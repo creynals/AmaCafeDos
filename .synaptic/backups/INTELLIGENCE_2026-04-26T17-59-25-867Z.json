@@ -275,7 +275,7 @@
         "navigation"
       ],
       "confidence": {
-        "score": 0.7,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.641Z",
         "source": "EXPLICIT"
@@ -294,7 +294,7 @@
         "products"
       ],
       "confidence": {
-        "score": 0.7,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.644Z",
         "source": "EXPLICIT"
@@ -313,7 +313,7 @@
         "images"
       ],
       "confidence": {
-        "score": 0.7,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.645Z",
         "source": "EXPLICIT"
@@ -332,7 +332,7 @@
         "soft-delete"
       ],
       "confidence": {
-        "score": 0.7,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.646Z",
         "source": "EXPLICIT"
@@ -351,7 +351,7 @@
         "categories"
       ],
       "confidence": {
-        "score": 0.7,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.647Z",
         "source": "EXPLICIT"
@@ -371,10 +371,109 @@
         "admin"
       ],
       "confidence": {
-        "score": 0.7,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.648Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334650-6",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.650Z",
+      "type": "PATTERN",
+      "title": "Migración idempotente para reparar base faltante",
+      "description": "Cuando una migración asume estado previo no existente, crear migración anterior idempotente",
+      "context": "Reparación de migraciones rotas en orden lexicográfico",
+      "applicability": [
+        "database",
+        "migrations",
+        "postgresql"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.650Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334651-7",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.651Z",
+      "type": "ANTI_PATTERN",
+      "title": "Migración 011 asumía base inexistente",
+      "description": "Migración 011 referenciaba products.deleted_at y products_audit sin crearlos previamente",
+      "context": "Detectado al implementar bulk import con soft delete",
+      "applicability": [
+        "database",
+        "migrations",
+        "tech-debt"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.651Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334653-8",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.653Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Bug preexistente: AuthContext no existe",
+      "description": "main.jsx, AdminPage.jsx, LoginPage.jsx, UsersTab.jsx importan ./context/AuthContext que no existe",
+      "context": "Bloquea npm run build del frontend, no relacionado con C3",
+      "applicability": [
+        "frontend",
+        "auth",
+        "tech-debt"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.653Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334657-9",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.657Z",
+      "type": "PATTERN",
+      "title": "Dry-run vs apply en bulk operations",
+      "description": "Bulk import expone ?dry_run=0|1 con feedback fila-por-fila antes de commit transaccional",
+      "context": "Operaciones masivas con feedback de validación",
+      "applicability": [
+        "bulk-import",
+        "ux",
+        "transactions"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.657Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334658-10",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.658Z",
+      "type": "PATTERN",
+      "title": "Auditoría con action='bulk_import'",
+      "description": "Operaciones masivas se registran en products_audit con action específica para trazabilidad",
+      "context": "Auditoría de operaciones admin",
+      "applicability": [
+        "audit",
+        "compliance"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.658Z",
+        "source": "INFERRED"
       }
     },
     {
@@ -1312,106 +1411,5 @@
     "[2026-04-26T17:45:36.520Z] E2E validation pending user: login admin/admin123, verify sub-tabs load without regressions",
     "[2026-04-26T17:45:36.521Z] 7 preexisting ESLint errors remain — not introduced by this cycle"
   ],
-  "lastUpdated": "2026-04-26T17:59:25.867Z",
-  "archivedLearnings": [
-    {
-      "learningId": "learning-3-1777215334650-6",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.650Z",
-      "type": "PATTERN",
-      "title": "Migración idempotente para reparar base faltante",
-      "description": "Cuando una migración asume estado previo no existente, crear migración anterior idempotente",
-      "context": "Reparación de migraciones rotas en orden lexicográfico",
-      "applicability": [
-        "database",
-        "migrations",
-        "postgresql"
-      ],
-      "confidence": {
-        "score": 0.09999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.650Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-3-1777215334651-7",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.651Z",
-      "type": "ANTI_PATTERN",
-      "title": "Migración 011 asumía base inexistente",
-      "description": "Migración 011 referenciaba products.deleted_at y products_audit sin crearlos previamente",
-      "context": "Detectado al implementar bulk import con soft delete",
-      "applicability": [
-        "database",
-        "migrations",
-        "tech-debt"
-      ],
-      "confidence": {
-        "score": 0.09999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.651Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-3-1777215334653-8",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.653Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Bug preexistente: AuthContext no existe",
-      "description": "main.jsx, AdminPage.jsx, LoginPage.jsx, UsersTab.jsx importan ./context/AuthContext que no existe",
-      "context": "Bloquea npm run build del frontend, no relacionado con C3",
-      "applicability": [
-        "frontend",
-        "auth",
-        "tech-debt"
-      ],
-      "confidence": {
-        "score": 0.09999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.653Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-3-1777215334657-9",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.657Z",
-      "type": "PATTERN",
-      "title": "Dry-run vs apply en bulk operations",
-      "description": "Bulk import expone ?dry_run=0|1 con feedback fila-por-fila antes de commit transaccional",
-      "context": "Operaciones masivas con feedback de validación",
-      "applicability": [
-        "bulk-import",
-        "ux",
-        "transactions"
-      ],
-      "confidence": {
-        "score": 0.09999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.657Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-3-1777215334658-10",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.658Z",
-      "type": "PATTERN",
-      "title": "Auditoría con action='bulk_import'",
-      "description": "Operaciones masivas se registran en products_audit con action específica para trazabilidad",
-      "context": "Auditoría de operaciones admin",
-      "applicability": [
-        "audit",
-        "compliance"
-      ],
-      "confidence": {
-        "score": 0.09999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.658Z",
-        "source": "INFERRED"
-      }
-    }
-  ]
+  "lastUpdated": "2026-04-26T17:45:36.522Z"
 }
