@@ -347,7 +347,7 @@
         "dg-079"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:00:13.429Z",
         "source": "EXPLICIT"
@@ -912,7 +912,7 @@
     "[2026-04-26T21:53:44.193Z] Ciclo 38 fue solo análisis sin commits - tuvo que reconstruirse el contexto",
     "[2026-04-26T21:53:44.194Z] E2E del fix queda pendiente de validación manual del usuario en storefront"
   ],
-  "lastUpdated": "2026-04-26T21:57:43.485Z",
+  "lastUpdated": "2026-04-26T22:00:57.908Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
