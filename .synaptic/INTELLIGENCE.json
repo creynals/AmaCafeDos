@@ -324,11 +324,11 @@
     },
     {
       "itemId": "ROAD-042",
-      "title": "Reemplazar .catch(()=>{}) silenciosos en frontend",
-      "description": "Identificar fetches que silencian errores críticos de config y añadir logging mínimo",
-      "priority": "LOW",
+      "title": "Validación E2E del rediseño Hero/Header",
+      "description": "Usuario debe refrescar localhost:8080 y validar layout desktop + mobile + footer intacto",
+      "priority": "HIGH",
       "status": "PLANNED",
-      "createdAtCycle": 39,
+      "createdAtCycle": 42,
       "dependencies": []
     }
   ],
@@ -347,7 +347,7 @@
         "ambiguous-input"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:26:56.937Z",
         "source": "EXPLICIT"
@@ -771,6 +771,86 @@
         "lastReinforced": "2026-04-26T21:53:44.190Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-42-1777241376627-0",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.627Z",
+      "type": "USER_PREFERENCE",
+      "title": "Enfoque A pre-aprobado en ciclo previo",
+      "description": "Usuario eligió Enfoque A en ciclo 41; ciclo 42 ejecuta inmediato sin re-confirmar",
+      "context": "Cuando un ciclo previo presenta opciones y usuario elige una explícitamente",
+      "applicability": [
+        "execution-mode",
+        "DG-079",
+        "immediate-execution"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.627Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376629-1",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.629Z",
+      "type": "PATTERN",
+      "title": "Tagline en header pill con responsive hide",
+      "description": "Pill central con hidden md:inline-flex oculta tagline en mobile preservando iconos esenciales",
+      "context": "Headers con logo + tagline + iconos en breakpoints angostos",
+      "applicability": [
+        "responsive-design",
+        "tailwind",
+        "header-layout"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.629Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376630-2",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.630Z",
+      "type": "PATTERN",
+      "title": "Hero compacto reduce padding 70-80%",
+      "description": "py-16 sm:py-24 → py-6 sm:py-8 sube grilla above-the-fold sin perder mensaje",
+      "context": "Cuando hero ocupa demasiado espacio y oculta contenido principal",
+      "applicability": [
+        "UX",
+        "above-the-fold",
+        "hero-design"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.630Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376631-3",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.631Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Layout flex con shrink-0 + min-w-0 + truncate",
+      "description": "Logo y iconos shrink-0, pill min-w-0 + truncate evita romper layout en breakpoints",
+      "context": "Headers de 3 secciones con contenido variable",
+      "applicability": [
+        "tailwind",
+        "flexbox",
+        "responsive"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.631Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -830,9 +910,12 @@
     "[2026-04-26T21:53:44.191Z] Workspace activo: import-1777213083759-63z86j (donde corre backend node --watch)",
     "[2026-04-26T21:53:44.192Z] DB: recaptcha_enabled=true con siteKey y secretKey configurados",
     "[2026-04-26T21:53:44.193Z] Ciclo 38 fue solo análisis sin commits - tuvo que reconstruirse el contexto",
-    "[2026-04-26T21:53:44.194Z] E2E del fix queda pendiente de validación manual del usuario en storefront"
+    "[2026-04-26T21:53:44.194Z] E2E del fix queda pendiente de validación manual del usuario en storefront",
+    "[2026-04-26T22:09:36.633Z] Ciclo 41 análisis + Ciclo 42 ejecución completan el rediseño Hero/Header del workspace import-1776956320164-2m9x2n",
+    "[2026-04-26T22:09:36.633Z] Synaptic Strength subió de 88.25% a 89% tras ejecución exitosa",
+    "[2026-04-26T22:09:36.634Z] E2E queda pendiente del usuario: validar desktop ≥768px y mobile <768px"
   ],
-  "lastUpdated": "2026-04-26T22:06:53.167Z",
+  "lastUpdated": "2026-04-26T22:18:06.926Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

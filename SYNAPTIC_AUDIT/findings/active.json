@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-26T21:53:19.605Z",
+  "lastUpdated": "2026-04-26T22:09:16.408Z",
   "findings": [
     {
       "id": "DC-001",
@@ -2918,17 +2918,43 @@
       "detectedInCycle": 31,
       "detectedAt": "2026-04-26T19:00:24.971Z",
       "status": "OPEN"
+    },
+    {
+      "id": "DC-840",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/Header.jsx",
+      "line": 12,
+      "description": "Unused function: 'handleSearch' (4 lines)",
+      "suggestion": "Remove unused function 'handleSearch' or export if needed elsewhere",
+      "findingId": "SAI-c071127a",
+      "detectedInCycle": 42,
+      "detectedAt": "2026-04-26T22:09:16.408Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-841",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/Header.jsx",
+      "line": 17,
+      "description": "Unused function: 'clearSearch' (5 lines)",
+      "suggestion": "Remove unused function 'clearSearch' or export if needed elsewhere",
+      "findingId": "SAI-2e750025",
+      "detectedInCycle": 42,
+      "detectedAt": "2026-04-26T22:09:16.408Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 176,
+    "totalOpen": 178,
     "totalResolved": 36,
     "bySeverity": {
-      "MEDIUM": 141,
+      "MEDIUM": 143,
       "LOW": 35
     },
     "byType": {
-      "dead_code": 132,
+      "dead_code": 134,
       "maintainability": 44
     }
   }

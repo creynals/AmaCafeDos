@@ -96,6 +96,8 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-043 | Hero compacto sin h1 ni CTA 'Ver Menu' | h1 redundante con logo del header; CTA innecesario porque la grilla está inmediatamente debajo | 2026-04-26 | 42 |
+| DEC-042 | Tagline 'Una nueva experiencia para disfrutar' migrado al header como pill central | Liberar espacio del Hero para que la grilla suba above-the-fold | 2026-04-26 | 42 |
 | DEC-081 | Eliminar endpoint duplicado en settings.js, dejar comentario apuntando a server.js | Evitar código muerto y confusión sobre cuál handler responde | 2026-04-26 | 39 |
 | DEC-080 | Endpoint /api/settings/recaptcha-config registrado en server.js antes del mount auth | Evita que requireAuth global bloquee el config necesario para el ChatWidget público | 2026-04-26 | 39 |
 | DEC-031-C | Tests con node:test built-in en lugar de framework externo | Helper puro no justifica agregar Jest/Mocha como dependencia | 2026-04-26 | 31 |
@@ -132,6 +134,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 42] Header.jsx: pill tagline con icono Coffee, oculto en mobile (<md)
+- [Cycle 42] Hero.jsx: padding reducido a py-6 sm:py-8 (~70-80% menos altura)
+- [Cycle 42] Build: 1753 módulos, 156ms, 0 errores ESLint
 - [Cycle 39] ChatWidget depende de GET /settings/recaptcha-config siendo público para cargar siteKey
 - [Cycle 39] Endpoints /admin/settings/recaptcha* siguen protegidos por requireAuth - sin regresión
 - [Cycle 31] UPDATE statements en webhooks/orders/payments ahora usan COALESCE($2, status) para no sobrescribir status manual
