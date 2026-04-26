@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-26T18:08:12.789Z",
+  "lastUpdated": "2026-04-26T19:00:24.971Z",
   "findings": [
     {
       "id": "DC-001",
@@ -2879,17 +2879,56 @@
       "detectedInCycle": 25,
       "detectedAt": "2026-04-26T18:08:12.788Z",
       "status": "OPEN"
+    },
+    {
+      "id": "DC-835",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.js",
+      "line": 241,
+      "description": "Unused function: 'mapStatus' (16 lines)",
+      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere",
+      "findingId": "SAI-fda1ce90",
+      "detectedInCycle": 31,
+      "detectedAt": "2026-04-26T19:00:24.971Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-836",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.js",
+      "line": 265,
+      "description": "Unused function: 'deriveFulfillmentFromPayment' (7 lines)",
+      "suggestion": "Remove unused function 'deriveFulfillmentFromPayment' or export if needed elsewhere",
+      "findingId": "SAI-e45d54cd",
+      "detectedInCycle": 31,
+      "detectedAt": "2026-04-26T19:00:24.971Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-839",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "line": 91,
+      "description": "Unused function: 'for' (6 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere",
+      "findingId": "SAI-7b1627c2",
+      "detectedInCycle": 31,
+      "detectedAt": "2026-04-26T19:00:24.971Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 173,
+    "totalOpen": 176,
     "totalResolved": 36,
     "bySeverity": {
-      "MEDIUM": 138,
+      "MEDIUM": 141,
       "LOW": 35
     },
     "byType": {
-      "dead_code": 129,
+      "dead_code": 132,
       "maintainability": 44
     }
   }

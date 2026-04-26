@@ -320,7 +320,7 @@
         "prioritization"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.030Z",
         "source": "EXPLICIT"
@@ -340,7 +340,7 @@
         "products"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.032Z",
         "source": "EXPLICIT"
@@ -360,7 +360,7 @@
         "validation"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.041Z",
         "source": "EXPLICIT"
@@ -380,7 +380,7 @@
         "backward-compat"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:09:31.152Z",
         "source": "EXPLICIT"
@@ -400,7 +400,7 @@
         "forms"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:09:31.161Z",
         "source": "EXPLICIT"
@@ -1107,7 +1107,7 @@
     "[2026-04-26T19:00:53.939Z] Modo DG-079 (ejecución inmediata) es la preferencia del usuario para cambios <50 líneas bien definidos",
     "[2026-04-26T19:00:53.940Z] Workspace activo: import-1776956320164-2m9x2n (no confundir con import-1777213083759-63z86j)"
   ],
-  "lastUpdated": "2026-04-26T19:03:06.913Z",
+  "lastUpdated": "2026-04-26T19:00:53.940Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

@@ -96,6 +96,9 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-031-C | Tests con node:test built-in en lugar de framework externo | Helper puro no justifica agregar Jest/Mocha como dependencia | 2026-04-26 | 31 |
+| DEC-031-B | Migración 013 backfill idempotente con snapshot a orders_audit | Corrige 9 órdenes legacy (incl #189) y permite reversibilidad si hay problema | 2026-04-26 | 31 |
+| DEC-031-A | Helper `deriveFulfillmentFromPayment` centraliza lógica payment→fulfillment status | Evita divergencia entre webhooks.js, orders.js, payments.js que tenían 3 UPDATE distintos | 2026-04-26 | 31 |
 | DEC-082 | Auto-refresh 30s con toggle en Vista de Cocina | Operación en tiempo casi-real sin saturar backend | 2026-04-26 | 25 |
 | DEC-081 | Bloquear avance de estado si payment_status != 'paid' | Evita preparar/enviar órdenes sin pago confirmado | 2026-04-26 | 25 |
 | DEC-080 | Vista de Cocina como sub-tab de Órdenes (Opción C) | Mantiene consistencia con patrón sub-tabs del Ciclo 23 y resuelve gap de items no visibles | 2026-04-26 | 25 |
@@ -127,6 +130,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 31] UPDATE statements en webhooks/orders/payments ahora usan COALESCE($2, status) para no sobrescribir status manual
+- [Cycle 31] Migración 013 se aplica automáticamente vía runMigrations() al iniciar backend
+- [Cycle 31] 9 órdenes legacy #180-#189 con payment_status='failed' pasarán a status='cancelled'
 - [Cycle 25] GET /api/admin/orders ahora retorna items[] vía json_agg+COALESCE
 - [Cycle 25] KITCHEN_STATUSES=['pending','in_progress','out_for_delivery']
 - [Cycle 25] Tailwind: usar mapas estáticos para clases condicionales por columna
@@ -163,6 +169,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 31, 2026-04-26] Centralización de lógica fulfillment en backend/src/utils/sumup.js (single source of truth)
 - [Cycle 25, 2026-04-26] Nuevo componente KitchenView.jsx (~370 líneas) bajo Órdenes
 - [Cycle 25, 2026-04-26] OrderDetailsRow ahora incluye tabla de items en fila expandida
 - [Cycle 23, 2026-04-26] AdminPage tab structure: 8 flat tabs → 6 tabs with 1 parent containing 3 sub-tabs

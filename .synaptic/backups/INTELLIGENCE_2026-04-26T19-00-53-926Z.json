@@ -276,33 +276,6 @@
       "status": "PLANNED",
       "createdAtCycle": 25,
       "dependencies": []
-    },
-    {
-      "itemId": "ROAD-031-A",
-      "title": "Reiniciar backend para aplicar fixes",
-      "description": "kill 73456 && cd backend && npm run dev — aplica migración 013 y fixes en webhooks/orders/payments",
-      "priority": "HIGH",
-      "status": "PLANNED",
-      "createdAtCycle": 31,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-031-B",
-      "title": "Verificar #189 quedó cancelled post-reinicio",
-      "description": "Query DB tras reinicio: SELECT id, status, payment_status FROM orders WHERE id=189",
-      "priority": "HIGH",
-      "status": "PLANNED",
-      "createdAtCycle": 31,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-031-C",
-      "title": "Considerar agregar --watch al script npm run dev",
-      "description": "Evitar reinicios manuales en futuros fixes; revisar nodemon/--watch en backend/package.json",
-      "priority": "LOW",
-      "status": "PLANNED",
-      "createdAtCycle": 31,
-      "dependencies": []
     }
   ],
   "learnings": [
@@ -320,7 +293,7 @@
         "prioritization"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.030Z",
         "source": "EXPLICIT"
@@ -340,7 +313,7 @@
         "products"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.032Z",
         "source": "EXPLICIT"
@@ -360,7 +333,7 @@
         "validation"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.041Z",
         "source": "EXPLICIT"
@@ -380,7 +353,7 @@
         "backward-compat"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:09:31.152Z",
         "source": "EXPLICIT"
@@ -400,7 +373,7 @@
         "forms"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:09:31.161Z",
         "source": "EXPLICIT"
@@ -930,126 +903,6 @@
         "lastReinforced": "2026-04-26T18:08:38.156Z",
         "source": "EXPLICIT"
       }
-    },
-    {
-      "learningId": "learning-31-1777230053925-0",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.925Z",
-      "type": "USER_PREFERENCE",
-      "title": "Modo ejecución inmediata DG-079",
-      "description": "Usuario prefiere ejecutar cambios pequeños (~30 líneas) en un solo ciclo, no fragmentar en re-análisis",
-      "context": "Cuando los cambios son acotados y bien definidos tras fase ARCHITECT",
-      "applicability": [
-        "execution-mode",
-        "user-preference",
-        "DG-079"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.925Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053929-1",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.929Z",
-      "type": "ANTI_PATTERN",
-      "title": "ARCHITECT MODE prolongado sin POST commit pierde contexto",
-      "description": "Ciclos 26-30 en ARCHITECT MODE sin commit POST hicieron perder la tabla de 5 fixes del ciclo 30",
-      "context": "Análisis multi-ciclo sin persistir conclusiones intermedias",
-      "applicability": [
-        "synaptic-protocol",
-        "context-loss",
-        "architect-mode"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.929Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053931-2",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.931Z",
-      "type": "PATTERN",
-      "title": "Helper puro derivado + COALESCE en UPDATE",
-      "description": "Extraer lógica de derivación a helper puro y usar COALESCE($n, status) en múltiples UPDATE para consistencia",
-      "context": "Cuando misma transformación payment→fulfillment se replica en webhooks/orders/payments",
-      "applicability": [
-        "refactor",
-        "DRY",
-        "sql-update"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.931Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053933-3",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.933Z",
-      "type": "PATTERN",
-      "title": "Migración SQL idempotente con snapshot a tabla audit",
-      "description": "Backfill legacy debe snapshot estado previo a tabla _audit antes de UPDATE para reversibilidad",
-      "context": "Migraciones que corrigen datos legacy en producción",
-      "applicability": [
-        "migration",
-        "audit",
-        "data-fix"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.933Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053934-4",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.934Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "node:test built-in evita nuevas deps",
-      "description": "Usar `node --test` con `node:test` para tests cortos sin agregar Jest/Mocha al proyecto",
-      "context": "Tests unitarios de helpers puros en backend Node",
-      "applicability": [
-        "testing",
-        "node-builtin",
-        "no-deps"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.934Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053936-5",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.936Z",
-      "type": "INSIGHT",
-      "title": "Backend sin --watch requiere reinicio manual",
-      "description": "PID 73456 corre `node src/server.js` directo, fixes no se aplican hasta `kill && npm run dev`",
-      "context": "Workspace import-1776956320164-2m9x2n backend dev workflow",
-      "applicability": [
-        "dev-workflow",
-        "hot-reload",
-        "deployment"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.936Z",
-        "source": "INFERRED"
-      }
     }
   ],
   "implementationState": {
@@ -1101,13 +954,9 @@
     "[2026-04-26T17:45:36.521Z] 7 preexisting ESLint errors remain — not introduced by this cycle",
     "[2026-04-26T18:08:38.157Z] Backend usa node --watch — no requiere reinicio manual al editar rutas",
     "[2026-04-26T18:08:38.158Z] Vista de Cocina default sub-tab es 'list' para preservar UX previa",
-    "[2026-04-26T18:08:38.159Z] E2E manual pendiente del usuario (login admin/admin123 en :8080/admin)",
-    "[2026-04-26T19:00:53.938Z] Backend corre como PID 73456 sin --watch, requiere reinicio manual para aplicar fixes #1-#4",
-    "[2026-04-26T19:00:53.938Z] ARCHITECT MODE sin POST commits causa pérdida de contexto entre ciclos - persistir tablas en BITACORA",
-    "[2026-04-26T19:00:53.939Z] Modo DG-079 (ejecución inmediata) es la preferencia del usuario para cambios <50 líneas bien definidos",
-    "[2026-04-26T19:00:53.940Z] Workspace activo: import-1776956320164-2m9x2n (no confundir con import-1777213083759-63z86j)"
+    "[2026-04-26T18:08:38.159Z] E2E manual pendiente del usuario (login admin/admin123 en :8080/admin)"
   ],
-  "lastUpdated": "2026-04-26T19:03:06.913Z",
+  "lastUpdated": "2026-04-26T18:50:15.829Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
