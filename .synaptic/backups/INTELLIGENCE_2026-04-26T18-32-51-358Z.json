@@ -293,7 +293,7 @@
         "ux"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:05:39.405Z",
         "source": "EXPLICIT"
@@ -313,7 +313,7 @@
         "code-review"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:16:35.895Z",
         "source": "EXPLICIT"
@@ -1214,7 +1214,7 @@
     "[2026-04-26T18:08:38.158Z] Vista de Cocina default sub-tab es 'list' para preservar UX previa",
     "[2026-04-26T18:08:38.159Z] E2E manual pendiente del usuario (login admin/admin123 en :8080/admin)"
   ],
-  "lastUpdated": "2026-04-26T18:32:51.357Z",
+  "lastUpdated": "2026-04-26T18:26:53.604Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
