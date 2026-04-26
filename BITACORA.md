@@ -1678,3 +1678,93 @@ proceder con implementación ciclo 22
 **Synaptic Strength**: 70%
 
 ---
+
+## Ciclo 25 — POST: Implementación Vista de Cocina dedicada (Opción C)
+
+**Timestamp**: 2026-04-26T18:10:00.000Z
+**Modo**: Immediate Execution (DG-079)
+**Decisión usuario**: Opción C del Ciclo 24 — Vista de Cocina dedicada (recomendada conceptualmente)
+
+```json
+{
+  "cycle": 25,
+  "phase": "IMPLEMENTATION",
+  "decision_ref": "Cycle 24 Option C",
+  "type": "feature",
+  "scope": "admin/orders",
+  "summary": "Vista de Cocina kanban como sub-tab de Órdenes + visibilidad de productos en listado",
+  "files_changed": [
+    "backend/src/routes/admin.js",
+    "frontend/src/components/AdminPage.jsx",
+    "frontend/src/components/OrdersTab.jsx",
+    "frontend/src/components/KitchenView.jsx (NEW)"
+  ]
+}
+```
+
+**Cambios Implementados**:
+
+1. **Backend — `GET /api/admin/orders`** (admin.js:432-459)
+   - Extendida consulta con `json_agg` agregando `items[]` por orden (con COALESCE a `[]::json` para órdenes sin items)
+   - Mantiene `item_count` por compatibilidad con consumos existentes
+   - Cada item: `{ id, product_id, name, price, quantity, subtotal, notes }` ordenados por `oi.id` (orden de inserción)
+   - SQL validado directamente contra Postgres `db_taza_data` (3 órdenes recientes — OK)
+
+2. **Frontend — `AdminPage.jsx`**
+   - Importado `ChefHat` icon y `KitchenView` component
+   - Agregada constante `ORDERS_SUBTABS` con 2 sub-tabs: 'list' (Listado) + 'kitchen' (Vista de Cocina)
+   - Agregado state `activeOrdersSubtab` (default 'list' — preserva UX previa por defecto)
+   - Renderizado de la pestaña Órdenes mirroring el patrón de `PRODUCTS_SUBTABS` (Cycle 23): underline tabs + descripción + sub-content
+
+3. **Frontend — `KitchenView.jsx` (nuevo, ~370 líneas)**
+   - Tablero kanban de 3 columnas: `Pendientes` / `En preparación` / `En reparto`
+   - Filtra automáticamente órdenes activas (`status IN ('pending', 'in_progress', 'out_for_delivery')`)
+   - Orden FIFO (más antiguas primero) → urgencia visual creciente: gris < 15 min, amarillo 15-29 min, rojo ≥ 30 min
+   - Cada `OrderCard` muestra: #ID, antigüedad, total, items count, cliente, teléfono, dirección, indicación, **lista detallada de productos solicitados** (cantidad × nombre + notas en amarillo) y badge si pago no confirmado
+   - Botón principal contextual por estado: Iniciar preparación → Marcar listo/Enviar → Confirmar entrega (deshabilitado si requiere pago confirmado y aún no está paid)
+   - Botón secundario para cancelar (con razón obligatoria)
+   - Modales `AdvanceDialog` y `CancelDialog` reutilizan `PATCH /admin/orders/:id/status`
+   - Auto-refresco cada 30s (toggle), refresh manual disponible, marca de "Actualizado HH:MM:SS"
+   - Sin clases dinámicas de Tailwind — `iconCls` / `badgeCls` estáticos por columna
+
+4. **Frontend — `OrdersTab.jsx` `OrderDetailsRow`**
+   - Fila expandida ahora incluye tabla de items (cantidad, producto, notas, precio unit, subtotal)
+   - Cierra el gap reportado por el usuario en Ciclo 24 también para el listado tradicional
+
+**Artefactos Generados**:
+- /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx (NEW)
+- backend/src/routes/admin.js (modified)
+- frontend/src/components/AdminPage.jsx (modified)
+- frontend/src/components/OrdersTab.jsx (modified)
+
+**Validación**:
+- ✅ ESLint sobre archivos modificados: 0 errores nuevos en KitchenView.jsx, OrdersTab.jsx; AdminPage.jsx mantiene los 7 errores preexistentes documentados (out-of-scope per USER_PREFERENCE)
+- ✅ Backend `node --watch` recargó sin crash (HTTP 200 en /captcha, HTTP 401 en /admin/orders sin token — comportamiento correcto)
+- ✅ SQL `json_agg` validado contra DB real (`db_taza_data`)
+- ✅ Tailwind: clases estáticas, sin interpolación dinámica
+- ✅ Vite HMR aplicará cambios automáticamente al frontend
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌ (Immediate Execution — usuario seleccionó Opción C de Ciclo 24)
+- Memoria actualizada: ✅
+- Tests generados: ❌ (validación E2E manual queda pendiente del usuario)
+- Reformulaciones necesarias: 0
+
+**E2E Pendiente Usuario**:
+1. Login en `/admin` con `admin / admin123`
+2. Click en pestaña "Órdenes" → debe aparecer sub-navegación con "Listado de Órdenes" (default) y "Vista de Cocina"
+3. En "Listado": expandir una orden con `▾` → la fila ampliada debe mostrar la tabla de productos solicitados (cant., nombre, notas, precio, subtotal)
+4. En "Vista de Cocina":
+   - Verificar 3 columnas: Pendientes / En preparación / En reparto con contadores
+   - Verificar tarjetas FIFO con productos solicitados visibles, antigüedad coloreada
+   - Probar "Iniciar preparación" en una orden pending (con pago confirmado) → debe pasar a "En preparación"
+   - Probar "Marcar listo / Enviar" → debe pasar a "En reparto"
+   - Probar "Confirmar entrega" → debe desaparecer del tablero (terminal: delivered)
+   - Verificar deshabilitación del botón de avance si `payment_status !== 'paid'` (mostrar tooltip "requiere pago confirmado")
+   - Probar cancelación con razón
+   - Verificar auto-refresco 30s (toggle on/off)
+
+**Synaptic Strength**: 73%
+
+---

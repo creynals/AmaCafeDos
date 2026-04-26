@@ -428,7 +428,9 @@ router.get('/admin/orders', async (req, res) => {
   const { rows: countRows } = await query(countSql, params);
   const total = Number(countRows[0].count);
 
-  // Listado con item_count (subquery evita GROUP BY masivo).
+  // Listado con item_count + items[] agregados (Ciclo 25 — Vista de Cocina).
+  // json_agg + FILTER evita filas null cuando no hay items, y ORDER BY oi.id
+  // mantiene el orden original de inserción.
   const listSql = `
     SELECT o.id, o.status, o.payment_status, o.payment_method, o.payment_currency,
            o.contact_name, o.contact_email, o.contact_phone,
@@ -438,7 +440,23 @@ router.get('/admin/orders', async (req, res) => {
            o.sumup_checkout_id, o.sumup_transaction_id,
            o.sumup_transaction_code, o.sumup_transaction_status, o.sumup_transaction_at,
            o.payment_updated_at, o.created_at, o.updated_at,
-           (SELECT COUNT(*) FROM order_items oi WHERE oi.order_id = o.id) AS item_count
+           (SELECT COUNT(*) FROM order_items oi WHERE oi.order_id = o.id) AS item_count,
+           COALESCE(
+             (
+               SELECT json_agg(json_build_object(
+                 'id', oi.id,
+                 'product_id', oi.product_id,
+                 'name', oi.name,
+                 'price', oi.price,
+                 'quantity', oi.quantity,
+                 'subtotal', oi.subtotal,
+                 'notes', oi.notes
+               ) ORDER BY oi.id)
+               FROM order_items oi
+               WHERE oi.order_id = o.id
+             ),
+             '[]'::json
+           ) AS items
       FROM orders o
       ${whereClause}
      ORDER BY ${orderBy}
@@ -451,6 +469,7 @@ router.get('/admin/orders', async (req, res) => {
     orders: rows.map(o => ({
       ...o,
       item_count: Number(o.item_count),
+      items: Array.isArray(o.items) ? o.items : [],
     })),
     pagination: { total, limit, offset },
   });

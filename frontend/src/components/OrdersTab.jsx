@@ -282,6 +282,7 @@ function StatusChangeModal({ order, onClose, onSuccess }) {
 }
 
 function OrderDetailsRow({ order }) {
+  const items = Array.isArray(order.items) ? order.items : [];
   return (
     <tr className="bg-ama-darker/50 border-b border-ama-border/50">
       <td colSpan={9} className="py-3 px-4">
@@ -315,6 +316,41 @@ function OrderDetailsRow({ order }) {
             )}
             <p className="text-ama-text-muted mt-0.5">Subtotal: {formatPrice(order.subtotal)}</p>
           </div>
+        </div>
+
+        {/* Productos solicitados — Ciclo 25 (Vista de Cocina + visibilidad en listado) */}
+        <div className="mt-3 pt-3 border-t border-ama-border/40">
+          <p className="text-ama-text-muted text-xs mb-2 flex items-center gap-1">
+            <ShoppingBag size={12} /> Productos solicitados ({items.length})
+          </p>
+          {items.length === 0 ? (
+            <p className="text-xs text-ama-text-muted italic">Sin items registrados</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="text-ama-text-muted">
+                    <th className="text-left py-1 pr-2 font-normal w-12">Cant.</th>
+                    <th className="text-left py-1 px-2 font-normal">Producto</th>
+                    <th className="text-left py-1 px-2 font-normal">Notas</th>
+                    <th className="text-right py-1 px-2 font-normal whitespace-nowrap">Precio unit.</th>
+                    <th className="text-right py-1 pl-2 font-normal whitespace-nowrap">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items.map(it => (
+                    <tr key={it.id} className="border-t border-ama-border/30">
+                      <td className="py-1.5 pr-2 text-ama-amber font-semibold">{it.quantity}×</td>
+                      <td className="py-1.5 px-2 text-ama-text">{it.name}</td>
+                      <td className="py-1.5 px-2 text-yellow-400/90 italic">{it.notes || '-'}</td>
+                      <td className="py-1.5 px-2 text-right text-ama-text-muted whitespace-nowrap">{formatPrice(it.price)}</td>
+                      <td className="py-1.5 pl-2 text-right text-ama-text whitespace-nowrap">{formatPrice(it.subtotal)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </td>
     </tr>

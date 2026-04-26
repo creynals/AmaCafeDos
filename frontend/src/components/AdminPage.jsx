@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { ArrowLeft, Package, TrendingUp, DollarSign, ShoppingBag, MessageCircle, Send, Loader2, BarChart3, RefreshCw, Users, UserCheck, Crown, ChevronLeft, Star, Calendar, Mail, Phone, CalendarRange, Settings, Key, Shield, Trash2, CheckCircle, AlertCircle, ChevronDown, Cpu, Zap, Lock, Eye, EyeOff, LogOut, UserCog, CreditCard, Globe, ClipboardList, FileSpreadsheet } from 'lucide-react';
+import { ArrowLeft, Package, TrendingUp, DollarSign, ShoppingBag, MessageCircle, Send, Loader2, BarChart3, RefreshCw, Users, UserCheck, Crown, ChevronLeft, Star, Calendar, Mail, Phone, CalendarRange, Settings, Key, Shield, Trash2, CheckCircle, AlertCircle, ChevronDown, Cpu, Zap, Lock, Eye, EyeOff, LogOut, UserCog, CreditCard, Globe, ClipboardList, FileSpreadsheet, ChefHat } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../api';
 import { useAuth } from '../context/AuthContext';
@@ -7,6 +7,7 @@ import UsersTab from './UsersTab';
 import OrdersTab from './OrdersTab';
 import BulkImportTab from './BulkImportTab';
 import ProductsCrudPanel from './ProductsCrudPanel';
+import KitchenView from './KitchenView';
 
 const TABS = [
   { id: 'products-parent', label: 'Productos', icon: Package },
@@ -21,6 +22,11 @@ const PRODUCTS_SUBTABS = [
   { id: 'crud', label: 'Mantenedor Productos', icon: Package, description: 'Gestión CRUD de productos individuales (crear, editar, stock, galería)' },
   { id: 'analytics', label: 'Análisis Productos', icon: BarChart3, description: 'Métricas de ventas, top productos y tendencias' },
   { id: 'bulk-import', label: 'Importación Masiva', icon: FileSpreadsheet, description: 'Carga masiva de productos vía Excel (alta, edición, eliminación)' },
+];
+
+const ORDERS_SUBTABS = [
+  { id: 'list', label: 'Listado de Órdenes', icon: ClipboardList, description: 'Búsqueda, filtros y gestión de estado de todas las órdenes' },
+  { id: 'kitchen', label: 'Vista de Cocina', icon: ChefHat, description: 'Tablero kanban de órdenes activas con detalle de productos solicitados (refresco automático)' },
 ];
 
 const WELCOME_MESSAGE = {
@@ -1643,6 +1649,7 @@ function SettingsTab() {
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('products-parent');
   const [activeProductsSubtab, setActiveProductsSubtab] = useState('crud');
+  const [activeOrdersSubtab, setActiveOrdersSubtab] = useState('list');
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
@@ -1732,7 +1739,39 @@ export default function AdminPage() {
             {activeProductsSubtab === 'bulk-import' && <BulkImportTab />}
           </div>
         )}
-        {activeTab === 'orders' && <OrdersTab />}
+        {activeTab === 'orders' && (
+          <div>
+            {/* Sub-tab navigation */}
+            <div className="border-b border-ama-border mb-4">
+              <div className="flex gap-1 overflow-x-auto">
+                {ORDERS_SUBTABS.map(subtab => (
+                  <button
+                    key={subtab.id}
+                    onClick={() => setActiveOrdersSubtab(subtab.id)}
+                    className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-all cursor-pointer whitespace-nowrap border-b-2 -mb-px ${
+                      activeOrdersSubtab === subtab.id
+                        ? 'border-ama-amber text-ama-amber'
+                        : 'border-transparent text-ama-text-muted hover:text-ama-text hover:border-ama-border'
+                    }`}
+                    title={subtab.description}
+                  >
+                    <subtab.icon size={16} />
+                    {subtab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Sub-tab description */}
+            <p className="text-xs text-ama-text-muted mb-4 px-1">
+              {ORDERS_SUBTABS.find(s => s.id === activeOrdersSubtab)?.description}
+            </p>
+
+            {/* Sub-tab content */}
+            {activeOrdersSubtab === 'list' && <OrdersTab />}
+            {activeOrdersSubtab === 'kitchen' && <KitchenView />}
+          </div>
+        )}
         {activeTab === 'customers' && <CustomersTab />}
         {activeTab === 'insights' && <InsightsTab />}
         {activeTab === 'settings' && <SettingsTab />}
