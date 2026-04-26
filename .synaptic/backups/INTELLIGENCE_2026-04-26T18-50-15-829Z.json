@@ -293,7 +293,7 @@
         "prioritization"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.030Z",
         "source": "EXPLICIT"
@@ -313,7 +313,7 @@
         "products"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.032Z",
         "source": "EXPLICIT"
@@ -333,7 +333,7 @@
         "validation"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.041Z",
         "source": "EXPLICIT"
@@ -353,10 +353,69 @@
         "backward-compat"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:09:31.152Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-10-1777219771155-1",
+      "cycle": 10,
+      "timestamp": "2026-04-26T16:09:31.156Z",
+      "type": "PATTERN",
+      "title": "Galería multi-imagen con primary flag",
+      "description": "UNIQUE INDEX parcial sobre is_primary garantiza máximo una imagen principal por producto",
+      "context": "Modelos 1:N donde un registro debe ser destacado",
+      "applicability": [
+        "sql",
+        "postgres",
+        "schema-design"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:09:31.155Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-10-1777219771158-2",
+      "cycle": 10,
+      "timestamp": "2026-04-26T16:09:31.158Z",
+      "type": "PATTERN",
+      "title": "Auditoría granular en products_audit",
+      "description": "Cada operación CRUD de imágenes registra entrada en tabla de auditoría",
+      "context": "Endpoints administrativos con trazabilidad",
+      "applicability": [
+        "backend",
+        "audit",
+        "compliance"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:09:31.158Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-10-1777219771159-3",
+      "cycle": 10,
+      "timestamp": "2026-04-26T16:09:31.159Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Cleanup físico al eliminar imagen",
+      "description": "DELETE endpoint borra archivo del filesystem además de la fila en DB",
+      "context": "Manejo de uploads para evitar archivos huérfanos",
+      "applicability": [
+        "backend",
+        "file-management"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:09:31.159Z",
+        "source": "INFERRED"
       }
     },
     {
@@ -373,10 +432,29 @@
         "forms"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:09:31.161Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-10-1777219771163-5",
+      "cycle": 10,
+      "timestamp": "2026-04-26T16:09:31.163Z",
+      "type": "INSIGHT",
+      "title": "Survey previo evita duplicación de trabajo",
+      "description": "Cycle 9 ya cubría prioridad 1, survey permitió saltar directo a prioridad 2",
+      "context": "Cuando se reciben prompts con múltiples prioridades secuenciales",
+      "applicability": [
+        "synaptic",
+        "workflow"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:09:31.163Z",
+        "source": "INFERRED"
       }
     },
     {
@@ -956,7 +1034,7 @@
     "[2026-04-26T18:08:38.158Z] Vista de Cocina default sub-tab es 'list' para preservar UX previa",
     "[2026-04-26T18:08:38.159Z] E2E manual pendiente del usuario (login admin/admin123 en :8080/admin)"
   ],
-  "lastUpdated": "2026-04-26T18:50:15.829Z",
+  "lastUpdated": "2026-04-26T18:46:07.954Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1491,84 +1569,6 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.042Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771155-1",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.156Z",
-      "type": "PATTERN",
-      "title": "Galería multi-imagen con primary flag",
-      "description": "UNIQUE INDEX parcial sobre is_primary garantiza máximo una imagen principal por producto",
-      "context": "Modelos 1:N donde un registro debe ser destacado",
-      "applicability": [
-        "sql",
-        "postgres",
-        "schema-design"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.155Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771158-2",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.158Z",
-      "type": "PATTERN",
-      "title": "Auditoría granular en products_audit",
-      "description": "Cada operación CRUD de imágenes registra entrada en tabla de auditoría",
-      "context": "Endpoints administrativos con trazabilidad",
-      "applicability": [
-        "backend",
-        "audit",
-        "compliance"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.158Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771159-3",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.159Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Cleanup físico al eliminar imagen",
-      "description": "DELETE endpoint borra archivo del filesystem además de la fila en DB",
-      "context": "Manejo de uploads para evitar archivos huérfanos",
-      "applicability": [
-        "backend",
-        "file-management"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.159Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771163-5",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.163Z",
-      "type": "INSIGHT",
-      "title": "Survey previo evita duplicación de trabajo",
-      "description": "Cycle 9 ya cubría prioridad 1, survey permitió saltar directo a prioridad 2",
-      "context": "Cuando se reciben prompts con múltiples prioridades secuenciales",
-      "applicability": [
-        "synaptic",
-        "workflow"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.163Z",
         "source": "INFERRED"
       }
     }
