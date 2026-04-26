@@ -232,4 +232,52 @@ export const api = {
   getSumupStatus: () => request('/admin/settings/sumup', { auth: true }),
   saveSumup: (payload) => post('/admin/settings/sumup', payload, { auth: true }),
   deleteSumup: () => del('/admin/settings/sumup', { auth: true }),
+
+  // Bulk import de productos — Ciclo 3 SYNAPTIC (admin)
+  adminProductCategories: () => request('/admin/products/categories', { auth: true }),
+
+  adminBulkTemplateUrl: () => `${BASE}/admin/products/bulk-template`,
+
+  adminBulkImport: async (file, { dryRun = false } = {}) => {
+    const token = localStorage.getItem('admin_token');
+    const fd = new FormData();
+    fd.append('file', file);
+    const qs = dryRun ? '?dry_run=1' : '';
+    const res = await fetch(`${BASE}/admin/products/bulk-import${qs}`, {
+      method: 'POST',
+      headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+      body: fd,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.status === 401) {
+      localStorage.removeItem('admin_token');
+      window.dispatchEvent(new Event('auth-expired'));
+    }
+    if (!res.ok && res.status !== 422) {
+      const err = new Error(data.error || `API error: ${res.status}`);
+      err.status = res.status;
+      err.data = data;
+      throw err;
+    }
+    // 422 → respuesta de validación con errores fila-por-fila (no es throw)
+    return { ok: res.ok, status: res.status, data };
+  },
+
+  adminUploadProductImage: async (file) => {
+    const token = localStorage.getItem('admin_token');
+    const fd = new FormData();
+    fd.append('image', file);
+    const res = await fetch(`${BASE}/admin/products/upload-image`, {
+      method: 'POST',
+      headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+      body: fd,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      const err = new Error(data.error || `API error: ${res.status}`);
+      err.status = res.status;
+      throw err;
+    }
+    return data;
+  },
 };

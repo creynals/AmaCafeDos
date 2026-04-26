@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { ArrowLeft, Package, TrendingUp, DollarSign, ShoppingBag, MessageCircle, Send, Loader2, BarChart3, RefreshCw, Users, UserCheck, Crown, ChevronLeft, Star, Calendar, Mail, Phone, CalendarRange, Settings, Key, Shield, Trash2, CheckCircle, AlertCircle, ChevronDown, Cpu, Zap, Lock, Eye, EyeOff, LogOut, UserCog, CreditCard, Globe, ClipboardList } from 'lucide-react';
+import { ArrowLeft, Package, TrendingUp, DollarSign, ShoppingBag, MessageCircle, Send, Loader2, BarChart3, RefreshCw, Users, UserCheck, Crown, ChevronLeft, Star, Calendar, Mail, Phone, CalendarRange, Settings, Key, Shield, Trash2, CheckCircle, AlertCircle, ChevronDown, Cpu, Zap, Lock, Eye, EyeOff, LogOut, UserCog, CreditCard, Globe, ClipboardList, FileSpreadsheet } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../api';
 import { useAuth } from '../context/AuthContext';
 import UsersTab from './UsersTab';
 import OrdersTab from './OrdersTab';
+import BulkImportTab from './BulkImportTab';
 
 const TABS = [
   { id: 'products', label: 'Gestión Productos', icon: Package },
+  { id: 'bulk-import', label: 'Importación Masiva', icon: FileSpreadsheet },
   { id: 'orders', label: 'Órdenes', icon: ClipboardList },
   { id: 'customers', label: 'Clientes', icon: Users },
   { id: 'insights', label: 'Chat AI Insights', icon: MessageCircle },
@@ -1690,6 +1692,7 @@ export default function AdminPage() {
 
         {/* Tab Content */}
         {activeTab === 'products' && <ProductsTab />}
+        {activeTab === 'bulk-import' && <BulkImportTab />}
         {activeTab === 'orders' && <OrdersTab />}
         {activeTab === 'customers' && <CustomersTab />}
         {activeTab === 'insights' && <InsightsTab />}

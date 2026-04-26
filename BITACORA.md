@@ -125,5 +125,83 @@ este es un MPV, que iremos progresivamente robusteciendo. Lo que necesito ahora 
 
 ---
 
+
+---
+## CICLO: 3
+**Timestamp**: 2026-04-26T15:05:00.000Z
+**Agente**: master_architect (IMMEDIATE EXECUTION — DG-079)
+**Fase**: IMPLEMENTACION
+**Decisión**: Implementación de Bulk Import de Productos vía Excel
+**Resultado**: SUCCESS (con observación: bug preexistente bloquea build E2E)
+**Modo**: SYNAPTIC Immediate Execution
+
+**Prompt Original**:
+```
+proceder con implementación ciclo 2, tab nueva separada de "Gestión Productos".
+SKU opcional para todos los productos nuevos. Imágenes en local. Sí, Bulk import
+permite eliminación lógica Ej: marcar productos como deleted_at desde Excel con
+columna action=delete. Categorías: sólo se permiten existentes. puede operar el
+mantenedor solo admin autenticado. Plantilla Excel descargable sí
+```
+
+**Decisiones Aplicadas (heredadas del Ciclo 2)**:
+- Tab nueva separada de "Gestión Productos" → `bulk-import`
+- SKU opcional para productos nuevos (UNIQUE INDEX parcial entre vivos)
+- Imágenes en local (multer.diskStorage → `fuentes/products/`, servidas vía `/static/products/`)
+- Soft-delete vía Excel: columna `action=delete` setea `deleted_at = NOW()`
+- Categorías solo existentes (no auto-crear): error fila-por-fila si no existe
+- Solo admin autenticado: ruta protegida con `requireAuth` middleware
+- Plantilla Excel descargable: `GET /api/admin/products/bulk-template`
+
+**Artefactos Generados**:
+- `backend/src/migrations/010a_products_soft_delete_and_audit_base.sql` (nuevo, idempotente — corrige assumption rota de 011)
+- `backend/src/services/productsBulkImport.js` (parser + validator + processor transaccional)
+- `backend/src/routes/products-admin.js` (4 endpoints: template, categories, bulk-import, upload-image)
+- `backend/src/server.js` (modificado: registra `productsAdminRoutes` con `requireAuth`)
+- `frontend/src/api.js` (modificado: 4 métodos nuevos para bulk import + image upload)
+- `frontend/src/components/BulkImportTab.jsx` (nuevo: UI completa con dry-run, validación, errores fila-por-fila)
+- `frontend/src/components/AdminPage.jsx` (modificado: tab nueva "Importación Masiva")
+
+**Endpoints implementados (todos `requireAuth`)**:
+- `GET  /api/admin/products/bulk-template` — descarga plantilla xlsx con instrucciones
+- `GET  /api/admin/products/categories` — lista categorías existentes (helper UI)
+- `POST /api/admin/products/bulk-import?dry_run=0|1` — sube xlsx, valida y aplica (transaccional)
+- `POST /api/admin/products/upload-image` — sube imagen a disco local, retorna URL `/static/products/...`
+
+**Características de seguridad/robustez**:
+- Validación pre-apply (dry-run): retorna errores fila-por-fila sin escribir
+- Transaccionalidad: si una fila falla en fase de aplicación, ROLLBACK global
+- Auditoría completa: cada cambio registra en `products_audit` con `action='bulk_import'` + `metadata.batch_id`
+- Límites: 5000 filas/batch, 10 MB para xlsx, 5 MB para imágenes
+- Whitelist de extensiones para uploads (xlsx/xls; jpg/png/webp/gif)
+
+**Bug preexistente detectado (no introducido por C3)**:
+- Frontend importa `./context/AuthContext` (en `main.jsx`, `AdminPage.jsx`, `LoginPage.jsx`, `UsersTab.jsx`) pero la carpeta `frontend/src/context/` NO EXISTE.
+- `npm run build` falla con `Module not found: ./context/AuthContext` — afecta a todo el frontend, no solo C3.
+- Migración 011 ya asumía `products.deleted_at` y `products_audit` sin que migraciones previas las crearan — corregido en C3 con migración `010a` idempotente.
+
+**Verificaciones realizadas**:
+- `node -c` sobre archivos backend nuevos: ✅ OK
+- ESLint sobre archivos frontend nuevos (`BulkImportTab.jsx`, `api.js`): ✅ OK (sin errores)
+- Build E2E del frontend: ❌ BLOQUEADO por bug preexistente (no relacionado con C3)
+
+**Métricas**:
+- Cumplimiento protocolo: 95% (Decision Gate omitido por DG-079)
+- Decision Gate presentado: N/A (Immediate Execution Mode activo)
+- Memoria actualizada: ✅
+- Tests generados: ❌ (pendiente para próximo ciclo)
+- Reformulaciones necesarias: 0
+- Bugs preexistentes documentados: 2 (AuthContext faltante; 011 sin base)
+
+**Próximos pasos sugeridos para Ciclo 4**:
+1. Crear `frontend/src/context/AuthContext.jsx` (o restaurar desde backup) — desbloquea build
+2. Tests de integración para bulk-import (casos: dry-run, errores fila-fila, transaccional rollback)
+3. UI de auditoría (`products_audit`) — diferida desde Ciclo 2/3
+4. CRUD individual de productos en tab "Gestión Productos" (separado de bulk import)
+
+**Synaptic Strength**: 25%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
-*Last Updated: 2026-04-26T14:18:03.772Z*
+*Last Updated: 2026-04-26T15:05:00.000Z*
