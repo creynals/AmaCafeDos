@@ -96,6 +96,10 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-009-4 | Soft-delete reversible vía endpoint /restore | Evitar pérdida de datos y permitir auditoría completa de eliminaciones | 2026-04-26 | 9 |
+| DEC-009-3 | Stock ajustable con modo absolute|delta en endpoint dedicado | Permite tanto fijar inventario como sumar/restar movimientos rápidos desde la tabla | 2026-04-26 | 9 |
+| DEC-009-2 | Sub-vista 'Mantenedor' por defecto al abrir tab Gestión Productos | El CRUD es la operación más frecuente; analíticas quedan como vistas secundarias | 2026-04-26 | 9 |
+| DEC-009-1 | CRUD admin de productos en archivo dedicado products-admin-crud.js | Separar endpoints administrativos del flujo de bulk import y catálogo público | 2026-04-26 | 9 |
 | DEC-007 | Persist cart_id under localStorage key ama_cart_id | Reuse existing key already used by ChatWidget for consistency | 2026-04-26 | 6 |
 | DEC-006 | Restore AuthContext, CartContext, ToastContext with consumer-derived API | Unblock frontend build (Cycle 3 blocker) without modifying any consumer component | 2026-04-26 | 6 |
 | DEC-005 | Crear AuthContext, CartContext, ToastContext con API mínima | Desbloquear build E2E sin introducir cambios funcionales adicionales | 2026-04-26 | 5 |
@@ -110,6 +114,11 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 9] Todos los endpoints admin usan transacciones explícitas BEGIN/COMMIT/ROLLBACK
+- [Cycle 9] Auditoría obligatoria en products_audit con acciones: create, update, stock_adjust, soft_delete, restore
+- [Cycle 9] Validación SKU único excluye soft-deleted devolviendo 409 con mensaje claro
+- [Cycle 9] Build frontend final: 423.91 kB (vite build OK)
+- [Cycle 9] Lint baseline: 13 errores preexistentes mantenidos sin regresión
 - [Cycle 6] Frontend build: 1750 modules, 402KB JS via Vite
 - [Cycle 6] Bulk import endpoints support dry_run, 422 row-level validation, soft-delete, atomic transaction
 - [Cycle 6] Migrations 003 and 006 are DML-only (no idempotency clauses needed)
@@ -123,6 +132,9 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 9, 2026-04-26] Nuevo router backend: products-admin-crud.js bajo /api/admin/products
+- [Cycle 9, 2026-04-26] Nuevo componente frontend: ProductsCrudPanel.jsx integrado en ProductsTab como sub-vista 'Mantenedor'
+- [Cycle 9, 2026-04-26] 7 helpers API añadidos en frontend/src/api.js para CRUD admin de productos
 - [Cycle 6, 2026-04-26] New frontend/src/context/ directory with 3 providers (Auth, Cart, Toast)
 - [Cycle 6, 2026-04-26] auth-expired event listener pattern wired in AuthContext
 - [Cycle 5, 2026-04-26] Restaurar carpeta frontend/src/context/ con 3 providers + hooks

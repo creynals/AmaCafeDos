@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-26T15:16:12.722Z",
+  "lastUpdated": "2026-04-26T15:53:05.107Z",
   "findings": [
     {
       "id": "DC-001",
@@ -1776,7 +1776,12 @@
       "findingId": "SAI-74fc1434",
       "detectedInCycle": 3,
       "detectedAt": "2026-04-26T14:55:00.501Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 9,
+        "resolvedAt": "2026-04-26T15:53:05.107Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-024",
@@ -2022,7 +2027,12 @@
       "findingId": "SAI-a30b0a77",
       "detectedInCycle": 3,
       "detectedAt": "2026-04-26T14:55:00.501Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 9,
+        "resolvedAt": "2026-04-26T15:53:05.107Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "MT-043",
@@ -2048,7 +2058,12 @@
       "findingId": "SAI-9a301abc",
       "detectedInCycle": 3,
       "detectedAt": "2026-04-26T14:55:00.501Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 9,
+        "resolvedAt": "2026-04-26T15:53:05.107Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "MT-045",
@@ -2205,18 +2220,249 @@
       "detectedInCycle": 6,
       "detectedAt": "2026-04-26T15:16:12.722Z",
       "status": "OPEN"
+    },
+    {
+      "id": "MT-131",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/products-admin-crud.js",
+      "description": "File has 534 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-6634f9ed",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-132",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 86,
+      "description": "Unused function: 'openCreate' (3 lines)",
+      "suggestion": "Remove unused function 'openCreate' or export if needed elsewhere",
+      "findingId": "SAI-d70b02fc",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-133",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 318,
+      "description": "Unused function: 'StatPill' (18 lines)",
+      "suggestion": "Remove unused function 'StatPill' or export if needed elsewhere",
+      "findingId": "SAI-47adf254",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-134",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 338,
+      "description": "Unused function: 'ProductFormModal' (218 lines)",
+      "suggestion": "Remove unused function 'ProductFormModal' or export if needed elsewhere",
+      "findingId": "SAI-fd5a139a",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-135",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 558,
+      "description": "Unused function: 'StockAdjustModal' (114 lines)",
+      "suggestion": "Remove unused function 'StockAdjustModal' or export if needed elsewhere",
+      "findingId": "SAI-eb8662f4",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-136",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 588,
+      "description": "Unused function: 'preview' (6 lines)",
+      "suggestion": "Remove unused function 'preview' or export if needed elsewhere",
+      "findingId": "SAI-aa41400e",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-137",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 674,
+      "description": "Unused function: 'DeleteConfirmModal' (64 lines)",
+      "suggestion": "Remove unused function 'DeleteConfirmModal' or export if needed elsewhere",
+      "findingId": "SAI-ef4aa35e",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-138",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 679,
+      "description": "Unused function: 'handleConfirm' (13 lines)",
+      "suggestion": "Remove unused function 'handleConfirm' or export if needed elsewhere",
+      "findingId": "SAI-62a1478f",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-139",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 740,
+      "description": "Unused function: 'ModalShell' (21 lines)",
+      "suggestion": "Remove unused function 'ModalShell' or export if needed elsewhere",
+      "findingId": "SAI-0abb25ee",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-140",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 742,
+      "description": "Unused function: 'handler' (1 lines)",
+      "suggestion": "Remove unused function 'handler' or export if needed elsewhere",
+      "findingId": "SAI-fa268c07",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-141",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 762,
+      "description": "Unused function: 'Field' (8 lines)",
+      "suggestion": "Remove unused function 'Field' or export if needed elsewhere",
+      "findingId": "SAI-baa00161",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-142",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "description": "File has 773 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-b0fa6ee4",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-143",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 338,
+      "description": "Function 'ProductFormModal' has 218 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-4c4d00e8",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-144",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 558,
+      "description": "Function 'StockAdjustModal' has 114 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-355fe4c4",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-145",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 674,
+      "description": "Function 'DeleteConfirmModal' has 64 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-cd4749d0",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-150",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 130,
+      "description": "Unused function: 'ProductsTab' (220 lines)",
+      "suggestion": "Remove unused function 'ProductsTab' or export if needed elsewhere",
+      "findingId": "SAI-27c4db62",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-169",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "description": "File has 1718 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-f2554208",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-171",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 130,
+      "description": "Function 'ProductsTab' has 220 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-a8f0c8ec",
+      "detectedInCycle": 9,
+      "detectedAt": "2026-04-26T15:53:05.105Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 137,
-    "totalResolved": 24,
+    "totalOpen": 152,
+    "totalResolved": 27,
     "bySeverity": {
-      "MEDIUM": 108,
-      "LOW": 29
+      "MEDIUM": 120,
+      "LOW": 32
     },
     "byType": {
-      "dead_code": 103,
-      "maintainability": 34
+      "dead_code": 113,
+      "maintainability": 39
     }
   }
 }

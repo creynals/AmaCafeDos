@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-26T15:16:12.723Z
+- **Last Updated:** 2026-04-26T15:53:05.108Z
 - **Status:** ACTIVE
 
 ---
@@ -11,13 +11,13 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 25 |
-| Score Promedio | 46% |
+| Ciclos Auditados | 26 |
+| Score Promedio | 44% |
 | Racha Actual (A/B) | 0 ciclos |
-| Último Ciclo | 6 |
+| Último Ciclo | 9 |
 | Última Calificación | F |
-| Findings Abiertos | 137 |
-| Findings Resueltos | 24 |
+| Findings Abiertos | 152 |
+| Findings Resueltos | 27 |
 
 ---
 
@@ -27,8 +27,8 @@
 |-----------|----------|
 | CRITICAL | 0 |
 | HIGH | 0 |
-| MEDIUM | 108 |
-| LOW | 29 |
+| MEDIUM | 120 |
+| LOW | 32 |
 
 ---
 
@@ -36,9 +36,9 @@
 
 | Tipo | Cantidad |
 |------|----------|
-| Dead Code | 103 |
+| Dead Code | 113 |
 | Security | 0 |
-| Maintainability | 34 |
+| Maintainability | 39 |
 | Duplication | 0 |
 | Consistency | 0 |
 
@@ -48,16 +48,16 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-83aa4655 | maintainability | LOW | components/AdminPage.jsx | Function 'InsightsTab' has 112 lines (max recommen... |
-| SAI-14f5964e | maintainability | LOW | components/AdminPage.jsx | Function 'ModelSelector' has 74 lines (max recomme... |
-| SAI-d371bc76 | maintainability | LOW | components/AdminPage.jsx | Function 'RecaptchaSettings' has 164 lines (max re... |
-| SAI-d05ad3cb | maintainability | LOW | components/AdminPage.jsx | Function 'SumupSettings' has 313 lines (max recomm... |
-| SAI-965c0297 | maintainability | LOW | components/AdminPage.jsx | Function 'SettingsTab' has 280 lines (max recommen... |
-| SAI-dd8cb0fb | dead_code | MEDIUM | context/AuthContext.jsx | Unused function: 'handler' (1 lines)... |
-| SAI-3a29d6e8 | maintainability | LOW | context/AuthContext.jsx | Function 'AuthProvider' has 71 lines (max recommen... |
-| SAI-933014eb | maintainability | LOW | context/CartContext.jsx | Function 'CartProvider' has 133 lines (max recomme... |
-| SAI-25423414 | dead_code | MEDIUM | context/ToastContext.jsx | Unused function: 'ToastViewport' (10 lines)... |
-| SAI-4fc30da3 | dead_code | MEDIUM | context/ToastContext.jsx | Unused function: 'ToastItem' (27 lines)... |
+| SAI-0abb25ee | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'ModalShell' (21 lines)... |
+| SAI-fa268c07 | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'handler' (1 lines)... |
+| SAI-baa00161 | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'Field' (8 lines)... |
+| SAI-b0fa6ee4 | maintainability | MEDIUM | components/ProductsCrudPanel.jsx | File has 773 lines (max recommended: 500)... |
+| SAI-4c4d00e8 | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'ProductFormModal' has 218 lines (max rec... |
+| SAI-355fe4c4 | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'StockAdjustModal' has 114 lines (max rec... |
+| SAI-cd4749d0 | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'DeleteConfirmModal' has 64 lines (max re... |
+| SAI-27c4db62 | dead_code | MEDIUM | components/AdminPage.jsx | Unused function: 'ProductsTab' (220 lines)... |
+| SAI-f2554208 | maintainability | MEDIUM | components/AdminPage.jsx | File has 1718 lines (max recommended: 500)... |
+| SAI-a8f0c8ec | maintainability | LOW | components/AdminPage.jsx | Function 'ProductsTab' has 220 lines (max recommen... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 18 | 50 | F |
 | 21 | 100 | A |
 | 26 | 0 | F |
 | 31 | 0 | F |
@@ -85,6 +84,7 @@
 | 103 | 100 | A |
 | 3 | 0 | F |
 | 6 | 0 | F |
+| 9 | 0 | F |
 
 ---
 
