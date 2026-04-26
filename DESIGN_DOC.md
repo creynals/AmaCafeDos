@@ -96,6 +96,9 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-082 | Auto-refresh 30s con toggle en Vista de Cocina | Operación en tiempo casi-real sin saturar backend | 2026-04-26 | 25 |
+| DEC-081 | Bloquear avance de estado si payment_status != 'paid' | Evita preparar/enviar órdenes sin pago confirmado | 2026-04-26 | 25 |
+| DEC-080 | Vista de Cocina como sub-tab de Órdenes (Opción C) | Mantiene consistencia con patrón sub-tabs del Ciclo 23 y resuelve gap de items no visibles | 2026-04-26 | 25 |
 | DEC-024 | Use PRODUCTS_SUBTABS constant with description field per sub-tab | Centralized config enables contextual descriptions below sub-nav for user clarity | 2026-04-26 | 23 |
 | DEC-023 | Consolidate 3 product tabs under single 'Productos' parent tab with sub-navigation | Reduces top-bar saturation from 8 to 6 tabs and groups semantically related views | 2026-04-26 | 23 |
 | DEC-018-C | Vite proxy must include '/static' alongside '/api' and '/webhook' | Backend serves uploaded images under /static; missing proxy returns SPA HTML | 2026-04-26 | 18 |
@@ -124,6 +127,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 25] GET /api/admin/orders ahora retorna items[] vía json_agg+COALESCE
+- [Cycle 25] KITCHEN_STATUSES=['pending','in_progress','out_for_delivery']
+- [Cycle 25] Tailwind: usar mapas estáticos para clases condicionales por columna
 - [Cycle 23] AdminPage.jsx now uses dual state: activeTab + activeProductsSubtab (default 'crud')
 - [Cycle 23] Vite build: 1752 módulos en 160ms — performance baseline for AdminPage refactor
 - [Cycle 23] ProductsCrudPanel / ProductsTab / BulkImportTab mounted unchanged under sub-nav
@@ -157,6 +163,8 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 25, 2026-04-26] Nuevo componente KitchenView.jsx (~370 líneas) bajo Órdenes
+- [Cycle 25, 2026-04-26] OrderDetailsRow ahora incluye tabla de items en fila expandida
 - [Cycle 23, 2026-04-26] AdminPage tab structure: 8 flat tabs → 6 tabs with 1 parent containing 3 sub-tabs
 - [Cycle 18, 2026-04-26] Vite proxy table extended: /api, /webhook, /static all forward to localhost:7001
 - [Cycle 14, 2026-04-26] AdminPage navegación primaria: Mantenedor Productos ahora landing tab

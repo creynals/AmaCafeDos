@@ -293,7 +293,7 @@
         "navigation"
       ],
       "confidence": {
-        "score": 0.3999999999999999,
+        "score": 0.7,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.641Z",
         "source": "EXPLICIT"
@@ -312,7 +312,7 @@
         "products"
       ],
       "confidence": {
-        "score": 0.3999999999999999,
+        "score": 0.7,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.644Z",
         "source": "EXPLICIT"
@@ -331,7 +331,7 @@
         "images"
       ],
       "confidence": {
-        "score": 0.3999999999999999,
+        "score": 0.7,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.645Z",
         "source": "EXPLICIT"
@@ -350,7 +350,7 @@
         "soft-delete"
       ],
       "confidence": {
-        "score": 0.3999999999999999,
+        "score": 0.7,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.646Z",
         "source": "EXPLICIT"
@@ -369,7 +369,7 @@
         "categories"
       ],
       "confidence": {
-        "score": 0.3999999999999999,
+        "score": 0.7,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.647Z",
         "source": "EXPLICIT"
@@ -389,10 +389,70 @@
         "admin"
       ],
       "confidence": {
-        "score": 0.3999999999999999,
+        "score": 0.7,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.648Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-5-1777215939397-0",
+      "cycle": 5,
+      "timestamp": "2026-04-26T15:05:39.397Z",
+      "type": "ANTI_PATTERN",
+      "title": "BITACORA desync vs filesystem real",
+      "description": "BITACORA reportaba estado menos grave que el real - carpeta context/ completa no existe",
+      "context": "Auditorías de ciclo previo deben verificarse contra filesystem real",
+      "applicability": [
+        "audit",
+        "bitacora",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:05:39.397Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-5-1777215939401-1",
+      "cycle": 5,
+      "timestamp": "2026-04-26T15:05:39.401Z",
+      "type": "PATTERN",
+      "title": "Auditoría de imports rotos antes de build",
+      "description": "Grep de imports vs existencia de archivos detecta bugs bloqueantes sin ejecutar build",
+      "context": "Cuando se sospecha de archivos faltantes en frontend",
+      "applicability": [
+        "frontend",
+        "audit",
+        "imports"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:05:39.401Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-5-1777215939403-2",
+      "cycle": 5,
+      "timestamp": "2026-04-26T15:05:39.403Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Contextos faltantes bloquean build E2E",
+      "description": "AuthContext, CartContext, ToastContext no existen pero son importados por 4+ archivos",
+      "context": "Frontend no compila hasta restaurar los 3 contextos",
+      "applicability": [
+        "frontend",
+        "react",
+        "context"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:05:39.403Z",
+        "source": "INFERRED"
       }
     },
     {
@@ -409,7 +469,7 @@
         "ux"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:05:39.405Z",
         "source": "EXPLICIT"
@@ -1411,7 +1471,7 @@
     "[2026-04-26T18:08:38.158Z] Vista de Cocina default sub-tab es 'list' para preservar UX previa",
     "[2026-04-26T18:08:38.159Z] E2E manual pendiente del usuario (login admin/admin123 en :8080/admin)"
   ],
-  "lastUpdated": "2026-04-26T18:09:46.094Z",
+  "lastUpdated": "2026-04-26T18:08:38.159Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1509,66 +1569,6 @@
         "score": 0.09999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T14:55:34.658Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-5-1777215939397-0",
-      "cycle": 5,
-      "timestamp": "2026-04-26T15:05:39.397Z",
-      "type": "ANTI_PATTERN",
-      "title": "BITACORA desync vs filesystem real",
-      "description": "BITACORA reportaba estado menos grave que el real - carpeta context/ completa no existe",
-      "context": "Auditorías de ciclo previo deben verificarse contra filesystem real",
-      "applicability": [
-        "audit",
-        "bitacora",
-        "verification"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:05:39.397Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-5-1777215939401-1",
-      "cycle": 5,
-      "timestamp": "2026-04-26T15:05:39.401Z",
-      "type": "PATTERN",
-      "title": "Auditoría de imports rotos antes de build",
-      "description": "Grep de imports vs existencia de archivos detecta bugs bloqueantes sin ejecutar build",
-      "context": "Cuando se sospecha de archivos faltantes en frontend",
-      "applicability": [
-        "frontend",
-        "audit",
-        "imports"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:05:39.401Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-5-1777215939403-2",
-      "cycle": 5,
-      "timestamp": "2026-04-26T15:05:39.403Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Contextos faltantes bloquean build E2E",
-      "description": "AuthContext, CartContext, ToastContext no existen pero son importados por 4+ archivos",
-      "context": "Frontend no compila hasta restaurar los 3 contextos",
-      "applicability": [
-        "frontend",
-        "react",
-        "context"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:05:39.403Z",
         "source": "INFERRED"
       }
     }

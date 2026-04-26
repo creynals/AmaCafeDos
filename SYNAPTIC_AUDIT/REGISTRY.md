@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-26T17:45:15.132Z
+- **Last Updated:** 2026-04-26T18:08:12.791Z
 - **Status:** ACTIVE
 
 ---
@@ -11,13 +11,13 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 30 |
-| Score Promedio | 41% |
+| Ciclos Auditados | 31 |
+| Score Promedio | 39% |
 | Racha Actual (A/B) | 0 ciclos |
-| Último Ciclo | 23 |
+| Último Ciclo | 25 |
 | Última Calificación | F |
-| Findings Abiertos | 152 |
-| Findings Resueltos | 35 |
+| Findings Abiertos | 173 |
+| Findings Resueltos | 36 |
 
 ---
 
@@ -27,8 +27,8 @@
 |-----------|----------|
 | CRITICAL | 0 |
 | HIGH | 0 |
-| MEDIUM | 120 |
-| LOW | 32 |
+| MEDIUM | 138 |
+| LOW | 35 |
 
 ---
 
@@ -36,9 +36,9 @@
 
 | Tipo | Cantidad |
 |------|----------|
-| Dead Code | 113 |
+| Dead Code | 129 |
 | Security | 0 |
-| Maintainability | 39 |
+| Maintainability | 44 |
 | Duplication | 0 |
 | Consistency | 0 |
 
@@ -48,16 +48,16 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-baa00161 | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'Field' (8 lines)... |
-| SAI-355fe4c4 | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'StockAdjustModal' has 114 lines (max rec... |
-| SAI-cd4749d0 | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'DeleteConfirmModal' has 64 lines (max re... |
-| SAI-182bec4c | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'ProductFormModal' (226 lines)... |
-| SAI-eda3a12a | maintainability | MEDIUM | components/ProductsCrudPanel.jsx | File has 782 lines (max recommended: 500)... |
-| SAI-fc4d9c8a | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'ProductFormModal' has 226 lines (max rec... |
-| SAI-7a2faef0 | dead_code | MEDIUM | components/AdminPage.jsx | Unused function: 'ProductsTab' (208 lines)... |
-| SAI-1e0e3ab9 | maintainability | LOW | components/AdminPage.jsx | Function 'ProductsTab' has 208 lines (max recommen... |
-| SAI-6b195cee | maintainability | MEDIUM | routes/products-admin-crud.js | File has 539 lines (max recommended: 500)... |
-| SAI-7e3a7276 | maintainability | MEDIUM | components/AdminPage.jsx | File has 1744 lines (max recommended: 500)... |
+| SAI-b03081b4 | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'StatusChangeModal' (153 lines)... |
+| SAI-d73c75a3 | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'submit' (25 lines)... |
+| SAI-40f768b2 | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'OrderDetailsRow' (75 lines)... |
+| SAI-86d79321 | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'clearFilters' (9 lines)... |
+| SAI-96f9158f | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'nextPage' (5 lines)... |
+| SAI-7ffd295c | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'prevPage' (3 lines)... |
+| SAI-3a6b5734 | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'handleStatusUpdated' (4 lines)... |
+| SAI-936a1b17 | maintainability | MEDIUM | components/OrdersTab.jsx | File has 700 lines (max recommended: 500)... |
+| SAI-b3f7aa3b | maintainability | LOW | components/OrdersTab.jsx | Function 'StatusChangeModal' has 153 lines (max re... |
+| SAI-10799e1a | maintainability | LOW | components/OrdersTab.jsx | Function 'OrderDetailsRow' has 75 lines (max recom... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 45 | 60 | D |
 | 56 | 0 | F |
 | 61 | 0 | F |
 | 73 | 100 | A |
@@ -85,6 +84,7 @@
 | 14 | 0 | F |
 | 18 | 80 | B |
 | 23 | 0 | F |
+| 25 | 0 | F |
 
 ---
 

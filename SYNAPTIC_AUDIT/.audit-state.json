@@ -1,12 +1,12 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-26T17:45:15.129Z",
+  "lastUpdated": "2026-04-26T18:08:12.787Z",
   "summary": {
-    "totalCyclesAudited": 30,
-    "averageScore": 41,
+    "totalCyclesAudited": 31,
+    "averageScore": 39,
     "currentStreak": 0,
-    "lastAuditCycle": 23,
-    "lastAuditTimestamp": "2026-04-26T17:45:15.129Z",
+    "lastAuditCycle": 25,
+    "lastAuditTimestamp": "2026-04-26T18:08:12.787Z",
     "lastAuditGrade": "F"
   },
   "scoreHistory": [
@@ -189,16 +189,22 @@
       "score": 0,
       "grade": "F",
       "timestamp": "2026-04-26T17:45:15.129Z"
+    },
+    {
+      "cycle": 25,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-26T18:08:12.787Z"
     }
   ],
   "findingsAggregate": {
-    "totalDetected": 187,
-    "totalResolved": 35,
+    "totalDetected": 209,
+    "totalResolved": 36,
     "byType": {
       "dead_code": {
-        "detected": 135,
+        "detected": 151,
         "resolved": 22,
-        "open": 113
+        "open": 129
       },
       "duplication": {
         "detected": 0,
@@ -211,9 +217,9 @@
         "open": 0
       },
       "maintainability": {
-        "detected": 52,
-        "resolved": 13,
-        "open": 39
+        "detected": 58,
+        "resolved": 14,
+        "open": 44
       },
       "consistency": {
         "detected": 0,
@@ -238,16 +244,16 @@
         "open": 0
       },
       "MEDIUM": {
-        "detected": 151,
-        "resolved": 31,
-        "open": 120
+        "detected": 170,
+        "resolved": 32,
+        "open": 138
       },
       "LOW": {
-        "detected": 36,
+        "detected": 39,
         "resolved": 4,
-        "open": 32
+        "open": 35
       }
     },
-    "avgCyclesToResolve": 16
+    "avgCyclesToResolve": 15
   }
 }
