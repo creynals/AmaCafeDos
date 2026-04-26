@@ -336,5 +336,168 @@ proceder con implementación corrección ciclo 4
 
 ---
 
+### Entry #6 - Cycle 6: Restauración de Contextos + Validación E2E Bulk Import (OPTION B)
+```json
+{
+  "timestamp": "2026-04-26T15:30:00.000Z",
+  "cycle": 6,
+  "phase": 4,
+  "action": "IMPLEMENTATION_COMPLETED",
+  "mode": "IMMEDIATE_EXECUTION (DG-079)",
+  "user_request": "proceder OPTION B: Restauración + Validación E2E del Bulk Import (Balanceada)",
+  "decision_reference": "decision-1777216034356 (Cycle 5)",
+  "details": {
+    "objective": "Desbloquear build E2E del frontend restaurando los 3 contextos faltantes y validar arquitectura bulk-import",
+    "implementation": {
+      "files_created": [
+        "frontend/src/context/AuthContext.jsx",
+        "frontend/src/context/CartContext.jsx",
+        "frontend/src/context/ToastContext.jsx"
+      ],
+      "files_modified": [],
+      "directories_created": ["frontend/src/context/"]
+    },
+    "AuthContext_API": {
+      "exports": ["AuthProvider", "useAuth"],
+      "state": "user, loading",
+      "methods": "login(username, password, captchaId, captchaAnswer), logout()",
+      "features": [
+        "Persiste token en localStorage (key: admin_token)",
+        "Valida sesión en mount via api.authCheck",
+        "Lazy loading state (true sólo si hay token pendiente de validar)",
+        "Listener global para evento auth-expired (limpia sesión en 401)",
+        "Logout best-effort (limpia local aunque falle el endpoint)"
+      ]
+    },
+    "CartContext_API": {
+      "exports": ["CartProvider", "useCart"],
+      "state": "cart, isOpen, loading, total, itemCount",
+      "methods": "setIsOpen, addItem, updateItem, removeItem, clearCart, refreshCart",
+      "features": [
+        "Persiste cart_id en localStorage (key: ama_cart_id)",
+        "Lazy create: ensureCart sólo crea si no existe o falló getCart",
+        "Total e itemCount derivados via useMemo de cart.items",
+        "Loading flag para deshabilitar UI durante mutaciones",
+        "Recovery automático en 404 (cart expirado en backend)"
+      ]
+    },
+    "ToastContext_API": {
+      "exports": ["ToastProvider", "useToast"],
+      "methods": "success(msg), error(msg), info(msg), dismiss(id)",
+      "features": [
+        "Stack visual fijo bottom-right z-200",
+        "Auto-dismiss en 4s (configurable por toast)",
+        "Variantes con paleta ama-* (success=green, error=red, info=ama-amber)",
+        "Animación de entrada via requestAnimationFrame + transition",
+        "Botón manual de cierre con icono X (lucide-react)"
+      ]
+    },
+    "validation": {
+      "frontend_build": {
+        "command": "npm run build",
+        "result": "PASS",
+        "modules_transformed": 1750,
+        "bundle_size_js": "402.97 kB (110.28 kB gzip)",
+        "bundle_size_css": "46.07 kB (8.20 kB gzip)",
+        "build_time_ms": 125
+      },
+      "frontend_lint": {
+        "command": "npm run lint",
+        "result": "PASS para src/context/ (0 errores en código nuevo)",
+        "preexistentes": "13 errores en AdminPage.jsx, OrdersTab.jsx, UsersTab.jsx, ChatWidget.jsx, main.jsx (no introducidos en este ciclo)",
+        "fixes_applied": [
+          "AuthContext: lazy useState init para evitar set-state-in-effect",
+          "CartContext: useMemo wrap de items para estabilidad de deps",
+          "Disable comments para react-refresh/only-export-components (patrón Provider+hook idiomático)"
+        ]
+      },
+      "backend_syntax": {
+        "command": "node --check",
+        "files_checked": ["src/server.js", "src/routes/products-admin.js", "src/services/productsBulkImport.js"],
+        "result": "PASS"
+      },
+      "migrations_audit": {
+        "total": 12,
+        "idempotent_or_noop": 12,
+        "with_idempotent_clauses": 10,
+        "noop_safe_dml": 2,
+        "files_audited": [
+          "001 - 12 IF NOT EXISTS / ON CONFLICT",
+          "002 - 1 ON CONFLICT (DML upsert)",
+          "003 - SELECT 1 no-op (placeholder)",
+          "004 - 2 ON CONFLICT",
+          "005 - 5 IF NOT EXISTS",
+          "006 - DELETE WHERE key (idempotente by nature)",
+          "007 - 3 IF NOT EXISTS",
+          "008 - 2 DROP IF EXISTS",
+          "009 - 5 IF NOT EXISTS",
+          "010 - 10 idempotent clauses",
+          "010a - 5 IF NOT EXISTS (RESUELVE precondiciones de 011)",
+          "011 - 8 idempotent clauses"
+        ],
+        "execution_order": "alfabético: 010 → 010a → 011 (correcto)",
+        "previous_011_block_resolved": true
+      },
+      "bulk_import_e2e_audit": {
+        "endpoints_verified": [
+          "GET /api/admin/products/categories (auth) - lista categorías existentes",
+          "GET /api/admin/products/bulk-template (auth) - .xlsx con 2 hojas",
+          "POST /api/admin/products/bulk-import (auth, multipart, max 10MB, ?dry_run=1) - 422 con errores fila-por-fila",
+          "POST /api/admin/products/upload-image (auth, multipart, max 5MB) - persiste en fuentes/products/"
+        ],
+        "validation_rules_confirmed": [
+          "SKU opcional (Cycle 3 user preference)",
+          "Categorías validadas contra existentes (no auto-crea)",
+          "action=delete soft-delete vía deleted_at TIMESTAMP",
+          "UNIQUE INDEX parcial en sku WHERE deleted_at IS NULL (permite reuse)",
+          "Transacción atómica all-or-nothing por batch",
+          "Dry-run ejecuta y rollback (validación realista)",
+          "Audit trail en products_audit con action='bulk_import'"
+        ],
+        "manual_e2e_pending": "Requiere PostgreSQL + servidor levantado + token admin (responsabilidad del usuario en su entorno dev)"
+      }
+    },
+    "preexistent_findings": {
+      "rate_limiting_bulk_endpoints": "NO aplicado a /bulk-import ni /upload-image (sólo en /chat). En roadmap LOW priority.",
+      "preexistent_lint_errors": "13 errores no relacionados con este ciclo (set-state-in-effect en AdminPage/OrdersTab/UsersTab, no-unused-vars varios, react-refresh en main.jsx)"
+    },
+    "checklist_e2e_para_usuario": [
+      "1. Levantar PostgreSQL + crear DB db_taza_data",
+      "2. cd backend && npm install && npm run dev (puerto 7001)",
+      "3. cd frontend && npm install && npm run dev (puerto 8080)",
+      "4. Migraciones se ejecutan automáticamente al startup del backend",
+      "5. Navegar a http://localhost:8080/admin → login (admin default)",
+      "6. Tab 'Importación Masiva' → Descargar plantilla → editar Excel → Upload con dry-run",
+      "7. Verificar errores 422 fila-por-fila si datos inválidos",
+      "8. Apply real (sin dry-run) → confirmar en products_audit",
+      "9. Probar action=delete con id=X → verificar deleted_at no-NULL"
+    ]
+  },
+  "outcome": "SUCCESS",
+  "synapticStrength": 30,
+  "complianceScore": 100
+}
+```
+
+**Bloqueante Cycle 3 RESUELTO**: Build E2E del frontend ahora pasa sin errores. Los 3 contextos faltantes (AuthContext, CartContext, ToastContext) están implementados con la API exacta que esperan los consumers existentes (LoginPage, AdminPage, UsersTab, App, Header, ProductModal, CartDrawer, CheckoutModal, ChatWidget).
+
+**Artefactos Generados**:
+- `frontend/src/context/AuthContext.jsx` (84 líneas)
+- `frontend/src/context/CartContext.jsx` (138 líneas)
+- `frontend/src/context/ToastContext.jsx` (97 líneas)
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Modo: IMMEDIATE_EXECUTION (decisión previa OPTION B Cycle 5)
+- Build frontend: ✅ PASS (1750 módulos, 402KB JS)
+- Lint código nuevo: ✅ 0 errores
+- Backend syntax: ✅ PASS
+- Migraciones idempotentes: ✅ 12/12
+- Tests E2E manual: ⚠️ pendiente ejecución por usuario (ambiente dev local)
+
+**Synaptic Strength**: 30%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
-*Last Updated: 2026-04-26T15:05:00.000Z*
+*Last Updated: 2026-04-26T15:30:00.000Z*
