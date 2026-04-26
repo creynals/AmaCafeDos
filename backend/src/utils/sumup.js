@@ -255,6 +255,21 @@ function mapStatus(sumupStatus) {
   }
 }
 
+// Ciclo 31: deriva el orders.status (fulfillment) desde el payment_status.
+// Regla: cuando el pago entra a estado terminal no-pagado (failed/cancelled/
+// refunded), el fulfillment también debe cerrarse en 'cancelled' — una orden
+// con pago rechazado no debe seguir apareciendo en Vista de Cocina como
+// 'pending'. Devuelve null cuando no hay transición a forzar (orden ya está
+// en estado terminal de fulfillment, o el pago no es terminal-rechazado).
+const FULFILLMENT_TERMINAL = new Set(['delivered', 'cancelled', 'returned']);
+function deriveFulfillmentFromPayment(currentFulfillment, paymentStatus) {
+  if (FULFILLMENT_TERMINAL.has(currentFulfillment)) return null;
+  if (paymentStatus === 'failed' || paymentStatus === 'cancelled' || paymentStatus === 'refunded') {
+    return 'cancelled';
+  }
+  return null;
+}
+
 const realAdapter = {
   currency: CURRENCY,
   getConfig,
@@ -288,6 +303,7 @@ module.exports = {
 
   // Pure / invalidation — no dispatch
   mapStatus,
+  deriveFulfillmentFromPayment,
   extractCardScheme,
   extractTransaction,
   invalidateModeCache,

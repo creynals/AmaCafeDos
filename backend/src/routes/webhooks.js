@@ -213,18 +213,25 @@ router.post(
     // Ciclo 82: agregamos transaction_code/status/at (transactions[0]) para
     // trazabilidad de soporte (transaction_code es el id que SumUp pide al
     // abrir tickets). COALESCE preserva valores capturados por sync previo.
+    // Ciclo 31: si el pago entra en estado terminal-rechazado, derivar el
+    // fulfillment a 'cancelled' (en el mismo UPDATE para evitar inconsistencias
+    // visibles en Vista de Cocina). status=COALESCE(...) preserva el valor
+    // actual cuando no hay derivación.
+    const derivedStatus = sumup.deriveFulfillmentFromPayment(order.status, internalStatus);
     await query(
       `UPDATE orders
           SET payment_status            = $1,
-              sumup_transaction_id      = COALESCE($2, sumup_transaction_id),
-              sumup_transaction_code    = COALESCE($3, sumup_transaction_code),
-              sumup_transaction_status  = COALESCE($4, sumup_transaction_status),
-              sumup_transaction_at      = COALESCE($5, sumup_transaction_at),
-              card_scheme               = COALESCE($6, card_scheme),
-              payment_updated_at        = $7
-        WHERE id = $8`,
+              status                    = COALESCE($2, status),
+              sumup_transaction_id      = COALESCE($3, sumup_transaction_id),
+              sumup_transaction_code    = COALESCE($4, sumup_transaction_code),
+              sumup_transaction_status  = COALESCE($5, sumup_transaction_status),
+              sumup_transaction_at      = COALESCE($6, sumup_transaction_at),
+              card_scheme               = COALESCE($7, card_scheme),
+              payment_updated_at        = $8
+        WHERE id = $9`,
       [
         internalStatus,
+        derivedStatus,
         checkout.transactionId,
         checkout.transactionCode,
         checkout.transactionStatus,

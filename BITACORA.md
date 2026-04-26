@@ -2062,3 +2062,103 @@ proceder con implementación ciclo 22
 **Synaptic Strength**: 73%
 
 ---
+
+## Ciclo 31 — POST: 5 fixes payment_status → fulfillment derivation (Immediate Execution / DG-079)
+
+**Timestamp**: 2026-04-26T18:55:00.000Z
+**Modo**: Immediate Execution (DG-079)
+**Decisión usuario**: ejecutar los 5 cambios identificados en el análisis del Ciclo 30 (orden #189: Tarjeta Falló + Pendiente)
+
+```json
+{
+  "cycle": 31,
+  "phase": "IMPLEMENTATION",
+  "decision_ref": "Cycle 30 analysis (5 fixes table)",
+  "type": "bugfix",
+  "scope": "payment + fulfillment status sync",
+  "summary": "Derivar orders.status='cancelled' cuando payment_status entra en estado terminal-rechazado (failed/cancelled/refunded), sin pisar fulfillment terminal previo. Aplicado en webhook + 2 endpoints + backfill de 9 órdenes legacy + test unit del helper.",
+  "files_changed": [
+    "backend/src/utils/sumup.js (helper deriveFulfillmentFromPayment + export)",
+    "backend/src/routes/webhooks.js (UPDATE en webhook SumUp)",
+    "backend/src/routes/orders.js (UPDATE en /sync-payment)",
+    "backend/src/routes/payments.js (UPDATE en /sumup/result)",
+    "backend/src/migrations/013_backfill_failed_payment_orders_to_cancelled.sql (NEW)",
+    "backend/src/utils/sumup.test.js (NEW, node:test)"
+  ]
+}
+```
+
+**Cambios Implementados**:
+
+1. **FIX #1 — Helper puro `deriveFulfillmentFromPayment(currentFulfillment, paymentStatus)`** en `backend/src/utils/sumup.js:259-272` y export en línea 290:
+   - Devuelve `'cancelled'` si `paymentStatus ∈ {failed, cancelled, refunded}` Y `currentFulfillment ∉ {delivered, cancelled, returned}`
+   - Devuelve `null` en cualquier otro caso (no hay derivación a forzar)
+   - Set `FULFILLMENT_TERMINAL` evita pisar estados ya terminales
+
+2. **FIX #2 — webhook SumUp** (`backend/src/routes/webhooks.js:216-241`):
+   - Agregado `const derivedStatus = sumup.deriveFulfillmentFromPayment(order.status, internalStatus)` antes del UPDATE
+   - UPDATE incluye `status = COALESCE($2, status)` (preserva valor actual si no hay derivación)
+   - +2 placeholders en query (de $8 a $9)
+
+3. **FIX #3a — `/admin/orders/:id/sync-payment`** (`backend/src/routes/orders.js:290-317`):
+   - Mismo patrón derivedStatus + COALESCE
+   - +2 placeholders en query (de $8 a $9)
+
+4. **FIX #3b — `/payments/sumup/result`** (`backend/src/routes/payments.js:116-141`):
+   - Mismo patrón derivedStatus + COALESCE
+   - +2 placeholders en query (de $8 a $9)
+
+5. **FIX #4 — Migración 013** (`backend/src/migrations/013_backfill_failed_payment_orders_to_cancelled.sql`):
+   - Snapshot a `orders_audit` (action='status_change', changed_by_email='system:migration_013', metadata jsonb con payment_status original)
+   - UPDATE backfill con misma regla que el helper
+   - Idempotente (WHERE excluye estados ya cancelled/delivered/returned)
+   - Auto-aplicada por `runMigrations()` al próximo arranque del backend
+
+6. **FIX #5 — Tests del helper** (`backend/src/utils/sumup.test.js`):
+   - Suite con 6 tests usando `node:test` built-in (sin nuevas dependencias)
+   - Cubre: failed/cancelled/refunded → cancelled, paid/processing/pending → null, terminal preservation, regresión orden #189
+   - **Resultado**: 6/6 pass (45ms)
+
+**Validación**:
+- ✅ `node --test src/utils/sumup.test.js` → 6/6 pass
+- ✅ `node --check` sintaxis OK en webhooks.js, orders.js, payments.js, sumup.js
+- ✅ Verificación DB: 9 órdenes en estado afectado (#180-189) listas para backfill al reiniciar backend
+- ✅ Backend cwd verificado: PID 73456 corre desde workspace correcto (`import-1777213083759-63z86j/backend`)
+
+**Datos verificados (psql `db_taza_data`)**:
+| id  | status  | payment_status |
+|-----|---------|----------------|
+| 189 | pending | failed         |
+| 188 | pending | failed         |
+| 186 | pending | failed         |
+| 185 | pending | failed         |
+| 184 | pending | failed         |
+| 183 | pending | failed         |
+| 182 | pending | failed         |
+| 181 | pending | failed         |
+| 180 | pending | failed         |
+
+Las 9 órdenes pasarán a `status='cancelled'` al ejecutar la migración (snapshot quedará en `orders_audit`).
+
+**Acción requerida del usuario**:
+- ⚠ El backend NO usa `--watch` (PID 73456 = `node src/server.js`). Para que los fixes #1-#3 y la migración #4 tomen efecto:
+  ```bash
+  # Detener backend actual
+  kill 73456
+  # Re-arrancar (modo dev recomendado para HMR futuro)
+  cd backend && npm run dev
+  ```
+- Validación E2E: simular un pago fallido en SumUp sandbox y verificar que la orden creada queda en `status='cancelled'` (no `pending`)
+- Verificar Vista de Cocina: las 9 órdenes #180-#189 deben desaparecer de la columna "Pendientes"
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌ (Immediate Execution — DG-079)
+- Memoria actualizada: ✅
+- Tests generados: ✅ (6 unit tests del helper)
+- Reformulaciones necesarias: 0
+- Líneas tocadas: ~80 (3 routes + helper + migración + test)
+
+**Synaptic Strength**: 82%
+
+---
