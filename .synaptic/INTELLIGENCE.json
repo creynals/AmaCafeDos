@@ -334,26 +334,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-18-1777222813429-4",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.429Z",
-      "type": "USER_PREFERENCE",
-      "title": "Single-word 'arregla' = full diagnostic + fix",
-      "description": "Terse user requests after frustration cycles expect immediate execution, not more analysis",
-      "context": "User has been through multiple architect-mode cycles without resolution",
-      "applicability": [
-        "communication",
-        "synaptic",
-        "dg-079"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.429Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
       "learningId": "learning-21-1777224416937-0",
       "cycle": 21,
       "timestamp": "2026-04-26T17:26:56.937Z",
@@ -367,70 +347,10 @@
         "ambiguous-input"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:26:56.937Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-21-1777224416940-1",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.940Z",
-      "type": "PATTERN",
-      "title": "Three-option Decision Gate structure",
-      "description": "Conservative / Balanced (recommended) / Innovative trio with pros, cons, time, risk, confidence",
-      "context": "Phase 1 Specification when multiple roadmap paths are viable",
-      "applicability": [
-        "synaptic",
-        "phase-1",
-        "specification"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.940Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-21-1777224416942-2",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.942Z",
-      "type": "INSIGHT",
-      "title": "Cycles 19-20 left payment flow in analysis without implementation",
-      "description": "ARCHITECT MODE cycles produced analysis of checkout redirect + success page but no fix shipped",
-      "context": "Open work item: payment flow needs implementation cycle",
-      "applicability": [
-        "payment-flow",
-        "architect-mode",
-        "open-loop"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.942Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-21-1777224416943-3",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.943Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Post cycles 11-17, evidence-of-health is high priority",
-      "description": "User concern after long frustration arc means E2E validation generates trust signal",
-      "context": "Recommending validation sprints over new features",
-      "applicability": [
-        "e2e",
-        "validation",
-        "trust"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.943Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -912,7 +832,7 @@
     "[2026-04-26T21:53:44.193Z] Ciclo 38 fue solo análisis sin commits - tuvo que reconstruirse el contexto",
     "[2026-04-26T21:53:44.194Z] E2E del fix queda pendiente de validación manual del usuario en storefront"
   ],
-  "lastUpdated": "2026-04-26T22:00:57.908Z",
+  "lastUpdated": "2026-04-26T22:06:53.167Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1832,6 +1752,86 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:00:13.427Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-18-1777222813429-4",
+      "cycle": 18,
+      "timestamp": "2026-04-26T17:00:13.429Z",
+      "type": "USER_PREFERENCE",
+      "title": "Single-word 'arregla' = full diagnostic + fix",
+      "description": "Terse user requests after frustration cycles expect immediate execution, not more analysis",
+      "context": "User has been through multiple architect-mode cycles without resolution",
+      "applicability": [
+        "communication",
+        "synaptic",
+        "dg-079"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:00:13.429Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-21-1777224416940-1",
+      "cycle": 21,
+      "timestamp": "2026-04-26T17:26:56.940Z",
+      "type": "PATTERN",
+      "title": "Three-option Decision Gate structure",
+      "description": "Conservative / Balanced (recommended) / Innovative trio with pros, cons, time, risk, confidence",
+      "context": "Phase 1 Specification when multiple roadmap paths are viable",
+      "applicability": [
+        "synaptic",
+        "phase-1",
+        "specification"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:26:56.940Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-21-1777224416942-2",
+      "cycle": 21,
+      "timestamp": "2026-04-26T17:26:56.942Z",
+      "type": "INSIGHT",
+      "title": "Cycles 19-20 left payment flow in analysis without implementation",
+      "description": "ARCHITECT MODE cycles produced analysis of checkout redirect + success page but no fix shipped",
+      "context": "Open work item: payment flow needs implementation cycle",
+      "applicability": [
+        "payment-flow",
+        "architect-mode",
+        "open-loop"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:26:56.942Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-21-1777224416943-3",
+      "cycle": 21,
+      "timestamp": "2026-04-26T17:26:56.943Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Post cycles 11-17, evidence-of-health is high priority",
+      "description": "User concern after long frustration arc means E2E validation generates trust signal",
+      "context": "Recommending validation sprints over new features",
+      "applicability": [
+        "e2e",
+        "validation",
+        "trust"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:26:56.943Z",
         "source": "INFERRED"
       }
     }
