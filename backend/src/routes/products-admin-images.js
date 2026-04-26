@@ -22,6 +22,7 @@ const crypto = require('crypto');
 const multer = require('multer');
 
 const { query, getClient } = require('../models/database');
+const { uploadImageRateLimiter } = require('../middleware/security');
 
 const router = express.Router();
 
@@ -151,6 +152,7 @@ router.get('/admin/products/:productId/images', async (req, res) => {
 //   FormData: file=<image> [, alt_text, is_primary]
 router.post(
   '/admin/products/:productId/images',
+  uploadImageRateLimiter,
   (req, res, next) => {
     imageUpload.single('image')(req, res, (err) => {
       if (err) {

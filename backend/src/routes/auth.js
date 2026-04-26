@@ -8,6 +8,7 @@ const {
   generateCaptcha,
   verifyCaptcha,
 } = require('../utils/auth');
+const { loginRateLimiter } = require('../middleware/security');
 
 const router = express.Router();
 
@@ -46,7 +47,7 @@ router.get('/auth/captcha', (req, res) => {
 });
 
 // POST /api/auth/login
-router.post('/auth/login', async (req, res) => {
+router.post('/auth/login', loginRateLimiter, async (req, res) => {
   const ip = req.ip;
 
   if (!checkLoginRate(ip)) {

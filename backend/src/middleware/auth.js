@@ -16,6 +16,16 @@ async function requireAuth(req, res, next) {
   next();
 }
 
+// Roles válidos para acceder a /api/admin/* — superadmin hereda permisos de admin.
+const ADMIN_ROLES = new Set(['admin', 'superadmin']);
+
+function requireAdmin(req, res, next) {
+  if (!req.authUser || !ADMIN_ROLES.has(req.authUser.role)) {
+    return res.status(403).json({ error: 'Requiere rol administrativo' });
+  }
+  next();
+}
+
 function requireSuperAdmin(req, res, next) {
   if (req.authUser?.role !== 'superadmin') {
     return res.status(403).json({ error: 'No tiene permisos para esta acción' });
@@ -23,4 +33,4 @@ function requireSuperAdmin(req, res, next) {
   next();
 }
 
-module.exports = { requireAuth, requireSuperAdmin };
+module.exports = { requireAuth, requireAdmin, requireSuperAdmin };

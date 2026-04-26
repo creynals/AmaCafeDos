@@ -85,4 +85,41 @@ const chatRateLimiter = rateLimit({
   },
 });
 
-module.exports = { sanitizeText, sanitizeResponse, chatInputSanitizer, chatRateLimiter };
+// Login: 10 intentos / 15 min por IP. Coexiste con el lockout in-memory por
+// usuario que ya existía en routes/auth.js — este limiter cubre fuerza bruta
+// distribuida sobre el endpoint en sí.
+const loginRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Demasiados intentos de login. Intente en 15 minutos.' },
+});
+
+// Bulk-import: 10 req / minuto por IP — protege parsing xlsx + escritura masiva.
+const bulkImportRateLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Demasiadas importaciones. Intente en un minuto.' },
+});
+
+// Upload-image: 30 req / minuto por IP — más permisivo (galerías).
+const uploadImageRateLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Demasiadas subidas de imágenes. Intente en un minuto.' },
+});
+
+module.exports = {
+  sanitizeText,
+  sanitizeResponse,
+  chatInputSanitizer,
+  chatRateLimiter,
+  loginRateLimiter,
+  bulkImportRateLimiter,
+  uploadImageRateLimiter,
+};

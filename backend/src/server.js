@@ -1,9 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const path = require('path');
 const { initSchema, closeDatabase } = require('./models/database');
-const { requireAuth } = require('./middleware/auth');
+const { requireAuth, requireAdmin } = require('./middleware/auth');
 const { ensureDefaultAdmin } = require('./utils/auth');
 const { getModeWithSource, getReturnUrlBaseWithSource } = require('./utils/sumup.config');
 const productRoutes = require('./routes/products');
@@ -26,6 +27,46 @@ const app = express();
 const PORT = process.env.PORT || 7000;
 
 // Middleware
+
+// helmet — headers de seguridad. CSP whitelist: SumUp (gateway) + reCAPTCHA
+// (google + gstatic). crossOriginResourcePolicy en "cross-origin" para que el
+// frontend (Vite/cloudflared) pueda cargar /static/* (imágenes de productos).
+app.use(helmet({
+  contentSecurityPolicy: {
+    useDefaults: true,
+    directives: {
+      'default-src': ["'self'"],
+      'script-src': [
+        "'self'",
+        "'unsafe-inline'",
+        'https://gateway.sumup.com',
+        'https://www.google.com',
+        'https://www.gstatic.com',
+        'https://www.recaptcha.net',
+      ],
+      'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+      'font-src': ["'self'", 'https://fonts.gstatic.com', 'data:'],
+      'img-src': ["'self'", 'data:', 'blob:', 'https:'],
+      'connect-src': [
+        "'self'",
+        'https://api.sumup.com',
+        'https://gateway.sumup.com',
+        'https://www.google.com',
+      ],
+      'frame-src': [
+        "'self'",
+        'https://gateway.sumup.com',
+        'https://www.google.com',
+        'https://www.recaptcha.net',
+      ],
+      'object-src': ["'none'"],
+      'base-uri': ["'self'"],
+    },
+  },
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+  crossOriginEmbedderPolicy: false,
+}));
+
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   credentials: true,
@@ -67,14 +108,17 @@ app.get('/api/settings/recaptcha-config', async (req, res) => {
   });
 });
 
-// Protected Admin Routes (require authentication)
-app.use('/api', requireAuth, adminRoutes);
-app.use('/api', requireAuth, adminProductsRoutes);
-app.use('/api', requireAuth, adminProductsCrudRoutes);
-app.use('/api', requireAuth, adminProductsImagesRoutes);
-app.use('/api', requireAuth, adminChatRoutes);
-app.use('/api', requireAuth, settingsRoutes);
-app.use('/api', requireAuth, usersRoutes);
+// Protected Admin Routes — requireAuth (sesión válida) + requireAdmin (rol
+// admin|superadmin). Defense in depth: aunque hoy todos los usuarios creados
+// son admin/superadmin, requireAdmin previene escalada si en el futuro se
+// agregan roles tipo "viewer" o "kitchen".
+app.use('/api', requireAuth, requireAdmin, adminRoutes);
+app.use('/api', requireAuth, requireAdmin, adminProductsRoutes);
+app.use('/api', requireAuth, requireAdmin, adminProductsCrudRoutes);
+app.use('/api', requireAuth, requireAdmin, adminProductsImagesRoutes);
+app.use('/api', requireAuth, requireAdmin, adminChatRoutes);
+app.use('/api', requireAuth, requireAdmin, settingsRoutes);
+app.use('/api', requireAuth, requireAdmin, usersRoutes);
 
 // Error handler
 app.use((err, req, res, next) => {

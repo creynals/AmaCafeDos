@@ -16,6 +16,7 @@ const {
   processBatch,
   newBatchId,
 } = require('../services/productsBulkImport');
+const { bulkImportRateLimiter, uploadImageRateLimiter } = require('../middleware/security');
 
 const router = express.Router();
 
@@ -82,6 +83,7 @@ router.get('/admin/products/categories', async (_req, res) => {
 //   ?dry_run=1 → solo valida, no escribe
 router.post(
   '/admin/products/bulk-import',
+  bulkImportRateLimiter,
   (req, res, next) => {
     xlsxUpload.single('file')(req, res, (err) => {
       if (err) {
@@ -156,6 +158,7 @@ router.post(
 // POST /api/admin/products/upload-image — sube una imagen, retorna URL local
 router.post(
   '/admin/products/upload-image',
+  uploadImageRateLimiter,
   (req, res, next) => {
     imageUpload.single('image')(req, res, (err) => {
       if (err) {

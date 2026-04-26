@@ -2898,3 +2898,59 @@ Las 9 órdenes pasarán a `status='cancelled'` al ejecutar la migración (snapsh
 **Synaptic Strength**: 82%
 
 ---
+
+## Cycle 44 — Hardening de seguridad (4 brechas críticas del audit ciclo 43)
+
+```json
+{
+  "timestamp": "2026-04-26T23:00:00.000Z",
+  "cycle": 44,
+  "phase": 5,
+  "mode": "DG-079_immediate_execution",
+  "action": "SECURITY_HARDENING_BATCH",
+  "details": {
+    "request": "Rotar ENCRYPTION_SECRET, sacar .env del git, purgar historial. Aplicar requireAdmin en 7 mounts. Rate-limit en /login, /bulk-import, /upload-image. helmet() con CSP SumUp+reCAPTCHA",
+    "changes": [
+      ".gitignore raíz creado (excluye **/.env, node_modules, dist, .DS_Store)",
+      "git rm --cached backend/.env (sale del tracking, archivo permanece en disco)",
+      "backend/scripts/rotate-encryption-secret.js (descifra con OLD, re-cifra con NEW para sumup_api_key, sumup_merchant_code, recaptcha_secret_key; soporta --apply / dry-run)",
+      "middleware/auth.js: agregado requireAdmin (roles 'admin'|'superadmin')",
+      "middleware/security.js: 3 nuevos rate limiters (loginRateLimiter 10/15min, bulkImportRateLimiter 10/min, uploadImageRateLimiter 30/min)",
+      "routes/auth.js: aplica loginRateLimiter en POST /auth/login",
+      "routes/products-admin.js: aplica bulkImportRateLimiter + uploadImageRateLimiter",
+      "routes/products-admin-images.js: aplica uploadImageRateLimiter en POST /admin/products/:productId/images",
+      "server.js: helmet() con CSP whitelist (gateway.sumup.com, www.google.com, www.gstatic.com, www.recaptcha.net), CORP cross-origin para /static",
+      "server.js: 7 mounts admin ahora encadenan requireAuth + requireAdmin (defense in depth)",
+      "backend/package.json: helmet@^8.1.0 agregado"
+    ],
+    "smokeTests": [
+      "GET /api/health → 200 con CSP, HSTS, X-Frame-Options",
+      "GET /api/admin/products sin token → 401 (requireAuth bloquea antes de requireAdmin)",
+      "POST /api/auth/login {} → 400 (rate limiter pasa, validación de body responde)"
+    ],
+    "pendingUserActions": [
+      "1) Generar nuevo secret: node -e \"console.log(require('crypto').randomBytes(32).toString('base64'))\"",
+      "2) Correr rotación dry-run: OLD_ENCRYPTION_SECRET=<actual> NEW_ENCRYPTION_SECRET=<nuevo> node backend/scripts/rotate-encryption-secret.js",
+      "3) Correr rotación real: añadir --apply al comando anterior",
+      "4) Editar backend/.env con el nuevo ENCRYPTION_SECRET y reiniciar backend",
+      "5) PURGA DE HISTORIAL (destructivo, requiere force-push y avisar a colaboradores): git filter-repo --path backend/.env --invert-paths    # requiere instalar git-filter-repo. Alternativa BFG: bfg --delete-files .env"
+    ]
+  },
+  "outcome": "SUCCESS",
+  "synapticStrength": 90.5,
+  "complianceScore": 100,
+  "filesChanged": 8,
+  "filesAdded": 2,
+  "linesTouched": "~140"
+}
+```
+
+**Notas críticas**:
+- La rotación de `ENCRYPTION_SECRET` NO se ejecutó automáticamente porque rompe el descifrado de `sumup_api_key`, `sumup_merchant_code` y `recaptcha_secret_key` ya almacenados. El script `rotate-encryption-secret.js` hace la rotación atómica (decrypt-old → re-encrypt-new dentro de transacción).
+- La **purga de historial git** NO se ejecutó: reescribe historia, requiere force-push y debe coordinarse con cualquier mirror/clone existente. Comando documentado arriba para que el usuario lo ejecute cuando esté listo.
+- `requireAdmin` aplicado a los 7 mounts es defensa en profundidad: hoy todos los usuarios son admin/superadmin (verificado en `utils/auth.js:148`), pero previene escalada si se agregan roles "kitchen" o "viewer" en el futuro.
+- helmet CSP es permisiva con `'unsafe-inline'` en script-src/style-src para no romper Vite/React inline styles. Endurecer en una iteración futura migrando a nonces.
+
+**Synaptic Strength**: 90.5%
+
+---
