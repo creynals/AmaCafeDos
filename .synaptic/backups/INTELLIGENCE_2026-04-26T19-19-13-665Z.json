@@ -320,10 +320,114 @@
         "synaptic-protocol"
       ],
       "confidence": {
-        "score": 0.8500000000000001,
+        "score": 0.9500000000000001,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-26T17:45:36.516Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202239-1",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.239Z",
+      "type": "PATTERN",
+      "title": "Promoción de panel CRUD a tab principal",
+      "description": "Reordenar TABS array, cambiar useState default, agregar render branch, limpiar duplicación en sub-vistas",
+      "context": "Cuando se promueve un sub-componente a pestaña de primer nivel en AdminPage",
+      "applicability": [
+        "frontend",
+        "react",
+        "admin-ui",
+        "refactor"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.239Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202242-2",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.242Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Workspaces SYNAPTIC son aislados por ciclo",
+      "description": "Cada ciclo crea workspace nuevo (import-{timestamp}-{hash}); dev server del usuario puede correr desde workspace anterior",
+      "context": "Al reiniciar dev server, verificar desde qué workspace corre el vite activo del usuario",
+      "applicability": [
+        "synaptic",
+        "workspace",
+        "dev-server",
+        "vite"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.242Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202244-3",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.244Z",
+      "type": "ANTI_PATTERN",
+      "title": "Reportar SUCCESS sin validación E2E manual posible",
+      "description": "Agente no puede autenticarse en navegador; debe escalar validación visual al usuario antes de cerrar SUCCESS",
+      "context": "Cambios UX que requieren login admin y verificación visual de regresiones",
+      "applicability": [
+        "validation",
+        "e2e",
+        "ux",
+        "auth"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.244Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202245-4",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.245Z",
+      "type": "INSIGHT",
+      "title": "Limpieza colateral reduce errores preexistentes",
+      "description": "Remover sub-vista duplicada 'crud' redujo errores lint de 13 a 7 sin introducir nuevos",
+      "context": "Al promover componentes, eliminar acceso duplicado mejora calidad de código",
+      "applicability": [
+        "refactor",
+        "lint",
+        "code-quality"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.245Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202247-5",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.247Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "useCallback huérfano tras remover guard",
+      "description": "Eliminar branches condicionales requiere actualizar dependencias de useCallback para evitar warnings",
+      "context": "Refactors que remueven ramas de lógica dentro de hooks memoizados",
+      "applicability": [
+        "react",
+        "hooks",
+        "lint",
+        "useCallback"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.247Z",
+        "source": "INFERRED"
       }
     },
     {
@@ -903,7 +1007,7 @@
     "[2026-04-26T19:00:53.939Z] Modo DG-079 (ejecución inmediata) es la preferencia del usuario para cambios <50 líneas bien definidos",
     "[2026-04-26T19:00:53.940Z] Workspace activo: import-1776956320164-2m9x2n (no confundir con import-1777213083759-63z86j)"
   ],
-  "lastUpdated": "2026-04-26T19:19:13.664Z",
+  "lastUpdated": "2026-04-26T19:14:31.881Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1617,110 +1721,6 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:09:31.161Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202239-1",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.239Z",
-      "type": "PATTERN",
-      "title": "Promoción de panel CRUD a tab principal",
-      "description": "Reordenar TABS array, cambiar useState default, agregar render branch, limpiar duplicación en sub-vistas",
-      "context": "Cuando se promueve un sub-componente a pestaña de primer nivel en AdminPage",
-      "applicability": [
-        "frontend",
-        "react",
-        "admin-ui",
-        "refactor"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:33:22.239Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202242-2",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.242Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Workspaces SYNAPTIC son aislados por ciclo",
-      "description": "Cada ciclo crea workspace nuevo (import-{timestamp}-{hash}); dev server del usuario puede correr desde workspace anterior",
-      "context": "Al reiniciar dev server, verificar desde qué workspace corre el vite activo del usuario",
-      "applicability": [
-        "synaptic",
-        "workspace",
-        "dev-server",
-        "vite"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:33:22.242Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202244-3",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.244Z",
-      "type": "ANTI_PATTERN",
-      "title": "Reportar SUCCESS sin validación E2E manual posible",
-      "description": "Agente no puede autenticarse en navegador; debe escalar validación visual al usuario antes de cerrar SUCCESS",
-      "context": "Cambios UX que requieren login admin y verificación visual de regresiones",
-      "applicability": [
-        "validation",
-        "e2e",
-        "ux",
-        "auth"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:33:22.244Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202245-4",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.245Z",
-      "type": "INSIGHT",
-      "title": "Limpieza colateral reduce errores preexistentes",
-      "description": "Remover sub-vista duplicada 'crud' redujo errores lint de 13 a 7 sin introducir nuevos",
-      "context": "Al promover componentes, eliminar acceso duplicado mejora calidad de código",
-      "applicability": [
-        "refactor",
-        "lint",
-        "code-quality"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:33:22.245Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202247-5",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.247Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "useCallback huérfano tras remover guard",
-      "description": "Eliminar branches condicionales requiere actualizar dependencias de useCallback para evitar warnings",
-      "context": "Refactors que remueven ramas de lógica dentro de hooks memoizados",
-      "applicability": [
-        "react",
-        "hooks",
-        "lint",
-        "useCallback"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:33:22.247Z",
-        "source": "INFERRED"
       }
     }
   ]
