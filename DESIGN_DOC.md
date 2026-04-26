@@ -96,6 +96,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-005 | Crear AuthContext, CartContext, ToastContext con API mínima | Desbloquear build E2E sin introducir cambios funcionales adicionales | 2026-04-26 | 5 |
 | DEC-007 | Plantilla Excel descargable vía GET /api/admin/products/bulk-template | Reduce errores de formato del usuario | 2026-04-26 | 3 |
 | DEC-006 | Bulk import requiere admin autenticado (requireAuth) | Operaciones masivas son sensibles, restringir a roles privilegiados | 2026-04-26 | 3 |
 | DEC-005 | Categorías solo existentes, no auto-crear | Evitar pollution del catálogo de categorías por errores de Excel | 2026-04-26 | 3 |
@@ -107,6 +108,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 5] Frontend usa imports de ./context/{Auth,Cart,Toast}Context que no existen en filesystem
+- [Cycle 5] main.jsx, AdminPage.jsx, LoginPage.jsx, UsersTab.jsx dependen de useAuth()
+- [Cycle 5] npm run build falla con Module not found hasta restaurar contextos
 - [Cycle 3] Bulk import usa xlsx + multer para parsing y upload
 - [Cycle 3] Procesamiento transaccional con rollback en error
 - [Cycle 3] Auditoría en products_audit con action='bulk_import'
@@ -114,6 +118,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 5, 2026-04-26] Restaurar carpeta frontend/src/context/ con 3 providers + hooks
 - [Cycle 3, 2026-04-26] Nueva ruta /api/admin/products/* protegida por requireAuth
 - [Cycle 3, 2026-04-26] Nuevo tab 'bulk-import' en AdminPage
 - [Cycle 3, 2026-04-26] Nuevo servicio productsBulkImport con parser/validator/processor
