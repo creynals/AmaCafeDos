@@ -280,6 +280,26 @@
   ],
   "learnings": [
     {
+      "learningId": "learning-5-1777215939405-3",
+      "cycle": 5,
+      "timestamp": "2026-04-26T15:05:39.405Z",
+      "type": "USER_PREFERENCE",
+      "title": "Decision Gates con 3 opciones (A/B/C)",
+      "description": "Usuario espera siempre 3 opciones: Conservadora, Balanceada (recomendada), Innovadora",
+      "context": "Phase 1 SPECIFICATION del protocolo SYNAPTIC",
+      "applicability": [
+        "synaptic",
+        "decision-gate",
+        "ux"
+      ],
+      "confidence": {
+        "score": 0.30000000000000004,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:05:39.405Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
       "learningId": "learning-6-1777216595895-3",
       "cycle": 6,
       "timestamp": "2026-04-26T15:16:35.895Z",
@@ -293,7 +313,7 @@
         "code-review"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:16:35.895Z",
         "source": "EXPLICIT"
@@ -1194,7 +1214,7 @@
     "[2026-04-26T18:08:38.158Z] Vista de Cocina default sub-tab es 'list' para preservar UX previa",
     "[2026-04-26T18:08:38.159Z] E2E manual pendiente del usuario (login admin/admin123 en :8080/admin)"
   ],
-  "lastUpdated": "2026-04-26T18:35:37.047Z",
+  "lastUpdated": "2026-04-26T18:32:51.357Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1550,26 +1570,6 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:16:35.896Z",
         "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-5-1777215939405-3",
-      "cycle": 5,
-      "timestamp": "2026-04-26T15:05:39.405Z",
-      "type": "USER_PREFERENCE",
-      "title": "Decision Gates con 3 opciones (A/B/C)",
-      "description": "Usuario espera siempre 3 opciones: Conservadora, Balanceada (recomendada), Innovadora",
-      "context": "Phase 1 SPECIFICATION del protocolo SYNAPTIC",
-      "applicability": [
-        "synaptic",
-        "decision-gate",
-        "ux"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:05:39.405Z",
-        "source": "EXPLICIT"
       }
     }
   ]
