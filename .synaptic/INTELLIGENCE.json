@@ -303,6 +303,33 @@
       "status": "PLANNED",
       "createdAtCycle": 31,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-040",
+      "title": "Validar E2E del Chat AI tras fix reCAPTCHA",
+      "description": "Usuario debe refrescar storefront, abrir chat y verificar Network tab + envío de mensaje sin error",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 39,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-041",
+      "title": "Auditar otros endpoints 'Public' bajo mounts con requireAuth",
+      "description": "Buscar comentarios 'Public endpoint' en routers montados con auth global y aplicar mismo patrón",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 39,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-042",
+      "title": "Reemplazar .catch(()=>{}) silenciosos en frontend",
+      "description": "Identificar fetches que silencian errores críticos de config y añadir logging mínimo",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 39,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -320,7 +347,7 @@
         "dg-079"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:00:13.429Z",
         "source": "EXPLICIT"
@@ -599,9 +626,9 @@
         "dev-workflow"
       ],
       "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.154Z",
+        "score": 0.44999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-26T21:53:44.189Z",
         "source": "INFERRED"
       }
     },
@@ -743,6 +770,87 @@
         "lastReinforced": "2026-04-26T19:00:53.936Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-39-1777240424179-0",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.179Z",
+      "type": "ANTI_PATTERN",
+      "title": "Global requireAuth oculta rutas públicas",
+      "description": "Mount global con requireAuth swallowea endpoints marcados 'Public' dentro del router",
+      "context": "Express con auth middleware aplicado en app.use() antes del router",
+      "applicability": [
+        "express",
+        "auth",
+        "routing",
+        "backend"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.179Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424184-1",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.184Z",
+      "type": "PATTERN",
+      "title": "Registrar handler público antes del mount protegido",
+      "description": "Importar handler y registrar ruta pública en server.js ANTES del app.use con requireAuth",
+      "context": "Cuando un router contiene mezcla de rutas públicas y protegidas bajo auth global",
+      "applicability": [
+        "express",
+        "auth",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.184Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424187-2",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.187Z",
+      "type": "ANTI_PATTERN",
+      "title": ".catch(()=>{}) silencia 401 críticos",
+      "description": "Frontend silenciaba el 401 del endpoint reCAPTCHA dejando siteKey null sin feedback",
+      "context": "Fetch en widgets de UI que dependen de config remota",
+      "applicability": [
+        "frontend",
+        "error-handling",
+        "debugging"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.187Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424190-4",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.190Z",
+      "type": "INSIGHT",
+      "title": "Comentario 'Public endpoint' no garantiza acceso público",
+      "description": "El comentario en el route file miente si el mount aplica auth global",
+      "context": "Auditoría de endpoints supuestamente públicos",
+      "applicability": [
+        "express",
+        "code-review",
+        "auth"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.190Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -798,9 +906,13 @@
     "[2026-04-26T19:00:53.938Z] Backend corre como PID 73456 sin --watch, requiere reinicio manual para aplicar fixes #1-#4",
     "[2026-04-26T19:00:53.938Z] ARCHITECT MODE sin POST commits causa pérdida de contexto entre ciclos - persistir tablas en BITACORA",
     "[2026-04-26T19:00:53.939Z] Modo DG-079 (ejecución inmediata) es la preferencia del usuario para cambios <50 líneas bien definidos",
-    "[2026-04-26T19:00:53.940Z] Workspace activo: import-1776956320164-2m9x2n (no confundir con import-1777213083759-63z86j)"
+    "[2026-04-26T19:00:53.940Z] Workspace activo: import-1776956320164-2m9x2n (no confundir con import-1777213083759-63z86j)",
+    "[2026-04-26T21:53:44.191Z] Workspace activo: import-1777213083759-63z86j (donde corre backend node --watch)",
+    "[2026-04-26T21:53:44.192Z] DB: recaptcha_enabled=true con siteKey y secretKey configurados",
+    "[2026-04-26T21:53:44.193Z] Ciclo 38 fue solo análisis sin commits - tuvo que reconstruirse el contexto",
+    "[2026-04-26T21:53:44.194Z] E2E del fix queda pendiente de validación manual del usuario en storefront"
   ],
-  "lastUpdated": "2026-04-26T21:48:58.189Z",
+  "lastUpdated": "2026-04-26T21:57:43.485Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

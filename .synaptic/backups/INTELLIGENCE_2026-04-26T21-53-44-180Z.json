@@ -276,394 +276,36 @@
       "status": "PLANNED",
       "createdAtCycle": 25,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-031-A",
+      "title": "Reiniciar backend para aplicar fixes",
+      "description": "kill 73456 && cd backend && npm run dev — aplica migración 013 y fixes en webhooks/orders/payments",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 31,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-031-B",
+      "title": "Verificar #189 quedó cancelled post-reinicio",
+      "description": "Query DB tras reinicio: SELECT id, status, payment_status FROM orders WHERE id=189",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 31,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-031-C",
+      "title": "Considerar agregar --watch al script npm run dev",
+      "description": "Evitar reinicios manuales en futuros fixes; revisar nodemon/--watch en backend/package.json",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 31,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-9-1777218821030-0",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.030Z",
-      "type": "USER_PREFERENCE",
-      "title": "Priorizar CRUD individual antes que galería de imágenes",
-      "description": "Usuario pidió implementar CRUD/stock primero y diferir galería de imágenes múltiples",
-      "context": "Al implementar mantenedores de productos en este proyecto",
-      "applicability": [
-        "products",
-        "crud",
-        "prioritization"
-      ],
-      "confidence": {
-        "score": 0.8,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.030Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821032-1",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.032Z",
-      "type": "USER_PREFERENCE",
-      "title": "No tocar Bulk Import",
-      "description": "Usuario excluyó explícitamente Bulk Import del scope del Ciclo 9",
-      "context": "Trabajo en módulo de productos admin",
-      "applicability": [
-        "scope",
-        "bulk-import",
-        "products"
-      ],
-      "confidence": {
-        "score": 0.8,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.032Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821041-8",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.041Z",
-      "type": "USER_PREFERENCE",
-      "title": "No introducir regresiones de lint",
-      "description": "Mantener contador de errores ESLint igual al baseline (13 preexistentes)",
-      "context": "Validación post-implementación",
-      "applicability": [
-        "lint",
-        "quality",
-        "validation"
-      ],
-      "confidence": {
-        "score": 0.8,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.041Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771152-0",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.152Z",
-      "type": "USER_PREFERENCE",
-      "title": "Backward compatibility con image_url",
-      "description": "Mantener products.image_url sincronizado con imagen primaria al implementar galería 1:N",
-      "context": "Al extender modelo de datos sin romper código existente",
-      "applicability": [
-        "backend",
-        "migrations",
-        "backward-compat"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.152Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771155-1",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.156Z",
-      "type": "PATTERN",
-      "title": "Galería multi-imagen con primary flag",
-      "description": "UNIQUE INDEX parcial sobre is_primary garantiza máximo una imagen principal por producto",
-      "context": "Modelos 1:N donde un registro debe ser destacado",
-      "applicability": [
-        "sql",
-        "postgres",
-        "schema-design"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.155Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771158-2",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.158Z",
-      "type": "PATTERN",
-      "title": "Auditoría granular en products_audit",
-      "description": "Cada operación CRUD de imágenes registra entrada en tabla de auditoría",
-      "context": "Endpoints administrativos con trazabilidad",
-      "applicability": [
-        "backend",
-        "audit",
-        "compliance"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.158Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771159-3",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.159Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Cleanup físico al eliminar imagen",
-      "description": "DELETE endpoint borra archivo del filesystem además de la fila en DB",
-      "context": "Manejo de uploads para evitar archivos huérfanos",
-      "applicability": [
-        "backend",
-        "file-management"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.159Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771161-4",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.161Z",
-      "type": "USER_PREFERENCE",
-      "title": "Galería solo en edición, no en creación",
-      "description": "Modal de creación muestra aviso 'Guarda primero' antes de habilitar gestión de imágenes",
-      "context": "UX de formularios con recursos dependientes de ID",
-      "applicability": [
-        "frontend",
-        "ux",
-        "forms"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.161Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771163-5",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.163Z",
-      "type": "INSIGHT",
-      "title": "Survey previo evita duplicación de trabajo",
-      "description": "Cycle 9 ya cubría prioridad 1, survey permitió saltar directo a prioridad 2",
-      "context": "Cuando se reciben prompts con múltiples prioridades secuenciales",
-      "applicability": [
-        "synaptic",
-        "workflow"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.163Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202235-0",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.235Z",
-      "type": "USER_PREFERENCE",
-      "title": "Immediate Execution Mode (DG-079)",
-      "description": "Usuario autoriza ejecución directa sin Decision Gate cuando indica 'modo ejecución inmediata'",
-      "context": "Cuando el requerimiento es claro y el usuario explicita bypass del Decision Gate",
-      "applicability": [
-        "workflow",
-        "decision-gate",
-        "synaptic-protocol"
-      ],
-      "confidence": {
-        "score": 0.9500000000000001,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-26T17:45:36.516Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202239-1",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.239Z",
-      "type": "PATTERN",
-      "title": "Promoción de panel CRUD a tab principal",
-      "description": "Reordenar TABS array, cambiar useState default, agregar render branch, limpiar duplicación en sub-vistas",
-      "context": "Cuando se promueve un sub-componente a pestaña de primer nivel en AdminPage",
-      "applicability": [
-        "frontend",
-        "react",
-        "admin-ui",
-        "refactor"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:33:22.239Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202242-2",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.242Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Workspaces SYNAPTIC son aislados por ciclo",
-      "description": "Cada ciclo crea workspace nuevo (import-{timestamp}-{hash}); dev server del usuario puede correr desde workspace anterior",
-      "context": "Al reiniciar dev server, verificar desde qué workspace corre el vite activo del usuario",
-      "applicability": [
-        "synaptic",
-        "workspace",
-        "dev-server",
-        "vite"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:33:22.242Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202244-3",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.244Z",
-      "type": "ANTI_PATTERN",
-      "title": "Reportar SUCCESS sin validación E2E manual posible",
-      "description": "Agente no puede autenticarse en navegador; debe escalar validación visual al usuario antes de cerrar SUCCESS",
-      "context": "Cambios UX que requieren login admin y verificación visual de regresiones",
-      "applicability": [
-        "validation",
-        "e2e",
-        "ux",
-        "auth"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:33:22.244Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202245-4",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.245Z",
-      "type": "INSIGHT",
-      "title": "Limpieza colateral reduce errores preexistentes",
-      "description": "Remover sub-vista duplicada 'crud' redujo errores lint de 13 a 7 sin introducir nuevos",
-      "context": "Al promover componentes, eliminar acceso duplicado mejora calidad de código",
-      "applicability": [
-        "refactor",
-        "lint",
-        "code-quality"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:33:22.245Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202247-5",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.247Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "useCallback huérfano tras remover guard",
-      "description": "Eliminar branches condicionales requiere actualizar dependencias de useCallback para evitar warnings",
-      "context": "Refactors que remueven ramas de lógica dentro de hooks memoizados",
-      "applicability": [
-        "react",
-        "hooks",
-        "lint",
-        "useCallback"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:33:22.247Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813420-0",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.420Z",
-      "type": "ANTI_PATTERN",
-      "title": "Stale backend from prior workspace",
-      "description": "Backend PID was running from old workspace dir, masking new routes as 404 across cycles 11-17",
-      "context": "Multi-workspace projects sharing ports; verify process cwd before debugging missing endpoints",
-      "applicability": [
-        "debugging",
-        "workspace",
-        "process-management",
-        "404"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.420Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813424-1",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.424Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Express 5 + path-to-regexp v8 break inline regex",
-      "description": "Route patterns like ':id(\\d+)' crash startup; remove regex and use Number.isInteger guard in handler",
-      "context": "Any Express 5 migration or new route definition with numeric param constraints",
-      "applicability": [
-        "express",
-        "routing",
-        "migration",
-        "path-to-regexp"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.424Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813426-2",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.426Z",
-      "type": "PATTERN",
-      "title": "Vite must proxy /static for backend-served assets",
-      "description": "Without '/static' proxy, uploaded images return SPA HTML instead of file (silent failure)",
-      "context": "Vite dev server fronting a backend that serves uploaded media",
-      "applicability": [
-        "vite",
-        "proxy",
-        "static-assets",
-        "uploads"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.426Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813427-3",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.428Z",
-      "type": "INSIGHT",
-      "title": "Architect-mode cycles missed runtime state",
-      "description": "Pure code analysis cannot detect process/cwd mismatches; runtime inspection (lsof) is required",
-      "context": "When user reports 'fix doesn't work' despite correct commits",
-      "applicability": [
-        "debugging",
-        "synaptic",
-        "architect-mode"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.427Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-18-1777222813429-4",
       "cycle": 18,
@@ -678,7 +320,7 @@
         "dg-079"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:00:13.429Z",
         "source": "EXPLICIT"
@@ -981,6 +623,126 @@
         "lastReinforced": "2026-04-26T18:08:38.156Z",
         "source": "EXPLICIT"
       }
+    },
+    {
+      "learningId": "learning-31-1777230053925-0",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.925Z",
+      "type": "USER_PREFERENCE",
+      "title": "Modo ejecución inmediata DG-079",
+      "description": "Usuario prefiere ejecutar cambios pequeños (~30 líneas) en un solo ciclo, no fragmentar en re-análisis",
+      "context": "Cuando los cambios son acotados y bien definidos tras fase ARCHITECT",
+      "applicability": [
+        "execution-mode",
+        "user-preference",
+        "DG-079"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.925Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053929-1",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.929Z",
+      "type": "ANTI_PATTERN",
+      "title": "ARCHITECT MODE prolongado sin POST commit pierde contexto",
+      "description": "Ciclos 26-30 en ARCHITECT MODE sin commit POST hicieron perder la tabla de 5 fixes del ciclo 30",
+      "context": "Análisis multi-ciclo sin persistir conclusiones intermedias",
+      "applicability": [
+        "synaptic-protocol",
+        "context-loss",
+        "architect-mode"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.929Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053931-2",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.931Z",
+      "type": "PATTERN",
+      "title": "Helper puro derivado + COALESCE en UPDATE",
+      "description": "Extraer lógica de derivación a helper puro y usar COALESCE($n, status) en múltiples UPDATE para consistencia",
+      "context": "Cuando misma transformación payment→fulfillment se replica en webhooks/orders/payments",
+      "applicability": [
+        "refactor",
+        "DRY",
+        "sql-update"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.931Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053933-3",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.933Z",
+      "type": "PATTERN",
+      "title": "Migración SQL idempotente con snapshot a tabla audit",
+      "description": "Backfill legacy debe snapshot estado previo a tabla _audit antes de UPDATE para reversibilidad",
+      "context": "Migraciones que corrigen datos legacy en producción",
+      "applicability": [
+        "migration",
+        "audit",
+        "data-fix"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.933Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053934-4",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.934Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "node:test built-in evita nuevas deps",
+      "description": "Usar `node --test` con `node:test` para tests cortos sin agregar Jest/Mocha al proyecto",
+      "context": "Tests unitarios de helpers puros en backend Node",
+      "applicability": [
+        "testing",
+        "node-builtin",
+        "no-deps"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.934Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053936-5",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.936Z",
+      "type": "INSIGHT",
+      "title": "Backend sin --watch requiere reinicio manual",
+      "description": "PID 73456 corre `node src/server.js` directo, fixes no se aplican hasta `kill && npm run dev`",
+      "context": "Workspace import-1776956320164-2m9x2n backend dev workflow",
+      "applicability": [
+        "dev-workflow",
+        "hot-reload",
+        "deployment"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.936Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1032,9 +794,13 @@
     "[2026-04-26T17:45:36.521Z] 7 preexisting ESLint errors remain — not introduced by this cycle",
     "[2026-04-26T18:08:38.157Z] Backend usa node --watch — no requiere reinicio manual al editar rutas",
     "[2026-04-26T18:08:38.158Z] Vista de Cocina default sub-tab es 'list' para preservar UX previa",
-    "[2026-04-26T18:08:38.159Z] E2E manual pendiente del usuario (login admin/admin123 en :8080/admin)"
+    "[2026-04-26T18:08:38.159Z] E2E manual pendiente del usuario (login admin/admin123 en :8080/admin)",
+    "[2026-04-26T19:00:53.938Z] Backend corre como PID 73456 sin --watch, requiere reinicio manual para aplicar fixes #1-#4",
+    "[2026-04-26T19:00:53.938Z] ARCHITECT MODE sin POST commits causa pérdida de contexto entre ciclos - persistir tablas en BITACORA",
+    "[2026-04-26T19:00:53.939Z] Modo DG-079 (ejecución inmediata) es la preferencia del usuario para cambios <50 líneas bien definidos",
+    "[2026-04-26T19:00:53.940Z] Workspace activo: import-1776956320164-2m9x2n (no confundir con import-1777213083759-63z86j)"
   ],
-  "lastUpdated": "2026-04-26T18:46:07.954Z",
+  "lastUpdated": "2026-04-26T21:48:58.189Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1569,6 +1335,391 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.042Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-10-1777219771155-1",
+      "cycle": 10,
+      "timestamp": "2026-04-26T16:09:31.156Z",
+      "type": "PATTERN",
+      "title": "Galería multi-imagen con primary flag",
+      "description": "UNIQUE INDEX parcial sobre is_primary garantiza máximo una imagen principal por producto",
+      "context": "Modelos 1:N donde un registro debe ser destacado",
+      "applicability": [
+        "sql",
+        "postgres",
+        "schema-design"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:09:31.155Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-10-1777219771158-2",
+      "cycle": 10,
+      "timestamp": "2026-04-26T16:09:31.158Z",
+      "type": "PATTERN",
+      "title": "Auditoría granular en products_audit",
+      "description": "Cada operación CRUD de imágenes registra entrada en tabla de auditoría",
+      "context": "Endpoints administrativos con trazabilidad",
+      "applicability": [
+        "backend",
+        "audit",
+        "compliance"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:09:31.158Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-10-1777219771159-3",
+      "cycle": 10,
+      "timestamp": "2026-04-26T16:09:31.159Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Cleanup físico al eliminar imagen",
+      "description": "DELETE endpoint borra archivo del filesystem además de la fila en DB",
+      "context": "Manejo de uploads para evitar archivos huérfanos",
+      "applicability": [
+        "backend",
+        "file-management"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:09:31.159Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-10-1777219771163-5",
+      "cycle": 10,
+      "timestamp": "2026-04-26T16:09:31.163Z",
+      "type": "INSIGHT",
+      "title": "Survey previo evita duplicación de trabajo",
+      "description": "Cycle 9 ya cubría prioridad 1, survey permitió saltar directo a prioridad 2",
+      "context": "Cuando se reciben prompts con múltiples prioridades secuenciales",
+      "applicability": [
+        "synaptic",
+        "workflow"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:09:31.163Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821030-0",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.030Z",
+      "type": "USER_PREFERENCE",
+      "title": "Priorizar CRUD individual antes que galería de imágenes",
+      "description": "Usuario pidió implementar CRUD/stock primero y diferir galería de imágenes múltiples",
+      "context": "Al implementar mantenedores de productos en este proyecto",
+      "applicability": [
+        "products",
+        "crud",
+        "prioritization"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.030Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821032-1",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.032Z",
+      "type": "USER_PREFERENCE",
+      "title": "No tocar Bulk Import",
+      "description": "Usuario excluyó explícitamente Bulk Import del scope del Ciclo 9",
+      "context": "Trabajo en módulo de productos admin",
+      "applicability": [
+        "scope",
+        "bulk-import",
+        "products"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.032Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821041-8",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.041Z",
+      "type": "USER_PREFERENCE",
+      "title": "No introducir regresiones de lint",
+      "description": "Mantener contador de errores ESLint igual al baseline (13 preexistentes)",
+      "context": "Validación post-implementación",
+      "applicability": [
+        "lint",
+        "quality",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.041Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-10-1777219771152-0",
+      "cycle": 10,
+      "timestamp": "2026-04-26T16:09:31.152Z",
+      "type": "USER_PREFERENCE",
+      "title": "Backward compatibility con image_url",
+      "description": "Mantener products.image_url sincronizado con imagen primaria al implementar galería 1:N",
+      "context": "Al extender modelo de datos sin romper código existente",
+      "applicability": [
+        "backend",
+        "migrations",
+        "backward-compat"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:09:31.152Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-10-1777219771161-4",
+      "cycle": 10,
+      "timestamp": "2026-04-26T16:09:31.161Z",
+      "type": "USER_PREFERENCE",
+      "title": "Galería solo en edición, no en creación",
+      "description": "Modal de creación muestra aviso 'Guarda primero' antes de habilitar gestión de imágenes",
+      "context": "UX de formularios con recursos dependientes de ID",
+      "applicability": [
+        "frontend",
+        "ux",
+        "forms"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:09:31.161Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202239-1",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.239Z",
+      "type": "PATTERN",
+      "title": "Promoción de panel CRUD a tab principal",
+      "description": "Reordenar TABS array, cambiar useState default, agregar render branch, limpiar duplicación en sub-vistas",
+      "context": "Cuando se promueve un sub-componente a pestaña de primer nivel en AdminPage",
+      "applicability": [
+        "frontend",
+        "react",
+        "admin-ui",
+        "refactor"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.239Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202242-2",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.242Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Workspaces SYNAPTIC son aislados por ciclo",
+      "description": "Cada ciclo crea workspace nuevo (import-{timestamp}-{hash}); dev server del usuario puede correr desde workspace anterior",
+      "context": "Al reiniciar dev server, verificar desde qué workspace corre el vite activo del usuario",
+      "applicability": [
+        "synaptic",
+        "workspace",
+        "dev-server",
+        "vite"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.242Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202244-3",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.244Z",
+      "type": "ANTI_PATTERN",
+      "title": "Reportar SUCCESS sin validación E2E manual posible",
+      "description": "Agente no puede autenticarse en navegador; debe escalar validación visual al usuario antes de cerrar SUCCESS",
+      "context": "Cambios UX que requieren login admin y verificación visual de regresiones",
+      "applicability": [
+        "validation",
+        "e2e",
+        "ux",
+        "auth"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.244Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202245-4",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.245Z",
+      "type": "INSIGHT",
+      "title": "Limpieza colateral reduce errores preexistentes",
+      "description": "Remover sub-vista duplicada 'crud' redujo errores lint de 13 a 7 sin introducir nuevos",
+      "context": "Al promover componentes, eliminar acceso duplicado mejora calidad de código",
+      "applicability": [
+        "refactor",
+        "lint",
+        "code-quality"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.245Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202247-5",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.247Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "useCallback huérfano tras remover guard",
+      "description": "Eliminar branches condicionales requiere actualizar dependencias de useCallback para evitar warnings",
+      "context": "Refactors que remueven ramas de lógica dentro de hooks memoizados",
+      "applicability": [
+        "react",
+        "hooks",
+        "lint",
+        "useCallback"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.247Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202235-0",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.235Z",
+      "type": "USER_PREFERENCE",
+      "title": "Immediate Execution Mode (DG-079)",
+      "description": "Usuario autoriza ejecución directa sin Decision Gate cuando indica 'modo ejecución inmediata'",
+      "context": "Cuando el requerimiento es claro y el usuario explicita bypass del Decision Gate",
+      "applicability": [
+        "workflow",
+        "decision-gate",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-26T17:45:36.516Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-18-1777222813420-0",
+      "cycle": 18,
+      "timestamp": "2026-04-26T17:00:13.420Z",
+      "type": "ANTI_PATTERN",
+      "title": "Stale backend from prior workspace",
+      "description": "Backend PID was running from old workspace dir, masking new routes as 404 across cycles 11-17",
+      "context": "Multi-workspace projects sharing ports; verify process cwd before debugging missing endpoints",
+      "applicability": [
+        "debugging",
+        "workspace",
+        "process-management",
+        "404"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:00:13.420Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-18-1777222813424-1",
+      "cycle": 18,
+      "timestamp": "2026-04-26T17:00:13.424Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Express 5 + path-to-regexp v8 break inline regex",
+      "description": "Route patterns like ':id(\\d+)' crash startup; remove regex and use Number.isInteger guard in handler",
+      "context": "Any Express 5 migration or new route definition with numeric param constraints",
+      "applicability": [
+        "express",
+        "routing",
+        "migration",
+        "path-to-regexp"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:00:13.424Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-18-1777222813426-2",
+      "cycle": 18,
+      "timestamp": "2026-04-26T17:00:13.426Z",
+      "type": "PATTERN",
+      "title": "Vite must proxy /static for backend-served assets",
+      "description": "Without '/static' proxy, uploaded images return SPA HTML instead of file (silent failure)",
+      "context": "Vite dev server fronting a backend that serves uploaded media",
+      "applicability": [
+        "vite",
+        "proxy",
+        "static-assets",
+        "uploads"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:00:13.426Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-18-1777222813427-3",
+      "cycle": 18,
+      "timestamp": "2026-04-26T17:00:13.428Z",
+      "type": "INSIGHT",
+      "title": "Architect-mode cycles missed runtime state",
+      "description": "Pure code analysis cannot detect process/cwd mismatches; runtime inspection (lsof) is required",
+      "context": "When user reports 'fix doesn't work' despite correct commits",
+      "applicability": [
+        "debugging",
+        "synaptic",
+        "architect-mode"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:00:13.427Z",
         "source": "INFERRED"
       }
     }
