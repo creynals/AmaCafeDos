@@ -307,6 +307,26 @@
   ],
   "learnings": [
     {
+      "learningId": "learning-14-1777221202235-0",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.235Z",
+      "type": "USER_PREFERENCE",
+      "title": "Immediate Execution Mode (DG-079)",
+      "description": "Usuario autoriza ejecución directa sin Decision Gate cuando indica 'modo ejecución inmediata'",
+      "context": "Cuando el requerimiento es claro y el usuario explicita bypass del Decision Gate",
+      "applicability": [
+        "workflow",
+        "decision-gate",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0.3500000000000001,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-26T17:45:36.516Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
       "learningId": "learning-18-1777222813420-0",
       "cycle": 18,
       "timestamp": "2026-04-26T17:00:13.420Z",
@@ -883,7 +903,7 @@
     "[2026-04-26T19:00:53.939Z] Modo DG-079 (ejecución inmediata) es la preferencia del usuario para cambios <50 líneas bien definidos",
     "[2026-04-26T19:00:53.940Z] Workspace activo: import-1776956320164-2m9x2n (no confundir con import-1777213083759-63z86j)"
   ],
-  "lastUpdated": "2026-04-26T21:38:08.300Z",
+  "lastUpdated": "2026-04-26T19:33:38.133Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1701,26 +1721,6 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:33:22.247Z",
         "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-14-1777221202235-0",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.235Z",
-      "type": "USER_PREFERENCE",
-      "title": "Immediate Execution Mode (DG-079)",
-      "description": "Usuario autoriza ejecución directa sin Decision Gate cuando indica 'modo ejecución inmediata'",
-      "context": "Cuando el requerimiento es claro y el usuario explicita bypass del Decision Gate",
-      "applicability": [
-        "workflow",
-        "decision-gate",
-        "synaptic-protocol"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-26T17:45:36.516Z",
-        "source": "EXPLICIT"
       }
     }
   ]
