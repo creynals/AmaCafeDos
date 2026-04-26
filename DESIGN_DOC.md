@@ -96,6 +96,8 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-015 | Análisis Productos retiene tab analítico con icono BarChart3, sin sub-vista crud duplicada | Separación clara entre operación (Mantenedor) y análisis (métricas/inventario) | 2026-04-26 | 14 |
+| DEC-014 | ProductsCrudPanel promovido a tab principal 'Mantenedor Productos' (default landing del AdminPage) | Fix UX inmediato: el panel CRUD estaba enterrado como sub-vista dentro de tab analítico | 2026-04-26 | 14 |
 | DEC-014 | Usar botones up/down en lugar de drag-and-drop para reorder inicial | MVP funcional rápido; DnD HTML5 queda como mejora futura | 2026-04-26 | 10 |
 | DEC-013 | Sincronizar products.image_url automáticamente con imagen primaria | Mantener backward compatibility con código que aún usa image_url directo | 2026-04-26 | 10 |
 | DEC-012 | Tabla product_images 1:N con CASCADE DELETE y UNIQUE parcial sobre is_primary | Garantiza integridad referencial y máximo una imagen principal por producto | 2026-04-26 | 10 |
@@ -117,6 +119,10 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 14] AdminPage.jsx TABS array: products-crud primero, products segundo
+- [Cycle 14] Default activeTab cambiado de 'products' a 'products-crud'
+- [Cycle 14] ProductsTab.view default ahora 'inventory' (sin opción 'crud')
+- [Cycle 14] Build size: 430.13 kB / 115.65 kB gzip — sin regresión de bundle
 - [Cycle 10] Migration 012 crea product_images con ON DELETE CASCADE desde products
 - [Cycle 10] Endpoint POST usa FormData para multipart upload de imágenes
 - [Cycle 10] GET /api/products/:id ahora incluye array images[] para storefront
@@ -138,6 +144,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 14, 2026-04-26] AdminPage navegación primaria: Mantenedor Productos ahora landing tab
 - [Cycle 10, 2026-04-26] Nuevo router products-admin-images registrado bajo requireAuth en server.js
 - [Cycle 10, 2026-04-26] Frontend api.js extendido con 5 helpers para CRUD de imágenes
 - [Cycle 9, 2026-04-26] Nuevo router backend: products-admin-crud.js bajo /api/admin/products

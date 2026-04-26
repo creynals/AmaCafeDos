@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-26T16:09:06.622Z",
+  "lastUpdated": "2026-04-26T16:32:55.220Z",
   "findings": [
     {
       "id": "DC-001",
@@ -2440,7 +2440,12 @@
       "findingId": "SAI-27c4db62",
       "detectedInCycle": 9,
       "detectedAt": "2026-04-26T15:53:05.105Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 14,
+        "resolvedAt": "2026-04-26T16:32:55.219Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "MT-169",
@@ -2452,7 +2457,12 @@
       "findingId": "SAI-f2554208",
       "detectedInCycle": 9,
       "detectedAt": "2026-04-26T15:53:05.105Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 14,
+        "resolvedAt": "2026-04-26T16:32:55.219Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "MT-171",
@@ -2465,7 +2475,12 @@
       "findingId": "SAI-a8f0c8ec",
       "detectedInCycle": 9,
       "detectedAt": "2026-04-26T15:53:05.105Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 14,
+        "resolvedAt": "2026-04-26T16:32:55.219Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-303",
@@ -2504,11 +2519,49 @@
       "detectedInCycle": 10,
       "detectedAt": "2026-04-26T16:09:06.621Z",
       "status": "OPEN"
+    },
+    {
+      "id": "DC-333",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 131,
+      "description": "Unused function: 'ProductsTab' (208 lines)",
+      "suggestion": "Remove unused function 'ProductsTab' or export if needed elsewhere",
+      "findingId": "SAI-7a2faef0",
+      "detectedInCycle": 14,
+      "detectedAt": "2026-04-26T16:32:55.217Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-352",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "description": "File has 1708 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-ef8039be",
+      "detectedInCycle": 14,
+      "detectedAt": "2026-04-26T16:32:55.217Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-354",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 131,
+      "description": "Function 'ProductsTab' has 208 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-1e0e3ab9",
+      "detectedInCycle": 14,
+      "detectedAt": "2026-04-26T16:32:55.217Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
     "totalOpen": 152,
-    "totalResolved": 30,
+    "totalResolved": 33,
     "bySeverity": {
       "MEDIUM": 120,
       "LOW": 32
