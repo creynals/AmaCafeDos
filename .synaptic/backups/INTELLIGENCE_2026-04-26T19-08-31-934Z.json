@@ -307,6 +307,66 @@
   ],
   "learnings": [
     {
+      "learningId": "learning-9-1777218821030-0",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.030Z",
+      "type": "USER_PREFERENCE",
+      "title": "Priorizar CRUD individual antes que galería de imágenes",
+      "description": "Usuario pidió implementar CRUD/stock primero y diferir galería de imágenes múltiples",
+      "context": "Al implementar mantenedores de productos en este proyecto",
+      "applicability": [
+        "products",
+        "crud",
+        "prioritization"
+      ],
+      "confidence": {
+        "score": 0.30000000000000004,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.030Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821032-1",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.032Z",
+      "type": "USER_PREFERENCE",
+      "title": "No tocar Bulk Import",
+      "description": "Usuario excluyó explícitamente Bulk Import del scope del Ciclo 9",
+      "context": "Trabajo en módulo de productos admin",
+      "applicability": [
+        "scope",
+        "bulk-import",
+        "products"
+      ],
+      "confidence": {
+        "score": 0.30000000000000004,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.032Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821041-8",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.041Z",
+      "type": "USER_PREFERENCE",
+      "title": "No introducir regresiones de lint",
+      "description": "Mantener contador de errores ESLint igual al baseline (13 preexistentes)",
+      "context": "Validación post-implementación",
+      "applicability": [
+        "lint",
+        "quality",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.30000000000000004,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.041Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
       "learningId": "learning-10-1777219771152-0",
       "cycle": 10,
       "timestamp": "2026-04-26T16:09:31.152Z",
@@ -320,7 +380,7 @@
         "backward-compat"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:09:31.152Z",
         "source": "EXPLICIT"
@@ -340,7 +400,7 @@
         "forms"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:09:31.161Z",
         "source": "EXPLICIT"
@@ -1047,7 +1107,7 @@
     "[2026-04-26T19:00:53.939Z] Modo DG-079 (ejecución inmediata) es la preferencia del usuario para cambios <50 líneas bien definidos",
     "[2026-04-26T19:00:53.940Z] Workspace activo: import-1776956320164-2m9x2n (no confundir con import-1777213083759-63z86j)"
   ],
-  "lastUpdated": "2026-04-26T19:08:31.934Z",
+  "lastUpdated": "2026-04-26T19:03:06.913Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1661,66 +1721,6 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:09:31.163Z",
         "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821030-0",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.030Z",
-      "type": "USER_PREFERENCE",
-      "title": "Priorizar CRUD individual antes que galería de imágenes",
-      "description": "Usuario pidió implementar CRUD/stock primero y diferir galería de imágenes múltiples",
-      "context": "Al implementar mantenedores de productos en este proyecto",
-      "applicability": [
-        "products",
-        "crud",
-        "prioritization"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.030Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821032-1",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.032Z",
-      "type": "USER_PREFERENCE",
-      "title": "No tocar Bulk Import",
-      "description": "Usuario excluyó explícitamente Bulk Import del scope del Ciclo 9",
-      "context": "Trabajo en módulo de productos admin",
-      "applicability": [
-        "scope",
-        "bulk-import",
-        "products"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.032Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821041-8",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.041Z",
-      "type": "USER_PREFERENCE",
-      "title": "No introducir regresiones de lint",
-      "description": "Mantener contador de errores ESLint igual al baseline (13 preexistentes)",
-      "context": "Validación post-implementación",
-      "applicability": [
-        "lint",
-        "quality",
-        "validation"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.041Z",
-        "source": "EXPLICIT"
       }
     }
   ]
