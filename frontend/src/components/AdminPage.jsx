@@ -9,14 +9,18 @@ import BulkImportTab from './BulkImportTab';
 import ProductsCrudPanel from './ProductsCrudPanel';
 
 const TABS = [
-  { id: 'products-crud', label: 'Mantenedor Productos', icon: Package },
-  { id: 'products', label: 'Análisis Productos', icon: BarChart3 },
-  { id: 'bulk-import', label: 'Importación Masiva', icon: FileSpreadsheet },
+  { id: 'products-parent', label: 'Productos', icon: Package },
   { id: 'orders', label: 'Órdenes', icon: ClipboardList },
   { id: 'customers', label: 'Clientes', icon: Users },
   { id: 'insights', label: 'Chat AI Insights', icon: MessageCircle },
   { id: 'settings', label: 'Configuración', icon: Settings },
   { id: 'users', label: 'Usuarios', icon: UserCog },
+];
+
+const PRODUCTS_SUBTABS = [
+  { id: 'crud', label: 'Mantenedor Productos', icon: Package, description: 'Gestión CRUD de productos individuales (crear, editar, stock, galería)' },
+  { id: 'analytics', label: 'Análisis Productos', icon: BarChart3, description: 'Métricas de ventas, top productos y tendencias' },
+  { id: 'bulk-import', label: 'Importación Masiva', icon: FileSpreadsheet, description: 'Carga masiva de productos vía Excel (alta, edición, eliminación)' },
 ];
 
 const WELCOME_MESSAGE = {
@@ -1637,7 +1641,8 @@ function SettingsTab() {
 }
 
 export default function AdminPage() {
-  const [activeTab, setActiveTab] = useState('products-crud');
+  const [activeTab, setActiveTab] = useState('products-parent');
+  const [activeProductsSubtab, setActiveProductsSubtab] = useState('crud');
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
@@ -1693,9 +1698,40 @@ export default function AdminPage() {
         </div>
 
         {/* Tab Content */}
-        {activeTab === 'products-crud' && <ProductsCrudPanel />}
-        {activeTab === 'products' && <ProductsTab />}
-        {activeTab === 'bulk-import' && <BulkImportTab />}
+        {activeTab === 'products-parent' && (
+          <div>
+            {/* Sub-tab navigation */}
+            <div className="border-b border-ama-border mb-4">
+              <div className="flex gap-1 overflow-x-auto">
+                {PRODUCTS_SUBTABS.map(subtab => (
+                  <button
+                    key={subtab.id}
+                    onClick={() => setActiveProductsSubtab(subtab.id)}
+                    className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-all cursor-pointer whitespace-nowrap border-b-2 -mb-px ${
+                      activeProductsSubtab === subtab.id
+                        ? 'border-ama-amber text-ama-amber'
+                        : 'border-transparent text-ama-text-muted hover:text-ama-text hover:border-ama-border'
+                    }`}
+                    title={subtab.description}
+                  >
+                    <subtab.icon size={16} />
+                    {subtab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Sub-tab description */}
+            <p className="text-xs text-ama-text-muted mb-4 px-1">
+              {PRODUCTS_SUBTABS.find(s => s.id === activeProductsSubtab)?.description}
+            </p>
+
+            {/* Sub-tab content */}
+            {activeProductsSubtab === 'crud' && <ProductsCrudPanel />}
+            {activeProductsSubtab === 'analytics' && <ProductsTab />}
+            {activeProductsSubtab === 'bulk-import' && <BulkImportTab />}
+          </div>
+        )}
         {activeTab === 'orders' && <OrdersTab />}
         {activeTab === 'customers' && <CustomersTab />}
         {activeTab === 'insights' && <InsightsTab />}

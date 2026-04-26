@@ -1546,3 +1546,55 @@ organizar y mejorar el UX de Productos, existen 3 Tab o pestañas "Mantenedor Pr
 
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
 *Last Updated: 2026-04-26T16:55:00.000Z*
+
+
+---
+## CICLO: 23
+**Timestamp**: 2026-04-26T18:00:00.000Z
+**Trace ID**: `c23-products-tab-consolidation`
+**Agente**: master_architect
+**Fase**: IMPLEMENTACION
+**Decisión**: Consolidar 3 tabs de Productos bajo pestaña padre única "Productos" con sub-navegación
+**Resultado**: SUCCESS
+**Modo**: IMMEDIATE EXECUTION (DG-079)
+
+**Prompt Original**:
+```
+proceder con implementación ciclo 22
+```
+
+**Decision Gate Presentado**: No (modo Immediate Execution activado por usuario)
+
+**Implementación**:
+- `frontend/src/components/AdminPage.jsx`:
+  - Reemplazadas 3 entradas de TABS ('products-crud', 'products', 'bulk-import') por 1 sola entrada padre 'products-parent' con etiqueta "Productos"
+  - Agregada constante `PRODUCTS_SUBTABS` con 3 sub-tabs: 'crud' (Mantenedor), 'analytics' (Análisis), 'bulk-import' (Importación)
+  - Cada sub-tab incluye campo `description` para tooltip y mensaje contextual
+  - Agregado state `activeProductsSubtab` (default 'crud')
+  - Renderizado condicional: cuando `activeTab === 'products-parent'`, muestra navegación secundaria estilo "underline tabs" + descripción + componente correspondiente
+  - Sub-navegación visualmente diferenciada (border-bottom ámbar) para distinguir de las tabs principales (pill ámbar)
+
+**Artefactos Generados**:
+- /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx
+
+**Validación**:
+- ✅ `npx vite build` → exit 0, 1752 modules, 160ms
+- ✅ ESLint: 0 errores nuevos introducidos (los 7 errores reportados son preexistentes, documentados en cycles previos)
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌ (Immediate Execution activo)
+- Memoria actualizada: ✅
+- Tests generados: ❌ (cambio puramente UX, validación E2E manual queda pendiente del usuario)
+- Reformulaciones necesarias: 0
+
+**E2E Pendiente Usuario**:
+1. Login en `/admin` con `admin / admin123`
+2. Verificar que la nueva pestaña "Productos" aparece como única en lugar de las 3 anteriores
+3. Click en "Productos" → debe mostrar sub-tabs "Mantenedor Productos" / "Análisis Productos" / "Importación Masiva"
+4. Verificar que cada sub-tab carga el componente correcto sin regresiones (CRUD, analytics, bulk import)
+5. Verificar que al cambiar de sub-tab y volver, el estado se preserva
+
+**Synaptic Strength**: 70%
+
+---
