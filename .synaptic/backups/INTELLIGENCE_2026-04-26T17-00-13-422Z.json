@@ -195,33 +195,6 @@
       "status": "PLANNED",
       "createdAtCycle": 14,
       "dependencies": []
-    },
-    {
-      "itemId": "ROAD-018-A",
-      "title": "User E2E validation of Mantenedor Productos",
-      "description": "Login as admin and verify list, create/edit/delete, and image upload render correctly",
-      "priority": "HIGH",
-      "status": "PLANNED",
-      "createdAtCycle": 18,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-018-B",
-      "title": "Add workspace-cwd guard to backend startup",
-      "description": "Backend should log/refuse to start if cwd does not match expected active workspace",
-      "priority": "MEDIUM",
-      "status": "PLANNED",
-      "createdAtCycle": 18,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-018-C",
-      "title": "Sweep remaining routes for inline regex patterns",
-      "description": "Audit all backend routes for ':param(regex)' syntax and migrate to handler guards",
-      "priority": "MEDIUM",
-      "status": "PLANNED",
-      "createdAtCycle": 18,
-      "dependencies": []
     }
   ],
   "learnings": [
@@ -1062,109 +1035,6 @@
         "lastReinforced": "2026-04-26T16:33:22.247Z",
         "source": "INFERRED"
       }
-    },
-    {
-      "learningId": "learning-18-1777222813420-0",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.420Z",
-      "type": "ANTI_PATTERN",
-      "title": "Stale backend from prior workspace",
-      "description": "Backend PID was running from old workspace dir, masking new routes as 404 across cycles 11-17",
-      "context": "Multi-workspace projects sharing ports; verify process cwd before debugging missing endpoints",
-      "applicability": [
-        "debugging",
-        "workspace",
-        "process-management",
-        "404"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.420Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813424-1",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.424Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Express 5 + path-to-regexp v8 break inline regex",
-      "description": "Route patterns like ':id(\\d+)' crash startup; remove regex and use Number.isInteger guard in handler",
-      "context": "Any Express 5 migration or new route definition with numeric param constraints",
-      "applicability": [
-        "express",
-        "routing",
-        "migration",
-        "path-to-regexp"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.424Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813426-2",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.426Z",
-      "type": "PATTERN",
-      "title": "Vite must proxy /static for backend-served assets",
-      "description": "Without '/static' proxy, uploaded images return SPA HTML instead of file (silent failure)",
-      "context": "Vite dev server fronting a backend that serves uploaded media",
-      "applicability": [
-        "vite",
-        "proxy",
-        "static-assets",
-        "uploads"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.426Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813427-3",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.428Z",
-      "type": "INSIGHT",
-      "title": "Architect-mode cycles missed runtime state",
-      "description": "Pure code analysis cannot detect process/cwd mismatches; runtime inspection (lsof) is required",
-      "context": "When user reports 'fix doesn't work' despite correct commits",
-      "applicability": [
-        "debugging",
-        "synaptic",
-        "architect-mode"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.427Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813429-4",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.429Z",
-      "type": "USER_PREFERENCE",
-      "title": "Single-word 'arregla' = full diagnostic + fix",
-      "description": "Terse user requests after frustration cycles expect immediate execution, not more analysis",
-      "context": "User has been through multiple architect-mode cycles without resolution",
-      "applicability": [
-        "communication",
-        "synaptic",
-        "dg-079"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.429Z",
-        "source": "EXPLICIT"
-      }
     }
   ],
   "implementationState": {
@@ -1202,10 +1072,7 @@
     "[2026-04-26T16:33:22.248Z] Workspace activo del ciclo: import-1777213083759-63z86j; usuario tenía vite corriendo desde import-1776956320164-2m9x2n",
     "[2026-04-26T16:33:22.248Z] Backend :7001 es compartido entre workspaces; vite :8080 fue migrado al workspace actual",
     "[2026-04-26T16:33:22.249Z] 7 errores eslint preexistentes en AdminPage.jsx (no introducidos en este ciclo)",
-    "[2026-04-26T16:33:22.249Z] Validación E2E manual con login admin queda pendiente del usuario para cerrar SUCCESS",
-    "[2026-04-26T17:00:13.431Z] Cycles 11-17 frustration root cause was runtime/workspace mismatch, not code bugs",
-    "[2026-04-26T17:00:13.431Z] Admin credentials: admin / admin123 at http://localhost:8080/admin",
-    "[2026-04-26T17:00:13.432Z] E2E validation of Mantenedor Productos (list/CRUD/image upload) pending user confirmation"
+    "[2026-04-26T16:33:22.249Z] Validación E2E manual con login admin queda pendiente del usuario para cerrar SUCCESS"
   ],
-  "lastUpdated": "2026-04-26T17:00:13.433Z"
+  "lastUpdated": "2026-04-26T16:33:22.249Z"
 }

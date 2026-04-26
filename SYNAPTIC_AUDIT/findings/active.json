@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-26T16:32:55.220Z",
+  "lastUpdated": "2026-04-26T16:59:47.891Z",
   "findings": [
     {
       "id": "DC-001",
@@ -2231,7 +2231,12 @@
       "findingId": "SAI-6634f9ed",
       "detectedInCycle": 9,
       "detectedAt": "2026-04-26T15:53:05.105Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 18,
+        "resolvedAt": "2026-04-26T16:59:47.891Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-132",
@@ -2557,11 +2562,23 @@
       "detectedInCycle": 14,
       "detectedAt": "2026-04-26T16:32:55.217Z",
       "status": "OPEN"
+    },
+    {
+      "id": "MT-527",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/products-admin-crud.js",
+      "description": "File has 539 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-6b195cee",
+      "detectedInCycle": 18,
+      "detectedAt": "2026-04-26T16:59:47.890Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
     "totalOpen": 152,
-    "totalResolved": 33,
+    "totalResolved": 34,
     "bySeverity": {
       "MEDIUM": 120,
       "LOW": 32

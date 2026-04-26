@@ -96,6 +96,9 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-018-C | Vite proxy must include '/static' alongside '/api' and '/webhook' | Backend serves uploaded images under /static; missing proxy returns SPA HTML | 2026-04-26 | 18 |
+| DEC-018-B | Drop inline regex from Express routes; validate numeric IDs in handler with Number.isInteger | Express 5 / path-to-regexp v8 no longer supports ':id(\d+)' syntax | 2026-04-26 | 18 |
+| DEC-018-A | Backend must run from active workspace cwd, killed and restarted on workspace switch | Stale PIDs from prior workspaces silently serve old code, causing phantom 404s | 2026-04-26 | 18 |
 | DEC-015 | Análisis Productos retiene tab analítico con icono BarChart3, sin sub-vista crud duplicada | Separación clara entre operación (Mantenedor) y análisis (métricas/inventario) | 2026-04-26 | 14 |
 | DEC-014 | ProductsCrudPanel promovido a tab principal 'Mantenedor Productos' (default landing del AdminPage) | Fix UX inmediato: el panel CRUD estaba enterrado como sub-vista dentro de tab analítico | 2026-04-26 | 14 |
 | DEC-014 | Usar botones up/down en lugar de drag-and-drop para reorder inicial | MVP funcional rápido; DnD HTML5 queda como mejora futura | 2026-04-26 | 10 |
@@ -119,6 +122,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 18] Backend PID 73456 now runs from import-1777213083759-63z86j/backend, log at /tmp/synaptic_backend_c18.log
+- [Cycle 18] Migrations 010a and 012 are idempotent and applied in initSchema()
+- [Cycle 18] Use lsof -p <pid> | grep cwd to verify a running process's working directory
 - [Cycle 14] AdminPage.jsx TABS array: products-crud primero, products segundo
 - [Cycle 14] Default activeTab cambiado de 'products' a 'products-crud'
 - [Cycle 14] ProductsTab.view default ahora 'inventory' (sin opción 'crud')
@@ -144,6 +150,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 18, 2026-04-26] Vite proxy table extended: /api, /webhook, /static all forward to localhost:7001
 - [Cycle 14, 2026-04-26] AdminPage navegación primaria: Mantenedor Productos ahora landing tab
 - [Cycle 10, 2026-04-26] Nuevo router products-admin-images registrado bajo requireAuth en server.js
 - [Cycle 10, 2026-04-26] Frontend api.js extendido con 5 helpers para CRUD de imágenes

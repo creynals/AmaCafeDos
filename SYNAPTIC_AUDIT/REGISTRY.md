@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-26T16:32:55.221Z
+- **Last Updated:** 2026-04-26T16:59:47.892Z
 - **Status:** ACTIVE
 
 ---
@@ -11,13 +11,13 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 28 |
-| Score Promedio | 41% |
-| Racha Actual (A/B) | 0 ciclos |
-| Último Ciclo | 14 |
-| Última Calificación | F |
+| Ciclos Auditados | 29 |
+| Score Promedio | 42% |
+| Racha Actual (A/B) | 1 ciclos |
+| Último Ciclo | 18 |
+| Última Calificación | B |
 | Findings Abiertos | 152 |
-| Findings Resueltos | 33 |
+| Findings Resueltos | 34 |
 
 ---
 
@@ -48,7 +48,6 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-fa268c07 | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'handler' (1 lines)... |
 | SAI-baa00161 | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'Field' (8 lines)... |
 | SAI-355fe4c4 | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'StockAdjustModal' has 114 lines (max rec... |
 | SAI-cd4749d0 | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'DeleteConfirmModal' has 64 lines (max re... |
@@ -58,6 +57,7 @@
 | SAI-7a2faef0 | dead_code | MEDIUM | components/AdminPage.jsx | Unused function: 'ProductsTab' (208 lines)... |
 | SAI-ef8039be | maintainability | MEDIUM | components/AdminPage.jsx | File has 1708 lines (max recommended: 500)... |
 | SAI-1e0e3ab9 | maintainability | LOW | components/AdminPage.jsx | Function 'ProductsTab' has 208 lines (max recommen... |
+| SAI-6b195cee | maintainability | MEDIUM | routes/products-admin-crud.js | File has 539 lines (max recommended: 500)... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 31 | 0 | F |
 | 41 | 0 | F |
 | 45 | 60 | D |
 | 56 | 0 | F |
@@ -85,6 +84,7 @@
 | 9 | 0 | F |
 | 10 | 0 | F |
 | 14 | 0 | F |
+| 18 | 80 | B |
 
 ---
 
