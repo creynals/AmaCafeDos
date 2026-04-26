@@ -125,12 +125,13 @@ function deleteFileIfLocal(filename) {
 }
 
 async function productExists(productId) {
+  if (!Number.isInteger(productId)) return null;
   const { rows } = await query('SELECT id, deleted_at FROM products WHERE id = $1', [productId]);
   return rows[0] || null;
 }
 
 // ─── GET /admin/products/:productId/images — listar galería ──────────────────
-router.get('/admin/products/:productId(\\d+)/images', async (req, res) => {
+router.get('/admin/products/:productId/images', async (req, res) => {
   const productId = Number(req.params.productId);
   const product = await productExists(productId);
   if (!product) {
@@ -149,7 +150,7 @@ router.get('/admin/products/:productId(\\d+)/images', async (req, res) => {
 // ─── POST /admin/products/:productId/images — subir nueva imagen ─────────────
 //   FormData: file=<image> [, alt_text, is_primary]
 router.post(
-  '/admin/products/:productId(\\d+)/images',
+  '/admin/products/:productId/images',
   (req, res, next) => {
     imageUpload.single('image')(req, res, (err) => {
       if (err) {
@@ -242,9 +243,12 @@ router.post(
 
 // ─── PUT /admin/products/:productId/images/:imageId — editar metadata ────────
 //   body: { alt_text?, is_primary?: boolean, sort_order?: int }
-router.put('/admin/products/:productId(\\d+)/images/:imageId(\\d+)', async (req, res) => {
+router.put('/admin/products/:productId/images/:imageId', async (req, res) => {
   const productId = Number(req.params.productId);
   const imageId = Number(req.params.imageId);
+  if (!Number.isInteger(productId) || !Number.isInteger(imageId)) {
+    return res.status(404).json({ error: 'Imagen no encontrada' });
+  }
 
   const client = await getClient();
   try {
@@ -334,7 +338,7 @@ router.put('/admin/products/:productId(\\d+)/images/:imageId(\\d+)', async (req,
 
 // ─── POST /admin/products/:productId/images/reorder — reordenamiento bulk ────
 //   body: { order: [imageId, imageId, ...] } → asigna sort_order según índice
-router.post('/admin/products/:productId(\\d+)/images/reorder', async (req, res) => {
+router.post('/admin/products/:productId/images/reorder', async (req, res) => {
   const productId = Number(req.params.productId);
   const order = Array.isArray(req.body.order) ? req.body.order.map(Number).filter(Number.isInteger) : null;
   if (!order || order.length === 0) {
@@ -397,9 +401,12 @@ router.post('/admin/products/:productId(\\d+)/images/reorder', async (req, res) 
 });
 
 // ─── DELETE /admin/products/:productId/images/:imageId — eliminar ────────────
-router.delete('/admin/products/:productId(\\d+)/images/:imageId(\\d+)', async (req, res) => {
+router.delete('/admin/products/:productId/images/:imageId', async (req, res) => {
   const productId = Number(req.params.productId);
   const imageId = Number(req.params.imageId);
+  if (!Number.isInteger(productId) || !Number.isInteger(imageId)) {
+    return res.status(404).json({ error: 'Imagen no encontrada' });
+  }
 
   const client = await getClient();
   try {

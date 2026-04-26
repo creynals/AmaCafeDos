@@ -118,8 +118,9 @@ router.get('/admin/products/list', async (req, res) => {
 });
 
 // ─── GET /admin/products/:id — detalle ───────────────────────────────────────
-router.get('/admin/products/:id(\\d+)', async (req, res) => {
+router.get('/admin/products/:id', async (req, res) => {
   const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(404).json({ error: 'Producto no encontrado' });
   const { rows } = await query(
     `SELECT
         p.id, p.category_id, c.name AS category_name, c.display_name AS category_display_name,
@@ -220,8 +221,9 @@ router.post('/admin/products', async (req, res) => {
 });
 
 // ─── PUT /admin/products/:id — actualizar ────────────────────────────────────
-router.put('/admin/products/:id(\\d+)', async (req, res) => {
+router.put('/admin/products/:id', async (req, res) => {
   const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(404).json({ error: 'Producto no encontrado' });
 
   const client = await getClient();
   try {
@@ -355,8 +357,9 @@ router.put('/admin/products/:id(\\d+)', async (req, res) => {
 
 // ─── PATCH /admin/products/:id/stock — ajuste rápido de stock ────────────────
 //   body: { stock?: int (set absoluto) | delta?: int (incremento), reason?: string }
-router.patch('/admin/products/:id(\\d+)/stock', async (req, res) => {
+router.patch('/admin/products/:id/stock', async (req, res) => {
   const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(404).json({ error: 'Producto no encontrado' });
   const stockAbsolute = toIntOrNull(req.body.stock);
   const delta = toIntOrNull(req.body.delta);
   const reason = toStrOrNull(req.body.reason);
@@ -429,8 +432,9 @@ router.patch('/admin/products/:id(\\d+)/stock', async (req, res) => {
 });
 
 // ─── DELETE /admin/products/:id — soft-delete ────────────────────────────────
-router.delete('/admin/products/:id(\\d+)', async (req, res) => {
+router.delete('/admin/products/:id', async (req, res) => {
   const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(404).json({ error: 'Producto no encontrado' });
   const reason = toStrOrNull(req.body?.reason);
 
   const client = await getClient();
@@ -474,8 +478,9 @@ router.delete('/admin/products/:id(\\d+)', async (req, res) => {
 });
 
 // ─── POST /admin/products/:id/restore — restaurar soft-deleted ───────────────
-router.post('/admin/products/:id(\\d+)/restore', async (req, res) => {
+router.post('/admin/products/:id/restore', async (req, res) => {
   const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(404).json({ error: 'Producto no encontrado' });
 
   const client = await getClient();
   try {

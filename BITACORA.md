@@ -1232,5 +1232,104 @@ dale con esta estupidez, porque tengo que elegir, arregla este desastre yaaaaaaa
 
 ---
 
+
+---
+## CICLO: 18
+**Timestamp**: 2026-04-26T16:55:00.000Z
+**Trace ID**: `c18-arregla-immediate-execution`
+**Agente**: master_architect
+**Fase**: IMPLEMENTACION
+**Decisión**: Migración del backend al workspace correcto + fix de incompatibilidad Express 5 en rutas regex
+**Resultado**: SUCCESS
+**Modo**: IMMEDIATE EXECUTION (DG-079)
+
+**Prompt Original**:
+```
+arregla
+```
+
+**Diagnóstico — Root Cause Analysis (lo que ningún ciclo anterior detectó)**:
+
+Tras 7 ciclos de queja del usuario sobre el mantenedor de productos (C11-C17),
+el origen real de los errores 404 / 400 era un desalineamiento de procesos:
+
+1. **Backend ejecutándose desde workspace incorrecto** (PID 51068):
+   - cwd del proceso: `import-1776956320164-2m9x2n/backend` (workspace anterior)
+   - workspace activo del ciclo: `import-1777213083759-63z86j`
+   - El workspace anterior NO tenía los archivos creados en C9-C10:
+     `products-admin-crud.js`, `products-admin-images.js`, `products-admin.js`
+   - Resultado: cualquier llamada a `/api/admin/products/list`,
+     `/api/admin/products`, `/api/admin/products/:id/images`, etc.
+     respondía 404 porque las rutas no existían en el backend en ejecución.
+   - Esto explica los 20× "404 Not Found" del C16 y los flujos rotos
+     reportados desde C11.
+
+2. **Incompatibilidad Express 5 + path-to-regexp v8**:
+   - Las rutas C9/C10 usaron sintaxis legacy `:id(\\d+)` (constraint inline).
+   - path-to-regexp v8 dropea esa sintaxis y crashea al cargar el archivo.
+   - Por eso, intentar levantar el backend del workspace correcto fallaba
+     en startup con `PathError: Unexpected ( at index 19`.
+   - 10 ocurrencias en 2 archivos.
+
+3. **Vite proxy incompleto para `/static`**:
+   - Imágenes subidas vía admin retornan URLs `/static/products/<file>`.
+   - Vite (8080) no proxeaba `/static` a backend (7001) → fallback a SPA
+     HTML con HTTP 200 y `text/html`. Los `<img>` aparecían rotos sin
+     error visible en consola.
+
+**Cambios Aplicados**:
+
+1. **Backend migrado al workspace activo**:
+   - SIGTERM al PID 51068 (backend antiguo, workspace anterior).
+   - `node src/server.js` desde `import-1777213083759-63z86j/backend`.
+   - Nuevo PID 73456 sirviendo el código correcto del ciclo en curso.
+   - Migraciones idempotentes (010a, 012) aplicadas automáticamente
+     en initSchema().
+
+2. **`backend/src/routes/products-admin-crud.js`**:
+   - Removido `(\\d+)` de 5 patrones (`/admin/products/:id`, `/:id/stock`,
+     `/:id/restore`).
+   - Agregado guard `if (!Number.isInteger(id)) return 404` en cada handler
+     para suplir la validación que daba el regex.
+
+3. **`backend/src/routes/products-admin-images.js`**:
+   - Removido `(\\d+)` de 5 patrones (`/:productId/images`,
+     `/:productId/images/:imageId`, `/:productId/images/reorder`).
+   - Guard `Number.isInteger` en `productExists()` (cubre 3 handlers que
+     pasan por ahí) + guards explícitos en PUT y DELETE de `:imageId`.
+
+4. **`frontend/vite.config.js`**:
+   - Agregada entrada `'/static': 'http://localhost:7001'` en `server.proxy`.
+   - Vite hot-reload tomó el cambio sin reinicio manual.
+
+**Validación**:
+- `curl /api/health` → 200 ✓
+- `curl /api/menu` → 200 ✓ (44 productos, todas las imágenes existen)
+- `curl /api/admin/products/list` → 401 ✓ (ruta existe, requiere auth)
+- `curl /api/admin/products/categories` → 401 ✓
+- `curl /api/admin/products/1/images` → 401 ✓
+- `curl http://localhost:8080/static/products/<existing>.jpg` → 200 image/jpeg ✓
+- `curl http://localhost:8080/static/products/missing.jpg` → 404 (correcto, no más SPA fallback) ✓
+- Backend log limpio, sin errores de path-to-regexp.
+
+**Pendientes para el usuario (E2E)**:
+- Loguearse en http://localhost:8080/admin (admin / admin123 default)
+- Validar tab "Mantenedor Productos" carga lista
+- Crear/editar/eliminar producto y verificar persistencia
+- Subir imagen al producto y verificar render correcto
+  (ahora `/static/...` se sirve real, no HTML)
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌ (DG-079 immediate execution)
+- Root cause identificado: ✅ (alineamiento de procesos, no bug de código aislado)
+- Memoria actualizada: ✅
+- Tests generados: ❌ (fix infra, no nueva funcionalidad)
+- Reformulaciones necesarias: 0
+
+**Synaptic Strength**: 65%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
-*Last Updated: 2026-04-26T16:45:00.000Z*
+*Last Updated: 2026-04-26T16:55:00.000Z*

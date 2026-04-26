@@ -17,6 +17,10 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:7001',
       '/webhook': 'http://localhost:7001',
+      // C18: imágenes subidas por admin se sirven desde backend en /static.
+      // Sin este proxy vite devolvía la SPA index.html (HTTP 200 + text/html)
+      // y los <img> aparecían rotos sin error claro en la consola.
+      '/static': 'http://localhost:7001',
     },
   },
 })
