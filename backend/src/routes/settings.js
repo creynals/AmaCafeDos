@@ -99,15 +99,8 @@ router.post('/admin/settings/model', async (req, res) => {
 });
 
 // --- reCAPTCHA v3 Configuration ---
-
-// Public endpoint: retorna site key para que el frontend cargue reCAPTCHA
-router.get('/settings/recaptcha-config', async (req, res) => {
-  const config = await getRecaptchaConfig();
-  res.json({
-    enabled: config.enabled,
-    siteKey: config.siteKey || null,
-  });
-});
+// Public endpoint /settings/recaptcha-config is registered directly in
+// server.js, before the requireAuth-protected mount of these routes.
 
 // Admin: ver estado de reCAPTCHA
 router.get('/admin/settings/recaptcha', async (req, res) => {

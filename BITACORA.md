@@ -2289,8 +2289,94 @@ reCAPTCHA failed: score=0, action=missing_token
 
 ---
 
+
+---
+## CICLO: 39 — POST: Fix Chat AI reCAPTCHA missing_token (Immediate Execution / DG-079)
+
+**Timestamp**: 2026-04-26T22:05:00.000Z
+**Modo**: Immediate Execution (DG-079)
+**Decisión usuario**: "proceder con el fix del ciclo 38" (Chat AI bloqueado por reCAPTCHA)
+
+```json
+{
+  "cycle": 39,
+  "phase": "IMPLEMENTATION",
+  "decision_ref": "Cycle 38 analysis (Chat AI fail: score=0, action=missing_token)",
+  "type": "bugfix",
+  "scope": "backend/auth + backend/recaptcha",
+  "summary": "Endpoint público /settings/recaptcha-config estaba detrás de requireAuth global → frontend no autenticado recibía 401 al cargar siteKey → no inicializaba grecaptcha → enviaba recaptcha_token=null → middleware rechazaba con 'missing_token'. Movido el endpoint a server.js antes del mount protegido.",
+  "files_changed": [
+    "backend/src/server.js (require getRecaptchaConfig + public route ANTES del requireAuth-mount)",
+    "backend/src/routes/settings.js (eliminado endpoint duplicado)"
+  ]
+}
+```
+
+**Cadena de fallo identificada**:
+1. `server.js:64` — `app.use('/api', requireAuth, settingsRoutes)` aplica `requireAuth` a TODAS las rutas en settings.js
+2. `settings.js:104` — Endpoint marcado como `// Public endpoint` quedaba protegido (Express ejecuta middleware antes del handler)
+3. `ChatWidget.jsx:31` — `api.getRecaptchaConfig()` recibe 401 → `.catch(()=>{})` silencia el error → `recaptchaSiteKey` queda en null
+4. `ChatWidget.jsx:39-47` — `getRecaptchaToken()` ve `recaptchaSiteKey=null` → retorna null sin intentar `grecaptcha.execute`
+5. `api.sendMessage()` envía `recaptcha_token: null` al backend
+6. `recaptcha.js:54-56` — Como `enabled=true` y `secretKey` existe, NO hace bypass → retorna `{success:false, score:0, action:'missing_token'}`
+7. `recaptcha.js:101-105` — Middleware loguea y responde 403 con mensaje al usuario
+
+**Verificación DB pre-fix** (`db_taza_data`):
+| key                  | value                                    |
+|----------------------|------------------------------------------|
+| recaptcha_site_key   | 6Lfg56ssAAAAAGFRs1jq6FCfNo4DWJJjcjJ_Diwl |
+| recaptcha_secret_key | [ENCRYPTED]                              |
+| recaptcha_enabled    | true                                     |
+
+**Verificación pre-fix**:
+- `curl /api/settings/recaptcha-config` → `401 No autorizado. Debe iniciar sesión.` ❌
+- `curl POST /api/chat` (sin token) → `403 missing_token` ❌
+
+**Verificación post-fix**:
+- `curl /api/settings/recaptcha-config` → `200 {"enabled":true,"siteKey":"6Lfg..."}` ✅
+- `curl POST /api/chat` (con token fake) → `403` (esperado: Google rechaza tokens falsos por score, no por missing_token) ✅
+
+**Cambios Implementados**:
+
+1. **`backend/src/server.js`** (líneas 23 y 50-67):
+   - Importado `getRecaptchaConfig` desde `./utils/recaptcha`
+   - Agregado handler `GET /api/settings/recaptcha-config` ANTES del bloque `requireAuth-protected` (después de las rutas públicas, antes de adminRoutes)
+   - Comentario explicativo del por qué del orden de registro
+
+2. **`backend/src/routes/settings.js`** (líneas 101-104):
+   - Eliminado endpoint duplicado `router.get('/settings/recaptcha-config', …)`
+   - Reemplazado por comentario que apunta a server.js (evita confusión futura)
+
+**Validación**:
+- ✅ `node --check src/server.js` — sintaxis OK
+- ✅ `node --check src/routes/settings.js` — sintaxis OK
+- ✅ Backend `node --watch` recargó automáticamente (PID 30743 / child 64071)
+- ✅ Endpoint público responde sin auth: `{"enabled":true,"siteKey":"6Lfg..."}`
+- ✅ Endpoint chat con token inválido responde 403 (esperado, Google score rechazo)
+- ✅ Otros endpoints `/admin/settings/recaptcha*` siguen protegidos por requireAuth (no regresión)
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌ (Immediate Execution — DG-079)
+- Memoria actualizada: ✅
+- Tests generados: ❌ (fix de configuración de routing, no requiere unit test nuevo)
+- Reformulaciones necesarias: 0
+- Líneas tocadas: ~15
+
+**E2E Pendiente Usuario**:
+1. Refrescar la pestaña del storefront en el navegador (para forzar nueva carga del ChatWidget)
+2. Abrir la burbuja de chat (FAB esquina inferior derecha)
+3. Verificar en DevTools › Network que `GET /api/settings/recaptcha-config` retorna 200 con `enabled:true, siteKey:"6Lfg..."`
+4. Verificar en DevTools › Elements que se inserta `<script id="recaptcha-v3-script" src="https://www.google.com/recaptcha/api.js?render=...">`
+5. Enviar un mensaje al asistente — debe responder correctamente sin error "No pudimos verificar que eres humano"
+6. (Opcional) En DevTools › Network, verificar que `POST /api/chat` envía `recaptcha_token` con un string largo (~700 chars de Google)
+
+**Synaptic Strength**: 87%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
-*Last Updated: 2026-04-26T16:55:00.000Z*
+*Last Updated: 2026-04-26T22:05:00.000Z*
 
 
 ---

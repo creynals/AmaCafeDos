@@ -20,6 +20,7 @@ const adminChatRoutes = require('./routes/admin-chat');
 const settingsRoutes = require('./routes/settings');
 const usersRoutes = require('./routes/users');
 const webhookRoutes = require('./routes/webhooks');
+const { getRecaptchaConfig } = require('./utils/recaptcha');
 
 const app = express();
 const PORT = process.env.PORT || 7000;
@@ -54,6 +55,17 @@ app.use('/api', orderRoutes);
 app.use('/api', paymentsRoutes);
 app.use('/api', chatRoutes);
 app.use('/api', authRoutes);
+
+// Public reCAPTCHA config — must register BEFORE the requireAuth-protected
+// settingsRoutes mount below, otherwise the global requireAuth swallows it
+// and unauthenticated guests can't fetch the site key, breaking chat tokens.
+app.get('/api/settings/recaptcha-config', async (req, res) => {
+  const config = await getRecaptchaConfig();
+  res.json({
+    enabled: config.enabled,
+    siteKey: config.siteKey || null,
+  });
+});
 
 // Protected Admin Routes (require authentication)
 app.use('/api', requireAuth, adminRoutes);
