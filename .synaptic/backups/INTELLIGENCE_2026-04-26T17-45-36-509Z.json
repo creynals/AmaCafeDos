@@ -153,20 +153,20 @@
     },
     {
       "itemId": "ROAD-023",
-      "title": "E2E validation of Productos sub-navigation",
-      "description": "User must verify sub-tabs load correctly and transitions are smooth in /admin",
-      "priority": "HIGH",
+      "title": "Drag-and-drop real para reorder",
+      "description": "Reemplazar botones up/down con HTML5 Drag and Drop API",
+      "priority": "LOW",
       "status": "PLANNED",
-      "createdAtCycle": 23,
+      "createdAtCycle": 10,
       "dependencies": []
     },
     {
       "itemId": "ROAD-024",
-      "title": "Address 7 preexisting ESLint errors",
-      "description": "Backlog cleanup of lint errors documented across previous cycles",
-      "priority": "LOW",
+      "title": "Carrusel de imágenes en storefront",
+      "description": "Mostrar images[] en ProductCard y ProductModal del frontend público",
+      "priority": "MEDIUM",
       "status": "PLANNED",
-      "createdAtCycle": 23,
+      "createdAtCycle": 10,
       "dependencies": []
     },
     {
@@ -989,9 +989,9 @@
         "synaptic-protocol"
       ],
       "confidence": {
-        "score": 0.9500000000000001,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-26T17:45:36.516Z",
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T16:33:22.235Z",
         "source": "EXPLICIT"
       }
     },
@@ -1281,86 +1281,6 @@
         "lastReinforced": "2026-04-26T17:26:56.943Z",
         "source": "INFERRED"
       }
-    },
-    {
-      "learningId": "learning-23-1777225536508-0",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.508Z",
-      "type": "PATTERN",
-      "title": "Tab consolidation with sub-navigation",
-      "description": "Group related tabs under parent tab with underline sub-tabs to reduce visual saturation",
-      "context": "When admin UI has 3+ related tabs cluttering top-level navigation",
-      "applicability": [
-        "ux",
-        "admin-ui",
-        "navigation",
-        "react"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.508Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536511-1",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.511Z",
-      "type": "PATTERN",
-      "title": "Visual hierarchy via differentiated tab styles",
-      "description": "Pills (ámbar) for main tabs, underline (ámbar) for sub-tabs creates clear hierarchy",
-      "context": "Multi-level tab navigation in admin panels",
-      "applicability": [
-        "ux",
-        "design-system",
-        "tailwind"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.511Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536514-2",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.514Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Conditional mounting preserves sub-tab state",
-      "description": "Separate conditional mounts per sub-tab keeps component state across sub-tab switches",
-      "context": "Sub-navigation where users expect state preservation between tabs",
-      "applicability": [
-        "react",
-        "state-management"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.514Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536517-4",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.517Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "7 ESLint errors are preexisting baseline",
-      "description": "The 7 ESLint errors in frontend are preexisting and documented; new changes must not add to them",
-      "context": "Validating lint output after frontend changes in this project",
-      "applicability": [
-        "lint",
-        "validation",
-        "frontend"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.517Z",
-        "source": "INFERRED"
-      }
     }
   ],
   "implementationState": {
@@ -1405,11 +1325,7 @@
     "[2026-04-26T17:26:56.945Z] Cycle 21 is a Decision Gate awaiting user choice between A/B/C — no code changes yet",
     "[2026-04-26T17:26:56.946Z] Option B (E2E Validation Sprint) was recommended as balanced path",
     "[2026-04-26T17:26:56.947Z] Cycles 19-20 analyzed payment flow issues but never implemented fixes",
-    "[2026-04-26T17:26:56.947Z] Cycle 18 fix (workspace + Express 5 regex) was root cause resolution for cycles 11-17",
-    "[2026-04-26T17:45:36.518Z] Cycle 23 implemented Cycle 22's UX proposal in IMMEDIATE EXECUTION mode (DG-079)",
-    "[2026-04-26T17:45:36.519Z] Productos parent tab uses Package icon; sub-tabs: crud / analytics / bulk-import",
-    "[2026-04-26T17:45:36.520Z] E2E validation pending user: login admin/admin123, verify sub-tabs load without regressions",
-    "[2026-04-26T17:45:36.521Z] 7 preexisting ESLint errors remain — not introduced by this cycle"
+    "[2026-04-26T17:26:56.947Z] Cycle 18 fix (workspace + Express 5 regex) was root cause resolution for cycles 11-17"
   ],
-  "lastUpdated": "2026-04-26T17:45:36.522Z"
+  "lastUpdated": "2026-04-26T17:26:56.948Z"
 }

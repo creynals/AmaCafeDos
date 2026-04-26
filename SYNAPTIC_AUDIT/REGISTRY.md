@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-26T16:59:47.892Z
+- **Last Updated:** 2026-04-26T17:45:15.132Z
 - **Status:** ACTIVE
 
 ---
@@ -11,13 +11,13 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 29 |
-| Score Promedio | 42% |
-| Racha Actual (A/B) | 1 ciclos |
-| Último Ciclo | 18 |
-| Última Calificación | B |
+| Ciclos Auditados | 30 |
+| Score Promedio | 41% |
+| Racha Actual (A/B) | 0 ciclos |
+| Último Ciclo | 23 |
+| Última Calificación | F |
 | Findings Abiertos | 152 |
-| Findings Resueltos | 34 |
+| Findings Resueltos | 35 |
 
 ---
 
@@ -55,9 +55,9 @@
 | SAI-eda3a12a | maintainability | MEDIUM | components/ProductsCrudPanel.jsx | File has 782 lines (max recommended: 500)... |
 | SAI-fc4d9c8a | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'ProductFormModal' has 226 lines (max rec... |
 | SAI-7a2faef0 | dead_code | MEDIUM | components/AdminPage.jsx | Unused function: 'ProductsTab' (208 lines)... |
-| SAI-ef8039be | maintainability | MEDIUM | components/AdminPage.jsx | File has 1708 lines (max recommended: 500)... |
 | SAI-1e0e3ab9 | maintainability | LOW | components/AdminPage.jsx | Function 'ProductsTab' has 208 lines (max recommen... |
 | SAI-6b195cee | maintainability | MEDIUM | routes/products-admin-crud.js | File has 539 lines (max recommended: 500)... |
+| SAI-7e3a7276 | maintainability | MEDIUM | components/AdminPage.jsx | File has 1744 lines (max recommended: 500)... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 41 | 0 | F |
 | 45 | 60 | D |
 | 56 | 0 | F |
 | 61 | 0 | F |
@@ -85,6 +84,7 @@
 | 10 | 0 | F |
 | 14 | 0 | F |
 | 18 | 80 | B |
+| 23 | 0 | F |
 
 ---
 

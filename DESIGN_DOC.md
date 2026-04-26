@@ -96,6 +96,8 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-024 | Use PRODUCTS_SUBTABS constant with description field per sub-tab | Centralized config enables contextual descriptions below sub-nav for user clarity | 2026-04-26 | 23 |
+| DEC-023 | Consolidate 3 product tabs under single 'Productos' parent tab with sub-navigation | Reduces top-bar saturation from 8 to 6 tabs and groups semantically related views | 2026-04-26 | 23 |
 | DEC-018-C | Vite proxy must include '/static' alongside '/api' and '/webhook' | Backend serves uploaded images under /static; missing proxy returns SPA HTML | 2026-04-26 | 18 |
 | DEC-018-B | Drop inline regex from Express routes; validate numeric IDs in handler with Number.isInteger | Express 5 / path-to-regexp v8 no longer supports ':id(\d+)' syntax | 2026-04-26 | 18 |
 | DEC-018-A | Backend must run from active workspace cwd, killed and restarted on workspace switch | Stale PIDs from prior workspaces silently serve old code, causing phantom 404s | 2026-04-26 | 18 |
@@ -122,6 +124,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 23] AdminPage.jsx now uses dual state: activeTab + activeProductsSubtab (default 'crud')
+- [Cycle 23] Vite build: 1752 módulos en 160ms — performance baseline for AdminPage refactor
+- [Cycle 23] ProductsCrudPanel / ProductsTab / BulkImportTab mounted unchanged under sub-nav
 - [Cycle 21] Admin credentials for E2E: admin / admin123 @ localhost:8080
 - [Cycle 21] Pending E2E validations: Bulk Import, Multi-image Gallery, Mantenedor Productos CRUD
 - [Cycle 18] Backend PID 73456 now runs from import-1777213083759-63z86j/backend, log at /tmp/synaptic_backend_c18.log
@@ -152,6 +157,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 23, 2026-04-26] AdminPage tab structure: 8 flat tabs → 6 tabs with 1 parent containing 3 sub-tabs
 - [Cycle 18, 2026-04-26] Vite proxy table extended: /api, /webhook, /static all forward to localhost:7001
 - [Cycle 14, 2026-04-26] AdminPage navegación primaria: Mantenedor Productos ahora landing tab
 - [Cycle 10, 2026-04-26] Nuevo router products-admin-images registrado bajo requireAuth en server.js
