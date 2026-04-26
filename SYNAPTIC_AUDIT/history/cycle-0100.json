@@ -1,0 +1,1164 @@
+{
+  "cycleId": 100,
+  "timestamp": "2026-04-26T05:06:59.391Z",
+  "taskId": "task-1777179682947-85zctt4vo",
+  "audit": {
+    "passed": false,
+    "score": 0,
+    "grade": "F",
+    "filesAnalyzed": [
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/api.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/api.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx"
+    ],
+    "linesAnalyzed": 7196
+  },
+  "findings": [
+    {
+      "id": "DC-322",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 84,
+      "description": "Unused function: 'StatusBadge' (8 lines)",
+      "suggestion": "Remove unused function 'StatusBadge' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-323",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 93,
+      "description": "Unused function: 'PaymentStatusPill' (8 lines)",
+      "suggestion": "Remove unused function 'PaymentStatusPill' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-324",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 102,
+      "description": "Unused function: 'ChipMulti' (27 lines)",
+      "suggestion": "Remove unused function 'ChipMulti' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-325",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Unused function: 'StatusChangeModal' (153 lines)",
+      "suggestion": "Remove unused function 'StatusChangeModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-326",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 139,
+      "description": "Unused function: 'submit' (25 lines)",
+      "suggestion": "Remove unused function 'submit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-327",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Unused function: 'OrderDetailsRow' (39 lines)",
+      "suggestion": "Remove unused function 'OrderDetailsRow' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-328",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 384,
+      "description": "Unused function: 'clearFilters' (9 lines)",
+      "suggestion": "Remove unused function 'clearFilters' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-329",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 396,
+      "description": "Unused function: 'nextPage' (5 lines)",
+      "suggestion": "Remove unused function 'nextPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-330",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 401,
+      "description": "Unused function: 'prevPage' (3 lines)",
+      "suggestion": "Remove unused function 'prevPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-331",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 405,
+      "description": "Unused function: 'handleStatusUpdated' (4 lines)",
+      "suggestion": "Remove unused function 'handleStatusUpdated' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-332",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "description": "File has 664 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-333",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Function 'StatusChangeModal' has 153 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-334",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 84,
+      "description": "Unused function: 'StatusBadge' (8 lines)",
+      "suggestion": "Remove unused function 'StatusBadge' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-335",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 93,
+      "description": "Unused function: 'PaymentStatusPill' (8 lines)",
+      "suggestion": "Remove unused function 'PaymentStatusPill' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-336",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 102,
+      "description": "Unused function: 'ChipMulti' (27 lines)",
+      "suggestion": "Remove unused function 'ChipMulti' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-337",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Unused function: 'StatusChangeModal' (153 lines)",
+      "suggestion": "Remove unused function 'StatusChangeModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-338",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 139,
+      "description": "Unused function: 'submit' (25 lines)",
+      "suggestion": "Remove unused function 'submit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-339",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Unused function: 'OrderDetailsRow' (39 lines)",
+      "suggestion": "Remove unused function 'OrderDetailsRow' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-340",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 384,
+      "description": "Unused function: 'clearFilters' (9 lines)",
+      "suggestion": "Remove unused function 'clearFilters' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-341",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 396,
+      "description": "Unused function: 'nextPage' (5 lines)",
+      "suggestion": "Remove unused function 'nextPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-342",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 401,
+      "description": "Unused function: 'prevPage' (3 lines)",
+      "suggestion": "Remove unused function 'prevPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-343",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 405,
+      "description": "Unused function: 'handleStatusUpdated' (4 lines)",
+      "suggestion": "Remove unused function 'handleStatusUpdated' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-344",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "description": "File has 664 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-345",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Function 'StatusChangeModal' has 153 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-346",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 84,
+      "description": "Unused function: 'StatusBadge' (8 lines)",
+      "suggestion": "Remove unused function 'StatusBadge' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-347",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 93,
+      "description": "Unused function: 'PaymentStatusPill' (8 lines)",
+      "suggestion": "Remove unused function 'PaymentStatusPill' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-348",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 102,
+      "description": "Unused function: 'ChipMulti' (27 lines)",
+      "suggestion": "Remove unused function 'ChipMulti' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-349",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Unused function: 'StatusChangeModal' (153 lines)",
+      "suggestion": "Remove unused function 'StatusChangeModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-350",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 139,
+      "description": "Unused function: 'submit' (25 lines)",
+      "suggestion": "Remove unused function 'submit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-351",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Unused function: 'OrderDetailsRow' (39 lines)",
+      "suggestion": "Remove unused function 'OrderDetailsRow' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-352",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 384,
+      "description": "Unused function: 'clearFilters' (9 lines)",
+      "suggestion": "Remove unused function 'clearFilters' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-353",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 396,
+      "description": "Unused function: 'nextPage' (5 lines)",
+      "suggestion": "Remove unused function 'nextPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-354",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 401,
+      "description": "Unused function: 'prevPage' (3 lines)",
+      "suggestion": "Remove unused function 'prevPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-355",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 405,
+      "description": "Unused function: 'handleStatusUpdated' (4 lines)",
+      "suggestion": "Remove unused function 'handleStatusUpdated' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-356",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "description": "File has 664 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-357",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Function 'StatusChangeModal' has 153 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-358",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 84,
+      "description": "Unused function: 'StatusBadge' (8 lines)",
+      "suggestion": "Remove unused function 'StatusBadge' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-359",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 93,
+      "description": "Unused function: 'PaymentStatusPill' (8 lines)",
+      "suggestion": "Remove unused function 'PaymentStatusPill' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-360",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 102,
+      "description": "Unused function: 'ChipMulti' (27 lines)",
+      "suggestion": "Remove unused function 'ChipMulti' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-361",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Unused function: 'StatusChangeModal' (153 lines)",
+      "suggestion": "Remove unused function 'StatusChangeModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-362",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 139,
+      "description": "Unused function: 'submit' (25 lines)",
+      "suggestion": "Remove unused function 'submit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-363",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Unused function: 'OrderDetailsRow' (39 lines)",
+      "suggestion": "Remove unused function 'OrderDetailsRow' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-364",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 384,
+      "description": "Unused function: 'clearFilters' (9 lines)",
+      "suggestion": "Remove unused function 'clearFilters' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-365",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 396,
+      "description": "Unused function: 'nextPage' (5 lines)",
+      "suggestion": "Remove unused function 'nextPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-366",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 401,
+      "description": "Unused function: 'prevPage' (3 lines)",
+      "suggestion": "Remove unused function 'prevPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-367",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 405,
+      "description": "Unused function: 'handleStatusUpdated' (4 lines)",
+      "suggestion": "Remove unused function 'handleStatusUpdated' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-368",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "description": "File has 664 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-369",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Function 'StatusChangeModal' has 153 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-370",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 27,
+      "description": "Unused function: 'StatCard' (12 lines)",
+      "suggestion": "Remove unused function 'StatCard' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-371",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 62,
+      "description": "Unused function: 'DateRangePicker' (64 lines)",
+      "suggestion": "Remove unused function 'DateRangePicker' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-372",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 64,
+      "description": "Unused function: 'activePreset' (10 lines)",
+      "suggestion": "Remove unused function 'activePreset' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-373",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 68,
+      "description": "Unused function: 'for' (4 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-374",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 127,
+      "description": "Unused function: 'ProductsTab' (208 lines)",
+      "suggestion": "Remove unused function 'ProductsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-375",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 336,
+      "description": "Unused function: 'CustomersTab' (350 lines)",
+      "suggestion": "Remove unused function 'CustomersTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-376",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 375,
+      "description": "Unused function: 'closeDetail' (4 lines)",
+      "suggestion": "Remove unused function 'closeDetail' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-377",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 687,
+      "description": "Unused function: 'InsightsTab' (112 lines)",
+      "suggestion": "Remove unused function 'InsightsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-378",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 702,
+      "description": "Unused function: 'handleSend' (22 lines)",
+      "suggestion": "Remove unused function 'handleSend' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-379",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 800,
+      "description": "Unused function: 'ModelSelector' (74 lines)",
+      "suggestion": "Remove unused function 'ModelSelector' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-380",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 807,
+      "description": "Unused function: 'handleSave' (14 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-381",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 822,
+      "description": "Unused function: 'modelName' (4 lines)",
+      "suggestion": "Remove unused function 'modelName' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-382",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 875,
+      "description": "Unused function: 'RecaptchaSettings' (164 lines)",
+      "suggestion": "Remove unused function 'RecaptchaSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-383",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 894,
+      "description": "Unused function: 'handleSave' (20 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-384",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 915,
+      "description": "Unused function: 'handleDisable' (13 lines)",
+      "suggestion": "Remove unused function 'handleDisable' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-385",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1040,
+      "description": "Unused function: 'SumupSettings' (313 lines)",
+      "suggestion": "Remove unused function 'SumupSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-386",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1072,
+      "description": "Unused function: 'handleSaveModeAndUrl' (20 lines)",
+      "suggestion": "Remove unused function 'handleSaveModeAndUrl' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-387",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1093,
+      "description": "Unused function: 'handleSaveCredentials' (39 lines)",
+      "suggestion": "Remove unused function 'handleSaveCredentials' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-388",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1133,
+      "description": "Unused function: 'handleDeleteAll' (10 lines)",
+      "suggestion": "Remove unused function 'handleDeleteAll' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-389",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1354,
+      "description": "Unused function: 'SettingsTab' (280 lines)",
+      "suggestion": "Remove unused function 'SettingsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-390",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1395,
+      "description": "Unused function: 'handleSaveKey' (18 lines)",
+      "suggestion": "Remove unused function 'handleSaveKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-391",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1414,
+      "description": "Unused function: 'handleDeleteKey' (11 lines)",
+      "suggestion": "Remove unused function 'handleDeleteKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-392",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1426,
+      "description": "Unused function: 'handleSaveModel' (4 lines)",
+      "suggestion": "Remove unused function 'handleSaveModel' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-393",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "description": "File has 1702 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-394",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 62,
+      "description": "Function 'DateRangePicker' has 64 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-395",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 127,
+      "description": "Function 'ProductsTab' has 208 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-396",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 336,
+      "description": "Function 'CustomersTab' has 350 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-397",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 397,
+      "description": "Function 'if' has 106 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-398",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 687,
+      "description": "Function 'InsightsTab' has 112 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-399",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 800,
+      "description": "Function 'ModelSelector' has 74 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-400",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 875,
+      "description": "Function 'RecaptchaSettings' has 164 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-401",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1040,
+      "description": "Function 'SumupSettings' has 313 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-402",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1354,
+      "description": "Function 'SettingsTab' has 280 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-403",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 27,
+      "description": "Unused function: 'StatCard' (12 lines)",
+      "suggestion": "Remove unused function 'StatCard' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-404",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 62,
+      "description": "Unused function: 'DateRangePicker' (64 lines)",
+      "suggestion": "Remove unused function 'DateRangePicker' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-405",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 64,
+      "description": "Unused function: 'activePreset' (10 lines)",
+      "suggestion": "Remove unused function 'activePreset' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-406",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 68,
+      "description": "Unused function: 'for' (4 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-407",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 127,
+      "description": "Unused function: 'ProductsTab' (208 lines)",
+      "suggestion": "Remove unused function 'ProductsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-408",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 336,
+      "description": "Unused function: 'CustomersTab' (350 lines)",
+      "suggestion": "Remove unused function 'CustomersTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-409",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 375,
+      "description": "Unused function: 'closeDetail' (4 lines)",
+      "suggestion": "Remove unused function 'closeDetail' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-410",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 687,
+      "description": "Unused function: 'InsightsTab' (112 lines)",
+      "suggestion": "Remove unused function 'InsightsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-411",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 702,
+      "description": "Unused function: 'handleSend' (22 lines)",
+      "suggestion": "Remove unused function 'handleSend' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-412",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 800,
+      "description": "Unused function: 'ModelSelector' (74 lines)",
+      "suggestion": "Remove unused function 'ModelSelector' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-413",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 807,
+      "description": "Unused function: 'handleSave' (14 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-414",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 822,
+      "description": "Unused function: 'modelName' (4 lines)",
+      "suggestion": "Remove unused function 'modelName' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-415",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 875,
+      "description": "Unused function: 'RecaptchaSettings' (164 lines)",
+      "suggestion": "Remove unused function 'RecaptchaSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-416",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 894,
+      "description": "Unused function: 'handleSave' (20 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-417",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 915,
+      "description": "Unused function: 'handleDisable' (13 lines)",
+      "suggestion": "Remove unused function 'handleDisable' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-418",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1040,
+      "description": "Unused function: 'SumupSettings' (313 lines)",
+      "suggestion": "Remove unused function 'SumupSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-419",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1072,
+      "description": "Unused function: 'handleSaveModeAndUrl' (20 lines)",
+      "suggestion": "Remove unused function 'handleSaveModeAndUrl' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-420",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1093,
+      "description": "Unused function: 'handleSaveCredentials' (39 lines)",
+      "suggestion": "Remove unused function 'handleSaveCredentials' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-421",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1133,
+      "description": "Unused function: 'handleDeleteAll' (10 lines)",
+      "suggestion": "Remove unused function 'handleDeleteAll' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-422",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1354,
+      "description": "Unused function: 'SettingsTab' (280 lines)",
+      "suggestion": "Remove unused function 'SettingsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-423",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1395,
+      "description": "Unused function: 'handleSaveKey' (18 lines)",
+      "suggestion": "Remove unused function 'handleSaveKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-424",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1414,
+      "description": "Unused function: 'handleDeleteKey' (11 lines)",
+      "suggestion": "Remove unused function 'handleDeleteKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-425",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1426,
+      "description": "Unused function: 'handleSaveModel' (4 lines)",
+      "suggestion": "Remove unused function 'handleSaveModel' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-426",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "description": "File has 1702 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-427",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 62,
+      "description": "Function 'DateRangePicker' has 64 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-428",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 127,
+      "description": "Function 'ProductsTab' has 208 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-429",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 336,
+      "description": "Function 'CustomersTab' has 350 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-430",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 397,
+      "description": "Function 'if' has 106 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-431",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 687,
+      "description": "Function 'InsightsTab' has 112 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-432",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 800,
+      "description": "Function 'ModelSelector' has 74 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-433",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 875,
+      "description": "Function 'RecaptchaSettings' has 164 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-434",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1040,
+      "description": "Function 'SumupSettings' has 313 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-435",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1354,
+      "description": "Function 'SettingsTab' has 280 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-436",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 84,
+      "description": "Unused function: 'StatusBadge' (8 lines)",
+      "suggestion": "Remove unused function 'StatusBadge' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-437",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 93,
+      "description": "Unused function: 'PaymentStatusPill' (8 lines)",
+      "suggestion": "Remove unused function 'PaymentStatusPill' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-438",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 102,
+      "description": "Unused function: 'ChipMulti' (27 lines)",
+      "suggestion": "Remove unused function 'ChipMulti' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-439",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Unused function: 'StatusChangeModal' (153 lines)",
+      "suggestion": "Remove unused function 'StatusChangeModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-440",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 139,
+      "description": "Unused function: 'submit' (25 lines)",
+      "suggestion": "Remove unused function 'submit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-441",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Unused function: 'OrderDetailsRow' (39 lines)",
+      "suggestion": "Remove unused function 'OrderDetailsRow' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-442",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 384,
+      "description": "Unused function: 'clearFilters' (9 lines)",
+      "suggestion": "Remove unused function 'clearFilters' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-443",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 396,
+      "description": "Unused function: 'nextPage' (5 lines)",
+      "suggestion": "Remove unused function 'nextPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-444",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 401,
+      "description": "Unused function: 'prevPage' (3 lines)",
+      "suggestion": "Remove unused function 'prevPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-445",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 405,
+      "description": "Unused function: 'handleStatusUpdated' (4 lines)",
+      "suggestion": "Remove unused function 'handleStatusUpdated' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-446",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "description": "File has 664 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-447",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Function 'StatusChangeModal' has 153 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    }
+  ],
+  "resolvedFindingIds": [
+    "SAI-ea803624"
+  ],
+  "metrics": {
+    "importsUsedPercent": 0,
+    "functionsUsedPercent": 0,
+    "duplicatePatterns": 0,
+    "securityIssues": 0,
+    "consistencyScore": 100,
+    "avgComplexity": 800,
+    "filesAnalyzed": 9,
+    "linesAnalyzed": 7196
+  }
+}

@@ -1,0 +1,1396 @@
+{
+  "cycleId": 15,
+  "timestamp": "2026-04-23T17:01:50.264Z",
+  "taskId": "task-1776962895636-xzooc386q",
+  "audit": {
+    "passed": false,
+    "score": 0,
+    "grade": "F",
+    "filesAnalyzed": [
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/settings.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/settings.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/api.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx"
+    ],
+    "linesAnalyzed": 8571
+  },
+  "findings": [
+    {
+      "id": "DC-029",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 33,
+      "description": "Unused function: 'getMode' (14 lines)",
+      "suggestion": "Remove unused function 'getMode' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-030",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 63,
+      "description": "Unused function: 'invalidateModeCache' (3 lines)",
+      "suggestion": "Remove unused function 'invalidateModeCache' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-031",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 67,
+      "description": "Unused function: 'invalidateReturnUrlCache' (3 lines)",
+      "suggestion": "Remove unused function 'invalidateReturnUrlCache' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-032",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 71,
+      "description": "Unused function: 'buildReturnUrls' (7 lines)",
+      "suggestion": "Remove unused function 'buildReturnUrls' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-033",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
+      "line": 215,
+      "description": "Unused function: 'mapStatus' (16 lines)",
+      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-034",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
+      "line": 21,
+      "description": "Unused function: 'createCheckout' (22 lines)",
+      "suggestion": "Remove unused function 'createCheckout' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-035",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
+      "line": 44,
+      "description": "Unused function: 'getCheckout' (16 lines)",
+      "suggestion": "Remove unused function 'getCheckout' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-036",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
+      "line": 61,
+      "description": "Unused function: 'completeCheckout' (24 lines)",
+      "suggestion": "Remove unused function 'completeCheckout' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-037",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
+      "line": 90,
+      "description": "Unused function: 'invalidateWebhookSecretCache' (3 lines)",
+      "suggestion": "Remove unused function 'invalidateWebhookSecretCache' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-038",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
+      "line": 94,
+      "description": "Unused function: 'mapStatus' (16 lines)",
+      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-039",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
+      "line": 111,
+      "description": "Unused function: '__reset' (3 lines)",
+      "suggestion": "Remove unused function '__reset' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-040",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 25,
+      "description": "Unused function: 'StatCard' (12 lines)",
+      "suggestion": "Remove unused function 'StatCard' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-041",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 60,
+      "description": "Unused function: 'DateRangePicker' (64 lines)",
+      "suggestion": "Remove unused function 'DateRangePicker' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-042",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 62,
+      "description": "Unused function: 'activePreset' (10 lines)",
+      "suggestion": "Remove unused function 'activePreset' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-043",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 66,
+      "description": "Unused function: 'for' (4 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-044",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 125,
+      "description": "Unused function: 'ProductsTab' (208 lines)",
+      "suggestion": "Remove unused function 'ProductsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-045",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 334,
+      "description": "Unused function: 'CustomersTab' (350 lines)",
+      "suggestion": "Remove unused function 'CustomersTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-046",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 373,
+      "description": "Unused function: 'closeDetail' (4 lines)",
+      "suggestion": "Remove unused function 'closeDetail' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-047",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 685,
+      "description": "Unused function: 'InsightsTab' (112 lines)",
+      "suggestion": "Remove unused function 'InsightsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-048",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 700,
+      "description": "Unused function: 'handleSend' (22 lines)",
+      "suggestion": "Remove unused function 'handleSend' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-049",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 798,
+      "description": "Unused function: 'ModelSelector' (74 lines)",
+      "suggestion": "Remove unused function 'ModelSelector' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-050",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 805,
+      "description": "Unused function: 'handleSave' (14 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-051",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 820,
+      "description": "Unused function: 'modelName' (4 lines)",
+      "suggestion": "Remove unused function 'modelName' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-052",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 873,
+      "description": "Unused function: 'RecaptchaSettings' (164 lines)",
+      "suggestion": "Remove unused function 'RecaptchaSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-053",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 892,
+      "description": "Unused function: 'handleSave' (20 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-054",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 913,
+      "description": "Unused function: 'handleDisable' (13 lines)",
+      "suggestion": "Remove unused function 'handleDisable' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-055",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1038,
+      "description": "Unused function: 'SumupSettings' (405 lines)",
+      "suggestion": "Remove unused function 'SumupSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-056",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1075,
+      "description": "Unused function: 'handleSaveModeAndUrl' (20 lines)",
+      "suggestion": "Remove unused function 'handleSaveModeAndUrl' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-057",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1096,
+      "description": "Unused function: 'handleSaveCredentials' (39 lines)",
+      "suggestion": "Remove unused function 'handleSaveCredentials' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-058",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1136,
+      "description": "Unused function: 'handleSaveWebhook' (18 lines)",
+      "suggestion": "Remove unused function 'handleSaveWebhook' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-059",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1155,
+      "description": "Unused function: 'handleDeleteWebhook' (10 lines)",
+      "suggestion": "Remove unused function 'handleDeleteWebhook' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-060",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1166,
+      "description": "Unused function: 'handleDeleteAll' (10 lines)",
+      "suggestion": "Remove unused function 'handleDeleteAll' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-061",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1444,
+      "description": "Unused function: 'SettingsTab' (280 lines)",
+      "suggestion": "Remove unused function 'SettingsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-062",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1485,
+      "description": "Unused function: 'handleSaveKey' (18 lines)",
+      "suggestion": "Remove unused function 'handleSaveKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-063",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1504,
+      "description": "Unused function: 'handleDeleteKey' (11 lines)",
+      "suggestion": "Remove unused function 'handleDeleteKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-064",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1516,
+      "description": "Unused function: 'handleSaveModel' (4 lines)",
+      "suggestion": "Remove unused function 'handleSaveModel' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-065",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "description": "File has 1791 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-066",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 60,
+      "description": "Function 'DateRangePicker' has 64 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-067",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 125,
+      "description": "Function 'ProductsTab' has 208 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-068",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 334,
+      "description": "Function 'CustomersTab' has 350 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-069",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 395,
+      "description": "Function 'if' has 106 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-070",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 685,
+      "description": "Function 'InsightsTab' has 112 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-071",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 798,
+      "description": "Function 'ModelSelector' has 74 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-072",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 873,
+      "description": "Function 'RecaptchaSettings' has 164 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-073",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1038,
+      "description": "Function 'SumupSettings' has 405 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-074",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1444,
+      "description": "Function 'SettingsTab' has 280 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-075",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 25,
+      "description": "Unused function: 'StatCard' (12 lines)",
+      "suggestion": "Remove unused function 'StatCard' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-076",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 60,
+      "description": "Unused function: 'DateRangePicker' (64 lines)",
+      "suggestion": "Remove unused function 'DateRangePicker' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-077",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 62,
+      "description": "Unused function: 'activePreset' (10 lines)",
+      "suggestion": "Remove unused function 'activePreset' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-078",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 66,
+      "description": "Unused function: 'for' (4 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-079",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 125,
+      "description": "Unused function: 'ProductsTab' (208 lines)",
+      "suggestion": "Remove unused function 'ProductsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-080",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 334,
+      "description": "Unused function: 'CustomersTab' (350 lines)",
+      "suggestion": "Remove unused function 'CustomersTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-081",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 373,
+      "description": "Unused function: 'closeDetail' (4 lines)",
+      "suggestion": "Remove unused function 'closeDetail' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-082",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 685,
+      "description": "Unused function: 'InsightsTab' (112 lines)",
+      "suggestion": "Remove unused function 'InsightsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-083",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 700,
+      "description": "Unused function: 'handleSend' (22 lines)",
+      "suggestion": "Remove unused function 'handleSend' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-084",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 798,
+      "description": "Unused function: 'ModelSelector' (74 lines)",
+      "suggestion": "Remove unused function 'ModelSelector' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-085",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 805,
+      "description": "Unused function: 'handleSave' (14 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-086",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 820,
+      "description": "Unused function: 'modelName' (4 lines)",
+      "suggestion": "Remove unused function 'modelName' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-087",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 873,
+      "description": "Unused function: 'RecaptchaSettings' (164 lines)",
+      "suggestion": "Remove unused function 'RecaptchaSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-088",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 892,
+      "description": "Unused function: 'handleSave' (20 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-089",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 913,
+      "description": "Unused function: 'handleDisable' (13 lines)",
+      "suggestion": "Remove unused function 'handleDisable' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-090",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1038,
+      "description": "Unused function: 'SumupSettings' (405 lines)",
+      "suggestion": "Remove unused function 'SumupSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-091",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1075,
+      "description": "Unused function: 'handleSaveModeAndUrl' (20 lines)",
+      "suggestion": "Remove unused function 'handleSaveModeAndUrl' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-092",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1096,
+      "description": "Unused function: 'handleSaveCredentials' (39 lines)",
+      "suggestion": "Remove unused function 'handleSaveCredentials' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-093",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1136,
+      "description": "Unused function: 'handleSaveWebhook' (18 lines)",
+      "suggestion": "Remove unused function 'handleSaveWebhook' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-094",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1155,
+      "description": "Unused function: 'handleDeleteWebhook' (10 lines)",
+      "suggestion": "Remove unused function 'handleDeleteWebhook' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-095",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1166,
+      "description": "Unused function: 'handleDeleteAll' (10 lines)",
+      "suggestion": "Remove unused function 'handleDeleteAll' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-096",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1444,
+      "description": "Unused function: 'SettingsTab' (280 lines)",
+      "suggestion": "Remove unused function 'SettingsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-097",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1485,
+      "description": "Unused function: 'handleSaveKey' (18 lines)",
+      "suggestion": "Remove unused function 'handleSaveKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-098",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1504,
+      "description": "Unused function: 'handleDeleteKey' (11 lines)",
+      "suggestion": "Remove unused function 'handleDeleteKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-099",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1516,
+      "description": "Unused function: 'handleSaveModel' (4 lines)",
+      "suggestion": "Remove unused function 'handleSaveModel' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-100",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "description": "File has 1791 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-101",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 60,
+      "description": "Function 'DateRangePicker' has 64 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-102",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 125,
+      "description": "Function 'ProductsTab' has 208 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-103",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 334,
+      "description": "Function 'CustomersTab' has 350 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-104",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 395,
+      "description": "Function 'if' has 106 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-105",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 685,
+      "description": "Function 'InsightsTab' has 112 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-106",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 798,
+      "description": "Function 'ModelSelector' has 74 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-107",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 873,
+      "description": "Function 'RecaptchaSettings' has 164 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-108",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1038,
+      "description": "Function 'SumupSettings' has 405 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-109",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1444,
+      "description": "Function 'SettingsTab' has 280 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-110",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 25,
+      "description": "Unused function: 'StatCard' (12 lines)",
+      "suggestion": "Remove unused function 'StatCard' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-111",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 60,
+      "description": "Unused function: 'DateRangePicker' (64 lines)",
+      "suggestion": "Remove unused function 'DateRangePicker' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-112",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 62,
+      "description": "Unused function: 'activePreset' (10 lines)",
+      "suggestion": "Remove unused function 'activePreset' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-113",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 66,
+      "description": "Unused function: 'for' (4 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-114",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 125,
+      "description": "Unused function: 'ProductsTab' (208 lines)",
+      "suggestion": "Remove unused function 'ProductsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-115",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 334,
+      "description": "Unused function: 'CustomersTab' (350 lines)",
+      "suggestion": "Remove unused function 'CustomersTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-116",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 373,
+      "description": "Unused function: 'closeDetail' (4 lines)",
+      "suggestion": "Remove unused function 'closeDetail' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-117",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 685,
+      "description": "Unused function: 'InsightsTab' (112 lines)",
+      "suggestion": "Remove unused function 'InsightsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-118",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 700,
+      "description": "Unused function: 'handleSend' (22 lines)",
+      "suggestion": "Remove unused function 'handleSend' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-119",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 798,
+      "description": "Unused function: 'ModelSelector' (74 lines)",
+      "suggestion": "Remove unused function 'ModelSelector' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-120",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 805,
+      "description": "Unused function: 'handleSave' (14 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-121",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 820,
+      "description": "Unused function: 'modelName' (4 lines)",
+      "suggestion": "Remove unused function 'modelName' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-122",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 873,
+      "description": "Unused function: 'RecaptchaSettings' (164 lines)",
+      "suggestion": "Remove unused function 'RecaptchaSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-123",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 892,
+      "description": "Unused function: 'handleSave' (20 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-124",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 913,
+      "description": "Unused function: 'handleDisable' (13 lines)",
+      "suggestion": "Remove unused function 'handleDisable' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-125",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1038,
+      "description": "Unused function: 'SumupSettings' (405 lines)",
+      "suggestion": "Remove unused function 'SumupSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-126",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1075,
+      "description": "Unused function: 'handleSaveModeAndUrl' (20 lines)",
+      "suggestion": "Remove unused function 'handleSaveModeAndUrl' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-127",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1096,
+      "description": "Unused function: 'handleSaveCredentials' (39 lines)",
+      "suggestion": "Remove unused function 'handleSaveCredentials' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-128",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1136,
+      "description": "Unused function: 'handleSaveWebhook' (18 lines)",
+      "suggestion": "Remove unused function 'handleSaveWebhook' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-129",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1155,
+      "description": "Unused function: 'handleDeleteWebhook' (10 lines)",
+      "suggestion": "Remove unused function 'handleDeleteWebhook' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-130",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1166,
+      "description": "Unused function: 'handleDeleteAll' (10 lines)",
+      "suggestion": "Remove unused function 'handleDeleteAll' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-131",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1444,
+      "description": "Unused function: 'SettingsTab' (280 lines)",
+      "suggestion": "Remove unused function 'SettingsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-132",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1485,
+      "description": "Unused function: 'handleSaveKey' (18 lines)",
+      "suggestion": "Remove unused function 'handleSaveKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-133",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1504,
+      "description": "Unused function: 'handleDeleteKey' (11 lines)",
+      "suggestion": "Remove unused function 'handleDeleteKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-134",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1516,
+      "description": "Unused function: 'handleSaveModel' (4 lines)",
+      "suggestion": "Remove unused function 'handleSaveModel' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-135",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "description": "File has 1791 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-136",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 60,
+      "description": "Function 'DateRangePicker' has 64 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-137",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 125,
+      "description": "Function 'ProductsTab' has 208 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-138",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 334,
+      "description": "Function 'CustomersTab' has 350 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-139",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 395,
+      "description": "Function 'if' has 106 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-140",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 685,
+      "description": "Function 'InsightsTab' has 112 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-141",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 798,
+      "description": "Function 'ModelSelector' has 74 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-142",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 873,
+      "description": "Function 'RecaptchaSettings' has 164 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-143",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1038,
+      "description": "Function 'SumupSettings' has 405 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-144",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1444,
+      "description": "Function 'SettingsTab' has 280 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-145",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 25,
+      "description": "Unused function: 'StatCard' (12 lines)",
+      "suggestion": "Remove unused function 'StatCard' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-146",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 60,
+      "description": "Unused function: 'DateRangePicker' (64 lines)",
+      "suggestion": "Remove unused function 'DateRangePicker' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-147",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 62,
+      "description": "Unused function: 'activePreset' (10 lines)",
+      "suggestion": "Remove unused function 'activePreset' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-148",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 66,
+      "description": "Unused function: 'for' (4 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-149",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 125,
+      "description": "Unused function: 'ProductsTab' (208 lines)",
+      "suggestion": "Remove unused function 'ProductsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-150",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 334,
+      "description": "Unused function: 'CustomersTab' (350 lines)",
+      "suggestion": "Remove unused function 'CustomersTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-151",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 373,
+      "description": "Unused function: 'closeDetail' (4 lines)",
+      "suggestion": "Remove unused function 'closeDetail' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-152",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 685,
+      "description": "Unused function: 'InsightsTab' (112 lines)",
+      "suggestion": "Remove unused function 'InsightsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-153",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 700,
+      "description": "Unused function: 'handleSend' (22 lines)",
+      "suggestion": "Remove unused function 'handleSend' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-154",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 798,
+      "description": "Unused function: 'ModelSelector' (74 lines)",
+      "suggestion": "Remove unused function 'ModelSelector' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-155",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 805,
+      "description": "Unused function: 'handleSave' (14 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-156",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 820,
+      "description": "Unused function: 'modelName' (4 lines)",
+      "suggestion": "Remove unused function 'modelName' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-157",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 873,
+      "description": "Unused function: 'RecaptchaSettings' (164 lines)",
+      "suggestion": "Remove unused function 'RecaptchaSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-158",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 892,
+      "description": "Unused function: 'handleSave' (20 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-159",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 913,
+      "description": "Unused function: 'handleDisable' (13 lines)",
+      "suggestion": "Remove unused function 'handleDisable' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-160",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1038,
+      "description": "Unused function: 'SumupSettings' (405 lines)",
+      "suggestion": "Remove unused function 'SumupSettings' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-161",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1075,
+      "description": "Unused function: 'handleSaveModeAndUrl' (20 lines)",
+      "suggestion": "Remove unused function 'handleSaveModeAndUrl' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-162",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1096,
+      "description": "Unused function: 'handleSaveCredentials' (39 lines)",
+      "suggestion": "Remove unused function 'handleSaveCredentials' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-163",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1136,
+      "description": "Unused function: 'handleSaveWebhook' (18 lines)",
+      "suggestion": "Remove unused function 'handleSaveWebhook' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-164",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1155,
+      "description": "Unused function: 'handleDeleteWebhook' (10 lines)",
+      "suggestion": "Remove unused function 'handleDeleteWebhook' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-165",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1166,
+      "description": "Unused function: 'handleDeleteAll' (10 lines)",
+      "suggestion": "Remove unused function 'handleDeleteAll' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-166",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1444,
+      "description": "Unused function: 'SettingsTab' (280 lines)",
+      "suggestion": "Remove unused function 'SettingsTab' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-167",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1485,
+      "description": "Unused function: 'handleSaveKey' (18 lines)",
+      "suggestion": "Remove unused function 'handleSaveKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-168",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1504,
+      "description": "Unused function: 'handleDeleteKey' (11 lines)",
+      "suggestion": "Remove unused function 'handleDeleteKey' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-169",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1516,
+      "description": "Unused function: 'handleSaveModel' (4 lines)",
+      "suggestion": "Remove unused function 'handleSaveModel' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-170",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "description": "File has 1791 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-171",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 60,
+      "description": "Function 'DateRangePicker' has 64 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-172",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 125,
+      "description": "Function 'ProductsTab' has 208 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-173",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 334,
+      "description": "Function 'CustomersTab' has 350 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-174",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 395,
+      "description": "Function 'if' has 106 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-175",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 685,
+      "description": "Function 'InsightsTab' has 112 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-176",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 798,
+      "description": "Function 'ModelSelector' has 74 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-177",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 873,
+      "description": "Function 'RecaptchaSettings' has 164 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-178",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1038,
+      "description": "Function 'SumupSettings' has 405 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-179",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/AdminPage.jsx",
+      "line": 1444,
+      "description": "Function 'SettingsTab' has 280 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    }
+  ],
+  "resolvedFindingIds": [
+    "SAI-9be7c9f3",
+    "SAI-514b69ba",
+    "SAI-7f731b20",
+    "SAI-9ac3afb2"
+  ],
+  "metrics": {
+    "importsUsedPercent": 0,
+    "functionsUsedPercent": 0,
+    "duplicatePatterns": 0,
+    "securityIssues": 0,
+    "consistencyScore": 100,
+    "avgComplexity": 857,
+    "filesAnalyzed": 10,
+    "linesAnalyzed": 8571
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "cycleId": 45,
+  "timestamp": "2026-04-25T02:15:01.762Z",
+  "taskId": "task-1777082850513-49cloqdys",
+  "audit": {
+    "passed": false,
+    "score": 60,
+    "grade": "D",
+    "filesAnalyzed": [
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/server.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/webhooks.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/webhooks.js"
+    ],
+    "linesAnalyzed": 666
+  },
+  "findings": [
+    {
+      "id": "DC-240",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 80,
+      "description": "Unused function: 'getMode' (3 lines)",
+      "suggestion": "Remove unused function 'getMode' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-241",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 116,
+      "description": "Unused function: 'invalidateModeCache' (3 lines)",
+      "suggestion": "Remove unused function 'invalidateModeCache' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-242",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 120,
+      "description": "Unused function: 'invalidateReturnUrlCache' (3 lines)",
+      "suggestion": "Remove unused function 'invalidateReturnUrlCache' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-243",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 145,
+      "description": "Unused function: 'buildReturnUrls' (8 lines)",
+      "suggestion": "Remove unused function 'buildReturnUrls' or export if needed elsewhere"
+    }
+  ],
+  "resolvedFindingIds": [],
+  "metrics": {
+    "importsUsedPercent": 80,
+    "functionsUsedPercent": 80,
+    "duplicatePatterns": 0,
+    "securityIssues": 0,
+    "consistencyScore": 100,
+    "avgComplexity": 167,
+    "filesAnalyzed": 4,
+    "linesAnalyzed": 666
+  }
+}

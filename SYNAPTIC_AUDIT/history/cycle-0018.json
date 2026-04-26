@@ -1,0 +1,78 @@
+{
+  "cycleId": 18,
+  "timestamp": "2026-04-23T18:44:04.584Z",
+  "taskId": "task-1776969401460-eklwfixbr",
+  "audit": {
+    "passed": false,
+    "score": 50,
+    "grade": "F",
+    "filesAnalyzed": [
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/webhooks.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/webhooks.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/server.js"
+    ],
+    "linesAnalyzed": 883
+  },
+  "findings": [
+    {
+      "id": "DC-180",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 33,
+      "description": "Unused function: 'getMode' (14 lines)",
+      "suggestion": "Remove unused function 'getMode' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-181",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 63,
+      "description": "Unused function: 'invalidateModeCache' (3 lines)",
+      "suggestion": "Remove unused function 'invalidateModeCache' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-182",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 67,
+      "description": "Unused function: 'invalidateReturnUrlCache' (3 lines)",
+      "suggestion": "Remove unused function 'invalidateReturnUrlCache' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-183",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.config.js",
+      "line": 88,
+      "description": "Unused function: 'buildReturnUrls' (8 lines)",
+      "suggestion": "Remove unused function 'buildReturnUrls' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-184",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
+      "line": 221,
+      "description": "Unused function: 'mapStatus' (16 lines)",
+      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
+    }
+  ],
+  "resolvedFindingIds": [
+    "SAI-43faa52b"
+  ],
+  "metrics": {
+    "importsUsedPercent": 75,
+    "functionsUsedPercent": 75,
+    "duplicatePatterns": 0,
+    "securityIssues": 0,
+    "consistencyScore": 100,
+    "avgComplexity": 177,
+    "filesAnalyzed": 5,
+    "linesAnalyzed": 883
+  }
+}

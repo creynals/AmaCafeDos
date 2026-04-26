@@ -1,0 +1,27 @@
+{
+  "basePath": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n",
+  "projectId": "import-1776956320164-2m9x2n",
+  "projectName": "amaCafe",
+  "createdAt": "2026-04-23T14:58:40.164Z",
+  "lastAccessedAt": "2026-04-26T13:50:21.025Z",
+  "settings": {
+    "synapticVersion": "3.0",
+    "enforcementMode": "strict",
+    "allowedCommands": [
+      "npm",
+      "git",
+      "node",
+      "npx",
+      "tsc"
+    ],
+    "blockedPaths": [
+      "..",
+      "/etc",
+      "/usr",
+      "C:\\Windows",
+      "C:\\Program Files"
+    ],
+    "autoCommit": false,
+    "gitIntegration": true
+  }
+}

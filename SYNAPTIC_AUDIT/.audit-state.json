@@ -1,0 +1,211 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-26T13:50:21.022Z",
+  "summary": {
+    "totalCyclesAudited": 23,
+    "averageScore": 50,
+    "currentStreak": 1,
+    "lastAuditCycle": 103,
+    "lastAuditTimestamp": "2026-04-26T13:50:21.022Z",
+    "lastAuditGrade": "A"
+  },
+  "scoreHistory": [
+    {
+      "cycle": 4,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-23T15:24:07.590Z"
+    },
+    {
+      "cycle": 6,
+      "score": 50,
+      "grade": "F",
+      "timestamp": "2026-04-23T15:52:53.619Z"
+    },
+    {
+      "cycle": 8,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-23T16:12:22.904Z"
+    },
+    {
+      "cycle": 13,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-23T16:38:35.168Z"
+    },
+    {
+      "cycle": 15,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-23T17:01:50.264Z"
+    },
+    {
+      "cycle": 18,
+      "score": 50,
+      "grade": "F",
+      "timestamp": "2026-04-23T18:44:04.584Z"
+    },
+    {
+      "cycle": 21,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-23T19:06:25.406Z"
+    },
+    {
+      "cycle": 26,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-23T20:07:41.018Z"
+    },
+    {
+      "cycle": 31,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-24T21:58:19.726Z"
+    },
+    {
+      "cycle": 41,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-24T23:48:35.341Z"
+    },
+    {
+      "cycle": 45,
+      "score": 60,
+      "grade": "D",
+      "timestamp": "2026-04-25T02:15:01.762Z"
+    },
+    {
+      "cycle": 56,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-25T15:57:55.543Z"
+    },
+    {
+      "cycle": 61,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-25T18:10:54.741Z"
+    },
+    {
+      "cycle": 73,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-26T00:48:06.997Z"
+    },
+    {
+      "cycle": 80,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-26T01:46:41.018Z"
+    },
+    {
+      "cycle": 82,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-26T02:23:17.856Z"
+    },
+    {
+      "cycle": 86,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-26T03:01:53.057Z"
+    },
+    {
+      "cycle": 89,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-26T03:30:06.159Z"
+    },
+    {
+      "cycle": 96,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-26T04:17:43.447Z"
+    },
+    {
+      "cycle": 98,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-26T04:51:00.982Z"
+    },
+    {
+      "cycle": 99,
+      "score": 80,
+      "grade": "B",
+      "timestamp": "2026-04-26T04:59:45.785Z"
+    },
+    {
+      "cycle": 100,
+      "score": 0,
+      "grade": "F",
+      "timestamp": "2026-04-26T05:06:59.391Z"
+    },
+    {
+      "cycle": 103,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-26T13:50:21.022Z"
+    }
+  ],
+  "findingsAggregate": {
+    "totalDetected": 105,
+    "totalResolved": 24,
+    "byType": {
+      "dead_code": {
+        "detected": 84,
+        "resolved": 19,
+        "open": 65
+      },
+      "duplication": {
+        "detected": 0,
+        "resolved": 0,
+        "open": 0
+      },
+      "security": {
+        "detected": 0,
+        "resolved": 0,
+        "open": 0
+      },
+      "maintainability": {
+        "detected": 21,
+        "resolved": 5,
+        "open": 16
+      },
+      "consistency": {
+        "detected": 0,
+        "resolved": 0,
+        "open": 0
+      },
+      "error_handling": {
+        "detected": 0,
+        "resolved": 0,
+        "open": 0
+      }
+    },
+    "bySeverity": {
+      "CRITICAL": {
+        "detected": 0,
+        "resolved": 0,
+        "open": 0
+      },
+      "HIGH": {
+        "detected": 0,
+        "resolved": 0,
+        "open": 0
+      },
+      "MEDIUM": {
+        "detected": 92,
+        "resolved": 23,
+        "open": 69
+      },
+      "LOW": {
+        "detected": 13,
+        "resolved": 1,
+        "open": 12
+      }
+    },
+    "avgCyclesToResolve": 21
+  }
+}

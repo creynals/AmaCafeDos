@@ -1,0 +1,40 @@
+{
+  "synaptic_version": "3.0",
+  "project": {
+    "id": "import-1776956320164-2m9x2n",
+    "name": "amaCafe",
+    "type": "general",
+    "description": "Imported from /Users/christianreynals/Desktop/tempo/amaCafe",
+    "domain": "general"
+  },
+  "technical": {
+    "stack": {},
+    "architecture": "to_be_defined",
+    "patterns": []
+  },
+  "enforcement": {
+    "mode": "STRICT",
+    "persistence": {
+      "enabled": true,
+      "reminder_frequency": "every_prompt",
+      "auto_validation": true,
+      "rejection_threshold": 70
+    },
+    "decision_gates": {
+      "always_require": true,
+      "options_count": 3,
+      "auto_reject_violations": true
+    }
+  },
+  "agents": {
+    "master_architect": {
+      "personality": "strict",
+      "expertise_focus": [
+        "architecture",
+        "quality",
+        "protocol"
+      ]
+    }
+  },
+  "created_at": "2026-04-23T14:58:40.178Z"
+}

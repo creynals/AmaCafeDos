@@ -1,0 +1,73 @@
+{
+  "cycleId": 6,
+  "timestamp": "2026-04-23T15:52:53.619Z",
+  "taskId": "task-1776958980050-4rtdv2v24",
+  "audit": {
+    "passed": false,
+    "score": 50,
+    "grade": "F",
+    "filesAnalyzed": [
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/settings.js"
+    ],
+    "linesAnalyzed": 480
+  },
+  "findings": [
+    {
+      "id": "DC-001",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
+      "line": 95,
+      "description": "Unused function: 'createCheckout' (26 lines)",
+      "suggestion": "Remove unused function 'createCheckout' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-002",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
+      "line": 123,
+      "description": "Unused function: 'getCheckout' (11 lines)",
+      "suggestion": "Remove unused function 'getCheckout' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-003",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
+      "line": 140,
+      "description": "Unused function: 'completeCheckout' (15 lines)",
+      "suggestion": "Remove unused function 'completeCheckout' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-004",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
+      "line": 164,
+      "description": "Unused function: 'verifyWebhookSignature' (17 lines)",
+      "suggestion": "Remove unused function 'verifyWebhookSignature' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-005",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
+      "line": 183,
+      "description": "Unused function: 'mapStatus' (16 lines)",
+      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
+    }
+  ],
+  "resolvedFindingIds": [],
+  "metrics": {
+    "importsUsedPercent": 75,
+    "functionsUsedPercent": 75,
+    "duplicatePatterns": 0,
+    "securityIssues": 0,
+    "consistencyScore": 100,
+    "avgComplexity": 240,
+    "filesAnalyzed": 2,
+    "linesAnalyzed": 480
+  }
+}

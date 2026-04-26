@@ -1,0 +1,160 @@
+{
+  "cycleId": 86,
+  "timestamp": "2026-04-26T03:01:53.057Z",
+  "taskId": "task-1777172218383-c1aahw6ca",
+  "audit": {
+    "passed": false,
+    "score": 0,
+    "grade": "F",
+    "filesAnalyzed": [
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/payments.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/server.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/server.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/main.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/main.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/api.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx"
+    ],
+    "linesAnalyzed": 1075
+  },
+  "findings": [
+    {
+      "id": "DC-306",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 109,
+      "description": "Unused function: 'PaidBlock' (12 lines)",
+      "suggestion": "Remove unused function 'PaidBlock' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-307",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 122,
+      "description": "Unused function: 'FailedBlock' (12 lines)",
+      "suggestion": "Remove unused function 'FailedBlock' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-308",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 135,
+      "description": "Unused function: 'PendingBlock' (15 lines)",
+      "suggestion": "Remove unused function 'PendingBlock' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-309",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 151,
+      "description": "Unused function: 'ErrorBlock' (9 lines)",
+      "suggestion": "Remove unused function 'ErrorBlock' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-310",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 161,
+      "description": "Unused function: 'DetailRows' (21 lines)",
+      "suggestion": "Remove unused function 'DetailRows' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-311",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 183,
+      "description": "Unused function: 'Row' (8 lines)",
+      "suggestion": "Remove unused function 'Row' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-312",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/main.jsx",
+      "line": 14,
+      "description": "Unused function: 'ProtectedAdmin' (17 lines)",
+      "suggestion": "Remove unused function 'ProtectedAdmin' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-313",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/main.jsx",
+      "line": 14,
+      "description": "Unused function: 'ProtectedAdmin' (17 lines)",
+      "suggestion": "Remove unused function 'ProtectedAdmin' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-314",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 109,
+      "description": "Unused function: 'PaidBlock' (12 lines)",
+      "suggestion": "Remove unused function 'PaidBlock' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-315",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 122,
+      "description": "Unused function: 'FailedBlock' (12 lines)",
+      "suggestion": "Remove unused function 'FailedBlock' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-316",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 135,
+      "description": "Unused function: 'PendingBlock' (15 lines)",
+      "suggestion": "Remove unused function 'PendingBlock' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-317",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 151,
+      "description": "Unused function: 'ErrorBlock' (9 lines)",
+      "suggestion": "Remove unused function 'ErrorBlock' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-318",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 161,
+      "description": "Unused function: 'DetailRows' (21 lines)",
+      "suggestion": "Remove unused function 'DetailRows' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-319",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/frontend/src/components/CheckoutSuccessPage.jsx",
+      "line": 183,
+      "description": "Unused function: 'Row' (8 lines)",
+      "suggestion": "Remove unused function 'Row' or export if needed elsewhere"
+    }
+  ],
+  "resolvedFindingIds": [],
+  "metrics": {
+    "importsUsedPercent": 30,
+    "functionsUsedPercent": 30,
+    "duplicatePatterns": 0,
+    "securityIssues": 0,
+    "consistencyScore": 100,
+    "avgComplexity": 134,
+    "filesAnalyzed": 8,
+    "linesAnalyzed": 1075
+  }
+}
