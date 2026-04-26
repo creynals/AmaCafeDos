@@ -233,6 +233,45 @@ export const api = {
   saveSumup: (payload) => post('/admin/settings/sumup', payload, { auth: true }),
   deleteSumup: () => del('/admin/settings/sumup', { auth: true }),
 
+  // CRUD individual de productos — Ciclo 9 SYNAPTIC (admin maintainer)
+  adminProductsList: (params = {}) => {
+    const clean = {};
+    Object.entries(params).forEach(([k, v]) => {
+      if (v !== undefined && v !== null && v !== '') clean[k] = v;
+    });
+    const qs = new URLSearchParams(clean).toString();
+    return request(`/admin/products/list${qs ? '?' + qs : ''}`, { auth: true });
+  },
+  adminProductGet: (id) => request(`/admin/products/${id}`, { auth: true }),
+  adminProductCreate: (data) => post('/admin/products', data, { auth: true }),
+  adminProductUpdate: (id, data) => put(`/admin/products/${id}`, data, { auth: true }),
+  adminProductDelete: (id, reason) => {
+    const token = localStorage.getItem('admin_token');
+    return fetch(`${BASE}/admin/products/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify({ reason: reason || null }),
+    }).then(async (res) => {
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 401) {
+        localStorage.removeItem('admin_token');
+        window.dispatchEvent(new Event('auth-expired'));
+      }
+      if (!res.ok) {
+        const err = new Error(data.error || `API error: ${res.status}`);
+        err.status = res.status;
+        err.data = data;
+        throw err;
+      }
+      return data;
+    });
+  },
+  adminProductRestore: (id) => post(`/admin/products/${id}/restore`, {}, { auth: true }),
+  adminProductAdjustStock: (id, payload) => patch(`/admin/products/${id}/stock`, payload, { auth: true }),
+
   // Bulk import de productos — Ciclo 3 SYNAPTIC (admin)
   adminProductCategories: () => request('/admin/products/categories', { auth: true }),
 

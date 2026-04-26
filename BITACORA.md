@@ -625,6 +625,89 @@ como tan negligente, no es lo que pedi, esto fue lo que indique en el primer cic
 **Synaptic Strength**: 37%
 
 ---
+## CICLO: 9
+**Timestamp**: 2026-04-26T15:55:00.000Z
+**Trace ID**: `cycle-9-mantenedor-productos-individual`
+**Agente**: master_architect
+**Fase**: IMPLEMENTACION (DG-079 IMMEDIATE EXECUTION)
+**Decisión**: Implementar mantenedor de productos individual (CRUD UI + endpoints)
+**Resultado**: SUCCESS
+**Duración**: ~implementación completa
+
+**Prompt Original**:
+```
+PROCEDER CON IMPLEMENTACION CICLO 8, Implementar mantenedor de productos individual
+(CRUD UI + endpoints) según gap analysis del Ciclo 8.
+Priorizar: 1) crear/editar/eliminar/stock individual, 2) galería de imágenes después.
+NO tocar Bulk Import.
+```
+
+**Decision Gate Presentado**: N/A (modo IMMEDIATE EXECUTION DG-079 — usuario delegó decisión)
+
+**Opción Elegida**: Implementación inmediata sobre gap C8
+
+**Artefactos Generados**:
+
+**Backend (PostgreSQL + Express)**:
+- `backend/src/routes/products-admin-crud.js` (NUEVO) — Endpoints CRUD individual:
+  - `GET    /api/admin/products/list` (filtros: search, category_id, include_deleted)
+  - `GET    /api/admin/products/:id`
+  - `POST   /api/admin/products` (crea con auditoría action=create)
+  - `PUT    /api/admin/products/:id` (update parcial con auditoría granular por campo)
+  - `PATCH  /api/admin/products/:id/stock` (modos absolute|delta, auditoría stock_adjust)
+  - `DELETE /api/admin/products/:id` (soft-delete, auditoría soft_delete)
+  - `POST   /api/admin/products/:id/restore` (revierte soft-delete, auditoría restore)
+- `backend/src/server.js` — registrado nuevo router como `app.use('/api', requireAuth, adminProductsCrudRoutes)`
+  después de `adminProductsRoutes` (los slugs literales de bulk-import siguen teniendo precedencia)
+
+**Frontend (React 19 + Vite)**:
+- `frontend/src/components/ProductsCrudPanel.jsx` (NUEVO) — Panel de mantenedor:
+  - Stats: Total, Activos, Eliminados, Stock bajo (≤10), Sin stock
+  - Toolbar: búsqueda por nombre/SKU, filtro categoría, toggle "incluir eliminados", refrescar, "Nuevo Producto"
+  - Tabla con acciones por fila: editar, eliminar (soft), restaurar (si eliminado), ajuste rápido stock al click
+  - 3 modales: ProductFormModal (crear/editar con upload de imagen), StockAdjustModal (absolute|delta + motivo), DeleteConfirmModal (con motivo)
+  - Toast feedback (success/error) en todas las operaciones via useToast()
+- `frontend/src/api.js` — Helpers nuevos: adminProductsList, adminProductGet, adminProductCreate, adminProductUpdate, adminProductDelete, adminProductRestore, adminProductAdjustStock
+- `frontend/src/components/AdminPage.jsx` — Tab "Gestión Productos" ahora abre por defecto en sub-vista "Mantenedor" (CRUD); las vistas analíticas (Inventario/Más Vendidos/Margen) se mantienen intactas
+
+**Auditoría granular**:
+- Cada operación crea registros en `products_audit` siguiendo el CHECK constraint de migración 011:
+  - create → 1 row con metadata.snapshot
+  - update → N rows (una por campo cambiado, con field/previous_value/new_value)
+  - stock_adjust → 1 row con field=stock, metadata={delta, mode, reason}
+  - soft_delete → 1 row con metadata={name, reason}
+  - restore → 1 row
+
+**Validaciones backend**:
+- name/category_id/price requeridos en create
+- stock entero >= 0
+- available ∈ {0,1}
+- SKU validado contra duplicados antes de INSERT/UPDATE (mensaje claro 409 en lugar de error 500)
+- category_id verificado contra tabla categories
+- Stock resultante negativo en delta-mode → 400
+- Bloqueo de edición de productos soft-deleted (forzar restore primero)
+- Validación de colisión SKU al restaurar
+
+**NO tocado** (per requerimiento):
+- Endpoints de bulk import (`/admin/products/bulk-import`, `bulk-template`)
+- Endpoint de upload-image (reutilizado desde modal de form)
+- Tab "Importación Masiva"
+
+**Diferido** (según prioridad del usuario):
+- Galería de imágenes múltiples por producto
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: N/A (DG-079 immediate execution)
+- Memoria actualizada: ✅
+- Build backend: ✅ (node --check pasa)
+- Build frontend: ✅ (vite build, 423.91 kB)
+- ESLint: 13 errores (todos preexistentes; no se introdujeron nuevos)
+- Reformulaciones necesarias: 0
+
+**Synaptic Strength**: 40% (avance +3% por cierre de gap mayor)
+
+---
 
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
-*Last Updated: 2026-04-26T15:30:00.000Z*
+*Last Updated: 2026-04-26T15:55:00.000Z*

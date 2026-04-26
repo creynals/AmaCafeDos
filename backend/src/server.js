@@ -14,6 +14,7 @@ const chatRoutes = require('./routes/chat');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const adminProductsRoutes = require('./routes/products-admin');
+const adminProductsCrudRoutes = require('./routes/products-admin-crud');
 const adminChatRoutes = require('./routes/admin-chat');
 const settingsRoutes = require('./routes/settings');
 const usersRoutes = require('./routes/users');
@@ -56,6 +57,7 @@ app.use('/api', authRoutes);
 // Protected Admin Routes (require authentication)
 app.use('/api', requireAuth, adminRoutes);
 app.use('/api', requireAuth, adminProductsRoutes);
+app.use('/api', requireAuth, adminProductsCrudRoutes);
 app.use('/api', requireAuth, adminChatRoutes);
 app.use('/api', requireAuth, settingsRoutes);
 app.use('/api', requireAuth, usersRoutes);

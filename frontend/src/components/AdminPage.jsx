@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import UsersTab from './UsersTab';
 import OrdersTab from './OrdersTab';
 import BulkImportTab from './BulkImportTab';
+import ProductsCrudPanel from './ProductsCrudPanel';
 
 const TABS = [
   { id: 'products', label: 'Gestión Productos', icon: Package },
@@ -131,11 +132,15 @@ function ProductsTab() {
   const [inventory, setInventory] = useState([]);
   const [bestSellers, setBestSellers] = useState([]);
   const [margins, setMargins] = useState([]);
-  const [view, setView] = useState('inventory');
+  const [view, setView] = useState('crud');
   const [dateRange, setDateRange] = useState({ from: '', to: '' });
   const [loading, setLoading] = useState(true);
 
   const loadData = useCallback(async () => {
+    if (view === 'crud') {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const dr = dateRange.from ? dateRange : undefined;
@@ -154,7 +159,7 @@ function ProductsTab() {
     } finally {
       setLoading(false);
     }
-  }, [dateRange]);
+  }, [dateRange, view]);
 
   useEffect(() => { loadData(); }, [loadData]);
 
@@ -168,8 +173,8 @@ function ProductsTab() {
 
   return (
     <div className="space-y-6">
-      {/* Stats */}
-      {dashboard && (
+      {/* Stats — solo se muestran en vistas analíticas, no en CRUD */}
+      {view !== 'crud' && dashboard && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <StatCard icon={Package} label="Productos" value={dashboard.active_products} sub={`${dashboard.total_products} total`} />
           <StatCard icon={ShoppingBag} label="Pedidos" value={dashboard.total_orders} />
@@ -178,12 +183,15 @@ function ProductsTab() {
         </div>
       )}
 
-      {/* Date Range Picker */}
-      <DateRangePicker dateRange={dateRange} onChange={setDateRange} />
+      {/* Date Range Picker — solo en vistas analíticas */}
+      {view !== 'crud' && (
+        <DateRangePicker dateRange={dateRange} onChange={setDateRange} />
+      )}
 
       {/* Sub-nav */}
       <div className="flex items-center gap-2 border-b border-ama-border pb-2">
         {[
+          { id: 'crud', label: 'Mantenedor' },
           { id: 'inventory', label: 'Inventario' },
           { id: 'bestsellers', label: 'Más Vendidos' },
           { id: 'margins', label: 'Margen' },
@@ -200,10 +208,15 @@ function ProductsTab() {
             {v.label}
           </button>
         ))}
-        <button onClick={loadData} className="ml-auto p-1.5 text-ama-text-muted hover:text-ama-amber transition-colors cursor-pointer" title="Refrescar">
-          <RefreshCw size={16} />
-        </button>
+        {view !== 'crud' && (
+          <button onClick={loadData} className="ml-auto p-1.5 text-ama-text-muted hover:text-ama-amber transition-colors cursor-pointer" title="Refrescar">
+            <RefreshCw size={16} />
+          </button>
+        )}
       </div>
+
+      {/* CRUD individual (Ciclo 9 SYNAPTIC) */}
+      {view === 'crud' && <ProductsCrudPanel />}
 
       {/* Inventory Table */}
       {view === 'inventory' && (
