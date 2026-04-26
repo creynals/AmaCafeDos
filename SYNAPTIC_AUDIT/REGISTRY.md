@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-26T13:50:21.024Z
+- **Last Updated:** 2026-04-26T14:55:00.504Z
 - **Status:** ACTIVE
 
 ---
@@ -11,12 +11,12 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 23 |
-| Score Promedio | 50% |
-| Racha Actual (A/B) | 1 ciclos |
-| Último Ciclo | 103 |
-| Última Calificación | A |
-| Findings Abiertos | 81 |
+| Ciclos Auditados | 24 |
+| Score Promedio | 48% |
+| Racha Actual (A/B) | 0 ciclos |
+| Último Ciclo | 3 |
+| Última Calificación | F |
+| Findings Abiertos | 132 |
 | Findings Resueltos | 24 |
 
 ---
@@ -27,8 +27,8 @@
 |-----------|----------|
 | CRITICAL | 0 |
 | HIGH | 0 |
-| MEDIUM | 69 |
-| LOW | 12 |
+| MEDIUM | 105 |
+| LOW | 27 |
 
 ---
 
@@ -36,9 +36,9 @@
 
 | Tipo | Cantidad |
 |------|----------|
-| Dead Code | 65 |
+| Dead Code | 100 |
 | Security | 0 |
-| Maintainability | 16 |
+| Maintainability | 32 |
 | Duplication | 0 |
 | Consistency | 0 |
 
@@ -48,16 +48,16 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-89fbf795 | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'StatusChangeModal' (153 lines)... |
-| SAI-995d1be1 | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'submit' (25 lines)... |
-| SAI-277419d9 | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'OrderDetailsRow' (39 lines)... |
-| SAI-a11b5c7c | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'clearFilters' (9 lines)... |
-| SAI-cd77c2e0 | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'nextPage' (5 lines)... |
-| SAI-d862198f | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'prevPage' (3 lines)... |
-| SAI-4ee95c32 | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'handleStatusUpdated' (4 lines)... |
-| SAI-9c1911ae | maintainability | MEDIUM | components/OrdersTab.jsx | File has 664 lines (max recommended: 500)... |
-| SAI-6e4a8d7f | maintainability | LOW | components/OrdersTab.jsx | Function 'StatusChangeModal' has 153 lines (max re... |
-| SAI-2949789d | maintainability | MEDIUM | components/AdminPage.jsx | File has 1702 lines (max recommended: 500)... |
+| SAI-a30b0a77 | maintainability | MEDIUM | components/AdminPage.jsx | File has 1705 lines (max recommended: 500)... |
+| SAI-7fd1ae36 | maintainability | LOW | components/AdminPage.jsx | Function 'DateRangePicker' has 64 lines (max recom... |
+| SAI-9a301abc | maintainability | LOW | components/AdminPage.jsx | Function 'ProductsTab' has 208 lines (max recommen... |
+| SAI-1caead90 | maintainability | LOW | components/AdminPage.jsx | Function 'CustomersTab' has 350 lines (max recomme... |
+| SAI-34540550 | maintainability | LOW | components/AdminPage.jsx | Function 'if' has 106 lines (max recommended: 50)... |
+| SAI-83aa4655 | maintainability | LOW | components/AdminPage.jsx | Function 'InsightsTab' has 112 lines (max recommen... |
+| SAI-14f5964e | maintainability | LOW | components/AdminPage.jsx | Function 'ModelSelector' has 74 lines (max recomme... |
+| SAI-d371bc76 | maintainability | LOW | components/AdminPage.jsx | Function 'RecaptchaSettings' has 164 lines (max re... |
+| SAI-d05ad3cb | maintainability | LOW | components/AdminPage.jsx | Function 'SumupSettings' has 313 lines (max recomm... |
+| SAI-965c0297 | maintainability | LOW | components/AdminPage.jsx | Function 'SettingsTab' has 280 lines (max recommen... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 13 | 100 | A |
 | 15 | 0 | F |
 | 18 | 50 | F |
 | 21 | 100 | A |
@@ -85,6 +84,7 @@
 | 99 | 80 | B |
 | 100 | 0 | F |
 | 103 | 100 | A |
+| 3 | 0 | F |
 
 ---
 

@@ -6,8 +6,261 @@
     "overallProgress": "Project initialized, awaiting first requirement"
   },
   "decisions": [],
-  "roadmap": [],
-  "learnings": [],
+  "roadmap": [
+    {
+      "itemId": "ROAD-001",
+      "title": "Resolver bug AuthContext faltante",
+      "description": "Crear frontend/src/context/AuthContext.jsx para desbloquear build",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 3,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-002",
+      "title": "Test E2E del bulk import en navegador",
+      "description": "Validar flujo completo: descarga plantilla, upload, dry-run, apply, soft-delete",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 3,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-003",
+      "title": "Auditar otras migraciones por dependencias rotas",
+      "description": "Revisar migraciones existentes por más casos como 011 que asumen estado inexistente",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 3,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-004",
+      "title": "Rate limiting en endpoints bulk",
+      "description": "Considerar throttling para uploads masivos que afecten DB",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 3,
+      "dependencies": []
+    }
+  ],
+  "learnings": [
+    {
+      "learningId": "learning-3-1777215334641-0",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.641Z",
+      "type": "USER_PREFERENCE",
+      "title": "Tab separada para Bulk Import",
+      "description": "Usuario prefiere tab nueva 'Importación Masiva' separada de 'Gestión Productos'",
+      "context": "Decisiones UX para features admin",
+      "applicability": [
+        "ui",
+        "admin",
+        "navigation"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.641Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334644-1",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.644Z",
+      "type": "USER_PREFERENCE",
+      "title": "SKU opcional en productos nuevos",
+      "description": "SKU no es obligatorio al crear productos vía bulk import",
+      "context": "Validación de productos en bulk import",
+      "applicability": [
+        "validation",
+        "products"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.644Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334645-2",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.645Z",
+      "type": "USER_PREFERENCE",
+      "title": "Imágenes en almacenamiento local",
+      "description": "Imágenes se guardan en filesystem local (fuentes/products/), no en cloud",
+      "context": "Estrategia de almacenamiento de assets",
+      "applicability": [
+        "storage",
+        "images"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.645Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334646-3",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.646Z",
+      "type": "USER_PREFERENCE",
+      "title": "Soft delete vía Excel con action=delete",
+      "description": "Bulk import soporta eliminación lógica usando columna action=delete (deleted_at)",
+      "context": "Operaciones masivas sobre productos",
+      "applicability": [
+        "bulk-import",
+        "soft-delete"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.646Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334647-4",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.647Z",
+      "type": "USER_PREFERENCE",
+      "title": "Categorías solo existentes",
+      "description": "Bulk import NO auto-crea categorías; valida contra existentes",
+      "context": "Validación de relaciones en bulk import",
+      "applicability": [
+        "validation",
+        "categories"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.647Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334648-5",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.648Z",
+      "type": "USER_PREFERENCE",
+      "title": "Acceso restringido a admin autenticado",
+      "description": "Endpoints de bulk import detrás de requireAuth, solo admins",
+      "context": "Seguridad de operaciones masivas",
+      "applicability": [
+        "auth",
+        "security",
+        "admin"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.648Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334650-6",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.650Z",
+      "type": "PATTERN",
+      "title": "Migración idempotente para reparar base faltante",
+      "description": "Cuando una migración asume estado previo no existente, crear migración anterior idempotente",
+      "context": "Reparación de migraciones rotas en orden lexicográfico",
+      "applicability": [
+        "database",
+        "migrations",
+        "postgresql"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.650Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334651-7",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.651Z",
+      "type": "ANTI_PATTERN",
+      "title": "Migración 011 asumía base inexistente",
+      "description": "Migración 011 referenciaba products.deleted_at y products_audit sin crearlos previamente",
+      "context": "Detectado al implementar bulk import con soft delete",
+      "applicability": [
+        "database",
+        "migrations",
+        "tech-debt"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.651Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334653-8",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.653Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Bug preexistente: AuthContext no existe",
+      "description": "main.jsx, AdminPage.jsx, LoginPage.jsx, UsersTab.jsx importan ./context/AuthContext que no existe",
+      "context": "Bloquea npm run build del frontend, no relacionado con C3",
+      "applicability": [
+        "frontend",
+        "auth",
+        "tech-debt"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.653Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334657-9",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.657Z",
+      "type": "PATTERN",
+      "title": "Dry-run vs apply en bulk operations",
+      "description": "Bulk import expone ?dry_run=0|1 con feedback fila-por-fila antes de commit transaccional",
+      "context": "Operaciones masivas con feedback de validación",
+      "applicability": [
+        "bulk-import",
+        "ux",
+        "transactions"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.657Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334658-10",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.658Z",
+      "type": "PATTERN",
+      "title": "Auditoría con action='bulk_import'",
+      "description": "Operaciones masivas se registran en products_audit con action específica para trazabilidad",
+      "context": "Auditoría de operaciones admin",
+      "applicability": [
+        "audit",
+        "compliance"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.658Z",
+        "source": "INFERRED"
+      }
+    }
+  ],
   "implementationState": {
     "lastCompletedTask": "Project workspace initialization",
     "currentTask": "Awaiting first user requirement",
@@ -17,7 +270,11 @@
   "contextNotes": [
     "Project \"import-1776956320164-2m9x2n\" created with SYNAPTIC Protocol v3.0",
     "Enforcement mode: STRICT",
-    "Domain: General"
+    "Domain: General",
+    "[2026-04-26T14:55:34.659Z] Bug preexistente AuthContext bloquea npm run build frontend (no introducido en C3)",
+    "[2026-04-26T14:55:34.659Z] Migración 011 estaba rota; resuelto con 010a_ idempotente",
+    "[2026-04-26T14:55:34.660Z] node -c y ESLint OK sobre código nuevo de C3",
+    "[2026-04-26T14:55:34.660Z] Build E2E frontend no verificable hasta resolver AuthContext"
   ],
-  "lastUpdated": "2026-04-26T14:18:03.772Z"
+  "lastUpdated": "2026-04-26T14:55:34.661Z"
 }

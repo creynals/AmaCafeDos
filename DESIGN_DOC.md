@@ -91,3 +91,30 @@ To be defined
 
 *Created: 2026-04-26T14:18:03.772Z*
 *SYNAPTIC Protocol v3.0 - Architecture Evolution Tracking*
+
+## Decisions
+
+| ID | Decision | Rationale | Date | Cycle |
+|----|----------|-----------|------|-------|
+| DEC-007 | Plantilla Excel descargable vía GET /api/admin/products/bulk-template | Reduce errores de formato del usuario | 2026-04-26 | 3 |
+| DEC-006 | Bulk import requiere admin autenticado (requireAuth) | Operaciones masivas son sensibles, restringir a roles privilegiados | 2026-04-26 | 3 |
+| DEC-005 | Categorías solo existentes, no auto-crear | Evitar pollution del catálogo de categorías por errores de Excel | 2026-04-26 | 3 |
+| DEC-004 | Soft delete vía columna action=delete en Excel | Permite eliminación masiva sin destrucción de datos (deleted_at) | 2026-04-26 | 3 |
+| DEC-003 | Imágenes en filesystem local (fuentes/products/) | Sin dependencia cloud, servido vía /static/products/ | 2026-04-26 | 3 |
+| DEC-002 | SKU opcional en bulk import | Flexibilidad para productos sin SKU asignado al momento de carga | 2026-04-26 | 3 |
+| DEC-001 | Tab 'Importación Masiva' separada de 'Gestión Productos' | UX clara: bulk operations no se mezclan con CRUD individual | 2026-04-26 | 3 |
+
+
+## Technical Notes
+
+- [Cycle 3] Bulk import usa xlsx + multer para parsing y upload
+- [Cycle 3] Procesamiento transaccional con rollback en error
+- [Cycle 3] Auditoría en products_audit con action='bulk_import'
+- [Cycle 3] Migración 010a_ idempotente garantiza base para 011
+
+## Architecture Changes
+
+- [Cycle 3, 2026-04-26] Nueva ruta /api/admin/products/* protegida por requireAuth
+- [Cycle 3, 2026-04-26] Nuevo tab 'bulk-import' en AdminPage
+- [Cycle 3, 2026-04-26] Nuevo servicio productsBulkImport con parser/validator/processor
+- [Cycle 3, 2026-04-26] Storage local en fuentes/products/ servido como /static/products/
