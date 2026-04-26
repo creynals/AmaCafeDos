@@ -96,6 +96,8 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-007 | Persist cart_id under localStorage key ama_cart_id | Reuse existing key already used by ChatWidget for consistency | 2026-04-26 | 6 |
+| DEC-006 | Restore AuthContext, CartContext, ToastContext with consumer-derived API | Unblock frontend build (Cycle 3 blocker) without modifying any consumer component | 2026-04-26 | 6 |
 | DEC-005 | Crear AuthContext, CartContext, ToastContext con API mínima | Desbloquear build E2E sin introducir cambios funcionales adicionales | 2026-04-26 | 5 |
 | DEC-007 | Plantilla Excel descargable vía GET /api/admin/products/bulk-template | Reduce errores de formato del usuario | 2026-04-26 | 3 |
 | DEC-006 | Bulk import requiere admin autenticado (requireAuth) | Operaciones masivas son sensibles, restringir a roles privilegiados | 2026-04-26 | 3 |
@@ -108,6 +110,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 6] Frontend build: 1750 modules, 402KB JS via Vite
+- [Cycle 6] Bulk import endpoints support dry_run, 422 row-level validation, soft-delete, atomic transaction
+- [Cycle 6] Migrations 003 and 006 are DML-only (no idempotency clauses needed)
 - [Cycle 5] Frontend usa imports de ./context/{Auth,Cart,Toast}Context que no existen en filesystem
 - [Cycle 5] main.jsx, AdminPage.jsx, LoginPage.jsx, UsersTab.jsx dependen de useAuth()
 - [Cycle 5] npm run build falla con Module not found hasta restaurar contextos
@@ -118,6 +123,8 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 6, 2026-04-26] New frontend/src/context/ directory with 3 providers (Auth, Cart, Toast)
+- [Cycle 6, 2026-04-26] auth-expired event listener pattern wired in AuthContext
 - [Cycle 5, 2026-04-26] Restaurar carpeta frontend/src/context/ con 3 providers + hooks
 - [Cycle 3, 2026-04-26] Nueva ruta /api/admin/products/* protegida por requireAuth
 - [Cycle 3, 2026-04-26] Nuevo tab 'bulk-import' en AdminPage

@@ -69,33 +69,6 @@
       "status": "PLANNED",
       "createdAtCycle": 5,
       "dependencies": []
-    },
-    {
-      "itemId": "ROAD-006",
-      "title": "Manual E2E validation of Bulk Import",
-      "description": "Run backend+frontend, login admin, test dry-run + real apply, verify products_audit and deleted_at",
-      "priority": "HIGH",
-      "status": "PLANNED",
-      "createdAtCycle": 6,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-007",
-      "title": "Fix 13 preexistent ESLint errors",
-      "description": "Address set-state-in-effect and no-unused-vars in AdminPage, OrdersTab, UsersTab, ChatWidget, main.jsx",
-      "priority": "MEDIUM",
-      "status": "PLANNED",
-      "createdAtCycle": 6,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-008",
-      "title": "Apply rate limiting to bulk-import and upload-image",
-      "description": "Add rate limiter middleware to /bulk-import and /upload-image endpoints",
-      "priority": "LOW",
-      "status": "PLANNED",
-      "createdAtCycle": 6,
-      "dependencies": []
     }
   ],
   "learnings": [
@@ -393,107 +366,6 @@
         "lastReinforced": "2026-04-26T15:05:39.405Z",
         "source": "EXPLICIT"
       }
-    },
-    {
-      "learningId": "learning-6-1777216595889-0",
-      "cycle": 6,
-      "timestamp": "2026-04-26T15:16:35.889Z",
-      "type": "PATTERN",
-      "title": "Context API: Provider+hook in same file",
-      "description": "Use eslint-disable react-refresh/only-export-components when colocating Provider and hook",
-      "context": "React Context API implementation in Vite projects with react-refresh",
-      "applicability": [
-        "react",
-        "context-api",
-        "eslint",
-        "vite"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:16:35.889Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-6-1777216595892-1",
-      "cycle": 6,
-      "timestamp": "2026-04-26T15:16:35.892Z",
-      "type": "PATTERN",
-      "title": "Lazy state init avoids setState in effect",
-      "description": "Initialize state from localStorage with lazy initializer instead of useEffect setState",
-      "context": "When hydrating React state from persistent storage on mount",
-      "applicability": [
-        "react",
-        "hooks",
-        "state-management"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:16:35.892Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-6-1777216595894-2",
-      "cycle": 6,
-      "timestamp": "2026-04-26T15:16:35.894Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Migration 010a unblocks 011 precondition",
-      "description": "Alphabetical order 010 -> 010a -> 011 ensures dependency satisfied before next migration",
-      "context": "PostgreSQL migration ordering with intermediate fix migrations",
-      "applicability": [
-        "migrations",
-        "postgres",
-        "ordering"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:16:35.894Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-6-1777216595895-3",
-      "cycle": 6,
-      "timestamp": "2026-04-26T15:16:35.895Z",
-      "type": "USER_PREFERENCE",
-      "title": "Out-of-scope lint errors not fixed",
-      "description": "User accepts leaving preexisting lint errors in untouched files; only fix introduced issues",
-      "context": "When validating builds with mixed preexisting and new errors",
-      "applicability": [
-        "scope-management",
-        "lint",
-        "code-review"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:16:35.895Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-6-1777216595896-4",
-      "cycle": 6,
-      "timestamp": "2026-04-26T15:16:35.896Z",
-      "type": "PATTERN",
-      "title": "API-first context design",
-      "description": "Read consumer files first to derive exact context API contract before implementing",
-      "context": "When restoring missing modules consumed by existing components",
-      "applicability": [
-        "react",
-        "api-design",
-        "restoration"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:16:35.896Z",
-        "source": "INFERRED"
-      }
     }
   ],
   "implementationState": {
@@ -513,12 +385,7 @@
     "[2026-04-26T15:05:39.406Z] Ciclo 3 entregó bulk import pero no se validó E2E por bug bloqueante en build",
     "[2026-04-26T15:05:39.406Z] BITACORA puede subreportar gravedad - auditar siempre contra filesystem",
     "[2026-04-26T15:05:39.407Z] Migración 011 asumía estado inexistente - posible patrón en otras migraciones 001-010",
-    "[2026-04-26T15:05:39.407Z] Endpoints bulk (/bulk-import, /upload-image) sin rate limiting",
-    "[2026-04-26T15:16:35.898Z] Cycle 3 blocker (missing contexts) RESOLVED in Cycle 6",
-    "[2026-04-26T15:16:35.898Z] 13 preexistent ESLint errors remain in AdminPage/OrdersTab/UsersTab/ChatWidget/main.jsx",
-    "[2026-04-26T15:16:35.899Z] Rate limiting NOT applied to /bulk-import and /upload-image endpoints",
-    "[2026-04-26T15:16:35.900Z] E2E manual validation pending in user local env (backend:7001, frontend:8080)",
-    "[2026-04-26T15:16:35.900Z] Synaptic Strength advanced 25% -> 30%"
+    "[2026-04-26T15:05:39.407Z] Endpoints bulk (/bulk-import, /upload-image) sin rate limiting"
   ],
-  "lastUpdated": "2026-04-26T15:16:35.901Z"
+  "lastUpdated": "2026-04-26T15:07:14.359Z"
 }

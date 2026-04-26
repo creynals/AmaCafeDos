@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-26T14:55:00.502Z",
+  "lastUpdated": "2026-04-26T15:16:12.722Z",
   "findings": [
     {
       "id": "DC-001",
@@ -2140,18 +2140,83 @@
       "detectedInCycle": 3,
       "detectedAt": "2026-04-26T14:55:00.501Z",
       "status": "OPEN"
+    },
+    {
+      "id": "DC-118",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/context/AuthContext.jsx",
+      "line": 44,
+      "description": "Unused function: 'handler' (1 lines)",
+      "suggestion": "Remove unused function 'handler' or export if needed elsewhere",
+      "findingId": "SAI-dd8cb0fb",
+      "detectedInCycle": 6,
+      "detectedAt": "2026-04-26T15:16:12.722Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-119",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/context/AuthContext.jsx",
+      "line": 8,
+      "description": "Function 'AuthProvider' has 71 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-3a29d6e8",
+      "detectedInCycle": 6,
+      "detectedAt": "2026-04-26T15:16:12.722Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-120",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/context/CartContext.jsx",
+      "line": 8,
+      "description": "Function 'CartProvider' has 133 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-933014eb",
+      "detectedInCycle": 6,
+      "detectedAt": "2026-04-26T15:16:12.722Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-121",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/context/ToastContext.jsx",
+      "line": 58,
+      "description": "Unused function: 'ToastViewport' (10 lines)",
+      "suggestion": "Remove unused function 'ToastViewport' or export if needed elsewhere",
+      "findingId": "SAI-25423414",
+      "detectedInCycle": 6,
+      "detectedAt": "2026-04-26T15:16:12.722Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-122",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/context/ToastContext.jsx",
+      "line": 69,
+      "description": "Unused function: 'ToastItem' (27 lines)",
+      "suggestion": "Remove unused function 'ToastItem' or export if needed elsewhere",
+      "findingId": "SAI-4fc30da3",
+      "detectedInCycle": 6,
+      "detectedAt": "2026-04-26T15:16:12.722Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 132,
+    "totalOpen": 137,
     "totalResolved": 24,
     "bySeverity": {
-      "MEDIUM": 105,
-      "LOW": 27
+      "MEDIUM": 108,
+      "LOW": 29
     },
     "byType": {
-      "dead_code": 100,
-      "maintainability": 32
+      "dead_code": 103,
+      "maintainability": 34
     }
   }
 }
