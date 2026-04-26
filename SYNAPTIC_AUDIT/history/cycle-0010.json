@@ -1,0 +1,288 @@
+{
+  "cycleId": 10,
+  "timestamp": "2026-04-26T16:09:06.620Z",
+  "taskId": "task-1777219237229-lkx08ma6f",
+  "audit": {
+    "passed": false,
+    "score": 0,
+    "grade": "F",
+    "filesAnalyzed": [
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/products-admin-images.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/server.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/server.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/api.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductImageGallery.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/products.js"
+    ],
+    "linesAnalyzed": 2946
+  },
+  "findings": [
+    {
+      "id": "DC-301",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 87,
+      "description": "Unused function: 'openCreate' (3 lines)",
+      "suggestion": "Remove unused function 'openCreate' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-302",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 319,
+      "description": "Unused function: 'StatPill' (18 lines)",
+      "suggestion": "Remove unused function 'StatPill' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-303",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 339,
+      "description": "Unused function: 'ProductFormModal' (226 lines)",
+      "suggestion": "Remove unused function 'ProductFormModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-304",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 567,
+      "description": "Unused function: 'StockAdjustModal' (114 lines)",
+      "suggestion": "Remove unused function 'StockAdjustModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-305",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 597,
+      "description": "Unused function: 'preview' (6 lines)",
+      "suggestion": "Remove unused function 'preview' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-306",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 683,
+      "description": "Unused function: 'DeleteConfirmModal' (64 lines)",
+      "suggestion": "Remove unused function 'DeleteConfirmModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-307",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 688,
+      "description": "Unused function: 'handleConfirm' (13 lines)",
+      "suggestion": "Remove unused function 'handleConfirm' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-308",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 749,
+      "description": "Unused function: 'ModalShell' (21 lines)",
+      "suggestion": "Remove unused function 'ModalShell' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-309",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 751,
+      "description": "Unused function: 'handler' (1 lines)",
+      "suggestion": "Remove unused function 'handler' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-310",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 771,
+      "description": "Unused function: 'Field' (8 lines)",
+      "suggestion": "Remove unused function 'Field' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-311",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "description": "File has 782 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-312",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 339,
+      "description": "Function 'ProductFormModal' has 226 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-313",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 567,
+      "description": "Function 'StockAdjustModal' has 114 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-314",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 683,
+      "description": "Function 'DeleteConfirmModal' has 64 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-315",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 87,
+      "description": "Unused function: 'openCreate' (3 lines)",
+      "suggestion": "Remove unused function 'openCreate' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-316",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 319,
+      "description": "Unused function: 'StatPill' (18 lines)",
+      "suggestion": "Remove unused function 'StatPill' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-317",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 339,
+      "description": "Unused function: 'ProductFormModal' (226 lines)",
+      "suggestion": "Remove unused function 'ProductFormModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-318",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 567,
+      "description": "Unused function: 'StockAdjustModal' (114 lines)",
+      "suggestion": "Remove unused function 'StockAdjustModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-319",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 597,
+      "description": "Unused function: 'preview' (6 lines)",
+      "suggestion": "Remove unused function 'preview' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-320",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 683,
+      "description": "Unused function: 'DeleteConfirmModal' (64 lines)",
+      "suggestion": "Remove unused function 'DeleteConfirmModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-321",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 688,
+      "description": "Unused function: 'handleConfirm' (13 lines)",
+      "suggestion": "Remove unused function 'handleConfirm' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-322",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 749,
+      "description": "Unused function: 'ModalShell' (21 lines)",
+      "suggestion": "Remove unused function 'ModalShell' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-323",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 751,
+      "description": "Unused function: 'handler' (1 lines)",
+      "suggestion": "Remove unused function 'handler' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-324",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 771,
+      "description": "Unused function: 'Field' (8 lines)",
+      "suggestion": "Remove unused function 'Field' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-325",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "description": "File has 782 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-326",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 339,
+      "description": "Function 'ProductFormModal' has 226 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-327",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 567,
+      "description": "Function 'StockAdjustModal' has 114 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-328",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 683,
+      "description": "Function 'DeleteConfirmModal' has 64 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    }
+  ],
+  "resolvedFindingIds": [
+    "SAI-fd5a139a",
+    "SAI-b0fa6ee4",
+    "SAI-4c4d00e8"
+  ],
+  "metrics": {
+    "importsUsedPercent": 0,
+    "functionsUsedPercent": 0,
+    "duplicatePatterns": 0,
+    "securityIssues": 0,
+    "consistencyScore": 100,
+    "avgComplexity": 368,
+    "filesAnalyzed": 8,
+    "linesAnalyzed": 2946
+  }
+}

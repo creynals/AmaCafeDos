@@ -96,6 +96,9 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-014 | Usar botones up/down en lugar de drag-and-drop para reorder inicial | MVP funcional rápido; DnD HTML5 queda como mejora futura | 2026-04-26 | 10 |
+| DEC-013 | Sincronizar products.image_url automáticamente con imagen primaria | Mantener backward compatibility con código que aún usa image_url directo | 2026-04-26 | 10 |
+| DEC-012 | Tabla product_images 1:N con CASCADE DELETE y UNIQUE parcial sobre is_primary | Garantiza integridad referencial y máximo una imagen principal por producto | 2026-04-26 | 10 |
 | DEC-009-4 | Soft-delete reversible vía endpoint /restore | Evitar pérdida de datos y permitir auditoría completa de eliminaciones | 2026-04-26 | 9 |
 | DEC-009-3 | Stock ajustable con modo absolute|delta en endpoint dedicado | Permite tanto fijar inventario como sumar/restar movimientos rápidos desde la tabla | 2026-04-26 | 9 |
 | DEC-009-2 | Sub-vista 'Mantenedor' por defecto al abrir tab Gestión Productos | El CRUD es la operación más frecuente; analíticas quedan como vistas secundarias | 2026-04-26 | 9 |
@@ -114,6 +117,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 10] Migration 012 crea product_images con ON DELETE CASCADE desde products
+- [Cycle 10] Endpoint POST usa FormData para multipart upload de imágenes
+- [Cycle 10] GET /api/products/:id ahora incluye array images[] para storefront
 - [Cycle 9] Todos los endpoints admin usan transacciones explícitas BEGIN/COMMIT/ROLLBACK
 - [Cycle 9] Auditoría obligatoria en products_audit con acciones: create, update, stock_adjust, soft_delete, restore
 - [Cycle 9] Validación SKU único excluye soft-deleted devolviendo 409 con mensaje claro
@@ -132,6 +138,8 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 10, 2026-04-26] Nuevo router products-admin-images registrado bajo requireAuth en server.js
+- [Cycle 10, 2026-04-26] Frontend api.js extendido con 5 helpers para CRUD de imágenes
 - [Cycle 9, 2026-04-26] Nuevo router backend: products-admin-crud.js bajo /api/admin/products
 - [Cycle 9, 2026-04-26] Nuevo componente frontend: ProductsCrudPanel.jsx integrado en ProductsTab como sub-vista 'Mantenedor'
 - [Cycle 9, 2026-04-26] 7 helpers API añadidos en frontend/src/api.js para CRUD admin de productos

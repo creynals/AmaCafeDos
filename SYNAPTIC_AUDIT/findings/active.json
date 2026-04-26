@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-26T15:53:05.107Z",
+  "lastUpdated": "2026-04-26T16:09:06.622Z",
   "findings": [
     {
       "id": "DC-001",
@@ -2270,7 +2270,12 @@
       "findingId": "SAI-fd5a139a",
       "detectedInCycle": 9,
       "detectedAt": "2026-04-26T15:53:05.105Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 10,
+        "resolvedAt": "2026-04-26T16:09:06.622Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-135",
@@ -2373,7 +2378,12 @@
       "findingId": "SAI-b0fa6ee4",
       "detectedInCycle": 9,
       "detectedAt": "2026-04-26T15:53:05.105Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 10,
+        "resolvedAt": "2026-04-26T16:09:06.622Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "MT-143",
@@ -2386,7 +2396,12 @@
       "findingId": "SAI-4c4d00e8",
       "detectedInCycle": 9,
       "detectedAt": "2026-04-26T15:53:05.105Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 10,
+        "resolvedAt": "2026-04-26T16:09:06.622Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "MT-144",
@@ -2451,11 +2466,49 @@
       "detectedInCycle": 9,
       "detectedAt": "2026-04-26T15:53:05.105Z",
       "status": "OPEN"
+    },
+    {
+      "id": "DC-303",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 339,
+      "description": "Unused function: 'ProductFormModal' (226 lines)",
+      "suggestion": "Remove unused function 'ProductFormModal' or export if needed elsewhere",
+      "findingId": "SAI-182bec4c",
+      "detectedInCycle": 10,
+      "detectedAt": "2026-04-26T16:09:06.621Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-311",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "description": "File has 782 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-eda3a12a",
+      "detectedInCycle": 10,
+      "detectedAt": "2026-04-26T16:09:06.621Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-312",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/ProductsCrudPanel.jsx",
+      "line": 339,
+      "description": "Function 'ProductFormModal' has 226 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-fc4d9c8a",
+      "detectedInCycle": 10,
+      "detectedAt": "2026-04-26T16:09:06.621Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
     "totalOpen": 152,
-    "totalResolved": 27,
+    "totalResolved": 30,
     "bySeverity": {
       "MEDIUM": 120,
       "LOW": 32

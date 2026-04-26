@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-26T15:53:05.108Z
+- **Last Updated:** 2026-04-26T16:09:06.623Z
 - **Status:** ACTIVE
 
 ---
@@ -11,13 +11,13 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 26 |
-| Score Promedio | 44% |
+| Ciclos Auditados | 27 |
+| Score Promedio | 42% |
 | Racha Actual (A/B) | 0 ciclos |
-| Último Ciclo | 9 |
+| Último Ciclo | 10 |
 | Última Calificación | F |
 | Findings Abiertos | 152 |
-| Findings Resueltos | 27 |
+| Findings Resueltos | 30 |
 
 ---
 
@@ -48,16 +48,16 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-0abb25ee | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'ModalShell' (21 lines)... |
 | SAI-fa268c07 | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'handler' (1 lines)... |
 | SAI-baa00161 | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'Field' (8 lines)... |
-| SAI-b0fa6ee4 | maintainability | MEDIUM | components/ProductsCrudPanel.jsx | File has 773 lines (max recommended: 500)... |
-| SAI-4c4d00e8 | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'ProductFormModal' has 218 lines (max rec... |
 | SAI-355fe4c4 | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'StockAdjustModal' has 114 lines (max rec... |
 | SAI-cd4749d0 | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'DeleteConfirmModal' has 64 lines (max re... |
 | SAI-27c4db62 | dead_code | MEDIUM | components/AdminPage.jsx | Unused function: 'ProductsTab' (220 lines)... |
 | SAI-f2554208 | maintainability | MEDIUM | components/AdminPage.jsx | File has 1718 lines (max recommended: 500)... |
 | SAI-a8f0c8ec | maintainability | LOW | components/AdminPage.jsx | Function 'ProductsTab' has 220 lines (max recommen... |
+| SAI-182bec4c | dead_code | MEDIUM | components/ProductsCrudPanel.jsx | Unused function: 'ProductFormModal' (226 lines)... |
+| SAI-eda3a12a | maintainability | MEDIUM | components/ProductsCrudPanel.jsx | File has 782 lines (max recommended: 500)... |
+| SAI-fc4d9c8a | maintainability | LOW | components/ProductsCrudPanel.jsx | Function 'ProductFormModal' has 226 lines (max rec... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 21 | 100 | A |
 | 26 | 0 | F |
 | 31 | 0 | F |
 | 41 | 0 | F |
@@ -85,6 +84,7 @@
 | 3 | 0 | F |
 | 6 | 0 | F |
 | 9 | 0 | F |
+| 10 | 0 | F |
 
 ---
 

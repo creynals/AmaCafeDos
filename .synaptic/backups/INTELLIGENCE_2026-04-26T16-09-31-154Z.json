@@ -132,42 +132,6 @@
       "status": "PLANNED",
       "createdAtCycle": 9,
       "dependencies": []
-    },
-    {
-      "itemId": "ROAD-021",
-      "title": "Validación E2E manual de galería",
-      "description": "Probar en local: subir 3 imágenes, reordenar, cambiar primaria, eliminar",
-      "priority": "HIGH",
-      "status": "PLANNED",
-      "createdAtCycle": 10,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-022",
-      "title": "UI de auditoría products_audit",
-      "description": "Vista para visualizar historial de cambios sobre productos e imágenes",
-      "priority": "MEDIUM",
-      "status": "PLANNED",
-      "createdAtCycle": 10,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-023",
-      "title": "Drag-and-drop real para reorder",
-      "description": "Reemplazar botones up/down con HTML5 Drag and Drop API",
-      "priority": "LOW",
-      "status": "PLANNED",
-      "createdAtCycle": 10,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-024",
-      "title": "Carrusel de imágenes en storefront",
-      "description": "Mostrar images[] en ProductCard y ProductModal del frontend público",
-      "priority": "MEDIUM",
-      "status": "PLANNED",
-      "createdAtCycle": 10,
-      "dependencies": []
     }
   ],
   "learnings": [
@@ -766,124 +730,6 @@
         "lastReinforced": "2026-04-26T15:53:41.042Z",
         "source": "INFERRED"
       }
-    },
-    {
-      "learningId": "learning-10-1777219771152-0",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.152Z",
-      "type": "USER_PREFERENCE",
-      "title": "Backward compatibility con image_url",
-      "description": "Mantener products.image_url sincronizado con imagen primaria al implementar galería 1:N",
-      "context": "Al extender modelo de datos sin romper código existente",
-      "applicability": [
-        "backend",
-        "migrations",
-        "backward-compat"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.152Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771155-1",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.156Z",
-      "type": "PATTERN",
-      "title": "Galería multi-imagen con primary flag",
-      "description": "UNIQUE INDEX parcial sobre is_primary garantiza máximo una imagen principal por producto",
-      "context": "Modelos 1:N donde un registro debe ser destacado",
-      "applicability": [
-        "sql",
-        "postgres",
-        "schema-design"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.155Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771158-2",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.158Z",
-      "type": "PATTERN",
-      "title": "Auditoría granular en products_audit",
-      "description": "Cada operación CRUD de imágenes registra entrada en tabla de auditoría",
-      "context": "Endpoints administrativos con trazabilidad",
-      "applicability": [
-        "backend",
-        "audit",
-        "compliance"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.158Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771159-3",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.159Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Cleanup físico al eliminar imagen",
-      "description": "DELETE endpoint borra archivo del filesystem además de la fila en DB",
-      "context": "Manejo de uploads para evitar archivos huérfanos",
-      "applicability": [
-        "backend",
-        "file-management"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.159Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771161-4",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.161Z",
-      "type": "USER_PREFERENCE",
-      "title": "Galería solo en edición, no en creación",
-      "description": "Modal de creación muestra aviso 'Guarda primero' antes de habilitar gestión de imágenes",
-      "context": "UX de formularios con recursos dependientes de ID",
-      "applicability": [
-        "frontend",
-        "ux",
-        "forms"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.161Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-10-1777219771163-5",
-      "cycle": 10,
-      "timestamp": "2026-04-26T16:09:31.163Z",
-      "type": "INSIGHT",
-      "title": "Survey previo evita duplicación de trabajo",
-      "description": "Cycle 9 ya cubría prioridad 1, survey permitió saltar directo a prioridad 2",
-      "context": "Cuando se reciben prompts con múltiples prioridades secuenciales",
-      "applicability": [
-        "synaptic",
-        "workflow"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T16:09:31.163Z",
-        "source": "INFERRED"
-      }
     }
   ],
   "implementationState": {
@@ -913,11 +759,7 @@
     "[2026-04-26T15:53:41.044Z] AdminPage.jsx tiene 13 errores ESLint preexistentes; no introducir nuevos",
     "[2026-04-26T15:53:41.044Z] Patrón de destructuring renombrado en helpers React rompe ESLint local",
     "[2026-04-26T15:53:41.045Z] Bulk Import y plantilla Excel quedan fuera de scope hasta nueva indicación",
-    "[2026-04-26T15:53:41.045Z] Próxima prioridad confirmada: galería de imágenes múltiples por producto",
-    "[2026-04-26T16:09:31.164Z] CRUD individual de productos completado en Cycle 9; Cycle 10 implementó galería multi-imagen",
-    "[2026-04-26T16:09:31.165Z] Bulk Import explícitamente excluido del scope por instrucción del usuario",
-    "[2026-04-26T16:09:31.166Z] Build frontend en 430.15 kB (115.68 kB gzip) tras adición de galería",
-    "[2026-04-26T16:09:31.166Z] products_audit registra cada operación de imagen para trazabilidad"
+    "[2026-04-26T15:53:41.045Z] Próxima prioridad confirmada: galería de imágenes múltiples por producto"
   ],
-  "lastUpdated": "2026-04-26T16:09:31.167Z"
+  "lastUpdated": "2026-04-26T15:53:41.046Z"
 }
