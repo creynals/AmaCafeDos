@@ -122,6 +122,8 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 21] Admin credentials for E2E: admin / admin123 @ localhost:8080
+- [Cycle 21] Pending E2E validations: Bulk Import, Multi-image Gallery, Mantenedor Productos CRUD
 - [Cycle 18] Backend PID 73456 now runs from import-1777213083759-63z86j/backend, log at /tmp/synaptic_backend_c18.log
 - [Cycle 18] Migrations 010a and 012 are idempotent and applied in initSchema()
 - [Cycle 18] Use lsof -p <pid> | grep cwd to verify a running process's working directory

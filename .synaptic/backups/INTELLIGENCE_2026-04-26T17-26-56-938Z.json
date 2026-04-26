@@ -222,42 +222,6 @@
       "status": "PLANNED",
       "createdAtCycle": 18,
       "dependencies": []
-    },
-    {
-      "itemId": "ROAD-PAY-01",
-      "title": "Implement payment flow fixes from Cycles 19-20 analysis",
-      "description": "Fix checkout redirect to atmosphere-beh and rebuild post-payment success page with order summary + CTAs",
-      "priority": "HIGH",
-      "status": "PLANNED",
-      "createdAtCycle": 21,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-E2E-01",
-      "title": "E2E Validation Sprint",
-      "description": "Manually validate Bulk Import, Multi-image Gallery, Mantenedor Productos CRUD end-to-end",
-      "priority": "HIGH",
-      "status": "PLANNED",
-      "createdAtCycle": 21,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-AUDIT-01",
-      "title": "products_audit history viewer UI",
-      "description": "Admin page rendering per-product change timeline (who/when/what) from audit table",
-      "priority": "MEDIUM",
-      "status": "PLANNED",
-      "createdAtCycle": 21,
-      "dependencies": []
-    },
-    {
-      "itemId": "ROAD-CAROUSEL-01",
-      "title": "Storefront image carousel in ProductCard + ProductModal",
-      "description": "Replace single-image render with full images[] carousel for public shop",
-      "priority": "MEDIUM",
-      "status": "PLANNED",
-      "createdAtCycle": 21,
-      "dependencies": []
     }
   ],
   "learnings": [
@@ -1201,86 +1165,6 @@
         "lastReinforced": "2026-04-26T17:00:13.429Z",
         "source": "EXPLICIT"
       }
-    },
-    {
-      "learningId": "learning-21-1777224416937-0",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.937Z",
-      "type": "USER_PREFERENCE",
-      "title": "Ambiguous 'continuar' triggers Decision Gate",
-      "description": "When user says 'continuar' without target, surface 3 highest-leverage paths from roadmap",
-      "context": "User issues vague continuation directive in SYNAPTIC protocol",
-      "applicability": [
-        "synaptic",
-        "decision-gate",
-        "ambiguous-input"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.937Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-21-1777224416940-1",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.940Z",
-      "type": "PATTERN",
-      "title": "Three-option Decision Gate structure",
-      "description": "Conservative / Balanced (recommended) / Innovative trio with pros, cons, time, risk, confidence",
-      "context": "Phase 1 Specification when multiple roadmap paths are viable",
-      "applicability": [
-        "synaptic",
-        "phase-1",
-        "specification"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.940Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-21-1777224416942-2",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.942Z",
-      "type": "INSIGHT",
-      "title": "Cycles 19-20 left payment flow in analysis without implementation",
-      "description": "ARCHITECT MODE cycles produced analysis of checkout redirect + success page but no fix shipped",
-      "context": "Open work item: payment flow needs implementation cycle",
-      "applicability": [
-        "payment-flow",
-        "architect-mode",
-        "open-loop"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.942Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-21-1777224416943-3",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.943Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Post cycles 11-17, evidence-of-health is high priority",
-      "description": "User concern after long frustration arc means E2E validation generates trust signal",
-      "context": "Recommending validation sprints over new features",
-      "applicability": [
-        "e2e",
-        "validation",
-        "trust"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.943Z",
-        "source": "INFERRED"
-      }
     }
   ],
   "implementationState": {
@@ -1321,11 +1205,7 @@
     "[2026-04-26T16:33:22.249Z] Validación E2E manual con login admin queda pendiente del usuario para cerrar SUCCESS",
     "[2026-04-26T17:00:13.431Z] Cycles 11-17 frustration root cause was runtime/workspace mismatch, not code bugs",
     "[2026-04-26T17:00:13.431Z] Admin credentials: admin / admin123 at http://localhost:8080/admin",
-    "[2026-04-26T17:00:13.432Z] E2E validation of Mantenedor Productos (list/CRUD/image upload) pending user confirmation",
-    "[2026-04-26T17:26:56.945Z] Cycle 21 is a Decision Gate awaiting user choice between A/B/C — no code changes yet",
-    "[2026-04-26T17:26:56.946Z] Option B (E2E Validation Sprint) was recommended as balanced path",
-    "[2026-04-26T17:26:56.947Z] Cycles 19-20 analyzed payment flow issues but never implemented fixes",
-    "[2026-04-26T17:26:56.947Z] Cycle 18 fix (workspace + Express 5 regex) was root cause resolution for cycles 11-17"
+    "[2026-04-26T17:00:13.432Z] E2E validation of Mantenedor Productos (list/CRUD/image upload) pending user confirmation"
   ],
-  "lastUpdated": "2026-04-26T17:26:56.948Z"
+  "lastUpdated": "2026-04-26T17:00:13.433Z"
 }
