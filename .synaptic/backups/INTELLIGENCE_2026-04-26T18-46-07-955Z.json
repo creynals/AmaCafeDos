@@ -280,6 +280,26 @@
   ],
   "learnings": [
     {
+      "learningId": "learning-6-1777216595895-3",
+      "cycle": 6,
+      "timestamp": "2026-04-26T15:16:35.895Z",
+      "type": "USER_PREFERENCE",
+      "title": "Out-of-scope lint errors not fixed",
+      "description": "User accepts leaving preexisting lint errors in untouched files; only fix introduced issues",
+      "context": "When validating builds with mixed preexisting and new errors",
+      "applicability": [
+        "scope-management",
+        "lint",
+        "code-review"
+      ],
+      "confidence": {
+        "score": 0.30000000000000004,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:16:35.895Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
       "learningId": "learning-9-1777218821030-0",
       "cycle": 9,
       "timestamp": "2026-04-26T15:53:41.030Z",
@@ -293,7 +313,7 @@
         "prioritization"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.030Z",
         "source": "EXPLICIT"
@@ -313,10 +333,130 @@
         "products"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.032Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821034-2",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.034Z",
+      "type": "PATTERN",
+      "title": "Endpoints CRUD transaccionales con auditoría",
+      "description": "Usar BEGIN/COMMIT/ROLLBACK y registrar en products_audit con CHECK constraint de migración 011",
+      "context": "Endpoints admin de productos que mutan datos",
+      "applicability": [
+        "backend",
+        "transactions",
+        "audit"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.034Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821035-3",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.035Z",
+      "type": "PATTERN",
+      "title": "Validación SKU único entre vivos pre-INSERT/UPDATE",
+      "description": "Validar SKU único excluyendo soft-deleted antes de mutaciones, devolver 409 explícito",
+      "context": "Endpoints POST/PUT de productos",
+      "applicability": [
+        "backend",
+        "validation",
+        "sku"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.035Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821036-4",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.036Z",
+      "type": "PATTERN",
+      "title": "Soft-delete con motivo y restore reversible",
+      "description": "DELETE registra motivo opcional; POST /restore revierte; ambos auditados",
+      "context": "Operaciones destructivas en productos",
+      "applicability": [
+        "backend",
+        "soft-delete",
+        "audit"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.036Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821038-5",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.038Z",
+      "type": "PATTERN",
+      "title": "Componente CRUD dedicado para mantener AdminPage limpio",
+      "description": "Crear ProductsCrudPanel.jsx separado e integrar como sub-vista en ProductsTab",
+      "context": "Al añadir nuevas vistas admin complejas",
+      "applicability": [
+        "frontend",
+        "components",
+        "admin"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.038Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821039-6",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.039Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Ajuste de stock soporta modos absolute y delta",
+      "description": "PATCH /stock acepta mode='absolute' o 'delta' con audit_action='stock_adjust'",
+      "context": "Operaciones rápidas de stock desde la tabla",
+      "applicability": [
+        "backend",
+        "stock",
+        "api"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.039Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821040-7",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.040Z",
+      "type": "ANTI_PATTERN",
+      "title": "Destructuring renombrado dispara error de ESLint preexistente",
+      "description": "Mismo patrón que afecta AdminPage.jsx:30:27; preferir inlinear componente helper",
+      "context": "Al introducir helpers en componentes React de este repo",
+      "applicability": [
+        "frontend",
+        "eslint",
+        "react"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.040Z",
+        "source": "INFERRED"
       }
     },
     {
@@ -333,10 +473,30 @@
         "validation"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:53:41.041Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-9-1777218821042-9",
+      "cycle": 9,
+      "timestamp": "2026-04-26T15:53:41.042Z",
+      "type": "PATTERN",
+      "title": "Reutilizar upload-image del bulk import en CRUD individual",
+      "description": "Reusar el mismo endpoint/componente de upload-image existente en lugar de duplicar",
+      "context": "Subida de imagen única en el formulario CRUD de producto",
+      "applicability": [
+        "frontend",
+        "reuse",
+        "upload"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:53:41.042Z",
+        "source": "INFERRED"
       }
     },
     {
@@ -1034,7 +1194,7 @@
     "[2026-04-26T18:08:38.158Z] Vista de Cocina default sub-tab es 'list' para preservar UX previa",
     "[2026-04-26T18:08:38.159Z] E2E manual pendiente del usuario (login admin/admin123 en :8080/admin)"
   ],
-  "lastUpdated": "2026-04-26T18:46:07.954Z",
+  "lastUpdated": "2026-04-26T18:35:37.047Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1410,166 +1570,6 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:05:39.405Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-6-1777216595895-3",
-      "cycle": 6,
-      "timestamp": "2026-04-26T15:16:35.895Z",
-      "type": "USER_PREFERENCE",
-      "title": "Out-of-scope lint errors not fixed",
-      "description": "User accepts leaving preexisting lint errors in untouched files; only fix introduced issues",
-      "context": "When validating builds with mixed preexisting and new errors",
-      "applicability": [
-        "scope-management",
-        "lint",
-        "code-review"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:16:35.895Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821034-2",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.034Z",
-      "type": "PATTERN",
-      "title": "Endpoints CRUD transaccionales con auditoría",
-      "description": "Usar BEGIN/COMMIT/ROLLBACK y registrar en products_audit con CHECK constraint de migración 011",
-      "context": "Endpoints admin de productos que mutan datos",
-      "applicability": [
-        "backend",
-        "transactions",
-        "audit"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.034Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821035-3",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.035Z",
-      "type": "PATTERN",
-      "title": "Validación SKU único entre vivos pre-INSERT/UPDATE",
-      "description": "Validar SKU único excluyendo soft-deleted antes de mutaciones, devolver 409 explícito",
-      "context": "Endpoints POST/PUT de productos",
-      "applicability": [
-        "backend",
-        "validation",
-        "sku"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.035Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821036-4",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.036Z",
-      "type": "PATTERN",
-      "title": "Soft-delete con motivo y restore reversible",
-      "description": "DELETE registra motivo opcional; POST /restore revierte; ambos auditados",
-      "context": "Operaciones destructivas en productos",
-      "applicability": [
-        "backend",
-        "soft-delete",
-        "audit"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.036Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821038-5",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.038Z",
-      "type": "PATTERN",
-      "title": "Componente CRUD dedicado para mantener AdminPage limpio",
-      "description": "Crear ProductsCrudPanel.jsx separado e integrar como sub-vista en ProductsTab",
-      "context": "Al añadir nuevas vistas admin complejas",
-      "applicability": [
-        "frontend",
-        "components",
-        "admin"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.038Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821039-6",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.039Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Ajuste de stock soporta modos absolute y delta",
-      "description": "PATCH /stock acepta mode='absolute' o 'delta' con audit_action='stock_adjust'",
-      "context": "Operaciones rápidas de stock desde la tabla",
-      "applicability": [
-        "backend",
-        "stock",
-        "api"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.039Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821040-7",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.040Z",
-      "type": "ANTI_PATTERN",
-      "title": "Destructuring renombrado dispara error de ESLint preexistente",
-      "description": "Mismo patrón que afecta AdminPage.jsx:30:27; preferir inlinear componente helper",
-      "context": "Al introducir helpers en componentes React de este repo",
-      "applicability": [
-        "frontend",
-        "eslint",
-        "react"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.040Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-9-1777218821042-9",
-      "cycle": 9,
-      "timestamp": "2026-04-26T15:53:41.042Z",
-      "type": "PATTERN",
-      "title": "Reutilizar upload-image del bulk import en CRUD individual",
-      "description": "Reusar el mismo endpoint/componente de upload-image existente en lugar de duplicar",
-      "context": "Subida de imagen única en el formulario CRUD de producto",
-      "applicability": [
-        "frontend",
-        "reuse",
-        "upload"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:53:41.042Z",
-        "source": "INFERRED"
       }
     }
   ]
