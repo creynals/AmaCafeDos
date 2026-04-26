@@ -347,90 +347,10 @@
         "ambiguous-input"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:26:56.937Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536508-0",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.508Z",
-      "type": "PATTERN",
-      "title": "Tab consolidation with sub-navigation",
-      "description": "Group related tabs under parent tab with underline sub-tabs to reduce visual saturation",
-      "context": "When admin UI has 3+ related tabs cluttering top-level navigation",
-      "applicability": [
-        "ux",
-        "admin-ui",
-        "navigation",
-        "react"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.508Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536511-1",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.511Z",
-      "type": "PATTERN",
-      "title": "Visual hierarchy via differentiated tab styles",
-      "description": "Pills (ámbar) for main tabs, underline (ámbar) for sub-tabs creates clear hierarchy",
-      "context": "Multi-level tab navigation in admin panels",
-      "applicability": [
-        "ux",
-        "design-system",
-        "tailwind"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.511Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536514-2",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.514Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Conditional mounting preserves sub-tab state",
-      "description": "Separate conditional mounts per sub-tab keeps component state across sub-tab switches",
-      "context": "Sub-navigation where users expect state preservation between tabs",
-      "applicability": [
-        "react",
-        "state-management"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.514Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536517-4",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.517Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "7 ESLint errors are preexisting baseline",
-      "description": "The 7 ESLint errors in frontend are preexisting and documented; new changes must not add to them",
-      "context": "Validating lint output after frontend changes in this project",
-      "applicability": [
-        "lint",
-        "validation",
-        "frontend"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.517Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -915,7 +835,7 @@
     "[2026-04-26T22:09:36.633Z] Synaptic Strength subió de 88.25% a 89% tras ejecución exitosa",
     "[2026-04-26T22:09:36.634Z] E2E queda pendiente del usuario: validar desktop ≥768px y mobile <768px"
   ],
-  "lastUpdated": "2026-04-26T22:18:06.926Z",
+  "lastUpdated": "2026-04-26T22:55:43.366Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1915,6 +1835,86 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:26:56.943Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536508-0",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.508Z",
+      "type": "PATTERN",
+      "title": "Tab consolidation with sub-navigation",
+      "description": "Group related tabs under parent tab with underline sub-tabs to reduce visual saturation",
+      "context": "When admin UI has 3+ related tabs cluttering top-level navigation",
+      "applicability": [
+        "ux",
+        "admin-ui",
+        "navigation",
+        "react"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.508Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536511-1",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.511Z",
+      "type": "PATTERN",
+      "title": "Visual hierarchy via differentiated tab styles",
+      "description": "Pills (ámbar) for main tabs, underline (ámbar) for sub-tabs creates clear hierarchy",
+      "context": "Multi-level tab navigation in admin panels",
+      "applicability": [
+        "ux",
+        "design-system",
+        "tailwind"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.511Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536514-2",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.514Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Conditional mounting preserves sub-tab state",
+      "description": "Separate conditional mounts per sub-tab keeps component state across sub-tab switches",
+      "context": "Sub-navigation where users expect state preservation between tabs",
+      "applicability": [
+        "react",
+        "state-management"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.514Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536517-4",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.517Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "7 ESLint errors are preexisting baseline",
+      "description": "The 7 ESLint errors in frontend are preexisting and documented; new changes must not add to them",
+      "context": "Validating lint output after frontend changes in this project",
+      "applicability": [
+        "lint",
+        "validation",
+        "frontend"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.517Z",
         "source": "INFERRED"
       }
     }
