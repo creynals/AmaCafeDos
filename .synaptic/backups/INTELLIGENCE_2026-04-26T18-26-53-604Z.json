@@ -280,6 +280,122 @@
   ],
   "learnings": [
     {
+      "learningId": "learning-3-1777215334641-0",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.641Z",
+      "type": "USER_PREFERENCE",
+      "title": "Tab separada para Bulk Import",
+      "description": "Usuario prefiere tab nueva 'Importación Masiva' separada de 'Gestión Productos'",
+      "context": "Decisiones UX para features admin",
+      "applicability": [
+        "ui",
+        "admin",
+        "navigation"
+      ],
+      "confidence": {
+        "score": 0.3999999999999999,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.641Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334644-1",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.644Z",
+      "type": "USER_PREFERENCE",
+      "title": "SKU opcional en productos nuevos",
+      "description": "SKU no es obligatorio al crear productos vía bulk import",
+      "context": "Validación de productos en bulk import",
+      "applicability": [
+        "validation",
+        "products"
+      ],
+      "confidence": {
+        "score": 0.3999999999999999,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.644Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334645-2",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.645Z",
+      "type": "USER_PREFERENCE",
+      "title": "Imágenes en almacenamiento local",
+      "description": "Imágenes se guardan en filesystem local (fuentes/products/), no en cloud",
+      "context": "Estrategia de almacenamiento de assets",
+      "applicability": [
+        "storage",
+        "images"
+      ],
+      "confidence": {
+        "score": 0.3999999999999999,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.645Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334646-3",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.646Z",
+      "type": "USER_PREFERENCE",
+      "title": "Soft delete vía Excel con action=delete",
+      "description": "Bulk import soporta eliminación lógica usando columna action=delete (deleted_at)",
+      "context": "Operaciones masivas sobre productos",
+      "applicability": [
+        "bulk-import",
+        "soft-delete"
+      ],
+      "confidence": {
+        "score": 0.3999999999999999,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.646Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334647-4",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.647Z",
+      "type": "USER_PREFERENCE",
+      "title": "Categorías solo existentes",
+      "description": "Bulk import NO auto-crea categorías; valida contra existentes",
+      "context": "Validación de relaciones en bulk import",
+      "applicability": [
+        "validation",
+        "categories"
+      ],
+      "confidence": {
+        "score": 0.3999999999999999,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.647Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-3-1777215334648-5",
+      "cycle": 3,
+      "timestamp": "2026-04-26T14:55:34.648Z",
+      "type": "USER_PREFERENCE",
+      "title": "Acceso restringido a admin autenticado",
+      "description": "Endpoints de bulk import detrás de requireAuth, solo admins",
+      "context": "Seguridad de operaciones masivas",
+      "applicability": [
+        "auth",
+        "security",
+        "admin"
+      ],
+      "confidence": {
+        "score": 0.3999999999999999,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T14:55:34.648Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
       "learningId": "learning-5-1777215939405-3",
       "cycle": 5,
       "timestamp": "2026-04-26T15:05:39.405Z",
@@ -293,10 +409,71 @@
         "ux"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:05:39.405Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-6-1777216595889-0",
+      "cycle": 6,
+      "timestamp": "2026-04-26T15:16:35.889Z",
+      "type": "PATTERN",
+      "title": "Context API: Provider+hook in same file",
+      "description": "Use eslint-disable react-refresh/only-export-components when colocating Provider and hook",
+      "context": "React Context API implementation in Vite projects with react-refresh",
+      "applicability": [
+        "react",
+        "context-api",
+        "eslint",
+        "vite"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:16:35.889Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-6-1777216595892-1",
+      "cycle": 6,
+      "timestamp": "2026-04-26T15:16:35.892Z",
+      "type": "PATTERN",
+      "title": "Lazy state init avoids setState in effect",
+      "description": "Initialize state from localStorage with lazy initializer instead of useEffect setState",
+      "context": "When hydrating React state from persistent storage on mount",
+      "applicability": [
+        "react",
+        "hooks",
+        "state-management"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:16:35.892Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-6-1777216595894-2",
+      "cycle": 6,
+      "timestamp": "2026-04-26T15:16:35.894Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Migration 010a unblocks 011 precondition",
+      "description": "Alphabetical order 010 -> 010a -> 011 ensures dependency satisfied before next migration",
+      "context": "PostgreSQL migration ordering with intermediate fix migrations",
+      "applicability": [
+        "migrations",
+        "postgres",
+        "ordering"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:16:35.894Z",
+        "source": "INFERRED"
       }
     },
     {
@@ -313,10 +490,30 @@
         "code-review"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.9,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:16:35.895Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-6-1777216595896-4",
+      "cycle": 6,
+      "timestamp": "2026-04-26T15:16:35.896Z",
+      "type": "PATTERN",
+      "title": "API-first context design",
+      "description": "Read consumer files first to derive exact context API contract before implementing",
+      "context": "When restoring missing modules consumed by existing components",
+      "applicability": [
+        "react",
+        "api-design",
+        "restoration"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T15:16:35.896Z",
+        "source": "INFERRED"
       }
     },
     {
@@ -1214,7 +1411,7 @@
     "[2026-04-26T18:08:38.158Z] Vista de Cocina default sub-tab es 'list' para preservar UX previa",
     "[2026-04-26T18:08:38.159Z] E2E manual pendiente del usuario (login admin/admin123 en :8080/admin)"
   ],
-  "lastUpdated": "2026-04-26T18:26:53.604Z",
+  "lastUpdated": "2026-04-26T18:09:46.094Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1372,203 +1569,6 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T15:05:39.403Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-3-1777215334641-0",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.641Z",
-      "type": "USER_PREFERENCE",
-      "title": "Tab separada para Bulk Import",
-      "description": "Usuario prefiere tab nueva 'Importación Masiva' separada de 'Gestión Productos'",
-      "context": "Decisiones UX para features admin",
-      "applicability": [
-        "ui",
-        "admin",
-        "navigation"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.641Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-3-1777215334644-1",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.644Z",
-      "type": "USER_PREFERENCE",
-      "title": "SKU opcional en productos nuevos",
-      "description": "SKU no es obligatorio al crear productos vía bulk import",
-      "context": "Validación de productos en bulk import",
-      "applicability": [
-        "validation",
-        "products"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.644Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-3-1777215334645-2",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.645Z",
-      "type": "USER_PREFERENCE",
-      "title": "Imágenes en almacenamiento local",
-      "description": "Imágenes se guardan en filesystem local (fuentes/products/), no en cloud",
-      "context": "Estrategia de almacenamiento de assets",
-      "applicability": [
-        "storage",
-        "images"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.645Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-3-1777215334646-3",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.646Z",
-      "type": "USER_PREFERENCE",
-      "title": "Soft delete vía Excel con action=delete",
-      "description": "Bulk import soporta eliminación lógica usando columna action=delete (deleted_at)",
-      "context": "Operaciones masivas sobre productos",
-      "applicability": [
-        "bulk-import",
-        "soft-delete"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.646Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-3-1777215334647-4",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.647Z",
-      "type": "USER_PREFERENCE",
-      "title": "Categorías solo existentes",
-      "description": "Bulk import NO auto-crea categorías; valida contra existentes",
-      "context": "Validación de relaciones en bulk import",
-      "applicability": [
-        "validation",
-        "categories"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.647Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-3-1777215334648-5",
-      "cycle": 3,
-      "timestamp": "2026-04-26T14:55:34.648Z",
-      "type": "USER_PREFERENCE",
-      "title": "Acceso restringido a admin autenticado",
-      "description": "Endpoints de bulk import detrás de requireAuth, solo admins",
-      "context": "Seguridad de operaciones masivas",
-      "applicability": [
-        "auth",
-        "security",
-        "admin"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T14:55:34.648Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-6-1777216595889-0",
-      "cycle": 6,
-      "timestamp": "2026-04-26T15:16:35.889Z",
-      "type": "PATTERN",
-      "title": "Context API: Provider+hook in same file",
-      "description": "Use eslint-disable react-refresh/only-export-components when colocating Provider and hook",
-      "context": "React Context API implementation in Vite projects with react-refresh",
-      "applicability": [
-        "react",
-        "context-api",
-        "eslint",
-        "vite"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:16:35.889Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-6-1777216595892-1",
-      "cycle": 6,
-      "timestamp": "2026-04-26T15:16:35.892Z",
-      "type": "PATTERN",
-      "title": "Lazy state init avoids setState in effect",
-      "description": "Initialize state from localStorage with lazy initializer instead of useEffect setState",
-      "context": "When hydrating React state from persistent storage on mount",
-      "applicability": [
-        "react",
-        "hooks",
-        "state-management"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:16:35.892Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-6-1777216595894-2",
-      "cycle": 6,
-      "timestamp": "2026-04-26T15:16:35.894Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Migration 010a unblocks 011 precondition",
-      "description": "Alphabetical order 010 -> 010a -> 011 ensures dependency satisfied before next migration",
-      "context": "PostgreSQL migration ordering with intermediate fix migrations",
-      "applicability": [
-        "migrations",
-        "postgres",
-        "ordering"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:16:35.894Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-6-1777216595896-4",
-      "cycle": 6,
-      "timestamp": "2026-04-26T15:16:35.896Z",
-      "type": "PATTERN",
-      "title": "API-first context design",
-      "description": "Read consumer files first to derive exact context API contract before implementing",
-      "context": "When restoring missing modules consumed by existing components",
-      "applicability": [
-        "react",
-        "api-design",
-        "restoration"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T15:16:35.896Z",
         "source": "INFERRED"
       }
     }
