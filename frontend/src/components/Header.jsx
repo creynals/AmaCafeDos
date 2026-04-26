@@ -1,4 +1,4 @@
-import { ShoppingCart, Search, X, Settings } from 'lucide-react';
+import { ShoppingCart, Search, X, Settings, Coffee } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -22,8 +22,8 @@ export default function Header({ onSearch }) {
 
   return (
     <header className="sticky top-0 z-40 bg-ama-darker/95 backdrop-blur-md border-b border-ama-border">
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2 no-underline">
+      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <a href="/" className="flex items-center gap-2 no-underline shrink-0">
           <img
             src="/images/logo-ama.jpg"
             alt="AMA Café"
@@ -34,7 +34,14 @@ export default function Header({ onSearch }) {
           </span>
         </a>
 
-        <div className="flex items-center gap-3">
+        <div className="hidden md:inline-flex items-center gap-2 bg-ama-card/60 border border-ama-border rounded-full px-3 py-1.5 min-w-0">
+          <Coffee className="w-3.5 h-3.5 text-ama-amber shrink-0" />
+          <span className="text-xs text-ama-text-muted truncate">
+            Una nueva experiencia para disfrutar
+          </span>
+        </div>
+
+        <div className="flex items-center gap-3 shrink-0">
           {searchOpen ? (
             <form onSubmit={handleSearch} className="flex items-center gap-2">
               <input

@@ -2502,8 +2502,80 @@ proceder con implementación ciclo 40
 
 ---
 
+## Ciclo 42 — POST: Hero compacto + tagline en header (Enfoque A — Immediate Execution / DG-079)
+
+**Timestamp**: 2026-04-26T22:15:00.000Z
+**Modo**: Immediate Execution (DG-079)
+**Decisión usuario**: Enfoque A del Ciclo 41 — Hero compacto + tagline en header
+
+```json
+{
+  "cycle": 42,
+  "phase": "IMPLEMENTATION",
+  "decision_ref": "Cycle 41 Option A",
+  "type": "ux",
+  "scope": "storefront/header+hero",
+  "summary": "Reaprovechar espacio del Hero: subir tagline 'Una nueva experiencia para disfrutar' a la barra superior, eliminar título redundante 'AMA Café' y CTA 'Ver Menu' del Hero, conservar solo 'Explora nuestro menu y arma tu pedido' en hero compacto.",
+  "files_changed": [
+    "frontend/src/components/Header.jsx",
+    "frontend/src/components/Hero.jsx"
+  ]
+}
+```
+
+**Cambios Implementados**:
+
+1. **Header.jsx** — Tagline integrado en barra superior:
+   - Importado icono `Coffee` de lucide-react
+   - Agregado pill central (`hidden md:inline-flex`) entre el logo y los iconos: ícono Coffee + texto "Una nueva experiencia para disfrutar"
+   - Pill con estilo `bg-ama-card/60 border border-ama-border rounded-full px-3 py-1.5`, texto `text-xs text-ama-text-muted truncate`
+   - Icono `w-3.5 h-3.5 text-ama-amber shrink-0` para no romper en breakpoints angostos
+   - Contenedor flex con `gap-4`, logo y bloque-iconos marcados `shrink-0`, pill `min-w-0` para truncar elegante
+   - **Mobile (<md)**: tagline oculto para no comprometer iconos esenciales (búsqueda, carrito, ADM)
+
+2. **Hero.jsx** — Reducido al mínimo informativo:
+   - Eliminado import de `Coffee` y `ArrowDown` (ya no se usan)
+   - Eliminado badge superior con icono + tagline (ahora está en header)
+   - Eliminado `<h1>` "AMA Café" (redundante con header)
+   - Eliminado CTA `<a href="#menu">Ver Menu</a>` (al estar el hero compacto y la grilla a continuación, deja de aportar)
+   - Mantenido solo `<p>` "Explora nuestro menu y arma tu pedido"
+   - Padding vertical reducido: `py-6 sm:py-8` (antes `py-16 sm:py-24`) → ~70-80% menos altura visible
+   - Conservado fondo gradiente sutil y `animate-fade-in-up` para preservar polish
+
+**Impacto Visual**:
+- Hero pasa de ~280px de alto a ~80-100px → la grilla de productos sube significativamente arriba del fold
+- Tagline marca-experience sigue presente arriba pero sin desperdiciar viewport
+- Identidad de marca "AMA Café" conservada en logo+texto del header
+
+**Validación**:
+- ✅ `npx eslint src/components/Header.jsx src/components/Hero.jsx` → 0 errores, 0 warnings
+- ✅ `npx vite build` → exit 0, 1753 modules, 156ms (CSS 49.90 kB / JS 447.06 kB)
+- ✅ Tailwind: clases estáticas, sin interpolación dinámica
+- ✅ Vite HMR aplicará cambios automáticamente al storefront en dev
+- ✅ Footer (`AMA Café — Una nueva experiencia para disfrutar`) intacto: el tagline conserva presencia secundaria en pie de página
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌ (Immediate Execution — DG-079)
+- Memoria actualizada: ✅
+- Tests generados: ❌ (cambio puramente UX, validación E2E manual del usuario)
+- Reformulaciones necesarias: 0
+- Líneas tocadas: ~25 (Header +9 / Hero -16)
+
+**E2E Pendiente Usuario**:
+1. Refrescar storefront `http://localhost:8080/` (HMR de Vite ya debería haber aplicado)
+2. Verificar que en desktop (≥768px) la barra superior muestra: logo+AMA Café | pill "Una nueva experiencia para disfrutar" | búsqueda/carrito/ADM
+3. Verificar que el Hero ahora es muy compacto y muestra únicamente "Explora nuestro menu y arma tu pedido"
+4. Verificar que la grilla de productos sube significativamente al primer pliegue
+5. Verificar que en mobile (<768px) el tagline desaparece del header (el hero compacto compensa) y los iconos no se cortan
+6. Verificar que el footer sigue mostrando "AMA Café — Una nueva experiencia para disfrutar"
+
+**Synaptic Strength**: 89%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
-*Last Updated: 2026-04-26T22:05:00.000Z*
+*Last Updated: 2026-04-26T22:15:00.000Z*
 
 
 ---
