@@ -759,5 +759,92 @@ PROCEDER CON IMPLEMENTACION CICLO 8, Implementar mantenedor de productos individ
 
 ---
 
+---
+## CICLO: 10
+**Timestamp**: 2026-04-26T16:25:00.000Z
+**Trace ID**: `c10-product-image-gallery`
+**Agente**: synaptic_executor
+**Fase**: IMPLEMENTATION
+**Decisión**: Implementar galería multi-imagen por producto (prioridad 2 del Ciclo 9)
+**Resultado**: SUCCESS
+**Duración**: ~22 min
+
+**Prompt Original**:
+```
+CON IMPLEMENTACION CICLO 8, Implementar mantenedor de productos individual (CRUD UI + endpoints) según gap analysis del Ciclo 8. Priorizar: 1) crear/editar/eliminar/stock individual, 2) galería de imágenes después. NO tocar Bulk Import.
+```
+
+**Decision Gate Presentado**: N/A (DG-079 Immediate Execution)
+
+**Opción Elegida**: Implementación directa — galería multi-imagen (prioridad 2 ya que prioridad 1 quedó completa en Cycle 9)
+
+**Cambios JSON**:
+```json
+{
+  "scope": "Galería multi-imagen por producto (admin CRUD + storefront read)",
+  "principles": [
+    "Backward-compatible: products.image_url permanece como fallback legacy",
+    "Cuando hay product_images con is_primary=TRUE, sincroniza products.image_url automáticamente",
+    "ON DELETE CASCADE: borrado físico de producto limpia imágenes",
+    "Soft-delete del producto NO toca product_images (restaurable)",
+    "Auditoría: cada add/update/reorder/delete genera row en products_audit"
+  ],
+  "backend": {
+    "migration": "012_product_images_gallery.sql (CREATE TABLE product_images, UNIQUE INDEX parcial idx_product_images_primary_unique)",
+    "endpoints": [
+      "GET    /api/admin/products/:productId/images",
+      "POST   /api/admin/products/:productId/images (multer 5MB)",
+      "PUT    /api/admin/products/:productId/images/:imageId",
+      "POST   /api/admin/products/:productId/images/reorder",
+      "DELETE /api/admin/products/:productId/images/:imageId"
+    ],
+    "storefront_change": "GET /api/products/:id ahora incluye `images[]` con id, url, alt_text, is_primary, sort_order"
+  },
+  "frontend": {
+    "api_helpers": "adminProductImagesList, adminProductImageAdd (FormData), adminProductImageUpdate, adminProductImagesReorder, adminProductImageDelete",
+    "component": "ProductImageGallery.jsx — UI con upload, marcar primaria, mover arriba/abajo, eliminar",
+    "integration": "ProductFormModal muestra galería solo cuando isEdit (necesita productId persistido)"
+  },
+  "validation": {
+    "node_check": "PASS (4 archivos)",
+    "vite_build": "PASS (430.15 kB / 115.68 kB gzip)",
+    "eslint": "PASS (sin nuevos warnings/errors)"
+  },
+  "deferred": [
+    "Drag-and-drop nativo (HTML5 DnD) para reorder — usamos botones up/down como MVP",
+    "UI de auditoría visualizando products_audit",
+    "Filtro avanzado en CRUD (rango precio, rango stock)"
+  ]
+}
+```
+
+**Artefactos Generados**:
+- backend/src/migrations/012_product_images_gallery.sql (NEW)
+- backend/src/routes/products-admin-images.js (NEW)
+- backend/src/routes/products.js (extendido con `images[]`)
+- backend/src/server.js (registro del nuevo router)
+- frontend/src/api.js (5 helpers nuevos)
+- frontend/src/components/ProductImageGallery.jsx (NEW)
+- frontend/src/components/ProductsCrudPanel.jsx (integración del componente)
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: N/A (DG-079 immediate execution)
+- Memoria actualizada: ✅
+- Build backend: ✅ (node --check pasa)
+- Build frontend: ✅ (vite build, 430.15 kB)
+- ESLint: 0 nuevos errores
+- Reformulaciones necesarias: 0
+
+**Pendientes para próximos ciclos**:
+- Validación E2E manual de la galería (subir varias imágenes, marcar primaria, reordenar, eliminar)
+- Vista de historial de auditoría (products_audit) en UI admin
+- Drag-and-drop real para reorder (HTML5 DnD o react-beautiful-dnd)
+- Mostrar carrusel de imágenes en ProductCard / ProductModal del storefront
+
+**Synaptic Strength**: 44% (+3% por cierre de gap C9 deferred)
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
-*Last Updated: 2026-04-26T15:55:00.000Z*
+*Last Updated: 2026-04-26T16:25:00.000Z*

@@ -272,6 +272,40 @@ export const api = {
   adminProductRestore: (id) => post(`/admin/products/${id}/restore`, {}, { auth: true }),
   adminProductAdjustStock: (id, payload) => patch(`/admin/products/${id}/stock`, payload, { auth: true }),
 
+  // Galería multi-imagen por producto — Ciclo 10 SYNAPTIC
+  adminProductImagesList: (productId) =>
+    request(`/admin/products/${productId}/images`, { auth: true }),
+  adminProductImageAdd: async (productId, file, { isPrimary = false, altText = null } = {}) => {
+    const token = localStorage.getItem('admin_token');
+    const fd = new FormData();
+    fd.append('image', file);
+    if (isPrimary) fd.append('is_primary', '1');
+    if (altText) fd.append('alt_text', altText);
+    const res = await fetch(`${BASE}/admin/products/${productId}/images`, {
+      method: 'POST',
+      headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+      body: fd,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.status === 401) {
+      localStorage.removeItem('admin_token');
+      window.dispatchEvent(new Event('auth-expired'));
+    }
+    if (!res.ok) {
+      const err = new Error(data.error || `API error: ${res.status}`);
+      err.status = res.status;
+      err.data = data;
+      throw err;
+    }
+    return data;
+  },
+  adminProductImageUpdate: (productId, imageId, payload) =>
+    put(`/admin/products/${productId}/images/${imageId}`, payload, { auth: true }),
+  adminProductImagesReorder: (productId, order) =>
+    post(`/admin/products/${productId}/images/reorder`, { order }, { auth: true }),
+  adminProductImageDelete: (productId, imageId) =>
+    del(`/admin/products/${productId}/images/${imageId}`, { auth: true }),
+
   // Bulk import de productos — Ciclo 3 SYNAPTIC (admin)
   adminProductCategories: () => request('/admin/products/categories', { auth: true }),
 

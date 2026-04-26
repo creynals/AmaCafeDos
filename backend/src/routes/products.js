@@ -41,7 +41,9 @@ router.get('/products', async (req, res) => {
   res.json(rows);
 });
 
-// GET /api/products/:id - Get single product with options
+// GET /api/products/:id - Get single product with options + image gallery
+// Ciclo 10: incluye `images[]` (galería multi-imagen). image_url legacy se mantiene
+// como fallback para clientes antiguos que no consumen images[].
 router.get('/products/:id', async (req, res) => {
   const { rows: productRows } = await query(`
     SELECT p.id, p.name, p.description, p.price, p.image_url, p.available,
@@ -61,7 +63,15 @@ router.get('/products/:id', async (req, res) => {
     [req.params.id]
   );
 
-  res.json({ ...product, options });
+  const { rows: images } = await query(
+    `SELECT id, url, alt_text, is_primary, sort_order
+     FROM product_images
+     WHERE product_id = $1
+     ORDER BY sort_order ASC, id ASC`,
+    [req.params.id]
+  );
+
+  res.json({ ...product, options, images });
 });
 
 // GET /api/menu - Full menu grouped by categories

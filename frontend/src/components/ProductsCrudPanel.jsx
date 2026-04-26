@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { api } from '../api';
 import { useToast } from '../context/ToastContext';
+import ProductImageGallery from './ProductImageGallery';
 
 // ProductsCrudPanel — Ciclo 9 SYNAPTIC.
 // Mantenedor individual de productos (CRUD) según gap C8:
@@ -482,7 +483,7 @@ function ProductFormModal({ form, categories, onClose, onSaved }) {
           />
         </Field>
 
-        <Field label="Imagen">
+        <Field label="Imagen principal (legacy / fallback)">
           <div className="flex items-center gap-3">
             {data.image_url ? (
               <img src={data.image_url} alt="" className="w-16 h-16 rounded-lg object-cover bg-ama-darker" />
@@ -513,9 +514,17 @@ function ProductFormModal({ form, categories, onClose, onSaved }) {
                   disabled={uploadingImage}
                 />
               </label>
+              <p className="text-[10px] text-ama-text-muted leading-snug">
+                Se usa como fallback cuando no hay galería. Al marcar una imagen como principal en la galería,
+                este campo se sincroniza automáticamente.
+              </p>
             </div>
           </div>
         </Field>
+
+        <div className="border-t border-ama-border pt-4">
+          <ProductImageGallery productId={isEdit ? data.id : null} />
+        </div>
 
         <div className="flex items-center gap-3">
           <button
