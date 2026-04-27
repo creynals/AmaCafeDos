@@ -2906,8 +2906,103 @@ ejecutar las recomendaciones del ciclo 48 🔴 ALTA
 
 ---
 
+## CICLO: 50
+**Timestamp**: 2026-04-27T02:35:00.000Z
+**Trace ID**: `c50-workspace-metadata-sync`
+**Agente**: master_architect
+**Fase**: IMPLEMENTACION
+**Decisión**: OPTION A — Sincronizar Metadata Workspace (mínimo invasivo)
+**Resultado**: SUCCESS
+**Modo**: IMMEDIATE EXECUTION (DG-079, decisión tomada en Cycle 49)
+
+**Prompt Original**:
+```
+proceder con OPTION A: Sincronizar Metadata Workspace (mínimo invasivo) ⭐ RECOMENDADA
+```
+
+**Decision Gate Presentado**: No (modo Immediate Execution — ciclo 49 ya resolvió la elección)
+
+**Opción Elegida**: OPTION A
+
+```json
+{
+  "cycle": 50,
+  "phase": "IMPLEMENTATION",
+  "decision_ref": "Cycle 49 Option A",
+  "type": "metadata-sync",
+  "scope": "workspaces/identity",
+  "summary": "Sincronizar metadata del workspace canónico (import-1777213083759-63z86j) y marcar dir alias como deprecated",
+  "files_changed": [
+    "import-1777213083759-63z86j/.synaptic-workspace.json"
+  ],
+  "files_added": [
+    "import-1777213083759-63z86j/WORKSPACE_IDENTITY.md",
+    "import-1776956320164-2m9x2n/DEPRECATED.md"
+  ]
+}
+```
+
+**Cambios Implementados**:
+
+1. **`.synaptic-workspace.json`** (active workspace)
+   - Agregados 4 campos nuevos sin alterar los existentes:
+     - `canonicalProjectName: "amaCafe"` — nombre humano-legible del proyecto original
+     - `aliasOf: "import-1776956320164-2m9x2n"` — referencia al dir legacy
+     - `canonicalDir: "import-1777213083759-63z86j"` — dir físico canónico explícito
+     - `notes: "..."` — explicación de por qué `projectName` se retiene por continuidad
+   - **Preservado** `projectName: "import-1776956320164-2m9x2n"` para no romper la cadena de SYNAPTIC INTELLIGENCE de los ciclos 1–49
+
+2. **`WORKSPACE_IDENTITY.md`** (NEW, active workspace)
+   - Documenta identidad canónica: dir físico, paths, projectId, projectName
+   - Documenta alias histórico: dir legacy, fecha de fork, último ciclo activo
+   - Documenta backup .zip: gestión usuario, ubicación externa
+   - Define reglas de convivencia entre los dos directorios
+   - Trazabilidad: refs Cycles 45–49
+
+3. **`DEPRECATED.md`** (NEW, orphan workspace)
+   - Marca `import-1776956320164-2m9x2n` como deprecado
+   - Apunta al dir activo
+   - Explica origen del fork (re-importación 2026-04-26)
+   - Reglas claras: no `npm run dev`, no modificar código fuente
+   - Anticipa el "Backend cwd guard" pendiente en roadmap
+
+**Validación**:
+- ✅ JSON `.synaptic-workspace.json` parseable (`node -e require()` ok)
+- ✅ Tres archivos creados/actualizados con permisos correctos
+- ✅ INTELLIGENCE.json no modificado (continuidad preservada)
+- ✅ BITACORA append-only (no se modificaron entradas previas)
+- ✅ Cambios no invasivos: ningún archivo de código fuente tocado
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌ (resuelto en Cycle 49)
+- Memoria actualizada: ✅
+- Archivos modificados: 1
+- Archivos creados: 2
+- Líneas tocadas: ~110 (mayormente documentación)
+- Reformulaciones necesarias: 0
+
+**Roadmap Items Resueltos**:
+- ✅ "Sync .synaptic-workspace.json metadata to physical dir" (HIGH)
+- ✅ "Create WORKSPACE_IDENTITY.md" (HIGH)
+- ✅ "Mark orphan dir as DEPRECATED" (MEDIUM)
+
+**Pendiente Usuario / Próximos Ciclos**:
+1. **Backend cwd guard** (MEDIUM): `backend/src/server.js` debe loggear/refusar si `process.cwd()` no contiene el dir canónico — referencia a `basePath` de `.synaptic-workspace.json`
+2. **Validar a futuro**: si el usuario decide migrar `INTELLIGENCE.json` para que `projectName` también refleje `import-1777213083759-63z86j`, requerirá Decision Gate dedicado (refactor de strings históricos)
+3. **Backup .zip**: si el usuario quiere documentar la ruta exacta del .zip, agregar a `WORKSPACE_IDENTITY.md` sección "Backup .zip"
+
+**Recomendaciones Cycle 50**:
+- 🟡 **MEDIUM**: Implementar el cwd guard del backend en próximo ciclo (mitigación contra el "workspace + shared backend trap" registrado en memoria global)
+- 🟢 **LOW**: Agregar `.synaptic-workspace.json` al `.gitignore` o decidir explícitamente versionarlo (actualmente puede estar tracked involuntariamente)
+- 🟢 **LOW**: Considerar mover el dir alias `import-1776956320164-2m9x2n` a un subdirectorio `_deprecated/` (acción futura, requiere Decision Gate por ser invasiva)
+
+**Synaptic Strength**: 95% (+0.75 vs Cycle 49 — metadata coherente reduce ambigüedad operativa)
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
-*Last Updated: 2026-04-26T22:15:00.000Z*
+*Last Updated: 2026-04-27T02:35:00.000Z*
 
 
 ---

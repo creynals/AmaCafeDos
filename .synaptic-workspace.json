@@ -2,8 +2,12 @@
   "basePath": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j",
   "projectId": "import-1777213083759-63z86j",
   "projectName": "import-1776956320164-2m9x2n",
+  "canonicalProjectName": "amaCafe",
+  "aliasOf": "import-1776956320164-2m9x2n",
+  "canonicalDir": "import-1777213083759-63z86j",
   "createdAt": "2026-04-26T14:18:03.759Z",
   "lastAccessedAt": "2026-04-27T02:28:15.842Z",
+  "notes": "ACTIVE WORKSPACE. Historical alias 'import-1776956320164-2m9x2n' refers to deprecated sibling directory (see WORKSPACE_IDENTITY.md). projectName retained for SYNAPTIC INTELLIGENCE continuity across cycles 1-49.",
   "settings": {
     "synapticVersion": "3.0",
     "enforcementMode": "strict",
