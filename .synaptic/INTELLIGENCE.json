@@ -437,6 +437,33 @@
       "status": "PLANNED",
       "createdAtCycle": 49,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-050-1",
+      "title": "Backend cwd guard in server.js",
+      "description": "Add guard mitigating workspace + shared backend trap (verify cwd matches active workspace)",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 50,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-050-2",
+      "title": "Decide .synaptic-workspace.json versioning policy",
+      "description": "Choose whether to commit .synaptic-workspace.json or add to .gitignore",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 50,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-050-3",
+      "title": "Document exact .zip backup path",
+      "description": "Once user confirms backup .zip location, record it in WORKSPACE_IDENTITY.md",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 50,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -982,6 +1009,86 @@
         "lastReinforced": "2026-04-27T02:28:41.324Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-50-1777257198541-0",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.541Z",
+      "type": "PATTERN",
+      "title": "Minimum-invasive metadata sync for workspace alias divergence",
+      "description": "Add aliasOf/canonicalDir fields + WORKSPACE_IDENTITY.md + DEPRECATED.md marker instead of renaming dirs",
+      "context": "When physical workspace dir differs from historical projectName alias and rename would break INTELLIGENCE chain",
+      "applicability": [
+        "workspace",
+        "metadata",
+        "synaptic",
+        "alias"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.541Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198546-1",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.546Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Preserve projectName field on alias divergence",
+      "description": "Original projectName must be retained in .synaptic-workspace.json to keep cycles 1-49 INTELLIGENCE chain intact",
+      "context": "Modifying .synaptic-workspace.json when canonical dir name changed",
+      "applicability": [
+        "synaptic",
+        "metadata",
+        "backwards-compat"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.546Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198549-2",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.549Z",
+      "type": "USER_PREFERENCE",
+      "title": "User prefers minimum-invasive options when offered",
+      "description": "User selected OPTION A (mínimo invasivo) over alternatives — favor non-destructive metadata changes",
+      "context": "When presenting multi-option decision gates with invasiveness tradeoffs",
+      "applicability": [
+        "decision-gate",
+        "user-preference"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.549Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198551-3",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.551Z",
+      "type": "PATTERN",
+      "title": "DEPRECATED.md marker in orphan directories",
+      "description": "Mark abandoned/orphan dirs with DEPRECATED.md pointing to active canonical dir for discoverability",
+      "context": "When a directory is superseded but cannot be deleted (history, backups, references)",
+      "applicability": [
+        "workspace",
+        "documentation",
+        "cleanup"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.551Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1051,9 +1158,12 @@
     "[2026-04-26T23:03:20.721Z] Commit de cierre: d80d39b (12 archivos, +350/-47)",
     "[2026-04-27T02:28:41.326Z] Cycle 48 was analysis-only; its recommendations were not persisted — C49 had to reconstruct from C45-C48 thread",
     "[2026-04-27T02:28:41.327Z] Active workspace: import-1777213083759-63z86j; alias/orphan: import-1776956320164-2m9x2n",
-    "[2026-04-27T02:28:41.329Z] C49 halted at Decision Gate awaiting user choice between Options A/B/C"
+    "[2026-04-27T02:28:41.329Z] C49 halted at Decision Gate awaiting user choice between Options A/B/C",
+    "[2026-04-27T02:33:18.554Z] BITACORA Cycle 50 entry inserted at line 2909 with structured JSON",
+    "[2026-04-27T02:33:18.556Z] Synaptic Strength advanced 94.25% → 95% after sync",
+    "[2026-04-27T02:33:18.558Z] Backup .zip path still pending user confirmation"
   ],
-  "lastUpdated": "2026-04-27T02:29:49.021Z",
+  "lastUpdated": "2026-04-27T02:34:37.018Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

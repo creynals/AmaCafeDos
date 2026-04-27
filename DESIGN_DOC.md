@@ -96,6 +96,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-050 | Adopt OPTION A: sync metadata via aliasOf + WORKSPACE_IDENTITY.md + DEPRECATED.md | Minimum-invasive, preserves INTELLIGENCE chain (cycles 1-49) without renames or data migration | 2026-04-27 | 50 |
 | DEC-050 | Canonical workspace dir is import-1777213083759-63z86j; the other is alias/orphan | All 48 cycles of work live in this physical directory | 2026-04-27 | 49 |
 | DEC-049 | Persist all 🔴 ALTA recommendations as structured list in BITACORA per cycle | Verbal-only recommendations cannot be executed in subsequent cycles | 2026-04-27 | 49 |
 | DEC-044-4 | Script de rotación de secrets siempre con dry-run por defecto | Operaciones destructivas requieren paso explícito --apply para evitar ejecuciones accidentales | 2026-04-26 | 44 |
@@ -140,6 +141,8 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 50] Canonical dir: import-1777213083759-63z86j; historical alias projectName: import-1776956320164-2m9x2n
+- [Cycle 50] WORKSPACE_IDENTITY.md is the canonical source of truth for workspace identity going forward
 - [Cycle 49] BITACORA cycle entries must include explicit 'Recomendaciones' section when recommendations are issued
 - [Cycle 49] WORKSPACE_IDENTITY.md should document canonical dir, alias, and backup .zip location
 - [Cycle 44] ENCRYPTION_SECRET cifra settings.sumup_* y settings.recaptcha_secret_key — rotar requiere decrypt+re-encrypt
@@ -190,6 +193,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 50, 2026-04-27] Introduced aliasOf/canonicalDir/canonicalProjectName fields in .synaptic-workspace.json schema
 - [Cycle 44, 2026-04-26] Capa de seguridad HTTP centralizada: helmet + CSP + rate-limits + requireAdmin en server.js
 - [Cycle 44, 2026-04-26] backend/.env removido del tracking git (sigue en disco local)
 - [Cycle 39, 2026-04-26] server.js ahora registra rutas públicas individuales antes del mount con auth global
