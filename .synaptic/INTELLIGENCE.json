@@ -1300,7 +1300,7 @@
     "[2026-04-27T22:30:10.398Z] Test suite: keyManager.test.js (16/16) + sumup.test.js (6/6 regression) passing",
     "[2026-04-27T22:30:10.400Z] OPTION C still pending: full key versioning with v{N}: prefix"
   ],
-  "lastUpdated": "2026-04-27T23:15:11.329Z",
+  "lastUpdated": "2026-04-27T23:31:35.081Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
