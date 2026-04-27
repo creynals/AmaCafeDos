@@ -382,29 +382,10 @@
         "api-design"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T18:08:38.152Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918154-5",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.154Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "node --watch recarga backend automáticamente",
-      "description": "Backend con node --watch detecta cambios SQL/route sin reinicio manual",
-      "context": "Cambios en backend/src durante desarrollo",
-      "applicability": [
-        "backend",
-        "dev-workflow"
-      ],
-      "confidence": {
-        "score": 0.35,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-26T21:53:44.189Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -420,7 +401,7 @@
         "scope-control"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T18:08:38.156Z",
         "source": "EXPLICIT"
@@ -935,7 +916,7 @@
     "[2026-04-26T23:03:20.720Z] Script rotate-encryption-secret.js disponible en backend/scripts/ con modo dry-run + --apply",
     "[2026-04-26T23:03:20.721Z] Commit de cierre: d80d39b (12 archivos, +350/-47)"
   ],
-  "lastUpdated": "2026-04-27T02:07:29.541Z",
+  "lastUpdated": "2026-04-27T02:10:25.676Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2116,6 +2097,25 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T18:08:38.151Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918154-5",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.154Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "node --watch recarga backend automáticamente",
+      "description": "Backend con node --watch detecta cambios SQL/route sin reinicio manual",
+      "context": "Cambios en backend/src durante desarrollo",
+      "applicability": [
+        "backend",
+        "dev-workflow"
+      ],
+      "confidence": {
+        "score": 0.14999999999999997,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-26T21:53:44.189Z",
         "source": "INFERRED"
       }
     }
