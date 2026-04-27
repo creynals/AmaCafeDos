@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-077 | Decision Gate abierto: estrategia de purga del historial git (A=BFG, B=filter-repo, C=recreación) | backend/.env permanece accesible vía git log/show pese a estar en .gitignore; bloqueante para deploy a Railway | 2026-04-27 | 77 |
 | DEC-067-3 | Render condizionale del blocco istruzioni in OrdersTab e KitchenView | Evitare spazio sprecato per ordini senza istruzioni | 2026-04-27 | 67 |
 | DEC-067-2 | Cap 1000 caratteri server-side + UI counter | Prevenire abuso e fornire feedback immediato all'utente | 2026-04-27 | 67 |
 | DEC-067-1 | Campo customer_instructions a livello ordine, separato da order_items.notes e address_notes | Evitare collisione semantica tra istruzioni per prodotto, per consegna e per ordine globale | 2026-04-27 | 67 |
@@ -151,6 +152,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 77] git filter-repo requiere brew install git-filter-repo en macOS
+- [Cycle 77] BFG Repo-Cleaner requiere Java instalado (es un JAR)
+- [Cycle 77] Force-push reescribe SHAs: cualquier clon externo debe re-clonar
 - [Cycle 67] Migration 014 idempotente con IF NOT EXISTS
 - [Cycle 67] createOrder() firma estesa a 5 parametri (5° = customerInstructions)
 - [Cycle 67] INSERT orders esteso da 12 a 13 placeholders
