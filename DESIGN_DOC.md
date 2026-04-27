@@ -100,6 +100,8 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-078-B | Tar.gz físico como única fuente de verdad para rollback | Tags pre-purga son reescritos por filter-repo, perdiendo su valor como punto de restauración | 2026-04-27 | 78 |
+| DEC-078 | Ejecutar git filter-repo (Option B) como método estándar de purga | Recomendación oficial; repo local-only sin remote reduce riesgo; preserva estructura de 94 commits | 2026-04-27 | 78 |
 | DEC-077 | Decision Gate abierto: estrategia de purga del historial git (A=BFG, B=filter-repo, C=recreación) | backend/.env permanece accesible vía git log/show pese a estar en .gitignore; bloqueante para deploy a Railway | 2026-04-27 | 77 |
 | DEC-067-3 | Render condizionale del blocco istruzioni in OrdersTab e KitchenView | Evitare spazio sprecato per ordini senza istruzioni | 2026-04-27 | 67 |
 | DEC-067-2 | Cap 1000 caratteri server-side + UI counter | Prevenire abuso e fornire feedback immediato all'utente | 2026-04-27 | 67 |
@@ -152,6 +154,10 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 78] git-filter-repo v2.47.0 instalado en el sistema
+- [Cycle 78] .git size reducido de 15M a 7.8M (-48%) tras purga
+- [Cycle 78] backend/.env removido del histórico desde commit 95136d9 (C1) hasta d80d39b (C44)
+- [Cycle 78] backend/.env.example preservado intacto en working tree e historial reescrito
 - [Cycle 77] git filter-repo requiere brew install git-filter-repo en macOS
 - [Cycle 77] BFG Repo-Cleaner requiere Java instalado (es un JAR)
 - [Cycle 77] Force-push reescribe SHAs: cualquier clon externo debe re-clonar
@@ -217,6 +223,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 78, 2026-04-27] Histórico git completo reescrito: HEAD f7447e1 → 347807f, 94 commits con nuevos SHAs
 - [Cycle 67, 2026-04-27] Schema orders esteso con colonna customer_instructions TEXT
 - [Cycle 67, 2026-04-27] Admin GET /api/admin/orders SELECT esteso
 - [Cycle 57, 2026-04-27] Estructura canónica: projectName (actual) + previousName + renamedAt + renamedInCycle en .synaptic-workspace.json

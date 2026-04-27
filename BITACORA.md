@@ -4437,6 +4437,45 @@ iniciar Ciclo 77: Decision Gate de estrategia de purga del historial git
 
 ---
 
+
+---
+## CICLO: 78
+**Timestamp**: 2026-04-27T22:10:47.584Z
+**Trace ID**: `695362cd-b218-4c26-a53d-2253b70e8d63`
+**Agente**: master_architect
+**Fase**: ANALISIS
+**Decisión**: Option B
+**Resultado**: SUCCESS
+**Duración**: 281602ms
+
+**Prompt Original**:
+```
+proceder con  OPTION B: git filter-repo — Purga Estándar Recomendada Oficialmente ⭐ RECOMENDADA
+```
+
+**Decision Gate Presentado**: Ninguno (ciclo de análisis inicial)
+
+**Opción Elegida**: B - Option B selected by user
+
+**Artefactos Generados**:
+- /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/CREDENTIAL_ROTATION_C78.md
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌
+- Memoria actualizada: ✅
+- Tests generados: ❌
+- Reformulaciones necesarias: 0
+
+
+
+**Notas**:
+User selected Option B: : git filter-repo — Purga Estándar Recomendada Oficialmente ⭐ RECOMENDADA
+
+**Synaptic Strength**: 97.8%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
 *Last Updated: 2026-04-27T04:30:00.000Z*
 
@@ -4799,5 +4838,152 @@ Las 9 órdenes pasarán a `status='cancelled'` al ejecutar la migración (snapsh
 - 🟢 BAJA: Considerar marcar `WORKSPACE_IDENTITY.md` como "fuente única de verdad" del estado de identidad y prohibir que otros documentos contradigan su sección "Decisiones Relacionadas".
 
 **Synaptic Strength**: 96.5%
+
+---
+
+---
+## CICLO: 78
+**Timestamp**: 2026-04-27T22:08:00.000Z
+**Trace ID**: `c78-purge-history-filter-repo`
+**Agente**: master_architect
+**Fase**: IMPLEMENTACION (DG-079 Immediate Execution)
+**Decisión**: Cycle 77 OPTION B — git filter-repo (purga estándar)
+**Resultado**: SUCCESS
+**Modo**: IMMEDIATE EXECUTION
+
+**Prompt Original**:
+```
+proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialmente ⭐ RECOMENDADA
+```
+
+**Entrada estructurada**:
+```json
+{
+  "timestamp": "2026-04-27T22:08:00.000Z",
+  "cycle": 78,
+  "phase": 3,
+  "action": "GIT_HISTORY_PURGE_EXECUTED",
+  "agent": "master_architect",
+  "mode": "IMMEDIATE_EXECUTION",
+  "decisionRef": "Cycle 77 — OPTION B (git filter-repo)",
+  "context": {
+    "trigger": "Tarea HIGH 'Purgar backend/.env del historial git' pendiente desde Ciclo 42 + decisión formal en C77",
+    "preState": {
+      "totalCommits": 94,
+      "branches": ["master"],
+      "tags": [],
+      "remote": "NONE (repo local-only)",
+      "envInHistory": {
+        "addedAt": "95136d9 (Cycle 1)",
+        "removedAt": "d80d39b (Cycle 44 - hardening seguridad)",
+        "stillTracked": false
+      },
+      "gitDirSize": "15M",
+      "packSize": "7.09 MiB"
+    },
+    "blastRadius": "MÍNIMO — repo local sin remote, operador único, sin colaboradores externos. No requiere force-push (no hay upstream)."
+  },
+  "execution": {
+    "steps": [
+      {
+        "step": 1,
+        "name": "Backup tag local",
+        "command": "git tag pre-purge-c78 HEAD",
+        "headBefore": "f7447e1",
+        "result": "OK (tag fue luego reescrito por filter-repo, ver caveat abajo)"
+      },
+      {
+        "step": 2,
+        "name": "Backup físico tar.gz",
+        "command": "tar -czf ... import-1777213083759-63z86j/",
+        "path": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/_backups_pre_purge_c78/import-1777213083759-63z86j_pre_purge_c78_20260427T220728Z.tar.gz",
+        "size": "15M",
+        "result": "OK — fuente de verdad para rollback si fuera necesario"
+      },
+      {
+        "step": 3,
+        "name": "Instalación git-filter-repo",
+        "command": "brew install git-filter-repo",
+        "version": "2.47.0",
+        "result": "OK"
+      },
+      {
+        "step": 4,
+        "name": "Ejecución purga",
+        "command": "git filter-repo --invert-paths --path backend/.env --force",
+        "duration": "0.34s total (0.05s parse + 0.29s repack)",
+        "commitsParsed": 94,
+        "commitsRewritten": 94,
+        "headBefore": "f7447e1",
+        "headAfter": "347807f",
+        "result": "OK"
+      }
+    ]
+  },
+  "validation": {
+    "envInHistoryPostPurge": {
+      "commitsTouchingBackendEnv": 0,
+      "blobsInPackWithBackendEnv": 0,
+      "envExamplePreserved": true,
+      "envExampleFirstCommit": "6ac7d84 (Cycle 1, post-rewrite SHA)"
+    },
+    "repoIntegrity": {
+      "totalCommitsPostPurge": 94,
+      "totalObjects": 2501,
+      "gitFsckErrors": 0,
+      "workingTreeStatus": "clean",
+      "workingTreeFiles": {
+        "backend/.env": "1699 bytes (untracked, .gitignore protege)",
+        "backend/.env.example": "1387 bytes (tracked)"
+      }
+    },
+    "sizeReduction": {
+      "gitDirBefore": "15M",
+      "gitDirAfter": "7.8M",
+      "reductionPct": "~48%"
+    }
+  },
+  "caveats": [
+    "El tag pre-purge-c78 fue reescrito por filter-repo apuntando ahora al nuevo SHA 347807f (no al f7447e1 original). git filter-repo reescribe TODAS las refs por diseño. La red de seguridad real para rollback es el tar.gz físico, no el tag.",
+    "TODOS los SHAs del historial fueron reescritos. Cualquier referencia externa a SHAs viejos (tickets, docs) queda obsoleta.",
+    "No hubo force-push porque no hay remote configurado. Si en el futuro se agrega un remote, el primer push debe ser explícito y consciente."
+  ],
+  "details": {
+    "request": "Ejecutar la purga del historial git según la decisión formal del Ciclo 77 (Option B: git filter-repo, herramienta estándar oficialmente recomendada por GitHub)",
+    "filesChangedInWorkingTree": [
+      "BITACORA.md (este append)"
+    ],
+    "filesAffectedInHistoryOnly": [
+      "backend/.env (eliminado de TODOS los commits que lo contenían: rango histórico C1→C44)"
+    ],
+    "filesNotTouched": [
+      "backend/.env en working tree (queda intacto en disco; sigue gitignored)",
+      "backend/.env.example (preservado en historia y working tree)",
+      "Cualquier otro archivo del repo (purga es selectiva por path)"
+    ]
+  },
+  "userImpact": "El historial git ahora está libre de credenciales en backend/.env. Sin embargo, esas credenciales fueron expuestas durante el período en que el archivo vivió en disco/git, por lo que la rotación obligatoria de TODAS las credenciales sigue siendo HIGH priority y NO se ha ejecutado en este ciclo.",
+  "outcome": "SUCCESS",
+  "synapticStrength": 97.7,
+  "complianceScore": 100,
+  "filesChanged": 1,
+  "filesAdded": 0,
+  "linesTouched": "BITACORA append + 94 commits reescritos"
+}
+```
+
+**Notas críticas**:
+- La purga del historial **NO sustituye la rotación de credenciales**. Si una credencial estuvo en un blob git aunque sea por minutos, se considera comprometida permanentemente. La purga solo previene exposición futura del repo a terceros.
+- El backup físico tar.gz es la única red de seguridad real. El tag local fue reescrito por filter-repo (comportamiento esperado, no es un bug).
+- Operación realizada en modo IMMEDIATE EXECUTION amparada en la Decisión Gate del Cycle 77.
+
+**Recomendaciones**:
+- 🔴 **CRÍTICA**: Ejecutar **rotación inmediata de TODAS las credenciales** que estuvieron en backend/.env: ENCRYPTION_SECRET, SumUp (sandbox + prod), reCAPTCHA (site key + secret), JWT secret, contraseña DB. La purga limpia el repo, no las credenciales (que fueron observadas en su forma original durante el período expuesto).
+- 🔴 **ALTA**: Si en algún momento se publica un remote (GitHub, GitLab, etc.), el primer push debe ser un `git push --force` consciente y los colaboradores deben re-clonar (no `pull`). Documentar este punto en WORKSPACE_IDENTITY.md.
+- 🟡 **MEDIA**: Crear sección "SHA Mapping (pre/post purga C78)" en WORKSPACE_IDENTITY.md con HEAD viejo (f7447e1) → HEAD nuevo (347807f) para futura trazabilidad.
+- 🟡 **MEDIA**: Añadir script CI/pre-commit que rechace commits con `backend/.env` (defensa en profundidad por si .gitignore falla).
+- 🟢 **BAJA**: Considerar conservar el tar.gz pre-purga durante al menos 30 días antes de borrarlo, por si surge necesidad inesperada de consultar el historial original.
+
+**Synaptic Strength**: 97.7%
 
 ---

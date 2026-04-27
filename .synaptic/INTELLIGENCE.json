@@ -573,6 +573,33 @@
       "status": "PLANNED",
       "createdAtCycle": 77,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-078-1",
+      "title": "Rotación de todas las credenciales expuestas",
+      "description": "Rotar ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT secret, DB password según CREDENTIAL_ROTATION_C78.md",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 78,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-078-2",
+      "title": "Validar funcionamiento post-purga",
+      "description": "Probar build, tests y flujos críticos para confirmar que la reescritura de SHAs no rompió referencias",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 78,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-078-3",
+      "title": "Documentar protocolo de force-push si se publica remote",
+      "description": "Si en el futuro se conecta GitHub/GitLab, primer push debe ser --force; colaboradores deben re-clonar",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 78,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -590,7 +617,7 @@
         "user-frustration"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T03:06:19.330Z",
         "source": "EXPLICIT"
@@ -817,6 +844,128 @@
         "lastReinforced": "2026-04-27T22:03:35.077Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-78-1777327875162-0",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.162Z",
+      "type": "PATTERN",
+      "title": "git filter-repo standard purge workflow",
+      "description": "Backup tar.gz + tag, install filter-repo, run purge, verify with rev-list/fsck, document rollback",
+      "context": "When purging sensitive files from git history on local-only repo without remote",
+      "applicability": [
+        "git",
+        "security",
+        "history-purge",
+        "credentials"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.162Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875168-1",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.168Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "filter-repo rewrites pre-existing tags",
+      "description": "Tags created before filter-repo run get rewritten to new SHAs; rollback must rely on physical tar.gz backup",
+      "context": "When using pre-purge tags as safety net before git filter-repo",
+      "applicability": [
+        "git",
+        "filter-repo",
+        "backup",
+        "rollback"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.168Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875170-2",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.170Z",
+      "type": "INSIGHT",
+      "title": "Local-only repo reduces purge blast radius",
+      "description": "Sin remote configurado, no requiere force-push ni coordinación con colaboradores; operación reversible vía tar.gz",
+      "context": "Evaluating risk of git history rewrites",
+      "applicability": [
+        "git",
+        "risk-assessment",
+        "blast-radius"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.170Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875172-3",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.172Z",
+      "type": "INSIGHT",
+      "title": "History purge does not invalidate exposed credentials",
+      "description": "Limpiar el repo no rota secretos; rotación manual obligatoria post-purga para mitigar riesgo real",
+      "context": "After removing .env or secrets from git history",
+      "applicability": [
+        "security",
+        "credentials",
+        "rotation",
+        "post-purge"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.172Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875175-4",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.175Z",
+      "type": "USER_PREFERENCE",
+      "title": "Preferencia por opciones recomendadas oficialmente",
+      "description": "Usuario eligió OPTION B explícitamente etiquetada como 'Recomendada Oficialmente' en Decision Gate",
+      "context": "Decision gates con múltiples opciones técnicas",
+      "applicability": [
+        "decision-making",
+        "user-preference"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.175Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875177-5",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.177Z",
+      "type": "PATTERN",
+      "title": "Etapas críticas con verificación entre cada una",
+      "description": "Operaciones HIGH-RISK irreversibles se ejecutan por fases con validación intermedia (inventario→backup→ejecución→verificación)",
+      "context": "Operaciones destructivas o irreversibles en repos/sistemas",
+      "applicability": [
+        "high-risk-ops",
+        "verification",
+        "phased-execution"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.177Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -904,9 +1053,13 @@
     "[2026-04-27T22:03:35.080Z] Operador es desarrollador único, no hay colaboradores externos identificados — reduce blast radius del force-push",
     "[2026-04-27T22:03:35.081Z] Credenciales expuestas en historial: ENCRYPTION_SECRET, SumUp (sandbox+prod), reCAPTCHA site/secret, JWT secret, DB password",
     "[2026-04-27T22:03:35.083Z] Tarea HIGH 'Purgar backend/.env del historial git' pendiente desde Ciclo 42",
-    "[2026-04-27T22:03:35.084Z] Recomendación SYNAPTIC: Option B (git filter-repo) por balance seguridad/trazabilidad/estándar"
+    "[2026-04-27T22:03:35.084Z] Recomendación SYNAPTIC: Option B (git filter-repo) por balance seguridad/trazabilidad/estándar",
+    "[2026-04-27T22:11:15.179Z] Repo amaCafe es local-only (sin remote); cualquier publicación futura requiere force-push consciente",
+    "[2026-04-27T22:11:15.180Z] Backup pre-purga en _backups_pre_purge_c78/import-1777213083759-63z86j_pre_purge_c78_20260427T220728Z.tar.gz",
+    "[2026-04-27T22:11:15.182Z] CREDENTIAL_ROTATION_C78.md contiene checklist accionable de rotación pendiente",
+    "[2026-04-27T22:11:15.183Z] Credenciales expuestas históricamente: ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT secret, DB password"
   ],
-  "lastUpdated": "2026-04-27T22:06:05.999Z",
+  "lastUpdated": "2026-04-27T22:12:38.690Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
