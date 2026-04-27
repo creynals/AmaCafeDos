@@ -1,4 +1,4 @@
-# 📋 RULES.md - import-1776956320164-2m9x2n
+# 📋 RULES.md - amaCafe
 
 ## SYNAPTIC Protocol v3.0 - Project Rules
 
@@ -60,8 +60,8 @@
 
 ## 4. PROJECT-SPECIFIC RULES
 
-### Project: import-1776956320164-2m9x2n
-### Description: Imported from /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n
+### Project: amaCafe
+### Description: amaCafe — workspace canónico `import-1777213083759-63z86j` (alias legacy: `import-1776956320164-2m9x2n`, deprecado)
 
 
 ---

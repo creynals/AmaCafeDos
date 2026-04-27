@@ -1,7 +1,9 @@
 {
   "projectSummary": {
-    "name": "import-1776956320164-2m9x2n",
-    "description": "Imported from /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n",
+    "name": "amaCafe",
+    "previousName": "import-1776956320164-2m9x2n",
+    "physicalDir": "import-1777213083759-63z86j",
+    "description": "amaCafe — proyecto de la cadena de cafés AMA. Workspace canónico: import-1777213083759-63z86j. Alias histórico legacy: import-1776956320164-2m9x2n (deprecated).",
     "currentPhase": "foundation",
     "overallProgress": "Project initialized, awaiting first requirement"
   },

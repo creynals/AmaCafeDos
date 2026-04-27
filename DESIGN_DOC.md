@@ -1,4 +1,4 @@
-# 🏗️ DESIGN_DOC.md - import-1776956320164-2m9x2n
+# 🏗️ DESIGN_DOC.md - amaCafe
 
 ## SYNAPTIC Protocol v3.0 - Architecture Document
 
@@ -7,10 +7,14 @@
 ## 1. PROJECT OVERVIEW
 
 ### 1.1 Project Name
-import-1776956320164-2m9x2n
+amaCafe
+
+> Renombrado en Cycle 53 desde alias legacy `import-1776956320164-2m9x2n`. Workspace físico canónico: `import-1777213083759-63z86j`.
 
 ### 1.2 Description
-Imported from /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n
+amaCafe — proyecto de la cadena de cafés AMA (storefront + backend administrativo + Bulk Import + Vista de Cocina + integración SumUp).
+
+Workspace físico canónico: `/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j`.
 
 ### 1.3 Project Type
 To be defined
