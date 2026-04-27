@@ -524,86 +524,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-50-1777257198549-2",
-      "cycle": 50,
-      "timestamp": "2026-04-27T02:33:18.549Z",
-      "type": "USER_PREFERENCE",
-      "title": "User prefers minimum-invasive options when offered",
-      "description": "User selected OPTION A (mínimo invasivo) over alternatives — favor non-destructive metadata changes",
-      "context": "When presenting multi-option decision gates with invasiveness tradeoffs",
-      "applicability": [
-        "decision-gate",
-        "user-preference"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:33:18.549Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-53-1777258007285-0",
-      "cycle": 53,
-      "timestamp": "2026-04-27T02:46:47.285Z",
-      "type": "ANTI_PATTERN",
-      "title": "Compromiso 'minimo invasivo' deja deuda técnica",
-      "description": "Cycle 50 preservó projectName legacy por 'continuidad histórica', causando UX confuso en Cycles 51-52",
-      "context": "Cuando se hace rename de workspace, actualizar TODOS los metadata operativos, no solo algunos",
-      "applicability": [
-        "rename",
-        "metadata",
-        "technical-debt",
-        "synaptic"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:46:47.285Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-53-1777258007286-1",
-      "cycle": 53,
-      "timestamp": "2026-04-27T02:46:47.286Z",
-      "type": "INSIGHT",
-      "title": "Cadena de aprendizaje vive en decisions[] y BITACORA, no en projectName",
-      "description": "El miedo a romper continuidad histórica al renombrar projectName era infundado",
-      "context": "Audit trail se preserva en previousName, decisions[], BITACORA append-only y backups",
-      "applicability": [
-        "audit-trail",
-        "rename",
-        "data-integrity"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:46:47.286Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-53-1777258007287-2",
-      "cycle": 53,
-      "timestamp": "2026-04-27T02:46:47.287Z",
-      "type": "PATTERN",
-      "title": "Rename completo con campos de trazabilidad",
-      "description": "Agregar previousProjectName, renamedAt, renamedReason al hacer rename para preservar audit trail",
-      "context": "Al renombrar entidades en metadata JSON",
-      "applicability": [
-        "rename",
-        "audit-trail",
-        "metadata"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:46:47.287Z",
-        "source": "INFERRED"
-      }
-    },
-    {
       "learningId": "learning-53-1777258007288-3",
       "cycle": 53,
       "timestamp": "2026-04-27T02:46:47.288Z",
@@ -617,30 +537,10 @@
         "decision-making"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:46:47.288Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-53-1777258007290-4",
-      "cycle": 53,
-      "timestamp": "2026-04-27T02:46:47.290Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "SYNAPTIC dashboard puede tener cache server-side",
-      "description": "Después de cambiar projectName, dashboard puede requerir reload o restart del servicio platform",
-      "context": "Cuando se modifican metadata files que alimentan el dashboard SYNAPTIC",
-      "applicability": [
-        "synaptic",
-        "dashboard",
-        "cache"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:46:47.290Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -967,7 +867,7 @@
     "[2026-04-27T04:22:26.580Z] Lezione C53 applicata: rilettura/grep finale prima di dichiarare successo",
     "[2026-04-27T04:22:26.581Z] 8 file modificati: 3 backend + 4 frontend + BITACORA"
   ],
-  "lastUpdated": "2026-04-27T21:14:27.510Z",
+  "lastUpdated": "2026-04-27T21:42:21.603Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2810,6 +2710,106 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:28:41.317Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198549-2",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.549Z",
+      "type": "USER_PREFERENCE",
+      "title": "User prefers minimum-invasive options when offered",
+      "description": "User selected OPTION A (mínimo invasivo) over alternatives — favor non-destructive metadata changes",
+      "context": "When presenting multi-option decision gates with invasiveness tradeoffs",
+      "applicability": [
+        "decision-gate",
+        "user-preference"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.549Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007285-0",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.285Z",
+      "type": "ANTI_PATTERN",
+      "title": "Compromiso 'minimo invasivo' deja deuda técnica",
+      "description": "Cycle 50 preservó projectName legacy por 'continuidad histórica', causando UX confuso en Cycles 51-52",
+      "context": "Cuando se hace rename de workspace, actualizar TODOS los metadata operativos, no solo algunos",
+      "applicability": [
+        "rename",
+        "metadata",
+        "technical-debt",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.285Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007286-1",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.286Z",
+      "type": "INSIGHT",
+      "title": "Cadena de aprendizaje vive en decisions[] y BITACORA, no en projectName",
+      "description": "El miedo a romper continuidad histórica al renombrar projectName era infundado",
+      "context": "Audit trail se preserva en previousName, decisions[], BITACORA append-only y backups",
+      "applicability": [
+        "audit-trail",
+        "rename",
+        "data-integrity"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.286Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007287-2",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.287Z",
+      "type": "PATTERN",
+      "title": "Rename completo con campos de trazabilidad",
+      "description": "Agregar previousProjectName, renamedAt, renamedReason al hacer rename para preservar audit trail",
+      "context": "Al renombrar entidades en metadata JSON",
+      "applicability": [
+        "rename",
+        "audit-trail",
+        "metadata"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.287Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007290-4",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.290Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "SYNAPTIC dashboard puede tener cache server-side",
+      "description": "Después de cambiar projectName, dashboard puede requerir reload o restart del servicio platform",
+      "context": "Cuando se modifican metadata files que alimentan el dashboard SYNAPTIC",
+      "applicability": [
+        "synaptic",
+        "dashboard",
+        "cache"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.290Z",
+        "source": "INFERRED"
       }
     }
   ]
