@@ -604,26 +604,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-57-1777259179330-4",
-      "cycle": 57,
-      "timestamp": "2026-04-27T03:06:19.330Z",
-      "type": "USER_PREFERENCE",
-      "title": "Modo IMMEDIATE EXECUTION cuando se pide acción directa",
-      "description": "'Ejecuta el fix' sin contexto de revisión = bypass Decision Gate, aplicar fix sin pedir aprobación intermedia",
-      "context": "Cuando el usuario expresa frustración persistente y pide acción inmediata",
-      "applicability": [
-        "execution-mode",
-        "decision-gate",
-        "user-frustration"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T03:06:19.330Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
       "learningId": "learning-67-1777263746562-0",
       "cycle": 67,
       "timestamp": "2026-04-27T04:22:26.563Z",
@@ -1059,7 +1039,7 @@
     "[2026-04-27T22:11:15.182Z] CREDENTIAL_ROTATION_C78.md contiene checklist accionable de rotación pendiente",
     "[2026-04-27T22:11:15.183Z] Credenciales expuestas históricamente: ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT secret, DB password"
   ],
-  "lastUpdated": "2026-04-27T22:16:44.749Z",
+  "lastUpdated": "2026-04-27T22:22:06.814Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -3122,6 +3102,26 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T03:06:19.332Z",
         "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179330-4",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.330Z",
+      "type": "USER_PREFERENCE",
+      "title": "Modo IMMEDIATE EXECUTION cuando se pide acción directa",
+      "description": "'Ejecuta el fix' sin contexto de revisión = bypass Decision Gate, aplicar fix sin pedir aprobación intermedia",
+      "context": "Cuando el usuario expresa frustración persistente y pide acción inmediata",
+      "applicability": [
+        "execution-mode",
+        "decision-gate",
+        "user-frustration"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.330Z",
+        "source": "EXPLICIT"
       }
     }
   ]
