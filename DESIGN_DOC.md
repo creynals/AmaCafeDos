@@ -100,6 +100,8 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-058 | Toda Edit declarada en BITACORA debe ser verificada con Read/Grep antes de cerrar ciclo | C53 documentó cambio que nunca se aplicó; descubierto 4 ciclos después | 2026-04-27 | 57 |
+| DEC-057 | projectName canónico = amaCafe; legacy alias preservado en previousName/legacyAliasId | Dashboard SYNAPTIC mostraba alias legacy por desync entre WORKSPACE_IDENTITY.md y .synaptic-workspace.json | 2026-04-27 | 57 |
 | DEC-053 | Rename completo de projectName a 'amaCafe' en todos los metadata operativos | Saldar deuda técnica de Cycle 50 y resolver UX confuso reportado en Cycles 51-52 | 2026-04-27 | 53 |
 | DEC-050 | Adopt OPTION A: sync metadata via aliasOf + WORKSPACE_IDENTITY.md + DEPRECATED.md | Minimum-invasive, preserves INTELLIGENCE chain (cycles 1-49) without renames or data migration | 2026-04-27 | 50 |
 | DEC-050 | Canonical workspace dir is import-1777213083759-63z86j; the other is alias/orphan | All 48 cycles of work live in this physical directory | 2026-04-27 | 49 |
@@ -146,6 +148,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 57] .synaptic-workspace.json es leído por el platform service para el header del dashboard
+- [Cycle 57] PROJECT_INIT.synaptic.project.id debe ser el directorio físico, no el alias legacy
+- [Cycle 57] Validar JSON con json.loads tras editar .synaptic-workspace.json y PROJECT_INIT.synaptic
 - [Cycle 53] 7 archivos modificados: .synaptic-workspace.json, session.json, INTELLIGENCE.json, MANTRA.md, RULES.md, DESIGN_DOC.md, WORKSPACE_IDENTITY.md
 - [Cycle 53] Alias legacy preservado solo en campos previousName, BITACORA histórica y backups
 - [Cycle 53] Validación JSON post-cambio confirma decisions count preservado (2)
@@ -201,6 +206,8 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 57, 2026-04-27] Estructura canónica: projectName (actual) + previousName + renamedAt + renamedInCycle en .synaptic-workspace.json
+- [Cycle 57, 2026-04-27] PROJECT_INIT.synaptic ahora separa project.id (físico) de legacyAliasId (histórico)
 - [Cycle 53, 2026-04-27] projectName canonical ahora es 'amaCafe' en lugar de 'import-1776956320164-2m9x2n'
 - [Cycle 50, 2026-04-27] Introduced aliasOf/canonicalDir/canonicalProjectName fields in .synaptic-workspace.json schema
 - [Cycle 44, 2026-04-26] Capa de seguridad HTTP centralizada: helmet + CSP + rate-limits + requireAdmin en server.js

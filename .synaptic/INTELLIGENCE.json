@@ -475,6 +475,33 @@
       "status": "PLANNED",
       "createdAtCycle": 53,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-057-A",
+      "title": "Validar dashboard tras hard-refresh",
+      "description": "Usuario debe Cmd+Shift+R y confirmar que header muestra 'amaCafe'",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 57,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-057-B",
+      "title": "Auditar otros ciclos con Edits declarados pero no verificados",
+      "description": "Revisar BITACORA C40-C53 buscando patrones similares de documentación sin ejecución",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 57,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-057-C",
+      "title": "Hook post-edit que verifique cambios declarados",
+      "description": "Automatizar verificación: cada Edit declarado en BITACORA debe pasar grep de confirmación",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 57,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -1081,6 +1108,126 @@
         "lastReinforced": "2026-04-27T02:46:47.290Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-57-1777259179318-0",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.318Z",
+      "type": "ANTI_PATTERN",
+      "title": "Documentar cambio sin aplicarlo",
+      "description": "C53 declaró rename en WORKSPACE_IDENTITY.md sin tocar .synaptic-workspace.json — deuda técnica 4 ciclos",
+      "context": "Cuando un ciclo edita metadata declarativa pero omite el archivo operativo real",
+      "applicability": [
+        "workspace-rename",
+        "metadata-sync",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.318Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179323-1",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.323Z",
+      "type": "PATTERN",
+      "title": "Verificar archivo en disco tras Edit declarado",
+      "description": "Releer cada archivo prometido modificado con Read/Grep antes de cerrar ciclo; afirmación ≠ cambio",
+      "context": "Tras cualquier ciclo que aplique fixes a múltiples archivos",
+      "applicability": [
+        "verification",
+        "edit-validation",
+        "synaptic-discipline"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.323Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179326-2",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.326Z",
+      "type": "TECHNICAL_NOTE",
+      "title": ".synaptic-workspace.json es la fuente para el dashboard",
+      "description": "El platform service de SYNAPTIC consume projectName de .synaptic-workspace.json para el header del dashboard",
+      "context": "Cualquier rename de proyecto debe actualizar este archivo, no solo WORKSPACE_IDENTITY.md",
+      "applicability": [
+        "synaptic-platform",
+        "dashboard",
+        "workspace-metadata"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.326Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179328-3",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.328Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "PROJECT_INIT.synaptic.project.id debe ser ID físico canónico",
+      "description": "project.id apuntaba al alias legacy; debe ser el directorio físico import-1777213083759-63z86j con legacyAliasId aparte",
+      "context": "Edición de PROJECT_INIT.synaptic tras rename de workspace",
+      "applicability": [
+        "project-init",
+        "workspace-id",
+        "legacy-alias"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.328Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179330-4",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.330Z",
+      "type": "USER_PREFERENCE",
+      "title": "Modo IMMEDIATE EXECUTION cuando se pide acción directa",
+      "description": "'Ejecuta el fix' sin contexto de revisión = bypass Decision Gate, aplicar fix sin pedir aprobación intermedia",
+      "context": "Cuando el usuario expresa frustración persistente y pide acción inmediata",
+      "applicability": [
+        "execution-mode",
+        "decision-gate",
+        "user-frustration"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.330Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179332-5",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.332Z",
+      "type": "INSIGHT",
+      "title": "Architect-only cycles no resuelven quejas operacionales",
+      "description": "C54-C56 fueron architect-only y acumularon frustración; quejas persistentes requieren modo ejecutivo",
+      "context": "Cuando una queja se repite ≥2 ciclos sin resolución",
+      "applicability": [
+        "cycle-mode",
+        "user-feedback-loop",
+        "architect-vs-executor"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.332Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1156,9 +1303,13 @@
     "[2026-04-27T02:33:18.558Z] Backup .zip path still pending user confirmation",
     "[2026-04-27T02:46:47.291Z] Cycle 50 tomó OPTION A 'minimo invasivo' que generó deuda técnica saldada en Cycle 53",
     "[2026-04-27T02:46:47.291Z] Workspace activo amaCafe tiene historia de rename desde alias import-1776956320164-2m9x2n",
-    "[2026-04-27T02:46:47.292Z] Memoria global synaptic_workspace_alias.md actualizada para reflejar nuevo estado canonical"
+    "[2026-04-27T02:46:47.292Z] Memoria global synaptic_workspace_alias.md actualizada para reflejar nuevo estado canonical",
+    "[2026-04-27T03:06:19.334Z] Workspace renamed: import-1776956320164-2m9x2n (legacy) → amaCafe (canónico desde C57)",
+    "[2026-04-27T03:06:19.335Z] Directorio físico canónico: import-1777213083759-63z86j",
+    "[2026-04-27T03:06:19.336Z] C53→C56 fue deuda técnica saldada en C57; cualquier referencia futura al alias legacy en metadata operativa es un bug",
+    "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side"
   ],
-  "lastUpdated": "2026-04-27T02:58:30.051Z",
+  "lastUpdated": "2026-04-27T03:09:11.974Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

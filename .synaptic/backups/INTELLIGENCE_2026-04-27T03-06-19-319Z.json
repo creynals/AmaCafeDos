@@ -1,7 +1,9 @@
 {
   "projectSummary": {
-    "name": "import-1776956320164-2m9x2n",
-    "description": "Imported from /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n",
+    "name": "amaCafe",
+    "previousName": "import-1776956320164-2m9x2n",
+    "physicalDir": "import-1777213083759-63z86j",
+    "description": "amaCafe — proyecto de la cadena de cafés AMA. Workspace canónico: import-1777213083759-63z86j. Alias histórico legacy: import-1776956320164-2m9x2n (deprecated).",
     "currentPhase": "foundation",
     "overallProgress": "Project initialized, awaiting first requirement"
   },
@@ -30,6 +32,32 @@
       },
       "selectedOption": "B",
       "userRationale": ": Restauración + Validación E2E del Bulk Import (Balanceada) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777256989019",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:29:49.019Z",
+      "decisionPoint": "proceder con OPTION A: Sincronizar Metadata Workspace (mínimo invasivo) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "A",
+      "userRationale": ": Sincronizar Metadata Workspace (mínimo invasivo) ⭐ RECOMENDADA",
       "outcome": "PENDING"
     }
   ],
@@ -411,129 +439,45 @@
       "status": "PLANNED",
       "createdAtCycle": 49,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-050-1",
+      "title": "Backend cwd guard in server.js",
+      "description": "Add guard mitigating workspace + shared backend trap (verify cwd matches active workspace)",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 50,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-050-2",
+      "title": "Decide .synaptic-workspace.json versioning policy",
+      "description": "Choose whether to commit .synaptic-workspace.json or add to .gitignore",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 50,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-050-3",
+      "title": "Document exact .zip backup path",
+      "description": "Once user confirms backup .zip location, record it in WORKSPACE_IDENTITY.md",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 50,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-053-1",
+      "title": "Verificar dashboard SYNAPTIC refleja amaCafe",
+      "description": "Usuario debe recargar dashboard; si persiste alias legacy, investigar cache server-side del platform service",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 53,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-31-1777230053925-0",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.925Z",
-      "type": "USER_PREFERENCE",
-      "title": "Modo ejecución inmediata DG-079",
-      "description": "Usuario prefiere ejecutar cambios pequeños (~30 líneas) en un solo ciclo, no fragmentar en re-análisis",
-      "context": "Cuando los cambios son acotados y bien definidos tras fase ARCHITECT",
-      "applicability": [
-        "execution-mode",
-        "user-preference",
-        "DG-079"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.925Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053929-1",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.929Z",
-      "type": "ANTI_PATTERN",
-      "title": "ARCHITECT MODE prolongado sin POST commit pierde contexto",
-      "description": "Ciclos 26-30 en ARCHITECT MODE sin commit POST hicieron perder la tabla de 5 fixes del ciclo 30",
-      "context": "Análisis multi-ciclo sin persistir conclusiones intermedias",
-      "applicability": [
-        "synaptic-protocol",
-        "context-loss",
-        "architect-mode"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.929Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053931-2",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.931Z",
-      "type": "PATTERN",
-      "title": "Helper puro derivado + COALESCE en UPDATE",
-      "description": "Extraer lógica de derivación a helper puro y usar COALESCE($n, status) en múltiples UPDATE para consistencia",
-      "context": "Cuando misma transformación payment→fulfillment se replica en webhooks/orders/payments",
-      "applicability": [
-        "refactor",
-        "DRY",
-        "sql-update"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.931Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053933-3",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.933Z",
-      "type": "PATTERN",
-      "title": "Migración SQL idempotente con snapshot a tabla audit",
-      "description": "Backfill legacy debe snapshot estado previo a tabla _audit antes de UPDATE para reversibilidad",
-      "context": "Migraciones que corrigen datos legacy en producción",
-      "applicability": [
-        "migration",
-        "audit",
-        "data-fix"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.933Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053934-4",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.934Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "node:test built-in evita nuevas deps",
-      "description": "Usar `node --test` con `node:test` para tests cortos sin agregar Jest/Mocha al proyecto",
-      "context": "Tests unitarios de helpers puros en backend Node",
-      "applicability": [
-        "testing",
-        "node-builtin",
-        "no-deps"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.934Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053936-5",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.936Z",
-      "type": "INSIGHT",
-      "title": "Backend sin --watch requiere reinicio manual",
-      "description": "PID 73456 corre `node src/server.js` directo, fixes no se aplican hasta `kill && npm run dev`",
-      "context": "Workspace import-1776956320164-2m9x2n backend dev workflow",
-      "applicability": [
-        "dev-workflow",
-        "hot-reload",
-        "deployment"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.936Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-39-1777240424179-0",
       "cycle": 39,
@@ -956,11 +900,192 @@
         "lastReinforced": "2026-04-27T02:28:41.324Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-50-1777257198541-0",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.541Z",
+      "type": "PATTERN",
+      "title": "Minimum-invasive metadata sync for workspace alias divergence",
+      "description": "Add aliasOf/canonicalDir fields + WORKSPACE_IDENTITY.md + DEPRECATED.md marker instead of renaming dirs",
+      "context": "When physical workspace dir differs from historical projectName alias and rename would break INTELLIGENCE chain",
+      "applicability": [
+        "workspace",
+        "metadata",
+        "synaptic",
+        "alias"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.541Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198546-1",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.546Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Preserve projectName field on alias divergence",
+      "description": "Original projectName must be retained in .synaptic-workspace.json to keep cycles 1-49 INTELLIGENCE chain intact",
+      "context": "Modifying .synaptic-workspace.json when canonical dir name changed",
+      "applicability": [
+        "synaptic",
+        "metadata",
+        "backwards-compat"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.546Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198549-2",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.549Z",
+      "type": "USER_PREFERENCE",
+      "title": "User prefers minimum-invasive options when offered",
+      "description": "User selected OPTION A (mínimo invasivo) over alternatives — favor non-destructive metadata changes",
+      "context": "When presenting multi-option decision gates with invasiveness tradeoffs",
+      "applicability": [
+        "decision-gate",
+        "user-preference"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.549Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198551-3",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.551Z",
+      "type": "PATTERN",
+      "title": "DEPRECATED.md marker in orphan directories",
+      "description": "Mark abandoned/orphan dirs with DEPRECATED.md pointing to active canonical dir for discoverability",
+      "context": "When a directory is superseded but cannot be deleted (history, backups, references)",
+      "applicability": [
+        "workspace",
+        "documentation",
+        "cleanup"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.551Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007285-0",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.285Z",
+      "type": "ANTI_PATTERN",
+      "title": "Compromiso 'minimo invasivo' deja deuda técnica",
+      "description": "Cycle 50 preservó projectName legacy por 'continuidad histórica', causando UX confuso en Cycles 51-52",
+      "context": "Cuando se hace rename de workspace, actualizar TODOS los metadata operativos, no solo algunos",
+      "applicability": [
+        "rename",
+        "metadata",
+        "technical-debt",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.285Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007286-1",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.286Z",
+      "type": "INSIGHT",
+      "title": "Cadena de aprendizaje vive en decisions[] y BITACORA, no en projectName",
+      "description": "El miedo a romper continuidad histórica al renombrar projectName era infundado",
+      "context": "Audit trail se preserva en previousName, decisions[], BITACORA append-only y backups",
+      "applicability": [
+        "audit-trail",
+        "rename",
+        "data-integrity"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.286Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007287-2",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.287Z",
+      "type": "PATTERN",
+      "title": "Rename completo con campos de trazabilidad",
+      "description": "Agregar previousProjectName, renamedAt, renamedReason al hacer rename para preservar audit trail",
+      "context": "Al renombrar entidades en metadata JSON",
+      "applicability": [
+        "rename",
+        "audit-trail",
+        "metadata"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.287Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007288-3",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.288Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario prefiere fix completo sobre compromiso parcial",
+      "description": "Usuario pidió 'proceder con fix ciclo 52' rechazando implícitamente el compromiso de Cycle 50",
+      "context": "Cuando se identifica deuda técnica de ciclos anteriores",
+      "applicability": [
+        "user-preference",
+        "technical-debt",
+        "decision-making"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.288Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007290-4",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.290Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "SYNAPTIC dashboard puede tener cache server-side",
+      "description": "Después de cambiar projectName, dashboard puede requerir reload o restart del servicio platform",
+      "context": "Cuando se modifican metadata files que alimentan el dashboard SYNAPTIC",
+      "applicability": [
+        "synaptic",
+        "dashboard",
+        "cache"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.290Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
-    "lastCompletedTask": "Decision Gate resolved: Option B selected",
-    "currentTask": "Implementing Option B as requested by user",
+    "lastCompletedTask": "Decision Gate resolved: Option A selected",
+    "currentTask": "Implementing Option A as requested by user",
     "pendingTasks": [],
     "blockers": []
   },
@@ -1025,9 +1150,15 @@
     "[2026-04-26T23:03:20.721Z] Commit de cierre: d80d39b (12 archivos, +350/-47)",
     "[2026-04-27T02:28:41.326Z] Cycle 48 was analysis-only; its recommendations were not persisted — C49 had to reconstruct from C45-C48 thread",
     "[2026-04-27T02:28:41.327Z] Active workspace: import-1777213083759-63z86j; alias/orphan: import-1776956320164-2m9x2n",
-    "[2026-04-27T02:28:41.329Z] C49 halted at Decision Gate awaiting user choice between Options A/B/C"
+    "[2026-04-27T02:28:41.329Z] C49 halted at Decision Gate awaiting user choice between Options A/B/C",
+    "[2026-04-27T02:33:18.554Z] BITACORA Cycle 50 entry inserted at line 2909 with structured JSON",
+    "[2026-04-27T02:33:18.556Z] Synaptic Strength advanced 94.25% → 95% after sync",
+    "[2026-04-27T02:33:18.558Z] Backup .zip path still pending user confirmation",
+    "[2026-04-27T02:46:47.291Z] Cycle 50 tomó OPTION A 'minimo invasivo' que generó deuda técnica saldada en Cycle 53",
+    "[2026-04-27T02:46:47.291Z] Workspace activo amaCafe tiene historia de rename desde alias import-1776956320164-2m9x2n",
+    "[2026-04-27T02:46:47.292Z] Memoria global synaptic_workspace_alias.md actualizada para reflejar nuevo estado canonical"
   ],
-  "lastUpdated": "2026-04-27T02:28:41.330Z",
+  "lastUpdated": "2026-04-27T02:58:30.051Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2265,6 +2396,126 @@
         "score": 0,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T18:08:38.156Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053929-1",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.929Z",
+      "type": "ANTI_PATTERN",
+      "title": "ARCHITECT MODE prolongado sin POST commit pierde contexto",
+      "description": "Ciclos 26-30 en ARCHITECT MODE sin commit POST hicieron perder la tabla de 5 fixes del ciclo 30",
+      "context": "Análisis multi-ciclo sin persistir conclusiones intermedias",
+      "applicability": [
+        "synaptic-protocol",
+        "context-loss",
+        "architect-mode"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.929Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053931-2",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.931Z",
+      "type": "PATTERN",
+      "title": "Helper puro derivado + COALESCE en UPDATE",
+      "description": "Extraer lógica de derivación a helper puro y usar COALESCE($n, status) en múltiples UPDATE para consistencia",
+      "context": "Cuando misma transformación payment→fulfillment se replica en webhooks/orders/payments",
+      "applicability": [
+        "refactor",
+        "DRY",
+        "sql-update"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.931Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053933-3",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.933Z",
+      "type": "PATTERN",
+      "title": "Migración SQL idempotente con snapshot a tabla audit",
+      "description": "Backfill legacy debe snapshot estado previo a tabla _audit antes de UPDATE para reversibilidad",
+      "context": "Migraciones que corrigen datos legacy en producción",
+      "applicability": [
+        "migration",
+        "audit",
+        "data-fix"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.933Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053934-4",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.934Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "node:test built-in evita nuevas deps",
+      "description": "Usar `node --test` con `node:test` para tests cortos sin agregar Jest/Mocha al proyecto",
+      "context": "Tests unitarios de helpers puros en backend Node",
+      "applicability": [
+        "testing",
+        "node-builtin",
+        "no-deps"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.934Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053936-5",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.936Z",
+      "type": "INSIGHT",
+      "title": "Backend sin --watch requiere reinicio manual",
+      "description": "PID 73456 corre `node src/server.js` directo, fixes no se aplican hasta `kill && npm run dev`",
+      "context": "Workspace import-1776956320164-2m9x2n backend dev workflow",
+      "applicability": [
+        "dev-workflow",
+        "hot-reload",
+        "deployment"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.936Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053925-0",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.925Z",
+      "type": "USER_PREFERENCE",
+      "title": "Modo ejecución inmediata DG-079",
+      "description": "Usuario prefiere ejecutar cambios pequeños (~30 líneas) en un solo ciclo, no fragmentar en re-análisis",
+      "context": "Cuando los cambios son acotados y bien definidos tras fase ARCHITECT",
+      "applicability": [
+        "execution-mode",
+        "user-preference",
+        "DG-079"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.925Z",
         "source": "EXPLICIT"
       }
     }
