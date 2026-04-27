@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-27T22:10:47.582Z",
+  "lastUpdated": "2026-04-27T22:29:47.771Z",
   "findings": [
     {
       "id": "DC-001",
@@ -3373,18 +3373,72 @@
       "detectedInCycle": 67,
       "detectedAt": "2026-04-27T04:22:01.693Z",
       "status": "OPEN"
+    },
+    {
+      "id": "DC-138",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/keyManager.js",
+      "line": 56,
+      "description": "Unused function: 'rotateValue' (6 lines)",
+      "suggestion": "Remove unused function 'rotateValue' or export if needed elsewhere",
+      "findingId": "SAI-a0c51627",
+      "detectedInCycle": 82,
+      "detectedAt": "2026-04-27T22:29:47.771Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-139",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/crypto.js",
+      "line": 15,
+      "description": "Unused function: 'encrypt' (3 lines)",
+      "suggestion": "Remove unused function 'encrypt' or export if needed elsewhere",
+      "findingId": "SAI-cab6ae55",
+      "detectedInCycle": 82,
+      "detectedAt": "2026-04-27T22:29:47.771Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-140",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/crypto.js",
+      "line": 19,
+      "description": "Unused function: 'decrypt' (8 lines)",
+      "suggestion": "Remove unused function 'decrypt' or export if needed elsewhere",
+      "findingId": "SAI-82b16be4",
+      "detectedInCycle": 82,
+      "detectedAt": "2026-04-27T22:29:47.771Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "SEC-141",
+      "type": "security",
+      "severity": "CRITICAL",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/crypto.js",
+      "line": 9,
+      "description": "Potential hardcoded secret detected",
+      "suggestion": "Move secrets to environment variables",
+      "findingId": "SAI-adde131e",
+      "detectedInCycle": 82,
+      "detectedAt": "2026-04-27T22:29:47.771Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 203,
+    "totalOpen": 207,
     "totalResolved": 42,
     "bySeverity": {
-      "MEDIUM": 164,
-      "LOW": 39
+      "MEDIUM": 167,
+      "LOW": 39,
+      "CRITICAL": 1
     },
     "byType": {
-      "dead_code": 153,
-      "maintainability": 50
+      "dead_code": 156,
+      "maintainability": 50,
+      "security": 1
     }
   }
 }

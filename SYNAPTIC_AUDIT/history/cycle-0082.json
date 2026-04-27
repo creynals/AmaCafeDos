@@ -1,284 +1,85 @@
 {
   "cycleId": 82,
-  "timestamp": "2026-04-26T02:23:17.856Z",
-  "taskId": "task-1777169855006-v023rm7qv",
+  "timestamp": "2026-04-27T22:29:47.770Z",
+  "taskId": "task-1777328693344-rz4p5w3nx",
   "audit": {
     "passed": false,
-    "score": 0,
+    "score": 35,
     "grade": "F",
     "filesAnalyzed": [
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/webhooks.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/orders.js",
-      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/orders.js"
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/keyManager.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/crypto.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/scripts/rotate-encryption-secret.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/scripts/rotate-encryption-secret.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/keyManager.test.js"
     ],
-    "linesAnalyzed": 3132
+    "linesAnalyzed": 464
   },
   "findings": [
     {
-      "id": "DC-279",
+      "id": "DC-138",
       "type": "dead_code",
       "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
-      "line": 241,
-      "description": "Unused function: 'mapStatus' (16 lines)",
-      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/keyManager.js",
+      "line": 56,
+      "description": "Unused function: 'rotateValue' (6 lines)",
+      "suggestion": "Remove unused function 'rotateValue' or export if needed elsewhere"
     },
     {
-      "id": "DC-280",
+      "id": "DC-139",
       "type": "dead_code",
       "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
-      "line": 241,
-      "description": "Unused function: 'mapStatus' (16 lines)",
-      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/crypto.js",
+      "line": 15,
+      "description": "Unused function: 'encrypt' (3 lines)",
+      "suggestion": "Remove unused function 'encrypt' or export if needed elsewhere"
     },
     {
-      "id": "DC-281",
+      "id": "DC-140",
       "type": "dead_code",
       "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
-      "line": 241,
-      "description": "Unused function: 'mapStatus' (16 lines)",
-      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/crypto.js",
+      "line": 19,
+      "description": "Unused function: 'decrypt' (8 lines)",
+      "suggestion": "Remove unused function 'decrypt' or export if needed elsewhere"
     },
     {
-      "id": "DC-282",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
-      "line": 241,
-      "description": "Unused function: 'mapStatus' (16 lines)",
-      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
+      "id": "SEC-141",
+      "type": "security",
+      "severity": "CRITICAL",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/crypto.js",
+      "line": 9,
+      "description": "Potential hardcoded secret detected",
+      "suggestion": "Move secrets to environment variables"
     },
     {
-      "id": "DC-283",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.js",
-      "line": 241,
-      "description": "Unused function: 'mapStatus' (16 lines)",
-      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
+      "id": "MT-142",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/scripts/rotate-encryption-secret.js",
+      "line": 22,
+      "description": "Function 'main' has 80 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
     },
     {
-      "id": "DC-284",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 49,
-      "description": "Unused function: 'createCheckout' (24 lines)",
-      "suggestion": "Remove unused function 'createCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-285",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 74,
-      "description": "Unused function: 'getCheckout' (21 lines)",
-      "suggestion": "Remove unused function 'getCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-286",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 96,
-      "description": "Unused function: 'completeCheckout' (45 lines)",
-      "suggestion": "Remove unused function 'completeCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-287",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 142,
-      "description": "Unused function: 'mapStatus' (16 lines)",
-      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-288",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 159,
-      "description": "Unused function: '__reset' (3 lines)",
-      "suggestion": "Remove unused function '__reset' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-289",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 49,
-      "description": "Unused function: 'createCheckout' (24 lines)",
-      "suggestion": "Remove unused function 'createCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-290",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 74,
-      "description": "Unused function: 'getCheckout' (21 lines)",
-      "suggestion": "Remove unused function 'getCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-291",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 96,
-      "description": "Unused function: 'completeCheckout' (45 lines)",
-      "suggestion": "Remove unused function 'completeCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-292",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 142,
-      "description": "Unused function: 'mapStatus' (16 lines)",
-      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-293",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 159,
-      "description": "Unused function: '__reset' (3 lines)",
-      "suggestion": "Remove unused function '__reset' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-294",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 49,
-      "description": "Unused function: 'createCheckout' (24 lines)",
-      "suggestion": "Remove unused function 'createCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-295",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 74,
-      "description": "Unused function: 'getCheckout' (21 lines)",
-      "suggestion": "Remove unused function 'getCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-296",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 96,
-      "description": "Unused function: 'completeCheckout' (45 lines)",
-      "suggestion": "Remove unused function 'completeCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-297",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 142,
-      "description": "Unused function: 'mapStatus' (16 lines)",
-      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-298",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 159,
-      "description": "Unused function: '__reset' (3 lines)",
-      "suggestion": "Remove unused function '__reset' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-299",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 49,
-      "description": "Unused function: 'createCheckout' (24 lines)",
-      "suggestion": "Remove unused function 'createCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-300",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 74,
-      "description": "Unused function: 'getCheckout' (21 lines)",
-      "suggestion": "Remove unused function 'getCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-301",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 96,
-      "description": "Unused function: 'completeCheckout' (45 lines)",
-      "suggestion": "Remove unused function 'completeCheckout' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-302",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 142,
-      "description": "Unused function: 'mapStatus' (16 lines)",
-      "suggestion": "Remove unused function 'mapStatus' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-303",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/utils/sumup.mocks.js",
-      "line": 159,
-      "description": "Unused function: '__reset' (3 lines)",
-      "suggestion": "Remove unused function '__reset' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-304",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/orders.js",
-      "line": 91,
-      "description": "Unused function: 'for' (6 lines)",
-      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
-    },
-    {
-      "id": "DC-305",
-      "type": "dead_code",
-      "severity": "MEDIUM",
-      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1776956320164-2m9x2n/backend/src/routes/orders.js",
-      "line": 91,
-      "description": "Unused function: 'for' (6 lines)",
-      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+      "id": "MT-143",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/scripts/rotate-encryption-secret.js",
+      "line": 22,
+      "description": "Function 'main' has 80 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
     }
   ],
-  "resolvedFindingIds": [
-    "SAI-95f74304",
-    "SAI-2a084b2e"
-  ],
+  "resolvedFindingIds": [],
   "metrics": {
-    "importsUsedPercent": 0,
-    "functionsUsedPercent": 0,
+    "importsUsedPercent": 85,
+    "functionsUsedPercent": 85,
     "duplicatePatterns": 0,
-    "securityIssues": 0,
+    "securityIssues": 1,
     "consistencyScore": 100,
-    "avgComplexity": 261,
-    "filesAnalyzed": 12,
-    "linesAnalyzed": 3132
+    "avgComplexity": 93,
+    "filesAnalyzed": 5,
+    "linesAnalyzed": 464
   }
 }

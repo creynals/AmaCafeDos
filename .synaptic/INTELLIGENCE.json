@@ -653,6 +653,24 @@
       "status": "PLANNED",
       "createdAtCycle": 81,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-082-A",
+      "title": "Implement OPTION C: key versioning",
+      "description": "Add v{N}: prefix to ciphertexts, migration 014 with encryption_keys table, support multi-version decryption",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 82,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-082-B",
+      "title": "Document keyManager API in DESIGN_DOC",
+      "description": "Add section describing shared crypto module contract and consumers",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 82,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -1081,6 +1099,106 @@
         "lastReinforced": "2026-04-27T22:24:09.793Z",
         "source": "EXPLICIT"
       }
+    },
+    {
+      "learningId": "learning-82-1777329010382-0",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.382Z",
+      "type": "PATTERN",
+      "title": "Shared crypto module preserves public API",
+      "description": "Refactor duplicated crypto primitives into shared module while keeping wrapper API intact for consumers",
+      "context": "When eliminating duplication between rotator scripts and runtime modules",
+      "applicability": [
+        "refactor",
+        "crypto",
+        "shared-module",
+        "backend"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.382Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010387-1",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.387Z",
+      "type": "PATTERN",
+      "title": "Cross-module ciphertext compatibility tests",
+      "description": "Add explicit tests validating ciphertexts encrypted in one module can be decrypted in another",
+      "context": "When refactoring shared cryptographic logic to ensure no data migration needed",
+      "applicability": [
+        "testing",
+        "crypto",
+        "refactor"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.387Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010389-2",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.389Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Smoke test via node import failure",
+      "description": "Validate refactored script loads cleanly by checking it fails on missing env, not SyntaxError",
+      "context": "Quick validation of module imports without full execution environment",
+      "applicability": [
+        "testing",
+        "smoke-test",
+        "node"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.389Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010391-3",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.391Z",
+      "type": "USER_PREFERENCE",
+      "title": "Balanced option preferred over minimal/maximal",
+      "description": "User selected OPTION B (Fix + Refactor) over A (minimal fix) or C (full versioning)",
+      "context": "Decision Gate selection between scope tiers",
+      "applicability": [
+        "decision-gate",
+        "scope",
+        "user-preference"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.391Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010393-4",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.393Z",
+      "type": "PATTERN",
+      "title": "Defer scope explicitly with rationale",
+      "description": "Bug #2 versioning explicitly deferred to OPTION C — documented why out of scope",
+      "context": "When implementing balanced refactor that intentionally leaves work for future",
+      "applicability": [
+        "scope-management",
+        "documentation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.393Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1176,9 +1294,13 @@
     "[2026-04-27T22:24:09.795Z] C81 ejecuta Phase 1 (Specification) con Decision Gate obligatorio según RULES.md sección 3.1",
     "[2026-04-27T22:24:09.797Z] Bug #1 (duplicación) presente en ambos archivos; Bug #2 (sin versioning) limita migración progresiva",
     "[2026-04-27T22:24:09.798Z] Salt hardcodeado 'amacafe-salt' compartido en ambos archivos — invariante cripto crítico",
-    "[2026-04-27T22:24:09.800Z] Recomendación SYNAPTIC: OPTION B (88% confianza, 1.5–2h, riesgo MEDIUM)"
+    "[2026-04-27T22:24:09.800Z] Recomendación SYNAPTIC: OPTION B (88% confianza, 1.5–2h, riesgo MEDIUM)",
+    "[2026-04-27T22:30:10.396Z] Ciphertexts pre-Cycle-82 remain decryptable — salt and GCM format unchanged",
+    "[2026-04-27T22:30:10.397Z] Public API of crypto.js intact: routes/settings.js requires no changes",
+    "[2026-04-27T22:30:10.398Z] Test suite: keyManager.test.js (16/16) + sumup.test.js (6/6 regression) passing",
+    "[2026-04-27T22:30:10.400Z] OPTION C still pending: full key versioning with v{N}: prefix"
   ],
-  "lastUpdated": "2026-04-27T22:24:53.368Z",
+  "lastUpdated": "2026-04-27T23:15:11.329Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

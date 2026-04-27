@@ -100,6 +100,9 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-082-C | Salt 'amacafe-salt' and GCM payload format preserved | Existing ciphertexts in settings table remain decryptable — no data migration required | 2026-04-27 | 82 |
+| DEC-082-B | crypto.js becomes thin wrapper preserving {encrypt, decrypt} public API | routes/settings.js consumers unchanged — backwards-compatible refactor | 2026-04-27 | 82 |
+| DEC-082-A | Crypto primitives consolidated in backend/src/utils/keyManager.js | Eliminate duplication between rotate-encryption-secret.js and crypto.js — single source of truth | 2026-04-27 | 82 |
 | DEC-081 | Pendiente: elegir entre OPTION A (fix mínimo), B (refactor keyManager.js), C (key-versioning completo) | C79 estableció entorno local-only; C80 identificó duplicación cripto; recomendación SYNAPTIC = B por balance scope/calidad | 2026-04-27 | 81 |
 | DEC-078-B | Tar.gz físico como única fuente de verdad para rollback | Tags pre-purga son reescritos por filter-repo, perdiendo su valor como punto de restauración | 2026-04-27 | 78 |
 | DEC-078 | Ejecutar git filter-repo (Option B) como método estándar de purga | Recomendación oficial; repo local-only sin remote reduce riesgo; preserva estructura de 94 commits | 2026-04-27 | 78 |
@@ -155,6 +158,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 82] keyManager exports: deriveKey, encryptWithSecret, decryptWithSecret, rotateValue + ALGORITHM/KEY_LENGTH/IV_LENGTH constants
+- [Cycle 82] 16 round-trip tests in keyManager.test.js including cross-module compatibility
+- [Cycle 82] Bug #2 (v{N}: versioning prefix) requires migration 014 + encryption_keys table — deferred to OPTION C
 - [Cycle 81] crypto.js (45 líneas) y rotate-encryption-secret.js (138 líneas) duplican ALGORITHM, deriveKey, salt 'amacafe-salt', encrypt, decrypt
 - [Cycle 81] OPTION B propone keyManager.js como módulo compartido con rotateValue(oldSecret, newSecret, encryptedText)
 - [Cycle 81] OPTION C requiere migración 014 idempotente para prefijar valores existentes con v1:
@@ -227,6 +233,9 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 82, 2026-04-27] New shared utility layer: backend/src/utils/keyManager.js as crypto primitives module
+- [Cycle 82, 2026-04-27] crypto.js reduced from 45 to 27 lines (thin wrapper)
+- [Cycle 82, 2026-04-27] rotate-encryption-secret.js: ~30 duplicated lines removed
 - [Cycle 81, 2026-04-27] Refactor pendiente: crypto.js se convertiría en wrapper delgado sobre keyManager.js si se elige OPTION B
 - [Cycle 78, 2026-04-27] Histórico git completo reescrito: HEAD f7447e1 → 347807f, 94 commits con nuevos SHAs
 - [Cycle 67, 2026-04-27] Schema orders esteso con colonna customer_instructions TEXT

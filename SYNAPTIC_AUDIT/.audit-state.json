@@ -1,13 +1,13 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-27T22:10:47.581Z",
+  "lastUpdated": "2026-04-27T22:29:47.770Z",
   "summary": {
-    "totalCyclesAudited": 40,
+    "totalCyclesAudited": 41,
     "averageScore": 47,
-    "currentStreak": 1,
-    "lastAuditCycle": 78,
-    "lastAuditTimestamp": "2026-04-27T22:10:47.581Z",
-    "lastAuditGrade": "A"
+    "currentStreak": 0,
+    "lastAuditCycle": 82,
+    "lastAuditTimestamp": "2026-04-27T22:29:47.770Z",
+    "lastAuditGrade": "F"
   },
   "scoreHistory": [
     {
@@ -249,16 +249,22 @@
       "score": 100,
       "grade": "A",
       "timestamp": "2026-04-27T22:10:47.581Z"
+    },
+    {
+      "cycle": 82,
+      "score": 35,
+      "grade": "F",
+      "timestamp": "2026-04-27T22:29:47.770Z"
     }
   ],
   "findingsAggregate": {
-    "totalDetected": 245,
+    "totalDetected": 249,
     "totalResolved": 42,
     "byType": {
       "dead_code": {
-        "detected": 177,
+        "detected": 180,
         "resolved": 24,
-        "open": 153
+        "open": 156
       },
       "duplication": {
         "detected": 0,
@@ -266,9 +272,9 @@
         "open": 0
       },
       "security": {
-        "detected": 0,
+        "detected": 1,
         "resolved": 0,
-        "open": 0
+        "open": 1
       },
       "maintainability": {
         "detected": 68,
@@ -288,9 +294,9 @@
     },
     "bySeverity": {
       "CRITICAL": {
-        "detected": 0,
+        "detected": 1,
         "resolved": 0,
-        "open": 0
+        "open": 1
       },
       "HIGH": {
         "detected": 0,
@@ -298,9 +304,9 @@
         "open": 0
       },
       "MEDIUM": {
-        "detected": 200,
+        "detected": 203,
         "resolved": 36,
-        "open": 164
+        "open": 167
       },
       "LOW": {
         "detected": 45,

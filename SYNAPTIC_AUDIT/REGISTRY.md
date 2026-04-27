@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-27T22:10:47.583Z
+- **Last Updated:** 2026-04-27T22:29:47.773Z
 - **Status:** ACTIVE
 
 ---
@@ -11,12 +11,12 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 40 |
+| Ciclos Auditados | 41 |
 | Score Promedio | 47% |
-| Racha Actual (A/B) | 1 ciclos |
-| Último Ciclo | 78 |
-| Última Calificación | A |
-| Findings Abiertos | 203 |
+| Racha Actual (A/B) | 0 ciclos |
+| Último Ciclo | 82 |
+| Última Calificación | F |
+| Findings Abiertos | 207 |
 | Findings Resueltos | 42 |
 
 ---
@@ -25,9 +25,9 @@
 
 | Severidad | Cantidad |
 |-----------|----------|
-| CRITICAL | 0 |
+| CRITICAL | 1 |
 | HIGH | 0 |
-| MEDIUM | 164 |
+| MEDIUM | 167 |
 | LOW | 39 |
 
 ---
@@ -36,8 +36,8 @@
 
 | Tipo | Cantidad |
 |------|----------|
-| Dead Code | 153 |
-| Security | 0 |
+| Dead Code | 156 |
+| Security | 1 |
 | Maintainability | 50 |
 | Duplication | 0 |
 | Consistency | 0 |
@@ -48,16 +48,16 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-0fecdd81 | maintainability | MEDIUM | components/CheckoutModal.jsx | File has 669 lines (max recommended: 500)... |
-| SAI-20bddd48 | maintainability | LOW | components/CheckoutModal.jsx | Function 'if' has 73 lines (max recommended: 50)... |
-| SAI-6bdee2c7 | maintainability | LOW | components/CheckoutModal.jsx | Function 'StepSummary' has 53 lines (max recommend... |
-| SAI-b762aacc | maintainability | LOW | components/CheckoutModal.jsx | Function 'StepAddress' has 65 lines (max recommend... |
 | SAI-f5aeb72e | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'OrderDetailsRow' (87 lines)... |
 | SAI-2663991b | maintainability | MEDIUM | components/OrdersTab.jsx | File has 712 lines (max recommended: 500)... |
 | SAI-870ee0e4 | maintainability | LOW | components/OrdersTab.jsx | Function 'OrderDetailsRow' has 87 lines (max recom... |
 | SAI-4c303374 | dead_code | MEDIUM | components/KitchenView.jsx | Unused function: 'OrderCard' (112 lines)... |
 | SAI-00537876 | maintainability | MEDIUM | components/KitchenView.jsx | File has 513 lines (max recommended: 500)... |
 | SAI-922b21a6 | maintainability | LOW | components/KitchenView.jsx | Function 'OrderCard' has 112 lines (max recommende... |
+| SAI-a0c51627 | dead_code | MEDIUM | utils/keyManager.js | Unused function: 'rotateValue' (6 lines)... |
+| SAI-cab6ae55 | dead_code | MEDIUM | utils/crypto.js | Unused function: 'encrypt' (3 lines)... |
+| SAI-82b16be4 | dead_code | MEDIUM | utils/crypto.js | Unused function: 'decrypt' (8 lines)... |
+| SAI-adde131e | security | CRITICAL | utils/crypto.js | Potential hardcoded secret detected... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 99 | 80 | B |
 | 100 | 0 | F |
 | 103 | 100 | A |
 | 3 | 0 | F |
@@ -85,6 +84,7 @@
 | 57 | 100 | A |
 | 67 | 0 | F |
 | 78 | 100 | A |
+| 82 | 35 | F |
 
 ---
 
