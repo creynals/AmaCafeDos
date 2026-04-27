@@ -502,271 +502,27 @@
       "status": "PLANNED",
       "createdAtCycle": 57,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-067-1",
+      "title": "Validazione E2E manuale Cycle 67",
+      "description": "Restart backend, completare ordine con istruzioni, verificare visualizzazione in OrdersTab e KitchenView",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 67,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-067-2",
+      "title": "Risolvere config ESLint backend mancante tsconfig.json",
+      "description": "Aggiungere tsconfig.json o aggiornare config ESLint per consentire lint backend",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 67,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-44-1777244600711-0",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.711Z",
-      "type": "USER_PREFERENCE",
-      "title": "No ejecutar acciones destructivas sin confirmación explícita",
-      "description": "Purga de historial git y rotación real de secrets requieren confirmación previa del usuario",
-      "context": "Operaciones que reescriben historia compartida o invalidan datos cifrados existentes",
-      "applicability": [
-        "security",
-        "git",
-        "destructive-ops"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.711Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921312-0",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.312Z",
-      "type": "ANTI_PATTERN",
-      "title": "Recommendations not persisted in BITACORA",
-      "description": "Cycle 48 verbal recommendations were not written to BITACORA, blocking C49 execution",
-      "context": "When a cycle produces actionable recommendations but only logs the prompt/metrics",
-      "applicability": [
-        "bitacora",
-        "persistence",
-        "recommendations"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.312Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921317-1",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.317Z",
-      "type": "USER_PREFERENCE",
-      "title": "Decision Gate when ambiguity detected",
-      "description": "Halt and present A/B/C options instead of guessing what 'execute recommendations' means",
-      "context": "When user request references prior cycle output that is not explicitly persisted",
-      "applicability": [
-        "decision-gate",
-        "ambiguity",
-        "synaptic-protocol"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.317Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921320-2",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.320Z",
-      "type": "INSIGHT",
-      "title": "Workspace identity drift across cycles",
-      "description": "Metadata projectName (import-1776956320164-2m9x2n) diverges from physical dir (import-1777213083759-63z86j)",
-      "context": "When .synaptic-workspace.json projectName does not match the active cwd",
-      "applicability": [
-        "workspace",
-        "metadata",
-        "synaptic"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.320Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921322-3",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.322Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Orphan workspace directory risk",
-      "description": "Two workspace dirs exist on disk; only one receives changes — risk of editing wrong path",
-      "context": "Multi-workspace SYNAPTIC setups with historical aliases",
-      "applicability": [
-        "workspace",
-        "filesystem",
-        "risk"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.322Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921324-4",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.324Z",
-      "type": "PATTERN",
-      "title": "Cwd guard in server.js",
-      "description": "Add startup check that process.cwd() contains expected workspace dir; fail fast if not",
-      "context": "Backend startup in multi-workspace environments",
-      "applicability": [
-        "backend",
-        "server.js",
-        "guard",
-        "startup"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.324Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-50-1777257198541-0",
-      "cycle": 50,
-      "timestamp": "2026-04-27T02:33:18.541Z",
-      "type": "PATTERN",
-      "title": "Minimum-invasive metadata sync for workspace alias divergence",
-      "description": "Add aliasOf/canonicalDir fields + WORKSPACE_IDENTITY.md + DEPRECATED.md marker instead of renaming dirs",
-      "context": "When physical workspace dir differs from historical projectName alias and rename would break INTELLIGENCE chain",
-      "applicability": [
-        "workspace",
-        "metadata",
-        "synaptic",
-        "alias"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:33:18.541Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-50-1777257198546-1",
-      "cycle": 50,
-      "timestamp": "2026-04-27T02:33:18.546Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Preserve projectName field on alias divergence",
-      "description": "Original projectName must be retained in .synaptic-workspace.json to keep cycles 1-49 INTELLIGENCE chain intact",
-      "context": "Modifying .synaptic-workspace.json when canonical dir name changed",
-      "applicability": [
-        "synaptic",
-        "metadata",
-        "backwards-compat"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:33:18.546Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-50-1777257198549-2",
-      "cycle": 50,
-      "timestamp": "2026-04-27T02:33:18.549Z",
-      "type": "USER_PREFERENCE",
-      "title": "User prefers minimum-invasive options when offered",
-      "description": "User selected OPTION A (mínimo invasivo) over alternatives — favor non-destructive metadata changes",
-      "context": "When presenting multi-option decision gates with invasiveness tradeoffs",
-      "applicability": [
-        "decision-gate",
-        "user-preference"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:33:18.549Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-50-1777257198551-3",
-      "cycle": 50,
-      "timestamp": "2026-04-27T02:33:18.551Z",
-      "type": "PATTERN",
-      "title": "DEPRECATED.md marker in orphan directories",
-      "description": "Mark abandoned/orphan dirs with DEPRECATED.md pointing to active canonical dir for discoverability",
-      "context": "When a directory is superseded but cannot be deleted (history, backups, references)",
-      "applicability": [
-        "workspace",
-        "documentation",
-        "cleanup"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:33:18.551Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-53-1777258007285-0",
-      "cycle": 53,
-      "timestamp": "2026-04-27T02:46:47.285Z",
-      "type": "ANTI_PATTERN",
-      "title": "Compromiso 'minimo invasivo' deja deuda técnica",
-      "description": "Cycle 50 preservó projectName legacy por 'continuidad histórica', causando UX confuso en Cycles 51-52",
-      "context": "Cuando se hace rename de workspace, actualizar TODOS los metadata operativos, no solo algunos",
-      "applicability": [
-        "rename",
-        "metadata",
-        "technical-debt",
-        "synaptic"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:46:47.285Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-53-1777258007286-1",
-      "cycle": 53,
-      "timestamp": "2026-04-27T02:46:47.286Z",
-      "type": "INSIGHT",
-      "title": "Cadena de aprendizaje vive en decisions[] y BITACORA, no en projectName",
-      "description": "El miedo a romper continuidad histórica al renombrar projectName era infundado",
-      "context": "Audit trail se preserva en previousName, decisions[], BITACORA append-only y backups",
-      "applicability": [
-        "audit-trail",
-        "rename",
-        "data-integrity"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:46:47.286Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-53-1777258007287-2",
-      "cycle": 53,
-      "timestamp": "2026-04-27T02:46:47.287Z",
-      "type": "PATTERN",
-      "title": "Rename completo con campos de trazabilidad",
-      "description": "Agregar previousProjectName, renamedAt, renamedReason al hacer rename para preservar audit trail",
-      "context": "Al renombrar entidades en metadata JSON",
-      "applicability": [
-        "rename",
-        "audit-trail",
-        "metadata"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:46:47.287Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-53-1777258007288-3",
       "cycle": 53,
@@ -781,30 +537,10 @@
         "decision-making"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:46:47.288Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-53-1777258007290-4",
-      "cycle": 53,
-      "timestamp": "2026-04-27T02:46:47.290Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "SYNAPTIC dashboard puede tener cache server-side",
-      "description": "Después de cambiar projectName, dashboard puede requerir reload o restart del servicio platform",
-      "context": "Cuando se modifican metadata files que alimentan el dashboard SYNAPTIC",
-      "applicability": [
-        "synaptic",
-        "dashboard",
-        "cache"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:46:47.290Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -926,6 +662,126 @@
         "lastReinforced": "2026-04-27T03:06:19.332Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-67-1777263746562-0",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.563Z",
+      "type": "PATTERN",
+      "title": "Verifica anti-C53 con grep multi-file",
+      "description": "Prima di dichiarare successo, grep del simbolo chiave su tutti i file attesi (8/8)",
+      "context": "Al termine di implementazioni multi-file per evitare false dichiarazioni di completamento",
+      "applicability": [
+        "validation",
+        "multi-file-changes",
+        "anti-regression"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.563Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746569-1",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.569Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Naming semantico per evitare collisioni",
+      "description": "customer_instructions distingue da order_items.notes (per prodotto) e address_notes (entrega)",
+      "context": "Quando si aggiungono campi note/instrucciones in domini con più livelli semantici",
+      "applicability": [
+        "db-schema",
+        "naming",
+        "domain-modeling"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.569Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746571-2",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.571Z",
+      "type": "PATTERN",
+      "title": "Migrazione SQL idempotente con IF NOT EXISTS",
+      "description": "ALTER TABLE ADD COLUMN IF NOT EXISTS per migrazioni rieseguibili senza errori",
+      "context": "Migrazioni DB in ambienti dev/prod con possibili re-run",
+      "applicability": [
+        "migrations",
+        "postgresql",
+        "idempotency"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.571Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746573-3",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.573Z",
+      "type": "PATTERN",
+      "title": "Validazione duale client+server per input testuali",
+      "description": "Cap 1000 chars enforced sia lato server (validation) sia lato UI (maxLength + counter)",
+      "context": "Campi testuali liberi esposti a utenti finali",
+      "applicability": [
+        "validation",
+        "ux",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.573Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746574-4",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.574Z",
+      "type": "INSIGHT",
+      "title": "Distinzione visiva esplicita in Vista de Cocina",
+      "description": "Icona MessageSquare + bordo accentuato separa istruzioni cliente da indicazioni di consegna",
+      "context": "UI con più tipologie di note che potrebbero essere confuse dall'operatore",
+      "applicability": [
+        "ux",
+        "kitchen-view",
+        "visual-hierarchy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.574Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746577-5",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.577Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "ESLint backend errore preesistente non bloccante",
+      "description": "Config ESLint backend richiede tsconfig.json mancante; node --check sufficiente per syntax",
+      "context": "Validazione backend amaCafe quando ESLint fallisce per config issue non correlati",
+      "applicability": [
+        "eslint",
+        "backend",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.577Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1005,9 +861,13 @@
     "[2026-04-27T03:06:19.334Z] Workspace renamed: import-1776956320164-2m9x2n (legacy) → amaCafe (canónico desde C57)",
     "[2026-04-27T03:06:19.335Z] Directorio físico canónico: import-1777213083759-63z86j",
     "[2026-04-27T03:06:19.336Z] C53→C56 fue deuda técnica saldada en C57; cualquier referencia futura al alias legacy en metadata operativa es un bug",
-    "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side"
+    "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side",
+    "[2026-04-27T04:22:26.578Z] Cycle 66 era in modalità ARCHITECT (analisi); Cycle 67 ha eseguito il piano in DG-079 Immediate Execution",
+    "[2026-04-27T04:22:26.579Z] E2E manuale pendente: richiede restart backend per migrazione 014",
+    "[2026-04-27T04:22:26.580Z] Lezione C53 applicata: rilettura/grep finale prima di dichiarare successo",
+    "[2026-04-27T04:22:26.581Z] 8 file modificati: 3 backend + 4 frontend + BITACORA"
   ],
-  "lastUpdated": "2026-04-27T04:12:46.182Z",
+  "lastUpdated": "2026-04-27T21:59:31.388Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2668,6 +2528,288 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T22:09:36.627Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600711-0",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.711Z",
+      "type": "USER_PREFERENCE",
+      "title": "No ejecutar acciones destructivas sin confirmación explícita",
+      "description": "Purga de historial git y rotación real de secrets requieren confirmación previa del usuario",
+      "context": "Operaciones que reescriben historia compartida o invalidan datos cifrados existentes",
+      "applicability": [
+        "security",
+        "git",
+        "destructive-ops"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.711Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921312-0",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.312Z",
+      "type": "ANTI_PATTERN",
+      "title": "Recommendations not persisted in BITACORA",
+      "description": "Cycle 48 verbal recommendations were not written to BITACORA, blocking C49 execution",
+      "context": "When a cycle produces actionable recommendations but only logs the prompt/metrics",
+      "applicability": [
+        "bitacora",
+        "persistence",
+        "recommendations"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.312Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921320-2",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.320Z",
+      "type": "INSIGHT",
+      "title": "Workspace identity drift across cycles",
+      "description": "Metadata projectName (import-1776956320164-2m9x2n) diverges from physical dir (import-1777213083759-63z86j)",
+      "context": "When .synaptic-workspace.json projectName does not match the active cwd",
+      "applicability": [
+        "workspace",
+        "metadata",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.320Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921322-3",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.322Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Orphan workspace directory risk",
+      "description": "Two workspace dirs exist on disk; only one receives changes — risk of editing wrong path",
+      "context": "Multi-workspace SYNAPTIC setups with historical aliases",
+      "applicability": [
+        "workspace",
+        "filesystem",
+        "risk"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.322Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921324-4",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.324Z",
+      "type": "PATTERN",
+      "title": "Cwd guard in server.js",
+      "description": "Add startup check that process.cwd() contains expected workspace dir; fail fast if not",
+      "context": "Backend startup in multi-workspace environments",
+      "applicability": [
+        "backend",
+        "server.js",
+        "guard",
+        "startup"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.324Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198541-0",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.541Z",
+      "type": "PATTERN",
+      "title": "Minimum-invasive metadata sync for workspace alias divergence",
+      "description": "Add aliasOf/canonicalDir fields + WORKSPACE_IDENTITY.md + DEPRECATED.md marker instead of renaming dirs",
+      "context": "When physical workspace dir differs from historical projectName alias and rename would break INTELLIGENCE chain",
+      "applicability": [
+        "workspace",
+        "metadata",
+        "synaptic",
+        "alias"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.541Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198546-1",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.546Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Preserve projectName field on alias divergence",
+      "description": "Original projectName must be retained in .synaptic-workspace.json to keep cycles 1-49 INTELLIGENCE chain intact",
+      "context": "Modifying .synaptic-workspace.json when canonical dir name changed",
+      "applicability": [
+        "synaptic",
+        "metadata",
+        "backwards-compat"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.546Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198551-3",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.551Z",
+      "type": "PATTERN",
+      "title": "DEPRECATED.md marker in orphan directories",
+      "description": "Mark abandoned/orphan dirs with DEPRECATED.md pointing to active canonical dir for discoverability",
+      "context": "When a directory is superseded but cannot be deleted (history, backups, references)",
+      "applicability": [
+        "workspace",
+        "documentation",
+        "cleanup"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.551Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921317-1",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.317Z",
+      "type": "USER_PREFERENCE",
+      "title": "Decision Gate when ambiguity detected",
+      "description": "Halt and present A/B/C options instead of guessing what 'execute recommendations' means",
+      "context": "When user request references prior cycle output that is not explicitly persisted",
+      "applicability": [
+        "decision-gate",
+        "ambiguity",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.317Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198549-2",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.549Z",
+      "type": "USER_PREFERENCE",
+      "title": "User prefers minimum-invasive options when offered",
+      "description": "User selected OPTION A (mínimo invasivo) over alternatives — favor non-destructive metadata changes",
+      "context": "When presenting multi-option decision gates with invasiveness tradeoffs",
+      "applicability": [
+        "decision-gate",
+        "user-preference"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.549Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007285-0",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.285Z",
+      "type": "ANTI_PATTERN",
+      "title": "Compromiso 'minimo invasivo' deja deuda técnica",
+      "description": "Cycle 50 preservó projectName legacy por 'continuidad histórica', causando UX confuso en Cycles 51-52",
+      "context": "Cuando se hace rename de workspace, actualizar TODOS los metadata operativos, no solo algunos",
+      "applicability": [
+        "rename",
+        "metadata",
+        "technical-debt",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.285Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007286-1",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.286Z",
+      "type": "INSIGHT",
+      "title": "Cadena de aprendizaje vive en decisions[] y BITACORA, no en projectName",
+      "description": "El miedo a romper continuidad histórica al renombrar projectName era infundado",
+      "context": "Audit trail se preserva en previousName, decisions[], BITACORA append-only y backups",
+      "applicability": [
+        "audit-trail",
+        "rename",
+        "data-integrity"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.286Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007287-2",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.287Z",
+      "type": "PATTERN",
+      "title": "Rename completo con campos de trazabilidad",
+      "description": "Agregar previousProjectName, renamedAt, renamedReason al hacer rename para preservar audit trail",
+      "context": "Al renombrar entidades en metadata JSON",
+      "applicability": [
+        "rename",
+        "audit-trail",
+        "metadata"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.287Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007290-4",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.290Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "SYNAPTIC dashboard puede tener cache server-side",
+      "description": "Después de cambiar projectName, dashboard puede requerir reload o restart del servicio platform",
+      "context": "Cuando se modifican metadata files que alimentan el dashboard SYNAPTIC",
+      "applicability": [
+        "synaptic",
+        "dashboard",
+        "cache"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.290Z",
+        "source": "INFERRED"
       }
     }
   ]

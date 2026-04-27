@@ -524,26 +524,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-53-1777258007288-3",
-      "cycle": 53,
-      "timestamp": "2026-04-27T02:46:47.288Z",
-      "type": "USER_PREFERENCE",
-      "title": "Usuario prefiere fix completo sobre compromiso parcial",
-      "description": "Usuario pidió 'proceder con fix ciclo 52' rechazando implícitamente el compromiso de Cycle 50",
-      "context": "Cuando se identifica deuda técnica de ciclos anteriores",
-      "applicability": [
-        "user-preference",
-        "technical-debt",
-        "decision-making"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:46:47.288Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
       "learningId": "learning-57-1777259179318-0",
       "cycle": 57,
       "timestamp": "2026-04-27T03:06:19.318Z",
@@ -867,7 +847,7 @@
     "[2026-04-27T04:22:26.580Z] Lezione C53 applicata: rilettura/grep finale prima di dichiarare successo",
     "[2026-04-27T04:22:26.581Z] 8 file modificati: 3 backend + 4 frontend + BITACORA"
   ],
-  "lastUpdated": "2026-04-27T21:59:31.388Z",
+  "lastUpdated": "2026-04-27T22:02:02.354Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2810,6 +2790,26 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:46:47.290Z",
         "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-53-1777258007288-3",
+      "cycle": 53,
+      "timestamp": "2026-04-27T02:46:47.288Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario prefiere fix completo sobre compromiso parcial",
+      "description": "Usuario pidió 'proceder con fix ciclo 52' rechazando implícitamente el compromiso de Cycle 50",
+      "context": "Cuando se identifica deuda técnica de ciclos anteriores",
+      "applicability": [
+        "user-preference",
+        "technical-debt",
+        "decision-making"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:46:47.288Z",
+        "source": "EXPLICIT"
       }
     }
   ]
