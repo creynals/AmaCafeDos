@@ -617,7 +617,7 @@
         "user-frustration"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T03:06:19.330Z",
         "source": "EXPLICIT"
@@ -1059,7 +1059,7 @@
     "[2026-04-27T22:11:15.182Z] CREDENTIAL_ROTATION_C78.md contiene checklist accionable de rotación pendiente",
     "[2026-04-27T22:11:15.183Z] Credenciales expuestas históricamente: ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT secret, DB password"
   ],
-  "lastUpdated": "2026-04-27T22:12:38.690Z",
+  "lastUpdated": "2026-04-27T22:16:44.749Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
