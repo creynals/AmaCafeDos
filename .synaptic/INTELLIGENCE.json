@@ -1309,7 +1309,7 @@
     "[2026-04-27T03:06:19.336Z] C53→C56 fue deuda técnica saldada en C57; cualquier referencia futura al alias legacy en metadata operativa es un bug",
     "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side"
   ],
-  "lastUpdated": "2026-04-27T03:09:11.974Z",
+  "lastUpdated": "2026-04-27T03:15:07.090Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
