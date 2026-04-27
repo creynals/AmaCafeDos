@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-26T22:09:16.408Z",
+  "lastUpdated": "2026-04-26T23:02:43.727Z",
   "findings": [
     {
       "id": "DC-001",
@@ -2944,18 +2944,96 @@
       "detectedInCycle": 42,
       "detectedAt": "2026-04-26T22:09:16.408Z",
       "status": "OPEN"
+    },
+    {
+      "id": "MT-842",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/scripts/rotate-encryption-secret.js",
+      "line": 53,
+      "description": "Function 'main' has 80 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-2832d09c",
+      "detectedInCycle": 44,
+      "detectedAt": "2026-04-26T23:02:43.727Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-843",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/middleware/auth.js",
+      "line": 3,
+      "description": "Unused function: 'requireAuth' (15 lines)",
+      "suggestion": "Remove unused function 'requireAuth' or export if needed elsewhere",
+      "findingId": "SAI-834c1973",
+      "detectedInCycle": 44,
+      "detectedAt": "2026-04-26T23:02:43.727Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-844",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/middleware/auth.js",
+      "line": 22,
+      "description": "Unused function: 'requireAdmin' (6 lines)",
+      "suggestion": "Remove unused function 'requireAdmin' or export if needed elsewhere",
+      "findingId": "SAI-f344afa6",
+      "detectedInCycle": 44,
+      "detectedAt": "2026-04-26T23:02:43.727Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-845",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/middleware/auth.js",
+      "line": 29,
+      "description": "Unused function: 'requireSuperAdmin' (6 lines)",
+      "suggestion": "Remove unused function 'requireSuperAdmin' or export if needed elsewhere",
+      "findingId": "SAI-23aecb80",
+      "detectedInCycle": 44,
+      "detectedAt": "2026-04-26T23:02:43.727Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-846",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/middleware/security.js",
+      "line": 29,
+      "description": "Unused function: 'sanitizeResponse' (20 lines)",
+      "suggestion": "Remove unused function 'sanitizeResponse' or export if needed elsewhere",
+      "findingId": "SAI-a42187c7",
+      "detectedInCycle": 44,
+      "detectedAt": "2026-04-26T23:02:43.727Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-847",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/middleware/security.js",
+      "line": 53,
+      "description": "Unused function: 'chatInputSanitizer' (19 lines)",
+      "suggestion": "Remove unused function 'chatInputSanitizer' or export if needed elsewhere",
+      "findingId": "SAI-17473f47",
+      "detectedInCycle": 44,
+      "detectedAt": "2026-04-26T23:02:43.727Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 178,
+    "totalOpen": 184,
     "totalResolved": 36,
     "bySeverity": {
-      "MEDIUM": 143,
-      "LOW": 35
+      "MEDIUM": 148,
+      "LOW": 36
     },
     "byType": {
-      "dead_code": 134,
-      "maintainability": 44
+      "dead_code": 139,
+      "maintainability": 45
     }
   }
 }

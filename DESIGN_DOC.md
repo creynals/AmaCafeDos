@@ -96,6 +96,10 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-044-4 | Script de rotación de secrets siempre con dry-run por defecto | Operaciones destructivas requieren paso explícito --apply para evitar ejecuciones accidentales | 2026-04-26 | 44 |
+| DEC-044-3 | Rate limiters dedicados por endpoint sensible en middleware/security.js | Perfiles de abuso distintos requieren límites distintos (login=brute force, upload=DoS) | 2026-04-26 | 44 |
+| DEC-044-2 | requireAdmin aplicado en server.js a nivel de mount, no en cada router | Single source of truth para autorización admin; evita olvidar el guard en routers nuevos | 2026-04-26 | 44 |
+| DEC-044-1 | Adoptar helmet@^8 con CSP custom (SumUp + reCAPTCHA whitelisted) | Defensa en profundidad: CSP previene XSS y limita orígenes externos a los estrictamente necesarios | 2026-04-26 | 44 |
 | DEC-043 | Hero compacto sin h1 ni CTA 'Ver Menu' | h1 redundante con logo del header; CTA innecesario porque la grilla está inmediatamente debajo | 2026-04-26 | 42 |
 | DEC-042 | Tagline 'Una nueva experiencia para disfrutar' migrado al header como pill central | Liberar espacio del Hero para que la grilla suba above-the-fold | 2026-04-26 | 42 |
 | DEC-081 | Eliminar endpoint duplicado en settings.js, dejar comentario apuntando a server.js | Evitar código muerto y confusión sobre cuál handler responde | 2026-04-26 | 39 |
@@ -134,6 +138,10 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 44] ENCRYPTION_SECRET cifra settings.sumup_* y settings.recaptcha_secret_key — rotar requiere decrypt+re-encrypt
+- [Cycle 44] helmet@^8.1.0 añadido como dependencia en backend/package.json
+- [Cycle 44] 7 mounts admin protegidos con requireAdmin en server.js
+- [Cycle 44] Limiters: authLimiter (/auth/login), bulkImportLimiter (/bulk-import), uploadImageLimiter (/upload-image)
 - [Cycle 42] Header.jsx: pill tagline con icono Coffee, oculto en mobile (<md)
 - [Cycle 42] Hero.jsx: padding reducido a py-6 sm:py-8 (~70-80% menos altura)
 - [Cycle 42] Build: 1753 módulos, 156ms, 0 errores ESLint
@@ -178,6 +186,8 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 44, 2026-04-26] Capa de seguridad HTTP centralizada: helmet + CSP + rate-limits + requireAdmin en server.js
+- [Cycle 44, 2026-04-26] backend/.env removido del tracking git (sigue en disco local)
 - [Cycle 39, 2026-04-26] server.js ahora registra rutas públicas individuales antes del mount con auth global
 - [Cycle 31, 2026-04-26] Centralización de lógica fulfillment en backend/src/utils/sumup.js (single source of truth)
 - [Cycle 25, 2026-04-26] Nuevo componente KitchenView.jsx (~370 líneas) bajo Órdenes

@@ -303,132 +303,36 @@
       "status": "PLANNED",
       "createdAtCycle": 31,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-040",
+      "title": "Validar E2E del Chat AI tras fix reCAPTCHA",
+      "description": "Usuario debe refrescar storefront, abrir chat y verificar Network tab + envío de mensaje sin error",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 39,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-041",
+      "title": "Auditar otros endpoints 'Public' bajo mounts con requireAuth",
+      "description": "Buscar comentarios 'Public endpoint' en routers montados con auth global y aplicar mismo patrón",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 39,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-042",
+      "title": "Validación E2E del rediseño Hero/Header",
+      "description": "Usuario debe refrescar localhost:8080 y validar layout desktop + mobile + footer intacto",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 42,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-14-1777221202235-0",
-      "cycle": 14,
-      "timestamp": "2026-04-26T16:33:22.235Z",
-      "type": "USER_PREFERENCE",
-      "title": "Immediate Execution Mode (DG-079)",
-      "description": "Usuario autoriza ejecución directa sin Decision Gate cuando indica 'modo ejecución inmediata'",
-      "context": "Cuando el requerimiento es claro y el usuario explicita bypass del Decision Gate",
-      "applicability": [
-        "workflow",
-        "decision-gate",
-        "synaptic-protocol"
-      ],
-      "confidence": {
-        "score": 0.6500000000000001,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-26T17:45:36.516Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813420-0",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.420Z",
-      "type": "ANTI_PATTERN",
-      "title": "Stale backend from prior workspace",
-      "description": "Backend PID was running from old workspace dir, masking new routes as 404 across cycles 11-17",
-      "context": "Multi-workspace projects sharing ports; verify process cwd before debugging missing endpoints",
-      "applicability": [
-        "debugging",
-        "workspace",
-        "process-management",
-        "404"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.420Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813424-1",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.424Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Express 5 + path-to-regexp v8 break inline regex",
-      "description": "Route patterns like ':id(\\d+)' crash startup; remove regex and use Number.isInteger guard in handler",
-      "context": "Any Express 5 migration or new route definition with numeric param constraints",
-      "applicability": [
-        "express",
-        "routing",
-        "migration",
-        "path-to-regexp"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.424Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813426-2",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.426Z",
-      "type": "PATTERN",
-      "title": "Vite must proxy /static for backend-served assets",
-      "description": "Without '/static' proxy, uploaded images return SPA HTML instead of file (silent failure)",
-      "context": "Vite dev server fronting a backend that serves uploaded media",
-      "applicability": [
-        "vite",
-        "proxy",
-        "static-assets",
-        "uploads"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.426Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813427-3",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.428Z",
-      "type": "INSIGHT",
-      "title": "Architect-mode cycles missed runtime state",
-      "description": "Pure code analysis cannot detect process/cwd mismatches; runtime inspection (lsof) is required",
-      "context": "When user reports 'fix doesn't work' despite correct commits",
-      "applicability": [
-        "debugging",
-        "synaptic",
-        "architect-mode"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.427Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-18-1777222813429-4",
-      "cycle": 18,
-      "timestamp": "2026-04-26T17:00:13.429Z",
-      "type": "USER_PREFERENCE",
-      "title": "Single-word 'arregla' = full diagnostic + fix",
-      "description": "Terse user requests after frustration cycles expect immediate execution, not more analysis",
-      "context": "User has been through multiple architect-mode cycles without resolution",
-      "applicability": [
-        "communication",
-        "synaptic",
-        "dg-079"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:00:13.429Z",
-        "source": "EXPLICIT"
-      }
-    },
     {
       "learningId": "learning-21-1777224416937-0",
       "cycle": 21,
@@ -443,150 +347,10 @@
         "ambiguous-input"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:26:56.937Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-21-1777224416940-1",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.940Z",
-      "type": "PATTERN",
-      "title": "Three-option Decision Gate structure",
-      "description": "Conservative / Balanced (recommended) / Innovative trio with pros, cons, time, risk, confidence",
-      "context": "Phase 1 Specification when multiple roadmap paths are viable",
-      "applicability": [
-        "synaptic",
-        "phase-1",
-        "specification"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.940Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-21-1777224416942-2",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.942Z",
-      "type": "INSIGHT",
-      "title": "Cycles 19-20 left payment flow in analysis without implementation",
-      "description": "ARCHITECT MODE cycles produced analysis of checkout redirect + success page but no fix shipped",
-      "context": "Open work item: payment flow needs implementation cycle",
-      "applicability": [
-        "payment-flow",
-        "architect-mode",
-        "open-loop"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.942Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-21-1777224416943-3",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.943Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Post cycles 11-17, evidence-of-health is high priority",
-      "description": "User concern after long frustration arc means E2E validation generates trust signal",
-      "context": "Recommending validation sprints over new features",
-      "applicability": [
-        "e2e",
-        "validation",
-        "trust"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.943Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536508-0",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.508Z",
-      "type": "PATTERN",
-      "title": "Tab consolidation with sub-navigation",
-      "description": "Group related tabs under parent tab with underline sub-tabs to reduce visual saturation",
-      "context": "When admin UI has 3+ related tabs cluttering top-level navigation",
-      "applicability": [
-        "ux",
-        "admin-ui",
-        "navigation",
-        "react"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.508Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536511-1",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.511Z",
-      "type": "PATTERN",
-      "title": "Visual hierarchy via differentiated tab styles",
-      "description": "Pills (ámbar) for main tabs, underline (ámbar) for sub-tabs creates clear hierarchy",
-      "context": "Multi-level tab navigation in admin panels",
-      "applicability": [
-        "ux",
-        "design-system",
-        "tailwind"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.511Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536514-2",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.514Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Conditional mounting preserves sub-tab state",
-      "description": "Separate conditional mounts per sub-tab keeps component state across sub-tab switches",
-      "context": "Sub-navigation where users expect state preservation between tabs",
-      "applicability": [
-        "react",
-        "state-management"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.514Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536517-4",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.517Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "7 ESLint errors are preexisting baseline",
-      "description": "The 7 ESLint errors in frontend are preexisting and documented; new changes must not add to them",
-      "context": "Validating lint output after frontend changes in this project",
-      "applicability": [
-        "lint",
-        "validation",
-        "frontend"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.517Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -702,9 +466,9 @@
         "dev-workflow"
       ],
       "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.154Z",
+        "score": 0.44999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-26T21:53:44.189Z",
         "source": "INFERRED"
       }
     },
@@ -846,6 +610,167 @@
         "lastReinforced": "2026-04-26T19:00:53.936Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-39-1777240424179-0",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.179Z",
+      "type": "ANTI_PATTERN",
+      "title": "Global requireAuth oculta rutas públicas",
+      "description": "Mount global con requireAuth swallowea endpoints marcados 'Public' dentro del router",
+      "context": "Express con auth middleware aplicado en app.use() antes del router",
+      "applicability": [
+        "express",
+        "auth",
+        "routing",
+        "backend"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.179Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424184-1",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.184Z",
+      "type": "PATTERN",
+      "title": "Registrar handler público antes del mount protegido",
+      "description": "Importar handler y registrar ruta pública en server.js ANTES del app.use con requireAuth",
+      "context": "Cuando un router contiene mezcla de rutas públicas y protegidas bajo auth global",
+      "applicability": [
+        "express",
+        "auth",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.184Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424187-2",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.187Z",
+      "type": "ANTI_PATTERN",
+      "title": ".catch(()=>{}) silencia 401 críticos",
+      "description": "Frontend silenciaba el 401 del endpoint reCAPTCHA dejando siteKey null sin feedback",
+      "context": "Fetch en widgets de UI que dependen de config remota",
+      "applicability": [
+        "frontend",
+        "error-handling",
+        "debugging"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.187Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424190-4",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.190Z",
+      "type": "INSIGHT",
+      "title": "Comentario 'Public endpoint' no garantiza acceso público",
+      "description": "El comentario en el route file miente si el mount aplica auth global",
+      "context": "Auditoría de endpoints supuestamente públicos",
+      "applicability": [
+        "express",
+        "code-review",
+        "auth"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.190Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376627-0",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.627Z",
+      "type": "USER_PREFERENCE",
+      "title": "Enfoque A pre-aprobado en ciclo previo",
+      "description": "Usuario eligió Enfoque A en ciclo 41; ciclo 42 ejecuta inmediato sin re-confirmar",
+      "context": "Cuando un ciclo previo presenta opciones y usuario elige una explícitamente",
+      "applicability": [
+        "execution-mode",
+        "DG-079",
+        "immediate-execution"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.627Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376629-1",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.629Z",
+      "type": "PATTERN",
+      "title": "Tagline en header pill con responsive hide",
+      "description": "Pill central con hidden md:inline-flex oculta tagline en mobile preservando iconos esenciales",
+      "context": "Headers con logo + tagline + iconos en breakpoints angostos",
+      "applicability": [
+        "responsive-design",
+        "tailwind",
+        "header-layout"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.629Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376630-2",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.630Z",
+      "type": "PATTERN",
+      "title": "Hero compacto reduce padding 70-80%",
+      "description": "py-16 sm:py-24 → py-6 sm:py-8 sube grilla above-the-fold sin perder mensaje",
+      "context": "Cuando hero ocupa demasiado espacio y oculta contenido principal",
+      "applicability": [
+        "UX",
+        "above-the-fold",
+        "hero-design"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.630Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376631-3",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.631Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Layout flex con shrink-0 + min-w-0 + truncate",
+      "description": "Logo y iconos shrink-0, pill min-w-0 + truncate evita romper layout en breakpoints",
+      "context": "Headers de 3 secciones con contenido variable",
+      "applicability": [
+        "tailwind",
+        "flexbox",
+        "responsive"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.631Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -901,9 +826,16 @@
     "[2026-04-26T19:00:53.938Z] Backend corre como PID 73456 sin --watch, requiere reinicio manual para aplicar fixes #1-#4",
     "[2026-04-26T19:00:53.938Z] ARCHITECT MODE sin POST commits causa pérdida de contexto entre ciclos - persistir tablas en BITACORA",
     "[2026-04-26T19:00:53.939Z] Modo DG-079 (ejecución inmediata) es la preferencia del usuario para cambios <50 líneas bien definidos",
-    "[2026-04-26T19:00:53.940Z] Workspace activo: import-1776956320164-2m9x2n (no confundir con import-1777213083759-63z86j)"
+    "[2026-04-26T19:00:53.940Z] Workspace activo: import-1776956320164-2m9x2n (no confundir con import-1777213083759-63z86j)",
+    "[2026-04-26T21:53:44.191Z] Workspace activo: import-1777213083759-63z86j (donde corre backend node --watch)",
+    "[2026-04-26T21:53:44.192Z] DB: recaptcha_enabled=true con siteKey y secretKey configurados",
+    "[2026-04-26T21:53:44.193Z] Ciclo 38 fue solo análisis sin commits - tuvo que reconstruirse el contexto",
+    "[2026-04-26T21:53:44.194Z] E2E del fix queda pendiente de validación manual del usuario en storefront",
+    "[2026-04-26T22:09:36.633Z] Ciclo 41 análisis + Ciclo 42 ejecución completan el rediseño Hero/Header del workspace import-1776956320164-2m9x2n",
+    "[2026-04-26T22:09:36.633Z] Synaptic Strength subió de 88.25% a 89% tras ejecución exitosa",
+    "[2026-04-26T22:09:36.634Z] E2E queda pendiente del usuario: validar desktop ≥768px y mobile <768px"
   ],
-  "lastUpdated": "2026-04-26T19:25:41.659Z",
+  "lastUpdated": "2026-04-26T22:55:43.366Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1720,6 +1652,269 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T16:33:22.247Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-14-1777221202235-0",
+      "cycle": 14,
+      "timestamp": "2026-04-26T16:33:22.235Z",
+      "type": "USER_PREFERENCE",
+      "title": "Immediate Execution Mode (DG-079)",
+      "description": "Usuario autoriza ejecución directa sin Decision Gate cuando indica 'modo ejecución inmediata'",
+      "context": "Cuando el requerimiento es claro y el usuario explicita bypass del Decision Gate",
+      "applicability": [
+        "workflow",
+        "decision-gate",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-26T17:45:36.516Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-18-1777222813420-0",
+      "cycle": 18,
+      "timestamp": "2026-04-26T17:00:13.420Z",
+      "type": "ANTI_PATTERN",
+      "title": "Stale backend from prior workspace",
+      "description": "Backend PID was running from old workspace dir, masking new routes as 404 across cycles 11-17",
+      "context": "Multi-workspace projects sharing ports; verify process cwd before debugging missing endpoints",
+      "applicability": [
+        "debugging",
+        "workspace",
+        "process-management",
+        "404"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:00:13.420Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-18-1777222813424-1",
+      "cycle": 18,
+      "timestamp": "2026-04-26T17:00:13.424Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Express 5 + path-to-regexp v8 break inline regex",
+      "description": "Route patterns like ':id(\\d+)' crash startup; remove regex and use Number.isInteger guard in handler",
+      "context": "Any Express 5 migration or new route definition with numeric param constraints",
+      "applicability": [
+        "express",
+        "routing",
+        "migration",
+        "path-to-regexp"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:00:13.424Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-18-1777222813426-2",
+      "cycle": 18,
+      "timestamp": "2026-04-26T17:00:13.426Z",
+      "type": "PATTERN",
+      "title": "Vite must proxy /static for backend-served assets",
+      "description": "Without '/static' proxy, uploaded images return SPA HTML instead of file (silent failure)",
+      "context": "Vite dev server fronting a backend that serves uploaded media",
+      "applicability": [
+        "vite",
+        "proxy",
+        "static-assets",
+        "uploads"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:00:13.426Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-18-1777222813427-3",
+      "cycle": 18,
+      "timestamp": "2026-04-26T17:00:13.428Z",
+      "type": "INSIGHT",
+      "title": "Architect-mode cycles missed runtime state",
+      "description": "Pure code analysis cannot detect process/cwd mismatches; runtime inspection (lsof) is required",
+      "context": "When user reports 'fix doesn't work' despite correct commits",
+      "applicability": [
+        "debugging",
+        "synaptic",
+        "architect-mode"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:00:13.427Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-18-1777222813429-4",
+      "cycle": 18,
+      "timestamp": "2026-04-26T17:00:13.429Z",
+      "type": "USER_PREFERENCE",
+      "title": "Single-word 'arregla' = full diagnostic + fix",
+      "description": "Terse user requests after frustration cycles expect immediate execution, not more analysis",
+      "context": "User has been through multiple architect-mode cycles without resolution",
+      "applicability": [
+        "communication",
+        "synaptic",
+        "dg-079"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:00:13.429Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-21-1777224416940-1",
+      "cycle": 21,
+      "timestamp": "2026-04-26T17:26:56.940Z",
+      "type": "PATTERN",
+      "title": "Three-option Decision Gate structure",
+      "description": "Conservative / Balanced (recommended) / Innovative trio with pros, cons, time, risk, confidence",
+      "context": "Phase 1 Specification when multiple roadmap paths are viable",
+      "applicability": [
+        "synaptic",
+        "phase-1",
+        "specification"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:26:56.940Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-21-1777224416942-2",
+      "cycle": 21,
+      "timestamp": "2026-04-26T17:26:56.942Z",
+      "type": "INSIGHT",
+      "title": "Cycles 19-20 left payment flow in analysis without implementation",
+      "description": "ARCHITECT MODE cycles produced analysis of checkout redirect + success page but no fix shipped",
+      "context": "Open work item: payment flow needs implementation cycle",
+      "applicability": [
+        "payment-flow",
+        "architect-mode",
+        "open-loop"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:26:56.942Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-21-1777224416943-3",
+      "cycle": 21,
+      "timestamp": "2026-04-26T17:26:56.943Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Post cycles 11-17, evidence-of-health is high priority",
+      "description": "User concern after long frustration arc means E2E validation generates trust signal",
+      "context": "Recommending validation sprints over new features",
+      "applicability": [
+        "e2e",
+        "validation",
+        "trust"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:26:56.943Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536508-0",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.508Z",
+      "type": "PATTERN",
+      "title": "Tab consolidation with sub-navigation",
+      "description": "Group related tabs under parent tab with underline sub-tabs to reduce visual saturation",
+      "context": "When admin UI has 3+ related tabs cluttering top-level navigation",
+      "applicability": [
+        "ux",
+        "admin-ui",
+        "navigation",
+        "react"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.508Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536511-1",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.511Z",
+      "type": "PATTERN",
+      "title": "Visual hierarchy via differentiated tab styles",
+      "description": "Pills (ámbar) for main tabs, underline (ámbar) for sub-tabs creates clear hierarchy",
+      "context": "Multi-level tab navigation in admin panels",
+      "applicability": [
+        "ux",
+        "design-system",
+        "tailwind"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.511Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536514-2",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.514Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Conditional mounting preserves sub-tab state",
+      "description": "Separate conditional mounts per sub-tab keeps component state across sub-tab switches",
+      "context": "Sub-navigation where users expect state preservation between tabs",
+      "applicability": [
+        "react",
+        "state-management"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.514Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536517-4",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.517Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "7 ESLint errors are preexisting baseline",
+      "description": "The 7 ESLint errors in frontend are preexisting and documented; new changes must not add to them",
+      "context": "Validating lint output after frontend changes in this project",
+      "applicability": [
+        "lint",
+        "validation",
+        "frontend"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.517Z",
         "source": "INFERRED"
       }
     }
