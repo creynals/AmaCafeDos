@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-081 | Pendiente: elegir entre OPTION A (fix mínimo), B (refactor keyManager.js), C (key-versioning completo) | C79 estableció entorno local-only; C80 identificó duplicación cripto; recomendación SYNAPTIC = B por balance scope/calidad | 2026-04-27 | 81 |
 | DEC-078-B | Tar.gz físico como única fuente de verdad para rollback | Tags pre-purga son reescritos por filter-repo, perdiendo su valor como punto de restauración | 2026-04-27 | 78 |
 | DEC-078 | Ejecutar git filter-repo (Option B) como método estándar de purga | Recomendación oficial; repo local-only sin remote reduce riesgo; preserva estructura de 94 commits | 2026-04-27 | 78 |
 | DEC-077 | Decision Gate abierto: estrategia de purga del historial git (A=BFG, B=filter-repo, C=recreación) | backend/.env permanece accesible vía git log/show pese a estar en .gitignore; bloqueante para deploy a Railway | 2026-04-27 | 77 |
@@ -154,6 +155,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 81] crypto.js (45 líneas) y rotate-encryption-secret.js (138 líneas) duplican ALGORITHM, deriveKey, salt 'amacafe-salt', encrypt, decrypt
+- [Cycle 81] OPTION B propone keyManager.js como módulo compartido con rotateValue(oldSecret, newSecret, encryptedText)
+- [Cycle 81] OPTION C requiere migración 014 idempotente para prefijar valores existentes con v1:
 - [Cycle 78] git-filter-repo v2.47.0 instalado en el sistema
 - [Cycle 78] .git size reducido de 15M a 7.8M (-48%) tras purga
 - [Cycle 78] backend/.env removido del histórico desde commit 95136d9 (C1) hasta d80d39b (C44)
@@ -223,6 +227,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 81, 2026-04-27] Refactor pendiente: crypto.js se convertiría en wrapper delgado sobre keyManager.js si se elige OPTION B
 - [Cycle 78, 2026-04-27] Histórico git completo reescrito: HEAD f7447e1 → 347807f, 94 commits con nuevos SHAs
 - [Cycle 67, 2026-04-27] Schema orders esteso con colonna customer_instructions TEXT
 - [Cycle 67, 2026-04-27] Admin GET /api/admin/orders SELECT esteso

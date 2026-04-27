@@ -85,6 +85,32 @@
       "selectedOption": "B",
       "userRationale": ": git filter-repo — Purga Estándar Recomendada Oficialmente ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777328693363",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:53.363Z",
+      "decisionPoint": "proceder con OPTION B: Fix + Refactor a keys-shared-module (Balanceado) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Fix + Refactor a keys-shared-module (Balanceado) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -600,6 +626,33 @@
       "status": "PLANNED",
       "createdAtCycle": 78,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-081-A",
+      "title": "Esperar decisión del usuario sobre alcance (A/B/C)",
+      "description": "Decision Gate activo — system halt hasta input humano",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 81,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-081-B",
+      "title": "Si OPTION B: crear backend/src/utils/keyManager.js + tests unitarios round-trip",
+      "description": "Módulo compartido con deriveKey, encryptWithSecret, decryptWithSecret, rotateValue",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 81,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-081-C",
+      "title": "Si OPTION C: migración 014 + tabla encryption_keys + refactor parsing v{N}:",
+      "description": "Solo si compliance/zero-downtime se vuelven requisitos; actualmente over-engineering para MPV local",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 81,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -737,9 +790,9 @@
         "phase-2"
       ],
       "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.063Z",
+        "score": 0.44999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-27T22:24:09.789Z",
         "source": "INFERRED"
       }
     },
@@ -946,6 +999,88 @@
         "lastReinforced": "2026-04-27T22:11:15.177Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-81-1777328649779-0",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.779Z",
+      "type": "ANTI_PATTERN",
+      "title": "Duplicación de lógica criptográfica en script de rotación",
+      "description": "rotate-encryption-secret.js duplica constantes/funciones de crypto.js en lugar de importarlas",
+      "context": "Cualquier script auxiliar que toque cifrado debe reusar el módulo central, no copiarlo",
+      "applicability": [
+        "crypto",
+        "scripts",
+        "code-smell",
+        "DRY"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.779Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-81-1777328649785-1",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.785Z",
+      "type": "INSIGHT",
+      "title": "Riesgo de corrupción silenciosa por divergencia cripto",
+      "description": "Si crypto.js cambia algoritmo/salt y el script duplicado no, la rotación corrompe la BD sin error visible",
+      "context": "Detectar duplicación de primitives criptográficas como riesgo CRÍTICO, no estético",
+      "applicability": [
+        "crypto",
+        "data-integrity",
+        "risk-analysis"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.785Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-81-1777328649791-3",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.791Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Modelo de key-versioning con prefijo v{N}:iv:tag:cipher",
+      "description": "Formato versionado permite zero-downtime rotation y migración progresiva con checkpoint",
+      "context": "Considerar para compliance PCI/SOC2 futuro o cuando se requiera rollback de claves",
+      "applicability": [
+        "crypto",
+        "key-rotation",
+        "compliance",
+        "future-work"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.791Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-81-1777328649793-4",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.793Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario delega alcance vía Decision Gate explícito",
+      "description": "Solicita decision gate con tres niveles de alcance en lugar de implementar el más amplio por defecto",
+      "context": "El usuario prefiere control granular sobre scope antes de invertir esfuerzo",
+      "applicability": [
+        "user-preference",
+        "scope-control",
+        "decision-gate"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.793Z",
+        "source": "EXPLICIT"
+      }
     }
   ],
   "implementationState": {
@@ -1037,9 +1172,13 @@
     "[2026-04-27T22:11:15.179Z] Repo amaCafe es local-only (sin remote); cualquier publicación futura requiere force-push consciente",
     "[2026-04-27T22:11:15.180Z] Backup pre-purga en _backups_pre_purge_c78/import-1777213083759-63z86j_pre_purge_c78_20260427T220728Z.tar.gz",
     "[2026-04-27T22:11:15.182Z] CREDENTIAL_ROTATION_C78.md contiene checklist accionable de rotación pendiente",
-    "[2026-04-27T22:11:15.183Z] Credenciales expuestas históricamente: ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT secret, DB password"
+    "[2026-04-27T22:11:15.183Z] Credenciales expuestas históricamente: ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT secret, DB password",
+    "[2026-04-27T22:24:09.795Z] C81 ejecuta Phase 1 (Specification) con Decision Gate obligatorio según RULES.md sección 3.1",
+    "[2026-04-27T22:24:09.797Z] Bug #1 (duplicación) presente en ambos archivos; Bug #2 (sin versioning) limita migración progresiva",
+    "[2026-04-27T22:24:09.798Z] Salt hardcodeado 'amacafe-salt' compartido en ambos archivos — invariante cripto crítico",
+    "[2026-04-27T22:24:09.800Z] Recomendación SYNAPTIC: OPTION B (88% confianza, 1.5–2h, riesgo MEDIUM)"
   ],
-  "lastUpdated": "2026-04-27T22:22:06.814Z",
+  "lastUpdated": "2026-04-27T22:24:53.368Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
