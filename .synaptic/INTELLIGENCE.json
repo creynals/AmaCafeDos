@@ -506,87 +506,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-39-1777240424179-0",
-      "cycle": 39,
-      "timestamp": "2026-04-26T21:53:44.179Z",
-      "type": "ANTI_PATTERN",
-      "title": "Global requireAuth oculta rutas públicas",
-      "description": "Mount global con requireAuth swallowea endpoints marcados 'Public' dentro del router",
-      "context": "Express con auth middleware aplicado en app.use() antes del router",
-      "applicability": [
-        "express",
-        "auth",
-        "routing",
-        "backend"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T21:53:44.179Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-39-1777240424184-1",
-      "cycle": 39,
-      "timestamp": "2026-04-26T21:53:44.184Z",
-      "type": "PATTERN",
-      "title": "Registrar handler público antes del mount protegido",
-      "description": "Importar handler y registrar ruta pública en server.js ANTES del app.use con requireAuth",
-      "context": "Cuando un router contiene mezcla de rutas públicas y protegidas bajo auth global",
-      "applicability": [
-        "express",
-        "auth",
-        "routing"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T21:53:44.184Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-39-1777240424187-2",
-      "cycle": 39,
-      "timestamp": "2026-04-26T21:53:44.187Z",
-      "type": "ANTI_PATTERN",
-      "title": ".catch(()=>{}) silencia 401 críticos",
-      "description": "Frontend silenciaba el 401 del endpoint reCAPTCHA dejando siteKey null sin feedback",
-      "context": "Fetch en widgets de UI que dependen de config remota",
-      "applicability": [
-        "frontend",
-        "error-handling",
-        "debugging"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T21:53:44.187Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-39-1777240424190-4",
-      "cycle": 39,
-      "timestamp": "2026-04-26T21:53:44.190Z",
-      "type": "INSIGHT",
-      "title": "Comentario 'Public endpoint' no garantiza acceso público",
-      "description": "El comentario en el route file miente si el mount aplica auth global",
-      "context": "Auditoría de endpoints supuestamente públicos",
-      "applicability": [
-        "express",
-        "code-review",
-        "auth"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T21:53:44.190Z",
-        "source": "INFERRED"
-      }
-    },
-    {
       "learningId": "learning-42-1777241376627-0",
       "cycle": 42,
       "timestamp": "2026-04-26T22:09:36.627Z",
@@ -1309,7 +1228,7 @@
     "[2026-04-27T03:06:19.336Z] C53→C56 fue deuda técnica saldada en C57; cualquier referencia futura al alias legacy en metadata operativa es un bug",
     "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side"
   ],
-  "lastUpdated": "2026-04-27T03:15:07.090Z",
+  "lastUpdated": "2026-04-27T03:25:36.649Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2668,6 +2587,87 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T19:00:53.925Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424179-0",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.179Z",
+      "type": "ANTI_PATTERN",
+      "title": "Global requireAuth oculta rutas públicas",
+      "description": "Mount global con requireAuth swallowea endpoints marcados 'Public' dentro del router",
+      "context": "Express con auth middleware aplicado en app.use() antes del router",
+      "applicability": [
+        "express",
+        "auth",
+        "routing",
+        "backend"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.179Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424184-1",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.184Z",
+      "type": "PATTERN",
+      "title": "Registrar handler público antes del mount protegido",
+      "description": "Importar handler y registrar ruta pública en server.js ANTES del app.use con requireAuth",
+      "context": "Cuando un router contiene mezcla de rutas públicas y protegidas bajo auth global",
+      "applicability": [
+        "express",
+        "auth",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.184Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424187-2",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.187Z",
+      "type": "ANTI_PATTERN",
+      "title": ".catch(()=>{}) silencia 401 críticos",
+      "description": "Frontend silenciaba el 401 del endpoint reCAPTCHA dejando siteKey null sin feedback",
+      "context": "Fetch en widgets de UI que dependen de config remota",
+      "applicability": [
+        "frontend",
+        "error-handling",
+        "debugging"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.187Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424190-4",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.190Z",
+      "type": "INSIGHT",
+      "title": "Comentario 'Public endpoint' no garantiza acceso público",
+      "description": "El comentario en el route file miente si el mount aplica auth global",
+      "context": "Auditoría de endpoints supuestamente públicos",
+      "applicability": [
+        "express",
+        "code-review",
+        "auth"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.190Z",
+        "source": "INFERRED"
       }
     }
   ]
