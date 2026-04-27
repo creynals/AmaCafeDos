@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "seed": "node src/data/seed.js"
+    "seed": "node src/data/seed.js",
+    "migrate": "node scripts/migrate.js",
+    "test": "node --test src/utils/*.test.js"
   },
   "keywords": [],
   "author": "",

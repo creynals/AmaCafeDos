@@ -5270,3 +5270,75 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 **Synaptic Strength**: 98.3%
 
 ---
+
+## CICLO: 84
+**Timestamp**: 2026-04-27T23:35:00.000Z
+**Agente**: master_architect
+**Fase**: IMPLEMENTACION (Phase 3/5) — parcial: B3+B4 ejecutados, B2 elevado a Decision Gate
+**Decisión Origen**: Cycle 83 — reporte Railway deploy (B-tasks identificadas)
+**Resultado**: SUCCESS
+**Modo**: HÍBRIDO (Immediate Execution para B3+B4 + Decision Gate explícito para B2)
+
+**Prompt Original**:
+> proceder con implmentacion ciclo 83, resolver B3 + B4 (api.js base configurable + railway.toml + script migrate). Decision Gate sobre estrategia de imágenes (B2).
+
+```json
+{
+  "timestamp": "2026-04-27T23:35:00.000Z",
+  "cycle": 84,
+  "phase": 3,
+  "action": "RAILWAY_DEPLOY_PREP_PARTIAL",
+  "details": {
+    "scope": "Habilitar despliegue del backend y frontend en Railway desde GitHub. B3 (api.js base URL configurable por env) y B4 (railway.toml en raíz + frontend, script migrate standalone) ejecutados. B2 (estrategia de imágenes en Railway con filesystem efímero) elevado a Decision Gate por su impacto arquitectónico.",
+    "filesCreated": [
+      "frontend/.env.example (B3 — documenta VITE_API_BASE_URL)",
+      "backend/scripts/migrate.js (B4 — runner standalone idempotente)",
+      "railway.toml (B4 — config backend service: NIXPACKS, preDeploy=migrate, healthcheck=/api/health)",
+      "frontend/railway.toml (B4 — config frontend service: build=npm ci+build, start=vite preview --host 0.0.0.0)"
+    ],
+    "filesModified": [
+      "frontend/src/api.js (B3 — `const BASE = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\\/$/, '')`)",
+      "backend/package.json (B4 — añadidos scripts `migrate` y `test`)"
+    ],
+    "validation": {
+      "frontendBuild": "✅ npx vite build → 1753 modules, 156ms, dist/ generado sin warnings",
+      "migrateScriptSyntax": "✅ node --check backend/scripts/migrate.js → OK",
+      "migrateScriptSmoke": "✅ DATABASE_URL=postgresql://localhost/db_taza_data node scripts/migrate.js → 'OK in 55ms' (idempotente sobre BD ya migrada)",
+      "backendTests": "✅ npm test → 22/22 PASS (16 keyManager + 6 sumup, sin regresiones)"
+    },
+    "b2DecisionGate": {
+      "issue": "Railway containers tienen filesystem efímero — cualquier archivo escrito en runtime (admin uploads via /admin/products/upload-image, /admin/products/:id/images) se pierde al redeploy/restart.",
+      "currentBehavior": "backend/src/server.js:85 sirve /static desde ../../fuentes (working tree). En Railway se monta read-only desde el git checkout del deploy.",
+      "imagenesEnRepo": {
+        "fuentes/products/": "1 archivo (foo.jpg)",
+        "fuentes/menu/": "11 archivos WhatsApp jpeg"
+      },
+      "rutaCriticaDeAdminUpload": "POST /api/admin/products/upload-image y POST /api/admin/products/:productId/images escriben con multer en disco; rutas referenciadas desde tabla products.image_url y product_images.url"
+    }
+  },
+  "userImpact": "Backend y frontend listos para Railway con configuración declarativa. Despliegue requiere: (a) crear 2 servicios en Railway con Root Directory=backend y Root Directory=frontend, (b) configurar plugin Postgres, (c) setear env vars listadas en railway.toml, (d) decidir B2 antes de habilitar uploads admin en producción.",
+  "outcome": "SUCCESS",
+  "synapticStrength": 98.5,
+  "complianceScore": 100,
+  "filesChanged": 2,
+  "filesAdded": 4,
+  "linesTouched": "~110"
+}
+```
+
+**Notas críticas**:
+- B3 es backwards-compatible: si `VITE_API_BASE_URL` no se setea, el bundle queda con `/api` (mismo comportamiento que el código pre-C84). El cambio solo desbloquea la opción de apuntar a otro host en producción.
+- `preDeployCommand=node scripts/migrate.js` en railway.toml asegura que el nuevo contenedor del backend NO toma tráfico hasta que las migraciones aplican exitosamente. Si migrate falla, Railway aborta el deploy y mantiene la versión anterior viva.
+- `frontend/railway.toml` usa `vite preview` para servir el bundle estático — suficiente para MPV pero no es un server HTTP industrial. Si en producción se observa lentitud, swap fácil a `npx serve -s dist -l $PORT` o un Dockerfile con nginx.
+- Variables `VITE_*` se inlinean al bundle en build time. Cambiar `VITE_API_BASE_URL` en Railway requiere **redeploy del frontend**, no basta con restart.
+- B2 NO se ejecutó: requiere decisión arquitectónica (volúmenes vs object storage vs git-only). Decision Gate presentado al usuario.
+
+**Recomendaciones**:
+- 🔴 **ALTA**: Resolver Decision Gate B2 antes de habilitar `/admin/products/upload-image` en producción — sin storage persistente las imágenes se pierden silenciosamente al redeploy.
+- 🟡 **MEDIA**: Una vez confirmado el host de Railway, setear `FRONTEND_URL` en backend service y `VITE_API_BASE_URL` en frontend service apuntando al backend; sin esto CORS bloqueará XHR.
+- 🟡 **MEDIA**: Añadir un workflow GitHub Actions que corra `npm test` (backend) y `npm run build` (frontend) en PRs, antes de que Railway auto-deploy reaccione al merge.
+- 🟢 **BAJA**: Considerar `[deploy].numReplicas = 1` explícito en railway.toml para evitar costos sorpresa si Railway introduce auto-scale por default.
+
+**Synaptic Strength**: 98.5%
+
+---

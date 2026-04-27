@@ -1,4 +1,7 @@
-const BASE = '/api';
+// C84: BASE configurable via VITE_API_BASE_URL para deploy en Railway/cualquier
+// host con backend en origen distinto. En dev queda '/api' (proxied por Vite).
+// Trailing slash se elimina para evitar dobles barras al concatenar paths.
+const BASE = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/$/, '');
 
 function getAuthHeaders() {
   const token = localStorage.getItem('admin_token');

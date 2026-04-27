@@ -1,0 +1,38 @@
+# C84 (B4): Railway service configuration — amaCafe BACKEND
+#
+# Esta config asume que la UI de Railway tiene configurado para este servicio:
+#   Service Settings → Source → Root Directory: backend
+#
+# Si NO se setea Root Directory en la UI, los comandos siguientes deben
+# anteponerse con `cd backend &&` (ver railway.backend.fallback.toml más
+# abajo si fuera necesario un día).
+#
+# Variables de entorno que el servicio backend espera (configurar en Railway
+# UI → Variables):
+#
+#   PORT                  → Railway lo inyecta automáticamente; server.js
+#                           ya lee process.env.PORT con fallback a 7000.
+#   DATABASE_URL          → Provisto por el plugin Postgres de Railway
+#                           (Add → Database → PostgreSQL).
+#   FRONTEND_URL          → URL pública del servicio frontend (CORS origin).
+#                           Ej: https://amacafe-front.up.railway.app
+#   ENCRYPTION_SECRET     → Generado fresh para producción, NO reusar el de dev:
+#                           node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+#   NODE_ENV              → "production" (activa failsafe sumup_mode!=mock).
+#   SUMUP_MODE            → "live" en prod (failsafe en server.js aborta si
+#                           NODE_ENV=production && sumup_mode=mock).
+#   SUMUP_RETURN_URL_BASE → URL pública del frontend (para checkout success/failure).
+#
+# El frontend se despliega como SERVICIO SEPARADO en Railway — ver
+# `frontend/railway.toml` para su config (Vite static + npm preview o serve).
+
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "npm start"
+preDeployCommand = "node scripts/migrate.js"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
