@@ -435,6 +435,7 @@ router.get('/admin/orders', async (req, res) => {
     SELECT o.id, o.status, o.payment_status, o.payment_method, o.payment_currency,
            o.contact_name, o.contact_email, o.contact_phone,
            o.address_street, o.address_number, o.address_commune, o.address_city, o.address_notes,
+           o.customer_instructions,
            o.subtotal, o.total,
            o.card_scheme,
            o.sumup_checkout_id, o.sumup_transaction_id,

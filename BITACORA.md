@@ -3822,8 +3822,80 @@ analizar y planificar implementacion del siguiente requerimiento: En "Confirma p
 
 ---
 
+## Cycle 67 — Customer order-level instructions (implementación del análisis del Cycle 66)
+
+**Timestamp**: 2026-04-27T04:30:00.000Z
+**Modo**: DG-079 (IMMEDIATE EXECUTION)
+**Fase**: 5/5 (Preservation)
+**Decisión usuario**: "proceder con implementa ciclo 66" — implementación directa del requerimiento analizado en C66.
+
+```json
+{
+  "cycle": 67,
+  "timestamp": "2026-04-27T04:30:00.000Z",
+  "phase": 5,
+  "mode": "DG-079_immediate_execution",
+  "action": "FEATURE_CUSTOMER_ORDER_INSTRUCTIONS",
+  "decision_ref": "Cycle 66 (architect-only analysis)",
+  "type": "feature",
+  "scope": "checkout + orders schema + admin orders + kitchen view",
+  "summary": "Campo libre 'Instrucciones del cliente' a nivel de orden, capturado en el paso 'Resumen' del checkout, persistido en orders.customer_instructions y mostrado en el listado de Órdenes (fila expandida) y en las tarjetas de la Vista de Cocina. Distinto de address_notes (entrega) y order_items.notes (por producto).",
+  "files_changed": [
+    "backend/src/migrations/014_add_customer_instructions_to_orders.sql (NEW)",
+    "backend/src/routes/orders.js (validación + INSERT + serialize)",
+    "backend/src/routes/admin.js (SELECT extendido)",
+    "frontend/src/components/CheckoutModal.jsx (state + textarea en StepSummary + reset)",
+    "frontend/src/api.js (createOrder firma extendida con customer_instructions)",
+    "frontend/src/components/OrdersTab.jsx (OrderDetailsRow render condicional)",
+    "frontend/src/components/KitchenView.jsx (OrderCard render distinto de address_notes)"
+  ],
+  "validation": {
+    "node_check": "OK src/routes/orders.js, src/routes/admin.js",
+    "vite_build": "OK 1753 modules, 154ms",
+    "eslint_frontend_touched": "0 errores / 0 warnings (CheckoutModal, OrdersTab, KitchenView, api.js)",
+    "eslint_backend": "Errores preexistentes de config (tsconfig.json ausente) — no relacionados con este ciclo",
+    "sql_review": "ALTER TABLE ADD COLUMN IF NOT EXISTS — idempotente, aplicado por runMigrations() al próximo arranque del backend"
+  },
+  "design_decisions": [
+    "Naming customer_instructions (no customer_notes/order_notes) para evitar colisión semántica con order_items.notes y address_notes.",
+    "Cap 1000 chars (validación servidor + maxLength en textarea) para prevenir abuso/payload-bomb.",
+    "Normalización: trim + null si vacío — evita strings vacíos en BD.",
+    "Render condicional en admin: la sección sólo aparece si la orden trae instrucciones, no ocupa espacio innecesario.",
+    "Vista de Cocina: bloque amarillo con borde marcado e ícono MessageSquare para diferenciar visualmente del bloque 'Indicación' (address_notes) que ya existía y es para el repartidor."
+  ],
+  "outcome": "SUCCESS",
+  "synapticStrength": 97.2,
+  "complianceScore": 100,
+  "filesChanged": 6,
+  "filesAdded": 1,
+  "linesTouched": "~95"
+}
+```
+
+**E2E Pendiente Usuario**:
+1. Reiniciar backend para que `runMigrations()` aplique la migración 014:
+   ```bash
+   # detener proceso actual y relanzar
+   cd backend && npm run dev
+   ```
+2. Validar que la columna existe: `psql ... -c "\\d orders" | grep customer_instructions`
+3. En storefront: abrir carrito → "Confirmar Pedido" → en el paso "Resumen" debe aparecer el textarea "Instrucciones para tu pedido (opcional)" con contador de caracteres restantes.
+4. Completar checkout con texto de prueba (ej: "Sin azúcar, leche de almendra, alergia a frutos secos").
+5. En `/admin` → Órdenes → Listado: expandir la nueva orden — debe verse el bloque "Instrucciones del cliente" en amarillo cursiva.
+6. En `/admin` → Órdenes → Vista de Cocina: la tarjeta de la orden debe mostrar el bloque amarillo "INSTRUCCIONES DEL CLIENTE" distinto del bloque "Indicación" (entrega).
+7. Validar que un envío sin instrucciones NO renderiza ninguno de los dos bloques nuevos (render condicional).
+8. Validar que un payload con > 1000 chars devuelve 400 desde el backend.
+
+**Recomendaciones**:
+- 🟡 MEDIA: Considerar exponer también `customer_instructions` en la pantalla de confirmación post-pago del storefront (echo al cliente) en un próximo ciclo.
+- 🟢 BAJA: Si en el futuro se agrega edición admin de la orden, permitir editar `customer_instructions` con audit (orders_audit action='customer_instructions_edited').
+
+**Synaptic Strength**: 97.2%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
-*Last Updated: 2026-04-27T02:45:00.000Z*
+*Last Updated: 2026-04-27T04:30:00.000Z*
 
 
 ---

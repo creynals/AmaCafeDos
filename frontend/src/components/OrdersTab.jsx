@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef, Fragment } from 'react';
 import {
   Loader2, RefreshCw, Search, Filter, ChevronLeft, ChevronRight,
   X, AlertCircle, CheckCircle, ShoppingBag, Mail, Phone, MapPin,
-  CreditCard, Calendar, ArrowRight, ChevronDown, ChevronUp,
+  CreditCard, Calendar, ArrowRight, ChevronDown, ChevronUp, MessageSquare,
 } from 'lucide-react';
 import { api } from '../api';
 
@@ -317,6 +317,18 @@ function OrderDetailsRow({ order }) {
             <p className="text-ama-text-muted mt-0.5">Subtotal: {formatPrice(order.subtotal)}</p>
           </div>
         </div>
+
+        {/* Cycle 67: Instrucciones libres del cliente capturadas en el paso "Resumen" del checkout. */}
+        {order.customer_instructions && (
+          <div className="mt-3 pt-3 border-t border-ama-border/40">
+            <p className="text-ama-text-muted text-xs mb-1 flex items-center gap-1">
+              <MessageSquare size={12} /> Instrucciones del cliente
+            </p>
+            <p className="text-xs text-yellow-400/90 italic whitespace-pre-wrap">
+              {order.customer_instructions}
+            </p>
+          </div>
+        )}
 
         {/* Productos solicitados — Ciclo 25 (Vista de Cocina + visibilidad en listado) */}
         <div className="mt-3 pt-3 border-t border-ama-border/40">

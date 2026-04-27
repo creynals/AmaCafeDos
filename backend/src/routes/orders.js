@@ -29,9 +29,21 @@ function normalizePaymentMethod(method) {
   return CARD_METHODS.has(method) ? 'tarjeta' : method;
 }
 
+// Cycle 67: instrucciones libres del cliente a nivel de orden (paso "Resumen"
+// del checkout). Distintas de address_notes (entrega) y de order_items.notes
+// (por producto). Cap en 1000 chars para evitar abuso.
+const CUSTOMER_INSTRUCTIONS_MAX_LEN = 1000;
+
+function normalizeCustomerInstructions(raw) {
+  if (raw == null) return null;
+  if (typeof raw !== 'string') return null;
+  const trimmed = raw.trim();
+  return trimmed.length === 0 ? null : trimmed;
+}
+
 // POST /api/orders - Create order from cart
 router.post('/orders', async (req, res) => {
-  const { cart_id, contact, address, payment_method } = req.body;
+  const { cart_id, contact, address, payment_method, customer_instructions } = req.body;
 
   // Validate required fields
   if (!cart_id) return res.status(400).json({ error: 'cart_id es requerido' });
@@ -49,6 +61,16 @@ router.post('/orders', async (req, res) => {
       error: `Metodo de pago invalido. Opciones: ${[...VALID_PAYMENT_METHODS].join(', ')}`,
     });
   }
+  if (
+    customer_instructions != null &&
+    typeof customer_instructions === 'string' &&
+    customer_instructions.length > CUSTOMER_INSTRUCTIONS_MAX_LEN
+  ) {
+    return res.status(400).json({
+      error: `customer_instructions excede el máximo de ${CUSTOMER_INSTRUCTIONS_MAX_LEN} caracteres`,
+    });
+  }
+  const normalizedInstructions = normalizeCustomerInstructions(customer_instructions);
 
   const normalizedMethod = normalizePaymentMethod(payment_method);
   const isCardPayment = normalizedMethod === 'tarjeta';
@@ -78,12 +100,12 @@ router.post('/orders', async (req, res) => {
     const { rows: orderRows } = await client.query(`
       INSERT INTO orders (cart_id, contact_name, contact_email, contact_phone,
         address_street, address_number, address_commune, address_city, address_notes,
-        payment_method, subtotal, total)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id
+        payment_method, subtotal, total, customer_instructions)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id
     `, [
       cart_id, contact.name, contact.email, contact.phone,
       address.street, address.number, address.commune, address.city, address.notes || null,
-      normalizedMethod, subtotal, total
+      normalizedMethod, subtotal, total, normalizedInstructions
     ]);
 
     orderId = orderRows[0].id;
@@ -166,6 +188,7 @@ router.post('/orders', async (req, res) => {
     },
     payment_method: order.payment_method,
     payment: paymentBlock,
+    customer_instructions: order.customer_instructions,
     items: items.map(i => ({
       name: i.name,
       price: i.price,
@@ -203,6 +226,7 @@ function serializeOrder(order, items) {
       city: order.address_city,
       notes: order.address_notes,
     },
+    customer_instructions: order.customer_instructions ?? null,
     items: items.map(i => ({
       name: i.name,
       price: i.price,

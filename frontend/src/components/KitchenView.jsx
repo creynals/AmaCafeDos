@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Loader2, RefreshCw, AlertCircle, Clock, ChefHat, Truck, MapPin,
-  Phone, ShoppingBag, ArrowRight, CheckCircle, XCircle,
+  Phone, ShoppingBag, ArrowRight, CheckCircle, XCircle, MessageSquare,
 } from 'lucide-react';
 import { api } from '../api';
 
@@ -169,6 +169,22 @@ function OrderCard({ order, onAdvance, onCancel, busy }) {
         </div>
         <ItemsList items={order.items} />
       </div>
+
+      {/* Cycle 67: Instrucciones libres del cliente a nivel de orden, distintas
+         de address_notes (entrega) y de las notas por item. */}
+      {order.customer_instructions && (
+        <div className="bg-yellow-400/5 border border-yellow-400/30 rounded-lg p-2.5 mb-2">
+          <div className="flex items-center gap-1.5 mb-1">
+            <MessageSquare size={12} className="text-yellow-400" />
+            <p className="text-xs font-semibold text-yellow-400 uppercase tracking-wide">
+              Instrucciones del cliente
+            </p>
+          </div>
+          <p className="text-xs text-ama-text whitespace-pre-wrap">
+            {order.customer_instructions}
+          </p>
+        </div>
+      )}
 
       {/* Estado de pago si no está pagado */}
       {order.payment_status !== 'paid' && (

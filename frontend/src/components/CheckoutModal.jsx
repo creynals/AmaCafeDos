@@ -44,6 +44,11 @@ export default function CheckoutModal({ isOpen, onClose }) {
   const [contact, setContact] = useState({ name: '', email: '', phone: '' });
   const [address, setAddress] = useState({ street: '', number: '', commune: '', city: 'Santiago', notes: '' });
   const [paymentMethod, setPaymentMethod] = useState('');
+  // Cycle 67: instrucciones libres del cliente a nivel de orden, capturadas en
+  // el paso "Resumen". Se persisten en orders.customer_instructions y se
+  // muestran en el listado admin y en la Vista de Cocina.
+  const [customerInstructions, setCustomerInstructions] = useState('');
+  const CUSTOMER_INSTRUCTIONS_MAX = 1000;
 
   // Card widget state (solo activo cuando paymentMethod es tarjeta)
   const [cardPhase, setCardPhase] = useState('idle'); // idle | widget | polling | done | failed
@@ -97,7 +102,13 @@ export default function CheckoutModal({ isOpen, onClose }) {
       const backendValue =
         PAYMENT_METHODS.find(m => m.id === paymentMethod)?.backendValue || paymentMethod;
 
-      const result = await api.createOrder(cart.cart_id, contact, address, backendValue);
+      const result = await api.createOrder(
+        cart.cart_id,
+        contact,
+        address,
+        backendValue,
+        customerInstructions.trim() || null,
+      );
 
       if (CARD_UI_IDS.has(paymentMethod)) {
         // Validar que el backend devolvió un checkout SumUp válido
@@ -224,6 +235,7 @@ export default function CheckoutModal({ isOpen, onClose }) {
       setContact({ name: '', email: '', phone: '' });
       setAddress({ street: '', number: '', commune: '', city: 'Santiago', notes: '' });
       setPaymentMethod('');
+      setCustomerInstructions('');
       setOrderResult(null);
       setCardPhase('idle');
       setCardError(null);
@@ -410,7 +422,15 @@ export default function CheckoutModal({ isOpen, onClose }) {
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
-          {step === 0 && <StepSummary items={items} total={total} />}
+          {step === 0 && (
+            <StepSummary
+              items={items}
+              total={total}
+              customerInstructions={customerInstructions}
+              onCustomerInstructionsChange={setCustomerInstructions}
+              maxInstructionsLen={CUSTOMER_INSTRUCTIONS_MAX}
+            />
+          )}
           {step === 1 && <StepContact contact={contact} onChange={setContact} />}
           {step === 2 && <StepAddress address={address} onChange={setAddress} />}
           {step === 3 && <StepPayment selected={paymentMethod} onSelect={setPaymentMethod} total={total} />}
@@ -446,7 +466,14 @@ export default function CheckoutModal({ isOpen, onClose }) {
   );
 }
 
-function StepSummary({ items, total }) {
+function StepSummary({
+  items,
+  total,
+  customerInstructions,
+  onCustomerInstructionsChange,
+  maxInstructionsLen,
+}) {
+  const remaining = maxInstructionsLen - (customerInstructions?.length || 0);
   return (
     <div>
       <h3 className="text-sm font-semibold text-ama-text-muted mb-3">Productos en tu pedido</h3>
@@ -464,6 +491,27 @@ function StepSummary({ items, total }) {
           </div>
         ))}
       </div>
+
+      {/* Cycle 67: instrucciones libres del cliente para la preparación
+         (visibles para cocina y admin). */}
+      <div className="mt-4">
+        <label htmlFor="customer-instructions" className="block text-xs text-ama-text-muted mb-1">
+          Instrucciones para tu pedido (opcional)
+        </label>
+        <textarea
+          id="customer-instructions"
+          value={customerInstructions || ''}
+          onChange={(e) => onCustomerInstructionsChange(e.target.value.slice(0, maxInstructionsLen))}
+          rows={3}
+          maxLength={maxInstructionsLen}
+          placeholder="Ej: sin azúcar, leche de almendra, pan tostado, alergia a frutos secos…"
+          className="w-full bg-ama-dark border border-ama-border rounded-xl px-4 py-2.5 text-sm text-ama-text placeholder:text-ama-text-muted/50 focus:outline-none focus:border-ama-amber transition-colors resize-none"
+        />
+        <p className="text-[11px] text-ama-text-muted mt-1 text-right">
+          {remaining} caracteres restantes
+        </p>
+      </div>
+
       <div className="mt-4 pt-3 border-t border-ama-border flex justify-between items-center">
         <span className="text-ama-text-muted">Total</span>
         <span className="text-xl font-bold text-ama-amber">{formatPrice(total)}</span>

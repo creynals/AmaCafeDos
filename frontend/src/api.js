@@ -123,8 +123,14 @@ export const api = {
     del(`/cart/${cartId}/items/${itemId}`),
   clearCart: (cartId) => del(`/cart/${cartId}`),
 
-  createOrder: (cartId, contact, address, paymentMethod) =>
-    post('/orders', { cart_id: cartId, contact, address, payment_method: paymentMethod }),
+  createOrder: (cartId, contact, address, paymentMethod, customerInstructions = null) =>
+    post('/orders', {
+      cart_id: cartId,
+      contact,
+      address,
+      payment_method: paymentMethod,
+      customer_instructions: customerInstructions,
+    }),
   getOrder: (id) => request(`/orders/${id}`),
   // Ciclo 56: sincronización activa de payment_status desde SumUp
   // (no depende del webhook). Usado por CheckoutModal tras widget success.
