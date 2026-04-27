@@ -502,270 +502,27 @@
       "status": "PLANNED",
       "createdAtCycle": 57,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-067-1",
+      "title": "Validazione E2E manuale Cycle 67",
+      "description": "Restart backend, completare ordine con istruzioni, verificare visualizzazione in OrdersTab e KitchenView",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 67,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-067-2",
+      "title": "Risolvere config ESLint backend mancante tsconfig.json",
+      "description": "Aggiungere tsconfig.json o aggiornare config ESLint per consentire lint backend",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 67,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-42-1777241376627-0",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.627Z",
-      "type": "USER_PREFERENCE",
-      "title": "Enfoque A pre-aprobado en ciclo previo",
-      "description": "Usuario eligió Enfoque A en ciclo 41; ciclo 42 ejecuta inmediato sin re-confirmar",
-      "context": "Cuando un ciclo previo presenta opciones y usuario elige una explícitamente",
-      "applicability": [
-        "execution-mode",
-        "DG-079",
-        "immediate-execution"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.627Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-42-1777241376629-1",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.629Z",
-      "type": "PATTERN",
-      "title": "Tagline en header pill con responsive hide",
-      "description": "Pill central con hidden md:inline-flex oculta tagline en mobile preservando iconos esenciales",
-      "context": "Headers con logo + tagline + iconos en breakpoints angostos",
-      "applicability": [
-        "responsive-design",
-        "tailwind",
-        "header-layout"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.629Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-42-1777241376630-2",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.630Z",
-      "type": "PATTERN",
-      "title": "Hero compacto reduce padding 70-80%",
-      "description": "py-16 sm:py-24 → py-6 sm:py-8 sube grilla above-the-fold sin perder mensaje",
-      "context": "Cuando hero ocupa demasiado espacio y oculta contenido principal",
-      "applicability": [
-        "UX",
-        "above-the-fold",
-        "hero-design"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.630Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-42-1777241376631-3",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.631Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Layout flex con shrink-0 + min-w-0 + truncate",
-      "description": "Logo y iconos shrink-0, pill min-w-0 + truncate evita romper layout en breakpoints",
-      "context": "Headers de 3 secciones con contenido variable",
-      "applicability": [
-        "tailwind",
-        "flexbox",
-        "responsive"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.631Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600711-0",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.711Z",
-      "type": "USER_PREFERENCE",
-      "title": "No ejecutar acciones destructivas sin confirmación explícita",
-      "description": "Purga de historial git y rotación real de secrets requieren confirmación previa del usuario",
-      "context": "Operaciones que reescriben historia compartida o invalidan datos cifrados existentes",
-      "applicability": [
-        "security",
-        "git",
-        "destructive-ops"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.711Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600712-1",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.712Z",
-      "type": "PATTERN",
-      "title": "Rotación de ENCRYPTION_SECRET requiere decrypt-old + re-encrypt-new",
-      "description": "No basta cambiar el valor; hay que descifrar con secret viejo y re-cifrar con secret nuevo todos los campos cifrados en DB",
-      "context": "Cuando ENCRYPTION_SECRET cifra datos persistidos (settings.sumup_*, recaptcha_secret_key)",
-      "applicability": [
-        "security",
-        "encryption",
-        "secret-rotation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.712Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600714-2",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.714Z",
-      "type": "PATTERN",
-      "title": "Script de rotación con dry-run + --apply",
-      "description": "Scripts destructivos deben tener modo dry-run por defecto y flag --apply explícito para ejecutar",
-      "context": "Scripts que modifican datos en producción o reescriben estado persistente",
-      "applicability": [
-        "scripting",
-        "safety",
-        "ops"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.714Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600715-3",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.715Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "CSP debe whitelistear SumUp + reCAPTCHA explícitamente",
-      "description": "helmet() con CSP requiere directivas específicas para integraciones de pagos (SumUp) y bot-protection (reCAPTCHA)",
-      "context": "Aplicación con integraciones externas de pagos y captcha",
-      "applicability": [
-        "security",
-        "csp",
-        "helmet",
-        "integrations"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.715Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600715-4",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.715Z",
-      "type": "PATTERN",
-      "title": "requireAdmin centralizado en middleware reutilizable",
-      "description": "Middleware exportado desde auth.js y aplicado a los 7 mounts admin en server.js (no inline en cada router)",
-      "context": "Cuando hay múltiples mounts admin que comparten requisito de autorización",
-      "applicability": [
-        "express",
-        "middleware",
-        "auth"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.715Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600716-5",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.716Z",
-      "type": "PATTERN",
-      "title": "Rate limiters dedicados por endpoint sensible",
-      "description": "Limiters específicos para /login, /bulk-import, /upload-image en lugar de un limiter global único",
-      "context": "Endpoints con perfiles de abuso distintos (brute force vs DoS por upload)",
-      "applicability": [
-        "security",
-        "rate-limiting",
-        "express"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.716Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600717-6",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.717Z",
-      "type": "INSIGHT",
-      "title": "git rm --cached + .gitignore no purga historial",
-      "description": "Sacar .env del tracking deja el archivo en commits previos; requiere git-filter-repo o BFG para purgar",
-      "context": "Cuando se descubre un secret commiteado por error",
-      "applicability": [
-        "git",
-        "security",
-        "secrets"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.717Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600718-7",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.718Z",
-      "type": "PATTERN",
-      "title": "Smoke test post-cambio de seguridad: 401/400 + headers",
-      "description": "Verificar 401 en admin sin auth, 400 en login sin body, y presencia de CSP/HSTS/X-Frame-Options en respuestas",
-      "context": "Después de aplicar middleware de auth, rate-limit y helmet",
-      "applicability": [
-        "testing",
-        "security",
-        "smoke-test"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.718Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921312-0",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.312Z",
-      "type": "ANTI_PATTERN",
-      "title": "Recommendations not persisted in BITACORA",
-      "description": "Cycle 48 verbal recommendations were not written to BITACORA, blocking C49 execution",
-      "context": "When a cycle produces actionable recommendations but only logs the prompt/metrics",
-      "applicability": [
-        "bitacora",
-        "persistence",
-        "recommendations"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.312Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-49-1777256921317-1",
       "cycle": 49,
@@ -780,71 +537,10 @@
         "synaptic-protocol"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:28:41.317Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921320-2",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.320Z",
-      "type": "INSIGHT",
-      "title": "Workspace identity drift across cycles",
-      "description": "Metadata projectName (import-1776956320164-2m9x2n) diverges from physical dir (import-1777213083759-63z86j)",
-      "context": "When .synaptic-workspace.json projectName does not match the active cwd",
-      "applicability": [
-        "workspace",
-        "metadata",
-        "synaptic"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.320Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921322-3",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.322Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Orphan workspace directory risk",
-      "description": "Two workspace dirs exist on disk; only one receives changes — risk of editing wrong path",
-      "context": "Multi-workspace SYNAPTIC setups with historical aliases",
-      "applicability": [
-        "workspace",
-        "filesystem",
-        "risk"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.322Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921324-4",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.324Z",
-      "type": "PATTERN",
-      "title": "Cwd guard in server.js",
-      "description": "Add startup check that process.cwd() contains expected workspace dir; fail fast if not",
-      "context": "Backend startup in multi-workspace environments",
-      "applicability": [
-        "backend",
-        "server.js",
-        "guard",
-        "startup"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.324Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1147,6 +843,126 @@
         "lastReinforced": "2026-04-27T03:06:19.332Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-67-1777263746562-0",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.563Z",
+      "type": "PATTERN",
+      "title": "Verifica anti-C53 con grep multi-file",
+      "description": "Prima di dichiarare successo, grep del simbolo chiave su tutti i file attesi (8/8)",
+      "context": "Al termine di implementazioni multi-file per evitare false dichiarazioni di completamento",
+      "applicability": [
+        "validation",
+        "multi-file-changes",
+        "anti-regression"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.563Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746569-1",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.569Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Naming semantico per evitare collisioni",
+      "description": "customer_instructions distingue da order_items.notes (per prodotto) e address_notes (entrega)",
+      "context": "Quando si aggiungono campi note/instrucciones in domini con più livelli semantici",
+      "applicability": [
+        "db-schema",
+        "naming",
+        "domain-modeling"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.569Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746571-2",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.571Z",
+      "type": "PATTERN",
+      "title": "Migrazione SQL idempotente con IF NOT EXISTS",
+      "description": "ALTER TABLE ADD COLUMN IF NOT EXISTS per migrazioni rieseguibili senza errori",
+      "context": "Migrazioni DB in ambienti dev/prod con possibili re-run",
+      "applicability": [
+        "migrations",
+        "postgresql",
+        "idempotency"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.571Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746573-3",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.573Z",
+      "type": "PATTERN",
+      "title": "Validazione duale client+server per input testuali",
+      "description": "Cap 1000 chars enforced sia lato server (validation) sia lato UI (maxLength + counter)",
+      "context": "Campi testuali liberi esposti a utenti finali",
+      "applicability": [
+        "validation",
+        "ux",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.573Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746574-4",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.574Z",
+      "type": "INSIGHT",
+      "title": "Distinzione visiva esplicita in Vista de Cocina",
+      "description": "Icona MessageSquare + bordo accentuato separa istruzioni cliente da indicazioni di consegna",
+      "context": "UI con più tipologie di note che potrebbero essere confuse dall'operatore",
+      "applicability": [
+        "ux",
+        "kitchen-view",
+        "visual-hierarchy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.574Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746577-5",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.577Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "ESLint backend errore preesistente non bloccante",
+      "description": "Config ESLint backend richiede tsconfig.json mancante; node --check sufficiente per syntax",
+      "context": "Validazione backend amaCafe quando ESLint fallisce per config issue non correlati",
+      "applicability": [
+        "eslint",
+        "backend",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.577Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1226,9 +1042,13 @@
     "[2026-04-27T03:06:19.334Z] Workspace renamed: import-1776956320164-2m9x2n (legacy) → amaCafe (canónico desde C57)",
     "[2026-04-27T03:06:19.335Z] Directorio físico canónico: import-1777213083759-63z86j",
     "[2026-04-27T03:06:19.336Z] C53→C56 fue deuda técnica saldada en C57; cualquier referencia futura al alias legacy en metadata operativa es un bug",
-    "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side"
+    "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side",
+    "[2026-04-27T04:22:26.578Z] Cycle 66 era in modalità ARCHITECT (analisi); Cycle 67 ha eseguito il piano in DG-079 Immediate Execution",
+    "[2026-04-27T04:22:26.579Z] E2E manuale pendente: richiede restart backend per migrazione 014",
+    "[2026-04-27T04:22:26.580Z] Lezione C53 applicata: rilettura/grep finale prima di dichiarare successo",
+    "[2026-04-27T04:22:26.581Z] 8 file modificati: 3 backend + 4 frontend + BITACORA"
   ],
-  "lastUpdated": "2026-04-27T03:31:33.677Z",
+  "lastUpdated": "2026-04-27T16:26:36.327Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2667,6 +2487,328 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T21:53:44.190Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376629-1",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.629Z",
+      "type": "PATTERN",
+      "title": "Tagline en header pill con responsive hide",
+      "description": "Pill central con hidden md:inline-flex oculta tagline en mobile preservando iconos esenciales",
+      "context": "Headers con logo + tagline + iconos en breakpoints angostos",
+      "applicability": [
+        "responsive-design",
+        "tailwind",
+        "header-layout"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.629Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376630-2",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.630Z",
+      "type": "PATTERN",
+      "title": "Hero compacto reduce padding 70-80%",
+      "description": "py-16 sm:py-24 → py-6 sm:py-8 sube grilla above-the-fold sin perder mensaje",
+      "context": "Cuando hero ocupa demasiado espacio y oculta contenido principal",
+      "applicability": [
+        "UX",
+        "above-the-fold",
+        "hero-design"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.630Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376631-3",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.631Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Layout flex con shrink-0 + min-w-0 + truncate",
+      "description": "Logo y iconos shrink-0, pill min-w-0 + truncate evita romper layout en breakpoints",
+      "context": "Headers de 3 secciones con contenido variable",
+      "applicability": [
+        "tailwind",
+        "flexbox",
+        "responsive"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.631Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600712-1",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.712Z",
+      "type": "PATTERN",
+      "title": "Rotación de ENCRYPTION_SECRET requiere decrypt-old + re-encrypt-new",
+      "description": "No basta cambiar el valor; hay que descifrar con secret viejo y re-cifrar con secret nuevo todos los campos cifrados en DB",
+      "context": "Cuando ENCRYPTION_SECRET cifra datos persistidos (settings.sumup_*, recaptcha_secret_key)",
+      "applicability": [
+        "security",
+        "encryption",
+        "secret-rotation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.712Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600714-2",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.714Z",
+      "type": "PATTERN",
+      "title": "Script de rotación con dry-run + --apply",
+      "description": "Scripts destructivos deben tener modo dry-run por defecto y flag --apply explícito para ejecutar",
+      "context": "Scripts que modifican datos en producción o reescriben estado persistente",
+      "applicability": [
+        "scripting",
+        "safety",
+        "ops"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.714Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600715-3",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.715Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "CSP debe whitelistear SumUp + reCAPTCHA explícitamente",
+      "description": "helmet() con CSP requiere directivas específicas para integraciones de pagos (SumUp) y bot-protection (reCAPTCHA)",
+      "context": "Aplicación con integraciones externas de pagos y captcha",
+      "applicability": [
+        "security",
+        "csp",
+        "helmet",
+        "integrations"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.715Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600715-4",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.715Z",
+      "type": "PATTERN",
+      "title": "requireAdmin centralizado en middleware reutilizable",
+      "description": "Middleware exportado desde auth.js y aplicado a los 7 mounts admin en server.js (no inline en cada router)",
+      "context": "Cuando hay múltiples mounts admin que comparten requisito de autorización",
+      "applicability": [
+        "express",
+        "middleware",
+        "auth"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.715Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600716-5",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.716Z",
+      "type": "PATTERN",
+      "title": "Rate limiters dedicados por endpoint sensible",
+      "description": "Limiters específicos para /login, /bulk-import, /upload-image en lugar de un limiter global único",
+      "context": "Endpoints con perfiles de abuso distintos (brute force vs DoS por upload)",
+      "applicability": [
+        "security",
+        "rate-limiting",
+        "express"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.716Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600717-6",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.717Z",
+      "type": "INSIGHT",
+      "title": "git rm --cached + .gitignore no purga historial",
+      "description": "Sacar .env del tracking deja el archivo en commits previos; requiere git-filter-repo o BFG para purgar",
+      "context": "Cuando se descubre un secret commiteado por error",
+      "applicability": [
+        "git",
+        "security",
+        "secrets"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.717Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600718-7",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.718Z",
+      "type": "PATTERN",
+      "title": "Smoke test post-cambio de seguridad: 401/400 + headers",
+      "description": "Verificar 401 en admin sin auth, 400 en login sin body, y presencia de CSP/HSTS/X-Frame-Options en respuestas",
+      "context": "Después de aplicar middleware de auth, rate-limit y helmet",
+      "applicability": [
+        "testing",
+        "security",
+        "smoke-test"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.718Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376627-0",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.627Z",
+      "type": "USER_PREFERENCE",
+      "title": "Enfoque A pre-aprobado en ciclo previo",
+      "description": "Usuario eligió Enfoque A en ciclo 41; ciclo 42 ejecuta inmediato sin re-confirmar",
+      "context": "Cuando un ciclo previo presenta opciones y usuario elige una explícitamente",
+      "applicability": [
+        "execution-mode",
+        "DG-079",
+        "immediate-execution"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.627Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600711-0",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.711Z",
+      "type": "USER_PREFERENCE",
+      "title": "No ejecutar acciones destructivas sin confirmación explícita",
+      "description": "Purga de historial git y rotación real de secrets requieren confirmación previa del usuario",
+      "context": "Operaciones que reescriben historia compartida o invalidan datos cifrados existentes",
+      "applicability": [
+        "security",
+        "git",
+        "destructive-ops"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.711Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921312-0",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.312Z",
+      "type": "ANTI_PATTERN",
+      "title": "Recommendations not persisted in BITACORA",
+      "description": "Cycle 48 verbal recommendations were not written to BITACORA, blocking C49 execution",
+      "context": "When a cycle produces actionable recommendations but only logs the prompt/metrics",
+      "applicability": [
+        "bitacora",
+        "persistence",
+        "recommendations"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.312Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921320-2",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.320Z",
+      "type": "INSIGHT",
+      "title": "Workspace identity drift across cycles",
+      "description": "Metadata projectName (import-1776956320164-2m9x2n) diverges from physical dir (import-1777213083759-63z86j)",
+      "context": "When .synaptic-workspace.json projectName does not match the active cwd",
+      "applicability": [
+        "workspace",
+        "metadata",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.320Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921322-3",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.322Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Orphan workspace directory risk",
+      "description": "Two workspace dirs exist on disk; only one receives changes — risk of editing wrong path",
+      "context": "Multi-workspace SYNAPTIC setups with historical aliases",
+      "applicability": [
+        "workspace",
+        "filesystem",
+        "risk"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.322Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921324-4",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.324Z",
+      "type": "PATTERN",
+      "title": "Cwd guard in server.js",
+      "description": "Add startup check that process.cwd() contains expected workspace dir; fail fast if not",
+      "context": "Backend startup in multi-workspace environments",
+      "applicability": [
+        "backend",
+        "server.js",
+        "guard",
+        "startup"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.324Z",
         "source": "INFERRED"
       }
     }

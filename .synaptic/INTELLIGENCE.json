@@ -537,51 +537,10 @@
         "synaptic-protocol"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:28:41.317Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-50-1777257198541-0",
-      "cycle": 50,
-      "timestamp": "2026-04-27T02:33:18.541Z",
-      "type": "PATTERN",
-      "title": "Minimum-invasive metadata sync for workspace alias divergence",
-      "description": "Add aliasOf/canonicalDir fields + WORKSPACE_IDENTITY.md + DEPRECATED.md marker instead of renaming dirs",
-      "context": "When physical workspace dir differs from historical projectName alias and rename would break INTELLIGENCE chain",
-      "applicability": [
-        "workspace",
-        "metadata",
-        "synaptic",
-        "alias"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:33:18.541Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-50-1777257198546-1",
-      "cycle": 50,
-      "timestamp": "2026-04-27T02:33:18.546Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Preserve projectName field on alias divergence",
-      "description": "Original projectName must be retained in .synaptic-workspace.json to keep cycles 1-49 INTELLIGENCE chain intact",
-      "context": "Modifying .synaptic-workspace.json when canonical dir name changed",
-      "applicability": [
-        "synaptic",
-        "metadata",
-        "backwards-compat"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:33:18.546Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -597,30 +556,10 @@
         "user-preference"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:33:18.549Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-50-1777257198551-3",
-      "cycle": 50,
-      "timestamp": "2026-04-27T02:33:18.551Z",
-      "type": "PATTERN",
-      "title": "DEPRECATED.md marker in orphan directories",
-      "description": "Mark abandoned/orphan dirs with DEPRECATED.md pointing to active canonical dir for discoverability",
-      "context": "When a directory is superseded but cannot be deleted (history, backups, references)",
-      "applicability": [
-        "workspace",
-        "documentation",
-        "cleanup"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:33:18.551Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1048,7 +987,7 @@
     "[2026-04-27T04:22:26.580Z] Lezione C53 applicata: rilettura/grep finale prima di dichiarare successo",
     "[2026-04-27T04:22:26.581Z] 8 file modificati: 3 backend + 4 frontend + BITACORA"
   ],
-  "lastUpdated": "2026-04-27T16:26:36.327Z",
+  "lastUpdated": "2026-04-27T19:12:38.637Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2809,6 +2748,67 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:28:41.324Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198541-0",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.541Z",
+      "type": "PATTERN",
+      "title": "Minimum-invasive metadata sync for workspace alias divergence",
+      "description": "Add aliasOf/canonicalDir fields + WORKSPACE_IDENTITY.md + DEPRECATED.md marker instead of renaming dirs",
+      "context": "When physical workspace dir differs from historical projectName alias and rename would break INTELLIGENCE chain",
+      "applicability": [
+        "workspace",
+        "metadata",
+        "synaptic",
+        "alias"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.541Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198546-1",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.546Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Preserve projectName field on alias divergence",
+      "description": "Original projectName must be retained in .synaptic-workspace.json to keep cycles 1-49 INTELLIGENCE chain intact",
+      "context": "Modifying .synaptic-workspace.json when canonical dir name changed",
+      "applicability": [
+        "synaptic",
+        "metadata",
+        "backwards-compat"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.546Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-50-1777257198551-3",
+      "cycle": 50,
+      "timestamp": "2026-04-27T02:33:18.551Z",
+      "type": "PATTERN",
+      "title": "DEPRECATED.md marker in orphan directories",
+      "description": "Mark abandoned/orphan dirs with DEPRECATED.md pointing to active canonical dir for discoverability",
+      "context": "When a directory is superseded but cannot be deleted (history, backups, references)",
+      "applicability": [
+        "workspace",
+        "documentation",
+        "cleanup"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:33:18.551Z",
         "source": "INFERRED"
       }
     }
