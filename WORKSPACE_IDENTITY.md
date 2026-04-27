@@ -2,7 +2,8 @@
 
 > Documento canónico de identidad del workspace activo.
 > **Cycle 50** introdujo este documento (OPTION A — mínimo invasivo).
-> **Cycle 53** completó la corrección renombrando `projectName` → `amaCafe` en toda la metadata operativa (fix del UX confuso reportado en Cycle 52).
+> **Cycle 53** documentó el rename a `amaCafe` pero **NO actualizó `.synaptic-workspace.json`** — el archivo que el dashboard SYNAPTIC consume — dejando la afirmación documental sin respaldo en metadata. Esa omisión causó la insistencia legítima del usuario en C54-C56.
+> **Cycle 57** ejecutó el rename real en `.synaptic-workspace.json`, alineó `PROJECT_INIT.synaptic` (`project.id` → dir físico canónico, agregó `legacyAliasId`) y limpió headers en `agents/master_architect/{identity,memory}.md` y `context/README.md`.
 
 ## Identidad Canónica
 
@@ -41,7 +42,7 @@
 
 1. **Todo trabajo nuevo** ocurre en `import-1777213083759-63z86j` (este directorio).
 2. **NO** modificar archivos en `import-1776956320164-2m9x2n` salvo para mantenimiento de su `DEPRECATED.md`.
-3. **SYNAPTIC INTELLIGENCE** ya fue migrado en Cycle 53 a `projectName: amaCafe`. La trazabilidad histórica del alias legacy se preserva en `previousName` / `previousProjectName` dentro de cada metadata file. La cadena de decisiones (ciclos 1–49) permanece intacta en `decisions[]` de `INTELLIGENCE.json`.
+3. **SYNAPTIC INTELLIGENCE** fue migrado en Cycle 53 a `projectName: amaCafe`; **`.synaptic-workspace.json` quedó pendiente hasta Cycle 57**. La trazabilidad histórica del alias legacy se preserva en `previousName` / `previousProjectName` / `legacyAliasId` dentro de cada metadata file. La cadena de decisiones (ciclos 1–49) permanece intacta en `decisions[]` de `INTELLIGENCE.json`.
 4. **Backend cwd guard** (pendiente, MEDIUM en roadmap) debe validar contra `basePath` de este archivo.
 
 ## Decisiones Relacionadas
@@ -50,8 +51,10 @@
 - **Cycle 49**: Decision Gate — usuario eligió OPTION A (mínimo invasivo).
 - **Cycle 50**: Ejecución de la sincronización mínima invasiva (no renombró `projectName`).
 - **Cycle 51–52**: Usuario reporta UX confuso — el dashboard SYNAPTIC seguía mostrando `import-1776956320164-2m9x2n`.
-- **Cycle 53** (este fix): Renombrado completo `projectName` → `amaCafe` en `.synaptic-workspace.json`, `.synaptic/session.json`, `.synaptic/INTELLIGENCE.json` y `DESIGN_DOC.md`. Alias legacy preservado en campos `previousName`/`previousProjectName` para trazabilidad.
+- **Cycle 53**: Rename declarado (en `INTELLIGENCE.json`, `DESIGN_DOC.md` y este documento) pero **omitido en `.synaptic-workspace.json`**, que es la fuente que consume el dashboard SYNAPTIC.
+- **Cycle 54–56**: Usuario reporta repetidamente que el dashboard sigue mostrando el alias legacy. SYNAPTIC entra en modo ARCHITECT-only y no aplica fix.
+- **Cycle 57** (fix real): Actualiza `.synaptic-workspace.json` (`projectName` → `amaCafe`, agrega `previousName`, `renamedAt`, `renamedInCycle`); alinea `PROJECT_INIT.synaptic.project.id` al dir físico canónico (`import-1777213083759-63z86j`) y agrega `legacyAliasId`; reemplaza headers `Project: import-1776956320164-2m9x2n` en `agents/master_architect/identity.md`, `agents/master_architect/memory.md` y `context/README.md`. Alias legacy preservado en todos los campos históricos.
 
 ---
 
-*Última actualización: 2026-04-27 — Cycle 53 (fix del UX confuso reportado en Cycle 52)*
+*Última actualización: 2026-04-27 — Cycle 57 (fix real del rename omitido en C53)*

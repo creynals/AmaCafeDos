@@ -1,6 +1,6 @@
 # 📁 Context - Documentos Directores
 
-Este directorio contiene los documentos de contexto del proyecto **import-1776956320164-2m9x2n**.
+Este directorio contiene los documentos de contexto del proyecto **amaCafe** (alias legacy: `import-1776956320164-2m9x2n`, deprecado).
 
 ## Propósito
 

@@ -1,7 +1,7 @@
 # 🧠 Master Architect - Memory
 
-## Project: import-1776956320164-2m9x2n
-## Last Updated: 2026-04-26T14:18:03.772Z
+## Project: amaCafe (legacy alias: import-1776956320164-2m9x2n, deprecated)
+## Last Updated: 2026-04-27T03:00:00.000Z (Cycle 57 — rename consolidation)
 
 ---
 

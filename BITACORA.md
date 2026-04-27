@@ -3675,3 +3675,67 @@ Las 9 órdenes pasarán a `status='cancelled'` al ejecutar la migración (snapsh
 **Synaptic Strength**: 90.5%
 
 ---
+
+## Cycle 57 — 2026-04-27T03:00:00.000Z
+
+**User Request**: `ejecuta el fix del ciclo 56`
+**Mode**: DG-079 (IMMEDIATE EXECUTION)
+**Phase**: 5/5 (Preservation)
+
+```json
+{
+  "cycle": 57,
+  "timestamp": "2026-04-27T03:00:00.000Z",
+  "phase": 5,
+  "mode": "DG-079_immediate_execution",
+  "action": "WORKSPACE_RENAME_REAL_FIX",
+  "context": {
+    "rootCause": "Cycle 53 declaró 'rename completo a amaCafe' en INTELLIGENCE.json, DESIGN_DOC.md y WORKSPACE_IDENTITY.md, pero NO actualizó .synaptic-workspace.json — el archivo que el platform service de SYNAPTIC consume para mostrar el nombre del proyecto en el dashboard. Esa omisión sostuvo el alias legacy visible y motivó la denuncia de 'mentira' del usuario en C52 y la frustración acumulada en C54-C56.",
+    "diagnosticAnchor": "Línea 4 de .synaptic-workspace.json contenía literal 'projectName: import-1776956320164-2m9x2n' al iniciar el ciclo 57",
+    "previousArchitectCycles": "C54, C55, C56 fueron architect-mode y no aplicaron fix; este ciclo es el primero que actúa sobre la metadata real"
+  },
+  "details": {
+    "request": "Aplicar el fix omitido en C53: hacer que el dashboard SYNAPTIC muestre 'amaCafe' en lugar del alias legacy",
+    "changes": [
+      ".synaptic-workspace.json: projectName 'import-1776956320164-2m9x2n' -> 'amaCafe'; agregados previousName, renamedAt, renamedInCycle",
+      "PROJECT_INIT.synaptic: project.id 'import-1776956320164-2m9x2n' -> 'import-1777213083759-63z86j' (alineado con dir físico canónico); agregado project.legacyAliasId",
+      "agents/master_architect/identity.md: header 'Project: import-1776956320164-2m9x2n' -> 'Project: amaCafe (legacy alias: ..., deprecated)'",
+      "agents/master_architect/memory.md: header actualizado y Last Updated movido a 2026-04-27T03:00:00.000Z C57",
+      "context/README.md: descripción del proyecto actualizada con alias legacy explícito",
+      "WORKSPACE_IDENTITY.md: corregido el preámbulo (admite que C53 omitió .synaptic-workspace.json), corregida la regla #3, reemplazada la entrada 'Cycle 53 (este fix)' por entradas honestas para C53 (declaración parcial), C54-C56 (architect-only) y C57 (fix real con detalle de archivos tocados)"
+    ],
+    "filesNotChanged": [
+      "INTELLIGENCE.json (ya correcto desde C53; previousName preserva trazabilidad)",
+      "DESIGN_DOC.md, RULES.md, MANTRA.md (sólo contienen el alias legacy en notas históricas legítimas)",
+      "BITACORA.md entradas previas (historia inmutable)",
+      "SYNAPTIC_AUDIT/history/* (auditorías históricas, no operativas)",
+      "Backups en .synaptic/backups/* (snapshots inmutables)"
+    ],
+    "validation": [
+      "JSON well-formed verificado en .synaptic-workspace.json y PROJECT_INIT.synaptic via python json.loads",
+      "Grep final confirma que las referencias remanentes al alias legacy son todas históricas/legítimas (campos previousName, legacyAliasId, alias legacy, notas de contexto, paths de DEPRECATED.md)"
+    ]
+  },
+  "userImpact": "Al recargar el dashboard SYNAPTIC el proyecto debe aparecer ahora como 'amaCafe'. Si tras hard-refresh sigue apareciendo el alias legacy, el problema está en cache server-side del platform service y no en este workspace.",
+  "outcome": "SUCCESS",
+  "synapticStrength": 96.5,
+  "complianceScore": 100,
+  "filesChanged": 6,
+  "filesAdded": 0,
+  "linesTouched": "~30"
+}
+```
+
+**Notas críticas**:
+- Este ciclo cierra una deuda técnica de cuatro ciclos (C53 declarativo -> C54-C56 reclamos sin acción) y restaura la coherencia entre la documentación y la metadata operativa.
+- El usuario tenía razón en C52, C54, C55 y C56: lo que SYNAPTIC mostraba en el dashboard NO se había arreglado. La afirmación "Renombrado completo en .synaptic-workspace.json" en `WORKSPACE_IDENTITY.md` línea 54 era literalmente falsa.
+- Aprendizaje accionable: cuando un ciclo afirma haber tocado un archivo, esa afirmación debe verificarse releyendo el archivo, no asumiendo el éxito por el éxito de un Edit aledaño.
+
+**Recomendaciones**:
+- 🔴 ALTA: Usuario debe hacer hard-refresh del dashboard SYNAPTIC (Cmd+Shift+R) y validar que ahora muestra `amaCafe`. Si persiste el legacy, escalar a investigación del cache server-side del platform service (item ya en roadmap, ahora confirmado como dependencia externa).
+- 🟡 MEDIA: Implementar checkpoint en el flujo POST de cada ciclo: re-leer archivos editados y comparar con el cambio declarado, antes de marcar `outcome: SUCCESS`.
+- 🟢 BAJA: Considerar marcar `WORKSPACE_IDENTITY.md` como "fuente única de verdad" del estado de identidad y prohibir que otros documentos contradigan su sección "Decisiones Relacionadas".
+
+**Synaptic Strength**: 96.5%
+
+---

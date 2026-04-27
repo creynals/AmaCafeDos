@@ -1,8 +1,9 @@
 {
   "synaptic_version": "3.0",
   "project": {
-    "id": "import-1776956320164-2m9x2n",
+    "id": "import-1777213083759-63z86j",
     "name": "amaCafe",
+    "legacyAliasId": "import-1776956320164-2m9x2n",
     "type": "general",
     "description": "Imported from /Users/christianreynals/Desktop/tempo/amaCafe",
     "domain": "general"

@@ -1,7 +1,7 @@
 # 🧠 Master Architect Agent
 
 ## Identity: MASTER_ARCHITECT
-## Project: import-1776956320164-2m9x2n
+## Project: amaCafe (legacy alias: import-1776956320164-2m9x2n, deprecated)
 ## SYNAPTIC Protocol: v3.0
 
 ---
