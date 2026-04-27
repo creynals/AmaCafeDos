@@ -5105,3 +5105,83 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 **Synaptic Strength**: 97.7%
 
 ---
+
+## CICLO: 82
+**Timestamp**: 2026-04-27T22:28:26.163Z
+**Agente**: master_architect
+**Fase**: IMPLEMENTACION (Phase 3/5)
+**Decisión Origen**: Cycle 81 — OPTION B (Fix + Refactor a keys-shared-module)
+**Resultado**: SUCCESS
+**Modo**: IMMEDIATE EXECUTION (DG-079)
+
+**Prompt Original**:
+> proceder con OPTION B: Fix + Refactor a keys-shared-module (Balanceado) ⭐ RECOMENDADA
+
+```json
+{
+  "timestamp": "2026-04-27T22:28:26.163Z",
+  "cycle": 82,
+  "phase": 3,
+  "action": "REFACTOR_SHARED_MODULE",
+  "details": {
+    "scope": "Eliminar duplicación de primitivas criptográficas entre runtime backend (crypto.js) y script de rotación (rotate-encryption-secret.js).",
+    "decisionRef": "Cycle 81 — OPTION B (Balanced, 88% confianza)",
+    "filesCreated": [
+      "backend/src/utils/keyManager.js (módulo compartido — 60 líneas)",
+      "backend/src/utils/keyManager.test.js (16 tests round-trip — node:test)"
+    ],
+    "filesModified": [
+      "backend/src/utils/crypto.js (refactor: wrapper delgado sobre keyManager, preserva API encrypt/decrypt)",
+      "backend/scripts/rotate-encryption-secret.js (refactor: importa keyManager, elimina ~30 líneas duplicadas)"
+    ],
+    "publicAPI": {
+      "keyManager": ["ALGORITHM", "KEY_LENGTH", "IV_LENGTH", "SALT", "deriveKey(secret)", "encryptWithSecret(secret, plain)", "decryptWithSecret(secret, ciphertext)", "rotateValue(oldSecret, newSecret, ciphertext)"],
+      "crypto.js": ["encrypt(plain)", "decrypt(ciphertext)"]
+    },
+    "bugsResolved": [
+      "Bug #1 (duplicación): ALGORITHM, KEY_LENGTH, IV_LENGTH, deriveKey, salt 'amacafe-salt' y rutinas encrypt/decrypt vivían en dos archivos. Ahora viven solo en keyManager.js."
+    ],
+    "bugsDeferred": [
+      "Bug #2 (sin versioning v{N}:): explícitamente diferido a OPTION C según plan C81 (requiere migración 014 + tabla encryption_keys)."
+    ],
+    "testsRun": {
+      "keyManager.test.js": "16/16 PASS",
+      "sumup.test.js (regresión)": "6/6 PASS"
+    },
+    "testCoverage": [
+      "deriveKey: determinismo, divergencia entre secrets, validación de input",
+      "round-trip encrypt→decrypt con mismo secret",
+      "no determinismo del IV aleatorio",
+      "rechazo con secret incorrecto (auth tag mismatch GCM)",
+      "rechazo con payload mal formado",
+      "rechazo con ciphertext alterado (integridad GCM)",
+      "manejo de null/undefined/empty inputs",
+      "rotateValue: round-trip oldSecret→newSecret",
+      "compatibilidad cross-module: ciphertext de keyManager descifrable por crypto.js y viceversa"
+    ],
+    "smokeTest": "node backend/scripts/rotate-encryption-secret.js → carga limpia, falla con mensaje esperado por falta de OLD/NEW env (no SyntaxError, no ImportError)."
+  },
+  "userImpact": "El backend y el script de rotación ahora comparten una única implementación criptográfica auditable. Cualquier cambio futuro (e.g. cambio de algoritmo, salt, o introducción de versioning) se hace en un solo lugar, eliminando el riesgo de divergencia silenciosa que motivó el Decision Gate del C81. La API pública de crypto.js (encrypt/decrypt) no cambió, por lo que routes/settings.js no requiere modificaciones.",
+  "outcome": "SUCCESS",
+  "synapticStrength": 98.3,
+  "complianceScore": 100,
+  "filesChanged": 2,
+  "filesAdded": 2,
+  "linesTouched": "+60 keyManager.js, +130 keyManager.test.js, -39/+8 crypto.js, -36/+2 rotate-encryption-secret.js"
+}
+```
+
+**Notas críticas**:
+- El refactor preserva exactamente el algoritmo, salt y formato de payload (`iv:tag:cipher` en hex), por lo que **los ciphertexts existentes en la tabla `settings` siguen siendo descifrables sin migración de datos**. El test "compatibilidad cross-module" valida explícitamente este invariante.
+- La rotación real de `ENCRYPTION_SECRET` (planificada en C80) puede ahora ejecutarse con confianza: el script comparte exactamente la misma implementación que el runtime, eliminando el riesgo de "rotación exitosa en script pero backend no descifra".
+- El salt sigue siendo el literal `'amacafe-salt'` — esto es un invariante criptográfico que no puede cambiarse sin re-cifrar todos los valores existentes en BD.
+
+**Recomendaciones**:
+- 🟢 **BAJA**: Considerar exponer `keyManager` también para futuros casos de uso (e.g. cifrado de campos en `users` o tokens temporales). El módulo ya está parametrizado por secret, listo para multi-tenant si fuera necesario.
+- 🟡 **MEDIA**: Cuando se aborde Bug #2 (versioning), introducir `encryptWithSecretV2(secret, plain)` que produzca payload `v2:iv:tag:cipher` y mantener `decryptWithSecret` capaz de leer ambos formatos (v1 sin prefijo + v2 con prefijo). La migración progresiva re-encripta on-write.
+- 🟡 **MEDIA**: Añadir el test runner al `package.json` (`"test": "node --test backend/src/utils/*.test.js"`) para que CI/pre-commit pueda invocar todos los tests con un comando.
+- 🔴 **ALTA (heredada de C78/C80)**: La rotación real de `ENCRYPTION_SECRET` y demás credenciales sigue pendiente. Esta refactorización **habilita** la rotación con confianza pero **no la ejecuta**.
+
+**Synaptic Strength**: 98.3%
+
+---

@@ -13,42 +13,11 @@
 // y reiniciar el backend.
 
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
-const crypto = require('crypto');
 const { Pool } = require('pg');
+// Cycle 82, OPTION B: usar módulo compartido en lugar de re-declarar primitivas.
+const { decryptWithSecret, encryptWithSecret } = require('../src/utils/keyManager');
 
 const ENCRYPTED_KEYS = ['sumup_api_key', 'sumup_merchant_code', 'recaptcha_secret_key'];
-
-const ALGORITHM = 'aes-256-gcm';
-const KEY_LENGTH = 32;
-const IV_LENGTH = 16;
-
-function deriveKey(secret) {
-  return crypto.scryptSync(secret, 'amacafe-salt', KEY_LENGTH);
-}
-
-function encryptWith(secret, plainText) {
-  if (!plainText) return null;
-  const key = deriveKey(secret);
-  const iv = crypto.randomBytes(IV_LENGTH);
-  const cipher = crypto.createCipheriv(ALGORITHM, key, iv);
-  let encrypted = cipher.update(plainText, 'utf8', 'hex');
-  encrypted += cipher.final('hex');
-  const authTag = cipher.getAuthTag();
-  return iv.toString('hex') + ':' + authTag.toString('hex') + ':' + encrypted;
-}
-
-function decryptWith(secret, encryptedText) {
-  if (!encryptedText) return null;
-  const key = deriveKey(secret);
-  const [ivHex, authTagHex, encrypted] = encryptedText.split(':');
-  const iv = Buffer.from(ivHex, 'hex');
-  const authTag = Buffer.from(authTagHex, 'hex');
-  const decipher = crypto.createDecipheriv(ALGORITHM, key, iv);
-  decipher.setAuthTag(authTag);
-  let decrypted = decipher.update(encrypted, 'hex', 'utf8');
-  decrypted += decipher.final('utf8');
-  return decrypted;
-}
 
 async function main() {
   const oldSecret = process.env.OLD_ENCRYPTION_SECRET;
@@ -91,7 +60,7 @@ async function main() {
 
       let plain;
       try {
-        plain = decryptWith(oldSecret, rows[0].value);
+        plain = decryptWithSecret(oldSecret, rows[0].value);
       } catch (err) {
         console.error(`[rotate] FAIL decrypt key=${key} con OLD: ${err.message}`);
         if (apply) await client.query('ROLLBACK');
@@ -103,7 +72,7 @@ async function main() {
         continue;
       }
 
-      const reEnc = encryptWith(newSecret, plain);
+      const reEnc = encryptWithSecret(newSecret, plain);
       reEncrypted.push({ key, plainPreview: plain.slice(0, 4) + '…' + plain.slice(-2) });
 
       if (apply) {

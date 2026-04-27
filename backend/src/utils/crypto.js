@@ -1,41 +1,24 @@
-const crypto = require('crypto');
+// crypto.js — Wrapper de runtime sobre keyManager (Cycle 82, OPTION B).
+//
+// Lee el secret desde process.env.ENCRYPTION_SECRET (con fallback de dev) y
+// delega toda la lógica criptográfica al módulo compartido keyManager.
+// Preserva la API pública { encrypt, decrypt } usada por routes/settings.js.
 
-const ALGORITHM = 'aes-256-gcm';
-const KEY_LENGTH = 32;
-const IV_LENGTH = 16;
-const AUTH_TAG_LENGTH = 16;
+const { encryptWithSecret, decryptWithSecret } = require('./keyManager');
 
-function deriveKey() {
-  const secret = process.env.ENCRYPTION_SECRET || 'amacafe-default-secret-key-2026';
-  return crypto.scryptSync(secret, 'amacafe-salt', KEY_LENGTH);
+const DEFAULT_DEV_SECRET = 'amacafe-default-secret-key-2026';
+
+function currentSecret() {
+  return process.env.ENCRYPTION_SECRET || DEFAULT_DEV_SECRET;
 }
 
 function encrypt(plainText) {
-  if (!plainText) return null;
-  const key = deriveKey();
-  const iv = crypto.randomBytes(IV_LENGTH);
-  const cipher = crypto.createCipheriv(ALGORITHM, key, iv);
-
-  let encrypted = cipher.update(plainText, 'utf8', 'hex');
-  encrypted += cipher.final('hex');
-  const authTag = cipher.getAuthTag();
-
-  return iv.toString('hex') + ':' + authTag.toString('hex') + ':' + encrypted;
+  return encryptWithSecret(currentSecret(), plainText);
 }
 
 function decrypt(encryptedText) {
-  if (!encryptedText) return null;
   try {
-    const key = deriveKey();
-    const [ivHex, authTagHex, encrypted] = encryptedText.split(':');
-    const iv = Buffer.from(ivHex, 'hex');
-    const authTag = Buffer.from(authTagHex, 'hex');
-    const decipher = crypto.createDecipheriv(ALGORITHM, key, iv);
-    decipher.setAuthTag(authTag);
-
-    let decrypted = decipher.update(encrypted, 'hex', 'utf8');
-    decrypted += decipher.final('utf8');
-    return decrypted;
+    return decryptWithSecret(currentSecret(), encryptedText);
   } catch (err) {
     console.error('Decryption failed:', err.message);
     return null;
