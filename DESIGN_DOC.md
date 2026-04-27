@@ -100,6 +100,9 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-067-3 | Render condizionale del blocco istruzioni in OrdersTab e KitchenView | Evitare spazio sprecato per ordini senza istruzioni | 2026-04-27 | 67 |
+| DEC-067-2 | Cap 1000 caratteri server-side + UI counter | Prevenire abuso e fornire feedback immediato all'utente | 2026-04-27 | 67 |
+| DEC-067-1 | Campo customer_instructions a livello ordine, separato da order_items.notes e address_notes | Evitare collisione semantica tra istruzioni per prodotto, per consegna e per ordine globale | 2026-04-27 | 67 |
 | DEC-058 | Toda Edit declarada en BITACORA debe ser verificada con Read/Grep antes de cerrar ciclo | C53 documentó cambio que nunca se aplicó; descubierto 4 ciclos después | 2026-04-27 | 57 |
 | DEC-057 | projectName canónico = amaCafe; legacy alias preservado en previousName/legacyAliasId | Dashboard SYNAPTIC mostraba alias legacy por desync entre WORKSPACE_IDENTITY.md y .synaptic-workspace.json | 2026-04-27 | 57 |
 | DEC-053 | Rename completo de projectName a 'amaCafe' en todos los metadata operativos | Saldar deuda técnica de Cycle 50 y resolver UX confuso reportado en Cycles 51-52 | 2026-04-27 | 53 |
@@ -148,6 +151,10 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 67] Migration 014 idempotente con IF NOT EXISTS
+- [Cycle 67] createOrder() firma estesa a 5 parametri (5° = customerInstructions)
+- [Cycle 67] INSERT orders esteso da 12 a 13 placeholders
+- [Cycle 67] serializeOrder() aggiornato per includere il nuovo campo
 - [Cycle 57] .synaptic-workspace.json es leído por el platform service para el header del dashboard
 - [Cycle 57] PROJECT_INIT.synaptic.project.id debe ser el directorio físico, no el alias legacy
 - [Cycle 57] Validar JSON con json.loads tras editar .synaptic-workspace.json y PROJECT_INIT.synaptic
@@ -206,6 +213,8 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 67, 2026-04-27] Schema orders esteso con colonna customer_instructions TEXT
+- [Cycle 67, 2026-04-27] Admin GET /api/admin/orders SELECT esteso
 - [Cycle 57, 2026-04-27] Estructura canónica: projectName (actual) + previousName + renamedAt + renamedInCycle en .synaptic-workspace.json
 - [Cycle 57, 2026-04-27] PROJECT_INIT.synaptic ahora separa project.id (físico) de legacyAliasId (histórico)
 - [Cycle 53, 2026-04-27] projectName canonical ahora es 'amaCafe' en lugar de 'import-1776956320164-2m9x2n'

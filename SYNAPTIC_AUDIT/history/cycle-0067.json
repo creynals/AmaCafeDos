@@ -1,0 +1,1271 @@
+{
+  "cycleId": 67,
+  "timestamp": "2026-04-27T04:22:01.692Z",
+  "taskId": "task-1777263166168-2av8vu5h1",
+  "audit": {
+    "passed": false,
+    "score": 0,
+    "grade": "F",
+    "filesAnalyzed": [
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/admin.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/api.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx"
+    ],
+    "linesAnalyzed": 8218
+  },
+  "findings": [
+    {
+      "id": "DC-001",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "line": 113,
+      "description": "Unused function: 'for' (6 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-002",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "line": 113,
+      "description": "Unused function: 'for' (6 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-003",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "line": 113,
+      "description": "Unused function: 'for' (6 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-004",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "line": 113,
+      "description": "Unused function: 'for' (6 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-005",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/admin.js",
+      "description": "File has 636 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "DC-006",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 65,
+      "description": "Unused function: 'validateContact' (6 lines)",
+      "suggestion": "Remove unused function 'validateContact' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-007",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 72,
+      "description": "Unused function: 'validateAddress' (7 lines)",
+      "suggestion": "Remove unused function 'validateAddress' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-008",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 80,
+      "description": "Unused function: 'validatePayment' (4 lines)",
+      "suggestion": "Remove unused function 'validatePayment' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-009",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 85,
+      "description": "Unused function: 'handleNext' (12 lines)",
+      "suggestion": "Remove unused function 'handleNext' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-010",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 98,
+      "description": "Unused function: 'handleSubmit' (46 lines)",
+      "suggestion": "Remove unused function 'handleSubmit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-011",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 154,
+      "description": "Unused function: 'pollOrderStatus' (25 lines)",
+      "suggestion": "Remove unused function 'pollOrderStatus' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-012",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 157,
+      "description": "Unused function: 'while' (20 lines)",
+      "suggestion": "Remove unused function 'while' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-013",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 180,
+      "description": "Unused function: 'handleWidgetSuccess' (45 lines)",
+      "suggestion": "Remove unused function 'handleWidgetSuccess' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-014",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 226,
+      "description": "Unused function: 'handleWidgetError' (4 lines)",
+      "suggestion": "Remove unused function 'handleWidgetError' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-015",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 231,
+      "description": "Unused function: 'handleClose' (15 lines)",
+      "suggestion": "Remove unused function 'handleClose' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-016",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Unused function: 'StepSummary' (53 lines)",
+      "suggestion": "Remove unused function 'StepSummary' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-017",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 523,
+      "description": "Unused function: 'StepContact' (41 lines)",
+      "suggestion": "Remove unused function 'StepContact' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-018",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Unused function: 'StepAddress' (65 lines)",
+      "suggestion": "Remove unused function 'StepAddress' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-019",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 631,
+      "description": "Unused function: 'StepPayment' (38 lines)",
+      "suggestion": "Remove unused function 'StepPayment' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-020",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "description": "File has 669 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-021",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 248,
+      "description": "Function 'if' has 73 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-022",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Function 'StepSummary' has 53 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-023",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Function 'StepAddress' has 65 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-024",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 65,
+      "description": "Unused function: 'validateContact' (6 lines)",
+      "suggestion": "Remove unused function 'validateContact' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-025",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 72,
+      "description": "Unused function: 'validateAddress' (7 lines)",
+      "suggestion": "Remove unused function 'validateAddress' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-026",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 80,
+      "description": "Unused function: 'validatePayment' (4 lines)",
+      "suggestion": "Remove unused function 'validatePayment' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-027",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 85,
+      "description": "Unused function: 'handleNext' (12 lines)",
+      "suggestion": "Remove unused function 'handleNext' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-028",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 98,
+      "description": "Unused function: 'handleSubmit' (46 lines)",
+      "suggestion": "Remove unused function 'handleSubmit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-029",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 154,
+      "description": "Unused function: 'pollOrderStatus' (25 lines)",
+      "suggestion": "Remove unused function 'pollOrderStatus' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-030",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 157,
+      "description": "Unused function: 'while' (20 lines)",
+      "suggestion": "Remove unused function 'while' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-031",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 180,
+      "description": "Unused function: 'handleWidgetSuccess' (45 lines)",
+      "suggestion": "Remove unused function 'handleWidgetSuccess' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-032",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 226,
+      "description": "Unused function: 'handleWidgetError' (4 lines)",
+      "suggestion": "Remove unused function 'handleWidgetError' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-033",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 231,
+      "description": "Unused function: 'handleClose' (15 lines)",
+      "suggestion": "Remove unused function 'handleClose' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-034",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Unused function: 'StepSummary' (53 lines)",
+      "suggestion": "Remove unused function 'StepSummary' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-035",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 523,
+      "description": "Unused function: 'StepContact' (41 lines)",
+      "suggestion": "Remove unused function 'StepContact' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-036",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Unused function: 'StepAddress' (65 lines)",
+      "suggestion": "Remove unused function 'StepAddress' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-037",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 631,
+      "description": "Unused function: 'StepPayment' (38 lines)",
+      "suggestion": "Remove unused function 'StepPayment' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-038",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "description": "File has 669 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-039",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 248,
+      "description": "Function 'if' has 73 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-040",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Function 'StepSummary' has 53 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-041",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Function 'StepAddress' has 65 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-042",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 65,
+      "description": "Unused function: 'validateContact' (6 lines)",
+      "suggestion": "Remove unused function 'validateContact' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-043",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 72,
+      "description": "Unused function: 'validateAddress' (7 lines)",
+      "suggestion": "Remove unused function 'validateAddress' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-044",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 80,
+      "description": "Unused function: 'validatePayment' (4 lines)",
+      "suggestion": "Remove unused function 'validatePayment' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-045",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 85,
+      "description": "Unused function: 'handleNext' (12 lines)",
+      "suggestion": "Remove unused function 'handleNext' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-046",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 98,
+      "description": "Unused function: 'handleSubmit' (46 lines)",
+      "suggestion": "Remove unused function 'handleSubmit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-047",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 154,
+      "description": "Unused function: 'pollOrderStatus' (25 lines)",
+      "suggestion": "Remove unused function 'pollOrderStatus' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-048",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 157,
+      "description": "Unused function: 'while' (20 lines)",
+      "suggestion": "Remove unused function 'while' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-049",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 180,
+      "description": "Unused function: 'handleWidgetSuccess' (45 lines)",
+      "suggestion": "Remove unused function 'handleWidgetSuccess' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-050",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 226,
+      "description": "Unused function: 'handleWidgetError' (4 lines)",
+      "suggestion": "Remove unused function 'handleWidgetError' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-051",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 231,
+      "description": "Unused function: 'handleClose' (15 lines)",
+      "suggestion": "Remove unused function 'handleClose' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-052",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Unused function: 'StepSummary' (53 lines)",
+      "suggestion": "Remove unused function 'StepSummary' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-053",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 523,
+      "description": "Unused function: 'StepContact' (41 lines)",
+      "suggestion": "Remove unused function 'StepContact' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-054",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Unused function: 'StepAddress' (65 lines)",
+      "suggestion": "Remove unused function 'StepAddress' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-055",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 631,
+      "description": "Unused function: 'StepPayment' (38 lines)",
+      "suggestion": "Remove unused function 'StepPayment' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-056",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "description": "File has 669 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-057",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 248,
+      "description": "Function 'if' has 73 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-058",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Function 'StepSummary' has 53 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-059",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Function 'StepAddress' has 65 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-060",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 65,
+      "description": "Unused function: 'validateContact' (6 lines)",
+      "suggestion": "Remove unused function 'validateContact' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-061",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 72,
+      "description": "Unused function: 'validateAddress' (7 lines)",
+      "suggestion": "Remove unused function 'validateAddress' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-062",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 80,
+      "description": "Unused function: 'validatePayment' (4 lines)",
+      "suggestion": "Remove unused function 'validatePayment' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-063",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 85,
+      "description": "Unused function: 'handleNext' (12 lines)",
+      "suggestion": "Remove unused function 'handleNext' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-064",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 98,
+      "description": "Unused function: 'handleSubmit' (46 lines)",
+      "suggestion": "Remove unused function 'handleSubmit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-065",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 154,
+      "description": "Unused function: 'pollOrderStatus' (25 lines)",
+      "suggestion": "Remove unused function 'pollOrderStatus' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-066",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 157,
+      "description": "Unused function: 'while' (20 lines)",
+      "suggestion": "Remove unused function 'while' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-067",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 180,
+      "description": "Unused function: 'handleWidgetSuccess' (45 lines)",
+      "suggestion": "Remove unused function 'handleWidgetSuccess' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-068",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 226,
+      "description": "Unused function: 'handleWidgetError' (4 lines)",
+      "suggestion": "Remove unused function 'handleWidgetError' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-069",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 231,
+      "description": "Unused function: 'handleClose' (15 lines)",
+      "suggestion": "Remove unused function 'handleClose' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-070",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Unused function: 'StepSummary' (53 lines)",
+      "suggestion": "Remove unused function 'StepSummary' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-071",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 523,
+      "description": "Unused function: 'StepContact' (41 lines)",
+      "suggestion": "Remove unused function 'StepContact' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-072",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Unused function: 'StepAddress' (65 lines)",
+      "suggestion": "Remove unused function 'StepAddress' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-073",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 631,
+      "description": "Unused function: 'StepPayment' (38 lines)",
+      "suggestion": "Remove unused function 'StepPayment' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-074",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "description": "File has 669 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-075",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 248,
+      "description": "Function 'if' has 73 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-076",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Function 'StepSummary' has 53 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-077",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Function 'StepAddress' has 65 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-078",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 65,
+      "description": "Unused function: 'validateContact' (6 lines)",
+      "suggestion": "Remove unused function 'validateContact' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-079",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 72,
+      "description": "Unused function: 'validateAddress' (7 lines)",
+      "suggestion": "Remove unused function 'validateAddress' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-080",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 80,
+      "description": "Unused function: 'validatePayment' (4 lines)",
+      "suggestion": "Remove unused function 'validatePayment' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-081",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 85,
+      "description": "Unused function: 'handleNext' (12 lines)",
+      "suggestion": "Remove unused function 'handleNext' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-082",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 98,
+      "description": "Unused function: 'handleSubmit' (46 lines)",
+      "suggestion": "Remove unused function 'handleSubmit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-083",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 154,
+      "description": "Unused function: 'pollOrderStatus' (25 lines)",
+      "suggestion": "Remove unused function 'pollOrderStatus' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-084",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 157,
+      "description": "Unused function: 'while' (20 lines)",
+      "suggestion": "Remove unused function 'while' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-085",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 180,
+      "description": "Unused function: 'handleWidgetSuccess' (45 lines)",
+      "suggestion": "Remove unused function 'handleWidgetSuccess' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-086",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 226,
+      "description": "Unused function: 'handleWidgetError' (4 lines)",
+      "suggestion": "Remove unused function 'handleWidgetError' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-087",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 231,
+      "description": "Unused function: 'handleClose' (15 lines)",
+      "suggestion": "Remove unused function 'handleClose' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-088",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Unused function: 'StepSummary' (53 lines)",
+      "suggestion": "Remove unused function 'StepSummary' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-089",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 523,
+      "description": "Unused function: 'StepContact' (41 lines)",
+      "suggestion": "Remove unused function 'StepContact' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-090",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Unused function: 'StepAddress' (65 lines)",
+      "suggestion": "Remove unused function 'StepAddress' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-091",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 631,
+      "description": "Unused function: 'StepPayment' (38 lines)",
+      "suggestion": "Remove unused function 'StepPayment' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-092",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "description": "File has 669 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-093",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 248,
+      "description": "Function 'if' has 73 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-094",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Function 'StepSummary' has 53 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-095",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Function 'StepAddress' has 65 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-096",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 84,
+      "description": "Unused function: 'StatusBadge' (8 lines)",
+      "suggestion": "Remove unused function 'StatusBadge' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-097",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 93,
+      "description": "Unused function: 'PaymentStatusPill' (8 lines)",
+      "suggestion": "Remove unused function 'PaymentStatusPill' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-098",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 102,
+      "description": "Unused function: 'ChipMulti' (27 lines)",
+      "suggestion": "Remove unused function 'ChipMulti' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-099",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Unused function: 'StatusChangeModal' (153 lines)",
+      "suggestion": "Remove unused function 'StatusChangeModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-100",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 139,
+      "description": "Unused function: 'submit' (25 lines)",
+      "suggestion": "Remove unused function 'submit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-101",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Unused function: 'OrderDetailsRow' (87 lines)",
+      "suggestion": "Remove unused function 'OrderDetailsRow' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-102",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 432,
+      "description": "Unused function: 'clearFilters' (9 lines)",
+      "suggestion": "Remove unused function 'clearFilters' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-103",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 444,
+      "description": "Unused function: 'nextPage' (5 lines)",
+      "suggestion": "Remove unused function 'nextPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-104",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 449,
+      "description": "Unused function: 'prevPage' (3 lines)",
+      "suggestion": "Remove unused function 'prevPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-105",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 453,
+      "description": "Unused function: 'handleStatusUpdated' (4 lines)",
+      "suggestion": "Remove unused function 'handleStatusUpdated' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-106",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "description": "File has 712 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-107",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Function 'StatusChangeModal' has 153 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-108",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Function 'OrderDetailsRow' has 87 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-109",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 84,
+      "description": "Unused function: 'StatusBadge' (8 lines)",
+      "suggestion": "Remove unused function 'StatusBadge' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-110",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 93,
+      "description": "Unused function: 'PaymentStatusPill' (8 lines)",
+      "suggestion": "Remove unused function 'PaymentStatusPill' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-111",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 102,
+      "description": "Unused function: 'ChipMulti' (27 lines)",
+      "suggestion": "Remove unused function 'ChipMulti' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-112",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Unused function: 'StatusChangeModal' (153 lines)",
+      "suggestion": "Remove unused function 'StatusChangeModal' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-113",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 139,
+      "description": "Unused function: 'submit' (25 lines)",
+      "suggestion": "Remove unused function 'submit' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-114",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Unused function: 'OrderDetailsRow' (87 lines)",
+      "suggestion": "Remove unused function 'OrderDetailsRow' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-115",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 432,
+      "description": "Unused function: 'clearFilters' (9 lines)",
+      "suggestion": "Remove unused function 'clearFilters' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-116",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 444,
+      "description": "Unused function: 'nextPage' (5 lines)",
+      "suggestion": "Remove unused function 'nextPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-117",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 449,
+      "description": "Unused function: 'prevPage' (3 lines)",
+      "suggestion": "Remove unused function 'prevPage' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-118",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 453,
+      "description": "Unused function: 'handleStatusUpdated' (4 lines)",
+      "suggestion": "Remove unused function 'handleStatusUpdated' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-119",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "description": "File has 712 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-120",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 130,
+      "description": "Function 'StatusChangeModal' has 153 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "MT-121",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Function 'OrderDetailsRow' has 87 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-122",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 88,
+      "description": "Unused function: 'ItemsList' (26 lines)",
+      "suggestion": "Remove unused function 'ItemsList' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-123",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 115,
+      "description": "Unused function: 'OrderCard' (112 lines)",
+      "suggestion": "Remove unused function 'OrderCard' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-124",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 228,
+      "description": "Unused function: 'CancelDialog' (46 lines)",
+      "suggestion": "Remove unused function 'CancelDialog' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-125",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 275,
+      "description": "Unused function: 'AdvanceDialog' (47 lines)",
+      "suggestion": "Remove unused function 'AdvanceDialog' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-126",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 370,
+      "description": "Unused function: 'confirmAdvance' (13 lines)",
+      "suggestion": "Remove unused function 'confirmAdvance' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-127",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 384,
+      "description": "Unused function: 'confirmCancel' (13 lines)",
+      "suggestion": "Remove unused function 'confirmCancel' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-128",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "description": "File has 513 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-129",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 115,
+      "description": "Function 'OrderCard' has 112 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-130",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 88,
+      "description": "Unused function: 'ItemsList' (26 lines)",
+      "suggestion": "Remove unused function 'ItemsList' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-131",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 115,
+      "description": "Unused function: 'OrderCard' (112 lines)",
+      "suggestion": "Remove unused function 'OrderCard' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-132",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 228,
+      "description": "Unused function: 'CancelDialog' (46 lines)",
+      "suggestion": "Remove unused function 'CancelDialog' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-133",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 275,
+      "description": "Unused function: 'AdvanceDialog' (47 lines)",
+      "suggestion": "Remove unused function 'AdvanceDialog' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-134",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 370,
+      "description": "Unused function: 'confirmAdvance' (13 lines)",
+      "suggestion": "Remove unused function 'confirmAdvance' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-135",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 384,
+      "description": "Unused function: 'confirmCancel' (13 lines)",
+      "suggestion": "Remove unused function 'confirmCancel' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-136",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "description": "File has 513 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules"
+    },
+    {
+      "id": "MT-137",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 115,
+      "description": "Function 'OrderCard' has 112 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    }
+  ],
+  "resolvedFindingIds": [
+    "SAI-e2401aef",
+    "SAI-8dff09ca",
+    "SAI-483d7bb6",
+    "SAI-40f768b2",
+    "SAI-936a1b17",
+    "SAI-10799e1a"
+  ],
+  "metrics": {
+    "importsUsedPercent": 0,
+    "functionsUsedPercent": 0,
+    "duplicatePatterns": 0,
+    "securityIssues": 0,
+    "consistencyScore": 100,
+    "avgComplexity": 548,
+    "filesAnalyzed": 15,
+    "linesAnalyzed": 8218
+  }
+}

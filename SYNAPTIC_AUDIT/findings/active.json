@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-27T03:05:47.095Z",
+  "lastUpdated": "2026-04-27T04:22:01.695Z",
   "findings": [
     {
       "id": "DC-001",
@@ -2607,7 +2607,12 @@
       "findingId": "SAI-e2401aef",
       "detectedInCycle": 25,
       "detectedAt": "2026-04-26T18:08:12.788Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 67,
+        "resolvedAt": "2026-04-27T04:22:01.695Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "MT-652",
@@ -2645,7 +2650,12 @@
       "findingId": "SAI-8dff09ca",
       "detectedInCycle": 25,
       "detectedAt": "2026-04-26T18:08:12.788Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 67,
+        "resolvedAt": "2026-04-27T04:22:01.695Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-796",
@@ -2710,7 +2720,12 @@
       "findingId": "SAI-483d7bb6",
       "detectedInCycle": 25,
       "detectedAt": "2026-04-26T18:08:12.788Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 67,
+        "resolvedAt": "2026-04-27T04:22:01.695Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-822",
@@ -2788,7 +2803,12 @@
       "findingId": "SAI-40f768b2",
       "detectedInCycle": 25,
       "detectedAt": "2026-04-26T18:08:12.788Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 67,
+        "resolvedAt": "2026-04-27T04:22:01.695Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-828",
@@ -2852,7 +2872,12 @@
       "findingId": "SAI-936a1b17",
       "detectedInCycle": 25,
       "detectedAt": "2026-04-26T18:08:12.788Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 67,
+        "resolvedAt": "2026-04-27T04:22:01.695Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "MT-833",
@@ -2878,7 +2903,12 @@
       "findingId": "SAI-10799e1a",
       "detectedInCycle": 25,
       "detectedAt": "2026-04-26T18:08:12.788Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 67,
+        "resolvedAt": "2026-04-27T04:22:01.695Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-835",
@@ -3022,18 +3052,339 @@
       "detectedInCycle": 44,
       "detectedAt": "2026-04-26T23:02:43.727Z",
       "status": "OPEN"
+    },
+    {
+      "id": "MT-005",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/admin.js",
+      "description": "File has 636 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-3777337c",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-006",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 65,
+      "description": "Unused function: 'validateContact' (6 lines)",
+      "suggestion": "Remove unused function 'validateContact' or export if needed elsewhere",
+      "findingId": "SAI-29f58928",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-007",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 72,
+      "description": "Unused function: 'validateAddress' (7 lines)",
+      "suggestion": "Remove unused function 'validateAddress' or export if needed elsewhere",
+      "findingId": "SAI-0397dc5b",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-008",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 80,
+      "description": "Unused function: 'validatePayment' (4 lines)",
+      "suggestion": "Remove unused function 'validatePayment' or export if needed elsewhere",
+      "findingId": "SAI-b0187252",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-009",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 85,
+      "description": "Unused function: 'handleNext' (12 lines)",
+      "suggestion": "Remove unused function 'handleNext' or export if needed elsewhere",
+      "findingId": "SAI-cff4265a",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-010",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 98,
+      "description": "Unused function: 'handleSubmit' (46 lines)",
+      "suggestion": "Remove unused function 'handleSubmit' or export if needed elsewhere",
+      "findingId": "SAI-6e2dcb5c",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-011",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 154,
+      "description": "Unused function: 'pollOrderStatus' (25 lines)",
+      "suggestion": "Remove unused function 'pollOrderStatus' or export if needed elsewhere",
+      "findingId": "SAI-ce0cfb3d",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-012",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 157,
+      "description": "Unused function: 'while' (20 lines)",
+      "suggestion": "Remove unused function 'while' or export if needed elsewhere",
+      "findingId": "SAI-d1ede06a",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-013",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 180,
+      "description": "Unused function: 'handleWidgetSuccess' (45 lines)",
+      "suggestion": "Remove unused function 'handleWidgetSuccess' or export if needed elsewhere",
+      "findingId": "SAI-a3a2ee55",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-014",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 226,
+      "description": "Unused function: 'handleWidgetError' (4 lines)",
+      "suggestion": "Remove unused function 'handleWidgetError' or export if needed elsewhere",
+      "findingId": "SAI-643a8aab",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-015",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 231,
+      "description": "Unused function: 'handleClose' (15 lines)",
+      "suggestion": "Remove unused function 'handleClose' or export if needed elsewhere",
+      "findingId": "SAI-d3070b85",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-016",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Unused function: 'StepSummary' (53 lines)",
+      "suggestion": "Remove unused function 'StepSummary' or export if needed elsewhere",
+      "findingId": "SAI-1cc8e8b1",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-017",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 523,
+      "description": "Unused function: 'StepContact' (41 lines)",
+      "suggestion": "Remove unused function 'StepContact' or export if needed elsewhere",
+      "findingId": "SAI-bba9a96b",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-018",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Unused function: 'StepAddress' (65 lines)",
+      "suggestion": "Remove unused function 'StepAddress' or export if needed elsewhere",
+      "findingId": "SAI-f4d3f314",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-019",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 631,
+      "description": "Unused function: 'StepPayment' (38 lines)",
+      "suggestion": "Remove unused function 'StepPayment' or export if needed elsewhere",
+      "findingId": "SAI-3f2a8e3f",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-020",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "description": "File has 669 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-0fecdd81",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-021",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 248,
+      "description": "Function 'if' has 73 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-20bddd48",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-022",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 469,
+      "description": "Function 'StepSummary' has 53 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-6bdee2c7",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-023",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "line": 565,
+      "description": "Function 'StepAddress' has 65 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-b762aacc",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-101",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Unused function: 'OrderDetailsRow' (87 lines)",
+      "suggestion": "Remove unused function 'OrderDetailsRow' or export if needed elsewhere",
+      "findingId": "SAI-f5aeb72e",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-106",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "description": "File has 712 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-2663991b",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-108",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/OrdersTab.jsx",
+      "line": 284,
+      "description": "Function 'OrderDetailsRow' has 87 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-870ee0e4",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-123",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 115,
+      "description": "Unused function: 'OrderCard' (112 lines)",
+      "suggestion": "Remove unused function 'OrderCard' or export if needed elsewhere",
+      "findingId": "SAI-4c303374",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-128",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "description": "File has 513 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-00537876",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-129",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/KitchenView.jsx",
+      "line": 115,
+      "description": "Function 'OrderCard' has 112 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-922b21a6",
+      "detectedInCycle": 67,
+      "detectedAt": "2026-04-27T04:22:01.693Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 184,
-    "totalResolved": 36,
+    "totalOpen": 203,
+    "totalResolved": 42,
     "bySeverity": {
-      "MEDIUM": 148,
-      "LOW": 36
+      "MEDIUM": 164,
+      "LOW": 39
     },
     "byType": {
-      "dead_code": 139,
-      "maintainability": 45
+      "dead_code": 153,
+      "maintainability": 50
     }
   }
 }

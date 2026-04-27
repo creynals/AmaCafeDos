@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-27T03:05:47.097Z
+- **Last Updated:** 2026-04-27T04:22:01.697Z
 - **Status:** ACTIVE
 
 ---
@@ -11,13 +11,13 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 38 |
-| Score Promedio | 47% |
-| Racha Actual (A/B) | 3 ciclos |
-| Último Ciclo | 57 |
-| Última Calificación | A |
-| Findings Abiertos | 184 |
-| Findings Resueltos | 36 |
+| Ciclos Auditados | 39 |
+| Score Promedio | 46% |
+| Racha Actual (A/B) | 0 ciclos |
+| Último Ciclo | 67 |
+| Última Calificación | F |
+| Findings Abiertos | 203 |
+| Findings Resueltos | 42 |
 
 ---
 
@@ -27,8 +27,8 @@
 |-----------|----------|
 | CRITICAL | 0 |
 | HIGH | 0 |
-| MEDIUM | 148 |
-| LOW | 36 |
+| MEDIUM | 164 |
+| LOW | 39 |
 
 ---
 
@@ -36,9 +36,9 @@
 
 | Tipo | Cantidad |
 |------|----------|
-| Dead Code | 139 |
+| Dead Code | 153 |
 | Security | 0 |
-| Maintainability | 45 |
+| Maintainability | 50 |
 | Duplication | 0 |
 | Consistency | 0 |
 
@@ -48,16 +48,16 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-e45d54cd | dead_code | MEDIUM | utils/sumup.js | Unused function: 'deriveFulfillmentFromPayment' (7... |
-| SAI-7b1627c2 | dead_code | MEDIUM | routes/orders.js | Unused function: 'for' (6 lines)... |
-| SAI-c071127a | dead_code | MEDIUM | components/Header.jsx | Unused function: 'handleSearch' (4 lines)... |
-| SAI-2e750025 | dead_code | MEDIUM | components/Header.jsx | Unused function: 'clearSearch' (5 lines)... |
-| SAI-2832d09c | maintainability | LOW | scripts/rotate-encryption-secret.js | Function 'main' has 80 lines (max recommended: 50)... |
-| SAI-834c1973 | dead_code | MEDIUM | middleware/auth.js | Unused function: 'requireAuth' (15 lines)... |
-| SAI-f344afa6 | dead_code | MEDIUM | middleware/auth.js | Unused function: 'requireAdmin' (6 lines)... |
-| SAI-23aecb80 | dead_code | MEDIUM | middleware/auth.js | Unused function: 'requireSuperAdmin' (6 lines)... |
-| SAI-a42187c7 | dead_code | MEDIUM | middleware/security.js | Unused function: 'sanitizeResponse' (20 lines)... |
-| SAI-17473f47 | dead_code | MEDIUM | middleware/security.js | Unused function: 'chatInputSanitizer' (19 lines)... |
+| SAI-0fecdd81 | maintainability | MEDIUM | components/CheckoutModal.jsx | File has 669 lines (max recommended: 500)... |
+| SAI-20bddd48 | maintainability | LOW | components/CheckoutModal.jsx | Function 'if' has 73 lines (max recommended: 50)... |
+| SAI-6bdee2c7 | maintainability | LOW | components/CheckoutModal.jsx | Function 'StepSummary' has 53 lines (max recommend... |
+| SAI-b762aacc | maintainability | LOW | components/CheckoutModal.jsx | Function 'StepAddress' has 65 lines (max recommend... |
+| SAI-f5aeb72e | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'OrderDetailsRow' (87 lines)... |
+| SAI-2663991b | maintainability | MEDIUM | components/OrdersTab.jsx | File has 712 lines (max recommended: 500)... |
+| SAI-870ee0e4 | maintainability | LOW | components/OrdersTab.jsx | Function 'OrderDetailsRow' has 87 lines (max recom... |
+| SAI-4c303374 | dead_code | MEDIUM | components/KitchenView.jsx | Unused function: 'OrderCard' (112 lines)... |
+| SAI-00537876 | maintainability | MEDIUM | components/KitchenView.jsx | File has 513 lines (max recommended: 500)... |
+| SAI-922b21a6 | maintainability | LOW | components/KitchenView.jsx | Function 'OrderCard' has 112 lines (max recommende... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 96 | 100 | A |
 | 98 | 100 | A |
 | 99 | 80 | B |
 | 100 | 0 | F |
@@ -85,6 +84,7 @@
 | 50 | 100 | A |
 | 53 | 100 | A |
 | 57 | 100 | A |
+| 67 | 0 | F |
 
 ---
 
