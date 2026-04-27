@@ -382,7 +382,7 @@
         "api-design"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T18:08:38.152Z",
         "source": "EXPLICIT"
@@ -401,7 +401,7 @@
         "scope-control"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T18:08:38.156Z",
         "source": "EXPLICIT"
@@ -916,7 +916,7 @@
     "[2026-04-26T23:03:20.720Z] Script rotate-encryption-secret.js disponible en backend/scripts/ con modo dry-run + --apply",
     "[2026-04-26T23:03:20.721Z] Commit de cierre: d80d39b (12 archivos, +350/-47)"
   ],
-  "lastUpdated": "2026-04-27T02:10:25.676Z",
+  "lastUpdated": "2026-04-27T02:21:42.364Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
