@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-27T02:32:58.104Z
+- **Last Updated:** 2026-04-27T02:46:23.979Z
 - **Status:** ACTIVE
 
 ---
@@ -11,10 +11,10 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 36 |
-| Score Promedio | 44% |
-| Racha Actual (A/B) | 1 ciclos |
-| Último Ciclo | 50 |
+| Ciclos Auditados | 37 |
+| Score Promedio | 46% |
+| Racha Actual (A/B) | 2 ciclos |
+| Último Ciclo | 53 |
 | Última Calificación | A |
 | Findings Abiertos | 184 |
 | Findings Resueltos | 36 |
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 86 | 0 | F |
 | 89 | 100 | A |
 | 96 | 100 | A |
 | 98 | 100 | A |
@@ -85,6 +84,7 @@
 | 42 | 80 | B |
 | 44 | 45 | F |
 | 50 | 100 | A |
+| 53 | 100 | A |
 
 ---
 

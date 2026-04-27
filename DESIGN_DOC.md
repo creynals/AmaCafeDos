@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-053 | Rename completo de projectName a 'amaCafe' en todos los metadata operativos | Saldar deuda técnica de Cycle 50 y resolver UX confuso reportado en Cycles 51-52 | 2026-04-27 | 53 |
 | DEC-050 | Adopt OPTION A: sync metadata via aliasOf + WORKSPACE_IDENTITY.md + DEPRECATED.md | Minimum-invasive, preserves INTELLIGENCE chain (cycles 1-49) without renames or data migration | 2026-04-27 | 50 |
 | DEC-050 | Canonical workspace dir is import-1777213083759-63z86j; the other is alias/orphan | All 48 cycles of work live in this physical directory | 2026-04-27 | 49 |
 | DEC-049 | Persist all 🔴 ALTA recommendations as structured list in BITACORA per cycle | Verbal-only recommendations cannot be executed in subsequent cycles | 2026-04-27 | 49 |
@@ -145,6 +146,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 53] 7 archivos modificados: .synaptic-workspace.json, session.json, INTELLIGENCE.json, MANTRA.md, RULES.md, DESIGN_DOC.md, WORKSPACE_IDENTITY.md
+- [Cycle 53] Alias legacy preservado solo en campos previousName, BITACORA histórica y backups
+- [Cycle 53] Validación JSON post-cambio confirma decisions count preservado (2)
 - [Cycle 50] Canonical dir: import-1777213083759-63z86j; historical alias projectName: import-1776956320164-2m9x2n
 - [Cycle 50] WORKSPACE_IDENTITY.md is the canonical source of truth for workspace identity going forward
 - [Cycle 49] BITACORA cycle entries must include explicit 'Recomendaciones' section when recommendations are issued
@@ -197,6 +201,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 53, 2026-04-27] projectName canonical ahora es 'amaCafe' en lugar de 'import-1776956320164-2m9x2n'
 - [Cycle 50, 2026-04-27] Introduced aliasOf/canonicalDir/canonicalProjectName fields in .synaptic-workspace.json schema
 - [Cycle 44, 2026-04-26] Capa de seguridad HTTP centralizada: helmet + CSP + rate-limits + requireAdmin en server.js
 - [Cycle 44, 2026-04-26] backend/.env removido del tracking git (sigue en disco local)
