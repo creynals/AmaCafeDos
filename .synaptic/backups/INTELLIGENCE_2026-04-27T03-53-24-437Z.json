@@ -475,110 +475,36 @@
       "status": "PLANNED",
       "createdAtCycle": 53,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-057-A",
+      "title": "Validar dashboard tras hard-refresh",
+      "description": "Usuario debe Cmd+Shift+R y confirmar que header muestra 'amaCafe'",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 57,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-057-B",
+      "title": "Auditar otros ciclos con Edits declarados pero no verificados",
+      "description": "Revisar BITACORA C40-C53 buscando patrones similares de documentación sin ejecución",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 57,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-057-C",
+      "title": "Hook post-edit que verifique cambios declarados",
+      "description": "Automatizar verificación: cada Edit declarado en BITACORA debe pasar grep de confirmación",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 57,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-31-1777230053925-0",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.925Z",
-      "type": "USER_PREFERENCE",
-      "title": "Modo ejecución inmediata DG-079",
-      "description": "Usuario prefiere ejecutar cambios pequeños (~30 líneas) en un solo ciclo, no fragmentar en re-análisis",
-      "context": "Cuando los cambios son acotados y bien definidos tras fase ARCHITECT",
-      "applicability": [
-        "execution-mode",
-        "user-preference",
-        "DG-079"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.925Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-39-1777240424179-0",
-      "cycle": 39,
-      "timestamp": "2026-04-26T21:53:44.179Z",
-      "type": "ANTI_PATTERN",
-      "title": "Global requireAuth oculta rutas públicas",
-      "description": "Mount global con requireAuth swallowea endpoints marcados 'Public' dentro del router",
-      "context": "Express con auth middleware aplicado en app.use() antes del router",
-      "applicability": [
-        "express",
-        "auth",
-        "routing",
-        "backend"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T21:53:44.179Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-39-1777240424184-1",
-      "cycle": 39,
-      "timestamp": "2026-04-26T21:53:44.184Z",
-      "type": "PATTERN",
-      "title": "Registrar handler público antes del mount protegido",
-      "description": "Importar handler y registrar ruta pública en server.js ANTES del app.use con requireAuth",
-      "context": "Cuando un router contiene mezcla de rutas públicas y protegidas bajo auth global",
-      "applicability": [
-        "express",
-        "auth",
-        "routing"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T21:53:44.184Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-39-1777240424187-2",
-      "cycle": 39,
-      "timestamp": "2026-04-26T21:53:44.187Z",
-      "type": "ANTI_PATTERN",
-      "title": ".catch(()=>{}) silencia 401 críticos",
-      "description": "Frontend silenciaba el 401 del endpoint reCAPTCHA dejando siteKey null sin feedback",
-      "context": "Fetch en widgets de UI que dependen de config remota",
-      "applicability": [
-        "frontend",
-        "error-handling",
-        "debugging"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T21:53:44.187Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-39-1777240424190-4",
-      "cycle": 39,
-      "timestamp": "2026-04-26T21:53:44.190Z",
-      "type": "INSIGHT",
-      "title": "Comentario 'Public endpoint' no garantiza acceso público",
-      "description": "El comentario en el route file miente si el mount aplica auth global",
-      "context": "Auditoría de endpoints supuestamente públicos",
-      "applicability": [
-        "express",
-        "code-review",
-        "auth"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T21:53:44.190Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-42-1777241376627-0",
       "cycle": 42,
@@ -593,70 +519,10 @@
         "immediate-execution"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T22:09:36.627Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-42-1777241376629-1",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.629Z",
-      "type": "PATTERN",
-      "title": "Tagline en header pill con responsive hide",
-      "description": "Pill central con hidden md:inline-flex oculta tagline en mobile preservando iconos esenciales",
-      "context": "Headers con logo + tagline + iconos en breakpoints angostos",
-      "applicability": [
-        "responsive-design",
-        "tailwind",
-        "header-layout"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.629Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-42-1777241376630-2",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.630Z",
-      "type": "PATTERN",
-      "title": "Hero compacto reduce padding 70-80%",
-      "description": "py-16 sm:py-24 → py-6 sm:py-8 sube grilla above-the-fold sin perder mensaje",
-      "context": "Cuando hero ocupa demasiado espacio y oculta contenido principal",
-      "applicability": [
-        "UX",
-        "above-the-fold",
-        "hero-design"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.630Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-42-1777241376631-3",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.631Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Layout flex con shrink-0 + min-w-0 + truncate",
-      "description": "Logo y iconos shrink-0, pill min-w-0 + truncate evita romper layout en breakpoints",
-      "context": "Headers de 3 secciones con contenido variable",
-      "applicability": [
-        "tailwind",
-        "flexbox",
-        "responsive"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.631Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1101,6 +967,126 @@
         "lastReinforced": "2026-04-27T02:46:47.290Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-57-1777259179318-0",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.318Z",
+      "type": "ANTI_PATTERN",
+      "title": "Documentar cambio sin aplicarlo",
+      "description": "C53 declaró rename en WORKSPACE_IDENTITY.md sin tocar .synaptic-workspace.json — deuda técnica 4 ciclos",
+      "context": "Cuando un ciclo edita metadata declarativa pero omite el archivo operativo real",
+      "applicability": [
+        "workspace-rename",
+        "metadata-sync",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.318Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179323-1",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.323Z",
+      "type": "PATTERN",
+      "title": "Verificar archivo en disco tras Edit declarado",
+      "description": "Releer cada archivo prometido modificado con Read/Grep antes de cerrar ciclo; afirmación ≠ cambio",
+      "context": "Tras cualquier ciclo que aplique fixes a múltiples archivos",
+      "applicability": [
+        "verification",
+        "edit-validation",
+        "synaptic-discipline"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.323Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179326-2",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.326Z",
+      "type": "TECHNICAL_NOTE",
+      "title": ".synaptic-workspace.json es la fuente para el dashboard",
+      "description": "El platform service de SYNAPTIC consume projectName de .synaptic-workspace.json para el header del dashboard",
+      "context": "Cualquier rename de proyecto debe actualizar este archivo, no solo WORKSPACE_IDENTITY.md",
+      "applicability": [
+        "synaptic-platform",
+        "dashboard",
+        "workspace-metadata"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.326Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179328-3",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.328Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "PROJECT_INIT.synaptic.project.id debe ser ID físico canónico",
+      "description": "project.id apuntaba al alias legacy; debe ser el directorio físico import-1777213083759-63z86j con legacyAliasId aparte",
+      "context": "Edición de PROJECT_INIT.synaptic tras rename de workspace",
+      "applicability": [
+        "project-init",
+        "workspace-id",
+        "legacy-alias"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.328Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179330-4",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.330Z",
+      "type": "USER_PREFERENCE",
+      "title": "Modo IMMEDIATE EXECUTION cuando se pide acción directa",
+      "description": "'Ejecuta el fix' sin contexto de revisión = bypass Decision Gate, aplicar fix sin pedir aprobación intermedia",
+      "context": "Cuando el usuario expresa frustración persistente y pide acción inmediata",
+      "applicability": [
+        "execution-mode",
+        "decision-gate",
+        "user-frustration"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.330Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179332-5",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.332Z",
+      "type": "INSIGHT",
+      "title": "Architect-only cycles no resuelven quejas operacionales",
+      "description": "C54-C56 fueron architect-only y acumularon frustración; quejas persistentes requieren modo ejecutivo",
+      "context": "Cuando una queja se repite ≥2 ciclos sin resolución",
+      "applicability": [
+        "cycle-mode",
+        "user-feedback-loop",
+        "architect-vs-executor"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.332Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1176,9 +1162,13 @@
     "[2026-04-27T02:33:18.558Z] Backup .zip path still pending user confirmation",
     "[2026-04-27T02:46:47.291Z] Cycle 50 tomó OPTION A 'minimo invasivo' que generó deuda técnica saldada en Cycle 53",
     "[2026-04-27T02:46:47.291Z] Workspace activo amaCafe tiene historia de rename desde alias import-1776956320164-2m9x2n",
-    "[2026-04-27T02:46:47.292Z] Memoria global synaptic_workspace_alias.md actualizada para reflejar nuevo estado canonical"
+    "[2026-04-27T02:46:47.292Z] Memoria global synaptic_workspace_alias.md actualizada para reflejar nuevo estado canonical",
+    "[2026-04-27T03:06:19.334Z] Workspace renamed: import-1776956320164-2m9x2n (legacy) → amaCafe (canónico desde C57)",
+    "[2026-04-27T03:06:19.335Z] Directorio físico canónico: import-1777213083759-63z86j",
+    "[2026-04-27T03:06:19.336Z] C53→C56 fue deuda técnica saldada en C57; cualquier referencia futura al alias legacy en metadata operativa es un bug",
+    "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side"
   ],
-  "lastUpdated": "2026-04-27T02:48:07.046Z",
+  "lastUpdated": "2026-04-27T03:44:22.647Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2516,6 +2506,167 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T19:00:53.936Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053925-0",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.925Z",
+      "type": "USER_PREFERENCE",
+      "title": "Modo ejecución inmediata DG-079",
+      "description": "Usuario prefiere ejecutar cambios pequeños (~30 líneas) en un solo ciclo, no fragmentar en re-análisis",
+      "context": "Cuando los cambios son acotados y bien definidos tras fase ARCHITECT",
+      "applicability": [
+        "execution-mode",
+        "user-preference",
+        "DG-079"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.925Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424179-0",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.179Z",
+      "type": "ANTI_PATTERN",
+      "title": "Global requireAuth oculta rutas públicas",
+      "description": "Mount global con requireAuth swallowea endpoints marcados 'Public' dentro del router",
+      "context": "Express con auth middleware aplicado en app.use() antes del router",
+      "applicability": [
+        "express",
+        "auth",
+        "routing",
+        "backend"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.179Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424184-1",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.184Z",
+      "type": "PATTERN",
+      "title": "Registrar handler público antes del mount protegido",
+      "description": "Importar handler y registrar ruta pública en server.js ANTES del app.use con requireAuth",
+      "context": "Cuando un router contiene mezcla de rutas públicas y protegidas bajo auth global",
+      "applicability": [
+        "express",
+        "auth",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.184Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424187-2",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.187Z",
+      "type": "ANTI_PATTERN",
+      "title": ".catch(()=>{}) silencia 401 críticos",
+      "description": "Frontend silenciaba el 401 del endpoint reCAPTCHA dejando siteKey null sin feedback",
+      "context": "Fetch en widgets de UI que dependen de config remota",
+      "applicability": [
+        "frontend",
+        "error-handling",
+        "debugging"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.187Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-39-1777240424190-4",
+      "cycle": 39,
+      "timestamp": "2026-04-26T21:53:44.190Z",
+      "type": "INSIGHT",
+      "title": "Comentario 'Public endpoint' no garantiza acceso público",
+      "description": "El comentario en el route file miente si el mount aplica auth global",
+      "context": "Auditoría de endpoints supuestamente públicos",
+      "applicability": [
+        "express",
+        "code-review",
+        "auth"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T21:53:44.190Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376629-1",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.629Z",
+      "type": "PATTERN",
+      "title": "Tagline en header pill con responsive hide",
+      "description": "Pill central con hidden md:inline-flex oculta tagline en mobile preservando iconos esenciales",
+      "context": "Headers con logo + tagline + iconos en breakpoints angostos",
+      "applicability": [
+        "responsive-design",
+        "tailwind",
+        "header-layout"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.629Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376630-2",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.630Z",
+      "type": "PATTERN",
+      "title": "Hero compacto reduce padding 70-80%",
+      "description": "py-16 sm:py-24 → py-6 sm:py-8 sube grilla above-the-fold sin perder mensaje",
+      "context": "Cuando hero ocupa demasiado espacio y oculta contenido principal",
+      "applicability": [
+        "UX",
+        "above-the-fold",
+        "hero-design"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.630Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376631-3",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.631Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Layout flex con shrink-0 + min-w-0 + truncate",
+      "description": "Logo y iconos shrink-0, pill min-w-0 + truncate evita romper layout en breakpoints",
+      "context": "Headers de 3 secciones con contenido variable",
+      "applicability": [
+        "tailwind",
+        "flexbox",
+        "responsive"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.631Z",
         "source": "INFERRED"
       }
     }
