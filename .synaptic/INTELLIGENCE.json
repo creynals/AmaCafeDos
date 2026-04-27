@@ -524,26 +524,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-49-1777256921312-0",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.312Z",
-      "type": "ANTI_PATTERN",
-      "title": "Recommendations not persisted in BITACORA",
-      "description": "Cycle 48 verbal recommendations were not written to BITACORA, blocking C49 execution",
-      "context": "When a cycle produces actionable recommendations but only logs the prompt/metrics",
-      "applicability": [
-        "bitacora",
-        "persistence",
-        "recommendations"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.312Z",
-        "source": "INFERRED"
-      }
-    },
-    {
       "learningId": "learning-49-1777256921317-1",
       "cycle": 49,
       "timestamp": "2026-04-27T02:28:41.317Z",
@@ -557,71 +537,10 @@
         "synaptic-protocol"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:28:41.317Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921320-2",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.320Z",
-      "type": "INSIGHT",
-      "title": "Workspace identity drift across cycles",
-      "description": "Metadata projectName (import-1776956320164-2m9x2n) diverges from physical dir (import-1777213083759-63z86j)",
-      "context": "When .synaptic-workspace.json projectName does not match the active cwd",
-      "applicability": [
-        "workspace",
-        "metadata",
-        "synaptic"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.320Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921322-3",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.322Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Orphan workspace directory risk",
-      "description": "Two workspace dirs exist on disk; only one receives changes — risk of editing wrong path",
-      "context": "Multi-workspace SYNAPTIC setups with historical aliases",
-      "applicability": [
-        "workspace",
-        "filesystem",
-        "risk"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.322Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-49-1777256921324-4",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.324Z",
-      "type": "PATTERN",
-      "title": "Cwd guard in server.js",
-      "description": "Add startup check that process.cwd() contains expected workspace dir; fail fast if not",
-      "context": "Backend startup in multi-workspace environments",
-      "applicability": [
-        "backend",
-        "server.js",
-        "guard",
-        "startup"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.324Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1129,7 +1048,7 @@
     "[2026-04-27T04:22:26.580Z] Lezione C53 applicata: rilettura/grep finale prima di dichiarare successo",
     "[2026-04-27T04:22:26.581Z] 8 file modificati: 3 backend + 4 frontend + BITACORA"
   ],
-  "lastUpdated": "2026-04-27T15:34:18.041Z",
+  "lastUpdated": "2026-04-27T16:26:36.327Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2810,6 +2729,87 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T23:03:20.711Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921312-0",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.312Z",
+      "type": "ANTI_PATTERN",
+      "title": "Recommendations not persisted in BITACORA",
+      "description": "Cycle 48 verbal recommendations were not written to BITACORA, blocking C49 execution",
+      "context": "When a cycle produces actionable recommendations but only logs the prompt/metrics",
+      "applicability": [
+        "bitacora",
+        "persistence",
+        "recommendations"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.312Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921320-2",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.320Z",
+      "type": "INSIGHT",
+      "title": "Workspace identity drift across cycles",
+      "description": "Metadata projectName (import-1776956320164-2m9x2n) diverges from physical dir (import-1777213083759-63z86j)",
+      "context": "When .synaptic-workspace.json projectName does not match the active cwd",
+      "applicability": [
+        "workspace",
+        "metadata",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.320Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921322-3",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.322Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Orphan workspace directory risk",
+      "description": "Two workspace dirs exist on disk; only one receives changes — risk of editing wrong path",
+      "context": "Multi-workspace SYNAPTIC setups with historical aliases",
+      "applicability": [
+        "workspace",
+        "filesystem",
+        "risk"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.322Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921324-4",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.324Z",
+      "type": "PATTERN",
+      "title": "Cwd guard in server.js",
+      "description": "Add startup check that process.cwd() contains expected workspace dir; fail fast if not",
+      "context": "Backend startup in multi-workspace environments",
+      "applicability": [
+        "backend",
+        "server.js",
+        "guard",
+        "startup"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.324Z",
+        "source": "INFERRED"
       }
     }
   ]
