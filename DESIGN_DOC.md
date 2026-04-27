@@ -100,6 +100,9 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-084-3 | Image storage strategy (B2) elevated to Decision Gate with options A/B/C (git-only / Volume / R2) | Railway ephemeral FS + admin uploads is a strategic tradeoff (cost vs UX vs scale) | 2026-04-27 | 84 |
+| DEC-084-2 | Backend migrations run via standalone scripts/migrate.js triggered by railway.toml preDeployCommand | Decouples schema sync from app boot; idempotent and re-runnable in CI (B4) | 2026-04-27 | 84 |
+| DEC-084-1 | Frontend api.js BASE is configurable via VITE_API_BASE_URL with `/api` fallback | Enables Railway frontend service to point at separate backend domain without code changes (B3) | 2026-04-27 | 84 |
 | DEC-082-C | Salt 'amacafe-salt' and GCM payload format preserved | Existing ciphertexts in settings table remain decryptable — no data migration required | 2026-04-27 | 82 |
 | DEC-082-B | crypto.js becomes thin wrapper preserving {encrypt, decrypt} public API | routes/settings.js consumers unchanged — backwards-compatible refactor | 2026-04-27 | 82 |
 | DEC-082-A | Crypto primitives consolidated in backend/src/utils/keyManager.js | Eliminate duplication between rotate-encryption-secret.js and crypto.js — single source of truth | 2026-04-27 | 82 |
@@ -158,6 +161,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 84] railway.toml at repo root configures backend; frontend/railway.toml configures frontend service
+- [Cycle 84] backend/package.json now exposes `migrate` and `test` scripts
+- [Cycle 84] Migration smoke test confirmed 55ms idempotent apply against live local Postgres
 - [Cycle 82] keyManager exports: deriveKey, encryptWithSecret, decryptWithSecret, rotateValue + ALGORITHM/KEY_LENGTH/IV_LENGTH constants
 - [Cycle 82] 16 round-trip tests in keyManager.test.js including cross-module compatibility
 - [Cycle 82] Bug #2 (v{N}: versioning prefix) requires migration 014 + encryption_keys table — deferred to OPTION C
@@ -233,6 +239,8 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 84, 2026-04-27] Two-service Railway topology: backend (Nixpacks + preDeploy migrate + /api/health) and frontend (vite preview)
+- [Cycle 84, 2026-04-27] Frontend BASE URL no longer hardcoded; resolved at build time from VITE_API_BASE_URL
 - [Cycle 82, 2026-04-27] New shared utility layer: backend/src/utils/keyManager.js as crypto primitives module
 - [Cycle 82, 2026-04-27] crypto.js reduced from 45 to 27 lines (thin wrapper)
 - [Cycle 82, 2026-04-27] rotate-encryption-secret.js: ~30 duplicated lines removed
