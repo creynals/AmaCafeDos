@@ -481,110 +481,10 @@
         "DG-079"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T19:00:53.925Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053929-1",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.929Z",
-      "type": "ANTI_PATTERN",
-      "title": "ARCHITECT MODE prolongado sin POST commit pierde contexto",
-      "description": "Ciclos 26-30 en ARCHITECT MODE sin commit POST hicieron perder la tabla de 5 fixes del ciclo 30",
-      "context": "Análisis multi-ciclo sin persistir conclusiones intermedias",
-      "applicability": [
-        "synaptic-protocol",
-        "context-loss",
-        "architect-mode"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.929Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053931-2",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.931Z",
-      "type": "PATTERN",
-      "title": "Helper puro derivado + COALESCE en UPDATE",
-      "description": "Extraer lógica de derivación a helper puro y usar COALESCE($n, status) en múltiples UPDATE para consistencia",
-      "context": "Cuando misma transformación payment→fulfillment se replica en webhooks/orders/payments",
-      "applicability": [
-        "refactor",
-        "DRY",
-        "sql-update"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.931Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053933-3",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.933Z",
-      "type": "PATTERN",
-      "title": "Migración SQL idempotente con snapshot a tabla audit",
-      "description": "Backfill legacy debe snapshot estado previo a tabla _audit antes de UPDATE para reversibilidad",
-      "context": "Migraciones que corrigen datos legacy en producción",
-      "applicability": [
-        "migration",
-        "audit",
-        "data-fix"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.933Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053934-4",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.934Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "node:test built-in evita nuevas deps",
-      "description": "Usar `node --test` con `node:test` para tests cortos sin agregar Jest/Mocha al proyecto",
-      "context": "Tests unitarios de helpers puros en backend Node",
-      "applicability": [
-        "testing",
-        "node-builtin",
-        "no-deps"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.934Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-31-1777230053936-5",
-      "cycle": 31,
-      "timestamp": "2026-04-26T19:00:53.936Z",
-      "type": "INSIGHT",
-      "title": "Backend sin --watch requiere reinicio manual",
-      "description": "PID 73456 corre `node src/server.js` directo, fixes no se aplican hasta `kill && npm run dev`",
-      "context": "Workspace import-1776956320164-2m9x2n backend dev workflow",
-      "applicability": [
-        "dev-workflow",
-        "hot-reload",
-        "deployment"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T19:00:53.936Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1163,7 +1063,7 @@
     "[2026-04-27T02:33:18.556Z] Synaptic Strength advanced 94.25% → 95% after sync",
     "[2026-04-27T02:33:18.558Z] Backup .zip path still pending user confirmation"
   ],
-  "lastUpdated": "2026-04-27T02:34:37.018Z",
+  "lastUpdated": "2026-04-27T02:38:08.758Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2402,6 +2302,106 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T18:08:38.156Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053929-1",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.929Z",
+      "type": "ANTI_PATTERN",
+      "title": "ARCHITECT MODE prolongado sin POST commit pierde contexto",
+      "description": "Ciclos 26-30 en ARCHITECT MODE sin commit POST hicieron perder la tabla de 5 fixes del ciclo 30",
+      "context": "Análisis multi-ciclo sin persistir conclusiones intermedias",
+      "applicability": [
+        "synaptic-protocol",
+        "context-loss",
+        "architect-mode"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.929Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053931-2",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.931Z",
+      "type": "PATTERN",
+      "title": "Helper puro derivado + COALESCE en UPDATE",
+      "description": "Extraer lógica de derivación a helper puro y usar COALESCE($n, status) en múltiples UPDATE para consistencia",
+      "context": "Cuando misma transformación payment→fulfillment se replica en webhooks/orders/payments",
+      "applicability": [
+        "refactor",
+        "DRY",
+        "sql-update"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.931Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053933-3",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.933Z",
+      "type": "PATTERN",
+      "title": "Migración SQL idempotente con snapshot a tabla audit",
+      "description": "Backfill legacy debe snapshot estado previo a tabla _audit antes de UPDATE para reversibilidad",
+      "context": "Migraciones que corrigen datos legacy en producción",
+      "applicability": [
+        "migration",
+        "audit",
+        "data-fix"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.933Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053934-4",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.934Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "node:test built-in evita nuevas deps",
+      "description": "Usar `node --test` con `node:test` para tests cortos sin agregar Jest/Mocha al proyecto",
+      "context": "Tests unitarios de helpers puros en backend Node",
+      "applicability": [
+        "testing",
+        "node-builtin",
+        "no-deps"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.934Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-31-1777230053936-5",
+      "cycle": 31,
+      "timestamp": "2026-04-26T19:00:53.936Z",
+      "type": "INSIGHT",
+      "title": "Backend sin --watch requiere reinicio manual",
+      "description": "PID 73456 corre `node src/server.js` directo, fixes no se aplican hasta `kill && npm run dev`",
+      "context": "Workspace import-1776956320164-2m9x2n backend dev workflow",
+      "applicability": [
+        "dev-workflow",
+        "hot-reload",
+        "deployment"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T19:00:53.936Z",
+        "source": "INFERRED"
       }
     }
   ]
