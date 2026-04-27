@@ -370,44 +370,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-25-1777226918152-4",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.152Z",
-      "type": "USER_PREFERENCE",
-      "title": "Reutilizar endpoints existentes",
-      "description": "Vista de Cocina usa PATCH /admin/orders/:id/status sin crear nuevos endpoints",
-      "context": "Al implementar nuevas UIs sobre flujos de estado existentes",
-      "applicability": [
-        "backend",
-        "api-design"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.152Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918156-6",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.156Z",
-      "type": "USER_PREFERENCE",
-      "title": "Lints preexistentes out-of-scope",
-      "description": "No tocar 7 errores ESLint preexistentes en AdminPage.jsx; validar solo nuevos",
-      "context": "Cualquier cambio que toque AdminPage.jsx",
-      "applicability": [
-        "lint",
-        "scope-control"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.156Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
       "learningId": "learning-31-1777230053925-0",
       "cycle": 31,
       "timestamp": "2026-04-26T19:00:53.925Z",
@@ -916,7 +878,7 @@
     "[2026-04-26T23:03:20.720Z] Script rotate-encryption-secret.js disponible en backend/scripts/ con modo dry-run + --apply",
     "[2026-04-26T23:03:20.721Z] Commit de cierre: d80d39b (12 archivos, +350/-47)"
   ],
-  "lastUpdated": "2026-04-27T02:21:42.364Z",
+  "lastUpdated": "2026-04-27T02:25:46.054Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2117,6 +2079,44 @@
         "evidenceCount": 2,
         "lastReinforced": "2026-04-26T21:53:44.189Z",
         "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918152-4",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.152Z",
+      "type": "USER_PREFERENCE",
+      "title": "Reutilizar endpoints existentes",
+      "description": "Vista de Cocina usa PATCH /admin/orders/:id/status sin crear nuevos endpoints",
+      "context": "Al implementar nuevas UIs sobre flujos de estado existentes",
+      "applicability": [
+        "backend",
+        "api-design"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.152Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918156-6",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.156Z",
+      "type": "USER_PREFERENCE",
+      "title": "Lints preexistentes out-of-scope",
+      "description": "No tocar 7 errores ESLint preexistentes en AdminPage.jsx; validar solo nuevos",
+      "context": "Cualquier cambio que toque AdminPage.jsx",
+      "applicability": [
+        "lint",
+        "scope-control"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.156Z",
+        "source": "EXPLICIT"
       }
     }
   ]
