@@ -22,6 +22,7 @@ const settingsRoutes = require('./routes/settings');
 const usersRoutes = require('./routes/users');
 const webhookRoutes = require('./routes/webhooks');
 const { getRecaptchaConfig } = require('./utils/recaptcha');
+const { IMAGES_DIR, ensureImagesDir } = require('./utils/imageStorage');
 
 const app = express();
 const PORT = process.env.PORT || 7000;
@@ -81,7 +82,16 @@ app.use('/', webhookRoutes);
 
 app.use(express.json());
 
-// Serve static files (product images, etc.)
+// Serve static files.
+//
+// C85 (B2 — Railway Volume): product images live in IMAGES_DIR, which is
+// IMAGES_STORAGE_PATH in production (Railway volume mount, e.g. /data/products)
+// and the in-repo `fuentes/products` directory locally. The `/static/products`
+// mount comes BEFORE the broader `/static` mount so volume contents win over
+// the bundled fallback in the repo. The remaining `/static` paths (menu/, logo)
+// continue to be served from the repo's `fuentes/` directory unchanged.
+ensureImagesDir();
+app.use('/static/products', express.static(IMAGES_DIR));
 app.use('/static', express.static(path.join(__dirname, '..', '..', 'fuentes')));
 
 // Health check

@@ -23,17 +23,13 @@ const multer = require('multer');
 
 const { query, getClient } = require('../models/database');
 const { uploadImageRateLimiter } = require('../middleware/security');
+const { IMAGES_DIR, ensureImagesDir } = require('../utils/imageStorage');
 
 const router = express.Router();
 
 // ─── Multer (mismo pipeline que products-admin.js para imágenes) ─────────────
-const IMAGES_DIR = path.join(__dirname, '..', '..', '..', 'fuentes', 'products');
-
-function ensureImagesDir() {
-  if (!fs.existsSync(IMAGES_DIR)) {
-    fs.mkdirSync(IMAGES_DIR, { recursive: true });
-  }
-}
+// IMAGES_DIR comes from utils/imageStorage so local dev (fuentes/products) and
+// Railway production (volume mount via IMAGES_STORAGE_PATH) stay aligned.
 
 const imageUpload = multer({
   storage: multer.diskStorage({

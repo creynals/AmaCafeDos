@@ -22,6 +22,22 @@
 #   SUMUP_MODE            → "live" en prod (failsafe en server.js aborta si
 #                           NODE_ENV=production && sumup_mode=mock).
 #   SUMUP_RETURN_URL_BASE → URL pública del frontend (para checkout success/failure).
+#   IMAGES_STORAGE_PATH   → Absolute path inside the container where uploaded
+#                           product images live. Set to the products subdir of
+#                           the mounted Railway Volume (see `[deploy.volumes]`
+#                           below). Recommended value: `/data/products`. If
+#                           unset, the backend falls back to the in-repo
+#                           `fuentes/products` directory (local dev only — DO
+#                           NOT leave unset in Railway, uploads would be lost
+#                           on every redeploy).
+#
+# Persistent storage (C85 — B2 Railway Volume):
+#   In Railway → Service → Volumes, attach a volume mounted at `/data`.
+#   Then set IMAGES_STORAGE_PATH=/data/products in the service variables.
+#   The `preDeployCommand` below runs `seed-volume-images.js` after the DB
+#   migrations to copy the bundled baseline images (`fuentes/products/`) into
+#   the volume on first boot. The script is idempotent — subsequent deploys
+#   skip files that are already present, so user uploads are never overwritten.
 #
 # El frontend se despliega como SERVICIO SEPARADO en Railway — ver
 # `frontend/railway.toml` para su config (Vite static + npm preview o serve).
@@ -31,8 +47,20 @@ builder = "NIXPACKS"
 
 [deploy]
 startCommand = "npm start"
-preDeployCommand = "node scripts/migrate.js"
+# preDeploy chain: migrate DB schema first, then seed the persistent volume
+# with baseline product images on a fresh volume (idempotent — no-op once
+# every file has been copied). If either step fails, Railway aborts the
+# rollout, so the listener never takes traffic against an inconsistent state.
+preDeployCommand = "node scripts/migrate.js && node scripts/seed-volume-images.js"
 healthcheckPath = "/api/health"
 healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 5
+
+# Railway Volume mount — REQUIRED in production for persistent product images.
+# Configure via Railway UI: Service → Volumes → New Volume → mount path `/data`.
+# Then set service env var IMAGES_STORAGE_PATH=/data/products. The TOML keys
+# below mirror the UI configuration for traceability; Railway honours the
+# UI definition as the source of truth.
+[deploy.volumes]
+"backend-images" = { mountPath = "/data" }

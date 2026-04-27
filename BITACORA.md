@@ -5387,3 +5387,74 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 **Synaptic Strength**: 98.5%
 
 ---
+
+## CICLO: 85
+**Timestamp**: 2026-04-27T23:55:00.000Z
+**Agente**: master_architect
+**Fase**: IMPLEMENTACION (Phase 3/5) — B2 resuelto via Railway Volume
+**Decisión Origen**: Cycle 84 Decision Gate B2 → user selected OPTION B (Railway Volume — Balanced ⭐)
+**Resultado**: SUCCESS
+**Modo**: IMMEDIATE EXECUTION
+
+**Prompt Original**:
+> proceder con  OPTION B: Railway Volume — Balanced ⭐ RECOMENDADA
+
+```json
+{
+  "timestamp": "2026-04-27T23:55:00.000Z",
+  "cycle": 85,
+  "phase": 3,
+  "action": "RAILWAY_VOLUME_IMAGES_PERSISTENCE",
+  "details": {
+    "scope": "Resolver B2 (filesystem efímero en Railway) montando un Railway Volume para imágenes de productos. Centralizar la ruta de almacenamiento detrás de un módulo único (utils/imageStorage), parametrizado por env (IMAGES_STORAGE_PATH), y bootstrappear el volumen en cada primer deploy con las imágenes baseline del repo via preDeployCommand idempotente.",
+    "filesCreated": [
+      "backend/src/utils/imageStorage.js (resolver IMAGES_DIR desde IMAGES_STORAGE_PATH con fallback a fuentes/products; ensureImagesDir; resolveImagesDir testeable)",
+      "backend/src/utils/imageStorage.test.js (5 tests: fallback, empty/whitespace, absolute happy-path, relative reject, LOCAL_DEFAULT_DIR shape)",
+      "backend/scripts/seed-volume-images.js (copia idempotente de fuentes/products → IMAGES_STORAGE_PATH; no-op cuando IMAGES_STORAGE_PATH está unset; skipea archivos ya presentes)"
+    ],
+    "filesModified": [
+      "backend/src/server.js (importa IMAGES_DIR/ensureImagesDir; mount `/static/products` → IMAGES_DIR ANTES del mount general `/static` → fuentes/, garantizando que el volumen gane sobre el baseline empacado)",
+      "backend/src/routes/products-admin.js (eliminada definición local de IMAGES_DIR + ensureImagesDir; ahora se importa desde utils/imageStorage)",
+      "backend/src/routes/products-admin-images.js (idem: eliminada definición local, importa de utils/imageStorage)",
+      "railway.toml (documentado IMAGES_STORAGE_PATH=/data/products en sección env vars; añadida sección `[deploy.volumes]` con mount `/data`; `preDeployCommand` ahora encadena `migrate.js && seed-volume-images.js`)"
+    ],
+    "validation": {
+      "backendTests": "✅ npm test → 27/27 PASS (5 nuevos imageStorage + 16 keyManager + 6 sumup, sin regresiones)",
+      "seedScriptLocal": "✅ node seed-volume-images.js sin IMAGES_STORAGE_PATH → 'local/dev run, nothing to seed'",
+      "seedScriptRemote": "✅ IMAGES_STORAGE_PATH=$TMP/products → primera ejecución copied=1, segunda ejecución skipped=1 (idempotencia confirmada)",
+      "moduleLoad": "✅ require imageStorage + products-admin + products-admin-images sin errores",
+      "postEditVerification": "✅ todos los archivos prometidos releídos en disco — no se declaró ningún edit no aplicado (rule from C57 honored)"
+    },
+    "behaviour": {
+      "localDev": "IMAGES_DIR === fuentes/products (sin cambios para el desarrollador local; uploads y /static/products siguen usando el árbol de trabajo)",
+      "railwayProd": "Operador setea IMAGES_STORAGE_PATH=/data/products y monta volumen en /data; preDeploy copia baseline en primer boot; uploads admin persisten en el volumen y sobreviven redeploys",
+      "ordenDeMounts": "`/static/products` registrado ANTES de `/static` para que el volumen gane sobre el contenido empacado del repo (Express usa el primer middleware que matchea)"
+    }
+  },
+  "userImpact": "Despliegue Railway ahora soporta uploads admin de imágenes con persistencia real entre redeploys. Pasos manuales restantes en Railway UI: (a) Service → Volumes → New Volume con mountPath=/data, (b) Variables → IMAGES_STORAGE_PATH=/data/products. El primer deploy ejecutará seed automáticamente y dejará el storefront servible incluso si el operador olvida poblar el volumen.",
+  "outcome": "SUCCESS",
+  "synapticStrength": 98.6,
+  "complianceScore": 100,
+  "filesChanged": 4,
+  "filesAdded": 3,
+  "linesTouched": "~210"
+}
+```
+
+**Notas críticas**:
+- La resolución de `IMAGES_DIR` ocurre en *module load* (top-level), por eso los tests targetean `resolveImagesDir()` directamente — modificar `process.env.IMAGES_STORAGE_PATH` después de `require('./imageStorage')` no re-evalúa la constante.
+- El mount `/static/products` se registra ANTES de `/static`. Express resuelve middlewares en orden de registro, así que el volumen siempre gana sobre el contenido empacado en `fuentes/`. Esto preserva el contrato de URL (`/static/products/<filename>`) sin tocar la BD ni el frontend.
+- Los archivos de `fuentes/menu/` y `fuentes/logoAma.jpg` siguen sirviéndose desde el repo via el mount general `/static`. Esos assets son inmutables para el storefront, no entran al volumen.
+- `seed-volume-images.js` solo copia archivos que NO existen en destino — un upload del usuario nunca es sobrescrito por re-seeds en deploys posteriores.
+- El bloque `[deploy.volumes]` en railway.toml es informativo/declarativo: Railway prioriza la configuración de la UI. Si en el futuro Railway expone una API TOML-first para volúmenes, este bloque ya queda alineado.
+- B2 cierra el último blocker funcional para habilitar `/admin/products/upload-image` y la galería multi-imagen en producción Railway.
+
+**Recomendaciones**:
+- 🔴 **ALTA**: Después del primer deploy en Railway, validar end-to-end: subir una imagen via `/admin/products/upload-image`, redeployar el servicio backend (forzar restart), y confirmar que la URL `/static/products/<filename>` sigue resolviendo. Sin este E2E real, la confianza en la persistencia es solo teórica.
+- 🟡 **MEDIA**: Considerar añadir un endpoint `/api/admin/storage/health` que reporte `IMAGES_STORAGE_PATH`, espacio libre y count de archivos — útil para dashboards y para detectar volúmenes cercanos al límite antes de que Railway empiece a rechazar writes.
+- 🟡 **MEDIA**: Si el catálogo crece sustancialmente (>1000 imágenes o assets >100MB cada uno), reabrir el Decision Gate con OPTION C (object storage tipo Cloudflare R2 o S3-compatible) — Railway Volume es óptimo para escala MPV, pero R2/S3 escala mejor en costos y latencia global.
+- 🟢 **BAJA**: Documentar en `docs/RAILWAY_DEPLOY.md` (a crear) los pasos UI exactos: crear volumen, setear IMAGES_STORAGE_PATH, primer deploy, verificación post-deploy. Reduciría el riesgo de configuración olvidada en futuros despliegues a otros entornos.
+
+**Synaptic Strength**: 98.6%
+
+---

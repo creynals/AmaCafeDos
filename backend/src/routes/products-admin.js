@@ -5,7 +5,6 @@
 
 const express = require('express');
 const path = require('path');
-const fs = require('fs');
 const crypto = require('crypto');
 const multer = require('multer');
 
@@ -17,6 +16,7 @@ const {
   newBatchId,
 } = require('../services/productsBulkImport');
 const { bulkImportRateLimiter, uploadImageRateLimiter } = require('../middleware/security');
+const { IMAGES_DIR, ensureImagesDir } = require('../utils/imageStorage');
 
 const router = express.Router();
 
@@ -32,14 +32,6 @@ const xlsxUpload = multer({
     cb(null, true);
   },
 });
-
-const IMAGES_DIR = path.join(__dirname, '..', '..', '..', 'fuentes', 'products');
-
-function ensureImagesDir() {
-  if (!fs.existsSync(IMAGES_DIR)) {
-    fs.mkdirSync(IMAGES_DIR, { recursive: true });
-  }
-}
 
 const imageUpload = multer({
   storage: multer.diskStorage({
