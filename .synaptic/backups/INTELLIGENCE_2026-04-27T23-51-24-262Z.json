@@ -85,6 +85,58 @@
       "selectedOption": "B",
       "userRationale": ": git filter-repo — Purga Estándar Recomendada Oficialmente ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777328693363",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:53.363Z",
+      "decisionPoint": "proceder con OPTION B: Fix + Refactor a keys-shared-module (Balanceado) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Fix + Refactor a keys-shared-module (Balanceado) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777333141453",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:39:01.453Z",
+      "decisionPoint": "proceder con  OPTION B: Railway Volume — Balanced ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Railway Volume — Balanced ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -600,29 +652,108 @@
       "status": "PLANNED",
       "createdAtCycle": 78,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-081-A",
+      "title": "Esperar decisión del usuario sobre alcance (A/B/C)",
+      "description": "Decision Gate activo — system halt hasta input humano",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 81,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-081-B",
+      "title": "Si OPTION B: crear backend/src/utils/keyManager.js + tests unitarios round-trip",
+      "description": "Módulo compartido con deriveKey, encryptWithSecret, decryptWithSecret, rotateValue",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 81,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-081-C",
+      "title": "Si OPTION C: migración 014 + tabla encryption_keys + refactor parsing v{N}:",
+      "description": "Solo si compliance/zero-downtime se vuelven requisitos; actualmente over-engineering para MPV local",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 81,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-082-A",
+      "title": "Implement OPTION C: key versioning",
+      "description": "Add v{N}: prefix to ciphertexts, migration 014 with encryption_keys table, support multi-version decryption",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 82,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-082-B",
+      "title": "Document keyManager API in DESIGN_DOC",
+      "description": "Add section describing shared crypto module contract and consumers",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 82,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-084-1",
+      "title": "Resolve B2 image storage Decision Gate",
+      "description": "User selects Option A (git-only + prod upload guard), B (Railway Volume), or C (Cloudflare R2)",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 84,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-084-2",
+      "title": "Wire VITE_API_BASE_URL in Railway frontend service env",
+      "description": "Set VITE_API_BASE_URL to backend Railway domain in frontend service variables before deploy",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 84,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-084-3",
+      "title": "First Railway deploy + smoke test /api/health and migrate preDeploy",
+      "description": "Trigger backend deploy, verify migrate.js runs in preDeploy, /api/health responds, then frontend deploy",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 84,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-084-4",
+      "title": "Implement chosen B2 strategy",
+      "description": "Execute Option A/B/C once user decides; includes seeding/migration of existing 12 images",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 84,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-085-1",
+      "title": "Configure Railway Volume in UI",
+      "description": "Create Volume mounted at /data, set IMAGES_STORAGE_PATH=/data/products variable",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 85,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-085-2",
+      "title": "E2E persistence test post-deploy",
+      "description": "Upload image via admin endpoint, restart backend service, confirm URL still resolves",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 85,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-57-1777259179330-4",
-      "cycle": 57,
-      "timestamp": "2026-04-27T03:06:19.330Z",
-      "type": "USER_PREFERENCE",
-      "title": "Modo IMMEDIATE EXECUTION cuando se pide acción directa",
-      "description": "'Ejecuta el fix' sin contexto de revisión = bypass Decision Gate, aplicar fix sin pedir aprobación intermedia",
-      "context": "Cuando el usuario expresa frustración persistente y pide acción inmediata",
-      "applicability": [
-        "execution-mode",
-        "decision-gate",
-        "user-frustration"
-      ],
-      "confidence": {
-        "score": 0.6000000000000001,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T03:06:19.330Z",
-        "source": "EXPLICIT"
-      }
-    },
     {
       "learningId": "learning-67-1777263746562-0",
       "cycle": 67,
@@ -757,9 +888,9 @@
         "phase-2"
       ],
       "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.063Z",
+        "score": 0.44999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-27T22:24:09.789Z",
         "source": "INFERRED"
       }
     },
@@ -966,6 +1097,433 @@
         "lastReinforced": "2026-04-27T22:11:15.177Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-81-1777328649779-0",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.779Z",
+      "type": "ANTI_PATTERN",
+      "title": "Duplicación de lógica criptográfica en script de rotación",
+      "description": "rotate-encryption-secret.js duplica constantes/funciones de crypto.js en lugar de importarlas",
+      "context": "Cualquier script auxiliar que toque cifrado debe reusar el módulo central, no copiarlo",
+      "applicability": [
+        "crypto",
+        "scripts",
+        "code-smell",
+        "DRY"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.779Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-81-1777328649785-1",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.785Z",
+      "type": "INSIGHT",
+      "title": "Riesgo de corrupción silenciosa por divergencia cripto",
+      "description": "Si crypto.js cambia algoritmo/salt y el script duplicado no, la rotación corrompe la BD sin error visible",
+      "context": "Detectar duplicación de primitives criptográficas como riesgo CRÍTICO, no estético",
+      "applicability": [
+        "crypto",
+        "data-integrity",
+        "risk-analysis"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.785Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-81-1777328649791-3",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.791Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Modelo de key-versioning con prefijo v{N}:iv:tag:cipher",
+      "description": "Formato versionado permite zero-downtime rotation y migración progresiva con checkpoint",
+      "context": "Considerar para compliance PCI/SOC2 futuro o cuando se requiera rollback de claves",
+      "applicability": [
+        "crypto",
+        "key-rotation",
+        "compliance",
+        "future-work"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.791Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-81-1777328649793-4",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.793Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario delega alcance vía Decision Gate explícito",
+      "description": "Solicita decision gate con tres niveles de alcance en lugar de implementar el más amplio por defecto",
+      "context": "El usuario prefiere control granular sobre scope antes de invertir esfuerzo",
+      "applicability": [
+        "user-preference",
+        "scope-control",
+        "decision-gate"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.793Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010382-0",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.382Z",
+      "type": "PATTERN",
+      "title": "Shared crypto module preserves public API",
+      "description": "Refactor duplicated crypto primitives into shared module while keeping wrapper API intact for consumers",
+      "context": "When eliminating duplication between rotator scripts and runtime modules",
+      "applicability": [
+        "refactor",
+        "crypto",
+        "shared-module",
+        "backend"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.382Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010387-1",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.387Z",
+      "type": "PATTERN",
+      "title": "Cross-module ciphertext compatibility tests",
+      "description": "Add explicit tests validating ciphertexts encrypted in one module can be decrypted in another",
+      "context": "When refactoring shared cryptographic logic to ensure no data migration needed",
+      "applicability": [
+        "testing",
+        "crypto",
+        "refactor"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.387Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010389-2",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.389Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Smoke test via node import failure",
+      "description": "Validate refactored script loads cleanly by checking it fails on missing env, not SyntaxError",
+      "context": "Quick validation of module imports without full execution environment",
+      "applicability": [
+        "testing",
+        "smoke-test",
+        "node"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.389Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010391-3",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.391Z",
+      "type": "USER_PREFERENCE",
+      "title": "Balanced option preferred over minimal/maximal",
+      "description": "User selected OPTION B (Fix + Refactor) over A (minimal fix) or C (full versioning)",
+      "context": "Decision Gate selection between scope tiers",
+      "applicability": [
+        "decision-gate",
+        "scope",
+        "user-preference"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.391Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010393-4",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.393Z",
+      "type": "PATTERN",
+      "title": "Defer scope explicitly with rationale",
+      "description": "Bug #2 versioning explicitly deferred to OPTION C — documented why out of scope",
+      "context": "When implementing balanced refactor that intentionally leaves work for future",
+      "applicability": [
+        "scope-management",
+        "documentation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.393Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031645-0",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.645Z",
+      "type": "USER_PREFERENCE",
+      "title": "Hybrid execution: implement + Decision Gate",
+      "description": "User authorizes immediate execution for low-risk B-tasks while reserving Decision Gate for strategic ones",
+      "context": "When cycle has multiple B-tasks with mixed risk/strategic weight",
+      "applicability": [
+        "synaptic-protocol",
+        "decision-gate",
+        "execution-mode"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.645Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031650-1",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.650Z",
+      "type": "PATTERN",
+      "title": "Backwards-compatible env-driven config",
+      "description": "Use `import.meta.env.VAR || '/api'` with trailing-slash strip to make BASE configurable without breaking dev",
+      "context": "Frontend api.js when adding deploy-target flexibility",
+      "applicability": [
+        "vite",
+        "frontend",
+        "env-config",
+        "railway"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.650Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031653-2",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.653Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Railway preDeployCommand for migrations",
+      "description": "railway.toml [deploy] preDeployCommand=node scripts/migrate.js runs idempotent schema migration before service start",
+      "context": "Railway deploys with Postgres requiring schema sync",
+      "applicability": [
+        "railway",
+        "postgres",
+        "migrations",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.653Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031655-3",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.655Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Frontend Railway service via vite preview",
+      "description": "Frontend railway.toml uses `npm ci && npm run build` + `vite preview --host 0.0.0.0 --port $PORT`",
+      "context": "Deploying Vite SPA as separate Railway service",
+      "applicability": [
+        "railway",
+        "vite",
+        "frontend",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.655Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031657-4",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.657Z",
+      "type": "ANTI_PATTERN",
+      "title": "Railway ephemeral FS breaks runtime uploads",
+      "description": "Files written at runtime (multer disk uploads) lost on every redeploy/restart in Railway containers",
+      "context": "Any backend with admin uploads or generated assets deployed to Railway without a Volume",
+      "applicability": [
+        "railway",
+        "filesystem",
+        "uploads",
+        "multer"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.657Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031660-5",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.660Z",
+      "type": "INSIGHT",
+      "title": "Standalone migrate.js enables preDeploy hook",
+      "description": "Extracting migration logic to scripts/migrate.js (vs inline server boot) lets CI/Railway run it independently",
+      "context": "When deploys need pre-start schema sync separate from app boot",
+      "applicability": [
+        "postgres",
+        "migrations",
+        "railway",
+        "ci"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.660Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510497-0",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.497Z",
+      "type": "PATTERN",
+      "title": "Single source of truth for storage paths",
+      "description": "Centralize IMAGES_DIR resolution in one util so routes and static mount stay aligned",
+      "context": "When multiple modules need the same configurable filesystem path",
+      "applicability": [
+        "storage",
+        "config",
+        "refactor"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.497Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510502-1",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.502Z",
+      "type": "PATTERN",
+      "title": "Mount specific static path before broader one",
+      "description": "Express mounts /static/products from volume BEFORE /static so volume overrides bundled assets",
+      "context": "Express static middleware ordering with overlapping paths",
+      "applicability": [
+        "express",
+        "static-files",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.502Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510506-2",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.506Z",
+      "type": "PATTERN",
+      "title": "Idempotent seed script via preDeployCommand",
+      "description": "Chain migrate.js && seed-volume-images.js in preDeploy; copy only when target empty",
+      "context": "Bootstrapping persistent volumes on first deploy without re-copying on every restart",
+      "applicability": [
+        "railway",
+        "deploy",
+        "volume",
+        "seed"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.506Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510509-3",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.509Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Volume resolver rejects relative paths",
+      "description": "IMAGES_STORAGE_PATH must be absolute; empty/missing falls back to fuentes/products for local dev",
+      "context": "Configuring storage path across local dev and Railway deploy",
+      "applicability": [
+        "config",
+        "validation",
+        "env"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.509Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510511-4",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.511Z",
+      "type": "PATTERN",
+      "title": "Smoke-test seed scripts with temp dirs",
+      "description": "Verify first-run copy + second-run skip with IMAGES_STORAGE_PATH=/tmp/... before deploying",
+      "context": "Validating idempotent filesystem operations locally",
+      "applicability": [
+        "testing",
+        "scripts",
+        "smoke-test"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.511Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510513-5",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.513Z",
+      "type": "USER_PREFERENCE",
+      "title": "User picks Balanced options when offered tiers",
+      "description": "User selected OPTION B (Balanced) over A (minimal) and C (object storage) for image persistence",
+      "context": "Decision gates with effort/complexity tradeoffs",
+      "applicability": [
+        "decisions",
+        "tradeoffs"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.513Z",
+        "source": "EXPLICIT"
+      }
     }
   ],
   "implementationState": {
@@ -1057,9 +1615,25 @@
     "[2026-04-27T22:11:15.179Z] Repo amaCafe es local-only (sin remote); cualquier publicación futura requiere force-push consciente",
     "[2026-04-27T22:11:15.180Z] Backup pre-purga en _backups_pre_purge_c78/import-1777213083759-63z86j_pre_purge_c78_20260427T220728Z.tar.gz",
     "[2026-04-27T22:11:15.182Z] CREDENTIAL_ROTATION_C78.md contiene checklist accionable de rotación pendiente",
-    "[2026-04-27T22:11:15.183Z] Credenciales expuestas históricamente: ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT secret, DB password"
+    "[2026-04-27T22:11:15.183Z] Credenciales expuestas históricamente: ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT secret, DB password",
+    "[2026-04-27T22:24:09.795Z] C81 ejecuta Phase 1 (Specification) con Decision Gate obligatorio según RULES.md sección 3.1",
+    "[2026-04-27T22:24:09.797Z] Bug #1 (duplicación) presente en ambos archivos; Bug #2 (sin versioning) limita migración progresiva",
+    "[2026-04-27T22:24:09.798Z] Salt hardcodeado 'amacafe-salt' compartido en ambos archivos — invariante cripto crítico",
+    "[2026-04-27T22:24:09.800Z] Recomendación SYNAPTIC: OPTION B (88% confianza, 1.5–2h, riesgo MEDIUM)",
+    "[2026-04-27T22:30:10.396Z] Ciphertexts pre-Cycle-82 remain decryptable — salt and GCM format unchanged",
+    "[2026-04-27T22:30:10.397Z] Public API of crypto.js intact: routes/settings.js requires no changes",
+    "[2026-04-27T22:30:10.398Z] Test suite: keyManager.test.js (16/16) + sumup.test.js (6/6 regression) passing",
+    "[2026-04-27T22:30:10.400Z] OPTION C still pending: full key versioning with v{N}: prefix",
+    "[2026-04-27T23:37:11.662Z] Cycle 84 implemented B3+B4 from Cycle 83 deploy report; B2 awaiting human decision",
+    "[2026-04-27T23:37:11.663Z] All 22 backend tests still passing; Vite build clean (1753 modules, 156ms)",
+    "[2026-04-27T23:37:11.665Z] Post-edit verification rule honored: every promised file re-read on disk before declaring success",
+    "[2026-04-27T23:37:11.666Z] Existing admin upload routes (server.js:85, /admin/products/upload-image, /admin/products/:id/images) are blocking factor for B2",
+    "[2026-04-27T23:37:11.667Z] Current /fuentes payload is ~12 jpegs (small), making Option A viable short-term",
+    "[2026-04-27T23:45:10.514Z] Railway UI steps still pending: create Volume at /data, set IMAGES_STORAGE_PATH=/data/products, trigger deploy",
+    "[2026-04-27T23:45:10.515Z] Persistence guarantee is theoretical until E2E test: upload image → restart service → verify URL resolves",
+    "[2026-04-27T23:45:10.516Z] Post-edit verification rule (C57) was honored: every promised file re-read on disk after edit"
   ],
-  "lastUpdated": "2026-04-27T22:12:38.690Z",
+  "lastUpdated": "2026-04-27T23:45:10.517Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -3122,6 +3696,26 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T03:06:19.332Z",
         "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-57-1777259179330-4",
+      "cycle": 57,
+      "timestamp": "2026-04-27T03:06:19.330Z",
+      "type": "USER_PREFERENCE",
+      "title": "Modo IMMEDIATE EXECUTION cuando se pide acción directa",
+      "description": "'Ejecuta el fix' sin contexto de revisión = bypass Decision Gate, aplicar fix sin pedir aprobación intermedia",
+      "context": "Cuando el usuario expresa frustración persistente y pide acción inmediata",
+      "applicability": [
+        "execution-mode",
+        "decision-gate",
+        "user-frustration"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T03:06:19.330Z",
+        "source": "EXPLICIT"
       }
     }
   ]

@@ -100,6 +100,9 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-085-3 | Bootstrap volume with baseline images via preDeployCommand seed script | Empty volume on first deploy would 404 baseline products; idempotent seed avoids re-copy | 2026-04-27 | 85 |
+| DEC-085-2 | IMAGES_STORAGE_PATH env var resolves storage location, defaults to fuentes/products locally | Single switch parametrizes prod vs dev without code branches | 2026-04-27 | 85 |
+| DEC-085-1 | Persist admin-uploaded product images via Railway Volume mounted at /data | Balanced tradeoff: persistence without object-storage complexity; keeps local dev unchanged | 2026-04-27 | 85 |
 | DEC-084-3 | Image storage strategy (B2) elevated to Decision Gate with options A/B/C (git-only / Volume / R2) | Railway ephemeral FS + admin uploads is a strategic tradeoff (cost vs UX vs scale) | 2026-04-27 | 84 |
 | DEC-084-2 | Backend migrations run via standalone scripts/migrate.js triggered by railway.toml preDeployCommand | Decouples schema sync from app boot; idempotent and re-runnable in CI (B4) | 2026-04-27 | 84 |
 | DEC-084-1 | Frontend api.js BASE is configurable via VITE_API_BASE_URL with `/api` fallback | Enables Railway frontend service to point at separate backend domain without code changes (B3) | 2026-04-27 | 84 |
@@ -161,6 +164,10 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 85] imageStorage util is the only place IMAGES_DIR is computed; routes import it
+- [Cycle 85] /static/products mount must precede /static in server.js for volume override to work
+- [Cycle 85] preDeployCommand chains: migrate.js && seed-volume-images.js
+- [Cycle 85] Test baseline now 27/27 (was 22/22) with 5 new resolver tests
 - [Cycle 84] railway.toml at repo root configures backend; frontend/railway.toml configures frontend service
 - [Cycle 84] backend/package.json now exposes `migrate` and `test` scripts
 - [Cycle 84] Migration smoke test confirmed 55ms idempotent apply against live local Postgres
@@ -239,6 +246,8 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 85, 2026-04-27] Backend storage path is now env-configurable via IMAGES_STORAGE_PATH
+- [Cycle 85, 2026-04-27] Production image storage moved from git-bundled assets to Railway persistent Volume at /data/products
 - [Cycle 84, 2026-04-27] Two-service Railway topology: backend (Nixpacks + preDeploy migrate + /api/health) and frontend (vite preview)
 - [Cycle 84, 2026-04-27] Frontend BASE URL no longer hardcoded; resolved at build time from VITE_API_BASE_URL
 - [Cycle 82, 2026-04-27] New shared utility layer: backend/src/utils/keyManager.js as crypto primitives module

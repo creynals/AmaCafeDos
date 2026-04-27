@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-27T23:36:38.418Z
+- **Last Updated:** 2026-04-27T23:44:45.623Z
 - **Status:** ACTIVE
 
 ---
@@ -11,12 +11,12 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 42 |
-| Score Promedio | 48% |
-| Racha Actual (A/B) | 1 ciclos |
-| Último Ciclo | 84 |
-| Última Calificación | A |
-| Findings Abiertos | 207 |
+| Ciclos Auditados | 43 |
+| Score Promedio | 49% |
+| Racha Actual (A/B) | 2 ciclos |
+| Último Ciclo | 85 |
+| Última Calificación | B |
+| Findings Abiertos | 209 |
 | Findings Resueltos | 42 |
 
 ---
@@ -27,7 +27,7 @@
 |-----------|----------|
 | CRITICAL | 1 |
 | HIGH | 0 |
-| MEDIUM | 167 |
+| MEDIUM | 169 |
 | LOW | 39 |
 
 ---
@@ -36,7 +36,7 @@
 
 | Tipo | Cantidad |
 |------|----------|
-| Dead Code | 156 |
+| Dead Code | 158 |
 | Security | 1 |
 | Maintainability | 50 |
 | Duplication | 0 |
@@ -48,8 +48,6 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-f5aeb72e | dead_code | MEDIUM | components/OrdersTab.jsx | Unused function: 'OrderDetailsRow' (87 lines)... |
-| SAI-2663991b | maintainability | MEDIUM | components/OrdersTab.jsx | File has 712 lines (max recommended: 500)... |
 | SAI-870ee0e4 | maintainability | LOW | components/OrdersTab.jsx | Function 'OrderDetailsRow' has 87 lines (max recom... |
 | SAI-4c303374 | dead_code | MEDIUM | components/KitchenView.jsx | Unused function: 'OrderCard' (112 lines)... |
 | SAI-00537876 | maintainability | MEDIUM | components/KitchenView.jsx | File has 513 lines (max recommended: 500)... |
@@ -58,6 +56,8 @@
 | SAI-cab6ae55 | dead_code | MEDIUM | utils/crypto.js | Unused function: 'encrypt' (3 lines)... |
 | SAI-82b16be4 | dead_code | MEDIUM | utils/crypto.js | Unused function: 'decrypt' (8 lines)... |
 | SAI-adde131e | security | CRITICAL | utils/crypto.js | Potential hardcoded secret detected... |
+| SAI-b2c74955 | dead_code | MEDIUM | utils/imageStorage.js | Unused function: 'ensureImagesDir' (5 lines)... |
+| SAI-9e1fcd4a | dead_code | MEDIUM | scripts/seed-volume-images.js | Unused function: 'for' (13 lines)... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 103 | 100 | A |
 | 3 | 0 | F |
 | 6 | 0 | F |
 | 9 | 0 | F |
@@ -85,6 +84,7 @@
 | 78 | 100 | A |
 | 82 | 35 | F |
 | 84 | 100 | A |
+| 85 | 80 | B |
 
 ---
 

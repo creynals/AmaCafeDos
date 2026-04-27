@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-27T23:36:38.417Z",
+  "lastUpdated": "2026-04-27T23:44:45.621Z",
   "findings": [
     {
       "id": "DC-001",
@@ -3425,18 +3425,44 @@
       "detectedInCycle": 82,
       "detectedAt": "2026-04-27T22:29:47.771Z",
       "status": "OPEN"
+    },
+    {
+      "id": "DC-144",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/imageStorage.js",
+      "line": 42,
+      "description": "Unused function: 'ensureImagesDir' (5 lines)",
+      "suggestion": "Remove unused function 'ensureImagesDir' or export if needed elsewhere",
+      "findingId": "SAI-b2c74955",
+      "detectedInCycle": 85,
+      "detectedAt": "2026-04-27T23:44:45.621Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-145",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/scripts/seed-volume-images.js",
+      "line": 54,
+      "description": "Unused function: 'for' (13 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere",
+      "findingId": "SAI-9e1fcd4a",
+      "detectedInCycle": 85,
+      "detectedAt": "2026-04-27T23:44:45.621Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 207,
+    "totalOpen": 209,
     "totalResolved": 42,
     "bySeverity": {
-      "MEDIUM": 167,
+      "MEDIUM": 169,
       "LOW": 39,
       "CRITICAL": 1
     },
     "byType": {
-      "dead_code": 156,
+      "dead_code": 158,
       "maintainability": 50,
       "security": 1
     }

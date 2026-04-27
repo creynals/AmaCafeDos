@@ -733,6 +733,24 @@
       "status": "PLANNED",
       "createdAtCycle": 84,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-085-1",
+      "title": "Configure Railway Volume in UI",
+      "description": "Create Volume mounted at /data, set IMAGES_STORAGE_PATH=/data/products variable",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 85,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-085-2",
+      "title": "E2E persistence test post-deploy",
+      "description": "Upload image via admin endpoint, restart backend service, confirm URL still resolves",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 85,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -1386,6 +1404,126 @@
         "lastReinforced": "2026-04-27T23:37:11.660Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-85-1777333510497-0",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.497Z",
+      "type": "PATTERN",
+      "title": "Single source of truth for storage paths",
+      "description": "Centralize IMAGES_DIR resolution in one util so routes and static mount stay aligned",
+      "context": "When multiple modules need the same configurable filesystem path",
+      "applicability": [
+        "storage",
+        "config",
+        "refactor"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.497Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510502-1",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.502Z",
+      "type": "PATTERN",
+      "title": "Mount specific static path before broader one",
+      "description": "Express mounts /static/products from volume BEFORE /static so volume overrides bundled assets",
+      "context": "Express static middleware ordering with overlapping paths",
+      "applicability": [
+        "express",
+        "static-files",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.502Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510506-2",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.506Z",
+      "type": "PATTERN",
+      "title": "Idempotent seed script via preDeployCommand",
+      "description": "Chain migrate.js && seed-volume-images.js in preDeploy; copy only when target empty",
+      "context": "Bootstrapping persistent volumes on first deploy without re-copying on every restart",
+      "applicability": [
+        "railway",
+        "deploy",
+        "volume",
+        "seed"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.506Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510509-3",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.509Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Volume resolver rejects relative paths",
+      "description": "IMAGES_STORAGE_PATH must be absolute; empty/missing falls back to fuentes/products for local dev",
+      "context": "Configuring storage path across local dev and Railway deploy",
+      "applicability": [
+        "config",
+        "validation",
+        "env"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.509Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510511-4",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.511Z",
+      "type": "PATTERN",
+      "title": "Smoke-test seed scripts with temp dirs",
+      "description": "Verify first-run copy + second-run skip with IMAGES_STORAGE_PATH=/tmp/... before deploying",
+      "context": "Validating idempotent filesystem operations locally",
+      "applicability": [
+        "testing",
+        "scripts",
+        "smoke-test"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.511Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510513-5",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.513Z",
+      "type": "USER_PREFERENCE",
+      "title": "User picks Balanced options when offered tiers",
+      "description": "User selected OPTION B (Balanced) over A (minimal) and C (object storage) for image persistence",
+      "context": "Decision gates with effort/complexity tradeoffs",
+      "applicability": [
+        "decisions",
+        "tradeoffs"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.513Z",
+        "source": "EXPLICIT"
+      }
     }
   ],
   "implementationState": {
@@ -1490,9 +1628,12 @@
     "[2026-04-27T23:37:11.663Z] All 22 backend tests still passing; Vite build clean (1753 modules, 156ms)",
     "[2026-04-27T23:37:11.665Z] Post-edit verification rule honored: every promised file re-read on disk before declaring success",
     "[2026-04-27T23:37:11.666Z] Existing admin upload routes (server.js:85, /admin/products/upload-image, /admin/products/:id/images) are blocking factor for B2",
-    "[2026-04-27T23:37:11.667Z] Current /fuentes payload is ~12 jpegs (small), making Option A viable short-term"
+    "[2026-04-27T23:37:11.667Z] Current /fuentes payload is ~12 jpegs (small), making Option A viable short-term",
+    "[2026-04-27T23:45:10.514Z] Railway UI steps still pending: create Volume at /data, set IMAGES_STORAGE_PATH=/data/products, trigger deploy",
+    "[2026-04-27T23:45:10.515Z] Persistence guarantee is theoretical until E2E test: upload image → restart service → verify URL resolves",
+    "[2026-04-27T23:45:10.516Z] Post-edit verification rule (C57) was honored: every promised file re-read on disk after edit"
   ],
-  "lastUpdated": "2026-04-27T23:39:01.457Z",
+  "lastUpdated": "2026-04-27T23:51:24.262Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
