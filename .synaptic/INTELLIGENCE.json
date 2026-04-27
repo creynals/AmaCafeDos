@@ -31,6 +31,32 @@
       "selectedOption": "B",
       "userRationale": ": Restauración + Validación E2E del Bulk Import (Balanceada) ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777256989019",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:29:49.019Z",
+      "decisionPoint": "proceder con OPTION A: Sincronizar Metadata Workspace (mínimo invasivo) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "A",
+      "userRationale": ": Sincronizar Metadata Workspace (mínimo invasivo) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -365,6 +391,51 @@
       "priority": "LOW",
       "status": "PLANNED",
       "createdAtCycle": 44,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-049",
+      "title": "Sync .synaptic-workspace.json metadata to physical dir",
+      "description": "Update projectName or add aliasOf field to reflect import-1777213083759-63z86j",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 49,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-050",
+      "title": "Create WORKSPACE_IDENTITY.md",
+      "description": "Document canonical dir, historical alias, and .zip backup location",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 49,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-051",
+      "title": "Add cwd guard to backend/src/server.js",
+      "description": "Fail/log on startup if process.cwd() does not contain expected workspace dir",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 49,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-052",
+      "title": "Mark orphan dir as DEPRECATED",
+      "description": "Create import-1776956320164-2m9x2n/DEPRECATED.md pointing to active workspace",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 49,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-053",
+      "title": "Enforce 'Recomendaciones' section in BITACORA template",
+      "description": "Update SYNAPTIC protocol so cycles persist actionable recommendations explicitly",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 49,
       "dependencies": []
     }
   ],
@@ -810,11 +881,112 @@
         "lastReinforced": "2026-04-26T23:03:20.718Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-49-1777256921312-0",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.312Z",
+      "type": "ANTI_PATTERN",
+      "title": "Recommendations not persisted in BITACORA",
+      "description": "Cycle 48 verbal recommendations were not written to BITACORA, blocking C49 execution",
+      "context": "When a cycle produces actionable recommendations but only logs the prompt/metrics",
+      "applicability": [
+        "bitacora",
+        "persistence",
+        "recommendations"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.312Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921317-1",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.317Z",
+      "type": "USER_PREFERENCE",
+      "title": "Decision Gate when ambiguity detected",
+      "description": "Halt and present A/B/C options instead of guessing what 'execute recommendations' means",
+      "context": "When user request references prior cycle output that is not explicitly persisted",
+      "applicability": [
+        "decision-gate",
+        "ambiguity",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.317Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921320-2",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.320Z",
+      "type": "INSIGHT",
+      "title": "Workspace identity drift across cycles",
+      "description": "Metadata projectName (import-1776956320164-2m9x2n) diverges from physical dir (import-1777213083759-63z86j)",
+      "context": "When .synaptic-workspace.json projectName does not match the active cwd",
+      "applicability": [
+        "workspace",
+        "metadata",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.320Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921322-3",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.322Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Orphan workspace directory risk",
+      "description": "Two workspace dirs exist on disk; only one receives changes — risk of editing wrong path",
+      "context": "Multi-workspace SYNAPTIC setups with historical aliases",
+      "applicability": [
+        "workspace",
+        "filesystem",
+        "risk"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.322Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921324-4",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.324Z",
+      "type": "PATTERN",
+      "title": "Cwd guard in server.js",
+      "description": "Add startup check that process.cwd() contains expected workspace dir; fail fast if not",
+      "context": "Backend startup in multi-workspace environments",
+      "applicability": [
+        "backend",
+        "server.js",
+        "guard",
+        "startup"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.324Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
-    "lastCompletedTask": "Decision Gate resolved: Option B selected",
-    "currentTask": "Implementing Option B as requested by user",
+    "lastCompletedTask": "Decision Gate resolved: Option A selected",
+    "currentTask": "Implementing Option A as requested by user",
     "pendingTasks": [],
     "blockers": []
   },
@@ -876,9 +1048,12 @@
     "[2026-04-26T23:03:20.719Z] ENCRYPTION_SECRET actual sigue siendo el comprometido (VskMIXgz...) hasta que el usuario ejecute la rotación",
     "[2026-04-26T23:03:20.719Z] Historial git todavía contiene backend/.env con secret expuesto — purga pendiente de confirmación del usuario",
     "[2026-04-26T23:03:20.720Z] Script rotate-encryption-secret.js disponible en backend/scripts/ con modo dry-run + --apply",
-    "[2026-04-26T23:03:20.721Z] Commit de cierre: d80d39b (12 archivos, +350/-47)"
+    "[2026-04-26T23:03:20.721Z] Commit de cierre: d80d39b (12 archivos, +350/-47)",
+    "[2026-04-27T02:28:41.326Z] Cycle 48 was analysis-only; its recommendations were not persisted — C49 had to reconstruct from C45-C48 thread",
+    "[2026-04-27T02:28:41.327Z] Active workspace: import-1777213083759-63z86j; alias/orphan: import-1776956320164-2m9x2n",
+    "[2026-04-27T02:28:41.329Z] C49 halted at Decision Gate awaiting user choice between Options A/B/C"
   ],
-  "lastUpdated": "2026-04-27T02:25:46.054Z",
+  "lastUpdated": "2026-04-27T02:29:49.021Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

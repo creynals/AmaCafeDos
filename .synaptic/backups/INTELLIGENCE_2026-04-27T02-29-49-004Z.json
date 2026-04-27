@@ -324,253 +324,96 @@
     },
     {
       "itemId": "ROAD-042",
-      "title": "Reemplazar .catch(()=>{}) silenciosos en frontend",
-      "description": "Identificar fetches que silencian errores críticos de config y añadir logging mínimo",
+      "title": "Validación E2E del rediseño Hero/Header",
+      "description": "Usuario debe refrescar localhost:8080 y validar layout desktop + mobile + footer intacto",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 42,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-044-1",
+      "title": "Ejecutar rotación real de ENCRYPTION_SECRET",
+      "description": "Correr rotate-encryption-secret.js --apply con OLD/NEW vars, actualizar .env, reiniciar backend",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 44,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-044-2",
+      "title": "Purgar backend/.env del historial git",
+      "description": "git-filter-repo o BFG para borrar .env de commits previos + force-push + avisar a colaboradores",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 44,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-044-3",
+      "title": "Verificar CSP en frontend con SumUp + reCAPTCHA en runtime real",
+      "description": "Smoke test E2E: cargar checkout SumUp y reCAPTCHA en navegador, confirmar que no hay bloqueos CSP",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 44,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-044-4",
+      "title": "Tunear umbrales de rate limiters según tráfico real",
+      "description": "Observar logs de 429 en /login, /bulk-import, /upload-image y ajustar windowMs/max si hay falsos positivos",
       "priority": "LOW",
       "status": "PLANNED",
-      "createdAtCycle": 39,
+      "createdAtCycle": 44,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-049",
+      "title": "Sync .synaptic-workspace.json metadata to physical dir",
+      "description": "Update projectName or add aliasOf field to reflect import-1777213083759-63z86j",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 49,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-050",
+      "title": "Create WORKSPACE_IDENTITY.md",
+      "description": "Document canonical dir, historical alias, and .zip backup location",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 49,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-051",
+      "title": "Add cwd guard to backend/src/server.js",
+      "description": "Fail/log on startup if process.cwd() does not contain expected workspace dir",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 49,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-052",
+      "title": "Mark orphan dir as DEPRECATED",
+      "description": "Create import-1776956320164-2m9x2n/DEPRECATED.md pointing to active workspace",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 49,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-053",
+      "title": "Enforce 'Recomendaciones' section in BITACORA template",
+      "description": "Update SYNAPTIC protocol so cycles persist actionable recommendations explicitly",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 49,
       "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-21-1777224416937-0",
-      "cycle": 21,
-      "timestamp": "2026-04-26T17:26:56.937Z",
-      "type": "USER_PREFERENCE",
-      "title": "Ambiguous 'continuar' triggers Decision Gate",
-      "description": "When user says 'continuar' without target, surface 3 highest-leverage paths from roadmap",
-      "context": "User issues vague continuation directive in SYNAPTIC protocol",
-      "applicability": [
-        "synaptic",
-        "decision-gate",
-        "ambiguous-input"
-      ],
-      "confidence": {
-        "score": 0.8,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:26:56.937Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536508-0",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.508Z",
-      "type": "PATTERN",
-      "title": "Tab consolidation with sub-navigation",
-      "description": "Group related tabs under parent tab with underline sub-tabs to reduce visual saturation",
-      "context": "When admin UI has 3+ related tabs cluttering top-level navigation",
-      "applicability": [
-        "ux",
-        "admin-ui",
-        "navigation",
-        "react"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.508Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536511-1",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.511Z",
-      "type": "PATTERN",
-      "title": "Visual hierarchy via differentiated tab styles",
-      "description": "Pills (ámbar) for main tabs, underline (ámbar) for sub-tabs creates clear hierarchy",
-      "context": "Multi-level tab navigation in admin panels",
-      "applicability": [
-        "ux",
-        "design-system",
-        "tailwind"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.511Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536514-2",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.514Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Conditional mounting preserves sub-tab state",
-      "description": "Separate conditional mounts per sub-tab keeps component state across sub-tab switches",
-      "context": "Sub-navigation where users expect state preservation between tabs",
-      "applicability": [
-        "react",
-        "state-management"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.514Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-23-1777225536517-4",
-      "cycle": 23,
-      "timestamp": "2026-04-26T17:45:36.517Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "7 ESLint errors are preexisting baseline",
-      "description": "The 7 ESLint errors in frontend are preexisting and documented; new changes must not add to them",
-      "context": "Validating lint output after frontend changes in this project",
-      "applicability": [
-        "lint",
-        "validation",
-        "frontend"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T17:45:36.517Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918140-0",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.140Z",
-      "type": "PATTERN",
-      "title": "Sub-tabs consistente parent+child",
-      "description": "Replicar patrón PRODUCTS_SUBTABS para ORDERS_SUBTABS (Listado/Vista de Cocina) con underline nav",
-      "context": "Cuando se añade vista alterna a una pestaña existente del admin",
-      "applicability": [
-        "frontend",
-        "admin",
-        "navigation",
-        "ux-consistency"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.140Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918147-1",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.147Z",
-      "type": "ANTI_PATTERN",
-      "title": "Clases Tailwind dinámicas no compilan",
-      "description": "text-${col.accent} no funciona con JIT; usar mapa estático iconCls/badgeCls por clave",
-      "context": "Componentes con estilo condicional por columna/estado en Tailwind",
-      "applicability": [
-        "frontend",
-        "tailwind",
-        "styling"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.147Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918149-2",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.149Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "json_agg con COALESCE a array vacío",
-      "description": "json_agg(...) FILTER + COALESCE(..., '[]'::json) garantiza items[]=[] cuando no hay líneas",
-      "context": "Al exponer relaciones 1:N en endpoints REST sin N+1",
-      "applicability": [
-        "backend",
-        "postgres",
-        "api"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.149Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918151-3",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.151Z",
-      "type": "PATTERN",
-      "title": "Kanban FIFO con urgencia por antigüedad",
-      "description": "3 columnas pending/in_progress/out_for_delivery, gris<15m, amarillo 15-29m, rojo >=30m",
-      "context": "Vistas operativas de cocina/kitchen con SLA visual",
-      "applicability": [
-        "frontend",
-        "kitchen-view",
-        "ux"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.151Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918152-4",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.152Z",
-      "type": "USER_PREFERENCE",
-      "title": "Reutilizar endpoints existentes",
-      "description": "Vista de Cocina usa PATCH /admin/orders/:id/status sin crear nuevos endpoints",
-      "context": "Al implementar nuevas UIs sobre flujos de estado existentes",
-      "applicability": [
-        "backend",
-        "api-design"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.152Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918154-5",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.154Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "node --watch recarga backend automáticamente",
-      "description": "Backend con node --watch detecta cambios SQL/route sin reinicio manual",
-      "context": "Cambios en backend/src durante desarrollo",
-      "applicability": [
-        "backend",
-        "dev-workflow"
-      ],
-      "confidence": {
-        "score": 0.44999999999999996,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-26T21:53:44.189Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918156-6",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.156Z",
-      "type": "USER_PREFERENCE",
-      "title": "Lints preexistentes out-of-scope",
-      "description": "No tocar 7 errores ESLint preexistentes en AdminPage.jsx; validar solo nuevos",
-      "context": "Cualquier cambio que toque AdminPage.jsx",
-      "applicability": [
-        "lint",
-        "scope-control"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.156Z",
-        "source": "EXPLICIT"
-      }
-    },
     {
       "learningId": "learning-31-1777230053925-0",
       "cycle": 31,
@@ -771,6 +614,348 @@
         "lastReinforced": "2026-04-26T21:53:44.190Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-42-1777241376627-0",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.627Z",
+      "type": "USER_PREFERENCE",
+      "title": "Enfoque A pre-aprobado en ciclo previo",
+      "description": "Usuario eligió Enfoque A en ciclo 41; ciclo 42 ejecuta inmediato sin re-confirmar",
+      "context": "Cuando un ciclo previo presenta opciones y usuario elige una explícitamente",
+      "applicability": [
+        "execution-mode",
+        "DG-079",
+        "immediate-execution"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.627Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376629-1",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.629Z",
+      "type": "PATTERN",
+      "title": "Tagline en header pill con responsive hide",
+      "description": "Pill central con hidden md:inline-flex oculta tagline en mobile preservando iconos esenciales",
+      "context": "Headers con logo + tagline + iconos en breakpoints angostos",
+      "applicability": [
+        "responsive-design",
+        "tailwind",
+        "header-layout"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.629Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376630-2",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.630Z",
+      "type": "PATTERN",
+      "title": "Hero compacto reduce padding 70-80%",
+      "description": "py-16 sm:py-24 → py-6 sm:py-8 sube grilla above-the-fold sin perder mensaje",
+      "context": "Cuando hero ocupa demasiado espacio y oculta contenido principal",
+      "applicability": [
+        "UX",
+        "above-the-fold",
+        "hero-design"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.630Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376631-3",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.631Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Layout flex con shrink-0 + min-w-0 + truncate",
+      "description": "Logo y iconos shrink-0, pill min-w-0 + truncate evita romper layout en breakpoints",
+      "context": "Headers de 3 secciones con contenido variable",
+      "applicability": [
+        "tailwind",
+        "flexbox",
+        "responsive"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.631Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600711-0",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.711Z",
+      "type": "USER_PREFERENCE",
+      "title": "No ejecutar acciones destructivas sin confirmación explícita",
+      "description": "Purga de historial git y rotación real de secrets requieren confirmación previa del usuario",
+      "context": "Operaciones que reescriben historia compartida o invalidan datos cifrados existentes",
+      "applicability": [
+        "security",
+        "git",
+        "destructive-ops"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.711Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600712-1",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.712Z",
+      "type": "PATTERN",
+      "title": "Rotación de ENCRYPTION_SECRET requiere decrypt-old + re-encrypt-new",
+      "description": "No basta cambiar el valor; hay que descifrar con secret viejo y re-cifrar con secret nuevo todos los campos cifrados en DB",
+      "context": "Cuando ENCRYPTION_SECRET cifra datos persistidos (settings.sumup_*, recaptcha_secret_key)",
+      "applicability": [
+        "security",
+        "encryption",
+        "secret-rotation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.712Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600714-2",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.714Z",
+      "type": "PATTERN",
+      "title": "Script de rotación con dry-run + --apply",
+      "description": "Scripts destructivos deben tener modo dry-run por defecto y flag --apply explícito para ejecutar",
+      "context": "Scripts que modifican datos en producción o reescriben estado persistente",
+      "applicability": [
+        "scripting",
+        "safety",
+        "ops"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.714Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600715-3",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.715Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "CSP debe whitelistear SumUp + reCAPTCHA explícitamente",
+      "description": "helmet() con CSP requiere directivas específicas para integraciones de pagos (SumUp) y bot-protection (reCAPTCHA)",
+      "context": "Aplicación con integraciones externas de pagos y captcha",
+      "applicability": [
+        "security",
+        "csp",
+        "helmet",
+        "integrations"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.715Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600715-4",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.715Z",
+      "type": "PATTERN",
+      "title": "requireAdmin centralizado en middleware reutilizable",
+      "description": "Middleware exportado desde auth.js y aplicado a los 7 mounts admin en server.js (no inline en cada router)",
+      "context": "Cuando hay múltiples mounts admin que comparten requisito de autorización",
+      "applicability": [
+        "express",
+        "middleware",
+        "auth"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.715Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600716-5",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.716Z",
+      "type": "PATTERN",
+      "title": "Rate limiters dedicados por endpoint sensible",
+      "description": "Limiters específicos para /login, /bulk-import, /upload-image en lugar de un limiter global único",
+      "context": "Endpoints con perfiles de abuso distintos (brute force vs DoS por upload)",
+      "applicability": [
+        "security",
+        "rate-limiting",
+        "express"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.716Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600717-6",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.717Z",
+      "type": "INSIGHT",
+      "title": "git rm --cached + .gitignore no purga historial",
+      "description": "Sacar .env del tracking deja el archivo en commits previos; requiere git-filter-repo o BFG para purgar",
+      "context": "Cuando se descubre un secret commiteado por error",
+      "applicability": [
+        "git",
+        "security",
+        "secrets"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.717Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600718-7",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.718Z",
+      "type": "PATTERN",
+      "title": "Smoke test post-cambio de seguridad: 401/400 + headers",
+      "description": "Verificar 401 en admin sin auth, 400 en login sin body, y presencia de CSP/HSTS/X-Frame-Options en respuestas",
+      "context": "Después de aplicar middleware de auth, rate-limit y helmet",
+      "applicability": [
+        "testing",
+        "security",
+        "smoke-test"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.718Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921312-0",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.312Z",
+      "type": "ANTI_PATTERN",
+      "title": "Recommendations not persisted in BITACORA",
+      "description": "Cycle 48 verbal recommendations were not written to BITACORA, blocking C49 execution",
+      "context": "When a cycle produces actionable recommendations but only logs the prompt/metrics",
+      "applicability": [
+        "bitacora",
+        "persistence",
+        "recommendations"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.312Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921317-1",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.317Z",
+      "type": "USER_PREFERENCE",
+      "title": "Decision Gate when ambiguity detected",
+      "description": "Halt and present A/B/C options instead of guessing what 'execute recommendations' means",
+      "context": "When user request references prior cycle output that is not explicitly persisted",
+      "applicability": [
+        "decision-gate",
+        "ambiguity",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.317Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921320-2",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.320Z",
+      "type": "INSIGHT",
+      "title": "Workspace identity drift across cycles",
+      "description": "Metadata projectName (import-1776956320164-2m9x2n) diverges from physical dir (import-1777213083759-63z86j)",
+      "context": "When .synaptic-workspace.json projectName does not match the active cwd",
+      "applicability": [
+        "workspace",
+        "metadata",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.320Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921322-3",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.322Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Orphan workspace directory risk",
+      "description": "Two workspace dirs exist on disk; only one receives changes — risk of editing wrong path",
+      "context": "Multi-workspace SYNAPTIC setups with historical aliases",
+      "applicability": [
+        "workspace",
+        "filesystem",
+        "risk"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.322Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921324-4",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.324Z",
+      "type": "PATTERN",
+      "title": "Cwd guard in server.js",
+      "description": "Add startup check that process.cwd() contains expected workspace dir; fail fast if not",
+      "context": "Backend startup in multi-workspace environments",
+      "applicability": [
+        "backend",
+        "server.js",
+        "guard",
+        "startup"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.324Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -830,9 +1015,19 @@
     "[2026-04-26T21:53:44.191Z] Workspace activo: import-1777213083759-63z86j (donde corre backend node --watch)",
     "[2026-04-26T21:53:44.192Z] DB: recaptcha_enabled=true con siteKey y secretKey configurados",
     "[2026-04-26T21:53:44.193Z] Ciclo 38 fue solo análisis sin commits - tuvo que reconstruirse el contexto",
-    "[2026-04-26T21:53:44.194Z] E2E del fix queda pendiente de validación manual del usuario en storefront"
+    "[2026-04-26T21:53:44.194Z] E2E del fix queda pendiente de validación manual del usuario en storefront",
+    "[2026-04-26T22:09:36.633Z] Ciclo 41 análisis + Ciclo 42 ejecución completan el rediseño Hero/Header del workspace import-1776956320164-2m9x2n",
+    "[2026-04-26T22:09:36.633Z] Synaptic Strength subió de 88.25% a 89% tras ejecución exitosa",
+    "[2026-04-26T22:09:36.634Z] E2E queda pendiente del usuario: validar desktop ≥768px y mobile <768px",
+    "[2026-04-26T23:03:20.719Z] ENCRYPTION_SECRET actual sigue siendo el comprometido (VskMIXgz...) hasta que el usuario ejecute la rotación",
+    "[2026-04-26T23:03:20.719Z] Historial git todavía contiene backend/.env con secret expuesto — purga pendiente de confirmación del usuario",
+    "[2026-04-26T23:03:20.720Z] Script rotate-encryption-secret.js disponible en backend/scripts/ con modo dry-run + --apply",
+    "[2026-04-26T23:03:20.721Z] Commit de cierre: d80d39b (12 archivos, +350/-47)",
+    "[2026-04-27T02:28:41.326Z] Cycle 48 was analysis-only; its recommendations were not persisted — C49 had to reconstruct from C45-C48 thread",
+    "[2026-04-27T02:28:41.327Z] Active workspace: import-1777213083759-63z86j; alias/orphan: import-1776956320164-2m9x2n",
+    "[2026-04-27T02:28:41.329Z] C49 halted at Decision Gate awaiting user choice between Options A/B/C"
   ],
-  "lastUpdated": "2026-04-26T22:06:53.167Z",
+  "lastUpdated": "2026-04-27T02:28:41.330Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -1833,6 +2028,244 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:26:56.943Z",
         "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536508-0",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.508Z",
+      "type": "PATTERN",
+      "title": "Tab consolidation with sub-navigation",
+      "description": "Group related tabs under parent tab with underline sub-tabs to reduce visual saturation",
+      "context": "When admin UI has 3+ related tabs cluttering top-level navigation",
+      "applicability": [
+        "ux",
+        "admin-ui",
+        "navigation",
+        "react"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.508Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536511-1",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.511Z",
+      "type": "PATTERN",
+      "title": "Visual hierarchy via differentiated tab styles",
+      "description": "Pills (ámbar) for main tabs, underline (ámbar) for sub-tabs creates clear hierarchy",
+      "context": "Multi-level tab navigation in admin panels",
+      "applicability": [
+        "ux",
+        "design-system",
+        "tailwind"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.511Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536514-2",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.514Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Conditional mounting preserves sub-tab state",
+      "description": "Separate conditional mounts per sub-tab keeps component state across sub-tab switches",
+      "context": "Sub-navigation where users expect state preservation between tabs",
+      "applicability": [
+        "react",
+        "state-management"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.514Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-23-1777225536517-4",
+      "cycle": 23,
+      "timestamp": "2026-04-26T17:45:36.517Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "7 ESLint errors are preexisting baseline",
+      "description": "The 7 ESLint errors in frontend are preexisting and documented; new changes must not add to them",
+      "context": "Validating lint output after frontend changes in this project",
+      "applicability": [
+        "lint",
+        "validation",
+        "frontend"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:45:36.517Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-21-1777224416937-0",
+      "cycle": 21,
+      "timestamp": "2026-04-26T17:26:56.937Z",
+      "type": "USER_PREFERENCE",
+      "title": "Ambiguous 'continuar' triggers Decision Gate",
+      "description": "When user says 'continuar' without target, surface 3 highest-leverage paths from roadmap",
+      "context": "User issues vague continuation directive in SYNAPTIC protocol",
+      "applicability": [
+        "synaptic",
+        "decision-gate",
+        "ambiguous-input"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T17:26:56.937Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918140-0",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.140Z",
+      "type": "PATTERN",
+      "title": "Sub-tabs consistente parent+child",
+      "description": "Replicar patrón PRODUCTS_SUBTABS para ORDERS_SUBTABS (Listado/Vista de Cocina) con underline nav",
+      "context": "Cuando se añade vista alterna a una pestaña existente del admin",
+      "applicability": [
+        "frontend",
+        "admin",
+        "navigation",
+        "ux-consistency"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.140Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918147-1",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.147Z",
+      "type": "ANTI_PATTERN",
+      "title": "Clases Tailwind dinámicas no compilan",
+      "description": "text-${col.accent} no funciona con JIT; usar mapa estático iconCls/badgeCls por clave",
+      "context": "Componentes con estilo condicional por columna/estado en Tailwind",
+      "applicability": [
+        "frontend",
+        "tailwind",
+        "styling"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.147Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918149-2",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.149Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "json_agg con COALESCE a array vacío",
+      "description": "json_agg(...) FILTER + COALESCE(..., '[]'::json) garantiza items[]=[] cuando no hay líneas",
+      "context": "Al exponer relaciones 1:N en endpoints REST sin N+1",
+      "applicability": [
+        "backend",
+        "postgres",
+        "api"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.149Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918151-3",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.151Z",
+      "type": "PATTERN",
+      "title": "Kanban FIFO con urgencia por antigüedad",
+      "description": "3 columnas pending/in_progress/out_for_delivery, gris<15m, amarillo 15-29m, rojo >=30m",
+      "context": "Vistas operativas de cocina/kitchen con SLA visual",
+      "applicability": [
+        "frontend",
+        "kitchen-view",
+        "ux"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.151Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918154-5",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.154Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "node --watch recarga backend automáticamente",
+      "description": "Backend con node --watch detecta cambios SQL/route sin reinicio manual",
+      "context": "Cambios en backend/src durante desarrollo",
+      "applicability": [
+        "backend",
+        "dev-workflow"
+      ],
+      "confidence": {
+        "score": 0.14999999999999997,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-26T21:53:44.189Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918152-4",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.152Z",
+      "type": "USER_PREFERENCE",
+      "title": "Reutilizar endpoints existentes",
+      "description": "Vista de Cocina usa PATCH /admin/orders/:id/status sin crear nuevos endpoints",
+      "context": "Al implementar nuevas UIs sobre flujos de estado existentes",
+      "applicability": [
+        "backend",
+        "api-design"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.152Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918156-6",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.156Z",
+      "type": "USER_PREFERENCE",
+      "title": "Lints preexistentes out-of-scope",
+      "description": "No tocar 7 errores ESLint preexistentes en AdminPage.jsx; validar solo nuevos",
+      "context": "Cualquier cambio que toque AdminPage.jsx",
+      "applicability": [
+        "lint",
+        "scope-control"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.156Z",
+        "source": "EXPLICIT"
       }
     }
   ]
