@@ -519,70 +519,10 @@
         "immediate-execution"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T22:09:36.627Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-42-1777241376629-1",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.629Z",
-      "type": "PATTERN",
-      "title": "Tagline en header pill con responsive hide",
-      "description": "Pill central con hidden md:inline-flex oculta tagline en mobile preservando iconos esenciales",
-      "context": "Headers con logo + tagline + iconos en breakpoints angostos",
-      "applicability": [
-        "responsive-design",
-        "tailwind",
-        "header-layout"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.629Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-42-1777241376630-2",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.630Z",
-      "type": "PATTERN",
-      "title": "Hero compacto reduce padding 70-80%",
-      "description": "py-16 sm:py-24 → py-6 sm:py-8 sube grilla above-the-fold sin perder mensaje",
-      "context": "Cuando hero ocupa demasiado espacio y oculta contenido principal",
-      "applicability": [
-        "UX",
-        "above-the-fold",
-        "hero-design"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.630Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-42-1777241376631-3",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.631Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Layout flex con shrink-0 + min-w-0 + truncate",
-      "description": "Logo y iconos shrink-0, pill min-w-0 + truncate evita romper layout en breakpoints",
-      "context": "Headers de 3 secciones con contenido variable",
-      "applicability": [
-        "tailwind",
-        "flexbox",
-        "responsive"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.631Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1228,7 +1168,7 @@
     "[2026-04-27T03:06:19.336Z] C53→C56 fue deuda técnica saldada en C57; cualquier referencia futura al alias legacy en metadata operativa es un bug",
     "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side"
   ],
-  "lastUpdated": "2026-04-27T03:36:33.078Z",
+  "lastUpdated": "2026-04-27T03:44:22.647Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2667,6 +2607,66 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T21:53:44.190Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376629-1",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.629Z",
+      "type": "PATTERN",
+      "title": "Tagline en header pill con responsive hide",
+      "description": "Pill central con hidden md:inline-flex oculta tagline en mobile preservando iconos esenciales",
+      "context": "Headers con logo + tagline + iconos en breakpoints angostos",
+      "applicability": [
+        "responsive-design",
+        "tailwind",
+        "header-layout"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.629Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376630-2",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.630Z",
+      "type": "PATTERN",
+      "title": "Hero compacto reduce padding 70-80%",
+      "description": "py-16 sm:py-24 → py-6 sm:py-8 sube grilla above-the-fold sin perder mensaje",
+      "context": "Cuando hero ocupa demasiado espacio y oculta contenido principal",
+      "applicability": [
+        "UX",
+        "above-the-fold",
+        "hero-design"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.630Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-42-1777241376631-3",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.631Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Layout flex con shrink-0 + min-w-0 + truncate",
+      "description": "Logo y iconos shrink-0, pill min-w-0 + truncate evita romper layout en breakpoints",
+      "context": "Headers de 3 secciones con contenido variable",
+      "applicability": [
+        "tailwind",
+        "flexbox",
+        "responsive"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.631Z",
         "source": "INFERRED"
       }
     }
