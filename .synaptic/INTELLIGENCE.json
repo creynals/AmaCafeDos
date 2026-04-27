@@ -519,7 +519,7 @@
         "immediate-execution"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T22:09:36.627Z",
         "source": "EXPLICIT"
@@ -539,151 +539,10 @@
         "destructive-ops"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T23:03:20.711Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600712-1",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.712Z",
-      "type": "PATTERN",
-      "title": "Rotación de ENCRYPTION_SECRET requiere decrypt-old + re-encrypt-new",
-      "description": "No basta cambiar el valor; hay que descifrar con secret viejo y re-cifrar con secret nuevo todos los campos cifrados en DB",
-      "context": "Cuando ENCRYPTION_SECRET cifra datos persistidos (settings.sumup_*, recaptcha_secret_key)",
-      "applicability": [
-        "security",
-        "encryption",
-        "secret-rotation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.712Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600714-2",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.714Z",
-      "type": "PATTERN",
-      "title": "Script de rotación con dry-run + --apply",
-      "description": "Scripts destructivos deben tener modo dry-run por defecto y flag --apply explícito para ejecutar",
-      "context": "Scripts que modifican datos en producción o reescriben estado persistente",
-      "applicability": [
-        "scripting",
-        "safety",
-        "ops"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.714Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600715-3",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.715Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "CSP debe whitelistear SumUp + reCAPTCHA explícitamente",
-      "description": "helmet() con CSP requiere directivas específicas para integraciones de pagos (SumUp) y bot-protection (reCAPTCHA)",
-      "context": "Aplicación con integraciones externas de pagos y captcha",
-      "applicability": [
-        "security",
-        "csp",
-        "helmet",
-        "integrations"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.715Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600715-4",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.715Z",
-      "type": "PATTERN",
-      "title": "requireAdmin centralizado en middleware reutilizable",
-      "description": "Middleware exportado desde auth.js y aplicado a los 7 mounts admin en server.js (no inline en cada router)",
-      "context": "Cuando hay múltiples mounts admin que comparten requisito de autorización",
-      "applicability": [
-        "express",
-        "middleware",
-        "auth"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.715Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600716-5",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.716Z",
-      "type": "PATTERN",
-      "title": "Rate limiters dedicados por endpoint sensible",
-      "description": "Limiters específicos para /login, /bulk-import, /upload-image en lugar de un limiter global único",
-      "context": "Endpoints con perfiles de abuso distintos (brute force vs DoS por upload)",
-      "applicability": [
-        "security",
-        "rate-limiting",
-        "express"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.716Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600717-6",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.717Z",
-      "type": "INSIGHT",
-      "title": "git rm --cached + .gitignore no purga historial",
-      "description": "Sacar .env del tracking deja el archivo en commits previos; requiere git-filter-repo o BFG para purgar",
-      "context": "Cuando se descubre un secret commiteado por error",
-      "applicability": [
-        "git",
-        "security",
-        "secrets"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.717Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-44-1777244600718-7",
-      "cycle": 44,
-      "timestamp": "2026-04-26T23:03:20.718Z",
-      "type": "PATTERN",
-      "title": "Smoke test post-cambio de seguridad: 401/400 + headers",
-      "description": "Verificar 401 en admin sin auth, 400 en login sin body, y presencia de CSP/HSTS/X-Frame-Options en respuestas",
-      "context": "Después de aplicar middleware de auth, rate-limit y helmet",
-      "applicability": [
-        "testing",
-        "security",
-        "smoke-test"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T23:03:20.718Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1168,7 +1027,7 @@
     "[2026-04-27T03:06:19.336Z] C53→C56 fue deuda técnica saldada en C57; cualquier referencia futura al alias legacy en metadata operativa es un bug",
     "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side"
   ],
-  "lastUpdated": "2026-04-27T03:53:24.437Z",
+  "lastUpdated": "2026-04-27T03:58:44.327Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2667,6 +2526,147 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T22:09:36.631Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600712-1",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.712Z",
+      "type": "PATTERN",
+      "title": "Rotación de ENCRYPTION_SECRET requiere decrypt-old + re-encrypt-new",
+      "description": "No basta cambiar el valor; hay que descifrar con secret viejo y re-cifrar con secret nuevo todos los campos cifrados en DB",
+      "context": "Cuando ENCRYPTION_SECRET cifra datos persistidos (settings.sumup_*, recaptcha_secret_key)",
+      "applicability": [
+        "security",
+        "encryption",
+        "secret-rotation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.712Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600714-2",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.714Z",
+      "type": "PATTERN",
+      "title": "Script de rotación con dry-run + --apply",
+      "description": "Scripts destructivos deben tener modo dry-run por defecto y flag --apply explícito para ejecutar",
+      "context": "Scripts que modifican datos en producción o reescriben estado persistente",
+      "applicability": [
+        "scripting",
+        "safety",
+        "ops"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.714Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600715-3",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.715Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "CSP debe whitelistear SumUp + reCAPTCHA explícitamente",
+      "description": "helmet() con CSP requiere directivas específicas para integraciones de pagos (SumUp) y bot-protection (reCAPTCHA)",
+      "context": "Aplicación con integraciones externas de pagos y captcha",
+      "applicability": [
+        "security",
+        "csp",
+        "helmet",
+        "integrations"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.715Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600715-4",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.715Z",
+      "type": "PATTERN",
+      "title": "requireAdmin centralizado en middleware reutilizable",
+      "description": "Middleware exportado desde auth.js y aplicado a los 7 mounts admin en server.js (no inline en cada router)",
+      "context": "Cuando hay múltiples mounts admin que comparten requisito de autorización",
+      "applicability": [
+        "express",
+        "middleware",
+        "auth"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.715Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600716-5",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.716Z",
+      "type": "PATTERN",
+      "title": "Rate limiters dedicados por endpoint sensible",
+      "description": "Limiters específicos para /login, /bulk-import, /upload-image en lugar de un limiter global único",
+      "context": "Endpoints con perfiles de abuso distintos (brute force vs DoS por upload)",
+      "applicability": [
+        "security",
+        "rate-limiting",
+        "express"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.716Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600717-6",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.717Z",
+      "type": "INSIGHT",
+      "title": "git rm --cached + .gitignore no purga historial",
+      "description": "Sacar .env del tracking deja el archivo en commits previos; requiere git-filter-repo o BFG para purgar",
+      "context": "Cuando se descubre un secret commiteado por error",
+      "applicability": [
+        "git",
+        "security",
+        "secrets"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.717Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-44-1777244600718-7",
+      "cycle": 44,
+      "timestamp": "2026-04-26T23:03:20.718Z",
+      "type": "PATTERN",
+      "title": "Smoke test post-cambio de seguridad: 401/400 + headers",
+      "description": "Verificar 401 en admin sin auth, 400 en login sin body, y presencia de CSP/HSTS/X-Frame-Options en respuestas",
+      "context": "Después de aplicar middleware de auth, rate-limit y helmet",
+      "applicability": [
+        "testing",
+        "security",
+        "smoke-test"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T23:03:20.718Z",
         "source": "INFERRED"
       }
     }
