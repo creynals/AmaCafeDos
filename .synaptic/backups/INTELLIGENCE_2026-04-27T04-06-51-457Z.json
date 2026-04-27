@@ -506,6 +506,26 @@
   ],
   "learnings": [
     {
+      "learningId": "learning-42-1777241376627-0",
+      "cycle": 42,
+      "timestamp": "2026-04-26T22:09:36.627Z",
+      "type": "USER_PREFERENCE",
+      "title": "Enfoque A pre-aprobado en ciclo previo",
+      "description": "Usuario eligió Enfoque A en ciclo 41; ciclo 42 ejecuta inmediato sin re-confirmar",
+      "context": "Cuando un ciclo previo presenta opciones y usuario elige una explícitamente",
+      "applicability": [
+        "execution-mode",
+        "DG-079",
+        "immediate-execution"
+      ],
+      "confidence": {
+        "score": 0.30000000000000004,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T22:09:36.627Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
       "learningId": "learning-44-1777244600711-0",
       "cycle": 44,
       "timestamp": "2026-04-26T23:03:20.711Z",
@@ -519,7 +539,7 @@
         "destructive-ops"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T23:03:20.711Z",
         "source": "EXPLICIT"
@@ -1007,7 +1027,7 @@
     "[2026-04-27T03:06:19.336Z] C53→C56 fue deuda técnica saldada en C57; cualquier referencia futura al alias legacy en metadata operativa es un bug",
     "[2026-04-27T03:06:19.337Z] Tras fix requiere hard-refresh del dashboard (Cmd+Shift+R); si persiste, escalar como cache server-side"
   ],
-  "lastUpdated": "2026-04-27T04:06:51.457Z",
+  "lastUpdated": "2026-04-27T03:58:44.327Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2648,26 +2668,6 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T23:03:20.718Z",
         "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-42-1777241376627-0",
-      "cycle": 42,
-      "timestamp": "2026-04-26T22:09:36.627Z",
-      "type": "USER_PREFERENCE",
-      "title": "Enfoque A pre-aprobado en ciclo previo",
-      "description": "Usuario eligió Enfoque A en ciclo 41; ciclo 42 ejecuta inmediato sin re-confirmar",
-      "context": "Cuando un ciclo previo presenta opciones y usuario elige una explícitamente",
-      "applicability": [
-        "execution-mode",
-        "DG-079",
-        "immediate-execution"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T22:09:36.627Z",
-        "source": "EXPLICIT"
       }
     }
   ]
