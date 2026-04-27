@@ -370,87 +370,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-25-1777226918140-0",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.140Z",
-      "type": "PATTERN",
-      "title": "Sub-tabs consistente parent+child",
-      "description": "Replicar patrón PRODUCTS_SUBTABS para ORDERS_SUBTABS (Listado/Vista de Cocina) con underline nav",
-      "context": "Cuando se añade vista alterna a una pestaña existente del admin",
-      "applicability": [
-        "frontend",
-        "admin",
-        "navigation",
-        "ux-consistency"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.140Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918147-1",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.147Z",
-      "type": "ANTI_PATTERN",
-      "title": "Clases Tailwind dinámicas no compilan",
-      "description": "text-${col.accent} no funciona con JIT; usar mapa estático iconCls/badgeCls por clave",
-      "context": "Componentes con estilo condicional por columna/estado en Tailwind",
-      "applicability": [
-        "frontend",
-        "tailwind",
-        "styling"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.147Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918149-2",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.149Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "json_agg con COALESCE a array vacío",
-      "description": "json_agg(...) FILTER + COALESCE(..., '[]'::json) garantiza items[]=[] cuando no hay líneas",
-      "context": "Al exponer relaciones 1:N en endpoints REST sin N+1",
-      "applicability": [
-        "backend",
-        "postgres",
-        "api"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.149Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-25-1777226918151-3",
-      "cycle": 25,
-      "timestamp": "2026-04-26T18:08:38.151Z",
-      "type": "PATTERN",
-      "title": "Kanban FIFO con urgencia por antigüedad",
-      "description": "3 columnas pending/in_progress/out_for_delivery, gris<15m, amarillo 15-29m, rojo >=30m",
-      "context": "Vistas operativas de cocina/kitchen con SLA visual",
-      "applicability": [
-        "frontend",
-        "kitchen-view",
-        "ux"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-26T18:08:38.151Z",
-        "source": "INFERRED"
-      }
-    },
-    {
       "learningId": "learning-25-1777226918152-4",
       "cycle": 25,
       "timestamp": "2026-04-26T18:08:38.152Z",
@@ -463,7 +382,7 @@
         "api-design"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T18:08:38.152Z",
         "source": "EXPLICIT"
@@ -482,7 +401,7 @@
         "dev-workflow"
       ],
       "confidence": {
-        "score": 0.44999999999999996,
+        "score": 0.35,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-26T21:53:44.189Z",
         "source": "INFERRED"
@@ -501,7 +420,7 @@
         "scope-control"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T18:08:38.156Z",
         "source": "EXPLICIT"
@@ -1016,7 +935,7 @@
     "[2026-04-26T23:03:20.720Z] Script rotate-encryption-secret.js disponible en backend/scripts/ con modo dry-run + --apply",
     "[2026-04-26T23:03:20.721Z] Commit de cierre: d80d39b (12 archivos, +350/-47)"
   ],
-  "lastUpdated": "2026-04-27T02:02:28.405Z",
+  "lastUpdated": "2026-04-27T02:07:29.541Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2117,6 +2036,87 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-26T17:26:56.937Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918140-0",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.140Z",
+      "type": "PATTERN",
+      "title": "Sub-tabs consistente parent+child",
+      "description": "Replicar patrón PRODUCTS_SUBTABS para ORDERS_SUBTABS (Listado/Vista de Cocina) con underline nav",
+      "context": "Cuando se añade vista alterna a una pestaña existente del admin",
+      "applicability": [
+        "frontend",
+        "admin",
+        "navigation",
+        "ux-consistency"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.140Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918147-1",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.147Z",
+      "type": "ANTI_PATTERN",
+      "title": "Clases Tailwind dinámicas no compilan",
+      "description": "text-${col.accent} no funciona con JIT; usar mapa estático iconCls/badgeCls por clave",
+      "context": "Componentes con estilo condicional por columna/estado en Tailwind",
+      "applicability": [
+        "frontend",
+        "tailwind",
+        "styling"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.147Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918149-2",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.149Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "json_agg con COALESCE a array vacío",
+      "description": "json_agg(...) FILTER + COALESCE(..., '[]'::json) garantiza items[]=[] cuando no hay líneas",
+      "context": "Al exponer relaciones 1:N en endpoints REST sin N+1",
+      "applicability": [
+        "backend",
+        "postgres",
+        "api"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.149Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-25-1777226918151-3",
+      "cycle": 25,
+      "timestamp": "2026-04-26T18:08:38.151Z",
+      "type": "PATTERN",
+      "title": "Kanban FIFO con urgencia por antigüedad",
+      "description": "3 columnas pending/in_progress/out_for_delivery, gris<15m, amarillo 15-29m, rojo >=30m",
+      "context": "Vistas operativas de cocina/kitchen con SLA visual",
+      "applicability": [
+        "frontend",
+        "kitchen-view",
+        "ux"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-26T18:08:38.151Z",
+        "source": "INFERRED"
       }
     }
   ]
