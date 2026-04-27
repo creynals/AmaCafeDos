@@ -524,26 +524,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-49-1777256921317-1",
-      "cycle": 49,
-      "timestamp": "2026-04-27T02:28:41.317Z",
-      "type": "USER_PREFERENCE",
-      "title": "Decision Gate when ambiguity detected",
-      "description": "Halt and present A/B/C options instead of guessing what 'execute recommendations' means",
-      "context": "When user request references prior cycle output that is not explicitly persisted",
-      "applicability": [
-        "decision-gate",
-        "ambiguity",
-        "synaptic-protocol"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T02:28:41.317Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
       "learningId": "learning-50-1777257198549-2",
       "cycle": 50,
       "timestamp": "2026-04-27T02:33:18.549Z",
@@ -556,7 +536,7 @@
         "user-preference"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:33:18.549Z",
         "source": "EXPLICIT"
@@ -987,7 +967,7 @@
     "[2026-04-27T04:22:26.580Z] Lezione C53 applicata: rilettura/grep finale prima di dichiarare successo",
     "[2026-04-27T04:22:26.581Z] 8 file modificati: 3 backend + 4 frontend + BITACORA"
   ],
-  "lastUpdated": "2026-04-27T20:55:53.073Z",
+  "lastUpdated": "2026-04-27T21:14:27.510Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -2810,6 +2790,26 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T02:33:18.551Z",
         "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-49-1777256921317-1",
+      "cycle": 49,
+      "timestamp": "2026-04-27T02:28:41.317Z",
+      "type": "USER_PREFERENCE",
+      "title": "Decision Gate when ambiguity detected",
+      "description": "Halt and present A/B/C options instead of guessing what 'execute recommendations' means",
+      "context": "When user request references prior cycle output that is not explicitly persisted",
+      "applicability": [
+        "decision-gate",
+        "ambiguity",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T02:28:41.317Z",
+        "source": "EXPLICIT"
       }
     }
   ]

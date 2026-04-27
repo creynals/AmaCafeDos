@@ -4108,6 +4108,131 @@ detallar los pasos requeridos, los mas críticos para desplegar el aplicativo en
 
 ---
 
+
+---
+## CICLO: 72
+**Timestamp**: 2026-04-27T20:58:11.264Z
+**Trace ID**: `ead3a15c-3c01-4c4a-9beb-103d266c34a8`
+**Agente**: master_architect
+**Fase**: ANALISIS
+**Decisión**: N/A
+**Resultado**: SUCCESS
+**Duración**: 138202ms
+
+**Prompt Original**:
+```
+[ARCHITECT MODE - Analysis only, no code modifications]
+
+para el MPV vamos a usar imagenes estáticas y desplegar desde GitHub a Railway.com, analizar los siguientes recomendaciones de agente para hacer ajustes si son necesarios o comenzar el despliégue: "📝 FASE 0: Preparación del Código (Local)
+
+Antes de subir nada a GitHub, asegúrate de estos tres puntos en tu repositorio:
+
+Imágenes: Coloca tus fotos genéricas en backend/public/images/products/.
+
+Express: En backend/src/server.js, verifica que tienes la línea:
+app.use('/static', express.static(path.join(__dirname, 'public')));
+
+Scripts: En el package.json de la raíz de tu proyecto, asegúrate de tener:
+
+JSON
+"scripts": {
+  "build": "npm install && cd frontend && npm install && npm run build && cd ../backend && npm install",
+  "start": "cd backend && node src/server.js"
+}
+🚀 FASE 1: Configuración en Railway (Lo que ves en tu imagen)
+
+Paso 1: Conectar el Repositorio
+
+En la pantalla que compartiste, haz clic en "GitHub Repository".
+
+Selecciona tu repositorio de la aplicación.
+
+Railway detectará automáticamente el lenguaje, pero no lo despliegues todavía.
+
+Paso 2: Agregar la Base de Datos
+
+Haz clic en el botón "Create" (o el icono + en el canvas).
+
+Selecciona "Database" y luego "Add PostgreSQL".
+
+Railway creará una instancia de Postgres. Verás que aparece un "cuadrito" nuevo en tu canvas.
+
+Paso 3: Conectar la App con la DB
+Railway inyecta automáticamente la variable DATABASE_URL si ambos servicios están en el mismo proyecto, pero para estar seguros:
+
+Entra al servicio de PostgreSQL -> pestaña Variables.
+
+Copia el valor de DATABASE_URL.
+
+Ve al servicio de tu App -> pestaña Variables -> clic en "New Variable" -> "Variable Reference" y selecciona DATABASE_URL.
+
+⚙️ FASE 2: Variables de Entorno Críticas
+
+En el servicio de tu App, agrega estas variables necesarias:
+
+Variable	Valor	Nota
+NODE_ENV	production	Optimiza Express y librerías.
+PORT	7000 (o el que uses)	Railway lo asigna, pero es bueno tenerlo explícito.
+ENCRYPTION_SECRET	(Genera una cadena larga)	Para cifrar las keys de SumUp en la DB.
+FRONTEND_URL	https://tu-app.up.railway.app	La URL que Railway te asigne en "Settings".
+🛠 FASE 3: Despliegue y Primeros Pasos
+
+Trigger Deploy: Realiza un git push a tu rama principal. Railway empezará a compilar.
+
+Ver logs: Haz clic en el servicio de tu App y ve a la pestaña "Deployments" -> "View Logs".
+
+Deberías ver cómo se instalan las dependencias de ambos mundos (front/back).
+
+Deberías ver el mensaje: "Server listening on port XXXX".
+
+Ejecutar Migraciones/Seed:
+Como es la primera vez, la base de datos está vacía. Railway te permite ejecutar comandos únicos:
+
+Ve a la pestaña "Settings" del servicio de la App.
+
+Busca "Deployments" -> "Custom Deploy Command" (o usa el botón "View Shell" si tienes el plan Hobby).
+
+Ejecuta: cd backend && npm run seed (asegúrate de tener este script definido para crear tu usuario admin).
+
+✅ FASE 4: Verificación (Smoke Test)
+
+Check de Salud: Visita https://tu-app.up.railway.app/api/health. Debería responder { status: 'ok' }.
+
+Imágenes Estáticas: Intenta cargar una imagen directamente: https://tu-app.up.railway.app/static/images/products/test.jpg. Si carga, el proxy de Express está bien configurado.
+
+Login Admin: Entra a la ruta de administración y loguéate con las credenciales del seed.
+
+💡 Tips Extra
+
+Dominio: En la pestaña Settings de tu app, puedes generar un dominio gratuito .up.railway.app o conectar uno propio.
+
+Plan: Si el build falla por memoria (Vite es algo pesado al compilar), podrías necesitar subir a un plan que permita más de 512MB de RAM momentáneamente durante el build.
+
+¿Quieres que revisemos algún script específico del package.json para asegurar que Railway no falle al compilar el monorepo?"
+```
+
+**Decision Gate Presentado**: Ninguno (ciclo de análisis inicial)
+
+**Opción Elegida**: Pendiente de selección
+
+**Artefactos Generados**:
+- Ninguno
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌
+- Memoria actualizada: ✅
+- Tests generados: ❌
+- Reformulaciones necesarias: 0
+
+
+
+
+
+**Synaptic Strength**: 97.2%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
 *Last Updated: 2026-04-27T04:30:00.000Z*
 
