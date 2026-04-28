@@ -6021,3 +6021,62 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 **Synaptic Strength**: 99%
 
 ---
+
+### Entry #95 - Cycle 95: Verificação de Default Branch + Inspeção de Repo Remoto
+```json
+{
+  "timestamp": "2026-04-28T01:15:00.000Z",
+  "cycle": 95,
+  "phase": 4,
+  "action": "VERIFY_GITHUB_DEFAULT_BRANCH",
+  "mode": "IMMEDIATE_EXECUTION",
+  "userRequest": "proceder con el próximo paso: PRÓXIMOS PASSOS (alta prioridade) — GitHub UI: marcar main como default branch em Settings → Branches",
+  "details": {
+    "context": "Tras push exitoso de C94 a https://github.com/creynals/AmaCafeDos, próxima recomendación HIGH del roadmap era marcar main como default branch via GitHub UI.",
+    "discovery": "GitHub auto-promove a primeira branch pushed para um repo vazio como default branch. Como C94 ejecutó `git push -u origin main` contra un repo recién creado vacío (sin README inicial), main fue establecida como default automáticamente. Acción manual UI NO requerida.",
+    "verifications": [
+      "gh api repos/creynals/AmaCafeDos --jq '.default_branch' → 'main' ✅",
+      "gh api repos/creynals/AmaCafeDos/branches → ['main'] (única branch en remoto) ✅",
+      "Repo state: visibility=private, archived=false, pushed_at=2026-04-28T01:02:39Z, size=0",
+      "git log --all --full-history -- '**/.env' → vacío (sin commits que afecten .env) ✅",
+      "git ls-tree -r HEAD --name-only | grep .env → solo backend/.env.example y frontend/.env.example ✅"
+    ],
+    "secondaryTaskCompleted": "Inspección de ausencia de .env en historial git (recomendación HIGH paralela del C94). Confirmado: ningún archivo .env (solo .env.example) en HEAD ni historial. Purga C78 sigue intacta.",
+    "noteOnPublicRepoTask": "El roadmap mencionaba 'inspección visual del repo público', pero AmaCafeDos es privado (visibility=private). La inspección via gh API es equivalente y suficiente: contenido auditado sin necesidad de UI."
+  },
+  "actionsExecuted": [
+    "gh auth status → autenticado como creynals con scope repo",
+    "gh api repos/creynals/AmaCafeDos → default_branch confirmado='main'",
+    "gh api repos/creynals/AmaCafeDos/branches → única branch='main'",
+    "git log + git ls-tree → ausencia de .env confirmada"
+  ],
+  "filesChanged": 0,
+  "filesAdded": 0,
+  "validation": {
+    "defaultBranchOnGitHub": "✅ main (auto-establecido por GitHub en push inicial a repo vacío)",
+    "envAbsentFromHistory": "✅ git log no muestra commits afectando .env",
+    "envAbsentFromHEAD": "✅ git ls-tree solo muestra .env.example (correcto)",
+    "remoteAccessible": "✅ gh API responde con scope repo válido"
+  },
+  "userImpact": "Tarea HIGH del roadmap cerrada sin acción manual del usuario: GitHub ya tiene main como default. Adicionalmente confirmada la limpieza del historial: ningún .env expuesto en el remoto, validando que la purga C78 (git filter-repo) sigue intacta tras el push C94.",
+  "outcome": "SUCCESS",
+  "synapticStrength": 99,
+  "complianceScore": 100
+}
+```
+
+**Notas críticas**:
+- GitHub auto-promueve la primera branch pushed cuando el repo se crea vacío (sin README inicial). Esto evita el paso manual UI que el roadmap anticipaba.
+- El repo es **privado** (no público como mencionaba la nota legacy del roadmap). La inspección vía `gh api` es la vía correcta para auditar contenido.
+- Honrando la regla C57 (verificar archivos editados antes de declarar éxito): el estado del default branch fue verificado vía API GitHub, no asumido del comportamiento esperado.
+
+**Recomendaciones (próximos pasos del roadmap por prioridade)**:
+- 🔴 **ALTA**: Iniciar rotación obligatoria de credenciales — ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT secret, DB password. Aunque `.env` ya no está en el historial, las credenciales que estuvieron expuestas deben considerarse comprometidas hasta rotarse.
+- 🔴 **ALTA**: Tras rotación, proceder con Decision Gate de configuración Railway service (R1-R8 según `docs/RAILWAY_DEPLOY.md`) — env vars, Volume mount en `/data`, primer deploy backend + frontend.
+- 🟡 **MEDIA**: Habilitar branch protection en `main` desde GitHub Settings → Branches → Branch protection rules (require PR, require status checks) antes de invitar colaboradores o instalar GitHub Actions.
+- 🟡 **MEDIA**: Documentar en `WORKSPACE_IDENTITY.md` el SHA mapping antes/después de la purga C78 y la URL del repo (`https://github.com/creynals/AmaCafeDos`) como referencia canónica.
+- 🟢 **BAJA**: Considerar agregar GitHub Actions CI básico (lint + build) tras configurar branch protection para enforce calidad antes de merge.
+
+**Synaptic Strength**: 99%
+
+---
