@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-093 | Decision Gate abierto: estrategia de push inicial a AmaCafeDos (Option A/B/C) | Usuario autorizó push pero mecánica (rename, tags, protección) requiere confirmación explícita | 2026-04-28 | 93 |
 | DEC-087-3 | Stage cleanup deletions but defer commit to user | 1247-file deletion is dramatic; user must visually confirm before history changes | 2026-04-28 | 87 |
 | DEC-087-2 | Install pre-commit hook via scripts/install-git-hooks.sh symlink (idempotent) | Prevent regression of node_modules/.DS_Store/.env/large-file commits | 2026-04-28 | 87 |
 | DEC-087-1 | Add bootstrapModeFromEnv() promotion step before failsafe in logAndValidateSumupConfig | Fresh deploys cannot reach UI to flip mode; env var must be authoritative when set and valid | 2026-04-28 | 87 |
@@ -167,6 +168,10 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 93] Repo destino: https://github.com/creynals/AmaCafeDos (vacío)
+- [Cycle 93] Branch local: master (historial reescrito en C78 vía filter-repo)
+- [Cycle 93] Branch destino solicitado: main
+- [Cycle 93] Tag pre-purge-c77 disponible localmente como respaldo de purga
 - [Cycle 87] sumup.config.js exposes bootstrapModeFromEnv with DB UPSERT and in-proc cache invalidation
 - [Cycle 87] server.js:144-153 calls promoter inside logAndValidateSumupConfig before mode resolution
 - [Cycle 87] Pre-commit hook blocks .env* (allows .env.example), node_modules/, .DS_Store/Thumbs.db, dist/build/, files >5 MiB

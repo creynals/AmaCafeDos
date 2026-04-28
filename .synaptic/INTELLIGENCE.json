@@ -137,6 +137,32 @@
       "selectedOption": "B",
       "userRationale": ": Railway Volume — Balanced ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777337992005",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:52.005Z",
+      "decisionPoint": "proceder con OPTION B: Rename + Push main + Push Tag pre-purge-c77 (Balanceado) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Rename + Push main + Push Tag pre-purge-c77 (Balanceado) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -777,6 +803,33 @@
       "priority": "MEDIUM",
       "status": "PLANNED",
       "createdAtCycle": 87,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-093-A",
+      "title": "Recibir decisión del usuario sobre Option A/B/C",
+      "description": "Esperar input explícito 'Proceed with Option [X]' antes de ejecutar cualquier comando git",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 93,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-093-B",
+      "title": "Ejecutar pre-flight checks antes del push",
+      "description": "Verificar remote, .gitignore, tag respaldo, credenciales rotadas, git log post-purga",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 93,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-093-C",
+      "title": "Configurar main como default branch en GitHub UI tras push",
+      "description": "Post-push: setear main como default y verificar que .env no aparece en ningún commit del remote",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 93,
       "dependencies": []
     }
   ],
@@ -1569,6 +1622,107 @@
         "lastReinforced": "2026-04-28T00:14:04.525Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-93-1777337968454-0",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.454Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario prefiere opciones balanceadas (Option B)",
+      "description": "5/5 últimas decisiones del usuario favorecieron la opción B (balanceada) sobre conservadora o innovadora",
+      "context": "Decision Gates con tres opciones A/B/C",
+      "applicability": [
+        "decision-gate",
+        "user-pattern",
+        "option-b"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.454Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968459-1",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.459Z",
+      "type": "PATTERN",
+      "title": "Decision Gate sobre mecánica de push inicial",
+      "description": "Push inicial a remote vacío requiere decidir: rename branch, manejo de tags, branch protection",
+      "context": "Primer push a repo GitHub recién creado tras filter-repo",
+      "applicability": [
+        "git",
+        "github",
+        "initial-push",
+        "filter-repo"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.459Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968462-2",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.462Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Pre-flight checks obligatorios antes de push post-purga",
+      "description": "Verificar remote, .gitignore, tag respaldo, credenciales rotadas, log post-purga antes de pushear",
+      "context": "Push inicial tras git filter-repo que eliminó secretos",
+      "applicability": [
+        "security",
+        "git-filter-repo",
+        "secrets-purge"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.462Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968465-3",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.465Z",
+      "type": "INSIGHT",
+      "title": "Tag pre-purge-c77 sólo local es single-point-of-failure",
+      "description": "Mantener tag de respaldo de purga sólo en local arriesga pérdida por fallo de disco",
+      "context": "Estrategia de respaldo post-filter-repo",
+      "applicability": [
+        "backup",
+        "resilience",
+        "tags"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.465Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968468-4",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.468Z",
+      "type": "ANTI_PATTERN",
+      "title": "Dual branch master+main genera ruido sin beneficio",
+      "description": "Publicar ambas ramas con mismo HEAD confunde y branch protection estricta sin team bloquea workflow",
+      "context": "MVP de un solo desarrollador",
+      "applicability": [
+        "git",
+        "branch-strategy",
+        "over-engineering"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.468Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1680,9 +1834,13 @@
     "[2026-04-28T00:14:04.527Z] C86 G1-G4 and R1-R9 labels were never persisted; future cycles must save such enumerations to BITACORA",
     "[2026-04-28T00:14:04.528Z] Operator's deploy gate is grepping backend logs for '[sumup] bootstrap: promoted SUMUP_MODE env to settings'",
     "[2026-04-28T00:14:04.530Z] docs/RAILWAY_DEPLOY.md R5 sets SUMUP_MODE=live; R8 step 2 verifies promotion log line",
-    "[2026-04-28T00:14:04.531Z] 1247 files / -223856 lines staged for deletion at end of C87 — user must review and commit"
+    "[2026-04-28T00:14:04.531Z] 1247 files / -223856 lines staged for deletion at end of C87 — user must review and commit",
+    "[2026-04-28T00:59:28.471Z] Cycle 93 entró en Phase 1 (Specification) con Decision Gate sin ejecutar comandos git",
+    "[2026-04-28T00:59:28.473Z] Pre-condiciones C87 ya aplicadas: hooks instalados, staging limpio (1247-file deletion commiteado)",
+    "[2026-04-28T00:59:28.474Z] Credenciales rotadas post-C78 deben verificarse antes del push (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB)",
+    "[2026-04-28T00:59:28.476Z] Recomendación del agente: Option B (rename + push main + push tag pre-purge-c77)"
   ],
-  "lastUpdated": "2026-04-28T00:57:54.609Z",
+  "lastUpdated": "2026-04-28T00:59:52.011Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
