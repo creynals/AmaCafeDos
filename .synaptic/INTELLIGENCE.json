@@ -1048,71 +1048,10 @@
         "decision-gate"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T22:24:09.793Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-82-1777329010382-0",
-      "cycle": 82,
-      "timestamp": "2026-04-27T22:30:10.382Z",
-      "type": "PATTERN",
-      "title": "Shared crypto module preserves public API",
-      "description": "Refactor duplicated crypto primitives into shared module while keeping wrapper API intact for consumers",
-      "context": "When eliminating duplication between rotator scripts and runtime modules",
-      "applicability": [
-        "refactor",
-        "crypto",
-        "shared-module",
-        "backend"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:30:10.382Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-82-1777329010387-1",
-      "cycle": 82,
-      "timestamp": "2026-04-27T22:30:10.387Z",
-      "type": "PATTERN",
-      "title": "Cross-module ciphertext compatibility tests",
-      "description": "Add explicit tests validating ciphertexts encrypted in one module can be decrypted in another",
-      "context": "When refactoring shared cryptographic logic to ensure no data migration needed",
-      "applicability": [
-        "testing",
-        "crypto",
-        "refactor"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:30:10.387Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-82-1777329010389-2",
-      "cycle": 82,
-      "timestamp": "2026-04-27T22:30:10.389Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Smoke test via node import failure",
-      "description": "Validate refactored script loads cleanly by checking it fails on missing env, not SyntaxError",
-      "context": "Quick validation of module imports without full execution environment",
-      "applicability": [
-        "testing",
-        "smoke-test",
-        "node"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:30:10.389Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1129,29 +1068,10 @@
         "user-preference"
       ],
       "confidence": {
-        "score": 0.9500000000000001,
+        "score": 0.8500000000000001,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-28T01:48:33.030Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-82-1777329010393-4",
-      "cycle": 82,
-      "timestamp": "2026-04-27T22:30:10.393Z",
-      "type": "PATTERN",
-      "title": "Defer scope explicitly with rationale",
-      "description": "Bug #2 versioning explicitly deferred to OPTION C — documented why out of scope",
-      "context": "When implementing balanced refactor that intentionally leaves work for future",
-      "applicability": [
-        "scope-management",
-        "documentation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:30:10.393Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -2259,7 +2179,7 @@
     "[2026-04-28T01:48:33.036Z] SQLi defense is parameterized SQL ($1,$2); validateInput is secondary pattern wall",
     "[2026-04-28T01:48:33.037Z] False-positive corpus includes legitimate Spanish/CL text to prevent over-blocking"
   ],
-  "lastUpdated": "2026-04-28T01:52:01.091Z",
+  "lastUpdated": "2026-04-28T01:57:02.590Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -4747,6 +4667,86 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T22:24:09.791Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010382-0",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.382Z",
+      "type": "PATTERN",
+      "title": "Shared crypto module preserves public API",
+      "description": "Refactor duplicated crypto primitives into shared module while keeping wrapper API intact for consumers",
+      "context": "When eliminating duplication between rotator scripts and runtime modules",
+      "applicability": [
+        "refactor",
+        "crypto",
+        "shared-module",
+        "backend"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.382Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010387-1",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.387Z",
+      "type": "PATTERN",
+      "title": "Cross-module ciphertext compatibility tests",
+      "description": "Add explicit tests validating ciphertexts encrypted in one module can be decrypted in another",
+      "context": "When refactoring shared cryptographic logic to ensure no data migration needed",
+      "applicability": [
+        "testing",
+        "crypto",
+        "refactor"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.387Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010389-2",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.389Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Smoke test via node import failure",
+      "description": "Validate refactored script loads cleanly by checking it fails on missing env, not SyntaxError",
+      "context": "Quick validation of module imports without full execution environment",
+      "applicability": [
+        "testing",
+        "smoke-test",
+        "node"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.389Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010393-4",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.393Z",
+      "type": "PATTERN",
+      "title": "Defer scope explicitly with rationale",
+      "description": "Bug #2 versioning explicitly deferred to OPTION C — documented why out of scope",
+      "context": "When implementing balanced refactor that intentionally leaves work for future",
+      "applicability": [
+        "scope-management",
+        "documentation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:30:10.393Z",
         "source": "INFERRED"
       }
     }
