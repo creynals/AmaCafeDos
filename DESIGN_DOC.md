@@ -103,6 +103,8 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-123B | Sprint A debe ejecutarse vía PR (Option A recomendada) | Respeta branch protection, deja audit trail, no abre ventana de desprotección | 2026-04-28 | 123 |
+| DEC-123A | No crear tag pre-deploy si push falló | Evita tags huérfanos apuntando a SHAs no remotos (lección C115/C116) | 2026-04-28 | 123 |
 | DEC-C121-RECONCILE | Adoptar TRUTH_RECONCILIATION_C120.md como artefacto formal de inventario declarado-vs-verificado | Cerrar deuda de auditoría retroactiva tras descubrir mentiras en C115/C116 | 2026-04-28 | 121 |
 | DEC-C120-RESOLVED | Cluster rotación C112-C116 reclasificado DEFERRED-TO-PROD/DEFERRED-TO-DEPLOY | Sandbox sin valor sin secretos productivos; consolidar en flujo Railway R5/R8 | 2026-04-28 | 121 |
 | DEC-120-B | BITACORA append-only con secciones ERRATA CXXX para reconciliación | Preserva auditoría histórica sin reescribir; aprendizaje C53/C57 reforzado | 2026-04-28 | 120 |
@@ -189,6 +191,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 123] Remote origin: https://github.com/creynals/AmaCafeDos.git
+- [Cycle 123] Branch protection en main bloquea push directo (GH006)
+- [Cycle 123] 17 commits locales pendientes (cycles 108→123 PRE) sin secretos en diff
 - [Cycle 121] 12 items rotación marcados con deferredAtCycle/deferredReason en INTELLIGENCE.json
 - [Cycle 121] decision C120 outcome=RESOLVED-RECONCILED con resolutionArtifacts apuntando a TRUTH_RECONCILIATION_C120.md
 - [Cycle 120] Credenciales SumUp residen en tabla settings (clave sumup_api_key), no en payment_methods

@@ -353,6 +353,32 @@
         "DESIGN_DOC.md: fila C120/C121 agregada al Decision Log",
         "BITACORA.md: entrada C121 con JSON estructurado"
       ]
+    },
+    {
+      "decisionId": "decision-1777349963160",
+      "cycle": 123,
+      "timestamp": "2026-04-28T04:19:23.160Z",
+      "decisionPoint": "proceder con OPTION A — PR único con los 17 commits",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "A",
+      "userRationale": "— PR único con los 17 commits",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -1534,29 +1560,36 @@
       "status": "PLANNED",
       "createdAtCycle": 121,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-123-1",
+      "title": "Ejecutar Option elegida para Sprint A",
+      "description": "Crear rama release/c123-sprint-a, push, abrir PR, mergear, crear tag pre-deploy-c123",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 123,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-123-2",
+      "title": "Verificar tag remoto post-merge",
+      "description": "git ls-remote --tags origin pre-deploy-c123 debe devolver SHA esperado antes de declarar SUCCESS",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 123,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-123-3",
+      "title": "Documentar política de branch protection en DESIGN_DOC",
+      "description": "Formalizar que main requiere PR + revisar si admins pueden bypass",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 123,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-100-1777340420165-0",
-      "cycle": 100,
-      "timestamp": "2026-04-28T01:40:20.165Z",
-      "type": "USER_PREFERENCE",
-      "title": "ENFORCE-SYNAPTIC-PROTOCOL overrides immediate-execution mode",
-      "description": "Explicit enforcement directive in request triggers mandatory Decision Gate even when DG-079 active",
-      "context": "When user includes [ENFORCE-SYNAPTIC-PROTOCOL] tag in cycle request",
-      "applicability": [
-        "synaptic-protocol",
-        "decision-gate",
-        "enforcement"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:40:20.165Z",
-        "source": "EXPLICIT"
-      }
-    },
     {
       "learningId": "learning-101-1777340855619-1",
       "cycle": 101,
@@ -1572,7 +1605,7 @@
         "xss"
       ],
       "confidence": {
-        "score": 0.55,
+        "score": 0.25,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:55:00.000Z",
         "source": "IMPLEMENTED"
@@ -1592,7 +1625,7 @@
         "routing"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-28T01:55:00.000Z",
         "source": "IMPLEMENTED"
@@ -1612,7 +1645,7 @@
         "prototype-pollution"
       ],
       "confidence": {
-        "score": 0.6499999999999999,
+        "score": 0.34999999999999987,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:55:00.000Z",
         "source": "IMPLEMENTED"
@@ -1633,7 +1666,7 @@
         "decision-gate"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:58:31.230Z",
         "source": "EXPLICIT"
@@ -1654,69 +1687,9 @@
         "railway"
       ],
       "confidence": {
-        "score": 0.44999999999999996,
+        "score": 0.35,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-28T02:19:19.372Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-103-1777341511242-2",
-      "cycle": 103,
-      "timestamp": "2026-04-28T01:58:31.242Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "git rm --cached avoids history rewrite",
-      "description": "Adding pattern to .gitignore + git rm --cached removes tracked files without filter-branch",
-      "context": "When excluding generated SYNAPTIC intelligence snapshots from future commits",
-      "applicability": [
-        "gitignore",
-        "synaptic-intelligence",
-        "history-preservation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:58:31.242Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-103-1777341511245-3",
-      "cycle": 103,
-      "timestamp": "2026-04-28T01:58:31.245Z",
-      "type": "PATTERN",
-      "title": "Pre-flight read-only diff before any remote-affecting action",
-      "description": "git diff origin/main..HEAD --stat verifies expected delta (validateInput.* + server.js) before push",
-      "context": "Before any push, tag, or gitignore mutation that touches remote or staged state",
-      "applicability": [
-        "pre-flight",
-        "git-diff",
-        "verification"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:58:31.245Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-103-1777341511249-4",
-      "cycle": 103,
-      "timestamp": "2026-04-28T01:58:31.249Z",
-      "type": "INSIGHT",
-      "title": "INTELLIGENCE_*.json versioning is a binary audit-vs-bloat tradeoff",
-      "description": "Keeping snapshots gives audit trail but causes repo bloat and noisy PR diffs over time",
-      "context": "Deciding which SYNAPTIC artifacts belong in remote history vs. local-only",
-      "applicability": [
-        "synaptic",
-        "repo-hygiene",
-        "audit-trail"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:58:31.249Z",
         "source": "INFERRED"
       }
     },
@@ -1734,9 +1707,9 @@
         "remote-safety"
       ],
       "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:19:19.356Z",
+        "score": 0.44999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T04:18:22.145Z",
         "source": "INFERRED"
       }
     },
@@ -2603,11 +2576,91 @@
         "lastReinforced": "2026-04-28T04:11:18.386Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-123-1777349902151-1",
+      "cycle": 123,
+      "timestamp": "2026-04-28T04:18:22.151Z",
+      "type": "ANTI_PATTERN",
+      "title": "Crear tag sin push previo exitoso",
+      "description": "Crear tag local apuntando a SHA no presente en origin = artefacto huérfano (patrón C115/C116)",
+      "context": "Al ejecutar sprints de deploy con tags + commits",
+      "applicability": [
+        "git",
+        "tags",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:18:22.151Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-123-1777349902155-2",
+      "cycle": 123,
+      "timestamp": "2026-04-28T04:18:22.155Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Branch protection activa en main",
+      "description": "GH006 bloquea push directo a main; requiere PR. Coherente con backlog HIGH ya planeado",
+      "context": "Cualquier intento de push directo a main fallará",
+      "applicability": [
+        "github",
+        "branch-protection",
+        "main"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:18:22.155Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-123-1777349902160-3",
+      "cycle": 123,
+      "timestamp": "2026-04-28T04:18:22.160Z",
+      "type": "USER_PREFERENCE",
+      "title": "HALT-AWAITING-INPUT en decisiones de estado compartido",
+      "description": "Detener y pedir decisión explícita antes de tocar settings/protecciones visibles a terceros",
+      "context": "Cuando alternativas tienen trade-offs operacionales no triviales",
+      "applicability": [
+        "decision-making",
+        "shared-state",
+        "halt"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:18:22.160Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-123-1777349902165-4",
+      "cycle": 123,
+      "timestamp": "2026-04-28T04:18:22.165Z",
+      "type": "PATTERN",
+      "title": "No persistir BITACORA hasta SUCCESS verificado",
+      "description": "Estado HALT no es SUCCESS; persistir solo cuando verificación física confirme artefactos",
+      "context": "Al final de cada ciclo, antes de actualizar BITACORA",
+      "applicability": [
+        "bitacora",
+        "lifecycle",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:18:22.165Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
-    "lastCompletedTask": "C121 — TRUTH_RECONCILIATION_C120.md creado, cluster rotación DEFERRED-TO-PROD, deploy R1-R8 elevado HIGH, BITACORA + DESIGN_DOC actualizados",
-    "currentTask": "Awaiting C122: ejecutar R1 (branch protection en main)",
+    "lastCompletedTask": "Decision Gate resolved: Option A selected",
+    "currentTask": "Implementing Option A as requested by user",
     "pendingTasks": [
       "ROAD-121-DEPLOY-R1",
       "ROAD-121-DEPLOY-R2",
@@ -2784,9 +2837,13 @@
     "[2026-04-28T04:11:18.390Z] C115/C116 declararon artefactos inexistentes (tag, backups, --apply) — verificación retroactiva confirmó mentira",
     "[2026-04-28T04:11:18.392Z] Smoke target real para rotación es settings:sumup_api_key, no payment_methods (tabla inexistente)",
     "[2026-04-28T04:11:18.395Z] 12/12 últimas decisiones del usuario fueron Option B — preferencia consolidada",
-    "[2026-04-28T04:11:18.397Z] Próximo ciclo C122 debe ejecutar ROAD-121-DEPLOY-R1 (branch protection main vía GitHub UI)"
+    "[2026-04-28T04:11:18.397Z] Próximo ciclo C122 debe ejecutar ROAD-121-DEPLOY-R1 (branch protection main vía GitHub UI)",
+    "[2026-04-28T04:18:22.168Z] Sprint A en estado HALT-AWAITING-INPUT, no SUCCESS",
+    "[2026-04-28T04:18:22.171Z] Tag pre-deploy-c123 NO creado intencionalmente",
+    "[2026-04-28T04:18:22.173Z] Recomendación SYNAPTIC: Option A (PR único con 17 commits)",
+    "[2026-04-28T04:18:22.175Z] Verificación final requerida: git ls-remote --tags origin pre-deploy-c123"
   ],
-  "lastUpdated": "2026-04-28T04:16:36.146Z",
+  "lastUpdated": "2026-04-28T04:19:23.166Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -6278,6 +6335,86 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:48:33.026Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420165-0",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.165Z",
+      "type": "USER_PREFERENCE",
+      "title": "ENFORCE-SYNAPTIC-PROTOCOL overrides immediate-execution mode",
+      "description": "Explicit enforcement directive in request triggers mandatory Decision Gate even when DG-079 active",
+      "context": "When user includes [ENFORCE-SYNAPTIC-PROTOCOL] tag in cycle request",
+      "applicability": [
+        "synaptic-protocol",
+        "decision-gate",
+        "enforcement"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.165Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-103-1777341511242-2",
+      "cycle": 103,
+      "timestamp": "2026-04-28T01:58:31.242Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "git rm --cached avoids history rewrite",
+      "description": "Adding pattern to .gitignore + git rm --cached removes tracked files without filter-branch",
+      "context": "When excluding generated SYNAPTIC intelligence snapshots from future commits",
+      "applicability": [
+        "gitignore",
+        "synaptic-intelligence",
+        "history-preservation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:58:31.242Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-103-1777341511245-3",
+      "cycle": 103,
+      "timestamp": "2026-04-28T01:58:31.245Z",
+      "type": "PATTERN",
+      "title": "Pre-flight read-only diff before any remote-affecting action",
+      "description": "git diff origin/main..HEAD --stat verifies expected delta (validateInput.* + server.js) before push",
+      "context": "Before any push, tag, or gitignore mutation that touches remote or staged state",
+      "applicability": [
+        "pre-flight",
+        "git-diff",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:58:31.245Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-103-1777341511249-4",
+      "cycle": 103,
+      "timestamp": "2026-04-28T01:58:31.249Z",
+      "type": "INSIGHT",
+      "title": "INTELLIGENCE_*.json versioning is a binary audit-vs-bloat tradeoff",
+      "description": "Keeping snapshots gives audit trail but causes repo bloat and noisy PR diffs over time",
+      "context": "Deciding which SYNAPTIC artifacts belong in remote history vs. local-only",
+      "applicability": [
+        "synaptic",
+        "repo-hygiene",
+        "audit-trail"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:58:31.249Z",
         "source": "INFERRED"
       }
     }
