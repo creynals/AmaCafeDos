@@ -100,6 +100,9 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-087-3 | Stage cleanup deletions but defer commit to user | 1247-file deletion is dramatic; user must visually confirm before history changes | 2026-04-28 | 87 |
+| DEC-087-2 | Install pre-commit hook via scripts/install-git-hooks.sh symlink (idempotent) | Prevent regression of node_modules/.DS_Store/.env/large-file commits | 2026-04-28 | 87 |
+| DEC-087-1 | Add bootstrapModeFromEnv() promotion step before failsafe in logAndValidateSumupConfig | Fresh deploys cannot reach UI to flip mode; env var must be authoritative when set and valid | 2026-04-28 | 87 |
 | DEC-085-3 | Bootstrap volume with baseline images via preDeployCommand seed script | Empty volume on first deploy would 404 baseline products; idempotent seed avoids re-copy | 2026-04-27 | 85 |
 | DEC-085-2 | IMAGES_STORAGE_PATH env var resolves storage location, defaults to fuentes/products locally | Single switch parametrizes prod vs dev without code branches | 2026-04-27 | 85 |
 | DEC-085-1 | Persist admin-uploaded product images via Railway Volume mounted at /data | Balanced tradeoff: persistence without object-storage complexity; keeps local dev unchanged | 2026-04-27 | 85 |
@@ -164,6 +167,10 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 87] sumup.config.js exposes bootstrapModeFromEnv with DB UPSERT and in-proc cache invalidation
+- [Cycle 87] server.js:144-153 calls promoter inside logAndValidateSumupConfig before mode resolution
+- [Cycle 87] Pre-commit hook blocks .env* (allows .env.example), node_modules/, .DS_Store/Thumbs.db, dist/build/, files >5 MiB
+- [Cycle 87] Backend test count: 27 (C85) → 35 (C87), +8 covering bootstrap edge cases
 - [Cycle 85] imageStorage util is the only place IMAGES_DIR is computed; routes import it
 - [Cycle 85] /static/products mount must precede /static in server.js for volume override to work
 - [Cycle 85] preDeployCommand chains: migrate.js && seed-volume-images.js
@@ -246,6 +253,8 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 87, 2026-04-28] SumUp config now has env→DB promotion phase on boot before mode resolution
+- [Cycle 87, 2026-04-28] Repository now ships pre-commit hook + installer script under scripts/git-hooks/
 - [Cycle 85, 2026-04-27] Backend storage path is now env-configurable via IMAGES_STORAGE_PATH
 - [Cycle 85, 2026-04-27] Production image storage moved from git-bundled assets to Railway persistent Volume at /data/products
 - [Cycle 84, 2026-04-27] Two-service Railway topology: backend (Nixpacks + preDeploy migrate + /api/health) and frontend (vite preview)

@@ -1,0 +1,104 @@
+{
+  "cycleId": 87,
+  "timestamp": "2026-04-28T00:13:32.100Z",
+  "taskId": "task-1777334558966-rki61xo38",
+  "audit": {
+    "passed": false,
+    "score": 20,
+    "grade": "F",
+    "filesAnalyzed": [
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/server.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/server.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.test.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.test.js"
+    ],
+    "linesAnalyzed": 1166
+  },
+  "findings": [
+    {
+      "id": "DC-146",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 80,
+      "description": "Unused function: 'getMode' (3 lines)",
+      "suggestion": "Remove unused function 'getMode' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-147",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 120,
+      "description": "Unused function: 'invalidateReturnUrlCache' (3 lines)",
+      "suggestion": "Remove unused function 'invalidateReturnUrlCache' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-148",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 142,
+      "description": "Unused function: 'bootstrapModeFromEnv' (26 lines)",
+      "suggestion": "Remove unused function 'bootstrapModeFromEnv' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-149",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 190,
+      "description": "Unused function: 'buildReturnUrls' (8 lines)",
+      "suggestion": "Remove unused function 'buildReturnUrls' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-150",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 80,
+      "description": "Unused function: 'getMode' (3 lines)",
+      "suggestion": "Remove unused function 'getMode' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-151",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 120,
+      "description": "Unused function: 'invalidateReturnUrlCache' (3 lines)",
+      "suggestion": "Remove unused function 'invalidateReturnUrlCache' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-152",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 142,
+      "description": "Unused function: 'bootstrapModeFromEnv' (26 lines)",
+      "suggestion": "Remove unused function 'bootstrapModeFromEnv' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-153",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 190,
+      "description": "Unused function: 'buildReturnUrls' (8 lines)",
+      "suggestion": "Remove unused function 'buildReturnUrls' or export if needed elsewhere"
+    }
+  ],
+  "resolvedFindingIds": [],
+  "metrics": {
+    "importsUsedPercent": 60,
+    "functionsUsedPercent": 60,
+    "duplicatePatterns": 0,
+    "securityIssues": 0,
+    "consistencyScore": 100,
+    "avgComplexity": 194,
+    "filesAnalyzed": 6,
+    "linesAnalyzed": 1166
+  }
+}

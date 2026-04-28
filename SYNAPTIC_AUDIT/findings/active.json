@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-27T23:44:45.621Z",
+  "lastUpdated": "2026-04-28T00:13:32.101Z",
   "findings": [
     {
       "id": "DC-001",
@@ -3451,18 +3451,70 @@
       "detectedInCycle": 85,
       "detectedAt": "2026-04-27T23:44:45.621Z",
       "status": "OPEN"
+    },
+    {
+      "id": "DC-146",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 80,
+      "description": "Unused function: 'getMode' (3 lines)",
+      "suggestion": "Remove unused function 'getMode' or export if needed elsewhere",
+      "findingId": "SAI-4e7fca60",
+      "detectedInCycle": 87,
+      "detectedAt": "2026-04-28T00:13:32.101Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-147",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 120,
+      "description": "Unused function: 'invalidateReturnUrlCache' (3 lines)",
+      "suggestion": "Remove unused function 'invalidateReturnUrlCache' or export if needed elsewhere",
+      "findingId": "SAI-fdc63616",
+      "detectedInCycle": 87,
+      "detectedAt": "2026-04-28T00:13:32.101Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-148",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 142,
+      "description": "Unused function: 'bootstrapModeFromEnv' (26 lines)",
+      "suggestion": "Remove unused function 'bootstrapModeFromEnv' or export if needed elsewhere",
+      "findingId": "SAI-6be101f2",
+      "detectedInCycle": 87,
+      "detectedAt": "2026-04-28T00:13:32.101Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-149",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/sumup.config.js",
+      "line": 190,
+      "description": "Unused function: 'buildReturnUrls' (8 lines)",
+      "suggestion": "Remove unused function 'buildReturnUrls' or export if needed elsewhere",
+      "findingId": "SAI-ece3ea11",
+      "detectedInCycle": 87,
+      "detectedAt": "2026-04-28T00:13:32.101Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 209,
+    "totalOpen": 213,
     "totalResolved": 42,
     "bySeverity": {
-      "MEDIUM": 169,
+      "MEDIUM": 173,
       "LOW": 39,
       "CRITICAL": 1
     },
     "byType": {
-      "dead_code": 158,
+      "dead_code": 162,
       "maintainability": 50,
       "security": 1
     }

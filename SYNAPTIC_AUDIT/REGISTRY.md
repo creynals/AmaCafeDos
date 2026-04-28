@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-27T23:44:45.623Z
+- **Last Updated:** 2026-04-28T00:13:32.103Z
 - **Status:** ACTIVE
 
 ---
@@ -11,12 +11,12 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 43 |
-| Score Promedio | 49% |
-| Racha Actual (A/B) | 2 ciclos |
-| Último Ciclo | 85 |
-| Última Calificación | B |
-| Findings Abiertos | 209 |
+| Ciclos Auditados | 44 |
+| Score Promedio | 48% |
+| Racha Actual (A/B) | 0 ciclos |
+| Último Ciclo | 87 |
+| Última Calificación | F |
+| Findings Abiertos | 213 |
 | Findings Resueltos | 42 |
 
 ---
@@ -27,7 +27,7 @@
 |-----------|----------|
 | CRITICAL | 1 |
 | HIGH | 0 |
-| MEDIUM | 169 |
+| MEDIUM | 173 |
 | LOW | 39 |
 
 ---
@@ -36,7 +36,7 @@
 
 | Tipo | Cantidad |
 |------|----------|
-| Dead Code | 158 |
+| Dead Code | 162 |
 | Security | 1 |
 | Maintainability | 50 |
 | Duplication | 0 |
@@ -48,16 +48,16 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-870ee0e4 | maintainability | LOW | components/OrdersTab.jsx | Function 'OrderDetailsRow' has 87 lines (max recom... |
-| SAI-4c303374 | dead_code | MEDIUM | components/KitchenView.jsx | Unused function: 'OrderCard' (112 lines)... |
-| SAI-00537876 | maintainability | MEDIUM | components/KitchenView.jsx | File has 513 lines (max recommended: 500)... |
-| SAI-922b21a6 | maintainability | LOW | components/KitchenView.jsx | Function 'OrderCard' has 112 lines (max recommende... |
 | SAI-a0c51627 | dead_code | MEDIUM | utils/keyManager.js | Unused function: 'rotateValue' (6 lines)... |
 | SAI-cab6ae55 | dead_code | MEDIUM | utils/crypto.js | Unused function: 'encrypt' (3 lines)... |
 | SAI-82b16be4 | dead_code | MEDIUM | utils/crypto.js | Unused function: 'decrypt' (8 lines)... |
 | SAI-adde131e | security | CRITICAL | utils/crypto.js | Potential hardcoded secret detected... |
 | SAI-b2c74955 | dead_code | MEDIUM | utils/imageStorage.js | Unused function: 'ensureImagesDir' (5 lines)... |
 | SAI-9e1fcd4a | dead_code | MEDIUM | scripts/seed-volume-images.js | Unused function: 'for' (13 lines)... |
+| SAI-4e7fca60 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'getMode' (3 lines)... |
+| SAI-fdc63616 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'invalidateReturnUrlCache' (3 lin... |
+| SAI-6be101f2 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'bootstrapModeFromEnv' (26 lines)... |
+| SAI-ece3ea11 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'buildReturnUrls' (8 lines)... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 3 | 0 | F |
 | 6 | 0 | F |
 | 9 | 0 | F |
 | 10 | 0 | F |
@@ -85,6 +84,7 @@
 | 82 | 35 | F |
 | 84 | 100 | A |
 | 85 | 80 | B |
+| 87 | 20 | F |
 
 ---
 

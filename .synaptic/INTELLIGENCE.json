@@ -751,129 +751,36 @@
       "status": "PLANNED",
       "createdAtCycle": 85,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-087-1",
+      "title": "Commit C87 staged cleanup",
+      "description": "User to review git diff --cached --stat and commit the 1247-file deletion",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 87,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-087-2",
+      "title": "Execute first Railway deploy per docs/RAILWAY_DEPLOY.md",
+      "description": "Follow R1-R8; verify R9 promotion log line appears in backend logs",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 87,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-087-3",
+      "title": "Run install-git-hooks.sh on all dev machines",
+      "description": "Hook is symlink-based; each clone needs the installer run once",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 87,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-67-1777263746562-0",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.563Z",
-      "type": "PATTERN",
-      "title": "Verifica anti-C53 con grep multi-file",
-      "description": "Prima di dichiarare successo, grep del simbolo chiave su tutti i file attesi (8/8)",
-      "context": "Al termine di implementazioni multi-file per evitare false dichiarazioni di completamento",
-      "applicability": [
-        "validation",
-        "multi-file-changes",
-        "anti-regression"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.563Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746569-1",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.569Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Naming semantico per evitare collisioni",
-      "description": "customer_instructions distingue da order_items.notes (per prodotto) e address_notes (entrega)",
-      "context": "Quando si aggiungono campi note/instrucciones in domini con più livelli semantici",
-      "applicability": [
-        "db-schema",
-        "naming",
-        "domain-modeling"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.569Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746571-2",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.571Z",
-      "type": "PATTERN",
-      "title": "Migrazione SQL idempotente con IF NOT EXISTS",
-      "description": "ALTER TABLE ADD COLUMN IF NOT EXISTS per migrazioni rieseguibili senza errori",
-      "context": "Migrazioni DB in ambienti dev/prod con possibili re-run",
-      "applicability": [
-        "migrations",
-        "postgresql",
-        "idempotency"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.571Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746573-3",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.573Z",
-      "type": "PATTERN",
-      "title": "Validazione duale client+server per input testuali",
-      "description": "Cap 1000 chars enforced sia lato server (validation) sia lato UI (maxLength + counter)",
-      "context": "Campi testuali liberi esposti a utenti finali",
-      "applicability": [
-        "validation",
-        "ux",
-        "security"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.573Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746574-4",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.574Z",
-      "type": "INSIGHT",
-      "title": "Distinzione visiva esplicita in Vista de Cocina",
-      "description": "Icona MessageSquare + bordo accentuato separa istruzioni cliente da indicazioni di consegna",
-      "context": "UI con più tipologie di note che potrebbero essere confuse dall'operatore",
-      "applicability": [
-        "ux",
-        "kitchen-view",
-        "visual-hierarchy"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.574Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746577-5",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.577Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "ESLint backend errore preesistente non bloccante",
-      "description": "Config ESLint backend richiede tsconfig.json mancante; node --check sufficiente per syntax",
-      "context": "Validazione backend amaCafe quando ESLint fallisce per config issue non correlati",
-      "applicability": [
-        "eslint",
-        "backend",
-        "validation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.577Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-77-1777327415063-0",
       "cycle": 77,
@@ -1524,6 +1431,144 @@
         "lastReinforced": "2026-04-27T23:45:10.513Z",
         "source": "EXPLICIT"
       }
+    },
+    {
+      "learningId": "learning-87-1777335244504-0",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.504Z",
+      "type": "ANTI_PATTERN",
+      "title": "DB-seeded config blocks env override",
+      "description": "Migration 004 seeded sumup_mode='mock' in settings; getModeWithSource read DB first so env fallback never fired and failsafe exit(1) trapped operator out of UI.",
+      "context": "When config has both DB-persisted and env-var sources with DB precedence on fresh deploys",
+      "applicability": [
+        "config",
+        "bootstrap",
+        "railway",
+        "sumup"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.504Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244513-1",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.513Z",
+      "type": "PATTERN",
+      "title": "One-shot env→DB promotion on boot",
+      "description": "bootstrapModeFromEnv() UPSERTs valid env value into settings before failsafe resolves, with cache invalidation and per-outcome logging.",
+      "context": "Reconciling env-var intent with DB-persisted config during cold-start",
+      "applicability": [
+        "bootstrap",
+        "config-reconciliation",
+        "sumup.config.js"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.513Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244515-2",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.515Z",
+      "type": "ANTI_PATTERN",
+      "title": "node_modules + .DS_Store tracked despite .gitignore",
+      "description": "1243 node_modules files and 4 .DS_Store files were in the index; .gitignore alone doesn't untrack already-committed paths.",
+      "context": "Repos where files were committed before .gitignore was added",
+      "applicability": [
+        "git-hygiene",
+        "gitignore",
+        "pre-push"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.515Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244518-3",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.518Z",
+      "type": "PATTERN",
+      "title": "Pre-commit hook with regex precision",
+      "description": "Initial .env regex over-matched .env.example; precise patterns + smoke-test against tmp git repo before declaring hook ready.",
+      "context": "Writing git hooks that block categories of files",
+      "applicability": [
+        "git-hooks",
+        "pre-commit",
+        "regex"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.518Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244520-4",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.520Z",
+      "type": "USER_PREFERENCE",
+      "title": "Multi-item requests executed in IMMEDIATE EXECUTION (DG-079)",
+      "description": "User chained three independent C86 follow-ups in one request expecting all executed without re-confirmation per item.",
+      "context": "When user explicitly references prior cycle recommendations",
+      "applicability": [
+        "execution-mode",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.520Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244523-5",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.523Z",
+      "type": "INSIGHT",
+      "title": "C86 G/R items lived only in conversation",
+      "description": "G1-G4 and R1-R9 labels weren't persisted to disk; had to reconstruct meaning from code inspection.",
+      "context": "When prior cycle reports use ad-hoc labels not saved to BITACORA/REGISTRY",
+      "applicability": [
+        "synaptic-memory",
+        "cycle-handoff"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.523Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244525-6",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.525Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Stage-only cleanup for large deletions",
+      "description": "git rm --cached run but commit deferred to user — 1247 file/-223856 line deletion staged for review before commit.",
+      "context": "When sweeping index changes need human eyes before history is rewritten",
+      "applicability": [
+        "git-rm-cached",
+        "review-gate"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.525Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1631,9 +1676,13 @@
     "[2026-04-27T23:37:11.667Z] Current /fuentes payload is ~12 jpegs (small), making Option A viable short-term",
     "[2026-04-27T23:45:10.514Z] Railway UI steps still pending: create Volume at /data, set IMAGES_STORAGE_PATH=/data/products, trigger deploy",
     "[2026-04-27T23:45:10.515Z] Persistence guarantee is theoretical until E2E test: upload image → restart service → verify URL resolves",
-    "[2026-04-27T23:45:10.516Z] Post-edit verification rule (C57) was honored: every promised file re-read on disk after edit"
+    "[2026-04-27T23:45:10.516Z] Post-edit verification rule (C57) was honored: every promised file re-read on disk after edit",
+    "[2026-04-28T00:14:04.527Z] C86 G1-G4 and R1-R9 labels were never persisted; future cycles must save such enumerations to BITACORA",
+    "[2026-04-28T00:14:04.528Z] Operator's deploy gate is grepping backend logs for '[sumup] bootstrap: promoted SUMUP_MODE env to settings'",
+    "[2026-04-28T00:14:04.530Z] docs/RAILWAY_DEPLOY.md R5 sets SUMUP_MODE=live; R8 step 2 verifies promotion log line",
+    "[2026-04-28T00:14:04.531Z] 1247 files / -223856 lines staged for deletion at end of C87 — user must review and commit"
   ],
-  "lastUpdated": "2026-04-28T00:02:38.983Z",
+  "lastUpdated": "2026-04-28T00:29:43.041Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -3716,6 +3765,126 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T03:06:19.330Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746562-0",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.563Z",
+      "type": "PATTERN",
+      "title": "Verifica anti-C53 con grep multi-file",
+      "description": "Prima di dichiarare successo, grep del simbolo chiave su tutti i file attesi (8/8)",
+      "context": "Al termine di implementazioni multi-file per evitare false dichiarazioni di completamento",
+      "applicability": [
+        "validation",
+        "multi-file-changes",
+        "anti-regression"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.563Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746569-1",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.569Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Naming semantico per evitare collisioni",
+      "description": "customer_instructions distingue da order_items.notes (per prodotto) e address_notes (entrega)",
+      "context": "Quando si aggiungono campi note/instrucciones in domini con più livelli semantici",
+      "applicability": [
+        "db-schema",
+        "naming",
+        "domain-modeling"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.569Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746571-2",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.571Z",
+      "type": "PATTERN",
+      "title": "Migrazione SQL idempotente con IF NOT EXISTS",
+      "description": "ALTER TABLE ADD COLUMN IF NOT EXISTS per migrazioni rieseguibili senza errori",
+      "context": "Migrazioni DB in ambienti dev/prod con possibili re-run",
+      "applicability": [
+        "migrations",
+        "postgresql",
+        "idempotency"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.571Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746573-3",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.573Z",
+      "type": "PATTERN",
+      "title": "Validazione duale client+server per input testuali",
+      "description": "Cap 1000 chars enforced sia lato server (validation) sia lato UI (maxLength + counter)",
+      "context": "Campi testuali liberi esposti a utenti finali",
+      "applicability": [
+        "validation",
+        "ux",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.573Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746574-4",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.574Z",
+      "type": "INSIGHT",
+      "title": "Distinzione visiva esplicita in Vista de Cocina",
+      "description": "Icona MessageSquare + bordo accentuato separa istruzioni cliente da indicazioni di consegna",
+      "context": "UI con più tipologie di note che potrebbero essere confuse dall'operatore",
+      "applicability": [
+        "ux",
+        "kitchen-view",
+        "visual-hierarchy"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.574Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746577-5",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.577Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "ESLint backend errore preesistente non bloccante",
+      "description": "Config ESLint backend richiede tsconfig.json mancante; node --check sufficiente per syntax",
+      "context": "Validazione backend amaCafe quando ESLint fallisce per config issue non correlati",
+      "applicability": [
+        "eslint",
+        "backend",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.577Z",
+        "source": "INFERRED"
       }
     }
   ]
