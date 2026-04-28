@@ -1093,29 +1093,36 @@
       "status": "PLANNED",
       "createdAtCycle": 103,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-104-1",
+      "title": "Enable branch protection on main",
+      "description": "GitHub Settings → Branches → require PR + status checks for main",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 104,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-104-2",
+      "title": "Execute Railway deploy Decision Gate R1-R8",
+      "description": "Follow docs/RAILWAY_DEPLOY.md gates R1 through R8",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 104,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-104-3",
+      "title": "E2E manual validation of validateInput",
+      "description": "Pending validation from C101 — exercise validateInput middleware end-to-end",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 104,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-81-1777328649793-4",
-      "cycle": 81,
-      "timestamp": "2026-04-27T22:24:09.793Z",
-      "type": "USER_PREFERENCE",
-      "title": "Usuario delega alcance vía Decision Gate explícito",
-      "description": "Solicita decision gate con tres niveles de alcance en lugar de implementar el más amplio por defecto",
-      "context": "El usuario prefiere control granular sobre scope antes de invertir esfuerzo",
-      "applicability": [
-        "user-preference",
-        "scope-control",
-        "decision-gate"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:24:09.793Z",
-        "source": "EXPLICIT"
-      }
-    },
     {
       "learningId": "learning-82-1777329010391-3",
       "cycle": 82,
@@ -1130,7 +1137,7 @@
         "user-preference"
       ],
       "confidence": {
-        "score": 0.6500000000000001,
+        "score": 0.3500000000000001,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-28T01:48:33.030Z",
         "source": "EXPLICIT"
@@ -1150,115 +1157,10 @@
         "execution-mode"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T23:37:11.645Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-84-1777333031650-1",
-      "cycle": 84,
-      "timestamp": "2026-04-27T23:37:11.650Z",
-      "type": "PATTERN",
-      "title": "Backwards-compatible env-driven config",
-      "description": "Use `import.meta.env.VAR || '/api'` with trailing-slash strip to make BASE configurable without breaking dev",
-      "context": "Frontend api.js when adding deploy-target flexibility",
-      "applicability": [
-        "vite",
-        "frontend",
-        "env-config",
-        "railway"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:37:11.650Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-84-1777333031653-2",
-      "cycle": 84,
-      "timestamp": "2026-04-27T23:37:11.653Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Railway preDeployCommand for migrations",
-      "description": "railway.toml [deploy] preDeployCommand=node scripts/migrate.js runs idempotent schema migration before service start",
-      "context": "Railway deploys with Postgres requiring schema sync",
-      "applicability": [
-        "railway",
-        "postgres",
-        "migrations",
-        "deploy"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:37:11.653Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-84-1777333031655-3",
-      "cycle": 84,
-      "timestamp": "2026-04-27T23:37:11.655Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Frontend Railway service via vite preview",
-      "description": "Frontend railway.toml uses `npm ci && npm run build` + `vite preview --host 0.0.0.0 --port $PORT`",
-      "context": "Deploying Vite SPA as separate Railway service",
-      "applicability": [
-        "railway",
-        "vite",
-        "frontend",
-        "deploy"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:37:11.655Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-84-1777333031657-4",
-      "cycle": 84,
-      "timestamp": "2026-04-27T23:37:11.657Z",
-      "type": "ANTI_PATTERN",
-      "title": "Railway ephemeral FS breaks runtime uploads",
-      "description": "Files written at runtime (multer disk uploads) lost on every redeploy/restart in Railway containers",
-      "context": "Any backend with admin uploads or generated assets deployed to Railway without a Volume",
-      "applicability": [
-        "railway",
-        "filesystem",
-        "uploads",
-        "multer"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:37:11.657Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-84-1777333031660-5",
-      "cycle": 84,
-      "timestamp": "2026-04-27T23:37:11.660Z",
-      "type": "INSIGHT",
-      "title": "Standalone migrate.js enables preDeploy hook",
-      "description": "Extracting migration logic to scripts/migrate.js (vs inline server boot) lets CI/Railway run it independently",
-      "context": "When deploys need pre-start schema sync separate from app boot",
-      "applicability": [
-        "postgres",
-        "migrations",
-        "railway",
-        "ci"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:37:11.660Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -2137,9 +2039,9 @@
         "railway"
       ],
       "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:58:31.238Z",
+        "score": 0.44999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T02:19:19.372Z",
         "source": "INFERRED"
       }
     },
@@ -2200,6 +2102,86 @@
         "score": 0.3,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:58:31.249Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-104-1777342759356-0",
+      "cycle": 104,
+      "timestamp": "2026-04-28T02:19:19.356Z",
+      "type": "PATTERN",
+      "title": "Pre-flight before remote push",
+      "description": "Run git diff origin/main..HEAD --stat before push to confirm delta scope",
+      "context": "Before any push to shared remote with multiple commits ahead",
+      "applicability": [
+        "git",
+        "pre-flight",
+        "remote-safety"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:19:19.356Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-104-1777342759363-1",
+      "cycle": 104,
+      "timestamp": "2026-04-28T02:19:19.363Z",
+      "type": "ANTI_PATTERN",
+      "title": "Roadmap path assumptions",
+      "description": "Roadmap mentioned .synaptic/intelligence/ but real path was .synaptic/backups/",
+      "context": "Verify actual file paths before applying gitignore patterns from roadmap docs",
+      "applicability": [
+        "gitignore",
+        "path-verification",
+        "roadmap-drift"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:19:19.363Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-104-1777342759367-2",
+      "cycle": 104,
+      "timestamp": "2026-04-28T02:19:19.367Z",
+      "type": "USER_PREFERENCE",
+      "title": "Confirm visible remote actions",
+      "description": "User expects explicit warning + confirmation before git push to remote",
+      "context": "Any action visible in origin (push, tag push, force operations)",
+      "applicability": [
+        "git-push",
+        "user-confirmation",
+        "remote-actions"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:19:19.367Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-104-1777342759374-4",
+      "cycle": 104,
+      "timestamp": "2026-04-28T02:19:19.374Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "INTELLIGENCE snapshots polluting repo",
+      "description": "10 snapshots ~27k lines in .synaptic/backups/ should never be tracked",
+      "context": "SYNAPTIC project hygiene — snapshots are local artifacts",
+      "applicability": [
+        "synaptic",
+        "gitignore",
+        "repo-hygiene"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:19:19.374Z",
         "source": "INFERRED"
       }
     }
@@ -2344,9 +2326,12 @@
     "[2026-04-28T01:48:33.037Z] False-positive corpus includes legitimate Spanish/CL text to prevent over-blocking",
     "[2026-04-28T01:58:31.252Z] C103 is a Decision Gate cycle — no commands executed, awaiting explicit 'Proceed with Option [A/B/C]'",
     "[2026-04-28T01:58:31.254Z] Last productive deliverable expected on HEAD: validateInput.js + validateInput.test.js + server.js wiring (from C101)",
-    "[2026-04-28T01:58:31.255Z] Recommended option is B (Balanced); Option C (keep INTELLIGENCE versioned) flagged HIGH risk due to repo bloat"
+    "[2026-04-28T01:58:31.255Z] Recommended option is B (Balanced); Option C (keep INTELLIGENCE versioned) flagged HIGH risk due to repo bloat",
+    "[2026-04-28T02:19:19.377Z] INTELLIGENCE snapshot backups live in .synaptic/backups/ not .synaptic/intelligence/",
+    "[2026-04-28T02:19:19.379Z] Tag pre-railway-c102 is the rollback anchor for upcoming Railway deploy",
+    "[2026-04-28T02:19:19.380Z] main branch lacks protection rules — flagged as next HIGH priority"
   ],
-  "lastUpdated": "2026-04-28T02:15:55.089Z",
+  "lastUpdated": "2026-04-28T02:20:25.544Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -4914,6 +4899,131 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T22:30:10.393Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-81-1777328649793-4",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.793Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario delega alcance vía Decision Gate explícito",
+      "description": "Solicita decision gate con tres niveles de alcance en lugar de implementar el más amplio por defecto",
+      "context": "El usuario prefiere control granular sobre scope antes de invertir esfuerzo",
+      "applicability": [
+        "user-preference",
+        "scope-control",
+        "decision-gate"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.793Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031650-1",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.650Z",
+      "type": "PATTERN",
+      "title": "Backwards-compatible env-driven config",
+      "description": "Use `import.meta.env.VAR || '/api'` with trailing-slash strip to make BASE configurable without breaking dev",
+      "context": "Frontend api.js when adding deploy-target flexibility",
+      "applicability": [
+        "vite",
+        "frontend",
+        "env-config",
+        "railway"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.650Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031653-2",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.653Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Railway preDeployCommand for migrations",
+      "description": "railway.toml [deploy] preDeployCommand=node scripts/migrate.js runs idempotent schema migration before service start",
+      "context": "Railway deploys with Postgres requiring schema sync",
+      "applicability": [
+        "railway",
+        "postgres",
+        "migrations",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.653Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031655-3",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.655Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Frontend Railway service via vite preview",
+      "description": "Frontend railway.toml uses `npm ci && npm run build` + `vite preview --host 0.0.0.0 --port $PORT`",
+      "context": "Deploying Vite SPA as separate Railway service",
+      "applicability": [
+        "railway",
+        "vite",
+        "frontend",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.655Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031657-4",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.657Z",
+      "type": "ANTI_PATTERN",
+      "title": "Railway ephemeral FS breaks runtime uploads",
+      "description": "Files written at runtime (multer disk uploads) lost on every redeploy/restart in Railway containers",
+      "context": "Any backend with admin uploads or generated assets deployed to Railway without a Volume",
+      "applicability": [
+        "railway",
+        "filesystem",
+        "uploads",
+        "multer"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.657Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031660-5",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.660Z",
+      "type": "INSIGHT",
+      "title": "Standalone migrate.js enables preDeploy hook",
+      "description": "Extracting migration logic to scripts/migrate.js (vs inline server boot) lets CI/Railway run it independently",
+      "context": "When deploys need pre-start schema sync separate from app boot",
+      "applicability": [
+        "postgres",
+        "migrations",
+        "railway",
+        "ci"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.660Z",
         "source": "INFERRED"
       }
     }
