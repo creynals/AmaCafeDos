@@ -5916,3 +5916,68 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 **Synaptic Strength**: 98.7%
 
 ---
+
+### Entry #94 - Cycle 94: Rename master→main + Push inicial a GitHub AmaCafeDos + Push tag de respaldo
+```json
+{
+  "timestamp": "2026-04-28T01:05:00.000Z",
+  "cycle": 94,
+  "phase": 3,
+  "action": "GIT_REMOTE_BOOTSTRAP",
+  "mode": "IMMEDIATE_EXECUTION (DG-079)",
+  "userRequest": "proceder con OPTION B: Rename + Push main + Push Tag pre-purge-c77 (Balanceado) ⭐ RECOMENDADA",
+  "decisionRef": "C93 → Option B (Balanced)",
+  "details": {
+    "preFlightChecks": {
+      "remotesBefore": "ninguno (repo local sin origin)",
+      "currentBranch": "master (limpio, sin uncommitted changes)",
+      "envInGitignore": "✅ líneas 2-6 de .gitignore: .env, .env.local, .env.*.local, **/.env, **/.env.local",
+      "envInHistory": "✅ AUSENTE — git log --all --diff-filter=A | grep .env vacío (purga C78 confirmada)",
+      "tagDiscrepancy": "Decisión nombró 'pre-purge-c77' pero tag real es 'pre-purge-c78' (creada en C78 cuando se ejecutó la purga; C77 fue el Decision Gate). Se usó la tag real existente."
+    },
+    "actionsExecuted": [
+      "git remote add origin https://github.com/creynals/AmaCafeDos.git",
+      "git branch -m master main",
+      "git push -u origin main → [new branch] main -> main, tracking configurado",
+      "git push origin pre-purge-c78 → [new tag] pre-purge-c78 -> pre-purge-c78"
+    ],
+    "remoteStateAfter": {
+      "HEAD": "d888a2f542e6d19e1fe713ba371cd736d37f458c",
+      "refs/heads/main": "d888a2f542e6d19e1fe713ba371cd736d37f458c",
+      "refs/tags/pre-purge-c78": "347807f561df82394a129a4192d7c59436cf818b"
+    },
+    "branchTracking": "main → origin/main",
+    "remoteUrl": "https://github.com/creynals/AmaCafeDos.git"
+  },
+  "validation": {
+    "remoteAdded": "✅ git remote -v muestra origin",
+    "branchRenamed": "✅ git branch --show-current → main",
+    "pushMain": "✅ [new branch] main -> main",
+    "pushTag": "✅ [new tag] pre-purge-c78 -> pre-purge-c78",
+    "lsRemoteVerification": "✅ HEAD, refs/heads/main, refs/tags/pre-purge-c78 todos visibles en remoto"
+  },
+  "userImpact": "Repo AmaCafeDos en GitHub ahora contiene la rama main como default candidate (resta marcar como default en GitHub UI) y la tag de respaldo pre-purge-c78 como punto de retorno por si la rotación de credenciales o el deploy a Railway fallan. El branch local antiguo 'master' fue renombrado, NO existe paralelamente.",
+  "outcome": "SUCCESS",
+  "synapticStrength": 99,
+  "complianceScore": 100,
+  "filesChanged": 0,
+  "filesAdded": 0
+}
+```
+
+**Notas críticas**:
+- La decisión de C93 mencionó `pre-purge-c77`, pero la tag real persistida en C78 se llama `pre-purge-c78`. Se respetó la convención real existente en lugar de inventar una nueva.
+- Push inicial sin `--force` porque el repo remoto fue creado vacío (sin README inicial). Si GitHub hubiera autogenerado un README, el push habría fallado con non-fast-forward y habría requerido confirmación adicional.
+- `.env` verificado AUSENTE del historial completo antes de exponer el repo a un remoto público — la purga C78 (git filter-repo) sigue intacta.
+- Honrando la regla post-edit C57: cada operación git fue verificada con `git ls-remote origin` mostrando los refs reales en el remoto.
+
+**Recomendaciones**:
+- 🔴 **ALTA**: En GitHub UI (Settings → Branches), marcar `main` como default branch del repo AmaCafeDos. Sin esto, la próxima vez que alguien clone verá `master` ausente pero `main` no destacada.
+- 🔴 **ALTA**: Confirmar visualmente en https://github.com/creynals/AmaCafeDos que NO aparece ningún archivo `.env`, `backend/.env`, ni similares en el árbol de la rama main ni en ningún commit del historial. Si aparece cualquiera, REVOCAR INMEDIATAMENTE las credenciales y volver a purgar.
+- 🟡 **MEDIA**: Iniciar la rotación obligatoria de credenciales (ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT, DB password) antes de configurar Railway, porque la presencia histórica de `.env` en pre-purga implica que cualquier credencial expuesta debe considerarse comprometida aunque ya no esté en el historial reescrito.
+- 🟡 **MEDIA**: Tras confirmar el repo limpio, proceder con el siguiente Decision Gate: configuración del Railway service (env vars, Volume, deploy walkthrough R1-R8) según `docs/RAILWAY_DEPLOY.md`.
+- 🟢 **BAJA**: Considerar habilitar branch protection en `main` (require PR, require status checks) cuando se introduzca GitHub Actions o colaboradores adicionales.
+
+**Synaptic Strength**: 99%
+
+---
