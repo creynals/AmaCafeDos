@@ -2090,7 +2090,7 @@
     "[2026-04-28T01:07:33.138Z] Next HIGH priority is credential rotation (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB)",
     "[2026-04-28T01:07:33.140Z] Railway deploy Decision Gate R1-R8 blocked on credential rotation"
   ],
-  "lastUpdated": "2026-04-28T01:21:57.171Z",
+  "lastUpdated": "2026-04-28T01:26:59.744Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
