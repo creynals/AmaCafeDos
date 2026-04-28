@@ -5506,6 +5506,46 @@ Push — git push origin main (no force‑push, fast‑forward limpio).
 
 ---
 
+
+---
+## CICLO: 104
+**Timestamp**: 2026-04-28T02:19:00.664Z
+**Trace ID**: `e295ea9b-dcd8-4139-a006-d16e4dc8e85b`
+**Agente**: master_architect
+**Fase**: ANALISIS
+**Decisión**: Option B
+**Resultado**: SUCCESS
+**Duración**: 185595ms
+
+**Prompt Original**:
+```
+proceder con OPTION B: Pre-flight + Gitignore (b) + Tag + Push (Balanceado) ⭐ RECOMENDADA
+```
+
+**Decision Gate Presentado**: Ninguno (ciclo de análisis inicial)
+
+**Opción Elegida**: B - Option B selected by user
+
+**Artefactos Generados**:
+- /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/.gitignore
+- /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/BITACORA.md
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌
+- Memoria actualizada: ✅
+- Tests generados: ❌
+- Reformulaciones necesarias: 0
+
+
+
+**Notas**:
+User selected Option B: : Pre-flight + Gitignore (b) + Tag + Push (Balanceado) ⭐ RECOMENDADA
+
+**Synaptic Strength**: 99%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
 *Last Updated: 2026-04-27T04:30:00.000Z*
 
@@ -6516,6 +6556,78 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 - 🟡 **MEDIA**: Considerar exponer `validateInput.skip()` o lista blanca de paths para futuros endpoints que necesiten markdown/HTML legítimo (ej. descripción rica de productos).
 - 🟢 **BAJA**: Métricas — agregar contador de payloads rechazados (kind=sqli|xss|nosql|length) para observabilidad post-deploy en Railway.
 - 🟢 **BAJA**: Una vez estabilizado en prod, evaluar OPTION C (Zod schemas por endpoint) como capa adicional sobre el guard genérico.
+
+**Synaptic Strength**: 99%
+
+---
+
+## Cycle 104 — Pre-flight + Gitignore + Tag + Push to GitHub (OPTION B)
+
+```json
+{
+  "cycle": 104,
+  "timestamp": "2026-04-28T02:25:00.000Z",
+  "userRequest": "proceder con OPTION B: Pre-flight + Gitignore (b) + Tag + Push (Balanceado)",
+  "decision": "OPTION B (decidido en C103)",
+  "executionMode": "IMMEDIATE_EXECUTION (DG-079)",
+  "phases": {
+    "preflight": {
+      "remote": "origin = https://github.com/creynals/AmaCafeDos.git",
+      "branchTracking": "main → origin/main (ahead 13 al inicio)",
+      "productiveDelta": "validateInput.js (+193) + validateInput.test.js (+340) + server.js wiring (+14) — confirmado de C101",
+      "bloatDetected": "10 archivos .synaptic/backups/INTELLIGENCE_*.json (~27k+ líneas snapshot)"
+    },
+    "gitignore": {
+      "patternsAdded": [
+        ".synaptic/backups/INTELLIGENCE_*.json",
+        ".synaptic/intelligence/INTELLIGENCE_*.json"
+      ],
+      "preservedTracked": ".synaptic/INTELLIGENCE.json (canonical)"
+    },
+    "untrack": {
+      "command": "git rm --cached '.synaptic/backups/INTELLIGENCE_*.json'",
+      "filesUntracked": 10,
+      "commit": "cab5f03 — chore(synaptic): ignore + untrack INTELLIGENCE snapshot backups"
+    },
+    "tag": {
+      "name": "pre-railway-c102",
+      "type": "annotated",
+      "sha": "47974e1d57f70821c1ae4a16199151676c23186b",
+      "purpose": "Rollback anchor pre-Railway deploy"
+    },
+    "push": {
+      "main": "d888a2f..cab5f03 main -> main (fast-forward, sin --force)",
+      "tag": "[new tag] pre-railway-c102 -> pre-railway-c102",
+      "remoteVerified": "git status: 'up to date with origin/main'"
+    }
+  },
+  "filesModified": [
+    ".gitignore — agregadas 2 patterns para snapshots INTELLIGENCE",
+    ".synaptic/backups/INTELLIGENCE_*.json — 10 archivos untracked (siguen en disco local, ignorados ahora)"
+  ],
+  "remoteState": {
+    "branch": "origin/main @ cab5f03",
+    "tag": "pre-railway-c102 @ 47974e1d",
+    "destructiveOps": "ninguna — push fast-forward sin --force"
+  },
+  "outcome": "SUCCESS",
+  "synapticStrength": 99,
+  "complianceScore": 100
+}
+```
+
+**Notas críticas**:
+- El roadmap C103 mencionaba `.synaptic/intelligence/INTELLIGENCE_*.json` pero el path real en el repo es `.synaptic/backups/INTELLIGENCE_*.json`. Se cubrieron ambos patterns en `.gitignore` para prevenir regresión.
+- `.synaptic/INTELLIGENCE.json` (canonical, sin timestamp) sigue tracked — solo los snapshots auto-generados se ignoraron.
+- Push fue fast-forward limpio (14 commits, sin `--force`); ningún colaborador necesita re-clonar.
+- Tag `pre-railway-c102` queda como anchor de rollback antes de iniciar Railway R1-R8.
+
+**Recomendaciones (próximos pasos)**:
+- 🔴 **ALTA**: Configurar branch protection en `main` (Settings → Branches → require PR + status checks) antes de agregar colaboradores o CI.
+- 🔴 **ALTA**: Iniciar Decision Gate Railway deploy R1-R8 (docs/RAILWAY_DEPLOY.md) — siguiente fase del roadmap.
+- 🟡 **MEDIA**: Validación E2E manual del input hardening (pendiente de C101): login con `admin'--`, crear producto con `<script>` en name → verificar 400.
+- 🟡 **MEDIA**: Considerar GitHub Actions CI básico (lint + build + test) tras branch protection.
+- 🟢 **BAJA**: Rotación de credenciales (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB) — diferido por usuario en C97 (sandbox), revisar antes de prod.
 
 **Synaptic Strength**: 99%
 

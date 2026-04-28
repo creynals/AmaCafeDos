@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-104 | Untrack .synaptic/backups/INTELLIGENCE_*.json + create pre-railway-c102 tag | Establish clean rollback anchor before Railway deploy R1-R8 | 2026-04-28 | 104 |
 | DEC-103 | Publish C101 deliverable to origin/main via Option B (gitignore INTELLIGENCE + tag + fast-forward push) | Balanced approach: clean remote history, rollback anchor, no history rewrite, halt-on-anomaly safety | 2026-04-28 | 103 |
 | DEC-101B | Exempt chat and webhooks via mount order, not skip logic | Mount before guard preserves silent sanitizer for chat; keeps guard config simple | 2026-04-28 | 101 |
 | DEC-101 | Central validateInput middleware with deep-walk pattern detection | Defense-in-depth layer above parameterized SQL; loud rejection with structured error | 2026-04-28 | 101 |
@@ -175,6 +176,8 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 104] Gitignore patterns added for INTELLIGENCE_*.json in both backups/ and intelligence/ paths
+- [Cycle 104] Push was fast-forward (no --force), 14 commits to origin/main
 - [Cycle 103] Pre-flight halt criteria: unexpected commits, sensitive files (.env), or non-fast-forward conflict abort the chain
 - [Cycle 103] Tag pre-railway-c102 mirrors pre-purge-c78 convention as rollback anchor before external deploy
 - [Cycle 103] Fast-forward push is reversible via git revert, not trivially — treat as MEDIUM blast radius
@@ -284,6 +287,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 104, 2026-04-28] Repo state: origin/main at cab5f03, tag pre-railway-c102 at 47974e1d as rollback anchor
 - [Cycle 103, 2026-04-28] Add .synaptic/intelligence/INTELLIGENCE_*.json to .gitignore (pending Option B confirmation)
 - [Cycle 101, 2026-04-28] New middleware layer: backend/src/middleware/validateInput.js wired globally on /api after express.json()
 - [Cycle 94, 2026-04-28] Repositorio AmaCafeDos ahora público en GitHub con branch main como principal
