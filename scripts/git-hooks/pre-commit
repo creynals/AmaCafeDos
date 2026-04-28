@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# amaCafe pre-commit hook (Cycle 87 — G4 pre-push hygiene)
+#
+# Defence in depth on top of .gitignore. Blocks staged commits that include
+# secrets, dependency trees, OS metadata, or build artefacts. The repo
+# carries the historical scar of backend/.env having lived in git history
+# (purged in C78); this hook makes it harder to repeat the mistake even if
+# someone edits .gitignore by accident.
+#
+# Install: ./scripts/install-git-hooks.sh
+# Bypass:  git commit --no-verify   (use only when you know what you're doing)
+
+set -euo pipefail
+
+red()    { printf '\033[31m%s\033[0m\n' "$*"; }
+yellow() { printf '\033[33m%s\033[0m\n' "$*"; }
+green()  { printf '\033[32m%s\033[0m\n' "$*"; }
+
+# Files added or modified in this commit (no deletions).
+staged=$(git diff --cached --name-only --diff-filter=ACM)
+[ -z "$staged" ] && exit 0
+
+violations=0
+
+# Drop documented-template paths up front so they bypass every block check.
+# .env.example is the published contract for required env vars and must ship.
+candidates=$(printf '%s\n' "$staged" | grep -Ev '(^|/)\.env\.example$' || true)
+allowed=$(printf '%s\n' "$staged" | grep -E '(^|/)\.env\.example$' || true)
+if [ -n "$allowed" ]; then
+  yellow "[pre-commit] note: .env.example files allowed (template only):"
+  printf '%s\n' "$allowed" | sed 's/^/  - /'
+fi
+
+block() {
+  local label=$1 pattern=$2
+  local hits
+  hits=$(printf '%s\n' "$candidates" | grep -E "$pattern" || true)
+  if [ -n "$hits" ]; then
+    red "[pre-commit] $label:"
+    printf '%s\n' "$hits" | sed 's/^/  - /'
+    violations=$((violations + 1))
+  fi
+}
+
+block "Environment files (potential secrets)"  '(^|/)\.env(\.[A-Za-z0-9_-]+)*(\.local)?$'
+block "node_modules tree"                      '(^|/)node_modules/'
+block "OS metadata"                            '(^|/)\.DS_Store$|(^|/)Thumbs\.db$'
+block "Build artefacts"                        '(^|/)dist/|(^|/)build/'
+
+# Hard size cap to catch big binaries someone forgot about. 5 MiB = 5242880 B.
+max_bytes=5242880
+big=$(printf '%s\n' "$staged" | while IFS= read -r f; do
+  [ -f "$f" ] || continue
+  size=$(wc -c <"$f" | tr -d ' ')
+  if [ "$size" -gt "$max_bytes" ]; then
+    printf '%s\t%s\n' "$f" "$size"
+  fi
+done)
+if [ -n "$big" ]; then
+  red "[pre-commit] Files larger than 5 MiB (consider Git LFS or .gitignore):"
+  printf '%s\n' "$big" | awk -F'\t' '{ printf "  - %s (%.2f MiB)\n", $1, $2/1048576 }'
+  violations=$((violations + 1))
+fi
+
+if [ "$violations" -gt 0 ]; then
+  red "[pre-commit] $violations rule(s) violated. Use 'git restore --staged <file>' to unstage, or '--no-verify' to override."
+  exit 1
+fi
+
+green "[pre-commit] OK — no hygiene violations."
+exit 0

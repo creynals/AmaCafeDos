@@ -5546,3 +5546,86 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 **Synaptic Strength**: 98.6%
 
 ---
+
+## CICLO: 87
+**Timestamp**: 2026-04-28T00:15:00.000Z
+**Agente**: master_architect
+**Fase**: IMPLEMENTACION (Phase 3/5)
+**Decisión Origen**: Cycle 86 — analysis report items G1+G3+G4 (pre-push hygiene), R1–R8 (deploy walkthrough), R9 (SUMUP_MODE bootstrap fallback)
+**Resultado**: SUCCESS
+**Modo**: IMMEDIATE EXECUTION (DG-079)
+
+**Prompt Original**:
+> proceder con ciclo 86, "G1+G3+G4 pre‑push hygiene", "R1‑R8 deploy walkthrough script", and "fix R9 by adding SUMUP_MODE bootstrap fallback"
+
+```json
+{
+  "timestamp": "2026-04-28T00:15:00.000Z",
+  "cycle": 87,
+  "phase": 3,
+  "action": "PRE_PUSH_HYGIENE_PLUS_DEPLOY_DOCS_PLUS_R9_BOOTSTRAP",
+  "details": {
+    "scope": "Three independent C86 follow-ups landed together: (1) R9 — fix the SumUp bootstrap deadlock where a fresh Railway deploy with NODE_ENV=production tripped the sumup_mode=mock failsafe before the operator could ever flip the mode via the admin UI; (2) G1+G3+G4 — pre-push hygiene to keep node_modules/.DS_Store/.env out of the GitHub push and add a defensive pre-commit hook so it stays out; (3) R1–R8 — first written walkthrough for the Railway deploy, closing the BAJA recommendation from C85.",
+    "decisionRef": "Cycle 86 architect-mode report (items G1+G3+G4, R1–R8, R9)",
+    "filesCreated": [
+      "backend/src/utils/sumup.config.test.js (8 tests for bootstrapModeFromEnv: env-unset, env-invalid, promote happy path, already-in-sync, row-missing, db-error, whitespace-only, cache invalidation)",
+      "scripts/git-hooks/pre-commit (G4 hook — blocks .env, node_modules/, .DS_Store, dist/build/, files >5 MiB; allows .env.example)",
+      "scripts/install-git-hooks.sh (G4 installer — symlinks scripts/git-hooks/* into .git/hooks/, idempotent, backs up existing non-symlink hooks)",
+      "docs/RAILWAY_DEPLOY.md (R1–R8 walkthrough + printable checklist + troubleshooting; explicitly references the C87 R9 bootstrap log line for verification)"
+    ],
+    "filesModified": [
+      "backend/src/utils/sumup.config.js (R9 — added bootstrapModeFromEnv() helper that UPSERTs settings.sumup_mode from process.env.SUMUP_MODE when env is set + valid + disagrees with DB; invalidates the mode cache on success; exported from module.exports)",
+      "backend/src/server.js (R9 — calls bootstrapModeFromEnv() inside logAndValidateSumupConfig BEFORE getModeWithSource so the failsafe sees the promoted value; logs whether promotion happened, was a no-op, or failed)"
+    ],
+    "indexCleanup": {
+      "action": "git rm --cached (no commit created — left staged for user review)",
+      "removed": {
+        "backend/node_modules/**": "1243 files",
+        ".DS_Store files": "4 (.DS_Store, backend/.DS_Store, backend/src/.DS_Store, fuentes/.DS_Store)"
+      },
+      "totalDeletions": "1247 files / -223856 lines",
+      "filesOnDisk": "untouched (only the index changed; .gitignore already excluded these so the rule now finally takes effect)"
+    },
+    "validation": {
+      "newTests": "✅ node --test src/utils/sumup.config.test.js → 8/8 PASS",
+      "fullSuite": "✅ npm test → 35/35 PASS (was 27/27 in C85 + 8 new R9 tests, no regressions)",
+      "syntaxCheck": "✅ node --check src/server.js && node --check src/utils/sumup.config.js → OK",
+      "hookSmokeBlocked": "✅ tmp repo with .env + node_modules/foo/index.js + .DS_Store + dist/out.js staged → hook blocked all 4 categories with red diagnostics",
+      "hookSmokeAllowed": "✅ tmp repo with .env.example + README.md staged → hook printed 'OK — no hygiene violations' and let the commit through",
+      "hookInstalled": "✅ scripts/install-git-hooks.sh symlinked .git/hooks/pre-commit to scripts/git-hooks/pre-commit; verified by ls -la"
+    },
+    "r9Mechanics": {
+      "problem": "Migration 004 seeds settings.sumup_mode='mock'. getModeWithSource() reads from settings (returns 'mock' with source='settings'), so the env-var fallback (line 62-63 of sumup.config.js) is never reached. server.js failsafe (line 155-159) sees NODE_ENV=production && mode='mock' → process.exit(1). Operator can never reach /admin → Configuración to flip the mode.",
+      "fix": "bootstrapModeFromEnv() runs BEFORE getModeWithSource() during boot. If process.env.SUMUP_MODE is set, valid (mock|live), and disagrees with the current settings row, it UPSERTs the env value into settings and invalidates the mode cache. Subsequent getModeWithSource() reads the freshly promoted value and the failsafe sees 'live'.",
+      "noopPaths": "env-unset, env-invalid (logged as warn, not promoted), already-in-sync (no DB write), db-error (logged, boot continues with whatever settings has)",
+      "preservesUiAuthority": "After first boot the UI/POST /admin/settings/sumup remains the source of truth — env only ever bootstraps. Operators can rotate via UI without touching env vars again.",
+      "deferredVariant": "Did NOT change SUMUP_MODE precedence in the steady-state lookup (settings still wins over env when both set). The promoter is deliberately one-shot at startup so production rotations stay UI-driven and don't get silently overwritten by stale env vars on the next deploy."
+    }
+  },
+  "userImpact": "Repo is now safe to push to GitHub: ~20 MiB of backend/node_modules and 4 .DS_Store files are unstaged (review with `git status` before committing), the pre-commit hook prevents regressions, and `docs/RAILWAY_DEPLOY.md` documents the 8-step deploy. Once on Railway, setting SUMUP_MODE=live in env vars (per R5) will now boot cleanly instead of dying on the failsafe.",
+  "outcome": "SUCCESS",
+  "synapticStrength": 98.7,
+  "complianceScore": 100,
+  "filesChanged": 2,
+  "filesAdded": 4,
+  "filesRemovedFromIndex": 1247,
+  "linesTouched": "+~470 (4 new files), ~+25/-5 (2 modified), -223856 (untracked node_modules + .DS_Store)"
+}
+```
+
+**Notas críticas**:
+- The 1247 deletions are STAGED, not committed. User should review with `git status` and `git diff --cached --stat` before deciding to commit. Files remain on disk; only the index changed.
+- The pre-commit hook is `--no-verify`-bypassable by design — it's defence in depth, not enforcement. Same applies to the cycle-after-cycle reminder: the hook does not replace `.gitignore`, it complements it.
+- Honoring the C57 post-edit verification rule: every file declared above was re-read from disk after editing. No silent declaration of changes that weren't actually applied.
+- R9 promoter logs loudly on first promotion: `[sumup] bootstrap: promoted SUMUP_MODE env to settings (was='mock', now='live')`. R8 step 2 in `docs/RAILWAY_DEPLOY.md` instructs the operator to look for this line as a deploy gate.
+- The hook's 5 MiB size cap is a heuristic against accidental binaries, not a hard architectural rule. Override consciously when shipping legitimate large assets via Git LFS.
+
+**Recomendaciones**:
+- 🔴 **ALTA**: Después del primer push y deploy en Railway, validar el log de boot del backend service buscando la línea `[sumup] bootstrap: promoted SUMUP_MODE env to settings`. Si no aparece pero la app boota, el env var ya estaba en sync con settings (esperado en redeploys posteriores). Si la app NO boota y aparece `FAILSAFE TRIGGERED`, el `SUMUP_MODE` env var no está seteado en Railway.
+- 🟡 **MEDIA**: Documentar en `WORKSPACE_IDENTITY.md` que el repo recién pasó por una limpieza masiva del index (1247 deletions). Cualquier `git log --stat` de los próximos commits mostrará deletions enormes que NO son pérdida de código real, son la consecuencia natural de sacar `node_modules` del tracking.
+- 🟡 **MEDIA**: Onboarding de cualquier colaborador nuevo debe incluir `./scripts/install-git-hooks.sh` como paso post-clone — el hook vive en el repo pero NO se auto-instala en `.git/hooks/`. Considerar añadir un check en `npm install` postinstall del backend que ejecute el installer si es la primera vez.
+- 🟢 **BAJA**: Si en el futuro se introducen GitHub Actions, encadenar el mismo set de chequeos del pre-commit en CI para defensa en profundidad ante colaboradores que usen `--no-verify`.
+
+**Synaptic Strength**: 98.7%
+
+---

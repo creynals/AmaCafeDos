@@ -6,7 +6,7 @@ const path = require('path');
 const { initSchema, closeDatabase } = require('./models/database');
 const { requireAuth, requireAdmin } = require('./middleware/auth');
 const { ensureDefaultAdmin } = require('./utils/auth');
-const { getModeWithSource, getReturnUrlBaseWithSource } = require('./utils/sumup.config');
+const { getModeWithSource, getReturnUrlBaseWithSource, bootstrapModeFromEnv } = require('./utils/sumup.config');
 const productRoutes = require('./routes/products');
 const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/orders');
@@ -142,6 +142,18 @@ app.use((err, req, res, next) => {
 // No bloquea startup si la BD está temporalmente inaccesible — degrada al
 // fallback de env/default con warn visible.
 async function logAndValidateSumupConfig() {
+  // Ciclo 87 (R9): one-shot env -> settings promotion BEFORE we resolve the
+  // effective mode, so a fresh prod deploy with SUMUP_MODE=live in the
+  // Railway env vars boots cleanly instead of tripping the mock failsafe.
+  const promotion = await bootstrapModeFromEnv();
+  if (promotion.promoted) {
+    console.log(`[sumup] bootstrap: promoted SUMUP_MODE env to settings (was='${promotion.from ?? 'unset'}', now='${promotion.to}')`);
+  } else if (promotion.reason === 'env-invalid') {
+    console.warn(`[sumup] bootstrap: ignoring invalid SUMUP_MODE env value '${promotion.envValue}' (allowed: mock|live)`);
+  } else if (promotion.reason === 'db-error') {
+    console.warn(`[sumup] bootstrap: env promotion failed (${promotion.error}) — proceeding with current settings`);
+  }
+
   const mode = await getModeWithSource();
   const returnUrl = await getReturnUrlBaseWithSource();
 

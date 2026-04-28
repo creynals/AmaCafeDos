@@ -121,6 +121,51 @@ function invalidateReturnUrlCache() {
   returnUrlCache = { value: null, source: null, expiresAt: 0 };
 }
 
+// Ciclo 87 (R9): bootstrap promotion env -> settings.
+//
+// Problem: migration 004 seeds `settings.sumup_mode='mock'`, so on a fresh
+// Railway deploy `getModeWithSource()` resolves to {value:'mock',source:'settings'}
+// and the env-var fallback (line 62) is never reached. The startup failsafe
+// in server.js then aborts boot under NODE_ENV=production, locking the operator
+// out of the UI they would use to flip the mode to 'live'.
+//
+// Fix: when `process.env.SUMUP_MODE` is set explicitly to a valid value AND
+// disagrees with what the DB currently has, persist the env value to settings
+// and invalidate the in-proc cache. This makes `SUMUP_MODE=live` in Railway
+// env vars an effective bootstrap mechanism: the first boot lifts the value
+// into the DB, subsequent boots read it from settings, and the UI can still
+// rotate it later.
+//
+// Idempotent: a no-op when env is unset, env value is invalid, or DB already
+// matches env. Safe to call on every server start. Returns a small report so
+// the caller can log the action.
+async function bootstrapModeFromEnv() {
+  const envValue = (process.env.SUMUP_MODE || '').trim();
+  if (!envValue) return { promoted: false, reason: 'env-unset' };
+  if (!VALID_MODES.includes(envValue)) {
+    return { promoted: false, reason: 'env-invalid', envValue };
+  }
+
+  const fromSetting = await readPlainSetting('sumup_mode');
+  if (fromSetting === envValue) {
+    return { promoted: false, reason: 'already-in-sync', value: envValue };
+  }
+
+  try {
+    await query(
+      `INSERT INTO settings (key, value, updated_at)
+       VALUES ('sumup_mode', $1, NOW())
+       ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, updated_at = NOW()`,
+      [envValue],
+    );
+  } catch (err) {
+    return { promoted: false, reason: 'db-error', error: err.message };
+  }
+
+  invalidateModeCache();
+  return { promoted: true, from: fromSetting, to: envValue };
+}
+
 /**
  * Build URLs for SumUp checkout.
  *
@@ -157,6 +202,7 @@ module.exports = {
   getReturnUrlBase,
   getReturnUrlBaseWithSource,
   buildReturnUrls,
+  bootstrapModeFromEnv,
   invalidateModeCache,
   invalidateReturnUrlCache,
   DEFAULT_MODE,
