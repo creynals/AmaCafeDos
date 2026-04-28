@@ -23,4 +23,14 @@ export default defineConfig({
       '/static': 'http://localhost:7001',
     },
   },
+  // C129: `vite preview` (used by Railway) defaults to port 4173 + localhost
+  // and rejects unknown Host headers since Vite 4.3. Without this block the
+  // healthcheck on / hits port 8080 (server.port) instead of $PORT and times
+  // out. Reading process.env.PORT lets Railway inject the bound port; the CLI
+  // flags in frontend/railway.toml are kept as a redundant safety net.
+  preview: {
+    port: Number(process.env.PORT) || 4173,
+    host: '0.0.0.0',
+    allowedHosts: ['.up.railway.app', '.railway.app'],
+  },
 })
