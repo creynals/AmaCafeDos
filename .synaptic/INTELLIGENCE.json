@@ -955,7 +955,7 @@
         "user-preference"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T22:11:15.175Z",
         "source": "EXPLICIT"
@@ -1975,7 +1975,7 @@
     "[2026-04-28T01:34:41.595Z] C83-85 already consumed B2/B3/B4 labels: Railway Volume, api.js config, railway.toml+migrate",
     "[2026-04-28T01:34:41.596Z] C98 awaiting user clarification on Tier 1 (B1+B2) scope before execution"
   ],
-  "lastUpdated": "2026-04-28T01:35:42.615Z",
+  "lastUpdated": "2026-04-28T01:38:39.450Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
