@@ -35,3 +35,8 @@ coverage/
 
 # --- SYNAPTIC runtime (local) ---
 .synaptic/runtime/
+
+# --- SYNAPTIC intelligence snapshots (auto-generated, repo bloat) ---
+# Canonical .synaptic/INTELLIGENCE.json IS tracked; only timestamped backups are ignored
+.synaptic/backups/INTELLIGENCE_*.json
+.synaptic/intelligence/INTELLIGENCE_*.json
