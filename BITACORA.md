@@ -6723,6 +6723,53 @@ Si después de este cambio el log sigue diciendo nodejs_18, significa que Railwa
 
 ---
 
+
+---
+## CICLO: 129
+**Timestamp**: 2026-04-28T16:56:33.471Z
+**Trace ID**: `b3b4527a-110d-4720-a20b-493cd1dd8048`
+**Agente**: master_architect
+**Fase**: ANALISIS
+**Decisión**: N/A
+**Resultado**: SUCCESS
+**Duración**: 349244ms
+
+**Prompt Original**:
+```
+proceder con ciclo 128, Verify Railway UI — what are Root Directory and Config Path per service? (decides B.1 vs B.2)
+Apply Fix A (engines.node in both package.jsons) — minimal, reversible, the actual root-cause fix
+Apply Fix B.1 (move root TOML → backend/railway.toml) — eliminates the two-TOML ambiguity
+Apply Fix D (remove redundant Railway UI env vars)
+Commit on top of fix/c127-railway-frontend-ebusy (or open fix/c128-railway-node-version), push, monitor deploy logs for nodejs_22 in the setup phase
+Skip Fix C unless A doesn't work — adding both is over-configuration
+Do NOT apply the user-proposed [setup] pkgs = ["nodejs_23"] block as written — it's invalid schema and will be silently ignored.
+```
+
+**Decision Gate Presentado**: Ninguno (ciclo de análisis inicial)
+
+**Opción Elegida**: Pendiente de selección
+
+**Artefactos Generados**:
+- /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/package.json
+- /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/package.json
+- /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/BITACORA.md
+- /Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/BITACORA.md
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌
+- Memoria actualizada: ✅
+- Tests generados: ❌
+- Reformulaciones necesarias: 0
+
+
+
+
+
+**Synaptic Strength**: 99%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
 *Last Updated: 2026-04-28T02:45:00.000Z*
 
@@ -7982,6 +8029,82 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 - 🔴 **ALTA — C124+**: Iniciar `ROAD-121-DEPLOY-R3-R8` siguiendo `docs/RAILWAY_DEPLOY.md` (R3 service config, R4 Volume `/data`, R5 secrets prod + SUMUP_MODE=live, R6 backend deploy, R7 frontend deploy, R8 smoke E2E con decrypt `settings:sumup_api_key`).
 - 🟡 **MEDIA**: Tras R8 verde, retomar `ROAD-101A` (E2E manual validateInput) y `ROAD-101B` (rate limiting `/api/auth/login`).
 - 🟢 **BAJA**: GitHub Actions CI (lint + build + test) tras stack productivo estable.
+
+**Synaptic Strength**: 99%
+**Compliance Score**: 100%
+**Violations Count**: 0
+
+---
+
+## Cycle 129 — Railway Node version pin + TOML disambiguation (IMMEDIATE EXECUTION)
+
+```json
+{
+  "cycle": 129,
+  "timestamp": "2026-04-28T17:05:00.000Z",
+  "userRequest": "proceder con ciclo 128: Apply Fix A (engines.node both package.jsons) + Fix B.1 (move root TOML → backend/railway.toml) + Fix D (remove redundant Railway UI env vars). Skip Fix C. Do NOT apply [setup] pkgs nodejs_23.",
+  "executionMode": "IMMEDIATE_EXECUTION (DG-079) — user-supplied punch list",
+  "branch": "fix/c128-railway-node-version (created off fix/c127-railway-frontend-ebusy HEAD 5516de4)",
+  "rationale": "C127 fix (drop 'npm ci &&' from frontend buildCommand) closed the BuildKit cache mount EBUSY. Remaining failure mode: Railway's Nixpacks defaulted to a Node 22 baseline below Vite 8's documented floor (^22.12 || >=24). Without engines.node, the build fails before bundle emission. Fix A is the canonical, declarative root-cause fix.",
+  "fixes": {
+    "fixA_enginesNode": {
+      "action": "Added engines.node = '>=22.12.0' to both package.jsons",
+      "files": [
+        "backend/package.json (+3 lines, between 'type' and 'dependencies')",
+        "frontend/package.json (+3 lines, between 'type' and 'scripts')"
+      ],
+      "rangeJustification": ">=22.12.0 satisfies Vite 8 minimum (^22.12 || >=24) and matches the local dev v24.12.0; allows Nixpacks to pick any compatible release rather than pinning to a specific minor.",
+      "validation": "node -e require('./*/package.json').engines → both report {node: '>=22.12.0'}"
+    },
+    "fixB1_tomlRelocation": {
+      "action": "git mv railway.toml backend/railway.toml (100% rename, content unchanged)",
+      "rationale": "With backend service Root Directory = 'backend' in Railway UI, placing the config inside backend/ removes ambiguity between two railway.toml files (backend at repo root vs frontend/railway.toml). Frontend's own toml at frontend/railway.toml stays put — already inside its service root.",
+      "verified": "ls backend/railway.toml → present (3673 bytes); ls railway.toml → no such file"
+    },
+    "fixD_uiEnvCleanup": {
+      "status": "DEFERRED-TO-USER (UI-only, cannot execute from CLI)",
+      "instruction": "In Railway UI for BOTH services, remove env vars 'NODE_VERSION' and 'NIXPACKS_NODE_VERSION' if present. Either would override engines.node from Fix A and silently defeat the fix.",
+      "verifyAfter": "Settings → Variables tab should NOT list NODE_VERSION or NIXPACKS_NODE_VERSION after cleanup."
+    },
+    "fixC_skipped": {
+      "rationale": "User requested skip unless A doesn't work — adding NIXPACKS_NODE_VERSION env on top of engines.node is over-configuration. Fix A is declarative and sufficient."
+    },
+    "setupBlockRejected": {
+      "candidate": "[setup]\\npkgs = ['nodejs_23']",
+      "rationale": "Not a valid Nixpacks schema field; would be silently ignored. Engines.node is the supported declarative path."
+    }
+  },
+  "preflight_unanswered": {
+    "question": "What are the Root Directory and Config Path values per service in Railway UI?",
+    "impact": "B.1 vs B.2 was forced to B.1 based on the existing TOML headers' assumption ('Service Settings → Source → Root Directory: backend'). If the actual Railway UI has a DIFFERENT Root Directory (e.g., '/' or 'backend/'), the move from / to backend/ may break Railway's config resolution until the UI matches.",
+    "recommendation": "User must verify in Railway UI BEFORE merging this PR: Backend service Root Directory = 'backend' (or empty/default with Config Path = 'backend/railway.toml'). Frontend service Root Directory = 'frontend'."
+  },
+  "git": {
+    "branchCreated": "fix/c128-railway-node-version off local HEAD (5516de4)",
+    "commit": "5e06ce4 — fix(railway): pin Node >=22.12.0 in engines + collapse two-TOML ambiguity",
+    "filesChanged": "3 files, +6 insertions, +0 deletions, +1 rename",
+    "push": "origin/fix/c128-railway-node-version (new branch, tracking set)",
+    "prUrl": "https://github.com/creynals/AmaCafeDos/pull/new/fix/c128-railway-node-version (not opened automatically)"
+  },
+  "outcome": "SUCCESS",
+  "synapticStrength": 99,
+  "complianceScore": 100
+}
+```
+
+**Notas críticas**:
+- Esta rama es **independiente** de PR #2 (`fix/c127-railway-frontend-ebusy`). C127 se merge primero (drop `npm ci`), C128 después (engines + toml move). Ambos PRs son ortogonales — no hay conflicto de archivos entre ellos.
+- `engines.node = '>=22.12.0'` es un **floor, no una pin**. Nixpacks elegirá el release satisfactorio más reciente que tenga disponible. Si en futuro Vite 9 sube el floor, basta editar este campo.
+- Fix D depende del usuario en la UI de Railway. **Si NO se hace y existen `NODE_VERSION` / `NIXPACKS_NODE_VERSION` seteadas, Fix A es no-op silencioso** — Nixpacks honra env > engines.
+- El contenido de `backend/railway.toml` no se modificó. Sus comentarios siguen siendo válidos (asumían `Root Directory: backend` desde C84).
+
+**Recomendaciones (próximos pasos)**:
+- 🔴 **ALTA — pre-merge**: Verificar en Railway UI (Backend service → Settings → Source) que `Root Directory = backend`. Si no, ajustarlo antes de mergear este PR (de lo contrario Railway no encontrará el toml movido).
+- 🔴 **ALTA — pre-merge**: Eliminar `NODE_VERSION` y `NIXPACKS_NODE_VERSION` de Variables UI en ambos servicios (Fix D).
+- 🔴 **ALTA — orden de merge**: PR C127 (#2) primero, PR C128 después. C127 ya está revisado y aprobado en BITACORA.
+- 🟡 **MEDIA — post-deploy**: Monitorear setup phase de Nixpacks en logs de Railway — debe aparecer línea tipo `Detected Node ^22.12 from package.json#engines, provisioning nodejs_22.12.x` (o similar).
+- 🟡 **MEDIA**: Si la build sigue fallando con Node version error tras merge + redeploy, activar Fix C (agregar `NIXPACKS_NODE_VERSION=22` como env var en Railway UI) y/o reportar al usuario para diagnóstico.
+- 🟢 **BAJA**: Considerar agregar `.nvmrc` en repo root con `22.12` para sincronizar dev local con prod (no necesario para Railway, pero ayuda a colaboradores).
 
 **Synaptic Strength**: 99%
 **Compliance Score**: 100%
