@@ -1417,65 +1417,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-98-1777340081584-0",
-      "cycle": 98,
-      "timestamp": "2026-04-28T01:34:41.584Z",
-      "type": "ANTI_PATTERN",
-      "title": "Tier/Bx labels not persisted in BITACORA",
-      "description": "C96/C97 entries lack Decision Gate task categorization, causing scope ambiguity in C98",
-      "context": "When user references prior cycle tasks by label (Tier N, Bx)",
-      "applicability": [
-        "bitacora",
-        "decision-gate",
-        "task-tracking"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:34:41.584Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-98-1777340081588-1",
-      "cycle": 98,
-      "timestamp": "2026-04-28T01:34:41.588Z",
-      "type": "PATTERN",
-      "title": "Halt on ambiguous scope despite DG-079",
-      "description": "Even in Immediate Execution mode, ask for clarification when task labels are undefined in persisted state",
-      "context": "When user prompt references undefined Tier/task IDs",
-      "applicability": [
-        "dg-079",
-        "immediate-execution",
-        "ambiguity"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:34:41.588Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-98-1777340081590-2",
-      "cycle": 98,
-      "timestamp": "2026-04-28T01:34:41.590Z",
-      "type": "INSIGHT",
-      "title": "B-task ID collision risk",
-      "description": "B1/B2/B3/B4 from C83-85 already executed; reusing labels in new cycles creates confusion",
-      "context": "Future task labeling should use cycle-prefixed IDs (C97-B1) not bare Bx",
-      "applicability": [
-        "task-naming",
-        "intelligence-json"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:34:41.590Z",
-        "source": "INFERRED"
-      }
-    },
-    {
       "learningId": "learning-100-1777340420165-0",
       "cycle": 100,
       "timestamp": "2026-04-28T01:40:20.165Z",
@@ -2685,7 +2626,7 @@
     "[2026-04-28T03:44:13.386Z] User offered 3 unblock paths: (a) provide both secrets, (b) authorize Claude to generate NEW with openssl, (c) rewrite smoke test target to settings:sumup_api_key",
     "[2026-04-28T03:44:13.388Z] Workspace verified canonical: import-1777213083759-63z86j / amaCafe"
   ],
-  "lastUpdated": "2026-04-28T03:49:47.108Z",
+  "lastUpdated": "2026-04-28T03:55:46.397Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5939,6 +5880,65 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:04:34.410Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081584-0",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.584Z",
+      "type": "ANTI_PATTERN",
+      "title": "Tier/Bx labels not persisted in BITACORA",
+      "description": "C96/C97 entries lack Decision Gate task categorization, causing scope ambiguity in C98",
+      "context": "When user references prior cycle tasks by label (Tier N, Bx)",
+      "applicability": [
+        "bitacora",
+        "decision-gate",
+        "task-tracking"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.584Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081588-1",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.588Z",
+      "type": "PATTERN",
+      "title": "Halt on ambiguous scope despite DG-079",
+      "description": "Even in Immediate Execution mode, ask for clarification when task labels are undefined in persisted state",
+      "context": "When user prompt references undefined Tier/task IDs",
+      "applicability": [
+        "dg-079",
+        "immediate-execution",
+        "ambiguity"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.588Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081590-2",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.590Z",
+      "type": "INSIGHT",
+      "title": "B-task ID collision risk",
+      "description": "B1/B2/B3/B4 from C83-85 already executed; reusing labels in new cycles creates confusion",
+      "context": "Future task labeling should use cycle-prefixed IDs (C97-B1) not bare Bx",
+      "applicability": [
+        "task-naming",
+        "intelligence-json"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.590Z",
+        "source": "INFERRED"
       }
     }
   ]
