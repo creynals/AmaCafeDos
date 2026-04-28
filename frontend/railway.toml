@@ -1,11 +1,11 @@
-# C84 (B4): Railway service configuration — amaCafe FRONTEND (Vite static)
+# C84 (B4) / C130: Railway service configuration — amaCafe FRONTEND (Vite static)
 #
 # Esta config asume que la UI de Railway tiene configurado para este servicio:
 #   Service Settings → Source → Root Directory: frontend
 #
 # Variables de entorno que el servicio frontend espera (Railway UI → Variables):
 #
-#   PORT                   → Railway lo inyecta; vite preview lee --port $PORT.
+#   PORT                   → Railway lo inyecta; serve lee -l $PORT.
 #   VITE_API_BASE_URL      → URL pública del backend + /api. Ejemplo:
 #                            https://amacafe-backend.up.railway.app/api
 #                            (NOTA: variables VITE_* se inlinean al BUNDLE en
@@ -15,21 +15,23 @@
 #   `npm run build` produce dist/ con el bundle estático ya parametrizado por
 #   VITE_API_BASE_URL inyectado al momento del build.
 #
-# Start:
-#   `vite preview` sirve dist/ con un servidor estático mínimo. Suficiente
-#   para MPV. Si en futuro se quiere un server HTTP más robusto, swap a
-#   `npx serve -s dist -l $PORT` o un nginx container.
+# Start (C130):
+#   `serve -s dist -l $PORT` reemplaza a `vite preview`. `vite preview` es una
+#   herramienta de DESARROLLO con restricciones estrictas de host (allowedHosts)
+#   que causaron healthcheck fails repetidos en Railway (logs C128–C130). `serve`
+#   es un servidor estático ligero pensado para producción de SPAs estáticas,
+#   sin las restricciones de Vite y con bind robusto al $PORT inyectado.
 #
-# IMPORTANTE: 'host 0.0.0.0' es obligatorio para que Railway pueda enrutar
-# tráfico hacia el container (sino bind solo a localhost interno).
+# El flag `-s` (single-page) hace fallback a index.html para rutas client-side
+# del React Router, condición indispensable para el storefront.
 
 [build]
 builder = "NIXPACKS"
 buildCommand = "npm run build"
 
 [deploy]
-startCommand = "npx vite preview --host 0.0.0.0 --port $PORT"
+startCommand = "npx serve -s dist -l $PORT"
 healthcheckPath = "/"
-healthcheckTimeout = 60
+healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 5
