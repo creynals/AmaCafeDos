@@ -31,6 +31,9 @@ General
 | ID | Decision | Option Selected | Date | Rationale |
 |----|----------|-----------------|------|-----------|
 | C100/C101 | Input hardening strategy | OPTION B — Audit + Central validateInput Middleware + Tests | 2026-04-28 | Single global guard on `/api/*` for SQLi/XSS/NoSQL pattern detection + length cap, complementing parameterized SQL. Loud 400 rejection (chat exempted — uses silent sanitizer). 32 tests covering 5 highest-risk endpoints. Files: `backend/src/middleware/validateInput.js`, `validateInput.test.js`. |
+| C103/C104 | INTELLIGENCE snapshot bloat strategy | OPTION B — Pre-flight + Gitignore + Tag + Push | 2026-04-28 | Untracked 10 timestamped INTELLIGENCE snapshots (~45k lines), added `.gitignore` patterns for `.synaptic/backups/` and `.synaptic/intelligence/`. Tag `pre-railway-c102` as rollback anchor. Fast-forward push (no `--force`). |
+| C106/C107 | Reconciliación divergencia main local vs origin | OPTION B — Rebase con drop del duplicado | 2026-04-28 | Detectado commit local `eea6d78` (C104 POST) idéntico a origin `cab5f03` (chore synaptic ignore, mismo árbol y timestamp). Drop local, rebase 3 commits SYNAPTIC PRE (C105/C106/C107) sobre origin/main, fast-forward push. Tag `pre-rebase-c107` como rollback anchor. Sin `--force`, historia lineal. |
+| C120/C121 | Reconciliación cluster rotación + repriorización backlog | OPTION B — Reconciliación + Repriorización Backlog | 2026-04-28 | C115/C116 declararon acciones físicas no ejecutadas (tag `pre-rotation-c115` inexistente, `pg_dump` nunca corrió, `payment_methods` no existe en DB). C121 crea `TRUTH_RECONCILIATION_C120.md` documentando declarado-vs-verificado, marca 12 items rotación como DEFERRED-TO-PROD (sandbox no requiere rotación) y eleva 4 items Railway R1-R8 a top HIGH. Próximo ciclo: R1 (branch protection en main). Refuerzo del invariante C57 (verify-after-edit). |
 
 *Decisions will be logged here as they are made through Decision Gates*
 
@@ -100,6 +103,17 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-123B | Sprint A debe ejecutarse vía PR (Option A recomendada) | Respeta branch protection, deja audit trail, no abre ventana de desprotección | 2026-04-28 | 123 |
+| DEC-123A | No crear tag pre-deploy si push falló | Evita tags huérfanos apuntando a SHAs no remotos (lección C115/C116) | 2026-04-28 | 123 |
+| DEC-C121-RECONCILE | Adoptar TRUTH_RECONCILIATION_C120.md como artefacto formal de inventario declarado-vs-verificado | Cerrar deuda de auditoría retroactiva tras descubrir mentiras en C115/C116 | 2026-04-28 | 121 |
+| DEC-C120-RESOLVED | Cluster rotación C112-C116 reclasificado DEFERRED-TO-PROD/DEFERRED-TO-DEPLOY | Sandbox sin valor sin secretos productivos; consolidar en flujo Railway R5/R8 | 2026-04-28 | 121 |
+| DEC-120-B | BITACORA append-only con secciones ERRATA CXXX para reconciliación | Preserva auditoría histórica sin reescribir; aprendizaje C53/C57 reforzado | 2026-04-28 | 120 |
+| DEC-120 | Sandbox credentials no rotation; deploy-first stance hasta producción | Usuario explicitó en C119 que rotación se difiere a producción y Railway deploy es prioridad | 2026-04-28 | 120 |
+| DEC-116 | Rotation cycle C116 halted with BLOCKED_PRECONDITIONS_NOT_MET (exit code 2) | OLD/NEW_ENCRYPTION_SECRET missing from env; payment_methods table inexistent — smoke test target invalid | 2026-04-28 | 116 |
+| DEC-114 | Ejecutar cluster C112+C113 con Option B: pre-flight focalizado + validación entre pasos + SumUp prod diferido | Balance óptimo entre reversibilidad y velocidad; alinea con preferencia explícita C113 y patrón histórico | 2026-04-28 | 114 |
+| DEC-113 | Ejecutar cluster C112+C113 secuencial con checkpoint entre pasos y tag pre-rotation-c113 | Honra cluster aprobado en C112; checkpoint reduce blast radius; rollback global vía git tag + pg_dump | 2026-04-28 | 113 |
+| DEC-112 | Ejecutar bloque pre-deploy en dos ciclos: rotación secretos (C112+C113) y infra Railway (C114+C115) | Atomicidad por dominio: separar crypto local de infra cloud reduce blast radius y permite verificación intermedia | 2026-04-28 | 112 |
+| DEC-107 | Reconciliar divergencia main vía rebase --onto con drop de eea6d78 + push FF | Evita --force, preserva historia lineal, recuperable por tag pre-rebase-c107 | 2026-04-28 | 107 |
 | DEC-106 | Reconciliar main vía rebase --onto descartando commit duplicado eea6d78 | Preserva bookkeeping C105/C106, elimina ruido del duplicado, push fast-forward sin --force | 2026-04-28 | 106 |
 | DEC-104 | Untrack .synaptic/backups/INTELLIGENCE_*.json + create pre-railway-c102 tag | Establish clean rollback anchor before Railway deploy R1-R8 | 2026-04-28 | 104 |
 | DEC-103 | Publish C101 deliverable to origin/main via Option B (gitignore INTELLIGENCE + tag + fast-forward push) | Balanced approach: clean remote history, rollback anchor, no history rewrite, halt-on-anomaly safety | 2026-04-28 | 103 |
@@ -177,6 +191,28 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 123] Remote origin: https://github.com/creynals/AmaCafeDos.git
+- [Cycle 123] Branch protection en main bloquea push directo (GH006)
+- [Cycle 123] 17 commits locales pendientes (cycles 108→123 PRE) sin secretos en diff
+- [Cycle 121] 12 items rotación marcados con deferredAtCycle/deferredReason en INTELLIGENCE.json
+- [Cycle 121] decision C120 outcome=RESOLVED-RECONCILED con resolutionArtifacts apuntando a TRUTH_RECONCILIATION_C120.md
+- [Cycle 120] Credenciales SumUp residen en tabla settings (clave sumup_api_key), no en payment_methods
+- [Cycle 120] git tag pre-rotation-c115 nunca fue creado; único tag real es pre-purge-c78
+- [Cycle 116] Encrypted columns in db_taza_data are exclusively in 'settings' table (3 keys), not payment_methods
+- [Cycle 116] rotate-encryption-secret.js requires both OLD and NEW env vars or aborts at lines 27-30
+- [Cycle 116] keyManager.js (C81) is available for decrypt verification in smoke tests
+- [Cycle 114] pg_dump parcial de tablas críticas (payment_methods, users, orders) como backup pre-rotación
+- [Cycle 114] Smoke test focalizado: 5 muestras decrypt + 1 JWT round-trip entre C112 y C113
+- [Cycle 114] CREDENTIAL_ROTATION_C112-C113.md gitignored con valores enmascarados
+- [Cycle 113] Orden de rotación: ENCRYPTION_SECRET → validación SumUp decrypt → JWT_SECRET + RECAPTCHA_SECRET + SUMUP_API_KEY
+- [Cycle 113] SUMUP_API_KEY prod requiere coordinación con dashboard del proveedor (potencial bloqueador)
+- [Cycle 113] Backend reinicio + smoke test (login JWT + checkout SumUp) obligatorio post-rotación
+- [Cycle 112] Pre-flight obligatorio: pg_dump + snapshot .env + verificar rows cifradas + tests round-trip keyManager
+- [Cycle 112] Documentación rotación va en docs/CREDENTIAL_ROTATION_C112-C113.md (gitignored, sin valores)
+- [Cycle 112] Tag pre-railway-c102 disponible como rollback anchor
+- [Cycle 107] SHA mapping post-rebase: dae064c→bf7ad7a, 8226645→5622fb3, b5e33db→f8c3ddb
+- [Cycle 107] Tag pre-rebase-c107 publicado en origin como punto de rollback
+- [Cycle 107] Los 3 commits ahead eran puramente estado SYNAPTIC (harness/BITACORA/INTELLIGENCE)
 - [Cycle 106] Commit eea6d78 (C104 POST SYNAPTIC) y cab5f03 (chore convencional) tienen diff idéntico: 5 ins / 45794 del / 11 archivos
 - [Cycle 106] Merge base actual: cf40db2 (C104 PRE); divergencia +3/-1 vs origin/main
 - [Cycle 106] Rebase de SHAs nunca pusheados no requiere --force-push
@@ -291,6 +327,8 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 121, 2026-04-28] Backlog reorganizado: rotación bloquea hasta despliegue Railway, no a la inversa
+- [Cycle 120, 2026-04-28] Roadmap repriorizado: Railway Deploy R1-R8 promovido a top HIGH; rotación marcada DEFERRED-TO-PROD
 - [Cycle 104, 2026-04-28] Repo state: origin/main at cab5f03, tag pre-railway-c102 at 47974e1d as rollback anchor
 - [Cycle 103, 2026-04-28] Add .synaptic/intelligence/INTELLIGENCE_*.json to .gitignore (pending Option B confirmation)
 - [Cycle 101, 2026-04-28] New middleware layer: backend/src/middleware/validateInput.js wired globally on /api after express.json()

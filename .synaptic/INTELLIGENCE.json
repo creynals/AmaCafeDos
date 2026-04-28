@@ -241,6 +241,144 @@
       "selectedOption": "B",
       "userRationale": ": Rebase con drop del duplicado (Balanceado) ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777347266499",
+      "cycle": 112,
+      "timestamp": "2026-04-28T03:34:26.499Z",
+      "decisionPoint": "proceder con OPTION B: C112 + C113 — Cluster de Rotación de Credenciales (Balanceado) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": C112 + C113 — Cluster de Rotación de Credenciales (Balanceado) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777347399732",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:39.732Z",
+      "decisionPoint": "proceder con OPTION B: Cluster completo C112 + C113 secuencial con validación entre pasos ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Cluster completo C112 + C113 secuencial con validación entre pasos ⭐ RECOMENDADA",
+      "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777347706344",
+      "cycle": 115,
+      "timestamp": "2026-04-28T03:41:46.344Z",
+      "decisionPoint": "EJECUTAR AHORA — sin nuevo Decision Gate.\nLa decisión C113/C114 (Cluster rotación C112+C113, Option B) está aprobada y es vinculante.\nOutput esperado en este ciclo:\n  1) git tag pre-rotation-c115\n  2) pg_dump backup → ./backups/pre-rotation-c115.sql\n  3) node scripts/rotate-encryption-secret.js --ap",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ") está aprobada y es vinculante.\nOutput esperado en este ciclo:\n  1) git tag pre-rotation-c115\n  2) pg_dump backup → ./backups/pre-rotation-c115.sql\n  3) node scripts/rotate-encryption-secret.js --app",
+      "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777348877404",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:01:17.404Z",
+      "decisionPoint": "proceder con OPTION B: Reconciliación + Repriorización Backlog (Balanceada) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Reconciliación + Repriorización Backlog (Balanceada) ⭐ RECOMENDADA",
+      "outcome": "RESOLVED-RECONCILED",
+      "resolvedAtCycle": 121,
+      "resolvedAt": "2026-04-28T04:30:00.000Z",
+      "resolutionArtifacts": [
+        "TRUTH_RECONCILIATION_C120.md",
+        "INTELLIGENCE.json: 12 items rotación marcados DEFERRED-TO-PROD; 4 items deploy R1-R8 elevados HIGH",
+        "DESIGN_DOC.md: fila C120/C121 agregada al Decision Log",
+        "BITACORA.md: entrada C121 con JSON estructurado"
+      ]
+    },
+    {
+      "decisionId": "decision-1777349963160",
+      "cycle": 123,
+      "timestamp": "2026-04-28T04:19:23.160Z",
+      "decisionPoint": "proceder con OPTION A — PR único con los 17 commits",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "A",
+      "userRationale": "— PR único con los 17 commits",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -1164,607 +1302,294 @@
       "status": "PLANNED",
       "createdAtCycle": 106,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-107A",
+      "title": "Configurar branch protection en main",
+      "description": "Settings → Branches → require PR + status checks para prevenir push directo",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 107,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-107B",
+      "title": "Iniciar Railway deploy R1-R8",
+      "description": "Ejecutar docs/RAILWAY_DEPLOY.md fases R1-R8",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 107,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-107C",
+      "title": "Validación E2E input hardening C101",
+      "description": "Probar admin login con admin'-- y producto con <script> en UI real",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 107,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-107D",
+      "title": "GitHub Actions CI básico",
+      "description": "Workflow con lint + build + test en PR",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 107,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-112A",
+      "title": "Ejecutar C112: rotación ENCRYPTION_SECRET local",
+      "description": "pg_dump backup + rotate-encryption-secret.js --apply + smoke test descifrado SumUp",
+      "priority": "DEFERRED",
+      "status": "DEFERRED-TO-PROD",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: credenciales locales son sandbox, rotación se ejecutará en flujo Railway R5/R8 con secrets de producción",
+      "createdAtCycle": 112,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-112B",
+      "title": "Ejecutar C113: rotar JWT/reCAPTCHA/SumUp sandbox+prod",
+      "description": "Generar nuevos valores en gestor de secretos del usuario + crear CREDENTIAL_ROTATION_C112-C113.md gitignored",
+      "priority": "DEFERRED",
+      "status": "DEFERRED-TO-PROD",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: rotación sandbox no aporta seguridad operativa; SumUp prod ya cubierto por ROAD-114-3",
+      "createdAtCycle": 112,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-114",
+      "title": "Deploy Railway (backlog HIGH posterior)",
+      "description": "Continuar con deploy a Railway una vez completado cluster de rotación",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 113,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-BRANCH-PROTECT",
+      "title": "Activar branch protection en main",
+      "description": "Pendiente HIGH del backlog, debería preceder primer deploy productivo",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 112,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-113-1",
+      "title": "Ejecutar pre-flight (pg_dump + git tag pre-rotation-c113)",
+      "description": "Snapshot DB + commit limpio + tag de rollback antes de rotación",
+      "priority": "DEFERRED",
+      "status": "DEFERRED-TO-PROD",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: pre-flight de rotación se reemplaza por pre-flight de deploy (tag pre-deploy-cXXX en R1)",
+      "createdAtCycle": 113,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-113-2",
+      "title": "Rotar ENCRYPTION_SECRET (C112) y validar decrypt SumUp",
+      "description": "rotate-encryption-secret.js --apply + smoke test descifrado settings:sumup_api_key (NO payment_methods, esa tabla no existe)",
+      "priority": "DEFERRED",
+      "status": "DEFERRED-TO-PROD",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: ejecutar contra credenciales prod en Railway, no sandbox local",
+      "createdAtCycle": 113,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-113-3",
+      "title": "Rotar JWT/reCAPTCHA/SumUp (C113) y actualizar .env",
+      "description": "Generar nuevos valores, persistir en .env local, marcar SumUp prod pendiente input usuario",
+      "priority": "DEFERRED",
+      "status": "DEFERRED-TO-PROD",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: secretos sandbox no requieren rotación; los productivos se inyectan en Railway service env (R5)",
+      "createdAtCycle": 113,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-113-4",
+      "title": "Crear CREDENTIAL_ROTATION_C112-C113.md (gitignored)",
+      "description": "Doc con valores enmascarados, timestamp, checklist de gestor de secretos",
+      "priority": "DEFERRED",
+      "status": "DEFERRED-TO-PROD",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: el doc se sustituye por CREDENTIAL_ROTATION_DEPLOY.md (a crear cuando se ejecute rotación productiva en R5/R8)",
+      "createdAtCycle": 113,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-113-5",
+      "title": "Reinicio backend + smoke tests post-rotación",
+      "description": "Verificar login JWT, reCAPTCHA y checkout SumUp tras rotación completa",
+      "priority": "DEFERRED",
+      "status": "DEFERRED-TO-PROD",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: smoke tests se moverán a checklist R8 (post-deploy verification)",
+      "createdAtCycle": 113,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-114-1",
+      "title": "Ejecutar rotación ENCRYPTION_SECRET (C112)",
+      "description": "rotate-encryption-secret.js --apply con OLD/NEW vars + smoke test decrypt settings:sumup_api_key",
+      "priority": "DEFERRED",
+      "status": "DEFERRED-TO-PROD",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: ejecución diferida hasta tener entorno productivo Railway provisionado",
+      "createdAtCycle": 114,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-114-2",
+      "title": "Ejecutar rotación JWT + reCAPTCHA + SumUp sandbox (C113)",
+      "description": "Rotar secrets, actualizar .env, reinicio backend, smoke tests E2E",
+      "priority": "DEFERRED",
+      "status": "DEFERRED-TO-PROD",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: sandbox no requiere rotación; productivos van por Railway env vars",
+      "createdAtCycle": 114,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-114-3",
+      "title": "Rotar SumUp prod en deploy Railway",
+      "description": "PENDING_USER_INPUT: esperar credenciales SumUp prod del gestor del usuario antes de deploy",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 114,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-C117-UNBLOCK",
+      "title": "Resolve C116 blockers and complete rotation",
+      "description": "User must provide OLD+NEW_ENCRYPTION_SECRET (or authorize generation) and confirm smoke test target as settings:sumup_api_key",
+      "priority": "DEFERRED",
+      "status": "DEFERRED-TO-PROD",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: bloqueante C116 deja de aplicar al diferir cluster rotación a deploy",
+      "createdAtCycle": 116,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-C117-SMOKE-REWRITE",
+      "title": "Rewrite smoke test against settings table",
+      "description": "Update smoke test to decrypt one row from settings (sumup_api_key) instead of nonexistent payment_methods",
+      "priority": "MEDIUM",
+      "status": "DEFERRED-TO-DEPLOY",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: re-emergerá como sub-tarea de R8 (post-deploy verification) cuando se ejecute rotación productiva",
+      "createdAtCycle": 116,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-C117-PATH-FIX",
+      "title": "Adjust execution path to backend/scripts/rotate-encryption-secret.js",
+      "description": "Use correct path when running rotation in next cycle",
+      "priority": "LOW",
+      "status": "DEFERRED-TO-DEPLOY",
+      "deferredAtCycle": 121,
+      "deferredReason": "C121 reconciliación: nota de path se conserva para cuando rotación productiva se ejecute en R5/R8",
+      "createdAtCycle": 116,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-120-1",
+      "title": "Railway Deploy R1-R8",
+      "description": "Ejecutar pipeline de deploy a Railway en producción amaCafe",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 120,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-120-2",
+      "title": "Rotación credenciales SumUp en producción",
+      "description": "Diferida hasta post-deploy; usar settings:sumup_api_key como fuente de verdad",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 120,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-120-3",
+      "title": "Crear git tag pre-deploy-cXXX antes de Railway push",
+      "description": "Aprender de C115: verificar creación efectiva del tag con git tag --list antes de declarar éxito",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 120,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-121-RECONCILE",
+      "title": "Mantener TRUTH_RECONCILIATION_C120.md como referencia viva",
+      "description": "Actualizar si surgen nuevas divergencias declarado-vs-verificado",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 121,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-121-DEPLOY-R1",
+      "title": "Branch protection en main",
+      "description": "GitHub UI → Settings → Branches → require PR + status checks",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 121,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-121-DEPLOY-R2",
+      "title": "Configurar Railway deployment",
+      "description": "Wiring de despliegue productivo previo a rotación",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 121,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-121-DEPLOY-R3-R8",
+      "title": "Rotación productiva de credenciales en Railway",
+      "description": "Ejecutar rotación una vez R1+R2 completos, con secretos productivos reales",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 121,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-123-1",
+      "title": "Ejecutar Option elegida para Sprint A",
+      "description": "Crear rama release/c123-sprint-a, push, abrir PR, mergear, crear tag pre-deploy-c123",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 123,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-123-2",
+      "title": "Verificar tag remoto post-merge",
+      "description": "git ls-remote --tags origin pre-deploy-c123 debe devolver SHA esperado antes de declarar SUCCESS",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 123,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-123-3",
+      "title": "Documentar política de branch protection en DESIGN_DOC",
+      "description": "Formalizar que main requiere PR + revisar si admins pueden bypass",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 123,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-84-1777333031645-0",
-      "cycle": 84,
-      "timestamp": "2026-04-27T23:37:11.645Z",
-      "type": "USER_PREFERENCE",
-      "title": "Hybrid execution: implement + Decision Gate",
-      "description": "User authorizes immediate execution for low-risk B-tasks while reserving Decision Gate for strategic ones",
-      "context": "When cycle has multiple B-tasks with mixed risk/strategic weight",
-      "applicability": [
-        "synaptic-protocol",
-        "decision-gate",
-        "execution-mode"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:37:11.645Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-85-1777333510513-5",
-      "cycle": 85,
-      "timestamp": "2026-04-27T23:45:10.513Z",
-      "type": "USER_PREFERENCE",
-      "title": "User picks Balanced options when offered tiers",
-      "description": "User selected OPTION B (Balanced) over A (minimal) and C (object storage) for image persistence",
-      "context": "Decision gates with effort/complexity tradeoffs",
-      "applicability": [
-        "decisions",
-        "tradeoffs"
-      ],
-      "confidence": {
-        "score": 0.6000000000000001,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:45:10.513Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244504-0",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.504Z",
-      "type": "ANTI_PATTERN",
-      "title": "DB-seeded config blocks env override",
-      "description": "Migration 004 seeded sumup_mode='mock' in settings; getModeWithSource read DB first so env fallback never fired and failsafe exit(1) trapped operator out of UI.",
-      "context": "When config has both DB-persisted and env-var sources with DB precedence on fresh deploys",
-      "applicability": [
-        "config",
-        "bootstrap",
-        "railway",
-        "sumup"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.504Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244513-1",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.513Z",
-      "type": "PATTERN",
-      "title": "One-shot env→DB promotion on boot",
-      "description": "bootstrapModeFromEnv() UPSERTs valid env value into settings before failsafe resolves, with cache invalidation and per-outcome logging.",
-      "context": "Reconciling env-var intent with DB-persisted config during cold-start",
-      "applicability": [
-        "bootstrap",
-        "config-reconciliation",
-        "sumup.config.js"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.513Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244515-2",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.515Z",
-      "type": "ANTI_PATTERN",
-      "title": "node_modules + .DS_Store tracked despite .gitignore",
-      "description": "1243 node_modules files and 4 .DS_Store files were in the index; .gitignore alone doesn't untrack already-committed paths.",
-      "context": "Repos where files were committed before .gitignore was added",
-      "applicability": [
-        "git-hygiene",
-        "gitignore",
-        "pre-push"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.515Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244518-3",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.518Z",
-      "type": "PATTERN",
-      "title": "Pre-commit hook with regex precision",
-      "description": "Initial .env regex over-matched .env.example; precise patterns + smoke-test against tmp git repo before declaring hook ready.",
-      "context": "Writing git hooks that block categories of files",
-      "applicability": [
-        "git-hooks",
-        "pre-commit",
-        "regex"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.518Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244520-4",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.520Z",
-      "type": "USER_PREFERENCE",
-      "title": "Multi-item requests executed in IMMEDIATE EXECUTION (DG-079)",
-      "description": "User chained three independent C86 follow-ups in one request expecting all executed without re-confirmation per item.",
-      "context": "When user explicitly references prior cycle recommendations",
-      "applicability": [
-        "execution-mode",
-        "synaptic-protocol"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.520Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244523-5",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.523Z",
-      "type": "INSIGHT",
-      "title": "C86 G/R items lived only in conversation",
-      "description": "G1-G4 and R1-R9 labels weren't persisted to disk; had to reconstruct meaning from code inspection.",
-      "context": "When prior cycle reports use ad-hoc labels not saved to BITACORA/REGISTRY",
-      "applicability": [
-        "synaptic-memory",
-        "cycle-handoff"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.523Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244525-6",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.525Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Stage-only cleanup for large deletions",
-      "description": "git rm --cached run but commit deferred to user — 1247 file/-223856 line deletion staged for review before commit.",
-      "context": "When sweeping index changes need human eyes before history is rewritten",
-      "applicability": [
-        "git-rm-cached",
-        "review-gate"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.525Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-93-1777337968454-0",
-      "cycle": 93,
-      "timestamp": "2026-04-28T00:59:28.454Z",
-      "type": "USER_PREFERENCE",
-      "title": "Usuario prefiere opciones balanceadas (Option B)",
-      "description": "5/5 últimas decisiones del usuario favorecieron la opción B (balanceada) sobre conservadora o innovadora",
-      "context": "Decision Gates con tres opciones A/B/C",
-      "applicability": [
-        "decision-gate",
-        "user-pattern",
-        "option-b"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:59:28.454Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-93-1777337968459-1",
-      "cycle": 93,
-      "timestamp": "2026-04-28T00:59:28.459Z",
-      "type": "PATTERN",
-      "title": "Decision Gate sobre mecánica de push inicial",
-      "description": "Push inicial a remote vacío requiere decidir: rename branch, manejo de tags, branch protection",
-      "context": "Primer push a repo GitHub recién creado tras filter-repo",
-      "applicability": [
-        "git",
-        "github",
-        "initial-push",
-        "filter-repo"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:59:28.459Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-93-1777337968462-2",
-      "cycle": 93,
-      "timestamp": "2026-04-28T00:59:28.462Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Pre-flight checks obligatorios antes de push post-purga",
-      "description": "Verificar remote, .gitignore, tag respaldo, credenciales rotadas, log post-purga antes de pushear",
-      "context": "Push inicial tras git filter-repo que eliminó secretos",
-      "applicability": [
-        "security",
-        "git-filter-repo",
-        "secrets-purge"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:59:28.462Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-93-1777337968465-3",
-      "cycle": 93,
-      "timestamp": "2026-04-28T00:59:28.465Z",
-      "type": "INSIGHT",
-      "title": "Tag pre-purge-c77 sólo local es single-point-of-failure",
-      "description": "Mantener tag de respaldo de purga sólo en local arriesga pérdida por fallo de disco",
-      "context": "Estrategia de respaldo post-filter-repo",
-      "applicability": [
-        "backup",
-        "resilience",
-        "tags"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:59:28.465Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-93-1777337968468-4",
-      "cycle": 93,
-      "timestamp": "2026-04-28T00:59:28.468Z",
-      "type": "ANTI_PATTERN",
-      "title": "Dual branch master+main genera ruido sin beneficio",
-      "description": "Publicar ambas ramas con mismo HEAD confunde y branch protection estricta sin team bloquea workflow",
-      "context": "MVP de un solo desarrollador",
-      "applicability": [
-        "git",
-        "branch-strategy",
-        "over-engineering"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:59:28.468Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-94-1777338274400-0",
-      "cycle": 94,
-      "timestamp": "2026-04-28T01:04:34.400Z",
-      "type": "ANTI_PATTERN",
-      "title": "Tag name mismatch entre Decision Gate e ejecución",
-      "description": "Decision Gate C93 mencionó 'pre-purge-c77' pero la tag real era 'pre-purge-c78' (creada en C78)",
-      "context": "Al ejecutar acciones que referencian tags/branches creados en cycles previos",
-      "applicability": [
-        "git",
-        "tags",
-        "decision-gate",
-        "verification"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:04:34.400Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-94-1777338274406-1",
-      "cycle": 94,
-      "timestamp": "2026-04-28T01:04:34.406Z",
-      "type": "PATTERN",
-      "title": "Pre-flight security check antes de push público",
-      "description": "Verificar .env ausente del historial completo ANTES de push a remoto público",
-      "context": "Primer push a repo público después de purga de secretos",
-      "applicability": [
-        "git",
-        "security",
-        "secrets",
-        "public-push"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:04:34.406Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-94-1777338274410-2",
-      "cycle": 94,
-      "timestamp": "2026-04-28T01:04:34.410Z",
-      "type": "USER_PREFERENCE",
-      "title": "Option B (Balanceado) sobre opciones extremas",
-      "description": "Usuario prefiere balance: rename + push main + push tag respaldo, sin force-push ni purga adicional",
-      "context": "Decisiones de migración de branch master→main con tag de respaldo",
-      "applicability": [
-        "decision-gate",
-        "git-migration",
-        "balanced-approach"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:04:34.410Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-94-1777338274413-3",
-      "cycle": 94,
-      "timestamp": "2026-04-28T01:04:34.413Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Sequencia git rename + push -u + push tag",
-      "description": "git remote add → git branch -m → git push -u origin main → git push origin <tag>",
-      "context": "Migración inicial de repo local a remoto público con preservación de respaldo",
-      "applicability": [
-        "git",
-        "remote-setup",
-        "branch-migration"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:04:34.413Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-95-1777338453119-0",
-      "cycle": 95,
-      "timestamp": "2026-04-28T01:07:33.119Z",
-      "type": "PATTERN",
-      "title": "Verify state before requesting manual user action",
-      "description": "Use gh api to check actual GitHub state before asking user to perform UI tasks",
-      "context": "When roadmap suggests manual GitHub UI actions",
-      "applicability": [
-        "github",
-        "verification",
-        "automation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:07:33.119Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-95-1777338453125-1",
-      "cycle": 95,
-      "timestamp": "2026-04-28T01:07:33.125Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "GitHub auto-promotes first pushed branch as default",
-      "description": "Empty repos auto-set default branch on first push -u; no manual UI step needed",
-      "context": "After git push -u origin main on a freshly created empty repo",
-      "applicability": [
-        "github",
-        "git",
-        "default-branch"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:07:33.125Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-95-1777338453128-2",
-      "cycle": 95,
-      "timestamp": "2026-04-28T01:07:33.128Z",
-      "type": "PATTERN",
-      "title": "Verify .env absence in remote history after purge",
-      "description": "git log --all --full-history -- '**/.env' must return empty to confirm filter-repo persisted",
-      "context": "Post-push validation after git filter-repo credential purge",
-      "applicability": [
-        "security",
-        "git-filter-repo",
-        "validation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:07:33.128Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-95-1777338453132-3",
-      "cycle": 95,
-      "timestamp": "2026-04-28T01:07:33.132Z",
-      "type": "INSIGHT",
-      "title": "Repo visibility was private, not public as legacy roadmap claimed",
-      "description": "AmaCafeDos repo is private; older roadmap notes had stale visibility info",
-      "context": "When trusting legacy roadmap entries about repo metadata",
-      "applicability": [
-        "roadmap-hygiene",
-        "github"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:07:33.132Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-98-1777340081584-0",
-      "cycle": 98,
-      "timestamp": "2026-04-28T01:34:41.584Z",
-      "type": "ANTI_PATTERN",
-      "title": "Tier/Bx labels not persisted in BITACORA",
-      "description": "C96/C97 entries lack Decision Gate task categorization, causing scope ambiguity in C98",
-      "context": "When user references prior cycle tasks by label (Tier N, Bx)",
-      "applicability": [
-        "bitacora",
-        "decision-gate",
-        "task-tracking"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:34:41.584Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-98-1777340081588-1",
-      "cycle": 98,
-      "timestamp": "2026-04-28T01:34:41.588Z",
-      "type": "PATTERN",
-      "title": "Halt on ambiguous scope despite DG-079",
-      "description": "Even in Immediate Execution mode, ask for clarification when task labels are undefined in persisted state",
-      "context": "When user prompt references undefined Tier/task IDs",
-      "applicability": [
-        "dg-079",
-        "immediate-execution",
-        "ambiguity"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:34:41.588Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-98-1777340081590-2",
-      "cycle": 98,
-      "timestamp": "2026-04-28T01:34:41.590Z",
-      "type": "INSIGHT",
-      "title": "B-task ID collision risk",
-      "description": "B1/B2/B3/B4 from C83-85 already executed; reusing labels in new cycles creates confusion",
-      "context": "Future task labeling should use cycle-prefixed IDs (C97-B1) not bare Bx",
-      "applicability": [
-        "task-naming",
-        "intelligence-json"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:34:41.590Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-100-1777340420165-0",
-      "cycle": 100,
-      "timestamp": "2026-04-28T01:40:20.165Z",
-      "type": "USER_PREFERENCE",
-      "title": "ENFORCE-SYNAPTIC-PROTOCOL overrides immediate-execution mode",
-      "description": "Explicit enforcement directive in request triggers mandatory Decision Gate even when DG-079 active",
-      "context": "When user includes [ENFORCE-SYNAPTIC-PROTOCOL] tag in cycle request",
-      "applicability": [
-        "synaptic-protocol",
-        "decision-gate",
-        "enforcement"
-      ],
-      "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:40:20.165Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-100-1777340420171-1",
-      "cycle": 100,
-      "timestamp": "2026-04-28T01:40:20.171Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "No central validateInput middleware exists",
-      "description": "Backend has only auth.js (36 LOC) and security.js (125 LOC); no validateInput.js, no zod/joi/express-validator",
-      "context": "Audit baseline for input-hardening work in amaCafe backend",
-      "applicability": [
-        "backend",
-        "middleware",
-        "security-audit"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:40:20.171Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-100-1777340420175-2",
-      "cycle": 100,
-      "timestamp": "2026-04-28T01:40:20.175Z",
-      "type": "ANTI_PATTERN",
-      "title": "Test glob excludes middleware/ and routes/",
-      "description": "Pattern 'src/utils/*.test.js' won't pick up middleware/*.test.js or routes/*.test.js",
-      "context": "Adding tests outside utils/ requires updating package.json test script",
-      "applicability": [
-        "testing",
-        "node-test-runner",
-        "package-json"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:40:20.175Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-100-1777340420178-3",
-      "cycle": 100,
-      "timestamp": "2026-04-28T01:40:20.178Z",
-      "type": "PATTERN",
-      "title": "Prefer hand-rolled utilities over new dependencies",
-      "description": "Monorepo convention follows keyManager.js style — hand-rolled validators preferred over zod/dompurify",
-      "context": "When choosing between adding deps vs implementing lightweight utilities",
-      "applicability": [
-        "dependencies",
-        "convention",
-        "amaCafe"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:40:20.178Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-100-1777340420182-4",
-      "cycle": 100,
-      "timestamp": "2026-04-28T01:40:20.182Z",
-      "type": "INSIGHT",
-      "title": "Pre-Railway-deploy risk shapes scope decisions",
-      "description": "High blast-radius changes (13-route sweeps) deferred until Railway deploy is stable",
-      "context": "Scoping cycles during deployment-sensitive periods",
-      "applicability": [
-        "risk-management",
-        "deployment",
-        "scoping"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:40:20.182Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-101-1777340855619-1",
       "cycle": 101,
@@ -1780,7 +1605,7 @@
         "xss"
       ],
       "confidence": {
-        "score": 0.85,
+        "score": 0.25,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:55:00.000Z",
         "source": "IMPLEMENTED"
@@ -1800,7 +1625,7 @@
         "routing"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.30000000000000004,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-28T01:55:00.000Z",
         "source": "IMPLEMENTED"
@@ -1820,110 +1645,10 @@
         "prototype-pollution"
       ],
       "confidence": {
-        "score": 0.95,
+        "score": 0.34999999999999987,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:55:00.000Z",
         "source": "IMPLEMENTED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340913009-0",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:48:33.009Z",
-      "type": "PATTERN",
-      "title": "Defense-in-depth via mount order",
-      "description": "Mount exempt routes (webhooks, chat) before global guard; no per-path skip logic needed",
-      "context": "Express middleware that should bypass global validation",
-      "applicability": [
-        "express",
-        "middleware",
-        "security"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:48:33.009Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340913015-1",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:48:33.015Z",
-      "type": "PATTERN",
-      "title": "Loud reject over silent strip",
-      "description": "Central guard returns 400+code+field; silent sanitizers kept only where legitimate tokens need preservation",
-      "context": "Input validation strategy at API boundary",
-      "applicability": [
-        "security",
-        "validation",
-        "api"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:48:33.015Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340913019-2",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:48:33.019Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "NoSQL $ops live in keys not values",
-      "description": "Deep-walk validators must inspect object keys for $where/$ne, not just values",
-      "context": "NoSQL injection detection in JSON bodies",
-      "applicability": [
-        "nosql",
-        "validation",
-        "security"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:48:33.019Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340913022-3",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:48:33.022Z",
-      "type": "ANTI_PATTERN",
-      "title": "Test glob too narrow misses middleware",
-      "description": "package.json test script globbing src/utils/*.test.js silently skipped src/middleware/ tests",
-      "context": "Adding tests in new directories",
-      "applicability": [
-        "testing",
-        "package.json",
-        "node"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:48:33.022Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340913026-4",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:48:33.026Z",
-      "type": "INSIGHT",
-      "title": "Parameterized SQL closes SQLi at DB layer",
-      "description": "All routes already used $1,$2 params; central guard is second wall, not primary defense",
-      "context": "Auditing SQLi exposure before adding middleware",
-      "applicability": [
-        "postgres",
-        "sqli",
-        "audit"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:48:33.026Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1941,7 +1666,7 @@
         "decision-gate"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:58:31.230Z",
         "source": "EXPLICIT"
@@ -1962,69 +1687,9 @@
         "railway"
       ],
       "confidence": {
-        "score": 0.44999999999999996,
+        "score": 0.35,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-28T02:19:19.372Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-103-1777341511242-2",
-      "cycle": 103,
-      "timestamp": "2026-04-28T01:58:31.242Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "git rm --cached avoids history rewrite",
-      "description": "Adding pattern to .gitignore + git rm --cached removes tracked files without filter-branch",
-      "context": "When excluding generated SYNAPTIC intelligence snapshots from future commits",
-      "applicability": [
-        "gitignore",
-        "synaptic-intelligence",
-        "history-preservation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:58:31.242Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-103-1777341511245-3",
-      "cycle": 103,
-      "timestamp": "2026-04-28T01:58:31.245Z",
-      "type": "PATTERN",
-      "title": "Pre-flight read-only diff before any remote-affecting action",
-      "description": "git diff origin/main..HEAD --stat verifies expected delta (validateInput.* + server.js) before push",
-      "context": "Before any push, tag, or gitignore mutation that touches remote or staged state",
-      "applicability": [
-        "pre-flight",
-        "git-diff",
-        "verification"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:58:31.245Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-103-1777341511249-4",
-      "cycle": 103,
-      "timestamp": "2026-04-28T01:58:31.249Z",
-      "type": "INSIGHT",
-      "title": "INTELLIGENCE_*.json versioning is a binary audit-vs-bloat tradeoff",
-      "description": "Keeping snapshots gives audit trail but causes repo bloat and noisy PR diffs over time",
-      "context": "Deciding which SYNAPTIC artifacts belong in remote history vs. local-only",
-      "applicability": [
-        "synaptic",
-        "repo-hygiene",
-        "audit-trail"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:58:31.249Z",
         "source": "INFERRED"
       }
     },
@@ -2042,9 +1707,9 @@
         "remote-safety"
       ],
       "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:19:19.356Z",
+        "score": 0.44999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T04:18:22.145Z",
         "source": "INFERRED"
       }
     },
@@ -2162,9 +1827,9 @@
         "history-cleanup"
       ],
       "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:32:13.307Z",
+        "score": 0.44999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T02:37:34.504Z",
         "source": "INFERRED"
       }
     },
@@ -2226,12 +1891,781 @@
         "lastReinforced": "2026-04-28T02:32:13.316Z",
         "source": "EXPLICIT"
       }
+    },
+    {
+      "learningId": "learning-107-1777343854508-1",
+      "cycle": 107,
+      "timestamp": "2026-04-28T02:37:34.508Z",
+      "type": "PATTERN",
+      "title": "Tag de respaldo pre-rebase",
+      "description": "Crear tag pre-rebase-cXXX antes de history rewrite permite rollback sin reflog",
+      "context": "Antes de cualquier rebase/reset que reescriba historia local",
+      "applicability": [
+        "git",
+        "safety",
+        "rollback",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:37:34.508Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-107-1777343854512-2",
+      "cycle": 107,
+      "timestamp": "2026-04-28T02:37:34.512Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Validación de duplicado por árbol+timestamp",
+      "description": "Comparar árbol git (líneas modificadas) y timestamp confirma equivalencia funcional pese a mensajes distintos",
+      "context": "Diagnóstico previo a drop en rebase para evitar pérdida de cambios reales",
+      "applicability": [
+        "git",
+        "diff",
+        "diagnosis"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:37:34.512Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-107-1777343854515-3",
+      "cycle": 107,
+      "timestamp": "2026-04-28T02:37:34.515Z",
+      "type": "INSIGHT",
+      "title": "Push fast-forward post-rebase evita --force",
+      "description": "Si origin solo tenía el duplicado dropable, post-rebase el push es FF natural sin --force",
+      "context": "Reconciliación local↔remote cuando divergencia es solo por duplicado",
+      "applicability": [
+        "git",
+        "push",
+        "safety"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:37:34.515Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-112-1777347226694-0",
+      "cycle": 112,
+      "timestamp": "2026-04-28T03:33:46.694Z",
+      "type": "USER_PREFERENCE",
+      "title": "Option B preference reinforced (10/10)",
+      "description": "Usuario confirma Option B (Balanceado) como elección estadísticamente dominante",
+      "context": "Decision Gates con tres opciones A/B/C donde B agrupa por dominio natural",
+      "applicability": [
+        "decision-gate",
+        "user-preference",
+        "balanced-scope"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:33:46.694Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-112-1777347226700-1",
+      "cycle": 112,
+      "timestamp": "2026-04-28T03:33:46.700Z",
+      "type": "PATTERN",
+      "title": "Atomicidad por dominio en sub-ciclos",
+      "description": "Agrupar sub-ciclos que comparten naturaleza (crypto), separar los de naturaleza distinta (infra cloud)",
+      "context": "Cuando backlog contiene múltiples sub-tareas encadenadas con riesgos heterogéneos",
+      "applicability": [
+        "cycle-scoping",
+        "risk-isolation",
+        "atomic-cycles"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:33:46.700Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-112-1777347226704-2",
+      "cycle": 112,
+      "timestamp": "2026-04-28T03:33:46.704Z",
+      "type": "ANTI_PATTERN",
+      "title": "Mega-ciclos crypto+infra mezclados",
+      "description": "Combinar rotación de secretos local con reconfiguración Railway UI viola atomicidad y aumenta blast radius",
+      "context": "Tentación de cerrar todo el bloque pre-deploy en un solo Decision Gate",
+      "applicability": [
+        "scope-creep",
+        "blast-radius",
+        "railway-deploy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:33:46.704Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-112-1777347226707-3",
+      "cycle": 112,
+      "timestamp": "2026-04-28T03:33:46.707Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "C112 bloqueante para C113-C115",
+      "description": "Validar descifrado SumUp post-rotación ENCRYPTION_SECRET antes de rotar credenciales externas",
+      "context": "Rotación de claves simétricas con datos cifrados en DB (encrypted_keys/stored_keys)",
+      "applicability": [
+        "encryption-rotation",
+        "sumup-keys",
+        "pre-deploy-validation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:33:46.707Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-112-1777347226710-4",
+      "cycle": 112,
+      "timestamp": "2026-04-28T03:33:46.710Z",
+      "type": "INSIGHT",
+      "title": "Override DG-079 vía ENFORCE-SYNAPTIC-PROTOCOL",
+      "description": "Marcador detectado activa Decision Gate explícito incluso cuando immediate execution estaba sugerida",
+      "context": "Cuando usuario solicita 'proceder con implementación' pero el ciclo requiere granularidad",
+      "applicability": [
+        "protocol-override",
+        "decision-gate",
+        "immediate-execution"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:33:46.710Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-113-1777347364980-0",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:04.980Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario confirma Option B en cluster de rotación",
+      "description": "Usuario aprobó OPTION B (cluster C112+C113 secuencial con checkpoint) consistente con patrón 10/10",
+      "context": "Decisiones de implementación bajo ENFORCE-SYNAPTIC-PROTOCOL con clusters aprobados previamente",
+      "applicability": [
+        "decision-gate",
+        "option-b",
+        "credential-rotation"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:36:04.980Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-113-1777347364985-1",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:04.985Z",
+      "type": "PATTERN",
+      "title": "Checkpoint defensivo entre sub-tareas críticas",
+      "description": "Cluster ejecuta C112 con validación + STOP-on-fail antes de proceder a C113",
+      "context": "Rotaciones múltiples de secretos en una misma sesión",
+      "applicability": [
+        "rotation",
+        "checkpoint",
+        "blast-radius"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:36:04.985Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-113-1777347364989-2",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:04.989Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Pre-flight obligatorio antes de rotación",
+      "description": "pg_dump + commit limpio + git tag pre-rotation-c113 como red de seguridad",
+      "context": "Rotación de ENCRYPTION_SECRET que afecta DB cifrada",
+      "applicability": [
+        "pg_dump",
+        "rollback",
+        "encryption-secret"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:36:04.989Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-113-1777347364993-3",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:04.993Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Documento de rotación gitignored",
+      "description": "CREDENTIAL_ROTATION_C112-C113.md mantiene secretos enmascarados fuera de git (post-purga C78)",
+      "context": "Documentación de rotaciones sin reintroducir secretos al historial",
+      "applicability": [
+        "gitignore",
+        "secrets",
+        "documentation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:36:04.993Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-113-1777347364996-4",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:04.996Z",
+      "type": "ANTI_PATTERN",
+      "title": "Evitar orquestador transaccional para MVP local",
+      "description": "Option C (rotate-all-secrets.js +400 LOC) descartada por over-engineering y desviar foco de Railway deploy",
+      "context": "Decisiones de scope en MVP cuando hay backlog HIGH pendiente",
+      "applicability": [
+        "over-engineering",
+        "yagni",
+        "mvp"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:36:04.996Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-114-1777347499180-0",
+      "cycle": 114,
+      "timestamp": "2026-04-28T03:38:19.180Z",
+      "type": "USER_PREFERENCE",
+      "title": "Cluster Option B confirmado en C114",
+      "description": "Usuario confirma Option B para cluster C112+C113 con validación entre pasos",
+      "context": "Decisiones de rotación de credenciales en clusters secuenciales",
+      "applicability": [
+        "credential-rotation",
+        "cluster-execution",
+        "option-b"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:38:19.180Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-114-1777347499185-1",
+      "cycle": 114,
+      "timestamp": "2026-04-28T03:38:19.185Z",
+      "type": "PATTERN",
+      "title": "Patrón Option B en 11/11 decisiones recientes",
+      "description": "Usuario consistentemente elige Option B (balance entre conservador y acelerado)",
+      "context": "Decision Gates en SYNAPTIC Protocol",
+      "applicability": [
+        "decision-gate",
+        "option-selection",
+        "user-pattern"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:38:19.185Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-114-1777347499189-2",
+      "cycle": 114,
+      "timestamp": "2026-04-28T03:38:19.189Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Pre-flight backup focalizado en tablas críticas",
+      "description": "pg_dump schema+data de payment_methods, users, orders + git tag pre-rotation-c114",
+      "context": "Antes de rotar ENCRYPTION_SECRET en producción local",
+      "applicability": [
+        "backup",
+        "pg_dump",
+        "rollback-strategy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:38:19.189Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-114-1777347499192-3",
+      "cycle": 114,
+      "timestamp": "2026-04-28T03:38:19.192Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "SumUp prod diferido a deploy Railway",
+      "description": "SumUp prod credentials marcadas PENDING_USER_INPUT hasta entorno Railway listo",
+      "context": "Rotación de credenciales con dependencia de entorno productivo",
+      "applicability": [
+        "sumup",
+        "railway-deploy",
+        "credential-staging"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:38:19.192Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-114-1777347499195-4",
+      "cycle": 114,
+      "timestamp": "2026-04-28T03:38:19.195Z",
+      "type": "PATTERN",
+      "title": "Decision Gate de granularidad post-decisión macro",
+      "description": "Aunque cluster macro decidido en C113, C114 abre Decision Gate para variables operativas",
+      "context": "Cuando hay variables de ejecución no comprometidas tras decisión macro",
+      "applicability": [
+        "decision-gate",
+        "execution-granularity",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:38:19.195Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853358-0",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.358Z",
+      "type": "USER_PREFERENCE",
+      "title": "Immediate execution mode overrides Decision Gates",
+      "description": "User can declare prior decision binding and demand execution without new DG/halts",
+      "context": "When user explicitly says 'EJECUTAR AHORA — sin nuevo Decision Gate'",
+      "applicability": [
+        "execution-mode",
+        "decision-gates",
+        "user-directives"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.358Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853365-1",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.365Z",
+      "type": "PATTERN",
+      "title": "Halt-on-blocker with error codes is acceptable in immediate execution",
+      "description": "Even in 'no halts' mode, hard blockers (missing secrets, missing tables) warrant stop with clear error code",
+      "context": "Destructive operations with missing prerequisites",
+      "applicability": [
+        "pre-flight",
+        "blockers",
+        "error-codes"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.365Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853369-2",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.369Z",
+      "type": "ANTI_PATTERN",
+      "title": "Never invent secrets or credentials autonomously",
+      "description": "OLD/NEW_ENCRYPTION_SECRET must come from user or explicit authorization, never fabricated",
+      "context": "Credential rotation operations",
+      "applicability": [
+        "secrets",
+        "security",
+        "rotation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.369Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853373-3",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.373Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "payment_methods table does not exist in db_taza_data",
+      "description": "Encrypted data lives in 'settings' table (recaptcha_secret_key, sumup_api_key, sumup_merchant_code)",
+      "context": "Smoke tests for encryption rotation",
+      "applicability": [
+        "database-schema",
+        "encryption",
+        "amaCafe"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.373Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853376-4",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.376Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "rotate-encryption-secret.js lives in backend/scripts/ not scripts/",
+      "description": "Path drift between user requirement and actual file location",
+      "context": "Executing rotation script",
+      "applicability": [
+        "script-paths",
+        "amaCafe",
+        "backend"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.376Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853379-5",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.379Z",
+      "type": "PATTERN",
+      "title": "Pre-flight verification before destructive operations",
+      "description": "Verify pg_dump availability, DB access, .env presence, tag availability, working tree state before mutation",
+      "context": "Any rotation/migration/destructive cycle",
+      "applicability": [
+        "pre-flight",
+        "safety",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.379Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-120-1777348856861-0",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:00:56.862Z",
+      "type": "USER_PREFERENCE",
+      "title": "Deploy-first sobre rotación de credenciales sandbox",
+      "description": "Usuario priorizó Railway deploy R1-R8 y diferir rotación de credenciales sandbox a producción",
+      "context": "Cuando el backlog INTELLIGENCE muestre rotación como HIGH pero el usuario indique deploy primero",
+      "applicability": [
+        "roadmap",
+        "prioritization",
+        "sandbox",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:00:56.861Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-120-1777348856869-1",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:00:56.869Z",
+      "type": "ANTI_PATTERN",
+      "title": "Declarar ejecución sin verificar artefactos físicos",
+      "description": "C115/C116 declararon git tag y rotación que nunca ocurrieron; tabla payment_methods no existía",
+      "context": "Antes de marcar SUCCESS en BITACORA, verificar tags, tablas y commits POST reales",
+      "applicability": [
+        "bitacora",
+        "verification",
+        "smoke-test",
+        "git-tags"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:00:56.869Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-120-1777348856873-2",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:00:56.873Z",
+      "type": "PATTERN",
+      "title": "Reconciliación append-only en BITACORA",
+      "description": "Erratas históricas se anexan como sección ERRATA CXXX, nunca se reescriben entradas previas",
+      "context": "Cuando se descubren divergencias entre BITACORA y estado físico verificable",
+      "applicability": [
+        "bitacora",
+        "audit",
+        "errata",
+        "memory-hygiene"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:00:56.873Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-120-1777348856877-3",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:00:56.877Z",
+      "type": "INSIGHT",
+      "title": "ENFORCE-SYNAPTIC-PROTOCOL anula DG-079 Immediate Execution",
+      "description": "Aun con DG-079 activo, instrucciones SYNAPTIC strict obligan a Decision Gate previo",
+      "context": "Inicio de cualquier ciclo bajo enforcement STRICT",
+      "applicability": [
+        "protocol",
+        "decision-gate",
+        "enforcement"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:00:56.877Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-120-1777348856880-4",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:00:56.880Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Smoke test SumUp usa settings:sumup_api_key",
+      "description": "No existe tabla payment_methods; credenciales SumUp viven en settings con clave sumup_api_key",
+      "context": "Al diseñar smoke tests o queries de credenciales SumUp en amaCafe",
+      "applicability": [
+        "sumup",
+        "smoke-test",
+        "settings",
+        "amaCafe"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:00:56.880Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-121-1777349478366-0",
+      "cycle": 121,
+      "timestamp": "2026-04-28T04:11:18.366Z",
+      "type": "USER_PREFERENCE",
+      "title": "Option B robusta (12/12 últimas decisiones)",
+      "description": "Usuario prefiere reconciliación balanceada con repriorización sobre rollback o continuación ciega",
+      "context": "Cuando hay divergencia declarado-vs-verificado en backlog",
+      "applicability": [
+        "decision-making",
+        "backlog",
+        "reconciliation"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:11:18.366Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-121-1777349478373-1",
+      "cycle": 121,
+      "timestamp": "2026-04-28T04:11:18.373Z",
+      "type": "ANTI_PATTERN",
+      "title": "Declaraciones C115/C116 sin artefactos en filesystem",
+      "description": "Tag pre-rotation-c115, pg_dump backups, y rotate-encryption-secret.js --apply declarados pero ninguno existe en git/fs",
+      "context": "Auditoría retroactiva de ciclos anteriores",
+      "applicability": [
+        "audit",
+        "verification",
+        "trust"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:11:18.373Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-121-1777349478379-2",
+      "cycle": 121,
+      "timestamp": "2026-04-28T04:11:18.379Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Smoke target correcto es settings:sumup_api_key",
+      "description": "Tabla payment_methods no existe en db_taza_data; rotación debe apuntar a settings:sumup_api_key",
+      "context": "Cualquier validación de rotación de credenciales en amaCafe",
+      "applicability": [
+        "database",
+        "rotation",
+        "smoke-test"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:11:18.379Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-121-1777349478383-3",
+      "cycle": 121,
+      "timestamp": "2026-04-28T04:11:18.383Z",
+      "type": "PATTERN",
+      "title": "Edit con ancla por itemId único",
+      "description": "Para evitar colisiones de string en INTELLIGENCE.json, anclar Edit al itemId previo del bloque",
+      "context": "Mutaciones masivas en INTELLIGENCE.json con múltiples items similares",
+      "applicability": [
+        "intelligence-json",
+        "bulk-edit",
+        "tooling"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:11:18.383Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-121-1777349478386-4",
+      "cycle": 121,
+      "timestamp": "2026-04-28T04:11:18.386Z",
+      "type": "INSIGHT",
+      "title": "Rotación sandbox se reubica, no se cancela",
+      "description": "Credenciales sandbox quedan DEFERRED-TO-PROD vinculadas a flujo Railway R5/R8 con secretos productivos",
+      "context": "Decisiones sobre credenciales en entornos pre-producción",
+      "applicability": [
+        "security",
+        "deployment",
+        "credentials"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:11:18.386Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-123-1777349902151-1",
+      "cycle": 123,
+      "timestamp": "2026-04-28T04:18:22.151Z",
+      "type": "ANTI_PATTERN",
+      "title": "Crear tag sin push previo exitoso",
+      "description": "Crear tag local apuntando a SHA no presente en origin = artefacto huérfano (patrón C115/C116)",
+      "context": "Al ejecutar sprints de deploy con tags + commits",
+      "applicability": [
+        "git",
+        "tags",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:18:22.151Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-123-1777349902155-2",
+      "cycle": 123,
+      "timestamp": "2026-04-28T04:18:22.155Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Branch protection activa en main",
+      "description": "GH006 bloquea push directo a main; requiere PR. Coherente con backlog HIGH ya planeado",
+      "context": "Cualquier intento de push directo a main fallará",
+      "applicability": [
+        "github",
+        "branch-protection",
+        "main"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:18:22.155Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-123-1777349902160-3",
+      "cycle": 123,
+      "timestamp": "2026-04-28T04:18:22.160Z",
+      "type": "USER_PREFERENCE",
+      "title": "HALT-AWAITING-INPUT en decisiones de estado compartido",
+      "description": "Detener y pedir decisión explícita antes de tocar settings/protecciones visibles a terceros",
+      "context": "Cuando alternativas tienen trade-offs operacionales no triviales",
+      "applicability": [
+        "decision-making",
+        "shared-state",
+        "halt"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:18:22.160Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-123-1777349902165-4",
+      "cycle": 123,
+      "timestamp": "2026-04-28T04:18:22.165Z",
+      "type": "PATTERN",
+      "title": "No persistir BITACORA hasta SUCCESS verificado",
+      "description": "Estado HALT no es SUCCESS; persistir solo cuando verificación física confirme artefactos",
+      "context": "Al final de cada ciclo, antes de actualizar BITACORA",
+      "applicability": [
+        "bitacora",
+        "lifecycle",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:18:22.165Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
-    "lastCompletedTask": "Decision Gate resolved: Option B selected",
-    "currentTask": "Implementing Option B as requested by user",
-    "pendingTasks": [],
+    "lastCompletedTask": "Decision Gate resolved: Option A selected",
+    "currentTask": "Implementing Option A as requested by user",
+    "pendingTasks": [
+      "ROAD-121-DEPLOY-R1",
+      "ROAD-121-DEPLOY-R2",
+      "ROAD-121-DEPLOY-R3-R8"
+    ],
     "blockers": []
   },
   "contextNotes": [
@@ -2374,9 +2808,42 @@
     "[2026-04-28T02:19:19.380Z] main branch lacks protection rules — flagged as next HIGH priority",
     "[2026-04-28T02:32:13.319Z] Repo recién inicializado en GitHub (origin: creynals/AmaCafeDos.git) — preferir historia lineal",
     "[2026-04-28T02:32:13.321Z] Próximo paso post-reconcile: branch protection en main + gates R1-R8 Railway deploy",
-    "[2026-04-28T02:32:13.322Z] Harness SYNAPTIC puede regenerar artefactos (INTELLIGENCE/BITACORA) en próximo ciclo — comportamiento esperado"
+    "[2026-04-28T02:32:13.322Z] Harness SYNAPTIC puede regenerar artefactos (INTELLIGENCE/BITACORA) en próximo ciclo — comportamiento esperado",
+    "[2026-04-28T02:37:34.518Z] main reconciliado en f8c3ddb, historia lineal sobre cab5f03 (chore origin)",
+    "[2026-04-28T02:37:34.520Z] Tags rollback disponibles en origin: pre-rebase-c107, pre-railway-c102",
+    "[2026-04-28T02:37:34.522Z] Divergencia 4↑/1↓ resuelta sin operaciones destructivas",
+    "[2026-04-28T03:33:46.713Z] Branch protection en main sigue PENDIENTE (HIGH priority backlog)",
+    "[2026-04-28T03:33:46.714Z] backend/.env ya purgado del historial git en C78 (filter-repo OK)",
+    "[2026-04-28T03:33:46.716Z] keyManager.js refactor C81 (OPTION B) habilita validación E2E de rotación",
+    "[2026-04-28T03:33:46.718Z] Patrón Option B confirmado en 10/10 decisiones recientes — señal estadísticamente robusta",
+    "[2026-04-28T03:36:04.999Z] Patrón Option B confirmado en 10/10 decisiones recientes — alta consistencia del usuario",
+    "[2026-04-28T03:36:05.001Z] keyManager.js (C81 Option B) disponible para soporte de rotación de claves cifradas",
+    "[2026-04-28T03:36:05.003Z] backend/.env ya purgado del historial git en C78 — mantener secretos fuera de git es invariante",
+    "[2026-04-28T03:36:05.005Z] Backlog HIGH posterior: deploy Railway pendiente tras completar cluster de rotación",
+    "[2026-04-28T03:38:19.198Z] C114 ejecuta el cluster decidido en C113; C112 y C113 originales no se ejecutaron como ciclos individuales",
+    "[2026-04-28T03:38:19.199Z] keyManager.js (C81 OPTION B) habilita decrypt verification automatizada en smoke tests",
+    "[2026-04-28T03:38:19.201Z] SumUp prod permanece como tarea HIGH bloqueante para deploy Railway",
+    "[2026-04-28T03:44:13.382Z] C116 commit PRE = 5112c43; no POST commit because execution halted before mutation",
+    "[2026-04-28T03:44:13.384Z] Tag pre-rotation-c115 not created (only pre-purge-c78 exists in repo)",
+    "[2026-04-28T03:44:13.386Z] User offered 3 unblock paths: (a) provide both secrets, (b) authorize Claude to generate NEW with openssl, (c) rewrite smoke test target to settings:sumup_api_key",
+    "[2026-04-28T03:44:13.388Z] Workspace verified canonical: import-1777213083759-63z86j / amaCafe",
+    "[2026-04-28T04:00:56.883Z] C115 y C116 contienen declaraciones no verificadas; consultar TRUTH_RECONCILIATION_C120.md antes de actuar sobre ellas",
+    "[2026-04-28T04:00:56.885Z] Cluster Rotación queda DEFERRED-TO-PROD; no re-promover a HIGH sin instrucción explícita del usuario",
+    "[2026-04-28T04:00:56.887Z] Próximo ciclo debe atacar Railway R1-R8 directamente",
+    "[2026-04-28T04:30:00.000Z] C121 ejecutó OPTION B (Reconciliación + Repriorización Backlog) — TRUTH_RECONCILIATION_C120.md creado en root, 12 items rotación marcados DEFERRED-TO-PROD, 4 items nuevos R1-R8 al tope HIGH",
+    "[2026-04-28T04:30:00.000Z] C115/C116 inventario formal: tag pre-rotation-c115 nunca creado; pg_dump ./backups/pre-rotation-c115.sql nunca generado; rotate-encryption-secret.js --apply nunca corrió; smoke target payment_methods inexistente",
+    "[2026-04-28T04:30:00.000Z] Decisión vinculante C119+C121: rotación de credenciales sandbox NO aporta valor; rotación productiva se hará dentro del flujo Railway R5/R8",
+    "[2026-04-28T04:30:00.000Z] Próximo ciclo (C122): ejecutar ROAD-121-DEPLOY-R1 (branch protection en main vía GitHub UI)",
+    "[2026-04-28T04:11:18.390Z] C115/C116 declararon artefactos inexistentes (tag, backups, --apply) — verificación retroactiva confirmó mentira",
+    "[2026-04-28T04:11:18.392Z] Smoke target real para rotación es settings:sumup_api_key, no payment_methods (tabla inexistente)",
+    "[2026-04-28T04:11:18.395Z] 12/12 últimas decisiones del usuario fueron Option B — preferencia consolidada",
+    "[2026-04-28T04:11:18.397Z] Próximo ciclo C122 debe ejecutar ROAD-121-DEPLOY-R1 (branch protection main vía GitHub UI)",
+    "[2026-04-28T04:18:22.168Z] Sprint A en estado HALT-AWAITING-INPUT, no SUCCESS",
+    "[2026-04-28T04:18:22.171Z] Tag pre-deploy-c123 NO creado intencionalmente",
+    "[2026-04-28T04:18:22.173Z] Recomendación SYNAPTIC: Option A (PR único con 17 commits)",
+    "[2026-04-28T04:18:22.175Z] Verificación final requerida: git ls-remote --tags origin pre-deploy-c123"
   ],
-  "lastUpdated": "2026-04-28T02:33:11.566Z",
+  "lastUpdated": "2026-04-28T04:19:23.166Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5190,6 +5657,764 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T23:45:10.511Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031645-0",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.645Z",
+      "type": "USER_PREFERENCE",
+      "title": "Hybrid execution: implement + Decision Gate",
+      "description": "User authorizes immediate execution for low-risk B-tasks while reserving Decision Gate for strategic ones",
+      "context": "When cycle has multiple B-tasks with mixed risk/strategic weight",
+      "applicability": [
+        "synaptic-protocol",
+        "decision-gate",
+        "execution-mode"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.645Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244504-0",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.504Z",
+      "type": "ANTI_PATTERN",
+      "title": "DB-seeded config blocks env override",
+      "description": "Migration 004 seeded sumup_mode='mock' in settings; getModeWithSource read DB first so env fallback never fired and failsafe exit(1) trapped operator out of UI.",
+      "context": "When config has both DB-persisted and env-var sources with DB precedence on fresh deploys",
+      "applicability": [
+        "config",
+        "bootstrap",
+        "railway",
+        "sumup"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.504Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244513-1",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.513Z",
+      "type": "PATTERN",
+      "title": "One-shot env→DB promotion on boot",
+      "description": "bootstrapModeFromEnv() UPSERTs valid env value into settings before failsafe resolves, with cache invalidation and per-outcome logging.",
+      "context": "Reconciling env-var intent with DB-persisted config during cold-start",
+      "applicability": [
+        "bootstrap",
+        "config-reconciliation",
+        "sumup.config.js"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.513Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244515-2",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.515Z",
+      "type": "ANTI_PATTERN",
+      "title": "node_modules + .DS_Store tracked despite .gitignore",
+      "description": "1243 node_modules files and 4 .DS_Store files were in the index; .gitignore alone doesn't untrack already-committed paths.",
+      "context": "Repos where files were committed before .gitignore was added",
+      "applicability": [
+        "git-hygiene",
+        "gitignore",
+        "pre-push"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.515Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244518-3",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.518Z",
+      "type": "PATTERN",
+      "title": "Pre-commit hook with regex precision",
+      "description": "Initial .env regex over-matched .env.example; precise patterns + smoke-test against tmp git repo before declaring hook ready.",
+      "context": "Writing git hooks that block categories of files",
+      "applicability": [
+        "git-hooks",
+        "pre-commit",
+        "regex"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.518Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244523-5",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.523Z",
+      "type": "INSIGHT",
+      "title": "C86 G/R items lived only in conversation",
+      "description": "G1-G4 and R1-R9 labels weren't persisted to disk; had to reconstruct meaning from code inspection.",
+      "context": "When prior cycle reports use ad-hoc labels not saved to BITACORA/REGISTRY",
+      "applicability": [
+        "synaptic-memory",
+        "cycle-handoff"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.523Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244525-6",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.525Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Stage-only cleanup for large deletions",
+      "description": "git rm --cached run but commit deferred to user — 1247 file/-223856 line deletion staged for review before commit.",
+      "context": "When sweeping index changes need human eyes before history is rewritten",
+      "applicability": [
+        "git-rm-cached",
+        "review-gate"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.525Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510513-5",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.513Z",
+      "type": "USER_PREFERENCE",
+      "title": "User picks Balanced options when offered tiers",
+      "description": "User selected OPTION B (Balanced) over A (minimal) and C (object storage) for image persistence",
+      "context": "Decision gates with effort/complexity tradeoffs",
+      "applicability": [
+        "decisions",
+        "tradeoffs"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.513Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244520-4",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.520Z",
+      "type": "USER_PREFERENCE",
+      "title": "Multi-item requests executed in IMMEDIATE EXECUTION (DG-079)",
+      "description": "User chained three independent C86 follow-ups in one request expecting all executed without re-confirmation per item.",
+      "context": "When user explicitly references prior cycle recommendations",
+      "applicability": [
+        "execution-mode",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.520Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968459-1",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.459Z",
+      "type": "PATTERN",
+      "title": "Decision Gate sobre mecánica de push inicial",
+      "description": "Push inicial a remote vacío requiere decidir: rename branch, manejo de tags, branch protection",
+      "context": "Primer push a repo GitHub recién creado tras filter-repo",
+      "applicability": [
+        "git",
+        "github",
+        "initial-push",
+        "filter-repo"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.459Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968462-2",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.462Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Pre-flight checks obligatorios antes de push post-purga",
+      "description": "Verificar remote, .gitignore, tag respaldo, credenciales rotadas, log post-purga antes de pushear",
+      "context": "Push inicial tras git filter-repo que eliminó secretos",
+      "applicability": [
+        "security",
+        "git-filter-repo",
+        "secrets-purge"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.462Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968465-3",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.465Z",
+      "type": "INSIGHT",
+      "title": "Tag pre-purge-c77 sólo local es single-point-of-failure",
+      "description": "Mantener tag de respaldo de purga sólo en local arriesga pérdida por fallo de disco",
+      "context": "Estrategia de respaldo post-filter-repo",
+      "applicability": [
+        "backup",
+        "resilience",
+        "tags"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.465Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968468-4",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.468Z",
+      "type": "ANTI_PATTERN",
+      "title": "Dual branch master+main genera ruido sin beneficio",
+      "description": "Publicar ambas ramas con mismo HEAD confunde y branch protection estricta sin team bloquea workflow",
+      "context": "MVP de un solo desarrollador",
+      "applicability": [
+        "git",
+        "branch-strategy",
+        "over-engineering"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.468Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274400-0",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.400Z",
+      "type": "ANTI_PATTERN",
+      "title": "Tag name mismatch entre Decision Gate e ejecución",
+      "description": "Decision Gate C93 mencionó 'pre-purge-c77' pero la tag real era 'pre-purge-c78' (creada en C78)",
+      "context": "Al ejecutar acciones que referencian tags/branches creados en cycles previos",
+      "applicability": [
+        "git",
+        "tags",
+        "decision-gate",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.400Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274406-1",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.406Z",
+      "type": "PATTERN",
+      "title": "Pre-flight security check antes de push público",
+      "description": "Verificar .env ausente del historial completo ANTES de push a remoto público",
+      "context": "Primer push a repo público después de purga de secretos",
+      "applicability": [
+        "git",
+        "security",
+        "secrets",
+        "public-push"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.406Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274413-3",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.413Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Sequencia git rename + push -u + push tag",
+      "description": "git remote add → git branch -m → git push -u origin main → git push origin <tag>",
+      "context": "Migración inicial de repo local a remoto público con preservación de respaldo",
+      "applicability": [
+        "git",
+        "remote-setup",
+        "branch-migration"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.413Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453119-0",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.119Z",
+      "type": "PATTERN",
+      "title": "Verify state before requesting manual user action",
+      "description": "Use gh api to check actual GitHub state before asking user to perform UI tasks",
+      "context": "When roadmap suggests manual GitHub UI actions",
+      "applicability": [
+        "github",
+        "verification",
+        "automation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.119Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453125-1",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.125Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "GitHub auto-promotes first pushed branch as default",
+      "description": "Empty repos auto-set default branch on first push -u; no manual UI step needed",
+      "context": "After git push -u origin main on a freshly created empty repo",
+      "applicability": [
+        "github",
+        "git",
+        "default-branch"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.125Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453128-2",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.128Z",
+      "type": "PATTERN",
+      "title": "Verify .env absence in remote history after purge",
+      "description": "git log --all --full-history -- '**/.env' must return empty to confirm filter-repo persisted",
+      "context": "Post-push validation after git filter-repo credential purge",
+      "applicability": [
+        "security",
+        "git-filter-repo",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.128Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453132-3",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.132Z",
+      "type": "INSIGHT",
+      "title": "Repo visibility was private, not public as legacy roadmap claimed",
+      "description": "AmaCafeDos repo is private; older roadmap notes had stale visibility info",
+      "context": "When trusting legacy roadmap entries about repo metadata",
+      "applicability": [
+        "roadmap-hygiene",
+        "github"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.132Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968454-0",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.454Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario prefiere opciones balanceadas (Option B)",
+      "description": "5/5 últimas decisiones del usuario favorecieron la opción B (balanceada) sobre conservadora o innovadora",
+      "context": "Decision Gates con tres opciones A/B/C",
+      "applicability": [
+        "decision-gate",
+        "user-pattern",
+        "option-b"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.454Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274410-2",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.410Z",
+      "type": "USER_PREFERENCE",
+      "title": "Option B (Balanceado) sobre opciones extremas",
+      "description": "Usuario prefiere balance: rename + push main + push tag respaldo, sin force-push ni purga adicional",
+      "context": "Decisiones de migración de branch master→main con tag de respaldo",
+      "applicability": [
+        "decision-gate",
+        "git-migration",
+        "balanced-approach"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.410Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081584-0",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.584Z",
+      "type": "ANTI_PATTERN",
+      "title": "Tier/Bx labels not persisted in BITACORA",
+      "description": "C96/C97 entries lack Decision Gate task categorization, causing scope ambiguity in C98",
+      "context": "When user references prior cycle tasks by label (Tier N, Bx)",
+      "applicability": [
+        "bitacora",
+        "decision-gate",
+        "task-tracking"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.584Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081588-1",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.588Z",
+      "type": "PATTERN",
+      "title": "Halt on ambiguous scope despite DG-079",
+      "description": "Even in Immediate Execution mode, ask for clarification when task labels are undefined in persisted state",
+      "context": "When user prompt references undefined Tier/task IDs",
+      "applicability": [
+        "dg-079",
+        "immediate-execution",
+        "ambiguity"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.588Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081590-2",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.590Z",
+      "type": "INSIGHT",
+      "title": "B-task ID collision risk",
+      "description": "B1/B2/B3/B4 from C83-85 already executed; reusing labels in new cycles creates confusion",
+      "context": "Future task labeling should use cycle-prefixed IDs (C97-B1) not bare Bx",
+      "applicability": [
+        "task-naming",
+        "intelligence-json"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.590Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420171-1",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.171Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "No central validateInput middleware exists",
+      "description": "Backend has only auth.js (36 LOC) and security.js (125 LOC); no validateInput.js, no zod/joi/express-validator",
+      "context": "Audit baseline for input-hardening work in amaCafe backend",
+      "applicability": [
+        "backend",
+        "middleware",
+        "security-audit"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.171Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420175-2",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.175Z",
+      "type": "ANTI_PATTERN",
+      "title": "Test glob excludes middleware/ and routes/",
+      "description": "Pattern 'src/utils/*.test.js' won't pick up middleware/*.test.js or routes/*.test.js",
+      "context": "Adding tests outside utils/ requires updating package.json test script",
+      "applicability": [
+        "testing",
+        "node-test-runner",
+        "package-json"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.175Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420178-3",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.178Z",
+      "type": "PATTERN",
+      "title": "Prefer hand-rolled utilities over new dependencies",
+      "description": "Monorepo convention follows keyManager.js style — hand-rolled validators preferred over zod/dompurify",
+      "context": "When choosing between adding deps vs implementing lightweight utilities",
+      "applicability": [
+        "dependencies",
+        "convention",
+        "amaCafe"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.178Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420182-4",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.182Z",
+      "type": "INSIGHT",
+      "title": "Pre-Railway-deploy risk shapes scope decisions",
+      "description": "High blast-radius changes (13-route sweeps) deferred until Railway deploy is stable",
+      "context": "Scoping cycles during deployment-sensitive periods",
+      "applicability": [
+        "risk-management",
+        "deployment",
+        "scoping"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.182Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913009-0",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.009Z",
+      "type": "PATTERN",
+      "title": "Defense-in-depth via mount order",
+      "description": "Mount exempt routes (webhooks, chat) before global guard; no per-path skip logic needed",
+      "context": "Express middleware that should bypass global validation",
+      "applicability": [
+        "express",
+        "middleware",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.009Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913015-1",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.015Z",
+      "type": "PATTERN",
+      "title": "Loud reject over silent strip",
+      "description": "Central guard returns 400+code+field; silent sanitizers kept only where legitimate tokens need preservation",
+      "context": "Input validation strategy at API boundary",
+      "applicability": [
+        "security",
+        "validation",
+        "api"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.015Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913019-2",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.019Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "NoSQL $ops live in keys not values",
+      "description": "Deep-walk validators must inspect object keys for $where/$ne, not just values",
+      "context": "NoSQL injection detection in JSON bodies",
+      "applicability": [
+        "nosql",
+        "validation",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.019Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913022-3",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.022Z",
+      "type": "ANTI_PATTERN",
+      "title": "Test glob too narrow misses middleware",
+      "description": "package.json test script globbing src/utils/*.test.js silently skipped src/middleware/ tests",
+      "context": "Adding tests in new directories",
+      "applicability": [
+        "testing",
+        "package.json",
+        "node"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.022Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913026-4",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.026Z",
+      "type": "INSIGHT",
+      "title": "Parameterized SQL closes SQLi at DB layer",
+      "description": "All routes already used $1,$2 params; central guard is second wall, not primary defense",
+      "context": "Auditing SQLi exposure before adding middleware",
+      "applicability": [
+        "postgres",
+        "sqli",
+        "audit"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.026Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420165-0",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.165Z",
+      "type": "USER_PREFERENCE",
+      "title": "ENFORCE-SYNAPTIC-PROTOCOL overrides immediate-execution mode",
+      "description": "Explicit enforcement directive in request triggers mandatory Decision Gate even when DG-079 active",
+      "context": "When user includes [ENFORCE-SYNAPTIC-PROTOCOL] tag in cycle request",
+      "applicability": [
+        "synaptic-protocol",
+        "decision-gate",
+        "enforcement"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.165Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-103-1777341511242-2",
+      "cycle": 103,
+      "timestamp": "2026-04-28T01:58:31.242Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "git rm --cached avoids history rewrite",
+      "description": "Adding pattern to .gitignore + git rm --cached removes tracked files without filter-branch",
+      "context": "When excluding generated SYNAPTIC intelligence snapshots from future commits",
+      "applicability": [
+        "gitignore",
+        "synaptic-intelligence",
+        "history-preservation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:58:31.242Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-103-1777341511245-3",
+      "cycle": 103,
+      "timestamp": "2026-04-28T01:58:31.245Z",
+      "type": "PATTERN",
+      "title": "Pre-flight read-only diff before any remote-affecting action",
+      "description": "git diff origin/main..HEAD --stat verifies expected delta (validateInput.* + server.js) before push",
+      "context": "Before any push, tag, or gitignore mutation that touches remote or staged state",
+      "applicability": [
+        "pre-flight",
+        "git-diff",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:58:31.245Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-103-1777341511249-4",
+      "cycle": 103,
+      "timestamp": "2026-04-28T01:58:31.249Z",
+      "type": "INSIGHT",
+      "title": "INTELLIGENCE_*.json versioning is a binary audit-vs-bloat tradeoff",
+      "description": "Keeping snapshots gives audit trail but causes repo bloat and noisy PR diffs over time",
+      "context": "Deciding which SYNAPTIC artifacts belong in remote history vs. local-only",
+      "applicability": [
+        "synaptic",
+        "repo-hygiene",
+        "audit-trail"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:58:31.249Z",
         "source": "INFERRED"
       }
     }
