@@ -1591,47 +1591,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-103-1777341511230-0",
-      "cycle": 103,
-      "timestamp": "2026-04-28T01:58:31.230Z",
-      "type": "USER_PREFERENCE",
-      "title": "User prefers staged multi-step git workflows with halt gates",
-      "description": "User explicitly requested pre-flight + decision + tag + push as discrete sequential steps",
-      "context": "When publishing to remote main after multi-cycle implementation work",
-      "applicability": [
-        "git",
-        "publish",
-        "remote",
-        "decision-gate"
-      ],
-      "confidence": {
-        "score": 0.5,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:58:31.230Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-104-1777342759356-0",
-      "cycle": 104,
-      "timestamp": "2026-04-28T02:19:19.356Z",
-      "type": "PATTERN",
-      "title": "Pre-flight before remote push",
-      "description": "Run git diff origin/main..HEAD --stat before push to confirm delta scope",
-      "context": "Before any push to shared remote with multiple commits ahead",
-      "applicability": [
-        "git",
-        "pre-flight",
-        "remote-safety"
-      ],
-      "confidence": {
-        "score": 0.35,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-28T04:18:22.145Z",
-        "source": "INFERRED"
-      }
-    },
-    {
       "learningId": "learning-104-1777342759367-2",
       "cycle": 104,
       "timestamp": "2026-04-28T02:19:19.367Z",
@@ -1645,7 +1604,7 @@
         "remote-actions"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:19:19.367Z",
         "source": "EXPLICIT"
@@ -2721,7 +2680,7 @@
     "[2026-04-28T04:18:22.173Z] Recomendación SYNAPTIC: Option A (PR único con 17 commits)",
     "[2026-04-28T04:18:22.175Z] Verificación final requerida: git ls-remote --tags origin pre-deploy-c123"
   ],
-  "lastUpdated": "2026-04-28T16:01:35.316Z",
+  "lastUpdated": "2026-04-28T16:05:39.412Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -6415,6 +6374,47 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:19:19.374Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-103-1777341511230-0",
+      "cycle": 103,
+      "timestamp": "2026-04-28T01:58:31.230Z",
+      "type": "USER_PREFERENCE",
+      "title": "User prefers staged multi-step git workflows with halt gates",
+      "description": "User explicitly requested pre-flight + decision + tag + push as discrete sequential steps",
+      "context": "When publishing to remote main after multi-cycle implementation work",
+      "applicability": [
+        "git",
+        "publish",
+        "remote",
+        "decision-gate"
+      ],
+      "confidence": {
+        "score": 0.19999999999999996,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:58:31.230Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-104-1777342759356-0",
+      "cycle": 104,
+      "timestamp": "2026-04-28T02:19:19.356Z",
+      "type": "PATTERN",
+      "title": "Pre-flight before remote push",
+      "description": "Run git diff origin/main..HEAD --stat before push to confirm delta scope",
+      "context": "Before any push to shared remote with multiple commits ahead",
+      "applicability": [
+        "git",
+        "pre-flight",
+        "remote-safety"
+      ],
+      "confidence": {
+        "score": 0.14999999999999997,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T04:18:22.145Z",
         "source": "INFERRED"
       }
     }
