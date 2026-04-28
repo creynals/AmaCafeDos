@@ -1591,149 +1591,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-101-1777340855619-1",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:55:00.000Z",
-      "type": "PATTERN",
-      "title": "Defense-in-depth: pattern guard + parameterized SQL",
-      "description": "Central pattern-detection middleware complements (does not replace) parameterized queries. Loud 400 surfaces attacks in logs and helps clients self-correct; silent sanitization reserved for UX-sensitive routes (chat).",
-      "context": "Backend input hardening for Express/PG stack",
-      "applicability": [
-        "security",
-        "middleware",
-        "sql-injection",
-        "xss"
-      ],
-      "confidence": {
-        "score": 0.25,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:55:00.000Z",
-        "source": "IMPLEMENTED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340855619-2",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:55:00.000Z",
-      "type": "INSIGHT",
-      "title": "Mount order matters for selective bypass",
-      "description": "Routes that need their own normalization (chat sanitizer, webhook raw-body) must be mounted BEFORE the global guard. This achieves bypass without per-path skip logic.",
-      "context": "Express middleware composition",
-      "applicability": [
-        "express",
-        "middleware",
-        "routing"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-28T01:55:00.000Z",
-        "source": "IMPLEMENTED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340855619-3",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:55:00.000Z",
-      "type": "PITFALL",
-      "title": "NoSQL operators surface as object keys, not values",
-      "description": "Walking only values misses $where/$ne/$gt — Mongo-style smuggling uses keys. Walk MUST inspect both keys and values; same for prototype-pollution markers (__proto__/constructor/prototype).",
-      "context": "Tree-walking validation middleware",
-      "applicability": [
-        "security",
-        "nosql",
-        "prototype-pollution"
-      ],
-      "confidence": {
-        "score": 0.34999999999999987,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:55:00.000Z",
-        "source": "IMPLEMENTED"
-      }
-    },
-    {
-      "learningId": "learning-103-1777341511230-0",
-      "cycle": 103,
-      "timestamp": "2026-04-28T01:58:31.230Z",
-      "type": "USER_PREFERENCE",
-      "title": "User prefers staged multi-step git workflows with halt gates",
-      "description": "User explicitly requested pre-flight + decision + tag + push as discrete sequential steps",
-      "context": "When publishing to remote main after multi-cycle implementation work",
-      "applicability": [
-        "git",
-        "publish",
-        "remote",
-        "decision-gate"
-      ],
-      "confidence": {
-        "score": 0.8,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:58:31.230Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-103-1777341511238-1",
-      "cycle": 103,
-      "timestamp": "2026-04-28T01:58:31.238Z",
-      "type": "PATTERN",
-      "title": "Checkpoint tag before risky deployment",
-      "description": "Anchor tag (pre-railway-c102) before push provides rollback parity with prior pre-purge-c78",
-      "context": "Before pushing changes that precede external deployment (Railway)",
-      "applicability": [
-        "git-tag",
-        "rollback",
-        "deployment",
-        "railway"
-      ],
-      "confidence": {
-        "score": 0.35,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-28T02:19:19.372Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-104-1777342759356-0",
-      "cycle": 104,
-      "timestamp": "2026-04-28T02:19:19.356Z",
-      "type": "PATTERN",
-      "title": "Pre-flight before remote push",
-      "description": "Run git diff origin/main..HEAD --stat before push to confirm delta scope",
-      "context": "Before any push to shared remote with multiple commits ahead",
-      "applicability": [
-        "git",
-        "pre-flight",
-        "remote-safety"
-      ],
-      "confidence": {
-        "score": 0.44999999999999996,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-28T04:18:22.145Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-104-1777342759363-1",
-      "cycle": 104,
-      "timestamp": "2026-04-28T02:19:19.363Z",
-      "type": "ANTI_PATTERN",
-      "title": "Roadmap path assumptions",
-      "description": "Roadmap mentioned .synaptic/intelligence/ but real path was .synaptic/backups/",
-      "context": "Verify actual file paths before applying gitignore patterns from roadmap docs",
-      "applicability": [
-        "gitignore",
-        "path-verification",
-        "roadmap-drift"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:19:19.363Z",
-        "source": "INFERRED"
-      }
-    },
-    {
       "learningId": "learning-104-1777342759367-2",
       "cycle": 104,
       "timestamp": "2026-04-28T02:19:19.367Z",
@@ -1747,70 +1604,10 @@
         "remote-actions"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:19:19.367Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-104-1777342759374-4",
-      "cycle": 104,
-      "timestamp": "2026-04-28T02:19:19.374Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "INTELLIGENCE snapshots polluting repo",
-      "description": "10 snapshots ~27k lines in .synaptic/backups/ should never be tracked",
-      "context": "SYNAPTIC project hygiene — snapshots are local artifacts",
-      "applicability": [
-        "synaptic",
-        "gitignore",
-        "repo-hygiene"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:19:19.374Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-106-1777343533298-0",
-      "cycle": 106,
-      "timestamp": "2026-04-28T02:32:13.298Z",
-      "type": "PATTERN",
-      "title": "Pre-flight diagnóstico antes de reconciliar git",
-      "description": "Ejecutar git status/rev-list/merge-base/diff --stat antes de proponer estrategia evita merges ciegos",
-      "context": "Cuando hay divergencia local vs remoto y se requiere reconciliación",
-      "applicability": [
-        "git",
-        "reconciliation",
-        "pre-flight"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:32:13.298Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-106-1777343533303-1",
-      "cycle": 106,
-      "timestamp": "2026-04-28T02:32:13.303Z",
-      "type": "INSIGHT",
-      "title": "Detectar commits duplicados por diff idéntico",
-      "description": "Dos SHAs distintos con mismo diff (5 ins / 45794 del, 11 archivos) indican mismo cambio con mensajes distintos",
-      "context": "Al reconciliar tras un commit convencional vs commit SYNAPTIC con marcadores",
-      "applicability": [
-        "git",
-        "deduplication",
-        "synaptic-bookkeeping"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:32:13.303Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1827,49 +1624,9 @@
         "history-cleanup"
       ],
       "confidence": {
-        "score": 0.44999999999999996,
+        "score": 0.35,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-28T02:37:34.504Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-106-1777343533310-3",
-      "cycle": 106,
-      "timestamp": "2026-04-28T02:32:13.310Z",
-      "type": "PATTERN",
-      "title": "Tag pre-reconcile como rollback anchor",
-      "description": "Crear tag local antes de rebase permite recuperación sin reflog hunting",
-      "context": "Operaciones git que reescriben SHAs locales",
-      "applicability": [
-        "git",
-        "safety",
-        "rollback"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:32:13.310Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-106-1777343533313-4",
-      "cycle": 106,
-      "timestamp": "2026-04-28T02:32:13.313Z",
-      "type": "ANTI_PATTERN",
-      "title": "Hard reset destruye bookkeeping SYNAPTIC",
-      "description": "git reset --hard a origin/main borra BITACORA/INTELLIGENCE/audit de ciclos no pusheados, viola Traceable covenant",
-      "context": "Cuando hay commits SYNAPTIC PRE/POST locales con bookkeeping",
-      "applicability": [
-        "git",
-        "synaptic",
-        "auditability"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:32:13.313Z",
         "source": "INFERRED"
       }
     },
@@ -1886,7 +1643,7 @@
         "user-pattern"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:32:13.316Z",
         "source": "EXPLICIT"
@@ -2843,7 +2600,7 @@
     "[2026-04-28T04:18:22.173Z] Recomendación SYNAPTIC: Option A (PR único con 17 commits)",
     "[2026-04-28T04:18:22.175Z] Verificación final requerida: git ls-remote --tags origin pre-deploy-c123"
   ],
-  "lastUpdated": "2026-04-28T04:19:23.166Z",
+  "lastUpdated": "2026-04-28T16:07:57.024Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -6415,6 +6172,249 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:58:31.249Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340855619-1",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:55:00.000Z",
+      "type": "PATTERN",
+      "title": "Defense-in-depth: pattern guard + parameterized SQL",
+      "description": "Central pattern-detection middleware complements (does not replace) parameterized queries. Loud 400 surfaces attacks in logs and helps clients self-correct; silent sanitization reserved for UX-sensitive routes (chat).",
+      "context": "Backend input hardening for Express/PG stack",
+      "applicability": [
+        "security",
+        "middleware",
+        "sql-injection",
+        "xss"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:55:00.000Z",
+        "source": "IMPLEMENTED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340855619-2",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:55:00.000Z",
+      "type": "INSIGHT",
+      "title": "Mount order matters for selective bypass",
+      "description": "Routes that need their own normalization (chat sanitizer, webhook raw-body) must be mounted BEFORE the global guard. This achieves bypass without per-path skip logic.",
+      "context": "Express middleware composition",
+      "applicability": [
+        "express",
+        "middleware",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T01:55:00.000Z",
+        "source": "IMPLEMENTED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340855619-3",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:55:00.000Z",
+      "type": "PITFALL",
+      "title": "NoSQL operators surface as object keys, not values",
+      "description": "Walking only values misses $where/$ne/$gt — Mongo-style smuggling uses keys. Walk MUST inspect both keys and values; same for prototype-pollution markers (__proto__/constructor/prototype).",
+      "context": "Tree-walking validation middleware",
+      "applicability": [
+        "security",
+        "nosql",
+        "prototype-pollution"
+      ],
+      "confidence": {
+        "score": 0.04999999999999982,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:55:00.000Z",
+        "source": "IMPLEMENTED"
+      }
+    },
+    {
+      "learningId": "learning-103-1777341511238-1",
+      "cycle": 103,
+      "timestamp": "2026-04-28T01:58:31.238Z",
+      "type": "PATTERN",
+      "title": "Checkpoint tag before risky deployment",
+      "description": "Anchor tag (pre-railway-c102) before push provides rollback parity with prior pre-purge-c78",
+      "context": "Before pushing changes that precede external deployment (Railway)",
+      "applicability": [
+        "git-tag",
+        "rollback",
+        "deployment",
+        "railway"
+      ],
+      "confidence": {
+        "score": 0.04999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T02:19:19.372Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-104-1777342759363-1",
+      "cycle": 104,
+      "timestamp": "2026-04-28T02:19:19.363Z",
+      "type": "ANTI_PATTERN",
+      "title": "Roadmap path assumptions",
+      "description": "Roadmap mentioned .synaptic/intelligence/ but real path was .synaptic/backups/",
+      "context": "Verify actual file paths before applying gitignore patterns from roadmap docs",
+      "applicability": [
+        "gitignore",
+        "path-verification",
+        "roadmap-drift"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:19:19.363Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-104-1777342759374-4",
+      "cycle": 104,
+      "timestamp": "2026-04-28T02:19:19.374Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "INTELLIGENCE snapshots polluting repo",
+      "description": "10 snapshots ~27k lines in .synaptic/backups/ should never be tracked",
+      "context": "SYNAPTIC project hygiene — snapshots are local artifacts",
+      "applicability": [
+        "synaptic",
+        "gitignore",
+        "repo-hygiene"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:19:19.374Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-103-1777341511230-0",
+      "cycle": 103,
+      "timestamp": "2026-04-28T01:58:31.230Z",
+      "type": "USER_PREFERENCE",
+      "title": "User prefers staged multi-step git workflows with halt gates",
+      "description": "User explicitly requested pre-flight + decision + tag + push as discrete sequential steps",
+      "context": "When publishing to remote main after multi-cycle implementation work",
+      "applicability": [
+        "git",
+        "publish",
+        "remote",
+        "decision-gate"
+      ],
+      "confidence": {
+        "score": 0.19999999999999996,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:58:31.230Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-104-1777342759356-0",
+      "cycle": 104,
+      "timestamp": "2026-04-28T02:19:19.356Z",
+      "type": "PATTERN",
+      "title": "Pre-flight before remote push",
+      "description": "Run git diff origin/main..HEAD --stat before push to confirm delta scope",
+      "context": "Before any push to shared remote with multiple commits ahead",
+      "applicability": [
+        "git",
+        "pre-flight",
+        "remote-safety"
+      ],
+      "confidence": {
+        "score": 0.14999999999999997,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T04:18:22.145Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533298-0",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.298Z",
+      "type": "PATTERN",
+      "title": "Pre-flight diagnóstico antes de reconciliar git",
+      "description": "Ejecutar git status/rev-list/merge-base/diff --stat antes de proponer estrategia evita merges ciegos",
+      "context": "Cuando hay divergencia local vs remoto y se requiere reconciliación",
+      "applicability": [
+        "git",
+        "reconciliation",
+        "pre-flight"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.298Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533303-1",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.303Z",
+      "type": "INSIGHT",
+      "title": "Detectar commits duplicados por diff idéntico",
+      "description": "Dos SHAs distintos con mismo diff (5 ins / 45794 del, 11 archivos) indican mismo cambio con mensajes distintos",
+      "context": "Al reconciliar tras un commit convencional vs commit SYNAPTIC con marcadores",
+      "applicability": [
+        "git",
+        "deduplication",
+        "synaptic-bookkeeping"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.303Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533310-3",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.310Z",
+      "type": "PATTERN",
+      "title": "Tag pre-reconcile como rollback anchor",
+      "description": "Crear tag local antes de rebase permite recuperación sin reflog hunting",
+      "context": "Operaciones git que reescriben SHAs locales",
+      "applicability": [
+        "git",
+        "safety",
+        "rollback"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.310Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533313-4",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.313Z",
+      "type": "ANTI_PATTERN",
+      "title": "Hard reset destruye bookkeeping SYNAPTIC",
+      "description": "git reset --hard a origin/main borra BITACORA/INTELLIGENCE/audit de ciclos no pusheados, viola Traceable covenant",
+      "context": "Cuando hay commits SYNAPTIC PRE/POST locales con bookkeeping",
+      "applicability": [
+        "git",
+        "synaptic",
+        "auditability"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.313Z",
         "source": "INFERRED"
       }
     }
