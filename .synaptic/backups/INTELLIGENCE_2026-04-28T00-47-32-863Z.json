@@ -111,6 +111,32 @@
       "selectedOption": "B",
       "userRationale": ": Fix + Refactor a keys-shared-module (Balanceado) ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777333141453",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:39:01.453Z",
+      "decisionPoint": "proceder con  OPTION B: Railway Volume — Balanced ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Railway Volume — Balanced ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -671,129 +697,90 @@
       "status": "PLANNED",
       "createdAtCycle": 82,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-084-1",
+      "title": "Resolve B2 image storage Decision Gate",
+      "description": "User selects Option A (git-only + prod upload guard), B (Railway Volume), or C (Cloudflare R2)",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 84,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-084-2",
+      "title": "Wire VITE_API_BASE_URL in Railway frontend service env",
+      "description": "Set VITE_API_BASE_URL to backend Railway domain in frontend service variables before deploy",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 84,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-084-3",
+      "title": "First Railway deploy + smoke test /api/health and migrate preDeploy",
+      "description": "Trigger backend deploy, verify migrate.js runs in preDeploy, /api/health responds, then frontend deploy",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 84,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-084-4",
+      "title": "Implement chosen B2 strategy",
+      "description": "Execute Option A/B/C once user decides; includes seeding/migration of existing 12 images",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 84,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-085-1",
+      "title": "Configure Railway Volume in UI",
+      "description": "Create Volume mounted at /data, set IMAGES_STORAGE_PATH=/data/products variable",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 85,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-085-2",
+      "title": "E2E persistence test post-deploy",
+      "description": "Upload image via admin endpoint, restart backend service, confirm URL still resolves",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 85,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-087-1",
+      "title": "Commit C87 staged cleanup",
+      "description": "User to review git diff --cached --stat and commit the 1247-file deletion",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 87,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-087-2",
+      "title": "Execute first Railway deploy per docs/RAILWAY_DEPLOY.md",
+      "description": "Follow R1-R8; verify R9 promotion log line appears in backend logs",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 87,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-087-3",
+      "title": "Run install-git-hooks.sh on all dev machines",
+      "description": "Hook is symlink-based; each clone needs the installer run once",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 87,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-67-1777263746562-0",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.563Z",
-      "type": "PATTERN",
-      "title": "Verifica anti-C53 con grep multi-file",
-      "description": "Prima di dichiarare successo, grep del simbolo chiave su tutti i file attesi (8/8)",
-      "context": "Al termine di implementazioni multi-file per evitare false dichiarazioni di completamento",
-      "applicability": [
-        "validation",
-        "multi-file-changes",
-        "anti-regression"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.563Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746569-1",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.569Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Naming semantico per evitare collisioni",
-      "description": "customer_instructions distingue da order_items.notes (per prodotto) e address_notes (entrega)",
-      "context": "Quando si aggiungono campi note/instrucciones in domini con più livelli semantici",
-      "applicability": [
-        "db-schema",
-        "naming",
-        "domain-modeling"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.569Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746571-2",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.571Z",
-      "type": "PATTERN",
-      "title": "Migrazione SQL idempotente con IF NOT EXISTS",
-      "description": "ALTER TABLE ADD COLUMN IF NOT EXISTS per migrazioni rieseguibili senza errori",
-      "context": "Migrazioni DB in ambienti dev/prod con possibili re-run",
-      "applicability": [
-        "migrations",
-        "postgresql",
-        "idempotency"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.571Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746573-3",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.573Z",
-      "type": "PATTERN",
-      "title": "Validazione duale client+server per input testuali",
-      "description": "Cap 1000 chars enforced sia lato server (validation) sia lato UI (maxLength + counter)",
-      "context": "Campi testuali liberi esposti a utenti finali",
-      "applicability": [
-        "validation",
-        "ux",
-        "security"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.573Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746574-4",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.574Z",
-      "type": "INSIGHT",
-      "title": "Distinzione visiva esplicita in Vista de Cocina",
-      "description": "Icona MessageSquare + bordo accentuato separa istruzioni cliente da indicazioni di consegna",
-      "context": "UI con più tipologie di note che potrebbero essere confuse dall'operatore",
-      "applicability": [
-        "ux",
-        "kitchen-view",
-        "visual-hierarchy"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.574Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746577-5",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.577Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "ESLint backend errore preesistente non bloccante",
-      "description": "Config ESLint backend richiede tsconfig.json mancante; node --check sufficiente per syntax",
-      "context": "Validazione backend amaCafe quando ESLint fallisce per config issue non correlati",
-      "applicability": [
-        "eslint",
-        "backend",
-        "validation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.577Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-77-1777327415063-0",
       "cycle": 77,
@@ -1199,6 +1186,389 @@
         "lastReinforced": "2026-04-27T22:30:10.393Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-84-1777333031645-0",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.645Z",
+      "type": "USER_PREFERENCE",
+      "title": "Hybrid execution: implement + Decision Gate",
+      "description": "User authorizes immediate execution for low-risk B-tasks while reserving Decision Gate for strategic ones",
+      "context": "When cycle has multiple B-tasks with mixed risk/strategic weight",
+      "applicability": [
+        "synaptic-protocol",
+        "decision-gate",
+        "execution-mode"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.645Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031650-1",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.650Z",
+      "type": "PATTERN",
+      "title": "Backwards-compatible env-driven config",
+      "description": "Use `import.meta.env.VAR || '/api'` with trailing-slash strip to make BASE configurable without breaking dev",
+      "context": "Frontend api.js when adding deploy-target flexibility",
+      "applicability": [
+        "vite",
+        "frontend",
+        "env-config",
+        "railway"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.650Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031653-2",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.653Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Railway preDeployCommand for migrations",
+      "description": "railway.toml [deploy] preDeployCommand=node scripts/migrate.js runs idempotent schema migration before service start",
+      "context": "Railway deploys with Postgres requiring schema sync",
+      "applicability": [
+        "railway",
+        "postgres",
+        "migrations",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.653Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031655-3",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.655Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Frontend Railway service via vite preview",
+      "description": "Frontend railway.toml uses `npm ci && npm run build` + `vite preview --host 0.0.0.0 --port $PORT`",
+      "context": "Deploying Vite SPA as separate Railway service",
+      "applicability": [
+        "railway",
+        "vite",
+        "frontend",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.655Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031657-4",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.657Z",
+      "type": "ANTI_PATTERN",
+      "title": "Railway ephemeral FS breaks runtime uploads",
+      "description": "Files written at runtime (multer disk uploads) lost on every redeploy/restart in Railway containers",
+      "context": "Any backend with admin uploads or generated assets deployed to Railway without a Volume",
+      "applicability": [
+        "railway",
+        "filesystem",
+        "uploads",
+        "multer"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.657Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031660-5",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.660Z",
+      "type": "INSIGHT",
+      "title": "Standalone migrate.js enables preDeploy hook",
+      "description": "Extracting migration logic to scripts/migrate.js (vs inline server boot) lets CI/Railway run it independently",
+      "context": "When deploys need pre-start schema sync separate from app boot",
+      "applicability": [
+        "postgres",
+        "migrations",
+        "railway",
+        "ci"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.660Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510497-0",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.497Z",
+      "type": "PATTERN",
+      "title": "Single source of truth for storage paths",
+      "description": "Centralize IMAGES_DIR resolution in one util so routes and static mount stay aligned",
+      "context": "When multiple modules need the same configurable filesystem path",
+      "applicability": [
+        "storage",
+        "config",
+        "refactor"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.497Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510502-1",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.502Z",
+      "type": "PATTERN",
+      "title": "Mount specific static path before broader one",
+      "description": "Express mounts /static/products from volume BEFORE /static so volume overrides bundled assets",
+      "context": "Express static middleware ordering with overlapping paths",
+      "applicability": [
+        "express",
+        "static-files",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.502Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510506-2",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.506Z",
+      "type": "PATTERN",
+      "title": "Idempotent seed script via preDeployCommand",
+      "description": "Chain migrate.js && seed-volume-images.js in preDeploy; copy only when target empty",
+      "context": "Bootstrapping persistent volumes on first deploy without re-copying on every restart",
+      "applicability": [
+        "railway",
+        "deploy",
+        "volume",
+        "seed"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.506Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510509-3",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.509Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Volume resolver rejects relative paths",
+      "description": "IMAGES_STORAGE_PATH must be absolute; empty/missing falls back to fuentes/products for local dev",
+      "context": "Configuring storage path across local dev and Railway deploy",
+      "applicability": [
+        "config",
+        "validation",
+        "env"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.509Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510511-4",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.511Z",
+      "type": "PATTERN",
+      "title": "Smoke-test seed scripts with temp dirs",
+      "description": "Verify first-run copy + second-run skip with IMAGES_STORAGE_PATH=/tmp/... before deploying",
+      "context": "Validating idempotent filesystem operations locally",
+      "applicability": [
+        "testing",
+        "scripts",
+        "smoke-test"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.511Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510513-5",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.513Z",
+      "type": "USER_PREFERENCE",
+      "title": "User picks Balanced options when offered tiers",
+      "description": "User selected OPTION B (Balanced) over A (minimal) and C (object storage) for image persistence",
+      "context": "Decision gates with effort/complexity tradeoffs",
+      "applicability": [
+        "decisions",
+        "tradeoffs"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.513Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244504-0",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.504Z",
+      "type": "ANTI_PATTERN",
+      "title": "DB-seeded config blocks env override",
+      "description": "Migration 004 seeded sumup_mode='mock' in settings; getModeWithSource read DB first so env fallback never fired and failsafe exit(1) trapped operator out of UI.",
+      "context": "When config has both DB-persisted and env-var sources with DB precedence on fresh deploys",
+      "applicability": [
+        "config",
+        "bootstrap",
+        "railway",
+        "sumup"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.504Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244513-1",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.513Z",
+      "type": "PATTERN",
+      "title": "One-shot env→DB promotion on boot",
+      "description": "bootstrapModeFromEnv() UPSERTs valid env value into settings before failsafe resolves, with cache invalidation and per-outcome logging.",
+      "context": "Reconciling env-var intent with DB-persisted config during cold-start",
+      "applicability": [
+        "bootstrap",
+        "config-reconciliation",
+        "sumup.config.js"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.513Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244515-2",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.515Z",
+      "type": "ANTI_PATTERN",
+      "title": "node_modules + .DS_Store tracked despite .gitignore",
+      "description": "1243 node_modules files and 4 .DS_Store files were in the index; .gitignore alone doesn't untrack already-committed paths.",
+      "context": "Repos where files were committed before .gitignore was added",
+      "applicability": [
+        "git-hygiene",
+        "gitignore",
+        "pre-push"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.515Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244518-3",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.518Z",
+      "type": "PATTERN",
+      "title": "Pre-commit hook with regex precision",
+      "description": "Initial .env regex over-matched .env.example; precise patterns + smoke-test against tmp git repo before declaring hook ready.",
+      "context": "Writing git hooks that block categories of files",
+      "applicability": [
+        "git-hooks",
+        "pre-commit",
+        "regex"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.518Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244520-4",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.520Z",
+      "type": "USER_PREFERENCE",
+      "title": "Multi-item requests executed in IMMEDIATE EXECUTION (DG-079)",
+      "description": "User chained three independent C86 follow-ups in one request expecting all executed without re-confirmation per item.",
+      "context": "When user explicitly references prior cycle recommendations",
+      "applicability": [
+        "execution-mode",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.520Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244523-5",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.523Z",
+      "type": "INSIGHT",
+      "title": "C86 G/R items lived only in conversation",
+      "description": "G1-G4 and R1-R9 labels weren't persisted to disk; had to reconstruct meaning from code inspection.",
+      "context": "When prior cycle reports use ad-hoc labels not saved to BITACORA/REGISTRY",
+      "applicability": [
+        "synaptic-memory",
+        "cycle-handoff"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.523Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244525-6",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.525Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Stage-only cleanup for large deletions",
+      "description": "git rm --cached run but commit deferred to user — 1247 file/-223856 line deletion staged for review before commit.",
+      "context": "When sweeping index changes need human eyes before history is rewritten",
+      "applicability": [
+        "git-rm-cached",
+        "review-gate"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.525Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1298,9 +1668,21 @@
     "[2026-04-27T22:30:10.396Z] Ciphertexts pre-Cycle-82 remain decryptable — salt and GCM format unchanged",
     "[2026-04-27T22:30:10.397Z] Public API of crypto.js intact: routes/settings.js requires no changes",
     "[2026-04-27T22:30:10.398Z] Test suite: keyManager.test.js (16/16) + sumup.test.js (6/6 regression) passing",
-    "[2026-04-27T22:30:10.400Z] OPTION C still pending: full key versioning with v{N}: prefix"
+    "[2026-04-27T22:30:10.400Z] OPTION C still pending: full key versioning with v{N}: prefix",
+    "[2026-04-27T23:37:11.662Z] Cycle 84 implemented B3+B4 from Cycle 83 deploy report; B2 awaiting human decision",
+    "[2026-04-27T23:37:11.663Z] All 22 backend tests still passing; Vite build clean (1753 modules, 156ms)",
+    "[2026-04-27T23:37:11.665Z] Post-edit verification rule honored: every promised file re-read on disk before declaring success",
+    "[2026-04-27T23:37:11.666Z] Existing admin upload routes (server.js:85, /admin/products/upload-image, /admin/products/:id/images) are blocking factor for B2",
+    "[2026-04-27T23:37:11.667Z] Current /fuentes payload is ~12 jpegs (small), making Option A viable short-term",
+    "[2026-04-27T23:45:10.514Z] Railway UI steps still pending: create Volume at /data, set IMAGES_STORAGE_PATH=/data/products, trigger deploy",
+    "[2026-04-27T23:45:10.515Z] Persistence guarantee is theoretical until E2E test: upload image → restart service → verify URL resolves",
+    "[2026-04-27T23:45:10.516Z] Post-edit verification rule (C57) was honored: every promised file re-read on disk after edit",
+    "[2026-04-28T00:14:04.527Z] C86 G1-G4 and R1-R9 labels were never persisted; future cycles must save such enumerations to BITACORA",
+    "[2026-04-28T00:14:04.528Z] Operator's deploy gate is grepping backend logs for '[sumup] bootstrap: promoted SUMUP_MODE env to settings'",
+    "[2026-04-28T00:14:04.530Z] docs/RAILWAY_DEPLOY.md R5 sets SUMUP_MODE=live; R8 step 2 verifies promotion log line",
+    "[2026-04-28T00:14:04.531Z] 1247 files / -223856 lines staged for deletion at end of C87 — user must review and commit"
   ],
-  "lastUpdated": "2026-04-27T22:30:10.401Z",
+  "lastUpdated": "2026-04-28T00:40:25.337Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -3383,6 +3765,126 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T03:06:19.330Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746562-0",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.563Z",
+      "type": "PATTERN",
+      "title": "Verifica anti-C53 con grep multi-file",
+      "description": "Prima di dichiarare successo, grep del simbolo chiave su tutti i file attesi (8/8)",
+      "context": "Al termine di implementazioni multi-file per evitare false dichiarazioni di completamento",
+      "applicability": [
+        "validation",
+        "multi-file-changes",
+        "anti-regression"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.563Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746569-1",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.569Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Naming semantico per evitare collisioni",
+      "description": "customer_instructions distingue da order_items.notes (per prodotto) e address_notes (entrega)",
+      "context": "Quando si aggiungono campi note/instrucciones in domini con più livelli semantici",
+      "applicability": [
+        "db-schema",
+        "naming",
+        "domain-modeling"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.569Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746571-2",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.571Z",
+      "type": "PATTERN",
+      "title": "Migrazione SQL idempotente con IF NOT EXISTS",
+      "description": "ALTER TABLE ADD COLUMN IF NOT EXISTS per migrazioni rieseguibili senza errori",
+      "context": "Migrazioni DB in ambienti dev/prod con possibili re-run",
+      "applicability": [
+        "migrations",
+        "postgresql",
+        "idempotency"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.571Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746573-3",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.573Z",
+      "type": "PATTERN",
+      "title": "Validazione duale client+server per input testuali",
+      "description": "Cap 1000 chars enforced sia lato server (validation) sia lato UI (maxLength + counter)",
+      "context": "Campi testuali liberi esposti a utenti finali",
+      "applicability": [
+        "validation",
+        "ux",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.573Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746574-4",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.574Z",
+      "type": "INSIGHT",
+      "title": "Distinzione visiva esplicita in Vista de Cocina",
+      "description": "Icona MessageSquare + bordo accentuato separa istruzioni cliente da indicazioni di consegna",
+      "context": "UI con più tipologie di note che potrebbero essere confuse dall'operatore",
+      "applicability": [
+        "ux",
+        "kitchen-view",
+        "visual-hierarchy"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.574Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746577-5",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.577Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "ESLint backend errore preesistente non bloccante",
+      "description": "Config ESLint backend richiede tsconfig.json mancante; node --check sufficiente per syntax",
+      "context": "Validazione backend amaCafe quando ESLint fallisce per config issue non correlati",
+      "applicability": [
+        "eslint",
+        "backend",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.577Z",
+        "source": "INFERRED"
       }
     }
   ]
