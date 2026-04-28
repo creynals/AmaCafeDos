@@ -31,6 +31,8 @@ General
 | ID | Decision | Option Selected | Date | Rationale |
 |----|----------|-----------------|------|-----------|
 | C100/C101 | Input hardening strategy | OPTION B — Audit + Central validateInput Middleware + Tests | 2026-04-28 | Single global guard on `/api/*` for SQLi/XSS/NoSQL pattern detection + length cap, complementing parameterized SQL. Loud 400 rejection (chat exempted — uses silent sanitizer). 32 tests covering 5 highest-risk endpoints. Files: `backend/src/middleware/validateInput.js`, `validateInput.test.js`. |
+| C103/C104 | INTELLIGENCE snapshot bloat strategy | OPTION B — Pre-flight + Gitignore + Tag + Push | 2026-04-28 | Untracked 10 timestamped INTELLIGENCE snapshots (~45k lines), added `.gitignore` patterns for `.synaptic/backups/` and `.synaptic/intelligence/`. Tag `pre-railway-c102` as rollback anchor. Fast-forward push (no `--force`). |
+| C106/C107 | Reconciliación divergencia main local vs origin | OPTION B — Rebase con drop del duplicado | 2026-04-28 | Detectado commit local `eea6d78` (C104 POST) idéntico a origin `cab5f03` (chore synaptic ignore, mismo árbol y timestamp). Drop local, rebase 3 commits SYNAPTIC PRE (C105/C106/C107) sobre origin/main, fast-forward push. Tag `pre-rebase-c107` como rollback anchor. Sin `--force`, historia lineal. |
 
 *Decisions will be logged here as they are made through Decision Gates*
 
@@ -100,6 +102,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-107 | Reconciliar divergencia main vía rebase --onto con drop de eea6d78 + push FF | Evita --force, preserva historia lineal, recuperable por tag pre-rebase-c107 | 2026-04-28 | 107 |
 | DEC-106 | Reconciliar main vía rebase --onto descartando commit duplicado eea6d78 | Preserva bookkeeping C105/C106, elimina ruido del duplicado, push fast-forward sin --force | 2026-04-28 | 106 |
 | DEC-104 | Untrack .synaptic/backups/INTELLIGENCE_*.json + create pre-railway-c102 tag | Establish clean rollback anchor before Railway deploy R1-R8 | 2026-04-28 | 104 |
 | DEC-103 | Publish C101 deliverable to origin/main via Option B (gitignore INTELLIGENCE + tag + fast-forward push) | Balanced approach: clean remote history, rollback anchor, no history rewrite, halt-on-anomaly safety | 2026-04-28 | 103 |
@@ -177,6 +180,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 107] SHA mapping post-rebase: dae064c→bf7ad7a, 8226645→5622fb3, b5e33db→f8c3ddb
+- [Cycle 107] Tag pre-rebase-c107 publicado en origin como punto de rollback
+- [Cycle 107] Los 3 commits ahead eran puramente estado SYNAPTIC (harness/BITACORA/INTELLIGENCE)
 - [Cycle 106] Commit eea6d78 (C104 POST SYNAPTIC) y cab5f03 (chore convencional) tienen diff idéntico: 5 ins / 45794 del / 11 archivos
 - [Cycle 106] Merge base actual: cf40db2 (C104 PRE); divergencia +3/-1 vs origin/main
 - [Cycle 106] Rebase de SHAs nunca pusheados no requiere --force-push

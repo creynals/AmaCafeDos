@@ -1164,29 +1164,45 @@
       "status": "PLANNED",
       "createdAtCycle": 106,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-107A",
+      "title": "Configurar branch protection en main",
+      "description": "Settings → Branches → require PR + status checks para prevenir push directo",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 107,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-107B",
+      "title": "Iniciar Railway deploy R1-R8",
+      "description": "Ejecutar docs/RAILWAY_DEPLOY.md fases R1-R8",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 107,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-107C",
+      "title": "Validación E2E input hardening C101",
+      "description": "Probar admin login con admin'-- y producto con <script> en UI real",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 107,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-107D",
+      "title": "GitHub Actions CI básico",
+      "description": "Workflow con lint + build + test en PR",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 107,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-84-1777333031645-0",
-      "cycle": 84,
-      "timestamp": "2026-04-27T23:37:11.645Z",
-      "type": "USER_PREFERENCE",
-      "title": "Hybrid execution: implement + Decision Gate",
-      "description": "User authorizes immediate execution for low-risk B-tasks while reserving Decision Gate for strategic ones",
-      "context": "When cycle has multiple B-tasks with mixed risk/strategic weight",
-      "applicability": [
-        "synaptic-protocol",
-        "decision-gate",
-        "execution-mode"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:37:11.645Z",
-        "source": "EXPLICIT"
-      }
-    },
     {
       "learningId": "learning-85-1777333510513-5",
       "cycle": 85,
@@ -1200,91 +1216,10 @@
         "tradeoffs"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T23:45:10.513Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244504-0",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.504Z",
-      "type": "ANTI_PATTERN",
-      "title": "DB-seeded config blocks env override",
-      "description": "Migration 004 seeded sumup_mode='mock' in settings; getModeWithSource read DB first so env fallback never fired and failsafe exit(1) trapped operator out of UI.",
-      "context": "When config has both DB-persisted and env-var sources with DB precedence on fresh deploys",
-      "applicability": [
-        "config",
-        "bootstrap",
-        "railway",
-        "sumup"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.504Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244513-1",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.513Z",
-      "type": "PATTERN",
-      "title": "One-shot env→DB promotion on boot",
-      "description": "bootstrapModeFromEnv() UPSERTs valid env value into settings before failsafe resolves, with cache invalidation and per-outcome logging.",
-      "context": "Reconciling env-var intent with DB-persisted config during cold-start",
-      "applicability": [
-        "bootstrap",
-        "config-reconciliation",
-        "sumup.config.js"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.513Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244515-2",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.515Z",
-      "type": "ANTI_PATTERN",
-      "title": "node_modules + .DS_Store tracked despite .gitignore",
-      "description": "1243 node_modules files and 4 .DS_Store files were in the index; .gitignore alone doesn't untrack already-committed paths.",
-      "context": "Repos where files were committed before .gitignore was added",
-      "applicability": [
-        "git-hygiene",
-        "gitignore",
-        "pre-push"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.515Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244518-3",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.518Z",
-      "type": "PATTERN",
-      "title": "Pre-commit hook with regex precision",
-      "description": "Initial .env regex over-matched .env.example; precise patterns + smoke-test against tmp git repo before declaring hook ready.",
-      "context": "Writing git hooks that block categories of files",
-      "applicability": [
-        "git-hooks",
-        "pre-commit",
-        "regex"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.518Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1300,48 +1235,10 @@
         "synaptic-protocol"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T00:14:04.520Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244523-5",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.523Z",
-      "type": "INSIGHT",
-      "title": "C86 G/R items lived only in conversation",
-      "description": "G1-G4 and R1-R9 labels weren't persisted to disk; had to reconstruct meaning from code inspection.",
-      "context": "When prior cycle reports use ad-hoc labels not saved to BITACORA/REGISTRY",
-      "applicability": [
-        "synaptic-memory",
-        "cycle-handoff"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.523Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-87-1777335244525-6",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.525Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Stage-only cleanup for large deletions",
-      "description": "git rm --cached run but commit deferred to user — 1247 file/-223856 line deletion staged for review before commit.",
-      "context": "When sweeping index changes need human eyes before history is rewritten",
-      "applicability": [
-        "git-rm-cached",
-        "review-gate"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.525Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -2162,9 +2059,9 @@
         "history-cleanup"
       ],
       "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:32:13.307Z",
+        "score": 0.44999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T02:37:34.504Z",
         "source": "INFERRED"
       }
     },
@@ -2225,6 +2122,67 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:32:13.316Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-107-1777343854508-1",
+      "cycle": 107,
+      "timestamp": "2026-04-28T02:37:34.508Z",
+      "type": "PATTERN",
+      "title": "Tag de respaldo pre-rebase",
+      "description": "Crear tag pre-rebase-cXXX antes de history rewrite permite rollback sin reflog",
+      "context": "Antes de cualquier rebase/reset que reescriba historia local",
+      "applicability": [
+        "git",
+        "safety",
+        "rollback",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:37:34.508Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-107-1777343854512-2",
+      "cycle": 107,
+      "timestamp": "2026-04-28T02:37:34.512Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Validación de duplicado por árbol+timestamp",
+      "description": "Comparar árbol git (líneas modificadas) y timestamp confirma equivalencia funcional pese a mensajes distintos",
+      "context": "Diagnóstico previo a drop en rebase para evitar pérdida de cambios reales",
+      "applicability": [
+        "git",
+        "diff",
+        "diagnosis"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:37:34.512Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-107-1777343854515-3",
+      "cycle": 107,
+      "timestamp": "2026-04-28T02:37:34.515Z",
+      "type": "INSIGHT",
+      "title": "Push fast-forward post-rebase evita --force",
+      "description": "Si origin solo tenía el duplicado dropable, post-rebase el push es FF natural sin --force",
+      "context": "Reconciliación local↔remote cuando divergencia es solo por duplicado",
+      "applicability": [
+        "git",
+        "push",
+        "safety"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:37:34.515Z",
+        "source": "INFERRED"
       }
     }
   ],
@@ -2374,9 +2332,12 @@
     "[2026-04-28T02:19:19.380Z] main branch lacks protection rules — flagged as next HIGH priority",
     "[2026-04-28T02:32:13.319Z] Repo recién inicializado en GitHub (origin: creynals/AmaCafeDos.git) — preferir historia lineal",
     "[2026-04-28T02:32:13.321Z] Próximo paso post-reconcile: branch protection en main + gates R1-R8 Railway deploy",
-    "[2026-04-28T02:32:13.322Z] Harness SYNAPTIC puede regenerar artefactos (INTELLIGENCE/BITACORA) en próximo ciclo — comportamiento esperado"
+    "[2026-04-28T02:32:13.322Z] Harness SYNAPTIC puede regenerar artefactos (INTELLIGENCE/BITACORA) en próximo ciclo — comportamiento esperado",
+    "[2026-04-28T02:37:34.518Z] main reconciliado en f8c3ddb, historia lineal sobre cab5f03 (chore origin)",
+    "[2026-04-28T02:37:34.520Z] Tags rollback disponibles en origin: pre-rebase-c107, pre-railway-c102",
+    "[2026-04-28T02:37:34.522Z] Divergencia 4↑/1↓ resuelta sin operaciones destructivas"
   ],
-  "lastUpdated": "2026-04-28T02:33:11.566Z",
+  "lastUpdated": "2026-04-28T02:38:35.286Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5190,6 +5151,145 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T23:45:10.511Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-84-1777333031645-0",
+      "cycle": 84,
+      "timestamp": "2026-04-27T23:37:11.645Z",
+      "type": "USER_PREFERENCE",
+      "title": "Hybrid execution: implement + Decision Gate",
+      "description": "User authorizes immediate execution for low-risk B-tasks while reserving Decision Gate for strategic ones",
+      "context": "When cycle has multiple B-tasks with mixed risk/strategic weight",
+      "applicability": [
+        "synaptic-protocol",
+        "decision-gate",
+        "execution-mode"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:37:11.645Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244504-0",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.504Z",
+      "type": "ANTI_PATTERN",
+      "title": "DB-seeded config blocks env override",
+      "description": "Migration 004 seeded sumup_mode='mock' in settings; getModeWithSource read DB first so env fallback never fired and failsafe exit(1) trapped operator out of UI.",
+      "context": "When config has both DB-persisted and env-var sources with DB precedence on fresh deploys",
+      "applicability": [
+        "config",
+        "bootstrap",
+        "railway",
+        "sumup"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.504Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244513-1",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.513Z",
+      "type": "PATTERN",
+      "title": "One-shot env→DB promotion on boot",
+      "description": "bootstrapModeFromEnv() UPSERTs valid env value into settings before failsafe resolves, with cache invalidation and per-outcome logging.",
+      "context": "Reconciling env-var intent with DB-persisted config during cold-start",
+      "applicability": [
+        "bootstrap",
+        "config-reconciliation",
+        "sumup.config.js"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.513Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244515-2",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.515Z",
+      "type": "ANTI_PATTERN",
+      "title": "node_modules + .DS_Store tracked despite .gitignore",
+      "description": "1243 node_modules files and 4 .DS_Store files were in the index; .gitignore alone doesn't untrack already-committed paths.",
+      "context": "Repos where files were committed before .gitignore was added",
+      "applicability": [
+        "git-hygiene",
+        "gitignore",
+        "pre-push"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.515Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244518-3",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.518Z",
+      "type": "PATTERN",
+      "title": "Pre-commit hook with regex precision",
+      "description": "Initial .env regex over-matched .env.example; precise patterns + smoke-test against tmp git repo before declaring hook ready.",
+      "context": "Writing git hooks that block categories of files",
+      "applicability": [
+        "git-hooks",
+        "pre-commit",
+        "regex"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.518Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244523-5",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.523Z",
+      "type": "INSIGHT",
+      "title": "C86 G/R items lived only in conversation",
+      "description": "G1-G4 and R1-R9 labels weren't persisted to disk; had to reconstruct meaning from code inspection.",
+      "context": "When prior cycle reports use ad-hoc labels not saved to BITACORA/REGISTRY",
+      "applicability": [
+        "synaptic-memory",
+        "cycle-handoff"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.523Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244525-6",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.525Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Stage-only cleanup for large deletions",
+      "description": "git rm --cached run but commit deferred to user — 1247 file/-223856 line deletion staged for review before commit.",
+      "context": "When sweeping index changes need human eyes before history is rewritten",
+      "applicability": [
+        "git-rm-cached",
+        "review-gate"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.525Z",
         "source": "INFERRED"
       }
     }
