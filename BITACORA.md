@@ -6598,6 +6598,81 @@ esto indica el diagnóstico de Railway: "Remove "npm ci &&" from the buildComman
 
 
 ---
+## CICLO: 127
+**Timestamp**: 2026-04-28T16:30:00.000Z
+**Trace ID**: `c127-railway-frontend-ebusy-fix`
+**Agente**: master_architect
+**Fase**: IMPLEMENTACION (immediate-execution per DG-079)
+**Decisión**: Apply C126 architect plan — drop `npm ci &&` from `frontend/railway.toml` buildCommand to resolve EBUSY conflict between Nixpacks-installed deps and Docker BuildKit cache mount on `node_modules/.cache`.
+**Resultado**: SUCCESS
+**Duración**: ~5min
+
+**Prompt Original**:
+```
+proceder con ciclo 126: Edit frontend/railway.toml:28 → buildCommand = "npm run build".
+Verify VITE_API_BASE_URL is set in Railway frontend service env vars (UI check, not a code change).
+Commit + push with a message like fix(frontend): drop npm ci from Railway buildCommand to resolve EBUSY — the commit is small enough to go directly to main (still no branch protection per the backlog) or via a PR if you prefer the C123 PR-only pattern.
+Trigger redeploy — should succeed on the 1st attempt.
+Persist learning in BITACORA C126 (asymmetry between front/back railway.toml authoring).
+```
+
+**Decision Gate Presentado**: Ninguno (Immediate Execution Mode DG-079, plan vinculante de C126)
+
+**Artefactos Modificados**:
+- `frontend/railway.toml` (línea 28): `npm ci && npm run build` → `npm run build`
+- `BITACORA.md` (este entry C127)
+
+**Verificación Física**:
+- ✅ `grep -n buildCommand frontend/railway.toml` → `28:buildCommand = "npm run build"` (post-edit)
+- ✅ Working tree clean antes de commit (excluyendo el cambio del ciclo)
+
+**Pasos Operacionales**:
+1. Edit aplicado a `frontend/railway.toml:28`
+2. Verificación grep post-edit (lección C53/C57: nunca declarar éxito sin releer)
+3. Commit directo a `main` (sin PR — alineado con autorización del usuario y ausencia de branch protection actual)
+4. Push a `origin/main`
+5. **Acción del usuario** (no automatizable por agente):
+   - Railway UI → Service `frontend` → Variables → confirmar `VITE_API_BASE_URL` apunta al dominio público del backend (`https://<backend>.up.railway.app/api`)
+   - Trigger Redeploy del servicio frontend (debería pasar en 1er intento)
+
+**🧠 LEARNING C127 — Asimetría front/back en autoría de `railway.toml`**:
+
+| Aspecto | Backend | Frontend |
+|---|---|---|
+| `railway.toml` presente | ❌ NO | ✅ SÍ |
+| Estrategia de build | Nixpacks auto-detecta `package.json`, ejecuta `npm ci && npm run build` automáticamente | `railway.toml` declara explícitamente `buildCommand` |
+| Resultado | OK — Nixpacks no choca consigo mismo | EBUSY — `npm ci` declarado en `buildCommand` corre **encima** del install que Nixpacks ya hizo, conflictuando con el cache mount de Docker BuildKit en `node_modules/.cache` |
+
+**Causa raíz**: Cuando Nixpacks detecta un `package.json` ya corre `npm ci` en una **fase previa** (con cache mount montado). Si el `buildCommand` de `railway.toml` también incluye `npm ci`, se ejecuta una segunda vez sobre `node_modules` que tiene el cache mount aún activo → EBUSY al intentar reescribir `node_modules/.cache`.
+
+**Regla derivada para futuros `railway.toml`**:
+- Si Nixpacks va a auto-detectar el lenguaje, el `buildCommand` debe ejecutar SOLO los pasos posteriores al install (build, transpile, etc.) — **nunca duplicar `npm ci` o `npm install`**.
+- Si se quiere control total del install, usar `builder = "DOCKERFILE"` con un Dockerfile explícito en lugar de `NIXPACKS`.
+- Para servicios que SÍ tengan `railway.toml`, documentar este patrón en el header del archivo (ya hecho implícitamente con este fix).
+
+**Métricas**:
+- Cumplimiento protocolo: 100% (immediate-execution autorizada)
+- Decision Gate presentado: ❌ (DG-079, plan C126 vinculante)
+- Memoria actualizada: ✅ (BITACORA + learning persistido en este entry)
+- Tests generados: ❌ (config-only fix, no aplica unit test)
+- Verificación post-edit: ✅ (grep ejecutado, valor confirmado)
+- Reformulaciones necesarias: 0
+- Lecciones aplicadas: C53/C57 (verify-after-edit), C115/C116 (no declarar artefactos sin verificación física)
+
+**Pending User Action**:
+- [ ] Verificar `VITE_API_BASE_URL` en Railway UI (frontend service → Variables)
+- [ ] Trigger redeploy del servicio frontend en Railway
+- [ ] Reportar resultado del 5to intento de deploy (esperado: SUCCESS)
+
+**Synaptic Strength**: 99%
+
+---
+
+*SYNAPTIC Protocol v3.0 - Continuous Logging Active*
+*Last Updated: 2026-04-28T16:30:00.000Z*
+
+
+---
 ## CICLO: 23
 **Timestamp**: 2026-04-26T18:00:00.000Z
 **Trace ID**: `c23-products-tab-consolidation`
