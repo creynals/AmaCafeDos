@@ -1204,25 +1204,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-85-1777333510513-5",
-      "cycle": 85,
-      "timestamp": "2026-04-27T23:45:10.513Z",
-      "type": "USER_PREFERENCE",
-      "title": "User picks Balanced options when offered tiers",
-      "description": "User selected OPTION B (Balanced) over A (minimal) and C (object storage) for image persistence",
-      "context": "Decision gates with effort/complexity tradeoffs",
-      "applicability": [
-        "decisions",
-        "tradeoffs"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:45:10.513Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
       "learningId": "learning-87-1777335244520-4",
       "cycle": 87,
       "timestamp": "2026-04-28T00:14:04.520Z",
@@ -1235,7 +1216,7 @@
         "synaptic-protocol"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T00:14:04.520Z",
         "source": "EXPLICIT"
@@ -2337,7 +2318,7 @@
     "[2026-04-28T02:37:34.520Z] Tags rollback disponibles en origin: pre-rebase-c107, pre-railway-c102",
     "[2026-04-28T02:37:34.522Z] Divergencia 4↑/1↓ resuelta sin operaciones destructivas"
   ],
-  "lastUpdated": "2026-04-28T02:38:35.286Z",
+  "lastUpdated": "2026-04-28T02:57:40.373Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5291,6 +5272,25 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T00:14:04.525Z",
         "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510513-5",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.513Z",
+      "type": "USER_PREFERENCE",
+      "title": "User picks Balanced options when offered tiers",
+      "description": "User selected OPTION B (Balanced) over A (minimal) and C (object storage) for image persistence",
+      "context": "Decision gates with effort/complexity tradeoffs",
+      "applicability": [
+        "decisions",
+        "tradeoffs"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.513Z",
+        "source": "EXPLICIT"
       }
     }
   ]
