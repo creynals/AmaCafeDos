@@ -1639,7 +1639,7 @@
         "user-pattern"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:32:13.316Z",
         "source": "EXPLICIT"
@@ -2662,7 +2662,7 @@
     "[2026-04-28T16:12:23.223Z] Frontend Railway deploy expected to succeed on 1st attempt post-merge if VITE_API_BASE_URL is set",
     "[2026-04-28T16:12:23.225Z] BITACORA C127 entry at lines 6601-6675"
   ],
-  "lastUpdated": "2026-04-28T16:48:12.190Z",
+  "lastUpdated": "2026-04-28T16:50:44.236Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

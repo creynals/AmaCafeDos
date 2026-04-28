@@ -6639,6 +6639,90 @@ Persist learning in BITACORA C126 (asymmetry between front/back railway.toml aut
 
 ---
 
+
+---
+## CICLO: 128
+**Timestamp**: 2026-04-28T16:50:05.256Z
+**Trace ID**: `3da39675-e3f0-499b-97b1-27ce545af237`
+**Agente**: master_architect
+**Fase**: ANALISIS
+**Decisión**: N/A
+**Resultado**: SUCCESS
+**Duración**: 113081ms
+
+**Prompt Original**:
+```
+[ARCHITECT MODE - Analysis only, no code modifications]
+
+analiza y planifica los cambios para resolver issue en railway en versiones de node.js: El contenido del railway.toml que compartes es correcto en su lógica de construcción (npm run build), pero le falta la instrucción de jerarquía superior que obliga a Railway a ignorar sus valores por defecto (Node 18) y usar la versión que necesitamos.
+
+Como los logs siguen reportando nodejs_18 y ejecutando un npm ci que no está en tu archivo, el problema es que Nixpacks está generando un plan automático antes de leer tu configuración, o bien está priorizando el archivo railway.toml que está en la raíz del proyecto en lugar del que está en /frontend.
+
+🛠️ La solución: Forzar el entorno en el TOML
+
+Modifica tu archivo frontend/railway.toml agregando la sección [setup]. Esto tiene más peso que cualquier variable de la interfaz:
+
+Ini, TOML
+# C84 (B4): Railway service configuration — amaCafe FRONTEND
+
+[setup]
+# Forzamos la versión exacta para que Vite 8 no falle
+pkgs = ["nodejs_23"]
+
+[build]
+builder = "NIXPACKS"
+# Al definir esto, Nixpacks dejará de intentar hacer el "npm ci" automático que bloquea el build
+buildCommand = "npm run build"
+
+[deploy]
+startCommand = "npx vite preview --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/"
+healthcheckTimeout = 60
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
+🔍 ¿Por qué esto es definitivo?
+
+Prioridad de Setup: Al incluir pkgs = ["nodejs_23"], el constructor no tiene que "adivinar" ni mirar las variables de la UI; recibe la instrucción directa de instalar Node 23 al inicio del proceso.
+
+Eliminación del Conflicto de Archivos: En uno de tus logs anteriores se mencionaba que se encontraron dos archivos railway.toml (uno en la raíz y otro en el subdirectorio). Al hacer push de este cambio, asegúrate de que el archivo en la raíz no tenga instrucciones que contradigan al de la carpeta /frontend.
+
+🚀 Pasos para aplicar y verificar:
+
+Actualiza el archivo en GitHub: Sube la versión con el bloque [setup].
+
+Limpia la UI: En Railway, ve a las Variables y elimina NIXPACKS_NODE_VERSION y NIXPACKS_NO_CACHE. Al estar en el TOML, ya no las necesitas y evitamos redundancia.
+
+Monitorea el inicio del Log:
+
+Debe decir: ║ setup │ nodejs_23 ║
+
+No debe aparecer: RUN npm ci (debe pasar directo a tu npm run build).
+
+Si después de este cambio el log sigue diciendo nodejs_18, significa que Railway está ignorando completamente la carpeta /frontend como Root Directory. En ese caso, la solución sería mover el railway.toml a la raíz del repositorio y ajustar las rutas internas.
+```
+
+**Decision Gate Presentado**: Ninguno (ciclo de análisis inicial)
+
+**Opción Elegida**: Pendiente de selección
+
+**Artefactos Generados**:
+- Ninguno
+
+**Métricas**:
+- Cumplimiento protocolo: 100%
+- Decision Gate presentado: ❌
+- Memoria actualizada: ✅
+- Tests generados: ❌
+- Reformulaciones necesarias: 0
+
+
+
+
+
+**Synaptic Strength**: 99%
+
+---
+
 *SYNAPTIC Protocol v3.0 - Continuous Logging Active*
 *Last Updated: 2026-04-28T02:45:00.000Z*
 
