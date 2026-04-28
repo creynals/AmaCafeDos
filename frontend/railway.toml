@@ -15,22 +15,34 @@
 #   `npm run build` produce dist/ con el bundle estático ya parametrizado por
 #   VITE_API_BASE_URL inyectado al momento del build.
 #
-# Start (C130):
-#   `serve -s dist -l $PORT` reemplaza a `vite preview`. `vite preview` es una
-#   herramienta de DESARROLLO con restricciones estrictas de host (allowedHosts)
-#   que causaron healthcheck fails repetidos en Railway (logs C128–C130). `serve`
-#   es un servidor estático ligero pensado para producción de SPAs estáticas,
-#   sin las restricciones de Vite y con bind robusto al $PORT inyectado.
+# Start (C130 + C134/C135 fix):
+#   `serve -s dist -l tcp://0.0.0.0:$PORT` reemplaza a `vite preview`. `vite preview`
+#   es una herramienta de DESARROLLO con restricciones estrictas de host
+#   (allowedHosts) que causaron healthcheck fails repetidos en Railway
+#   (logs C128–C130). `serve` es un servidor estático ligero pensado para
+#   producción de SPAs estáticas.
+#
+# Bind explícito a 0.0.0.0 (C135):
+#   En `serve` >= 14, pasar `-l <PORT>` (solo número) bindea a `localhost`,
+#   por lo que el healthcheck del proxy de Railway no puede alcanzar el
+#   contenedor desde fuera y falla con timeout. Pasar `-l tcp://0.0.0.0:$PORT`
+#   fuerza el bind a todas las interfaces, condición necesaria para que el
+#   load balancer de Railway resuelva la healthcheck en `/`.
+#   Evidencia empírica: P0 C133 confirmó "Accepting connections at
+#   http://localhost:8080" en logs post-PR#5 → root cause identificado en C134.
 #
 # El flag `-s` (single-page) hace fallback a index.html para rutas client-side
 # del React Router, condición indispensable para el storefront.
+#
+# Rollback: `git reset --hard pre-c134-fix` (tag creado en C135 sobre el SHA
+# pre-fix del main: 202fb41).
 
 [build]
 builder = "NIXPACKS"
 buildCommand = "npm run build"
 
 [deploy]
-startCommand = "npx serve -s dist -l $PORT"
+startCommand = "npx serve -s dist -l tcp://0.0.0.0:$PORT"
 healthcheckPath = "/"
 healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"
