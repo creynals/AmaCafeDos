@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-098 | Require explicit task definition in BITACORA before referencing by label across cycles | C96/C97 architect-mode entries had no persisted task schema, blocking C98 execution | 2026-04-28 | 98 |
 | DEC-095 | Validate GitHub state via gh api before delegating manual UI tasks to user | Tasks may already be auto-completed; avoids unnecessary user friction | 2026-04-28 | 95 |
 | DEC-094 | Ejecutar Option B: rename master→main, push inicial, push tag pre-purge-c78 | Balance entre seguridad (tag respaldo) y simplicidad (sin force-push ni re-purga) | 2026-04-28 | 94 |
 | DEC-093 | Decision Gate abierto: estrategia de push inicial a AmaCafeDos (Option A/B/C) | Usuario autorizó push pero mecánica (rename, tags, protección) requiere confirmación explícita | 2026-04-28 | 93 |
@@ -170,6 +171,8 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 98] Architect-mode cycles must persist task definitions if Tier/Bx labels will be referenced later
+- [Cycle 98] DG-079 Immediate Execution allows clarifying questions for ambiguous/risky scope
 - [Cycle 95] Default branch on AmaCafeDos = main (verified via gh api)
 - [Cycle 95] Only branch on remote = main; no stale branches to clean
 - [Cycle 95] Last push timestamp 2026-04-28T01:02:39Z matches C94 push

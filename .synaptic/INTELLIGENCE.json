@@ -912,112 +912,36 @@
       "status": "PLANNED",
       "createdAtCycle": 95,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-098-1",
+      "title": "Define Tier 1 scope explicitly",
+      "description": "User must confirm hypothesis (input hardening / Railway deploy / pre-deploy local) for B1+B2",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 98,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-098-2",
+      "title": "Adopt cycle-prefixed task IDs",
+      "description": "Use C{N}-B{n} format in BITACORA to avoid collision with prior cycles' B-tasks",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 98,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-098-3",
+      "title": "Persist task schema in architect-mode cycles",
+      "description": "When architect-mode produces a plan, write Tier/task definitions into BITACORA, not just narrative",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 98,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-77-1777327415063-0",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.063Z",
-      "type": "PATTERN",
-      "title": "Decision Gate con 3 opciones diferenciadas",
-      "description": "Phase 2 SYNAPTIC requiere A/B/C con pros/cons/risk/confidence cuantificados",
-      "context": "Cualquier ciclo que entre en Phase 2 Decision Gate",
-      "applicability": [
-        "synaptic-protocol",
-        "decision-gate",
-        "phase-2"
-      ],
-      "confidence": {
-        "score": 0.35,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-27T22:24:09.789Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-78-1777327875162-0",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.162Z",
-      "type": "PATTERN",
-      "title": "git filter-repo standard purge workflow",
-      "description": "Backup tar.gz + tag, install filter-repo, run purge, verify with rev-list/fsck, document rollback",
-      "context": "When purging sensitive files from git history on local-only repo without remote",
-      "applicability": [
-        "git",
-        "security",
-        "history-purge",
-        "credentials"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.162Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-78-1777327875168-1",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.168Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "filter-repo rewrites pre-existing tags",
-      "description": "Tags created before filter-repo run get rewritten to new SHAs; rollback must rely on physical tar.gz backup",
-      "context": "When using pre-purge tags as safety net before git filter-repo",
-      "applicability": [
-        "git",
-        "filter-repo",
-        "backup",
-        "rollback"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.168Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-78-1777327875170-2",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.170Z",
-      "type": "INSIGHT",
-      "title": "Local-only repo reduces purge blast radius",
-      "description": "Sin remote configurado, no requiere force-push ni coordinación con colaboradores; operación reversible vía tar.gz",
-      "context": "Evaluating risk of git history rewrites",
-      "applicability": [
-        "git",
-        "risk-assessment",
-        "blast-radius"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.170Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-78-1777327875172-3",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.172Z",
-      "type": "INSIGHT",
-      "title": "History purge does not invalidate exposed credentials",
-      "description": "Limpiar el repo no rota secretos; rotación manual obligatoria post-purga para mitigar riesgo real",
-      "context": "After removing .env or secrets from git history",
-      "applicability": [
-        "security",
-        "credentials",
-        "rotation",
-        "post-purge"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.172Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-78-1777327875175-4",
       "cycle": 78,
@@ -1031,30 +955,10 @@
         "user-preference"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T22:11:15.175Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-78-1777327875177-5",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.177Z",
-      "type": "PATTERN",
-      "title": "Etapas críticas con verificación entre cada una",
-      "description": "Operaciones HIGH-RISK irreversibles se ejecutan por fases con validación intermedia (inventario→backup→ejecución→verificación)",
-      "context": "Operaciones destructivas o irreversibles en repos/sistemas",
-      "applicability": [
-        "high-risk-ops",
-        "verification",
-        "phased-execution"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.177Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1883,6 +1787,65 @@
         "lastReinforced": "2026-04-28T01:07:33.132Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-98-1777340081584-0",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.584Z",
+      "type": "ANTI_PATTERN",
+      "title": "Tier/Bx labels not persisted in BITACORA",
+      "description": "C96/C97 entries lack Decision Gate task categorization, causing scope ambiguity in C98",
+      "context": "When user references prior cycle tasks by label (Tier N, Bx)",
+      "applicability": [
+        "bitacora",
+        "decision-gate",
+        "task-tracking"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.584Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081588-1",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.588Z",
+      "type": "PATTERN",
+      "title": "Halt on ambiguous scope despite DG-079",
+      "description": "Even in Immediate Execution mode, ask for clarification when task labels are undefined in persisted state",
+      "context": "When user prompt references undefined Tier/task IDs",
+      "applicability": [
+        "dg-079",
+        "immediate-execution",
+        "ambiguity"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.588Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081590-2",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.590Z",
+      "type": "INSIGHT",
+      "title": "B-task ID collision risk",
+      "description": "B1/B2/B3/B4 from C83-85 already executed; reusing labels in new cycles creates confusion",
+      "context": "Future task labeling should use cycle-prefixed IDs (C97-B1) not bare Bx",
+      "applicability": [
+        "task-naming",
+        "intelligence-json"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.590Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -2006,9 +1969,13 @@
     "[2026-04-28T01:07:33.134Z] Repo creynals/AmaCafeDos is PRIVATE (not public)",
     "[2026-04-28T01:07:33.136Z] Default branch already main; branch protection still pending",
     "[2026-04-28T01:07:33.138Z] Next HIGH priority is credential rotation (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB)",
-    "[2026-04-28T01:07:33.140Z] Railway deploy Decision Gate R1-R8 blocked on credential rotation"
+    "[2026-04-28T01:07:33.140Z] Railway deploy Decision Gate R1-R8 blocked on credential rotation",
+    "[2026-04-28T01:34:41.592Z] C96 = Railway deploy report request (architect mode, no artifacts)",
+    "[2026-04-28T01:34:41.593Z] C97 = sandbox input-injection validation request (architect mode, no artifacts)",
+    "[2026-04-28T01:34:41.595Z] C83-85 already consumed B2/B3/B4 labels: Railway Volume, api.js config, railway.toml+migrate",
+    "[2026-04-28T01:34:41.596Z] C98 awaiting user clarification on Tier 1 (B1+B2) scope before execution"
   ],
-  "lastUpdated": "2026-04-28T01:32:29.005Z",
+  "lastUpdated": "2026-04-28T01:35:42.615Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -4292,6 +4259,129 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T22:03:35.077Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415063-0",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.063Z",
+      "type": "PATTERN",
+      "title": "Decision Gate con 3 opciones diferenciadas",
+      "description": "Phase 2 SYNAPTIC requiere A/B/C con pros/cons/risk/confidence cuantificados",
+      "context": "Cualquier ciclo que entre en Phase 2 Decision Gate",
+      "applicability": [
+        "synaptic-protocol",
+        "decision-gate",
+        "phase-2"
+      ],
+      "confidence": {
+        "score": 0.14999999999999997,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-27T22:24:09.789Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875162-0",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.162Z",
+      "type": "PATTERN",
+      "title": "git filter-repo standard purge workflow",
+      "description": "Backup tar.gz + tag, install filter-repo, run purge, verify with rev-list/fsck, document rollback",
+      "context": "When purging sensitive files from git history on local-only repo without remote",
+      "applicability": [
+        "git",
+        "security",
+        "history-purge",
+        "credentials"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.162Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875168-1",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.168Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "filter-repo rewrites pre-existing tags",
+      "description": "Tags created before filter-repo run get rewritten to new SHAs; rollback must rely on physical tar.gz backup",
+      "context": "When using pre-purge tags as safety net before git filter-repo",
+      "applicability": [
+        "git",
+        "filter-repo",
+        "backup",
+        "rollback"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.168Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875170-2",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.170Z",
+      "type": "INSIGHT",
+      "title": "Local-only repo reduces purge blast radius",
+      "description": "Sin remote configurado, no requiere force-push ni coordinación con colaboradores; operación reversible vía tar.gz",
+      "context": "Evaluating risk of git history rewrites",
+      "applicability": [
+        "git",
+        "risk-assessment",
+        "blast-radius"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.170Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875172-3",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.172Z",
+      "type": "INSIGHT",
+      "title": "History purge does not invalidate exposed credentials",
+      "description": "Limpiar el repo no rota secretos; rotación manual obligatoria post-purga para mitigar riesgo real",
+      "context": "After removing .env or secrets from git history",
+      "applicability": [
+        "security",
+        "credentials",
+        "rotation",
+        "post-purge"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.172Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875177-5",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.177Z",
+      "type": "PATTERN",
+      "title": "Etapas críticas con verificación entre cada una",
+      "description": "Operaciones HIGH-RISK irreversibles se ejecutan por fases con validación intermedia (inventario→backup→ejecución→verificación)",
+      "context": "Operaciones destructivas o irreversibles en repos/sistemas",
+      "applicability": [
+        "high-risk-ops",
+        "verification",
+        "phased-execution"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.177Z",
         "source": "INFERRED"
       }
     }

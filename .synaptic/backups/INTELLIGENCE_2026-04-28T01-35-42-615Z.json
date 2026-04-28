@@ -137,6 +137,32 @@
       "selectedOption": "B",
       "userRationale": ": Railway Volume — Balanced ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777337992005",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:52.005Z",
+      "decisionPoint": "proceder con OPTION B: Rename + Push main + Push Tag pre-purge-c77 (Balanceado) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Rename + Push main + Push Tag pre-purge-c77 (Balanceado) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -778,6 +804,141 @@
       "status": "PLANNED",
       "createdAtCycle": 87,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-093-A",
+      "title": "Recibir decisión del usuario sobre Option A/B/C",
+      "description": "Esperar input explícito 'Proceed with Option [X]' antes de ejecutar cualquier comando git",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 93,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-093-B",
+      "title": "Ejecutar pre-flight checks antes del push",
+      "description": "Verificar remote, .gitignore, tag respaldo, credenciales rotadas, git log post-purga",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 93,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-093-C",
+      "title": "Configurar main como default branch en GitHub UI tras push",
+      "description": "Post-push: setear main como default y verificar que .env no aparece en ningún commit del remote",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 93,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-1",
+      "title": "Configurar main como default branch en GitHub UI",
+      "description": "Settings → Branches → cambiar default a main",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-2",
+      "title": "Inspección visual del repo público",
+      "description": "Confirmar ausencia de .env en todos los commits visibles en GitHub",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-3",
+      "title": "Rotación de credenciales pre-deploy",
+      "description": "Rotar ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT, DB password",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-4",
+      "title": "Decision Gate Railway service config",
+      "description": "Configurar Railway service según docs/RAILWAY_DEPLOY.md (R1-R8)",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-1",
+      "title": "Rotación obligatoria de credenciales",
+      "description": "Rotate ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT, DB password",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-2",
+      "title": "Decision Gate Railway deploy R1-R8",
+      "description": "Execute Railway deploy gates per docs/RAILWAY_DEPLOY.md after credential rotation",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-3",
+      "title": "Branch protection on main",
+      "description": "Require PR + status checks on main branch before collaborators/CI added",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-4",
+      "title": "Document SHA mapping pre/post-purge",
+      "description": "Record pre/post filter-repo SHA mapping in WORKSPACE_IDENTITY.md",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-5",
+      "title": "GitHub Actions CI básico",
+      "description": "Set up basic lint + build CI workflow after branch protection",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-098-1",
+      "title": "Define Tier 1 scope explicitly",
+      "description": "User must confirm hypothesis (input hardening / Railway deploy / pre-deploy local) for B1+B2",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 98,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-098-2",
+      "title": "Adopt cycle-prefixed task IDs",
+      "description": "Use C{N}-B{n} format in BITACORA to avoid collision with prior cycles' B-tasks",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 98,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-098-3",
+      "title": "Persist task schema in architect-mode cycles",
+      "description": "When architect-mode produces a plan, write Tier/task definitions into BITACORA, not just narrative",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 98,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -795,91 +956,9 @@
         "phase-2"
       ],
       "confidence": {
-        "score": 0.44999999999999996,
+        "score": 0.35,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-27T22:24:09.789Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415068-1",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.068Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "git filter-repo recomendado oficialmente sobre filter-branch",
-      "description": "Es el sustituto oficial de Git para reescritura de historial; cubre archivos y contenido",
-      "context": "Purga de secretos del historial git",
-      "applicability": [
-        "git",
-        "security",
-        "history-rewrite",
-        "secrets"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.068Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415071-2",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.071Z",
-      "type": "INSIGHT",
-      "title": "Rotación de credenciales es prerequisito Y obligatorio post-purga",
-      "description": "Aunque se rote antes, tras purgar historial deben rotarse TODAS las credenciales expuestas",
-      "context": "Operaciones de purga de .env del historial",
-      "applicability": [
-        "security",
-        "credentials-rotation",
-        "post-purge"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.071Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415074-3",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.074Z",
-      "type": "ANTI_PATTERN",
-      "title": "Recreación total destruye trazabilidad SYNAPTIC",
-      "description": "Squash inicial rompe vínculo BITACORA↔commits y contradice principio Traceable",
-      "context": "Decisiones sobre limpieza de historial en proyectos SYNAPTIC",
-      "applicability": [
-        "synaptic-principles",
-        "traceability",
-        "anti-pattern"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.074Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415077-4",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.077Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Backup obligatorio + tag pre-purge antes de force-push",
-      "description": "Zip de .git+working tree y tag pre-purge-c77 permiten rollback granular",
-      "context": "Antes de cualquier operación destructiva sobre historial git",
-      "applicability": [
-        "git",
-        "backup",
-        "rollback",
-        "safety"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.077Z",
         "source": "INFERRED"
       }
     },
@@ -1569,6 +1648,327 @@
         "lastReinforced": "2026-04-28T00:14:04.525Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-93-1777337968454-0",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.454Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario prefiere opciones balanceadas (Option B)",
+      "description": "5/5 últimas decisiones del usuario favorecieron la opción B (balanceada) sobre conservadora o innovadora",
+      "context": "Decision Gates con tres opciones A/B/C",
+      "applicability": [
+        "decision-gate",
+        "user-pattern",
+        "option-b"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.454Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968459-1",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.459Z",
+      "type": "PATTERN",
+      "title": "Decision Gate sobre mecánica de push inicial",
+      "description": "Push inicial a remote vacío requiere decidir: rename branch, manejo de tags, branch protection",
+      "context": "Primer push a repo GitHub recién creado tras filter-repo",
+      "applicability": [
+        "git",
+        "github",
+        "initial-push",
+        "filter-repo"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.459Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968462-2",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.462Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Pre-flight checks obligatorios antes de push post-purga",
+      "description": "Verificar remote, .gitignore, tag respaldo, credenciales rotadas, log post-purga antes de pushear",
+      "context": "Push inicial tras git filter-repo que eliminó secretos",
+      "applicability": [
+        "security",
+        "git-filter-repo",
+        "secrets-purge"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.462Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968465-3",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.465Z",
+      "type": "INSIGHT",
+      "title": "Tag pre-purge-c77 sólo local es single-point-of-failure",
+      "description": "Mantener tag de respaldo de purga sólo en local arriesga pérdida por fallo de disco",
+      "context": "Estrategia de respaldo post-filter-repo",
+      "applicability": [
+        "backup",
+        "resilience",
+        "tags"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.465Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968468-4",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.468Z",
+      "type": "ANTI_PATTERN",
+      "title": "Dual branch master+main genera ruido sin beneficio",
+      "description": "Publicar ambas ramas con mismo HEAD confunde y branch protection estricta sin team bloquea workflow",
+      "context": "MVP de un solo desarrollador",
+      "applicability": [
+        "git",
+        "branch-strategy",
+        "over-engineering"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.468Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274400-0",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.400Z",
+      "type": "ANTI_PATTERN",
+      "title": "Tag name mismatch entre Decision Gate e ejecución",
+      "description": "Decision Gate C93 mencionó 'pre-purge-c77' pero la tag real era 'pre-purge-c78' (creada en C78)",
+      "context": "Al ejecutar acciones que referencian tags/branches creados en cycles previos",
+      "applicability": [
+        "git",
+        "tags",
+        "decision-gate",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.400Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274406-1",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.406Z",
+      "type": "PATTERN",
+      "title": "Pre-flight security check antes de push público",
+      "description": "Verificar .env ausente del historial completo ANTES de push a remoto público",
+      "context": "Primer push a repo público después de purga de secretos",
+      "applicability": [
+        "git",
+        "security",
+        "secrets",
+        "public-push"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.406Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274410-2",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.410Z",
+      "type": "USER_PREFERENCE",
+      "title": "Option B (Balanceado) sobre opciones extremas",
+      "description": "Usuario prefiere balance: rename + push main + push tag respaldo, sin force-push ni purga adicional",
+      "context": "Decisiones de migración de branch master→main con tag de respaldo",
+      "applicability": [
+        "decision-gate",
+        "git-migration",
+        "balanced-approach"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.410Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274413-3",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.413Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Sequencia git rename + push -u + push tag",
+      "description": "git remote add → git branch -m → git push -u origin main → git push origin <tag>",
+      "context": "Migración inicial de repo local a remoto público con preservación de respaldo",
+      "applicability": [
+        "git",
+        "remote-setup",
+        "branch-migration"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.413Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453119-0",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.119Z",
+      "type": "PATTERN",
+      "title": "Verify state before requesting manual user action",
+      "description": "Use gh api to check actual GitHub state before asking user to perform UI tasks",
+      "context": "When roadmap suggests manual GitHub UI actions",
+      "applicability": [
+        "github",
+        "verification",
+        "automation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.119Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453125-1",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.125Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "GitHub auto-promotes first pushed branch as default",
+      "description": "Empty repos auto-set default branch on first push -u; no manual UI step needed",
+      "context": "After git push -u origin main on a freshly created empty repo",
+      "applicability": [
+        "github",
+        "git",
+        "default-branch"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.125Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453128-2",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.128Z",
+      "type": "PATTERN",
+      "title": "Verify .env absence in remote history after purge",
+      "description": "git log --all --full-history -- '**/.env' must return empty to confirm filter-repo persisted",
+      "context": "Post-push validation after git filter-repo credential purge",
+      "applicability": [
+        "security",
+        "git-filter-repo",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.128Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453132-3",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.132Z",
+      "type": "INSIGHT",
+      "title": "Repo visibility was private, not public as legacy roadmap claimed",
+      "description": "AmaCafeDos repo is private; older roadmap notes had stale visibility info",
+      "context": "When trusting legacy roadmap entries about repo metadata",
+      "applicability": [
+        "roadmap-hygiene",
+        "github"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.132Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081584-0",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.584Z",
+      "type": "ANTI_PATTERN",
+      "title": "Tier/Bx labels not persisted in BITACORA",
+      "description": "C96/C97 entries lack Decision Gate task categorization, causing scope ambiguity in C98",
+      "context": "When user references prior cycle tasks by label (Tier N, Bx)",
+      "applicability": [
+        "bitacora",
+        "decision-gate",
+        "task-tracking"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.584Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081588-1",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.588Z",
+      "type": "PATTERN",
+      "title": "Halt on ambiguous scope despite DG-079",
+      "description": "Even in Immediate Execution mode, ask for clarification when task labels are undefined in persisted state",
+      "context": "When user prompt references undefined Tier/task IDs",
+      "applicability": [
+        "dg-079",
+        "immediate-execution",
+        "ambiguity"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.588Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081590-2",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.590Z",
+      "type": "INSIGHT",
+      "title": "B-task ID collision risk",
+      "description": "B1/B2/B3/B4 from C83-85 already executed; reusing labels in new cycles creates confusion",
+      "context": "Future task labeling should use cycle-prefixed IDs (C97-B1) not bare Bx",
+      "applicability": [
+        "task-naming",
+        "intelligence-json"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.590Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1680,9 +2080,25 @@
     "[2026-04-28T00:14:04.527Z] C86 G1-G4 and R1-R9 labels were never persisted; future cycles must save such enumerations to BITACORA",
     "[2026-04-28T00:14:04.528Z] Operator's deploy gate is grepping backend logs for '[sumup] bootstrap: promoted SUMUP_MODE env to settings'",
     "[2026-04-28T00:14:04.530Z] docs/RAILWAY_DEPLOY.md R5 sets SUMUP_MODE=live; R8 step 2 verifies promotion log line",
-    "[2026-04-28T00:14:04.531Z] 1247 files / -223856 lines staged for deletion at end of C87 — user must review and commit"
+    "[2026-04-28T00:14:04.531Z] 1247 files / -223856 lines staged for deletion at end of C87 — user must review and commit",
+    "[2026-04-28T00:59:28.471Z] Cycle 93 entró en Phase 1 (Specification) con Decision Gate sin ejecutar comandos git",
+    "[2026-04-28T00:59:28.473Z] Pre-condiciones C87 ya aplicadas: hooks instalados, staging limpio (1247-file deletion commiteado)",
+    "[2026-04-28T00:59:28.474Z] Credenciales rotadas post-C78 deben verificarse antes del push (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB)",
+    "[2026-04-28T00:59:28.476Z] Recomendación del agente: Option B (rename + push main + push tag pre-purge-c77)",
+    "[2026-04-28T01:04:34.415Z] Default branch en GitHub UI aún debe configurarse manualmente como main",
+    "[2026-04-28T01:04:34.417Z] Inspección visual pendiente: confirmar que ningún .env aparece en commits del repo público",
+    "[2026-04-28T01:04:34.419Z] Rotación de credenciales pendiente antes de deploy Railway: ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB",
+    "[2026-04-28T01:04:34.421Z] Discrepancia resuelta: nomenclatura tag c77 vs c78 — siempre verificar con git tag -l antes de referenciar",
+    "[2026-04-28T01:07:33.134Z] Repo creynals/AmaCafeDos is PRIVATE (not public)",
+    "[2026-04-28T01:07:33.136Z] Default branch already main; branch protection still pending",
+    "[2026-04-28T01:07:33.138Z] Next HIGH priority is credential rotation (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB)",
+    "[2026-04-28T01:07:33.140Z] Railway deploy Decision Gate R1-R8 blocked on credential rotation",
+    "[2026-04-28T01:34:41.592Z] C96 = Railway deploy report request (architect mode, no artifacts)",
+    "[2026-04-28T01:34:41.593Z] C97 = sandbox input-injection validation request (architect mode, no artifacts)",
+    "[2026-04-28T01:34:41.595Z] C83-85 already consumed B2/B3/B4 labels: Railway Volume, api.js config, railway.toml+migrate",
+    "[2026-04-28T01:34:41.596Z] C98 awaiting user clarification on Tier 1 (B1+B2) scope before execution"
   ],
-  "lastUpdated": "2026-04-28T00:52:11.837Z",
+  "lastUpdated": "2026-04-28T01:34:41.597Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -3884,6 +4300,88 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T04:22:26.577Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415068-1",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.068Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "git filter-repo recomendado oficialmente sobre filter-branch",
+      "description": "Es el sustituto oficial de Git para reescritura de historial; cubre archivos y contenido",
+      "context": "Purga de secretos del historial git",
+      "applicability": [
+        "git",
+        "security",
+        "history-rewrite",
+        "secrets"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.068Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415071-2",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.071Z",
+      "type": "INSIGHT",
+      "title": "Rotación de credenciales es prerequisito Y obligatorio post-purga",
+      "description": "Aunque se rote antes, tras purgar historial deben rotarse TODAS las credenciales expuestas",
+      "context": "Operaciones de purga de .env del historial",
+      "applicability": [
+        "security",
+        "credentials-rotation",
+        "post-purge"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.071Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415074-3",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.074Z",
+      "type": "ANTI_PATTERN",
+      "title": "Recreación total destruye trazabilidad SYNAPTIC",
+      "description": "Squash inicial rompe vínculo BITACORA↔commits y contradice principio Traceable",
+      "context": "Decisiones sobre limpieza de historial en proyectos SYNAPTIC",
+      "applicability": [
+        "synaptic-principles",
+        "traceability",
+        "anti-pattern"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.074Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415077-4",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.077Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Backup obligatorio + tag pre-purge antes de force-push",
+      "description": "Zip de .git+working tree y tag pre-purge-c77 permiten rollback granular",
+      "context": "Antes de cualquier operación destructiva sobre historial git",
+      "applicability": [
+        "git",
+        "backup",
+        "rollback",
+        "safety"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.077Z",
         "source": "INFERRED"
       }
     }
