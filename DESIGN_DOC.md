@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-103 | Publish C101 deliverable to origin/main via Option B (gitignore INTELLIGENCE + tag + fast-forward push) | Balanced approach: clean remote history, rollback anchor, no history rewrite, halt-on-anomaly safety | 2026-04-28 | 103 |
 | DEC-101B | Exempt chat and webhooks via mount order, not skip logic | Mount before guard preserves silent sanitizer for chat; keeps guard config simple | 2026-04-28 | 101 |
 | DEC-101 | Central validateInput middleware with deep-walk pattern detection | Defense-in-depth layer above parameterized SQL; loud rejection with structured error | 2026-04-28 | 101 |
 | DEC-100 | Decision Gate presented 3 options for input-hardening (A/B/C); awaiting user selection | ENFORCE-SYNAPTIC-PROTOCOL directive overrode immediate execution; gap analysis revealed no central validation layer | 2026-04-28 | 100 |
@@ -174,6 +175,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 103] Pre-flight halt criteria: unexpected commits, sensitive files (.env), or non-fast-forward conflict abort the chain
+- [Cycle 103] Tag pre-railway-c102 mirrors pre-purge-c78 convention as rollback anchor before external deploy
+- [Cycle 103] Fast-forward push is reversible via git revert, not trivially — treat as MEDIUM blast radius
 - [Cycle 101] validateInput.js: 171 LoC, walks body+query+params, 5000-char cap, inspects keys for $ops
 - [Cycle 101] Test glob widened to src/middleware/*.test.js in package.json
 - [Cycle 101] Chat route mounted at server.js:110 (pre-guard), validateInput at server.js:111
@@ -280,6 +284,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 103, 2026-04-28] Add .synaptic/intelligence/INTELLIGENCE_*.json to .gitignore (pending Option B confirmation)
 - [Cycle 101, 2026-04-28] New middleware layer: backend/src/middleware/validateInput.js wired globally on /api after express.json()
 - [Cycle 94, 2026-04-28] Repositorio AmaCafeDos ahora público en GitHub con branch main como principal
 - [Cycle 87, 2026-04-28] SumUp config now has env→DB promotion phase on boot before mode resolution
