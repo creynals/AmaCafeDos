@@ -293,6 +293,32 @@
       "selectedOption": "B",
       "userRationale": ": Cluster completo C112 + C113 secuencial con validación entre pasos ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777347706344",
+      "cycle": 115,
+      "timestamp": "2026-04-28T03:41:46.344Z",
+      "decisionPoint": "EJECUTAR AHORA — sin nuevo Decision Gate.\nLa decisión C113/C114 (Cluster rotación C112+C113, Option B) está aprobada y es vinculante.\nOutput esperado en este ciclo:\n  1) git tag pre-rotation-c115\n  2) pg_dump backup → ./backups/pre-rotation-c115.sql\n  3) node scripts/rotate-encryption-secret.js --ap",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ") está aprobada y es vinculante.\nOutput esperado en este ciclo:\n  1) git tag pre-rotation-c115\n  2) pg_dump backup → ./backups/pre-rotation-c115.sql\n  3) node scripts/rotate-encryption-secret.js --app",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -1377,7 +1403,7 @@
         "option-b"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T00:59:28.454Z",
         "source": "EXPLICIT"
@@ -1397,89 +1423,10 @@
         "balanced-approach"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:04:34.410Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-95-1777338453119-0",
-      "cycle": 95,
-      "timestamp": "2026-04-28T01:07:33.119Z",
-      "type": "PATTERN",
-      "title": "Verify state before requesting manual user action",
-      "description": "Use gh api to check actual GitHub state before asking user to perform UI tasks",
-      "context": "When roadmap suggests manual GitHub UI actions",
-      "applicability": [
-        "github",
-        "verification",
-        "automation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:07:33.119Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-95-1777338453125-1",
-      "cycle": 95,
-      "timestamp": "2026-04-28T01:07:33.125Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "GitHub auto-promotes first pushed branch as default",
-      "description": "Empty repos auto-set default branch on first push -u; no manual UI step needed",
-      "context": "After git push -u origin main on a freshly created empty repo",
-      "applicability": [
-        "github",
-        "git",
-        "default-branch"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:07:33.125Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-95-1777338453128-2",
-      "cycle": 95,
-      "timestamp": "2026-04-28T01:07:33.128Z",
-      "type": "PATTERN",
-      "title": "Verify .env absence in remote history after purge",
-      "description": "git log --all --full-history -- '**/.env' must return empty to confirm filter-repo persisted",
-      "context": "Post-push validation after git filter-repo credential purge",
-      "applicability": [
-        "security",
-        "git-filter-repo",
-        "validation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:07:33.128Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-95-1777338453132-3",
-      "cycle": 95,
-      "timestamp": "2026-04-28T01:07:33.132Z",
-      "type": "INSIGHT",
-      "title": "Repo visibility was private, not public as legacy roadmap claimed",
-      "description": "AmaCafeDos repo is private; older roadmap notes had stale visibility info",
-      "context": "When trusting legacy roadmap entries about repo metadata",
-      "applicability": [
-        "roadmap-hygiene",
-        "github"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:07:33.132Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -2627,7 +2574,7 @@
     "[2026-04-28T03:38:19.199Z] keyManager.js (C81 OPTION B) habilita decrypt verification automatizada en smoke tests",
     "[2026-04-28T03:38:19.201Z] SumUp prod permanece como tarea HIGH bloqueante para deploy Railway"
   ],
-  "lastUpdated": "2026-04-28T03:38:42.221Z",
+  "lastUpdated": "2026-04-28T03:41:46.350Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5761,6 +5708,85 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:04:34.413Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453119-0",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.119Z",
+      "type": "PATTERN",
+      "title": "Verify state before requesting manual user action",
+      "description": "Use gh api to check actual GitHub state before asking user to perform UI tasks",
+      "context": "When roadmap suggests manual GitHub UI actions",
+      "applicability": [
+        "github",
+        "verification",
+        "automation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.119Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453125-1",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.125Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "GitHub auto-promotes first pushed branch as default",
+      "description": "Empty repos auto-set default branch on first push -u; no manual UI step needed",
+      "context": "After git push -u origin main on a freshly created empty repo",
+      "applicability": [
+        "github",
+        "git",
+        "default-branch"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.125Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453128-2",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.128Z",
+      "type": "PATTERN",
+      "title": "Verify .env absence in remote history after purge",
+      "description": "git log --all --full-history -- '**/.env' must return empty to confirm filter-repo persisted",
+      "context": "Post-push validation after git filter-repo credential purge",
+      "applicability": [
+        "security",
+        "git-filter-repo",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.128Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453132-3",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.132Z",
+      "type": "INSIGHT",
+      "title": "Repo visibility was private, not public as legacy roadmap claimed",
+      "description": "AmaCafeDos repo is private; older roadmap notes had stale visibility info",
+      "context": "When trusting legacy roadmap entries about repo metadata",
+      "applicability": [
+        "roadmap-hygiene",
+        "github"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.132Z",
         "source": "INFERRED"
       }
     }
