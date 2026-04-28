@@ -6315,3 +6315,76 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 **Synaptic Strength**: 99%
 
 ---
+
+## Cycle 101 — Input Hardening: Audit + Central validateInput Middleware + Tests (OPTION B)
+
+```json
+{
+  "cycle": 101,
+  "timestamp": "2026-04-28T01:55:00.000Z",
+  "userRequest": "proceder con OPTION B: Audit + Central validateInput Middleware + Tests (Balanced)",
+  "decisionResolved": "Cycle 100 Decision Gate — OPTION B selected",
+  "audit": {
+    "preExistingValidateInput": false,
+    "preExistingSanitizers": [
+      "backend/src/middleware/security.js → chatInputSanitizer (chat-only, silent strip of HTML/handlers)",
+      "backend/src/middleware/security.js → sanitizeText / sanitizeResponse (chat helpers)"
+    ],
+    "sqlInjectionPosture": "All routes use parameterized queries ($1, $2, ...) via pg pool; SQL layer is the authoritative defense. Audit confirmed grep on db.query/client.query usage in 13 route files.",
+    "perRouteValidation": "Inline only via toIntOrNull / toStrOrNull helpers in products-admin-crud.js, orders.js, settings.js, etc. No central pattern detection.",
+    "testScriptGap": "package.json test script glob 'src/utils/*.test.js' missed src/middleware/* — fixed."
+  },
+  "filesAdded": [
+    "backend/src/middleware/validateInput.js (171 LoC) — central guard with SQLi/XSS/NoSQL pattern detection, deep walk, length cap, per-key inspection for $-operators and prototype-pollution markers",
+    "backend/src/middleware/validateInput.test.js (32 tests) — pattern detection, false-positive guard on legitimate Spanish/CL text, deep walk on nested objects/arrays, express middleware contract, 5-endpoint corpus (login/orders/admin-create/admin-update/admin-search)"
+  ],
+  "filesModified": [
+    "backend/src/server.js — wired validateInput() globally on /api after express.json(); chatRoutes mounted BEFORE the guard so chatInputSanitizer keeps its silent-strip semantics",
+    "backend/package.json — test glob widened to 'src/utils/*.test.js src/middleware/*.test.js'"
+  ],
+  "designDecisions": {
+    "globalVsPerRoute": "Global mount on /api/* — single pluggable wall, zero per-route boilerplate, easier to audit and evolve. Per-route opt-out via fields option preserved for future rich-text endpoints.",
+    "rejectVsSanitize": "Reject 400 with code+field. Loud failure surfaces attacks in logs and tells legitimate clients to fix their data. Chat is the only exception (it sanitizes silently to preserve UX on '<3' / '<3 latte' tokens).",
+    "patternScope": "SQLi (boolean/UNION/stacked/comments/timing/file-ops), XSS (script/iframe/object/embed/svg-on/img-on/javascript:/data:text-html/event-handlers/proto-pollution), NoSQL ($where/$ne/$gt/...), length cap (5000 chars).",
+    "doNotEchoPattern": "Server logs the pattern source for forensics; client receives only error+code+field. Avoids leaking detection rules to attackers."
+  },
+  "endpointsCovered": [
+    "POST /api/auth/login (username, password)",
+    "POST /api/orders (contact.*, address.*, customer_instructions)",
+    "POST /api/admin/products (name, description, sku)",
+    "PUT /api/admin/products/:id (same)",
+    "GET /api/admin/products/list?search=... (query string)"
+  ],
+  "testResults": {
+    "total": 67,
+    "newInThisCycle": 32,
+    "passing": 67,
+    "failing": 0,
+    "command": "npm test (cwd=backend)"
+  },
+  "syntaxChecks": {
+    "server.js": "node -c → OK",
+    "validateInput.js": "node -c → OK"
+  },
+  "outcome": "SUCCESS",
+  "synapticStrength": 99,
+  "complianceScore": 100
+}
+```
+
+**Notas críticas**:
+- El middleware NO sustituye la defensa por queries parametrizadas; las complementa. Postgres sigue siendo la línea autoritativa contra SQLi.
+- Chat queda fuera del guard global por diseño — su sanitizer existente normaliza silenciosamente y sería UX-disruptivo rechazar `<3` o tokens similares.
+- Webhooks bypasan implícitamente porque se montan ANTES de `express.json()` (raw body para sha256 fingerprint).
+- Honrando la regla C57: cada archivo modificado fue releído tras editar; tests corren verde.
+
+**Recomendaciones (próximos pasos)**:
+- 🔴 **ALTA**: Validación E2E manual — levantar backend + frontend, intentar login con `admin'--`, intentar crear producto con `<script>` en el name, verificar que se rechazan con 400 y que payloads legítimos siguen funcionando.
+- 🟡 **MEDIA**: Auditar rutas restantes (cart, payments, settings, users) para confirmar que el guard global captura sus inputs y no rompe flujos legítimos. Especial atención a `settings.js` (texto largo de configuración).
+- 🟡 **MEDIA**: Considerar exponer `validateInput.skip()` o lista blanca de paths para futuros endpoints que necesiten markdown/HTML legítimo (ej. descripción rica de productos).
+- 🟢 **BAJA**: Métricas — agregar contador de payloads rechazados (kind=sqli|xss|nosql|length) para observabilidad post-deploy en Railway.
+- 🟢 **BAJA**: Una vez estabilizado en prod, evaluar OPTION C (Zod schemas por endpoint) como capa adicional sobre el guard genérico.
+
+**Synaptic Strength**: 99%
+
+---

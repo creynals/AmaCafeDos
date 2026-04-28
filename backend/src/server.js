@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const path = require('path');
 const { initSchema, closeDatabase } = require('./models/database');
 const { requireAuth, requireAdmin } = require('./middleware/auth');
+const { validateInput } = require('./middleware/validateInput');
 const { ensureDefaultAdmin } = require('./utils/auth');
 const { getModeWithSource, getReturnUrlBaseWithSource, bootstrapModeFromEnv } = require('./utils/sumup.config');
 const productRoutes = require('./routes/products');
@@ -99,12 +100,21 @@ app.use('/api/health', (req, res) => {
   res.json({ status: 'ok', project: 'AMA Café API', version: '1.0.0', database: 'PostgreSQL' });
 });
 
-// Public API Routes
+// Cycle 101 (OPTION B): central input hardening guard. Inspects req.body /
+// req.query / req.params for SQLi / XSS / NoSQL payload shapes and
+// string-length DoS. Mounted AFTER express.json() so the body is parsed.
+// /api/chat is registered BEFORE the guard so its existing chatInputSanitizer
+// (silent HTML strip) keeps working — rejecting loudly there would break
+// legitimate user messages that happen to contain "<3" or similar tokens.
+// Webhooks bypass implicitly (registered earlier with raw body).
+app.use('/api', chatRoutes);
+app.use('/api', validateInput());
+
+// Public API Routes (post-guard)
 app.use('/api', productRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', orderRoutes);
 app.use('/api', paymentsRoutes);
-app.use('/api', chatRoutes);
 app.use('/api', authRoutes);
 
 // Public reCAPTCHA config — must register BEFORE the requireAuth-protected

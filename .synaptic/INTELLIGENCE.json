@@ -971,18 +971,21 @@
       "title": "Execute selected input-hardening option",
       "description": "Implement Option A/B/C per user selection; persist BITACORA C100 + INTELLIGENCE + DESIGN_DOC patch",
       "priority": "HIGH",
-      "status": "PLANNED",
+      "status": "DONE",
       "createdAtCycle": 100,
-      "dependencies": []
+      "dependencies": [],
+      "completedAtCycle": 101
     },
     {
       "itemId": "ROAD-100B",
       "title": "Audit parameterized PG queries across 13 route files",
       "description": "Confirm db.query() calls use parameterized form to close SQLi vector audit gap",
       "priority": "HIGH",
-      "status": "PLANNED",
+      "status": "DONE",
       "createdAtCycle": 100,
-      "dependencies": []
+      "dependencies": [],
+      "completedAtCycle": 101,
+      "completionNote": "Confirmed during C101 audit — all db.query/client.query call sites use parameterized binding"
     },
     {
       "itemId": "ROAD-100C",
@@ -991,6 +994,44 @@
       "priority": "LOW",
       "status": "PLANNED",
       "createdAtCycle": 100,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-101A",
+      "title": "E2E manual validation of input hardening",
+      "description": "Boot backend+frontend, attempt SQLi login (admin--) and XSS in product name; confirm 400 rejections; confirm legitimate Spanish text + SKUs pass",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 101,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-101B",
+      "title": "Audit cart/payments/settings/users routes against global guard",
+      "description": "Confirm validateInput does not block legitimate flows in cart, payments, settings (especially long-text settings), users CRUD",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 101,
+      "dependencies": [
+        "ROAD-101A"
+      ]
+    },
+    {
+      "itemId": "ROAD-101C",
+      "title": "Add validateInput.skip / whitelist for rich-text endpoints",
+      "description": "When/if endpoints need legitimate markdown/HTML, expose path-based skip mechanism in middleware factory",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 101,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-101D",
+      "title": "Observability — counter for rejected payloads by kind",
+      "description": "Track sqli/xss/nosql/length rejection counts post-Railway deploy for tuning false-positive risk",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 101,
       "dependencies": []
     }
   ],
@@ -1999,11 +2040,72 @@
         "lastReinforced": "2026-04-28T01:40:20.182Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-101-1777340855619-1",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:55:00.000Z",
+      "type": "PATTERN",
+      "title": "Defense-in-depth: pattern guard + parameterized SQL",
+      "description": "Central pattern-detection middleware complements (does not replace) parameterized queries. Loud 400 surfaces attacks in logs and helps clients self-correct; silent sanitization reserved for UX-sensitive routes (chat).",
+      "context": "Backend input hardening for Express/PG stack",
+      "applicability": [
+        "security",
+        "middleware",
+        "sql-injection",
+        "xss"
+      ],
+      "confidence": {
+        "score": 0.85,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:55:00.000Z",
+        "source": "IMPLEMENTED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340855619-2",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:55:00.000Z",
+      "type": "INSIGHT",
+      "title": "Mount order matters for selective bypass",
+      "description": "Routes that need their own normalization (chat sanitizer, webhook raw-body) must be mounted BEFORE the global guard. This achieves bypass without per-path skip logic.",
+      "context": "Express middleware composition",
+      "applicability": [
+        "express",
+        "middleware",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T01:55:00.000Z",
+        "source": "IMPLEMENTED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340855619-3",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:55:00.000Z",
+      "type": "PITFALL",
+      "title": "NoSQL operators surface as object keys, not values",
+      "description": "Walking only values misses $where/$ne/$gt — Mongo-style smuggling uses keys. Walk MUST inspect both keys and values; same for prototype-pollution markers (__proto__/constructor/prototype).",
+      "context": "Tree-walking validation middleware",
+      "applicability": [
+        "security",
+        "nosql",
+        "prototype-pollution"
+      ],
+      "confidence": {
+        "score": 0.95,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:55:00.000Z",
+        "source": "IMPLEMENTED"
+      }
     }
   ],
   "implementationState": {
-    "lastCompletedTask": "Decision Gate resolved: Option B selected",
-    "currentTask": "Implementing Option B as requested by user",
+    "lastCompletedTask": "Cycle 101 — Option B implemented: central validateInput middleware (171 LoC) + 32 tests passing + server.js wired + DESIGN_DOC + BITACORA updated",
+    "currentTask": "Awaiting next user request (Cycle 102) — recommended: E2E manual validation of input hardening",
     "pendingTasks": [],
     "blockers": []
   },
@@ -2129,9 +2231,14 @@
     "[2026-04-28T01:34:41.596Z] C98 awaiting user clarification on Tier 1 (B1+B2) scope before execution",
     "[2026-04-28T01:40:20.185Z] Cycle 100 halted at Decision Gate — no code generated, awaiting Option A/B/C selection",
     "[2026-04-28T01:40:20.186Z] Recommended Option B: hand-rolled validateInput.js + 12-payload SQLi/XSS test corpus targeting 5 highest-risk endpoints",
-    "[2026-04-28T01:40:20.188Z] Test script needs update from 'src/utils/*.test.js' to 'src/**/*.test.js tests/**/*.test.js' for security tests"
+    "[2026-04-28T01:40:20.188Z] Test script needs update from 'src/utils/*.test.js' to 'src/**/*.test.js tests/**/*.test.js' for security tests",
+    "[2026-04-28T01:55:00.000Z] Cycle 101 SUCCESS — Option B delivered: backend/src/middleware/validateInput.js + .test.js (32 tests), wired globally on /api after express.json(), chat route exempted (mounted before guard)",
+    "[2026-04-28T01:55:00.000Z] Test script glob widened in package.json: src/utils/*.test.js src/middleware/*.test.js — 67 tests passing total (32 new)",
+    "[2026-04-28T01:55:00.000Z] Audit confirmed: all 13 route files use parameterized SQL (dollar-N placeholders) — closes ROAD-100B implicitly via grep audit during C101",
+    "[2026-04-28T01:55:00.000Z] Chat exempted by design — chatInputSanitizer silently strips HTML; loud rejection would break legitimate \"<3 latte\" tokens",
+    "[2026-04-28T01:55:00.000Z] Webhook routes implicitly bypass — registered before express.json() with raw body for sha256 fingerprint"
   ],
-  "lastUpdated": "2026-04-28T01:41:13.008Z",
+  "lastUpdated": "2026-04-28T01:55:00.000Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

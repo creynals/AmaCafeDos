@@ -30,7 +30,7 @@ General
 
 | ID | Decision | Option Selected | Date | Rationale |
 |----|----------|-----------------|------|-----------|
-| - | - | - | - | - |
+| C100/C101 | Input hardening strategy | OPTION B — Audit + Central validateInput Middleware + Tests | 2026-04-28 | Single global guard on `/api/*` for SQLi/XSS/NoSQL pattern detection + length cap, complementing parameterized SQL. Loud 400 rejection (chat exempted — uses silent sanitizer). 32 tests covering 5 highest-risk endpoints. Files: `backend/src/middleware/validateInput.js`, `validateInput.test.js`. |
 
 *Decisions will be logged here as they are made through Decision Gates*
 
