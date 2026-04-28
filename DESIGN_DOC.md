@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-094 | Ejecutar Option B: rename master→main, push inicial, push tag pre-purge-c78 | Balance entre seguridad (tag respaldo) y simplicidad (sin force-push ni re-purga) | 2026-04-28 | 94 |
 | DEC-093 | Decision Gate abierto: estrategia de push inicial a AmaCafeDos (Option A/B/C) | Usuario autorizó push pero mecánica (rename, tags, protección) requiere confirmación explícita | 2026-04-28 | 93 |
 | DEC-087-3 | Stage cleanup deletions but defer commit to user | 1247-file deletion is dramatic; user must visually confirm before history changes | 2026-04-28 | 87 |
 | DEC-087-2 | Install pre-commit hook via scripts/install-git-hooks.sh symlink (idempotent) | Prevent regression of node_modules/.DS_Store/.env/large-file commits | 2026-04-28 | 87 |
@@ -168,6 +169,10 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 94] Remote origin: https://github.com/creynals/AmaCafeDos.git
+- [Cycle 94] main HEAD remoto: d888a2f
+- [Cycle 94] Tag pre-purge-c78 remota: 347807f
+- [Cycle 94] Tag real es c78 (creada cuando purga ejecutó), no c77 (Decision Gate)
 - [Cycle 93] Repo destino: https://github.com/creynals/AmaCafeDos (vacío)
 - [Cycle 93] Branch local: master (historial reescrito en C78 vía filter-repo)
 - [Cycle 93] Branch destino solicitado: main
@@ -258,6 +263,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 94, 2026-04-28] Repositorio AmaCafeDos ahora público en GitHub con branch main como principal
 - [Cycle 87, 2026-04-28] SumUp config now has env→DB promotion phase on boot before mode resolution
 - [Cycle 87, 2026-04-28] Repository now ships pre-commit hook + installer script under scripts/git-hooks/
 - [Cycle 85, 2026-04-27] Backend storage path is now env-configurable via IMAGES_STORAGE_PATH

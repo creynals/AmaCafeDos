@@ -137,6 +137,32 @@
       "selectedOption": "B",
       "userRationale": ": Railway Volume — Balanced ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777337992005",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:52.005Z",
+      "decisionPoint": "proceder con OPTION B: Rename + Push main + Push Tag pre-purge-c77 (Balanceado) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Rename + Push main + Push Tag pre-purge-c77 (Balanceado) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -751,129 +777,99 @@
       "status": "PLANNED",
       "createdAtCycle": 85,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-087-1",
+      "title": "Commit C87 staged cleanup",
+      "description": "User to review git diff --cached --stat and commit the 1247-file deletion",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 87,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-087-2",
+      "title": "Execute first Railway deploy per docs/RAILWAY_DEPLOY.md",
+      "description": "Follow R1-R8; verify R9 promotion log line appears in backend logs",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 87,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-087-3",
+      "title": "Run install-git-hooks.sh on all dev machines",
+      "description": "Hook is symlink-based; each clone needs the installer run once",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 87,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-093-A",
+      "title": "Recibir decisión del usuario sobre Option A/B/C",
+      "description": "Esperar input explícito 'Proceed with Option [X]' antes de ejecutar cualquier comando git",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 93,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-093-B",
+      "title": "Ejecutar pre-flight checks antes del push",
+      "description": "Verificar remote, .gitignore, tag respaldo, credenciales rotadas, git log post-purga",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 93,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-093-C",
+      "title": "Configurar main como default branch en GitHub UI tras push",
+      "description": "Post-push: setear main como default y verificar que .env no aparece en ningún commit del remote",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 93,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-1",
+      "title": "Configurar main como default branch en GitHub UI",
+      "description": "Settings → Branches → cambiar default a main",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-2",
+      "title": "Inspección visual del repo público",
+      "description": "Confirmar ausencia de .env en todos los commits visibles en GitHub",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-3",
+      "title": "Rotación de credenciales pre-deploy",
+      "description": "Rotar ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT, DB password",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-4",
+      "title": "Decision Gate Railway service config",
+      "description": "Configurar Railway service según docs/RAILWAY_DEPLOY.md (R1-R8)",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-67-1777263746562-0",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.563Z",
-      "type": "PATTERN",
-      "title": "Verifica anti-C53 con grep multi-file",
-      "description": "Prima di dichiarare successo, grep del simbolo chiave su tutti i file attesi (8/8)",
-      "context": "Al termine di implementazioni multi-file per evitare false dichiarazioni di completamento",
-      "applicability": [
-        "validation",
-        "multi-file-changes",
-        "anti-regression"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.563Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746569-1",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.569Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Naming semantico per evitare collisioni",
-      "description": "customer_instructions distingue da order_items.notes (per prodotto) e address_notes (entrega)",
-      "context": "Quando si aggiungono campi note/instrucciones in domini con più livelli semantici",
-      "applicability": [
-        "db-schema",
-        "naming",
-        "domain-modeling"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.569Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746571-2",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.571Z",
-      "type": "PATTERN",
-      "title": "Migrazione SQL idempotente con IF NOT EXISTS",
-      "description": "ALTER TABLE ADD COLUMN IF NOT EXISTS per migrazioni rieseguibili senza errori",
-      "context": "Migrazioni DB in ambienti dev/prod con possibili re-run",
-      "applicability": [
-        "migrations",
-        "postgresql",
-        "idempotency"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.571Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746573-3",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.573Z",
-      "type": "PATTERN",
-      "title": "Validazione duale client+server per input testuali",
-      "description": "Cap 1000 chars enforced sia lato server (validation) sia lato UI (maxLength + counter)",
-      "context": "Campi testuali liberi esposti a utenti finali",
-      "applicability": [
-        "validation",
-        "ux",
-        "security"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.573Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746574-4",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.574Z",
-      "type": "INSIGHT",
-      "title": "Distinzione visiva esplicita in Vista de Cocina",
-      "description": "Icona MessageSquare + bordo accentuato separa istruzioni cliente da indicazioni di consegna",
-      "context": "UI con più tipologie di note che potrebbero essere confuse dall'operatore",
-      "applicability": [
-        "ux",
-        "kitchen-view",
-        "visual-hierarchy"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.574Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-67-1777263746577-5",
-      "cycle": 67,
-      "timestamp": "2026-04-27T04:22:26.577Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "ESLint backend errore preesistente non bloccante",
-      "description": "Config ESLint backend richiede tsconfig.json mancante; node --check sufficiente per syntax",
-      "context": "Validazione backend amaCafe quando ESLint fallisce per config issue non correlati",
-      "applicability": [
-        "eslint",
-        "backend",
-        "validation"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T04:22:26.577Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-77-1777327415063-0",
       "cycle": 77,
@@ -1524,6 +1520,327 @@
         "lastReinforced": "2026-04-27T23:45:10.513Z",
         "source": "EXPLICIT"
       }
+    },
+    {
+      "learningId": "learning-87-1777335244504-0",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.504Z",
+      "type": "ANTI_PATTERN",
+      "title": "DB-seeded config blocks env override",
+      "description": "Migration 004 seeded sumup_mode='mock' in settings; getModeWithSource read DB first so env fallback never fired and failsafe exit(1) trapped operator out of UI.",
+      "context": "When config has both DB-persisted and env-var sources with DB precedence on fresh deploys",
+      "applicability": [
+        "config",
+        "bootstrap",
+        "railway",
+        "sumup"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.504Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244513-1",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.513Z",
+      "type": "PATTERN",
+      "title": "One-shot env→DB promotion on boot",
+      "description": "bootstrapModeFromEnv() UPSERTs valid env value into settings before failsafe resolves, with cache invalidation and per-outcome logging.",
+      "context": "Reconciling env-var intent with DB-persisted config during cold-start",
+      "applicability": [
+        "bootstrap",
+        "config-reconciliation",
+        "sumup.config.js"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.513Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244515-2",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.515Z",
+      "type": "ANTI_PATTERN",
+      "title": "node_modules + .DS_Store tracked despite .gitignore",
+      "description": "1243 node_modules files and 4 .DS_Store files were in the index; .gitignore alone doesn't untrack already-committed paths.",
+      "context": "Repos where files were committed before .gitignore was added",
+      "applicability": [
+        "git-hygiene",
+        "gitignore",
+        "pre-push"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.515Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244518-3",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.518Z",
+      "type": "PATTERN",
+      "title": "Pre-commit hook with regex precision",
+      "description": "Initial .env regex over-matched .env.example; precise patterns + smoke-test against tmp git repo before declaring hook ready.",
+      "context": "Writing git hooks that block categories of files",
+      "applicability": [
+        "git-hooks",
+        "pre-commit",
+        "regex"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.518Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244520-4",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.520Z",
+      "type": "USER_PREFERENCE",
+      "title": "Multi-item requests executed in IMMEDIATE EXECUTION (DG-079)",
+      "description": "User chained three independent C86 follow-ups in one request expecting all executed without re-confirmation per item.",
+      "context": "When user explicitly references prior cycle recommendations",
+      "applicability": [
+        "execution-mode",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.520Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244523-5",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.523Z",
+      "type": "INSIGHT",
+      "title": "C86 G/R items lived only in conversation",
+      "description": "G1-G4 and R1-R9 labels weren't persisted to disk; had to reconstruct meaning from code inspection.",
+      "context": "When prior cycle reports use ad-hoc labels not saved to BITACORA/REGISTRY",
+      "applicability": [
+        "synaptic-memory",
+        "cycle-handoff"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.523Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244525-6",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.525Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Stage-only cleanup for large deletions",
+      "description": "git rm --cached run but commit deferred to user — 1247 file/-223856 line deletion staged for review before commit.",
+      "context": "When sweeping index changes need human eyes before history is rewritten",
+      "applicability": [
+        "git-rm-cached",
+        "review-gate"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.525Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968454-0",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.454Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario prefiere opciones balanceadas (Option B)",
+      "description": "5/5 últimas decisiones del usuario favorecieron la opción B (balanceada) sobre conservadora o innovadora",
+      "context": "Decision Gates con tres opciones A/B/C",
+      "applicability": [
+        "decision-gate",
+        "user-pattern",
+        "option-b"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.454Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968459-1",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.459Z",
+      "type": "PATTERN",
+      "title": "Decision Gate sobre mecánica de push inicial",
+      "description": "Push inicial a remote vacío requiere decidir: rename branch, manejo de tags, branch protection",
+      "context": "Primer push a repo GitHub recién creado tras filter-repo",
+      "applicability": [
+        "git",
+        "github",
+        "initial-push",
+        "filter-repo"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.459Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968462-2",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.462Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Pre-flight checks obligatorios antes de push post-purga",
+      "description": "Verificar remote, .gitignore, tag respaldo, credenciales rotadas, log post-purga antes de pushear",
+      "context": "Push inicial tras git filter-repo que eliminó secretos",
+      "applicability": [
+        "security",
+        "git-filter-repo",
+        "secrets-purge"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.462Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968465-3",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.465Z",
+      "type": "INSIGHT",
+      "title": "Tag pre-purge-c77 sólo local es single-point-of-failure",
+      "description": "Mantener tag de respaldo de purga sólo en local arriesga pérdida por fallo de disco",
+      "context": "Estrategia de respaldo post-filter-repo",
+      "applicability": [
+        "backup",
+        "resilience",
+        "tags"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.465Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968468-4",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.468Z",
+      "type": "ANTI_PATTERN",
+      "title": "Dual branch master+main genera ruido sin beneficio",
+      "description": "Publicar ambas ramas con mismo HEAD confunde y branch protection estricta sin team bloquea workflow",
+      "context": "MVP de un solo desarrollador",
+      "applicability": [
+        "git",
+        "branch-strategy",
+        "over-engineering"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.468Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274400-0",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.400Z",
+      "type": "ANTI_PATTERN",
+      "title": "Tag name mismatch entre Decision Gate e ejecución",
+      "description": "Decision Gate C93 mencionó 'pre-purge-c77' pero la tag real era 'pre-purge-c78' (creada en C78)",
+      "context": "Al ejecutar acciones que referencian tags/branches creados en cycles previos",
+      "applicability": [
+        "git",
+        "tags",
+        "decision-gate",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.400Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274406-1",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.406Z",
+      "type": "PATTERN",
+      "title": "Pre-flight security check antes de push público",
+      "description": "Verificar .env ausente del historial completo ANTES de push a remoto público",
+      "context": "Primer push a repo público después de purga de secretos",
+      "applicability": [
+        "git",
+        "security",
+        "secrets",
+        "public-push"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.406Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274410-2",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.410Z",
+      "type": "USER_PREFERENCE",
+      "title": "Option B (Balanceado) sobre opciones extremas",
+      "description": "Usuario prefiere balance: rename + push main + push tag respaldo, sin force-push ni purga adicional",
+      "context": "Decisiones de migración de branch master→main con tag de respaldo",
+      "applicability": [
+        "decision-gate",
+        "git-migration",
+        "balanced-approach"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.410Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274413-3",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.413Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Sequencia git rename + push -u + push tag",
+      "description": "git remote add → git branch -m → git push -u origin main → git push origin <tag>",
+      "context": "Migración inicial de repo local a remoto público con preservación de respaldo",
+      "applicability": [
+        "git",
+        "remote-setup",
+        "branch-migration"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.413Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1631,9 +1948,21 @@
     "[2026-04-27T23:37:11.667Z] Current /fuentes payload is ~12 jpegs (small), making Option A viable short-term",
     "[2026-04-27T23:45:10.514Z] Railway UI steps still pending: create Volume at /data, set IMAGES_STORAGE_PATH=/data/products, trigger deploy",
     "[2026-04-27T23:45:10.515Z] Persistence guarantee is theoretical until E2E test: upload image → restart service → verify URL resolves",
-    "[2026-04-27T23:45:10.516Z] Post-edit verification rule (C57) was honored: every promised file re-read on disk after edit"
+    "[2026-04-27T23:45:10.516Z] Post-edit verification rule (C57) was honored: every promised file re-read on disk after edit",
+    "[2026-04-28T00:14:04.527Z] C86 G1-G4 and R1-R9 labels were never persisted; future cycles must save such enumerations to BITACORA",
+    "[2026-04-28T00:14:04.528Z] Operator's deploy gate is grepping backend logs for '[sumup] bootstrap: promoted SUMUP_MODE env to settings'",
+    "[2026-04-28T00:14:04.530Z] docs/RAILWAY_DEPLOY.md R5 sets SUMUP_MODE=live; R8 step 2 verifies promotion log line",
+    "[2026-04-28T00:14:04.531Z] 1247 files / -223856 lines staged for deletion at end of C87 — user must review and commit",
+    "[2026-04-28T00:59:28.471Z] Cycle 93 entró en Phase 1 (Specification) con Decision Gate sin ejecutar comandos git",
+    "[2026-04-28T00:59:28.473Z] Pre-condiciones C87 ya aplicadas: hooks instalados, staging limpio (1247-file deletion commiteado)",
+    "[2026-04-28T00:59:28.474Z] Credenciales rotadas post-C78 deben verificarse antes del push (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB)",
+    "[2026-04-28T00:59:28.476Z] Recomendación del agente: Option B (rename + push main + push tag pre-purge-c77)",
+    "[2026-04-28T01:04:34.415Z] Default branch en GitHub UI aún debe configurarse manualmente como main",
+    "[2026-04-28T01:04:34.417Z] Inspección visual pendiente: confirmar que ningún .env aparece en commits del repo público",
+    "[2026-04-28T01:04:34.419Z] Rotación de credenciales pendiente antes de deploy Railway: ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB",
+    "[2026-04-28T01:04:34.421Z] Discrepancia resuelta: nomenclatura tag c77 vs c78 — siempre verificar con git tag -l antes de referenciar"
   ],
-  "lastUpdated": "2026-04-27T23:51:24.262Z",
+  "lastUpdated": "2026-04-28T01:04:34.422Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -3716,6 +4045,126 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T03:06:19.330Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746562-0",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.563Z",
+      "type": "PATTERN",
+      "title": "Verifica anti-C53 con grep multi-file",
+      "description": "Prima di dichiarare successo, grep del simbolo chiave su tutti i file attesi (8/8)",
+      "context": "Al termine di implementazioni multi-file per evitare false dichiarazioni di completamento",
+      "applicability": [
+        "validation",
+        "multi-file-changes",
+        "anti-regression"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.563Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746569-1",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.569Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Naming semantico per evitare collisioni",
+      "description": "customer_instructions distingue da order_items.notes (per prodotto) e address_notes (entrega)",
+      "context": "Quando si aggiungono campi note/instrucciones in domini con più livelli semantici",
+      "applicability": [
+        "db-schema",
+        "naming",
+        "domain-modeling"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.569Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746571-2",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.571Z",
+      "type": "PATTERN",
+      "title": "Migrazione SQL idempotente con IF NOT EXISTS",
+      "description": "ALTER TABLE ADD COLUMN IF NOT EXISTS per migrazioni rieseguibili senza errori",
+      "context": "Migrazioni DB in ambienti dev/prod con possibili re-run",
+      "applicability": [
+        "migrations",
+        "postgresql",
+        "idempotency"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.571Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746573-3",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.573Z",
+      "type": "PATTERN",
+      "title": "Validazione duale client+server per input testuali",
+      "description": "Cap 1000 chars enforced sia lato server (validation) sia lato UI (maxLength + counter)",
+      "context": "Campi testuali liberi esposti a utenti finali",
+      "applicability": [
+        "validation",
+        "ux",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.573Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746574-4",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.574Z",
+      "type": "INSIGHT",
+      "title": "Distinzione visiva esplicita in Vista de Cocina",
+      "description": "Icona MessageSquare + bordo accentuato separa istruzioni cliente da indicazioni di consegna",
+      "context": "UI con più tipologie di note che potrebbero essere confuse dall'operatore",
+      "applicability": [
+        "ux",
+        "kitchen-view",
+        "visual-hierarchy"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.574Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-67-1777263746577-5",
+      "cycle": 67,
+      "timestamp": "2026-04-27T04:22:26.577Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "ESLint backend errore preesistente non bloccante",
+      "description": "Config ESLint backend richiede tsconfig.json mancante; node --check sufficiente per syntax",
+      "context": "Validazione backend amaCafe quando ESLint fallisce per config issue non correlati",
+      "applicability": [
+        "eslint",
+        "backend",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T04:22:26.577Z",
+        "source": "INFERRED"
       }
     }
   ]

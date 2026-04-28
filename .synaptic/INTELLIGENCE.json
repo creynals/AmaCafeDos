@@ -831,6 +831,42 @@
       "status": "PLANNED",
       "createdAtCycle": 93,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-1",
+      "title": "Configurar main como default branch en GitHub UI",
+      "description": "Settings → Branches → cambiar default a main",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-2",
+      "title": "Inspección visual del repo público",
+      "description": "Confirmar ausencia de .env en todos los commits visibles en GitHub",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-3",
+      "title": "Rotación de credenciales pre-deploy",
+      "description": "Rotar ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT, DB password",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-094-4",
+      "title": "Decision Gate Railway service config",
+      "description": "Configurar Railway service según docs/RAILWAY_DEPLOY.md (R1-R8)",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 94,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -1723,6 +1759,88 @@
         "lastReinforced": "2026-04-28T00:59:28.468Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-94-1777338274400-0",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.400Z",
+      "type": "ANTI_PATTERN",
+      "title": "Tag name mismatch entre Decision Gate e ejecución",
+      "description": "Decision Gate C93 mencionó 'pre-purge-c77' pero la tag real era 'pre-purge-c78' (creada en C78)",
+      "context": "Al ejecutar acciones que referencian tags/branches creados en cycles previos",
+      "applicability": [
+        "git",
+        "tags",
+        "decision-gate",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.400Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274406-1",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.406Z",
+      "type": "PATTERN",
+      "title": "Pre-flight security check antes de push público",
+      "description": "Verificar .env ausente del historial completo ANTES de push a remoto público",
+      "context": "Primer push a repo público después de purga de secretos",
+      "applicability": [
+        "git",
+        "security",
+        "secrets",
+        "public-push"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.406Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274410-2",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.410Z",
+      "type": "USER_PREFERENCE",
+      "title": "Option B (Balanceado) sobre opciones extremas",
+      "description": "Usuario prefiere balance: rename + push main + push tag respaldo, sin force-push ni purga adicional",
+      "context": "Decisiones de migración de branch master→main con tag de respaldo",
+      "applicability": [
+        "decision-gate",
+        "git-migration",
+        "balanced-approach"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.410Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274413-3",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.413Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Sequencia git rename + push -u + push tag",
+      "description": "git remote add → git branch -m → git push -u origin main → git push origin <tag>",
+      "context": "Migración inicial de repo local a remoto público con preservación de respaldo",
+      "applicability": [
+        "git",
+        "remote-setup",
+        "branch-migration"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.413Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1838,9 +1956,13 @@
     "[2026-04-28T00:59:28.471Z] Cycle 93 entró en Phase 1 (Specification) con Decision Gate sin ejecutar comandos git",
     "[2026-04-28T00:59:28.473Z] Pre-condiciones C87 ya aplicadas: hooks instalados, staging limpio (1247-file deletion commiteado)",
     "[2026-04-28T00:59:28.474Z] Credenciales rotadas post-C78 deben verificarse antes del push (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB)",
-    "[2026-04-28T00:59:28.476Z] Recomendación del agente: Option B (rename + push main + push tag pre-purge-c77)"
+    "[2026-04-28T00:59:28.476Z] Recomendación del agente: Option B (rename + push main + push tag pre-purge-c77)",
+    "[2026-04-28T01:04:34.415Z] Default branch en GitHub UI aún debe configurarse manualmente como main",
+    "[2026-04-28T01:04:34.417Z] Inspección visual pendiente: confirmar que ningún .env aparece en commits del repo público",
+    "[2026-04-28T01:04:34.419Z] Rotación de credenciales pendiente antes de deploy Railway: ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB",
+    "[2026-04-28T01:04:34.421Z] Discrepancia resuelta: nomenclatura tag c77 vs c78 — siempre verificar con git tag -l antes de referenciar"
   ],
-  "lastUpdated": "2026-04-28T00:59:52.011Z",
+  "lastUpdated": "2026-04-28T01:05:25.823Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
