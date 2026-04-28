@@ -7934,3 +7934,64 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 **Violations Count**: 0
 
 ---
+
+## Cycle 127 (extension) — C135 serve bind explicit: push branch + open PR #6 (IMMEDIATE EXECUTION)
+
+```json
+{
+  "cycle": "127-ext-C135",
+  "timestamp": "2026-04-28T20:30:00.000Z",
+  "userRequest": "continuar (Now! button — IMMEDIATE EXECUTION mode under SYNAPTIC C127 enforcement)",
+  "executionMode": "IMMEDIATE_EXECUTION (DG-079) — branch already had committed C135 fix; user requested continuation",
+  "incomingState": {
+    "branch": "fix/c135-serve-bind-explicit (local-only, no upstream, 1 commit ahead of main)",
+    "headCommit": "4ba6087 [SYNAPTIC] [Cycle 127] PRE: continuar — actually contains C135 fix to frontend/railway.toml",
+    "workingTree": "clean",
+    "openPRs": "none for this branch"
+  },
+  "rationale": "C130 (PR #5) switched Railway frontend startCommand from 'vite preview' to 'npx serve -s dist -l $PORT'. Post-deploy logs (C133) showed serve booting with 'Accepting connections at http://localhost:8080' yet healthcheck still failing. C134 identified root cause: serve >= 14 binds to localhost when -l receives only a port number. C135 fix: pass '-l tcp://0.0.0.0:$PORT' to force bind on all interfaces so Railway proxy can hit /. Branch was committed but never pushed; this cycle pushes + opens PR per established pattern (memory: main is branch-protected, must use PR).",
+  "actionsTaken": {
+    "pushBranch": {
+      "command": "git push -u origin fix/c135-serve-bind-explicit",
+      "result": "new branch on origin, tracking set"
+    },
+    "openPR": {
+      "command": "gh pr create --base main --head fix/c135-serve-bind-explicit",
+      "title": "fix(frontend): bind serve to 0.0.0.0 explicitly for Railway healthcheck (C135)",
+      "url": "https://github.com/creynals/AmaCafeDos/pull/6"
+    }
+  },
+  "diffSummary": {
+    "filesChanged": "frontend/railway.toml only (1 file, +19/-7)",
+    "productiveDelta": "startCommand: 'npx serve -s dist -l $PORT' → 'npx serve -s dist -l tcp://0.0.0.0:$PORT'",
+    "documentationDelta": "Updated header comments to record C133 evidence + C134/C135 root-cause attribution + pre-c134-fix rollback tag reference"
+  },
+  "outcome": "SUCCESS",
+  "nextSteps": [
+    "User merges PR #6 via GitHub UI (squash) — branch protection requires PR pattern",
+    "Trigger Railway frontend service redeploy after merge",
+    "Verify deploy log emits 'Accepting connections at http://0.0.0.0:<PORT>' (NOT localhost)",
+    "Confirm Railway healthcheck on / succeeds within 100s timeout",
+    "Smoke test public URL: storefront load + /admin route hydration"
+  ],
+  "synapticStrength": 99,
+  "complianceScore": 100,
+  "violationsCount": 0
+}
+```
+
+**Notas críticas**:
+- El commit `4ba6087` lleva el mensaje genérico `[SYNAPTIC] [Cycle 127] PRE: continuar` pero su contenido productivo es el fix C135. **No se enmendó** (regla: NEVER amend without explicit user request). El título del PR + body capturan el "qué/por qué" reales — el squash merge usará el título del PR como mensaje final en `main`, eliminando la confusión.
+- El `pre-c134-fix` tag mencionado en los comentarios del toml **debe verificarse antes de declarar dependencia de él para rollback**. Se referencia el SHA `202fb41` (HEAD pre-C130 en main).
+- Si el redeploy falla de nuevo con healthcheck timeout, próximo paso es revisar Railway UI → frontend service → Settings → Networking para confirmar que el puerto público está mapeado al `$PORT` interno.
+
+**Recomendaciones (próximos pasos)**:
+- 🔴 **ALTA — post-merge**: Disparar redeploy en Railway frontend service inmediatamente tras merge para validar el fix end-to-end.
+- 🔴 **ALTA — verificación física**: Inspeccionar línea exacta del log de Railway: debe ser `Accepting connections at http://0.0.0.0:<PORT>` (cualquier `localhost` indica que el fix no surtió efecto y hay otra capa de override).
+- 🟡 **MEDIA — verificar tag rollback**: `git tag --list | grep pre-c134-fix` antes de necesitarlo. Si no existe, crearlo apuntando a `202fb41` para que la nota del toml sea verificable.
+- 🟡 **MEDIA — actualizar backlog INTELLIGENCE**: Marcar item "Frontend Railway deploy expected to succeed on 1st attempt post-merge if VITE_API_BASE_URL is set" como REVISADO (la asunción de C127 era prematura — faltaba C128/C130/C135).
+- 🟢 **BAJA — convención de commits SYNAPTIC**: Considerar diferenciar `PRE:` (pre-cycle, sin cambios productivos) de `FIX:` o `IMPL:` cuando el commit transporta el delta real, para evitar que el mensaje de un commit productivo quede ofuscado por el prefijo `PRE:`.
+
+**Synaptic Strength**: 99%
+**Compliance Score**: 100%
+**Violations Count**: 0
