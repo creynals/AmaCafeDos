@@ -103,6 +103,8 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-127-02 | Adopt C123 PR-only pattern as default for main-targeted commits | Branch protection on main is now enforced; direct push always fails | 2026-04-28 | 127 |
+| DEC-127-01 | frontend/railway.toml buildCommand reduced to 'npm run build' only | Nixpacks already runs npm ci with BuildKit cache mount; duplicating it caused EBUSY | 2026-04-28 | 127 |
 | DEC-123B | Sprint A debe ejecutarse vía PR (Option A recomendada) | Respeta branch protection, deja audit trail, no abre ventana de desprotección | 2026-04-28 | 123 |
 | DEC-123A | No crear tag pre-deploy si push falló | Evita tags huérfanos apuntando a SHAs no remotos (lección C115/C116) | 2026-04-28 | 123 |
 | DEC-C121-RECONCILE | Adoptar TRUTH_RECONCILIATION_C120.md como artefacto formal de inventario declarado-vs-verificado | Cerrar deuda de auditoría retroactiva tras descubrir mentiras en C115/C116 | 2026-04-28 | 121 |
@@ -191,6 +193,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 127] frontend/railway.toml:28 buildCommand = 'npm run build' (no npm ci prefix)
+- [Cycle 127] backend has no railway.toml — relies on Nixpacks auto-detection
+- [Cycle 127] PR #2 opened: https://github.com/creynals/AmaCafeDos/pull/2
 - [Cycle 123] Remote origin: https://github.com/creynals/AmaCafeDos.git
 - [Cycle 123] Branch protection en main bloquea push directo (GH006)
 - [Cycle 123] 17 commits locales pendientes (cycles 108→123 PRE) sin secretos en diff
