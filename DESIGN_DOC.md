@@ -103,6 +103,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-130 | Halt at Phase 2 Decision Gate awaiting A/B/C selection | STRICT mode requires human input before push/tag/doc actions on protected branch context | 2026-04-28 | 130 |
 | DEC-135 | Use `serve -l tcp://0.0.0.0:$PORT` instead of `-l $PORT` in frontend/railway.toml | serve >=14 binds to localhost when port is bare number; Railway healthcheck needs 0.0.0.0 | 2026-04-28 | 127 |
 | DEC-129-D | Branch off fix/c127-railway-frontend-ebusy as fix/c128-railway-node-version | Preserve C127 EBUSY fix; merge order C127 first, C128 second | 2026-04-28 | 129 |
 | DEC-129-C | Skip Fix C (NIXPACKS_NODE_VERSION env) unless Fix A fails | Over-configuration; engines.node is the canonical mechanism | 2026-04-28 | 129 |
@@ -198,6 +199,8 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 130] frontend/railway.toml references pre-c134-fix tag at SHA 202fb41 as rollback anchor
+- [Cycle 130] Expected log regex post-deploy: Accepting connections at http://0\.0\.0\.0:
 - [Cycle 127] frontend/railway.toml uses `serve` for static hosting after C130 vite-preview migration
 - [Cycle 127] PR #6 opened for C135 fix; awaits manual squash merge + Railway redeploy
 - [Cycle 129] git mv preserves rename detection (100% similarity) for railway.toml relocation

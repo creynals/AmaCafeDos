@@ -379,6 +379,32 @@
       "selectedOption": "A",
       "userRationale": "— PR único con los 17 commits",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777403626684",
+      "cycle": 130,
+      "timestamp": "2026-04-28T19:13:46.684Z",
+      "decisionPoint": "proceder con OPTION B: Push + Verifica Tag Rollback + Checklist Post-Deploy (Balanceada) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Push + Verifica Tag Rollback + Checklist Post-Deploy (Balanceada) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -1650,6 +1676,42 @@
       "status": "PLANNED",
       "createdAtCycle": 127,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-130-1",
+      "title": "Push 4 local SYNAPTIC commits to origin/fix/c135-serve-bind-explicit",
+      "description": "Align remote branch before user merges PR #6",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 130,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-130-2",
+      "title": "Verify or create pre-c134-fix rollback tag at SHA 202fb41",
+      "description": "Tag is referenced in frontend/railway.toml comments but existence unconfirmed",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 130,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-130-3",
+      "title": "Generate DEPLOY_VERIFICATION_C135 checklist",
+      "description": "Local gitignored doc with redeploy command, log regex, healthcheck steps, fallback",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 130,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-130-4",
+      "title": "Post-merge: trigger Railway redeploy and verify healthcheck",
+      "description": "Confirm 0.0.0.0 binding takes effect and frontend serves successfully",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 130,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -2562,11 +2624,91 @@
         "lastReinforced": "2026-04-28T18:43:10.384Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-130-1777403611409-0",
+      "cycle": 130,
+      "timestamp": "2026-04-28T19:13:31.409Z",
+      "type": "PATTERN",
+      "title": "C129 ambiguity: historical vs architect-mode",
+      "description": "Cycle reference can map to two distinct entries (BITACORA vs commit), requiring disambiguation before action",
+      "context": "When user requests proceeding with a numbered cycle that has architect-mode and execution variants",
+      "applicability": [
+        "synaptic",
+        "cycle-resolution",
+        "ambiguity"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T19:13:31.409Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-130-1777403611416-1",
+      "cycle": 130,
+      "timestamp": "2026-04-28T19:13:31.416Z",
+      "type": "INSIGHT",
+      "title": "Railway frontend deploy required 5 iterations",
+      "description": "C127 EBUSY -> C128 node -> vite-preview -> C130 serve -> C135 bind 0.0.0.0",
+      "context": "Architect-mode retrospective showing thrashing pattern in Railway deploys",
+      "applicability": [
+        "railway",
+        "deploy",
+        "retrospective"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T19:13:31.416Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-130-1777403611421-2",
+      "cycle": 130,
+      "timestamp": "2026-04-28T19:13:31.421Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "PR #6 open, 4 SYNAPTIC commits unpushed",
+      "description": "Branch fix/c135-serve-bind-explicit has bookkeeping commits not yet on origin; PR not merged",
+      "context": "State verification before any 'proceder' action",
+      "applicability": [
+        "git",
+        "synaptic",
+        "state"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T19:13:31.421Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-130-1777403611425-3",
+      "cycle": 130,
+      "timestamp": "2026-04-28T19:13:31.425Z",
+      "type": "ANTI_PATTERN",
+      "title": "Speculative work before closing deploy loop",
+      "description": "Adding new work while C135 fix is committed but not merged + redeploy + healthcheck unverified",
+      "context": "When a productive fix is in-flight but not validated end-to-end",
+      "applicability": [
+        "scope",
+        "deploy",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T19:13:31.425Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
-    "lastCompletedTask": "Decision Gate resolved: Option A selected",
-    "currentTask": "Implementing Option A as requested by user",
+    "lastCompletedTask": "Decision Gate resolved: Option B selected",
+    "currentTask": "Implementing Option B as requested by user",
     "pendingTasks": [
       "ROAD-121-DEPLOY-R1",
       "ROAD-121-DEPLOY-R2",
@@ -2754,9 +2896,12 @@
     "[2026-04-28T16:12:23.225Z] BITACORA C127 entry at lines 6601-6675",
     "[2026-04-28T18:43:10.388Z] C135 = third Railway deploy fix iteration (C128 node version → C130 vite→serve → C135 bind address)",
     "[2026-04-28T18:43:10.390Z] Commit 4ba6087 has generic PRE message but contains the productive C135 delta",
-    "[2026-04-28T18:43:10.392Z] Branch fix/c135-serve-bind-explicit pushed; PR #6 open and awaiting merge"
+    "[2026-04-28T18:43:10.392Z] Branch fix/c135-serve-bind-explicit pushed; PR #6 open and awaiting merge",
+    "[2026-04-28T19:13:31.429Z] PRs #1-#5 already merged into main; PR #6 (C135 bind fix) is the only open one",
+    "[2026-04-28T19:13:31.431Z] Branch protection on main forces PR pattern; user must merge via GitHub UI",
+    "[2026-04-28T19:13:31.433Z] User frustration recorded in C129 architect-mode: deploy expected to be 30 min, took 5 iterations"
   ],
-  "lastUpdated": "2026-04-28T19:10:57.246Z",
+  "lastUpdated": "2026-04-28T19:13:46.689Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
