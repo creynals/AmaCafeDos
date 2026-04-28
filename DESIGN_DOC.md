@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-100 | Decision Gate presented 3 options for input-hardening (A/B/C); awaiting user selection | ENFORCE-SYNAPTIC-PROTOCOL directive overrode immediate execution; gap analysis revealed no central validation layer | 2026-04-28 | 100 |
 | DEC-098 | Require explicit task definition in BITACORA before referencing by label across cycles | C96/C97 architect-mode entries had no persisted task schema, blocking C98 execution | 2026-04-28 | 98 |
 | DEC-095 | Validate GitHub state via gh api before delegating manual UI tasks to user | Tasks may already be auto-completed; avoids unnecessary user friction | 2026-04-28 | 95 |
 | DEC-094 | Ejecutar Option B: rename master→main, push inicial, push tag pre-purge-c78 | Balance entre seguridad (tag respaldo) y simplicidad (sin force-push ni re-purga) | 2026-04-28 | 94 |
@@ -171,6 +172,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 100] Public routes (no requireAuth): auth.js, products.js, chat.js, webhooks.js, cart.js (per-handler)
+- [Cycle 100] Stack: Express 5, helmet 8, express-rate-limit 8 — no validator library installed
+- [Cycle 100] 13 route files require parameterized PG query audit for SQLi vector confirmation
 - [Cycle 98] Architect-mode cycles must persist task definitions if Tier/Bx labels will be referenced later
 - [Cycle 98] DG-079 Immediate Execution allows clarifying questions for ambiguous/risky scope
 - [Cycle 95] Default branch on AmaCafeDos = main (verified via gh api)

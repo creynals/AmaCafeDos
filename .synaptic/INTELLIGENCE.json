@@ -163,6 +163,32 @@
       "selectedOption": "B",
       "userRationale": ": Rename + Push main + Push Tag pre-purge-c77 (Balanceado) ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777340473003",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:41:13.003Z",
+      "decisionPoint": "proceder con OPTION B: Audit + Central validateInput Middleware + Tests (Balanced) ⭐ RECOMMENDED",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Audit + Central validateInput Middleware + Tests (Balanced) ⭐ RECOMMENDED",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -939,6 +965,33 @@
       "status": "PLANNED",
       "createdAtCycle": 98,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-100A",
+      "title": "Execute selected input-hardening option",
+      "description": "Implement Option A/B/C per user selection; persist BITACORA C100 + INTELLIGENCE + DESIGN_DOC patch",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 100,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-100B",
+      "title": "Audit parameterized PG queries across 13 route files",
+      "description": "Confirm db.query() calls use parameterized form to close SQLi vector audit gap",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 100,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-100C",
+      "title": "Defer full Zod schema layer (Option C) until post-Railway-deploy",
+      "description": "Industry-standard schema validation across all 13 routes — high blast-radius, schedule after deploy stability",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 100,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -955,7 +1008,7 @@
         "user-preference"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T22:11:15.175Z",
         "source": "EXPLICIT"
@@ -1846,6 +1899,106 @@
         "lastReinforced": "2026-04-28T01:34:41.590Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-100-1777340420165-0",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.165Z",
+      "type": "USER_PREFERENCE",
+      "title": "ENFORCE-SYNAPTIC-PROTOCOL overrides immediate-execution mode",
+      "description": "Explicit enforcement directive in request triggers mandatory Decision Gate even when DG-079 active",
+      "context": "When user includes [ENFORCE-SYNAPTIC-PROTOCOL] tag in cycle request",
+      "applicability": [
+        "synaptic-protocol",
+        "decision-gate",
+        "enforcement"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.165Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420171-1",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.171Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "No central validateInput middleware exists",
+      "description": "Backend has only auth.js (36 LOC) and security.js (125 LOC); no validateInput.js, no zod/joi/express-validator",
+      "context": "Audit baseline for input-hardening work in amaCafe backend",
+      "applicability": [
+        "backend",
+        "middleware",
+        "security-audit"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.171Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420175-2",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.175Z",
+      "type": "ANTI_PATTERN",
+      "title": "Test glob excludes middleware/ and routes/",
+      "description": "Pattern 'src/utils/*.test.js' won't pick up middleware/*.test.js or routes/*.test.js",
+      "context": "Adding tests outside utils/ requires updating package.json test script",
+      "applicability": [
+        "testing",
+        "node-test-runner",
+        "package-json"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.175Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420178-3",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.178Z",
+      "type": "PATTERN",
+      "title": "Prefer hand-rolled utilities over new dependencies",
+      "description": "Monorepo convention follows keyManager.js style — hand-rolled validators preferred over zod/dompurify",
+      "context": "When choosing between adding deps vs implementing lightweight utilities",
+      "applicability": [
+        "dependencies",
+        "convention",
+        "amaCafe"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.178Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420182-4",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.182Z",
+      "type": "INSIGHT",
+      "title": "Pre-Railway-deploy risk shapes scope decisions",
+      "description": "High blast-radius changes (13-route sweeps) deferred until Railway deploy is stable",
+      "context": "Scoping cycles during deployment-sensitive periods",
+      "applicability": [
+        "risk-management",
+        "deployment",
+        "scoping"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.182Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1973,9 +2126,12 @@
     "[2026-04-28T01:34:41.592Z] C96 = Railway deploy report request (architect mode, no artifacts)",
     "[2026-04-28T01:34:41.593Z] C97 = sandbox input-injection validation request (architect mode, no artifacts)",
     "[2026-04-28T01:34:41.595Z] C83-85 already consumed B2/B3/B4 labels: Railway Volume, api.js config, railway.toml+migrate",
-    "[2026-04-28T01:34:41.596Z] C98 awaiting user clarification on Tier 1 (B1+B2) scope before execution"
+    "[2026-04-28T01:34:41.596Z] C98 awaiting user clarification on Tier 1 (B1+B2) scope before execution",
+    "[2026-04-28T01:40:20.185Z] Cycle 100 halted at Decision Gate — no code generated, awaiting Option A/B/C selection",
+    "[2026-04-28T01:40:20.186Z] Recommended Option B: hand-rolled validateInput.js + 12-payload SQLi/XSS test corpus targeting 5 highest-risk endpoints",
+    "[2026-04-28T01:40:20.188Z] Test script needs update from 'src/utils/*.test.js' to 'src/**/*.test.js tests/**/*.test.js' for security tests"
   ],
-  "lastUpdated": "2026-04-28T01:38:39.450Z",
+  "lastUpdated": "2026-04-28T01:41:13.008Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
