@@ -42,7 +42,7 @@ builder = "NIXPACKS"
 buildCommand = "npm run build"
 
 [deploy]
-startCommand = "npx serve -s dist -l tcp://0.0.0.0:$PORT"
+startCommand = "npx serve -s dist -l 0.0.0.0:$PORT"
 healthcheckPath = "/"
 healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"
