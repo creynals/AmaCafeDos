@@ -102,6 +102,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-114 | Ejecutar cluster C112+C113 con Option B: pre-flight focalizado + validación entre pasos + SumUp prod diferido | Balance óptimo entre reversibilidad y velocidad; alinea con preferencia explícita C113 y patrón histórico | 2026-04-28 | 114 |
 | DEC-113 | Ejecutar cluster C112+C113 secuencial con checkpoint entre pasos y tag pre-rotation-c113 | Honra cluster aprobado en C112; checkpoint reduce blast radius; rollback global vía git tag + pg_dump | 2026-04-28 | 113 |
 | DEC-112 | Ejecutar bloque pre-deploy en dos ciclos: rotación secretos (C112+C113) y infra Railway (C114+C115) | Atomicidad por dominio: separar crypto local de infra cloud reduce blast radius y permite verificación intermedia | 2026-04-28 | 112 |
 | DEC-107 | Reconciliar divergencia main vía rebase --onto con drop de eea6d78 + push FF | Evita --force, preserva historia lineal, recuperable por tag pre-rebase-c107 | 2026-04-28 | 107 |
@@ -182,6 +183,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 114] pg_dump parcial de tablas críticas (payment_methods, users, orders) como backup pre-rotación
+- [Cycle 114] Smoke test focalizado: 5 muestras decrypt + 1 JWT round-trip entre C112 y C113
+- [Cycle 114] CREDENTIAL_ROTATION_C112-C113.md gitignored con valores enmascarados
 - [Cycle 113] Orden de rotación: ENCRYPTION_SECRET → validación SumUp decrypt → JWT_SECRET + RECAPTCHA_SECRET + SUMUP_API_KEY
 - [Cycle 113] SUMUP_API_KEY prod requiere coordinación con dashboard del proveedor (potencial bloqueador)
 - [Cycle 113] Backend reinicio + smoke test (login JWT + checkout SumUp) obligatorio post-rotación

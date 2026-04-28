@@ -1333,6 +1333,33 @@
       "status": "PLANNED",
       "createdAtCycle": 113,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-114-1",
+      "title": "Ejecutar rotación ENCRYPTION_SECRET (C112)",
+      "description": "rotate-encryption-secret.js --apply con OLD/NEW vars + smoke test decrypt payment_methods",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 114,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-114-2",
+      "title": "Ejecutar rotación JWT + reCAPTCHA + SumUp sandbox (C113)",
+      "description": "Rotar secrets, actualizar .env, reinicio backend, smoke tests E2E",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 114,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-114-3",
+      "title": "Rotar SumUp prod en deploy Railway",
+      "description": "PENDING_USER_INPUT: esperar credenciales SumUp prod del gestor del usuario antes de deploy",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 114,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -1350,52 +1377,10 @@
         "option-b"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T00:59:28.454Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-94-1777338274400-0",
-      "cycle": 94,
-      "timestamp": "2026-04-28T01:04:34.400Z",
-      "type": "ANTI_PATTERN",
-      "title": "Tag name mismatch entre Decision Gate e ejecución",
-      "description": "Decision Gate C93 mencionó 'pre-purge-c77' pero la tag real era 'pre-purge-c78' (creada en C78)",
-      "context": "Al ejecutar acciones que referencian tags/branches creados en cycles previos",
-      "applicability": [
-        "git",
-        "tags",
-        "decision-gate",
-        "verification"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:04:34.400Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-94-1777338274406-1",
-      "cycle": 94,
-      "timestamp": "2026-04-28T01:04:34.406Z",
-      "type": "PATTERN",
-      "title": "Pre-flight security check antes de push público",
-      "description": "Verificar .env ausente del historial completo ANTES de push a remoto público",
-      "context": "Primer push a repo público después de purga de secretos",
-      "applicability": [
-        "git",
-        "security",
-        "secrets",
-        "public-push"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:04:34.406Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1412,30 +1397,10 @@
         "balanced-approach"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:04:34.410Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-94-1777338274413-3",
-      "cycle": 94,
-      "timestamp": "2026-04-28T01:04:34.413Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Sequencia git rename + push -u + push tag",
-      "description": "git remote add → git branch -m → git push -u origin main → git push origin <tag>",
-      "context": "Migración inicial de repo local a remoto público con preservación de respaldo",
-      "applicability": [
-        "git",
-        "remote-setup",
-        "branch-migration"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:04:34.413Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -2398,6 +2363,106 @@
         "lastReinforced": "2026-04-28T03:36:04.996Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-114-1777347499180-0",
+      "cycle": 114,
+      "timestamp": "2026-04-28T03:38:19.180Z",
+      "type": "USER_PREFERENCE",
+      "title": "Cluster Option B confirmado en C114",
+      "description": "Usuario confirma Option B para cluster C112+C113 con validación entre pasos",
+      "context": "Decisiones de rotación de credenciales en clusters secuenciales",
+      "applicability": [
+        "credential-rotation",
+        "cluster-execution",
+        "option-b"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:38:19.180Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-114-1777347499185-1",
+      "cycle": 114,
+      "timestamp": "2026-04-28T03:38:19.185Z",
+      "type": "PATTERN",
+      "title": "Patrón Option B en 11/11 decisiones recientes",
+      "description": "Usuario consistentemente elige Option B (balance entre conservador y acelerado)",
+      "context": "Decision Gates en SYNAPTIC Protocol",
+      "applicability": [
+        "decision-gate",
+        "option-selection",
+        "user-pattern"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:38:19.185Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-114-1777347499189-2",
+      "cycle": 114,
+      "timestamp": "2026-04-28T03:38:19.189Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Pre-flight backup focalizado en tablas críticas",
+      "description": "pg_dump schema+data de payment_methods, users, orders + git tag pre-rotation-c114",
+      "context": "Antes de rotar ENCRYPTION_SECRET en producción local",
+      "applicability": [
+        "backup",
+        "pg_dump",
+        "rollback-strategy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:38:19.189Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-114-1777347499192-3",
+      "cycle": 114,
+      "timestamp": "2026-04-28T03:38:19.192Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "SumUp prod diferido a deploy Railway",
+      "description": "SumUp prod credentials marcadas PENDING_USER_INPUT hasta entorno Railway listo",
+      "context": "Rotación de credenciales con dependencia de entorno productivo",
+      "applicability": [
+        "sumup",
+        "railway-deploy",
+        "credential-staging"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:38:19.192Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-114-1777347499195-4",
+      "cycle": 114,
+      "timestamp": "2026-04-28T03:38:19.195Z",
+      "type": "PATTERN",
+      "title": "Decision Gate de granularidad post-decisión macro",
+      "description": "Aunque cluster macro decidido en C113, C114 abre Decision Gate para variables operativas",
+      "context": "Cuando hay variables de ejecución no comprometidas tras decisión macro",
+      "applicability": [
+        "decision-gate",
+        "execution-granularity",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:38:19.195Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -2557,9 +2622,12 @@
     "[2026-04-28T03:36:04.999Z] Patrón Option B confirmado en 10/10 decisiones recientes — alta consistencia del usuario",
     "[2026-04-28T03:36:05.001Z] keyManager.js (C81 Option B) disponible para soporte de rotación de claves cifradas",
     "[2026-04-28T03:36:05.003Z] backend/.env ya purgado del historial git en C78 — mantener secretos fuera de git es invariante",
-    "[2026-04-28T03:36:05.005Z] Backlog HIGH posterior: deploy Railway pendiente tras completar cluster de rotación"
+    "[2026-04-28T03:36:05.005Z] Backlog HIGH posterior: deploy Railway pendiente tras completar cluster de rotación",
+    "[2026-04-28T03:38:19.198Z] C114 ejecuta el cluster decidido en C113; C112 y C113 originales no se ejecutaron como ciclos individuales",
+    "[2026-04-28T03:38:19.199Z] keyManager.js (C81 OPTION B) habilita decrypt verification automatizada en smoke tests",
+    "[2026-04-28T03:38:19.201Z] SumUp prod permanece como tarea HIGH bloqueante para deploy Railway"
   ],
-  "lastUpdated": "2026-04-28T03:36:39.737Z",
+  "lastUpdated": "2026-04-28T03:38:42.221Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5631,6 +5699,68 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T00:59:28.468Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274400-0",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.400Z",
+      "type": "ANTI_PATTERN",
+      "title": "Tag name mismatch entre Decision Gate e ejecución",
+      "description": "Decision Gate C93 mencionó 'pre-purge-c77' pero la tag real era 'pre-purge-c78' (creada en C78)",
+      "context": "Al ejecutar acciones que referencian tags/branches creados en cycles previos",
+      "applicability": [
+        "git",
+        "tags",
+        "decision-gate",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.400Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274406-1",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.406Z",
+      "type": "PATTERN",
+      "title": "Pre-flight security check antes de push público",
+      "description": "Verificar .env ausente del historial completo ANTES de push a remoto público",
+      "context": "Primer push a repo público después de purga de secretos",
+      "applicability": [
+        "git",
+        "security",
+        "secrets",
+        "public-push"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.406Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-94-1777338274413-3",
+      "cycle": 94,
+      "timestamp": "2026-04-28T01:04:34.413Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Sequencia git rename + push -u + push tag",
+      "description": "git remote add → git branch -m → git push -u origin main → git push origin <tag>",
+      "context": "Migración inicial de repo local a remoto público con preservación de respaldo",
+      "applicability": [
+        "git",
+        "remote-setup",
+        "branch-migration"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:04:34.413Z",
         "source": "INFERRED"
       }
     }
