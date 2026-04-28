@@ -1623,29 +1623,36 @@
       "status": "PLANNED",
       "createdAtCycle": 127,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-135-A",
+      "title": "Merge PR #6 (squash) and trigger Railway redeploy",
+      "description": "User must merge via GitHub UI then redeploy frontend on Railway",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 127,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-135-B",
+      "title": "Verify deploy log shows 0.0.0.0 bind and healthcheck passes",
+      "description": "Confirm `Accepting connections at http://0.0.0.0:<PORT>` and / healthcheck succeeds <100s",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 127,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-135-C",
+      "title": "Verify or create pre-c134-fix rollback tag on SHA 202fb41",
+      "description": "Run `git tag --list | grep pre-c134-fix`; create if missing to make railway.toml comment accurate",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 127,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-106-1777343533307-2",
-      "cycle": 106,
-      "timestamp": "2026-04-28T02:32:13.307Z",
-      "type": "PATTERN",
-      "title": "Rebase --onto para drop selectivo de duplicado",
-      "description": "git rebase --onto origin/main <duplicado> main descarta duplicado y replaya commits posteriores fast-forward",
-      "context": "Cuando hay 1 commit duplicado + N commits válidos no pusheados",
-      "applicability": [
-        "git",
-        "rebase",
-        "history-cleanup"
-      ],
-      "confidence": {
-        "score": 0.24999999999999997,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-28T02:37:34.504Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-106-1777343533316-5",
       "cycle": 106,
@@ -1659,7 +1666,7 @@
         "user-pattern"
       ],
       "confidence": {
-        "score": 0.7000000000000001,
+        "score": 0.5,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:32:13.316Z",
         "source": "EXPLICIT"
@@ -2491,6 +2498,89 @@
         "lastReinforced": "2026-04-28T16:12:23.215Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-127-1777401790368-0",
+      "cycle": 127,
+      "timestamp": "2026-04-28T18:43:10.368Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "serve >=14 requires explicit 0.0.0.0 bind",
+      "description": "`serve -l <PORT>` binds to localhost; must use `-l tcp://0.0.0.0:$PORT` for Railway healthcheck",
+      "context": "Frontend static hosting on Railway/containers using `serve` package",
+      "applicability": [
+        "railway",
+        "serve",
+        "frontend",
+        "healthcheck",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T18:43:10.368Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-127-1777401790375-1",
+      "cycle": 127,
+      "timestamp": "2026-04-28T18:43:10.375Z",
+      "type": "PATTERN",
+      "title": "PR workflow for protected main",
+      "description": "Push branch + open PR via gh CLI; squash merge uses PR title (commit message can stay generic)",
+      "context": "Any change to main on AmaCafeDos repo (branch-protected)",
+      "applicability": [
+        "git",
+        "github",
+        "branch-protection",
+        "pr-workflow"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T18:43:10.375Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-127-1777401790380-2",
+      "cycle": 127,
+      "timestamp": "2026-04-28T18:43:10.380Z",
+      "type": "INSIGHT",
+      "title": "Generic SYNAPTIC commit message OK with squash merge",
+      "description": "Commit `[SYNAPTIC] [Cycle X] PRE: continuar` is acceptable since squash uses PR title on main",
+      "context": "Working with branch-protected repos using squash merge",
+      "applicability": [
+        "git",
+        "commit-messages",
+        "squash-merge"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T18:43:10.380Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-127-1777401790384-3",
+      "cycle": 127,
+      "timestamp": "2026-04-28T18:43:10.384Z",
+      "type": "ANTI_PATTERN",
+      "title": "Referencing unverified rollback tags in code comments",
+      "description": "`pre-c134-fix` tag referenced in railway.toml comments was never verified to exist",
+      "context": "When adding rollback references in config files",
+      "applicability": [
+        "git-tags",
+        "rollback",
+        "documentation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T18:43:10.384Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -2680,9 +2770,12 @@
     "[2026-04-28T16:12:23.218Z] Branch protection on main is ACTIVE on AmaCafeDos — backlog item silently completed",
     "[2026-04-28T16:12:23.221Z] Commit 51845e4 lives on branch fix/c127-railway-frontend-ebusy, awaiting PR #2 merge",
     "[2026-04-28T16:12:23.223Z] Frontend Railway deploy expected to succeed on 1st attempt post-merge if VITE_API_BASE_URL is set",
-    "[2026-04-28T16:12:23.225Z] BITACORA C127 entry at lines 6601-6675"
+    "[2026-04-28T16:12:23.225Z] BITACORA C127 entry at lines 6601-6675",
+    "[2026-04-28T18:43:10.388Z] C135 = third Railway deploy fix iteration (C128 node version → C130 vite→serve → C135 bind address)",
+    "[2026-04-28T18:43:10.390Z] Commit 4ba6087 has generic PRE message but contains the productive C135 delta",
+    "[2026-04-28T18:43:10.392Z] Branch fix/c135-serve-bind-explicit pushed; PR #6 open and awaiting merge"
   ],
-  "lastUpdated": "2026-04-28T18:40:26.012Z",
+  "lastUpdated": "2026-04-28T18:59:00.841Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -6518,6 +6611,26 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:19:19.367Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533307-2",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.307Z",
+      "type": "PATTERN",
+      "title": "Rebase --onto para drop selectivo de duplicado",
+      "description": "git rebase --onto origin/main <duplicado> main descarta duplicado y replaya commits posteriores fast-forward",
+      "context": "Cuando hay 1 commit duplicado + N commits válidos no pusheados",
+      "applicability": [
+        "git",
+        "rebase",
+        "history-cleanup"
+      ],
+      "confidence": {
+        "score": 0.04999999999999996,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T02:37:34.504Z",
+        "source": "INFERRED"
       }
     }
   ]

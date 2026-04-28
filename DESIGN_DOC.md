@@ -103,6 +103,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-135 | Use `serve -l tcp://0.0.0.0:$PORT` instead of `-l $PORT` in frontend/railway.toml | serve >=14 binds to localhost when port is bare number; Railway healthcheck needs 0.0.0.0 | 2026-04-28 | 127 |
 | DEC-129-D | Branch off fix/c127-railway-frontend-ebusy as fix/c128-railway-node-version | Preserve C127 EBUSY fix; merge order C127 first, C128 second | 2026-04-28 | 129 |
 | DEC-129-C | Skip Fix C (NIXPACKS_NODE_VERSION env) unless Fix A fails | Over-configuration; engines.node is the canonical mechanism | 2026-04-28 | 129 |
 | DEC-129-B | Move root railway.toml to backend/railway.toml (Fix B.1) | Eliminates two-TOML ambiguity; matches per-service Root Directory pattern | 2026-04-28 | 129 |
@@ -197,6 +198,8 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 127] frontend/railway.toml uses `serve` for static hosting after C130 vite-preview migration
+- [Cycle 127] PR #6 opened for C135 fix; awaits manual squash merge + Railway redeploy
 - [Cycle 129] git mv preserves rename detection (100% similarity) for railway.toml relocation
 - [Cycle 129] Railway UI Root Directory must match TOML location for service to discover config
 - [Cycle 127] frontend/railway.toml:28 buildCommand = 'npm run build' (no npm ci prefix)
