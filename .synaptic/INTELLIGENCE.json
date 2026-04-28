@@ -1627,6 +1627,46 @@
   ],
   "learnings": [
     {
+      "learningId": "learning-104-1777342759367-2",
+      "cycle": 104,
+      "timestamp": "2026-04-28T02:19:19.367Z",
+      "type": "USER_PREFERENCE",
+      "title": "Confirm visible remote actions",
+      "description": "User expects explicit warning + confirmation before git push to remote",
+      "context": "Any action visible in origin (push, tag push, force operations)",
+      "applicability": [
+        "git-push",
+        "user-confirmation",
+        "remote-actions"
+      ],
+      "confidence": {
+        "score": 0.30000000000000004,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:19:19.367Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533307-2",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.307Z",
+      "type": "PATTERN",
+      "title": "Rebase --onto para drop selectivo de duplicado",
+      "description": "git rebase --onto origin/main <duplicado> main descarta duplicado y replaya commits posteriores fast-forward",
+      "context": "Cuando hay 1 commit duplicado + N commits válidos no pusheados",
+      "applicability": [
+        "git",
+        "rebase",
+        "history-cleanup"
+      ],
+      "confidence": {
+        "score": 0.35,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T02:37:34.504Z",
+        "source": "INFERRED"
+      }
+    },
+    {
       "learningId": "learning-106-1777343533316-5",
       "cycle": 106,
       "timestamp": "2026-04-28T02:32:13.316Z",
@@ -1639,7 +1679,7 @@
         "user-pattern"
       ],
       "confidence": {
-        "score": 0.30000000000000004,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:32:13.316Z",
         "source": "EXPLICIT"
@@ -2662,7 +2702,7 @@
     "[2026-04-28T16:12:23.223Z] Frontend Railway deploy expected to succeed on 1st attempt post-merge if VITE_API_BASE_URL is set",
     "[2026-04-28T16:12:23.225Z] BITACORA C127 entry at lines 6601-6675"
   ],
-  "lastUpdated": "2026-04-28T16:50:44.236Z",
+  "lastUpdated": "2026-04-28T16:07:57.024Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -6477,107 +6517,6 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:32:13.313Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-104-1777342759367-2",
-      "cycle": 104,
-      "timestamp": "2026-04-28T02:19:19.367Z",
-      "type": "USER_PREFERENCE",
-      "title": "Confirm visible remote actions",
-      "description": "User expects explicit warning + confirmation before git push to remote",
-      "context": "Any action visible in origin (push, tag push, force operations)",
-      "applicability": [
-        "git-push",
-        "user-confirmation",
-        "remote-actions"
-      ],
-      "confidence": {
-        "score": 0,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:19:19.367Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-106-1777343533307-2",
-      "cycle": 106,
-      "timestamp": "2026-04-28T02:32:13.307Z",
-      "type": "PATTERN",
-      "title": "Rebase --onto para drop selectivo de duplicado",
-      "description": "git rebase --onto origin/main <duplicado> main descarta duplicado y replaya commits posteriores fast-forward",
-      "context": "Cuando hay 1 commit duplicado + N commits válidos no pusheados",
-      "applicability": [
-        "git",
-        "rebase",
-        "history-cleanup"
-      ],
-      "confidence": {
-        "score": 0.14999999999999997,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-28T02:37:34.504Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-107-1777343854508-1",
-      "cycle": 107,
-      "timestamp": "2026-04-28T02:37:34.508Z",
-      "type": "PATTERN",
-      "title": "Tag de respaldo pre-rebase",
-      "description": "Crear tag pre-rebase-cXXX antes de history rewrite permite rollback sin reflog",
-      "context": "Antes de cualquier rebase/reset que reescriba historia local",
-      "applicability": [
-        "git",
-        "safety",
-        "rollback",
-        "synaptic"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:37:34.508Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-107-1777343854512-2",
-      "cycle": 107,
-      "timestamp": "2026-04-28T02:37:34.512Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Validación de duplicado por árbol+timestamp",
-      "description": "Comparar árbol git (líneas modificadas) y timestamp confirma equivalencia funcional pese a mensajes distintos",
-      "context": "Diagnóstico previo a drop en rebase para evitar pérdida de cambios reales",
-      "applicability": [
-        "git",
-        "diff",
-        "diagnosis"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:37:34.512Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-107-1777343854515-3",
-      "cycle": 107,
-      "timestamp": "2026-04-28T02:37:34.515Z",
-      "type": "INSIGHT",
-      "title": "Push fast-forward post-rebase evita --force",
-      "description": "Si origin solo tenía el duplicado dropable, post-rebase el push es FF natural sin --force",
-      "context": "Reconciliación local↔remote cuando divergencia es solo por duplicado",
-      "applicability": [
-        "git",
-        "push",
-        "safety"
-      ],
-      "confidence": {
-        "score": 0.19999999999999998,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:37:34.515Z",
         "source": "INFERRED"
       }
     }
