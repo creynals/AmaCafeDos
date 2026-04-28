@@ -100,6 +100,8 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-101B | Exempt chat and webhooks via mount order, not skip logic | Mount before guard preserves silent sanitizer for chat; keeps guard config simple | 2026-04-28 | 101 |
+| DEC-101 | Central validateInput middleware with deep-walk pattern detection | Defense-in-depth layer above parameterized SQL; loud rejection with structured error | 2026-04-28 | 101 |
 | DEC-100 | Decision Gate presented 3 options for input-hardening (A/B/C); awaiting user selection | ENFORCE-SYNAPTIC-PROTOCOL directive overrode immediate execution; gap analysis revealed no central validation layer | 2026-04-28 | 100 |
 | DEC-098 | Require explicit task definition in BITACORA before referencing by label across cycles | C96/C97 architect-mode entries had no persisted task schema, blocking C98 execution | 2026-04-28 | 98 |
 | DEC-095 | Validate GitHub state via gh api before delegating manual UI tasks to user | Tasks may already be auto-completed; avoids unnecessary user friction | 2026-04-28 | 95 |
@@ -172,6 +174,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 101] validateInput.js: 171 LoC, walks body+query+params, 5000-char cap, inspects keys for $ops
+- [Cycle 101] Test glob widened to src/middleware/*.test.js in package.json
+- [Cycle 101] Chat route mounted at server.js:110 (pre-guard), validateInput at server.js:111
 - [Cycle 100] Public routes (no requireAuth): auth.js, products.js, chat.js, webhooks.js, cart.js (per-handler)
 - [Cycle 100] Stack: Express 5, helmet 8, express-rate-limit 8 — no validator library installed
 - [Cycle 100] 13 route files require parameterized PG query audit for SQLi vector confirmation
@@ -275,6 +280,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 101, 2026-04-28] New middleware layer: backend/src/middleware/validateInput.js wired globally on /api after express.json()
 - [Cycle 94, 2026-04-28] Repositorio AmaCafeDos ahora público en GitHub con branch main como principal
 - [Cycle 87, 2026-04-28] SumUp config now has env→DB promotion phase on boot before mode resolution
 - [Cycle 87, 2026-04-28] Repository now ships pre-commit hook + installer script under scripts/git-hooks/

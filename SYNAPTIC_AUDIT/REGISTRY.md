@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-28T01:07:11.172Z
+- **Last Updated:** 2026-04-28T01:48:09.112Z
 - **Status:** ACTIVE
 
 ---
@@ -11,12 +11,12 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 46 |
-| Score Promedio | 51% |
-| Racha Actual (A/B) | 2 ciclos |
-| Último Ciclo | 95 |
-| Última Calificación | A |
-| Findings Abiertos | 213 |
+| Ciclos Auditados | 47 |
+| Score Promedio | 50% |
+| Racha Actual (A/B) | 0 ciclos |
+| Último Ciclo | 101 |
+| Última Calificación | F |
+| Findings Abiertos | 217 |
 | Findings Resueltos | 42 |
 
 ---
@@ -25,9 +25,9 @@
 
 | Severidad | Cantidad |
 |-----------|----------|
-| CRITICAL | 1 |
+| CRITICAL | 2 |
 | HIGH | 0 |
-| MEDIUM | 173 |
+| MEDIUM | 176 |
 | LOW | 39 |
 
 ---
@@ -36,8 +36,8 @@
 
 | Tipo | Cantidad |
 |------|----------|
-| Dead Code | 162 |
-| Security | 1 |
+| Dead Code | 165 |
+| Security | 2 |
 | Maintainability | 50 |
 | Duplication | 0 |
 | Consistency | 0 |
@@ -48,16 +48,16 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-a0c51627 | dead_code | MEDIUM | utils/keyManager.js | Unused function: 'rotateValue' (6 lines)... |
-| SAI-cab6ae55 | dead_code | MEDIUM | utils/crypto.js | Unused function: 'encrypt' (3 lines)... |
-| SAI-82b16be4 | dead_code | MEDIUM | utils/crypto.js | Unused function: 'decrypt' (8 lines)... |
-| SAI-adde131e | security | CRITICAL | utils/crypto.js | Potential hardcoded secret detected... |
 | SAI-b2c74955 | dead_code | MEDIUM | utils/imageStorage.js | Unused function: 'ensureImagesDir' (5 lines)... |
 | SAI-9e1fcd4a | dead_code | MEDIUM | scripts/seed-volume-images.js | Unused function: 'for' (13 lines)... |
 | SAI-4e7fca60 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'getMode' (3 lines)... |
 | SAI-fdc63616 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'invalidateReturnUrlCache' (3 lin... |
 | SAI-6be101f2 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'bootstrapModeFromEnv' (26 lines)... |
 | SAI-ece3ea11 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'buildReturnUrls' (8 lines)... |
+| SAI-5a0d6f8d | dead_code | MEDIUM | middleware/validateInput.js | Unused function: 'validateInput' (38 lines)... |
+| SAI-b1728a6b | dead_code | MEDIUM | middleware/validateInput.test.js | Unused function: 'status' (1 lines)... |
+| SAI-f594e8d8 | dead_code | MEDIUM | middleware/validateInput.test.js | Unused function: 'json' (1 lines)... |
+| SAI-f5d1cbb5 | security | CRITICAL | middleware/validateInput.test.js | Potential hardcoded secret detected... |
 
 ---
 
@@ -65,7 +65,6 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 10 | 0 | F |
 | 14 | 0 | F |
 | 18 | 80 | B |
 | 23 | 0 | F |
@@ -85,6 +84,7 @@
 | 87 | 20 | F |
 | 94 | 100 | A |
 | 95 | 100 | A |
+| 101 | 0 | F |
 
 ---
 

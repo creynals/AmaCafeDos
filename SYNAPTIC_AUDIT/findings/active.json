@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-28T01:07:11.171Z",
+  "lastUpdated": "2026-04-28T01:48:09.110Z",
   "findings": [
     {
       "id": "DC-001",
@@ -3503,20 +3503,72 @@
       "detectedInCycle": 87,
       "detectedAt": "2026-04-28T00:13:32.101Z",
       "status": "OPEN"
+    },
+    {
+      "id": "DC-154",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/middleware/validateInput.js",
+      "line": 146,
+      "description": "Unused function: 'validateInput' (38 lines)",
+      "suggestion": "Remove unused function 'validateInput' or export if needed elsewhere",
+      "findingId": "SAI-5a0d6f8d",
+      "detectedInCycle": 101,
+      "detectedAt": "2026-04-28T01:48:09.110Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-155",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/middleware/validateInput.test.js",
+      "line": 191,
+      "description": "Unused function: 'status' (1 lines)",
+      "suggestion": "Remove unused function 'status' or export if needed elsewhere",
+      "findingId": "SAI-b1728a6b",
+      "detectedInCycle": 101,
+      "detectedAt": "2026-04-28T01:48:09.110Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-156",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/middleware/validateInput.test.js",
+      "line": 192,
+      "description": "Unused function: 'json' (1 lines)",
+      "suggestion": "Remove unused function 'json' or export if needed elsewhere",
+      "findingId": "SAI-f594e8d8",
+      "detectedInCycle": 101,
+      "detectedAt": "2026-04-28T01:48:09.110Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "SEC-157",
+      "type": "security",
+      "severity": "CRITICAL",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/middleware/validateInput.test.js",
+      "line": 208,
+      "description": "Potential hardcoded secret detected",
+      "suggestion": "Move secrets to environment variables",
+      "findingId": "SAI-f5d1cbb5",
+      "detectedInCycle": 101,
+      "detectedAt": "2026-04-28T01:48:09.110Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 213,
+    "totalOpen": 217,
     "totalResolved": 42,
     "bySeverity": {
-      "MEDIUM": 173,
+      "MEDIUM": 176,
       "LOW": 39,
-      "CRITICAL": 1
+      "CRITICAL": 2
     },
     "byType": {
-      "dead_code": 162,
+      "dead_code": 165,
       "maintainability": 50,
-      "security": 1
+      "security": 2
     }
   }
 }

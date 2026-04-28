@@ -163,6 +163,32 @@
       "selectedOption": "B",
       "userRationale": ": Rename + Push main + Push Tag pre-purge-c77 (Balanceado) ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777340473003",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:41:13.003Z",
+      "decisionPoint": "proceder con OPTION B: Audit + Central validateInput Middleware + Tests (Balanced) ⭐ RECOMMENDED",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Audit + Central validateInput Middleware + Tests (Balanced) ⭐ RECOMMENDED",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -867,194 +893,149 @@
       "status": "PLANNED",
       "createdAtCycle": 94,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-1",
+      "title": "Rotación obligatoria de credenciales",
+      "description": "Rotate ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT, DB password",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-2",
+      "title": "Decision Gate Railway deploy R1-R8",
+      "description": "Execute Railway deploy gates per docs/RAILWAY_DEPLOY.md after credential rotation",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-3",
+      "title": "Branch protection on main",
+      "description": "Require PR + status checks on main branch before collaborators/CI added",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-4",
+      "title": "Document SHA mapping pre/post-purge",
+      "description": "Record pre/post filter-repo SHA mapping in WORKSPACE_IDENTITY.md",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-5",
+      "title": "GitHub Actions CI básico",
+      "description": "Set up basic lint + build CI workflow after branch protection",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-098-1",
+      "title": "Define Tier 1 scope explicitly",
+      "description": "User must confirm hypothesis (input hardening / Railway deploy / pre-deploy local) for B1+B2",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 98,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-098-2",
+      "title": "Adopt cycle-prefixed task IDs",
+      "description": "Use C{N}-B{n} format in BITACORA to avoid collision with prior cycles' B-tasks",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 98,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-098-3",
+      "title": "Persist task schema in architect-mode cycles",
+      "description": "When architect-mode produces a plan, write Tier/task definitions into BITACORA, not just narrative",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 98,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-100A",
+      "title": "Execute selected input-hardening option",
+      "description": "Implement Option A/B/C per user selection; persist BITACORA C100 + INTELLIGENCE + DESIGN_DOC patch",
+      "priority": "HIGH",
+      "status": "DONE",
+      "createdAtCycle": 100,
+      "dependencies": [],
+      "completedAtCycle": 101
+    },
+    {
+      "itemId": "ROAD-100B",
+      "title": "Audit parameterized PG queries across 13 route files",
+      "description": "Confirm db.query() calls use parameterized form to close SQLi vector audit gap",
+      "priority": "HIGH",
+      "status": "DONE",
+      "createdAtCycle": 100,
+      "dependencies": [],
+      "completedAtCycle": 101,
+      "completionNote": "Confirmed during C101 audit — all db.query/client.query call sites use parameterized binding"
+    },
+    {
+      "itemId": "ROAD-100C",
+      "title": "Defer full Zod schema layer (Option C) until post-Railway-deploy",
+      "description": "Industry-standard schema validation across all 13 routes — high blast-radius, schedule after deploy stability",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 100,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-101A",
+      "title": "E2E manual validation of input hardening",
+      "description": "Boot backend+frontend, attempt SQLi login (admin--) and XSS in product name; confirm 400 rejections; confirm legitimate Spanish text + SKUs pass",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 101,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-101B",
+      "title": "Audit cart/payments/settings/users routes against global guard",
+      "description": "Confirm validateInput does not block legitimate flows in cart, payments, settings (especially long-text settings), users CRUD",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 101,
+      "dependencies": [
+        "ROAD-101A"
+      ]
+    },
+    {
+      "itemId": "ROAD-101C",
+      "title": "Add validateInput.skip / whitelist for rich-text endpoints",
+      "description": "When/if endpoints need legitimate markdown/HTML, expose path-based skip mechanism in middleware factory",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 101,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-101D",
+      "title": "Observability — counter for rejected payloads by kind",
+      "description": "Track sqli/xss/nosql/length rejection counts post-Railway deploy for tuning false-positive risk",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 101,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-77-1777327415063-0",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.063Z",
-      "type": "PATTERN",
-      "title": "Decision Gate con 3 opciones diferenciadas",
-      "description": "Phase 2 SYNAPTIC requiere A/B/C con pros/cons/risk/confidence cuantificados",
-      "context": "Cualquier ciclo que entre en Phase 2 Decision Gate",
-      "applicability": [
-        "synaptic-protocol",
-        "decision-gate",
-        "phase-2"
-      ],
-      "confidence": {
-        "score": 0.44999999999999996,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-27T22:24:09.789Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415068-1",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.068Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "git filter-repo recomendado oficialmente sobre filter-branch",
-      "description": "Es el sustituto oficial de Git para reescritura de historial; cubre archivos y contenido",
-      "context": "Purga de secretos del historial git",
-      "applicability": [
-        "git",
-        "security",
-        "history-rewrite",
-        "secrets"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.068Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415071-2",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.071Z",
-      "type": "INSIGHT",
-      "title": "Rotación de credenciales es prerequisito Y obligatorio post-purga",
-      "description": "Aunque se rote antes, tras purgar historial deben rotarse TODAS las credenciales expuestas",
-      "context": "Operaciones de purga de .env del historial",
-      "applicability": [
-        "security",
-        "credentials-rotation",
-        "post-purge"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.071Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415074-3",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.074Z",
-      "type": "ANTI_PATTERN",
-      "title": "Recreación total destruye trazabilidad SYNAPTIC",
-      "description": "Squash inicial rompe vínculo BITACORA↔commits y contradice principio Traceable",
-      "context": "Decisiones sobre limpieza de historial en proyectos SYNAPTIC",
-      "applicability": [
-        "synaptic-principles",
-        "traceability",
-        "anti-pattern"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.074Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415077-4",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.077Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Backup obligatorio + tag pre-purge antes de force-push",
-      "description": "Zip de .git+working tree y tag pre-purge-c77 permiten rollback granular",
-      "context": "Antes de cualquier operación destructiva sobre historial git",
-      "applicability": [
-        "git",
-        "backup",
-        "rollback",
-        "safety"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.077Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-78-1777327875162-0",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.162Z",
-      "type": "PATTERN",
-      "title": "git filter-repo standard purge workflow",
-      "description": "Backup tar.gz + tag, install filter-repo, run purge, verify with rev-list/fsck, document rollback",
-      "context": "When purging sensitive files from git history on local-only repo without remote",
-      "applicability": [
-        "git",
-        "security",
-        "history-purge",
-        "credentials"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.162Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-78-1777327875168-1",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.168Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "filter-repo rewrites pre-existing tags",
-      "description": "Tags created before filter-repo run get rewritten to new SHAs; rollback must rely on physical tar.gz backup",
-      "context": "When using pre-purge tags as safety net before git filter-repo",
-      "applicability": [
-        "git",
-        "filter-repo",
-        "backup",
-        "rollback"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.168Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-78-1777327875170-2",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.170Z",
-      "type": "INSIGHT",
-      "title": "Local-only repo reduces purge blast radius",
-      "description": "Sin remote configurado, no requiere force-push ni coordinación con colaboradores; operación reversible vía tar.gz",
-      "context": "Evaluating risk of git history rewrites",
-      "applicability": [
-        "git",
-        "risk-assessment",
-        "blast-radius"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.170Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-78-1777327875172-3",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.172Z",
-      "type": "INSIGHT",
-      "title": "History purge does not invalidate exposed credentials",
-      "description": "Limpiar el repo no rota secretos; rotación manual obligatoria post-purga para mitigar riesgo real",
-      "context": "After removing .env or secrets from git history",
-      "applicability": [
-        "security",
-        "credentials",
-        "rotation",
-        "post-purge"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.172Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-78-1777327875175-4",
       "cycle": 78,
@@ -1068,30 +1049,10 @@
         "user-preference"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T22:11:15.175Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-78-1777327875177-5",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.177Z",
-      "type": "PATTERN",
-      "title": "Etapas críticas con verificación entre cada una",
-      "description": "Operaciones HIGH-RISK irreversibles se ejecutan por fases con validación intermedia (inventario→backup→ejecución→verificación)",
-      "context": "Operaciones destructivas o irreversibles en repos/sistemas",
-      "applicability": [
-        "high-risk-ops",
-        "verification",
-        "phased-execution"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.177Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1841,11 +1802,310 @@
         "lastReinforced": "2026-04-28T01:04:34.413Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-95-1777338453119-0",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.119Z",
+      "type": "PATTERN",
+      "title": "Verify state before requesting manual user action",
+      "description": "Use gh api to check actual GitHub state before asking user to perform UI tasks",
+      "context": "When roadmap suggests manual GitHub UI actions",
+      "applicability": [
+        "github",
+        "verification",
+        "automation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.119Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453125-1",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.125Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "GitHub auto-promotes first pushed branch as default",
+      "description": "Empty repos auto-set default branch on first push -u; no manual UI step needed",
+      "context": "After git push -u origin main on a freshly created empty repo",
+      "applicability": [
+        "github",
+        "git",
+        "default-branch"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.125Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453128-2",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.128Z",
+      "type": "PATTERN",
+      "title": "Verify .env absence in remote history after purge",
+      "description": "git log --all --full-history -- '**/.env' must return empty to confirm filter-repo persisted",
+      "context": "Post-push validation after git filter-repo credential purge",
+      "applicability": [
+        "security",
+        "git-filter-repo",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.128Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453132-3",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.132Z",
+      "type": "INSIGHT",
+      "title": "Repo visibility was private, not public as legacy roadmap claimed",
+      "description": "AmaCafeDos repo is private; older roadmap notes had stale visibility info",
+      "context": "When trusting legacy roadmap entries about repo metadata",
+      "applicability": [
+        "roadmap-hygiene",
+        "github"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.132Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081584-0",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.584Z",
+      "type": "ANTI_PATTERN",
+      "title": "Tier/Bx labels not persisted in BITACORA",
+      "description": "C96/C97 entries lack Decision Gate task categorization, causing scope ambiguity in C98",
+      "context": "When user references prior cycle tasks by label (Tier N, Bx)",
+      "applicability": [
+        "bitacora",
+        "decision-gate",
+        "task-tracking"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.584Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081588-1",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.588Z",
+      "type": "PATTERN",
+      "title": "Halt on ambiguous scope despite DG-079",
+      "description": "Even in Immediate Execution mode, ask for clarification when task labels are undefined in persisted state",
+      "context": "When user prompt references undefined Tier/task IDs",
+      "applicability": [
+        "dg-079",
+        "immediate-execution",
+        "ambiguity"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.588Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-98-1777340081590-2",
+      "cycle": 98,
+      "timestamp": "2026-04-28T01:34:41.590Z",
+      "type": "INSIGHT",
+      "title": "B-task ID collision risk",
+      "description": "B1/B2/B3/B4 from C83-85 already executed; reusing labels in new cycles creates confusion",
+      "context": "Future task labeling should use cycle-prefixed IDs (C97-B1) not bare Bx",
+      "applicability": [
+        "task-naming",
+        "intelligence-json"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:34:41.590Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420165-0",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.165Z",
+      "type": "USER_PREFERENCE",
+      "title": "ENFORCE-SYNAPTIC-PROTOCOL overrides immediate-execution mode",
+      "description": "Explicit enforcement directive in request triggers mandatory Decision Gate even when DG-079 active",
+      "context": "When user includes [ENFORCE-SYNAPTIC-PROTOCOL] tag in cycle request",
+      "applicability": [
+        "synaptic-protocol",
+        "decision-gate",
+        "enforcement"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.165Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420171-1",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.171Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "No central validateInput middleware exists",
+      "description": "Backend has only auth.js (36 LOC) and security.js (125 LOC); no validateInput.js, no zod/joi/express-validator",
+      "context": "Audit baseline for input-hardening work in amaCafe backend",
+      "applicability": [
+        "backend",
+        "middleware",
+        "security-audit"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.171Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420175-2",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.175Z",
+      "type": "ANTI_PATTERN",
+      "title": "Test glob excludes middleware/ and routes/",
+      "description": "Pattern 'src/utils/*.test.js' won't pick up middleware/*.test.js or routes/*.test.js",
+      "context": "Adding tests outside utils/ requires updating package.json test script",
+      "applicability": [
+        "testing",
+        "node-test-runner",
+        "package-json"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.175Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420178-3",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.178Z",
+      "type": "PATTERN",
+      "title": "Prefer hand-rolled utilities over new dependencies",
+      "description": "Monorepo convention follows keyManager.js style — hand-rolled validators preferred over zod/dompurify",
+      "context": "When choosing between adding deps vs implementing lightweight utilities",
+      "applicability": [
+        "dependencies",
+        "convention",
+        "amaCafe"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.178Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420182-4",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.182Z",
+      "type": "INSIGHT",
+      "title": "Pre-Railway-deploy risk shapes scope decisions",
+      "description": "High blast-radius changes (13-route sweeps) deferred until Railway deploy is stable",
+      "context": "Scoping cycles during deployment-sensitive periods",
+      "applicability": [
+        "risk-management",
+        "deployment",
+        "scoping"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.182Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340855619-1",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:55:00.000Z",
+      "type": "PATTERN",
+      "title": "Defense-in-depth: pattern guard + parameterized SQL",
+      "description": "Central pattern-detection middleware complements (does not replace) parameterized queries. Loud 400 surfaces attacks in logs and helps clients self-correct; silent sanitization reserved for UX-sensitive routes (chat).",
+      "context": "Backend input hardening for Express/PG stack",
+      "applicability": [
+        "security",
+        "middleware",
+        "sql-injection",
+        "xss"
+      ],
+      "confidence": {
+        "score": 0.85,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:55:00.000Z",
+        "source": "IMPLEMENTED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340855619-2",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:55:00.000Z",
+      "type": "INSIGHT",
+      "title": "Mount order matters for selective bypass",
+      "description": "Routes that need their own normalization (chat sanitizer, webhook raw-body) must be mounted BEFORE the global guard. This achieves bypass without per-path skip logic.",
+      "context": "Express middleware composition",
+      "applicability": [
+        "express",
+        "middleware",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T01:55:00.000Z",
+        "source": "IMPLEMENTED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340855619-3",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:55:00.000Z",
+      "type": "PITFALL",
+      "title": "NoSQL operators surface as object keys, not values",
+      "description": "Walking only values misses $where/$ne/$gt — Mongo-style smuggling uses keys. Walk MUST inspect both keys and values; same for prototype-pollution markers (__proto__/constructor/prototype).",
+      "context": "Tree-walking validation middleware",
+      "applicability": [
+        "security",
+        "nosql",
+        "prototype-pollution"
+      ],
+      "confidence": {
+        "score": 0.95,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:55:00.000Z",
+        "source": "IMPLEMENTED"
+      }
     }
   ],
   "implementationState": {
-    "lastCompletedTask": "Decision Gate resolved: Option B selected",
-    "currentTask": "Implementing Option B as requested by user",
+    "lastCompletedTask": "Cycle 101 — Option B implemented: central validateInput middleware (171 LoC) + 32 tests passing + server.js wired + DESIGN_DOC + BITACORA updated",
+    "currentTask": "Awaiting next user request (Cycle 102) — recommended: E2E manual validation of input hardening",
     "pendingTasks": [],
     "blockers": []
   },
@@ -1960,9 +2220,25 @@
     "[2026-04-28T01:04:34.415Z] Default branch en GitHub UI aún debe configurarse manualmente como main",
     "[2026-04-28T01:04:34.417Z] Inspección visual pendiente: confirmar que ningún .env aparece en commits del repo público",
     "[2026-04-28T01:04:34.419Z] Rotación de credenciales pendiente antes de deploy Railway: ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB",
-    "[2026-04-28T01:04:34.421Z] Discrepancia resuelta: nomenclatura tag c77 vs c78 — siempre verificar con git tag -l antes de referenciar"
+    "[2026-04-28T01:04:34.421Z] Discrepancia resuelta: nomenclatura tag c77 vs c78 — siempre verificar con git tag -l antes de referenciar",
+    "[2026-04-28T01:07:33.134Z] Repo creynals/AmaCafeDos is PRIVATE (not public)",
+    "[2026-04-28T01:07:33.136Z] Default branch already main; branch protection still pending",
+    "[2026-04-28T01:07:33.138Z] Next HIGH priority is credential rotation (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB)",
+    "[2026-04-28T01:07:33.140Z] Railway deploy Decision Gate R1-R8 blocked on credential rotation",
+    "[2026-04-28T01:34:41.592Z] C96 = Railway deploy report request (architect mode, no artifacts)",
+    "[2026-04-28T01:34:41.593Z] C97 = sandbox input-injection validation request (architect mode, no artifacts)",
+    "[2026-04-28T01:34:41.595Z] C83-85 already consumed B2/B3/B4 labels: Railway Volume, api.js config, railway.toml+migrate",
+    "[2026-04-28T01:34:41.596Z] C98 awaiting user clarification on Tier 1 (B1+B2) scope before execution",
+    "[2026-04-28T01:40:20.185Z] Cycle 100 halted at Decision Gate — no code generated, awaiting Option A/B/C selection",
+    "[2026-04-28T01:40:20.186Z] Recommended Option B: hand-rolled validateInput.js + 12-payload SQLi/XSS test corpus targeting 5 highest-risk endpoints",
+    "[2026-04-28T01:40:20.188Z] Test script needs update from 'src/utils/*.test.js' to 'src/**/*.test.js tests/**/*.test.js' for security tests",
+    "[2026-04-28T01:55:00.000Z] Cycle 101 SUCCESS — Option B delivered: backend/src/middleware/validateInput.js + .test.js (32 tests), wired globally on /api after express.json(), chat route exempted (mounted before guard)",
+    "[2026-04-28T01:55:00.000Z] Test script glob widened in package.json: src/utils/*.test.js src/middleware/*.test.js — 67 tests passing total (32 new)",
+    "[2026-04-28T01:55:00.000Z] Audit confirmed: all 13 route files use parameterized SQL (dollar-N placeholders) — closes ROAD-100B implicitly via grep audit during C101",
+    "[2026-04-28T01:55:00.000Z] Chat exempted by design — chatInputSanitizer silently strips HTML; loud rejection would break legitimate \"<3 latte\" tokens",
+    "[2026-04-28T01:55:00.000Z] Webhook routes implicitly bypass — registered before express.json() with raw body for sha256 fingerprint"
   ],
-  "lastUpdated": "2026-04-28T01:04:34.422Z",
+  "lastUpdated": "2026-04-28T01:55:00.000Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -4164,6 +4440,211 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T04:22:26.577Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415068-1",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.068Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "git filter-repo recomendado oficialmente sobre filter-branch",
+      "description": "Es el sustituto oficial de Git para reescritura de historial; cubre archivos y contenido",
+      "context": "Purga de secretos del historial git",
+      "applicability": [
+        "git",
+        "security",
+        "history-rewrite",
+        "secrets"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.068Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415071-2",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.071Z",
+      "type": "INSIGHT",
+      "title": "Rotación de credenciales es prerequisito Y obligatorio post-purga",
+      "description": "Aunque se rote antes, tras purgar historial deben rotarse TODAS las credenciales expuestas",
+      "context": "Operaciones de purga de .env del historial",
+      "applicability": [
+        "security",
+        "credentials-rotation",
+        "post-purge"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.071Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415074-3",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.074Z",
+      "type": "ANTI_PATTERN",
+      "title": "Recreación total destruye trazabilidad SYNAPTIC",
+      "description": "Squash inicial rompe vínculo BITACORA↔commits y contradice principio Traceable",
+      "context": "Decisiones sobre limpieza de historial en proyectos SYNAPTIC",
+      "applicability": [
+        "synaptic-principles",
+        "traceability",
+        "anti-pattern"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.074Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415077-4",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.077Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Backup obligatorio + tag pre-purge antes de force-push",
+      "description": "Zip de .git+working tree y tag pre-purge-c77 permiten rollback granular",
+      "context": "Antes de cualquier operación destructiva sobre historial git",
+      "applicability": [
+        "git",
+        "backup",
+        "rollback",
+        "safety"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.077Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415063-0",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.063Z",
+      "type": "PATTERN",
+      "title": "Decision Gate con 3 opciones diferenciadas",
+      "description": "Phase 2 SYNAPTIC requiere A/B/C con pros/cons/risk/confidence cuantificados",
+      "context": "Cualquier ciclo que entre en Phase 2 Decision Gate",
+      "applicability": [
+        "synaptic-protocol",
+        "decision-gate",
+        "phase-2"
+      ],
+      "confidence": {
+        "score": 0.14999999999999997,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-27T22:24:09.789Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875162-0",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.162Z",
+      "type": "PATTERN",
+      "title": "git filter-repo standard purge workflow",
+      "description": "Backup tar.gz + tag, install filter-repo, run purge, verify with rev-list/fsck, document rollback",
+      "context": "When purging sensitive files from git history on local-only repo without remote",
+      "applicability": [
+        "git",
+        "security",
+        "history-purge",
+        "credentials"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.162Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875168-1",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.168Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "filter-repo rewrites pre-existing tags",
+      "description": "Tags created before filter-repo run get rewritten to new SHAs; rollback must rely on physical tar.gz backup",
+      "context": "When using pre-purge tags as safety net before git filter-repo",
+      "applicability": [
+        "git",
+        "filter-repo",
+        "backup",
+        "rollback"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.168Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875170-2",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.170Z",
+      "type": "INSIGHT",
+      "title": "Local-only repo reduces purge blast radius",
+      "description": "Sin remote configurado, no requiere force-push ni coordinación con colaboradores; operación reversible vía tar.gz",
+      "context": "Evaluating risk of git history rewrites",
+      "applicability": [
+        "git",
+        "risk-assessment",
+        "blast-radius"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.170Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875172-3",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.172Z",
+      "type": "INSIGHT",
+      "title": "History purge does not invalidate exposed credentials",
+      "description": "Limpiar el repo no rota secretos; rotación manual obligatoria post-purga para mitigar riesgo real",
+      "context": "After removing .env or secrets from git history",
+      "applicability": [
+        "security",
+        "credentials",
+        "rotation",
+        "post-purge"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.172Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875177-5",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.177Z",
+      "type": "PATTERN",
+      "title": "Etapas críticas con verificación entre cada una",
+      "description": "Operaciones HIGH-RISK irreversibles se ejecutan por fases con validación intermedia (inventario→backup→ejecución→verificación)",
+      "context": "Operaciones destructivas o irreversibles en repos/sistemas",
+      "applicability": [
+        "high-risk-ops",
+        "verification",
+        "phased-execution"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.177Z",
         "source": "INFERRED"
       }
     }

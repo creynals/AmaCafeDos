@@ -998,8 +998,8 @@
     },
     {
       "itemId": "ROAD-101A",
-      "title": "E2E manual validation of input hardening",
-      "description": "Boot backend+frontend, attempt SQLi login (admin--) and XSS in product name; confirm 400 rejections; confirm legitimate Spanish text + SKUs pass",
+      "title": "E2E manual validation of validateInput",
+      "description": "Boot backend+frontend, test admin'-- login and <script> product name reject with 400; confirm Spanish text passes",
       "priority": "HIGH",
       "status": "PLANNED",
       "createdAtCycle": 101,
@@ -1007,19 +1007,17 @@
     },
     {
       "itemId": "ROAD-101B",
-      "title": "Audit cart/payments/settings/users routes against global guard",
-      "description": "Confirm validateInput does not block legitimate flows in cart, payments, settings (especially long-text settings), users CRUD",
+      "title": "Add rate limiting to /api/auth/login",
+      "description": "Complement input validation with brute-force throttling on auth endpoints",
       "priority": "MEDIUM",
       "status": "PLANNED",
       "createdAtCycle": 101,
-      "dependencies": [
-        "ROAD-101A"
-      ]
+      "dependencies": []
     },
     {
       "itemId": "ROAD-101C",
-      "title": "Add validateInput.skip / whitelist for rich-text endpoints",
-      "description": "When/if endpoints need legitimate markdown/HTML, expose path-based skip mechanism in middleware factory",
+      "title": "Structured logging of rejected payloads",
+      "description": "Log validateInput rejections with request id for security telemetry without leaking patterns to client",
       "priority": "MEDIUM",
       "status": "PLANNED",
       "createdAtCycle": 101,
@@ -1027,8 +1025,8 @@
     },
     {
       "itemId": "ROAD-101D",
-      "title": "Observability — counter for rejected payloads by kind",
-      "description": "Track sqli/xss/nosql/length rejection counts post-Railway deploy for tuning false-positive risk",
+      "title": "Extend pattern corpus with prototype-pollution and SSRF",
+      "description": "Add __proto__/constructor and internal-IP URL patterns to validateInput",
       "priority": "LOW",
       "status": "PLANNED",
       "createdAtCycle": 101,
@@ -1036,87 +1034,6 @@
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-78-1777327875175-4",
-      "cycle": 78,
-      "timestamp": "2026-04-27T22:11:15.175Z",
-      "type": "USER_PREFERENCE",
-      "title": "Preferencia por opciones recomendadas oficialmente",
-      "description": "Usuario eligió OPTION B explícitamente etiquetada como 'Recomendada Oficialmente' en Decision Gate",
-      "context": "Decision gates con múltiples opciones técnicas",
-      "applicability": [
-        "decision-making",
-        "user-preference"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:11:15.175Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-81-1777328649779-0",
-      "cycle": 81,
-      "timestamp": "2026-04-27T22:24:09.779Z",
-      "type": "ANTI_PATTERN",
-      "title": "Duplicación de lógica criptográfica en script de rotación",
-      "description": "rotate-encryption-secret.js duplica constantes/funciones de crypto.js en lugar de importarlas",
-      "context": "Cualquier script auxiliar que toque cifrado debe reusar el módulo central, no copiarlo",
-      "applicability": [
-        "crypto",
-        "scripts",
-        "code-smell",
-        "DRY"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:24:09.779Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-81-1777328649785-1",
-      "cycle": 81,
-      "timestamp": "2026-04-27T22:24:09.785Z",
-      "type": "INSIGHT",
-      "title": "Riesgo de corrupción silenciosa por divergencia cripto",
-      "description": "Si crypto.js cambia algoritmo/salt y el script duplicado no, la rotación corrompe la BD sin error visible",
-      "context": "Detectar duplicación de primitives criptográficas como riesgo CRÍTICO, no estético",
-      "applicability": [
-        "crypto",
-        "data-integrity",
-        "risk-analysis"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:24:09.785Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-81-1777328649791-3",
-      "cycle": 81,
-      "timestamp": "2026-04-27T22:24:09.791Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Modelo de key-versioning con prefijo v{N}:iv:tag:cipher",
-      "description": "Formato versionado permite zero-downtime rotation y migración progresiva con checkpoint",
-      "context": "Considerar para compliance PCI/SOC2 futuro o cuando se requiera rollback de claves",
-      "applicability": [
-        "crypto",
-        "key-rotation",
-        "compliance",
-        "future-work"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:24:09.791Z",
-        "source": "INFERRED"
-      }
-    },
     {
       "learningId": "learning-81-1777328649793-4",
       "cycle": 81,
@@ -1131,7 +1048,7 @@
         "decision-gate"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T22:24:09.793Z",
         "source": "EXPLICIT"
@@ -1212,9 +1129,9 @@
         "user-preference"
       ],
       "confidence": {
-        "score": 0.9,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:30:10.391Z",
+        "score": 0.9500000000000001,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T01:48:33.030Z",
         "source": "EXPLICIT"
       }
     },
@@ -2101,6 +2018,106 @@
         "lastReinforced": "2026-04-28T01:55:00.000Z",
         "source": "IMPLEMENTED"
       }
+    },
+    {
+      "learningId": "learning-101-1777340913009-0",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.009Z",
+      "type": "PATTERN",
+      "title": "Defense-in-depth via mount order",
+      "description": "Mount exempt routes (webhooks, chat) before global guard; no per-path skip logic needed",
+      "context": "Express middleware that should bypass global validation",
+      "applicability": [
+        "express",
+        "middleware",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.009Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913015-1",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.015Z",
+      "type": "PATTERN",
+      "title": "Loud reject over silent strip",
+      "description": "Central guard returns 400+code+field; silent sanitizers kept only where legitimate tokens need preservation",
+      "context": "Input validation strategy at API boundary",
+      "applicability": [
+        "security",
+        "validation",
+        "api"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.015Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913019-2",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.019Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "NoSQL $ops live in keys not values",
+      "description": "Deep-walk validators must inspect object keys for $where/$ne, not just values",
+      "context": "NoSQL injection detection in JSON bodies",
+      "applicability": [
+        "nosql",
+        "validation",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.019Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913022-3",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.022Z",
+      "type": "ANTI_PATTERN",
+      "title": "Test glob too narrow misses middleware",
+      "description": "package.json test script globbing src/utils/*.test.js silently skipped src/middleware/ tests",
+      "context": "Adding tests in new directories",
+      "applicability": [
+        "testing",
+        "package.json",
+        "node"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.022Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913026-4",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.026Z",
+      "type": "INSIGHT",
+      "title": "Parameterized SQL closes SQLi at DB layer",
+      "description": "All routes already used $1,$2 params; central guard is second wall, not primary defense",
+      "context": "Auditing SQLi exposure before adding middleware",
+      "applicability": [
+        "postgres",
+        "sqli",
+        "audit"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.026Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -2236,9 +2253,13 @@
     "[2026-04-28T01:55:00.000Z] Test script glob widened in package.json: src/utils/*.test.js src/middleware/*.test.js — 67 tests passing total (32 new)",
     "[2026-04-28T01:55:00.000Z] Audit confirmed: all 13 route files use parameterized SQL (dollar-N placeholders) — closes ROAD-100B implicitly via grep audit during C101",
     "[2026-04-28T01:55:00.000Z] Chat exempted by design — chatInputSanitizer silently strips HTML; loud rejection would break legitimate \"<3 latte\" tokens",
-    "[2026-04-28T01:55:00.000Z] Webhook routes implicitly bypass — registered before express.json() with raw body for sha256 fingerprint"
+    "[2026-04-28T01:55:00.000Z] Webhook routes implicitly bypass — registered before express.json() with raw body for sha256 fingerprint",
+    "[2026-04-28T01:48:33.032Z] 67/67 tests passing (32 new validateInput + 35 prior)",
+    "[2026-04-28T01:48:33.034Z] Chat route uses chatInputSanitizer (silent HTML strip) — must stay before global guard",
+    "[2026-04-28T01:48:33.036Z] SQLi defense is parameterized SQL ($1,$2); validateInput is secondary pattern wall",
+    "[2026-04-28T01:48:33.037Z] False-positive corpus includes legitimate Spanish/CL text to prevent over-blocking"
   ],
-  "lastUpdated": "2026-04-28T01:55:00.000Z",
+  "lastUpdated": "2026-04-28T01:52:01.091Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -4645,6 +4666,87 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T22:11:15.177Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-78-1777327875175-4",
+      "cycle": 78,
+      "timestamp": "2026-04-27T22:11:15.175Z",
+      "type": "USER_PREFERENCE",
+      "title": "Preferencia por opciones recomendadas oficialmente",
+      "description": "Usuario eligió OPTION B explícitamente etiquetada como 'Recomendada Oficialmente' en Decision Gate",
+      "context": "Decision gates con múltiples opciones técnicas",
+      "applicability": [
+        "decision-making",
+        "user-preference"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:11:15.175Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-81-1777328649779-0",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.779Z",
+      "type": "ANTI_PATTERN",
+      "title": "Duplicación de lógica criptográfica en script de rotación",
+      "description": "rotate-encryption-secret.js duplica constantes/funciones de crypto.js en lugar de importarlas",
+      "context": "Cualquier script auxiliar que toque cifrado debe reusar el módulo central, no copiarlo",
+      "applicability": [
+        "crypto",
+        "scripts",
+        "code-smell",
+        "DRY"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.779Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-81-1777328649785-1",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.785Z",
+      "type": "INSIGHT",
+      "title": "Riesgo de corrupción silenciosa por divergencia cripto",
+      "description": "Si crypto.js cambia algoritmo/salt y el script duplicado no, la rotación corrompe la BD sin error visible",
+      "context": "Detectar duplicación de primitives criptográficas como riesgo CRÍTICO, no estético",
+      "applicability": [
+        "crypto",
+        "data-integrity",
+        "risk-analysis"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.785Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-81-1777328649791-3",
+      "cycle": 81,
+      "timestamp": "2026-04-27T22:24:09.791Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Modelo de key-versioning con prefijo v{N}:iv:tag:cipher",
+      "description": "Formato versionado permite zero-downtime rotation y migración progresiva con checkpoint",
+      "context": "Considerar para compliance PCI/SOC2 futuro o cuando se requiera rollback de claves",
+      "applicability": [
+        "crypto",
+        "key-rotation",
+        "compliance",
+        "future-work"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:24:09.791Z",
         "source": "INFERRED"
       }
     }
