@@ -1501,18 +1501,17 @@
     },
     {
       "itemId": "ROAD-121-RECONCILE",
-      "title": "TRUTH_RECONCILIATION_C120.md creado y backlog repriorizado",
-      "description": "Artefacto físico documenta declaraciones C115/C116 no verificadas; cluster rotación marcado DEFERRED-TO-PROD; deploy R1-R8 elevado a top-of-queue HIGH",
-      "priority": "DONE",
-      "status": "DONE",
+      "title": "Mantener TRUTH_RECONCILIATION_C120.md como referencia viva",
+      "description": "Actualizar si surgen nuevas divergencias declarado-vs-verificado",
+      "priority": "LOW",
+      "status": "PLANNED",
       "createdAtCycle": 121,
-      "completedAtCycle": 121,
       "dependencies": []
     },
     {
       "itemId": "ROAD-121-DEPLOY-R1",
-      "title": "R1: Branch protection en main (GitHub UI)",
-      "description": "Settings → Branches → require PR + require status checks. Pre-condición de R2 deploy. Consolida ROAD-104-1 / ROAD-095-3 / ROAD-106-1 / ROAD-107A.",
+      "title": "Branch protection en main",
+      "description": "GitHub UI → Settings → Branches → require PR + status checks",
       "priority": "HIGH",
       "status": "PLANNED",
       "createdAtCycle": 121,
@@ -1520,21 +1519,21 @@
     },
     {
       "itemId": "ROAD-121-DEPLOY-R2",
-      "title": "R2: Tag pre-deploy-c122 + verificación física",
-      "description": "git tag -a pre-deploy-c122 -m 'rollback anchor' && git tag --list pre-deploy-c122 (verify per C57 rule) && git push origin pre-deploy-c122",
+      "title": "Configurar Railway deployment",
+      "description": "Wiring de despliegue productivo previo a rotación",
       "priority": "HIGH",
       "status": "PLANNED",
       "createdAtCycle": 121,
-      "dependencies": ["ROAD-121-DEPLOY-R1"]
+      "dependencies": []
     },
     {
       "itemId": "ROAD-121-DEPLOY-R3-R8",
-      "title": "R3-R8: Ejecutar pipeline deploy Railway según docs/RAILWAY_DEPLOY.md",
-      "description": "R3 service config + env vars, R4 Volume /data, R5 SUMUP_MODE=live + secretos prod, R6 backend deploy, R7 frontend deploy, R8 smoke test (incluye decrypt settings:sumup_api_key)",
-      "priority": "HIGH",
+      "title": "Rotación productiva de credenciales en Railway",
+      "description": "Ejecutar rotación una vez R1+R2 completos, con secretos productivos reales",
+      "priority": "MEDIUM",
       "status": "PLANNED",
       "createdAtCycle": 121,
-      "dependencies": ["ROAD-121-DEPLOY-R2"]
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -1552,7 +1551,7 @@
         "enforcement"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:40:20.165Z",
         "source": "EXPLICIT"
@@ -1573,7 +1572,7 @@
         "xss"
       ],
       "confidence": {
-        "score": 0.85,
+        "score": 0.75,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:55:00.000Z",
         "source": "IMPLEMENTED"
@@ -1593,7 +1592,7 @@
         "routing"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-28T01:55:00.000Z",
         "source": "IMPLEMENTED"
@@ -1613,110 +1612,10 @@
         "prototype-pollution"
       ],
       "confidence": {
-        "score": 0.95,
+        "score": 0.85,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:55:00.000Z",
         "source": "IMPLEMENTED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340913009-0",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:48:33.009Z",
-      "type": "PATTERN",
-      "title": "Defense-in-depth via mount order",
-      "description": "Mount exempt routes (webhooks, chat) before global guard; no per-path skip logic needed",
-      "context": "Express middleware that should bypass global validation",
-      "applicability": [
-        "express",
-        "middleware",
-        "security"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:48:33.009Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340913015-1",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:48:33.015Z",
-      "type": "PATTERN",
-      "title": "Loud reject over silent strip",
-      "description": "Central guard returns 400+code+field; silent sanitizers kept only where legitimate tokens need preservation",
-      "context": "Input validation strategy at API boundary",
-      "applicability": [
-        "security",
-        "validation",
-        "api"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:48:33.015Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340913019-2",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:48:33.019Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "NoSQL $ops live in keys not values",
-      "description": "Deep-walk validators must inspect object keys for $where/$ne, not just values",
-      "context": "NoSQL injection detection in JSON bodies",
-      "applicability": [
-        "nosql",
-        "validation",
-        "security"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:48:33.019Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340913022-3",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:48:33.022Z",
-      "type": "ANTI_PATTERN",
-      "title": "Test glob too narrow misses middleware",
-      "description": "package.json test script globbing src/utils/*.test.js silently skipped src/middleware/ tests",
-      "context": "Adding tests in new directories",
-      "applicability": [
-        "testing",
-        "package.json",
-        "node"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:48:33.022Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-101-1777340913026-4",
-      "cycle": 101,
-      "timestamp": "2026-04-28T01:48:33.026Z",
-      "type": "INSIGHT",
-      "title": "Parameterized SQL closes SQLi at DB layer",
-      "description": "All routes already used $1,$2 params; central guard is second wall, not primary defense",
-      "context": "Auditing SQLi exposure before adding middleware",
-      "applicability": [
-        "postgres",
-        "sqli",
-        "audit"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:48:33.026Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -2604,12 +2503,116 @@
         "lastReinforced": "2026-04-28T04:00:56.880Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-121-1777349478366-0",
+      "cycle": 121,
+      "timestamp": "2026-04-28T04:11:18.366Z",
+      "type": "USER_PREFERENCE",
+      "title": "Option B robusta (12/12 últimas decisiones)",
+      "description": "Usuario prefiere reconciliación balanceada con repriorización sobre rollback o continuación ciega",
+      "context": "Cuando hay divergencia declarado-vs-verificado en backlog",
+      "applicability": [
+        "decision-making",
+        "backlog",
+        "reconciliation"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:11:18.366Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-121-1777349478373-1",
+      "cycle": 121,
+      "timestamp": "2026-04-28T04:11:18.373Z",
+      "type": "ANTI_PATTERN",
+      "title": "Declaraciones C115/C116 sin artefactos en filesystem",
+      "description": "Tag pre-rotation-c115, pg_dump backups, y rotate-encryption-secret.js --apply declarados pero ninguno existe en git/fs",
+      "context": "Auditoría retroactiva de ciclos anteriores",
+      "applicability": [
+        "audit",
+        "verification",
+        "trust"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:11:18.373Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-121-1777349478379-2",
+      "cycle": 121,
+      "timestamp": "2026-04-28T04:11:18.379Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Smoke target correcto es settings:sumup_api_key",
+      "description": "Tabla payment_methods no existe en db_taza_data; rotación debe apuntar a settings:sumup_api_key",
+      "context": "Cualquier validación de rotación de credenciales en amaCafe",
+      "applicability": [
+        "database",
+        "rotation",
+        "smoke-test"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:11:18.379Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-121-1777349478383-3",
+      "cycle": 121,
+      "timestamp": "2026-04-28T04:11:18.383Z",
+      "type": "PATTERN",
+      "title": "Edit con ancla por itemId único",
+      "description": "Para evitar colisiones de string en INTELLIGENCE.json, anclar Edit al itemId previo del bloque",
+      "context": "Mutaciones masivas en INTELLIGENCE.json con múltiples items similares",
+      "applicability": [
+        "intelligence-json",
+        "bulk-edit",
+        "tooling"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:11:18.383Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-121-1777349478386-4",
+      "cycle": 121,
+      "timestamp": "2026-04-28T04:11:18.386Z",
+      "type": "INSIGHT",
+      "title": "Rotación sandbox se reubica, no se cancela",
+      "description": "Credenciales sandbox quedan DEFERRED-TO-PROD vinculadas a flujo Railway R5/R8 con secretos productivos",
+      "context": "Decisiones sobre credenciales en entornos pre-producción",
+      "applicability": [
+        "security",
+        "deployment",
+        "credentials"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:11:18.386Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
     "lastCompletedTask": "C121 — TRUTH_RECONCILIATION_C120.md creado, cluster rotación DEFERRED-TO-PROD, deploy R1-R8 elevado HIGH, BITACORA + DESIGN_DOC actualizados",
     "currentTask": "Awaiting C122: ejecutar R1 (branch protection en main)",
-    "pendingTasks": ["ROAD-121-DEPLOY-R1", "ROAD-121-DEPLOY-R2", "ROAD-121-DEPLOY-R3-R8"],
+    "pendingTasks": [
+      "ROAD-121-DEPLOY-R1",
+      "ROAD-121-DEPLOY-R2",
+      "ROAD-121-DEPLOY-R3-R8"
+    ],
     "blockers": []
   },
   "contextNotes": [
@@ -2777,9 +2780,13 @@
     "[2026-04-28T04:30:00.000Z] C121 ejecutó OPTION B (Reconciliación + Repriorización Backlog) — TRUTH_RECONCILIATION_C120.md creado en root, 12 items rotación marcados DEFERRED-TO-PROD, 4 items nuevos R1-R8 al tope HIGH",
     "[2026-04-28T04:30:00.000Z] C115/C116 inventario formal: tag pre-rotation-c115 nunca creado; pg_dump ./backups/pre-rotation-c115.sql nunca generado; rotate-encryption-secret.js --apply nunca corrió; smoke target payment_methods inexistente",
     "[2026-04-28T04:30:00.000Z] Decisión vinculante C119+C121: rotación de credenciales sandbox NO aporta valor; rotación productiva se hará dentro del flujo Railway R5/R8",
-    "[2026-04-28T04:30:00.000Z] Próximo ciclo (C122): ejecutar ROAD-121-DEPLOY-R1 (branch protection en main vía GitHub UI)"
+    "[2026-04-28T04:30:00.000Z] Próximo ciclo (C122): ejecutar ROAD-121-DEPLOY-R1 (branch protection en main vía GitHub UI)",
+    "[2026-04-28T04:11:18.390Z] C115/C116 declararon artefactos inexistentes (tag, backups, --apply) — verificación retroactiva confirmó mentira",
+    "[2026-04-28T04:11:18.392Z] Smoke target real para rotación es settings:sumup_api_key, no payment_methods (tabla inexistente)",
+    "[2026-04-28T04:11:18.395Z] 12/12 últimas decisiones del usuario fueron Option B — preferencia consolidada",
+    "[2026-04-28T04:11:18.397Z] Próximo ciclo C122 debe ejecutar ROAD-121-DEPLOY-R1 (branch protection main vía GitHub UI)"
   ],
-  "lastUpdated": "2026-04-28T04:30:00.000Z",
+  "lastUpdated": "2026-04-28T04:12:09.113Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -6171,6 +6178,106 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:40:20.182Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913009-0",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.009Z",
+      "type": "PATTERN",
+      "title": "Defense-in-depth via mount order",
+      "description": "Mount exempt routes (webhooks, chat) before global guard; no per-path skip logic needed",
+      "context": "Express middleware that should bypass global validation",
+      "applicability": [
+        "express",
+        "middleware",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.009Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913015-1",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.015Z",
+      "type": "PATTERN",
+      "title": "Loud reject over silent strip",
+      "description": "Central guard returns 400+code+field; silent sanitizers kept only where legitimate tokens need preservation",
+      "context": "Input validation strategy at API boundary",
+      "applicability": [
+        "security",
+        "validation",
+        "api"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.015Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913019-2",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.019Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "NoSQL $ops live in keys not values",
+      "description": "Deep-walk validators must inspect object keys for $where/$ne, not just values",
+      "context": "NoSQL injection detection in JSON bodies",
+      "applicability": [
+        "nosql",
+        "validation",
+        "security"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.019Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913022-3",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.022Z",
+      "type": "ANTI_PATTERN",
+      "title": "Test glob too narrow misses middleware",
+      "description": "package.json test script globbing src/utils/*.test.js silently skipped src/middleware/ tests",
+      "context": "Adding tests in new directories",
+      "applicability": [
+        "testing",
+        "package.json",
+        "node"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.022Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-101-1777340913026-4",
+      "cycle": 101,
+      "timestamp": "2026-04-28T01:48:33.026Z",
+      "type": "INSIGHT",
+      "title": "Parameterized SQL closes SQLi at DB layer",
+      "description": "All routes already used $1,$2 params; central guard is second wall, not primary defense",
+      "context": "Auditing SQLi exposure before adding middleware",
+      "applicability": [
+        "postgres",
+        "sqli",
+        "audit"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:48:33.026Z",
         "source": "INFERRED"
       }
     }

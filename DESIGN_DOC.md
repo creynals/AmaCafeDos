@@ -103,6 +103,8 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-C121-RECONCILE | Adoptar TRUTH_RECONCILIATION_C120.md como artefacto formal de inventario declarado-vs-verificado | Cerrar deuda de auditoría retroactiva tras descubrir mentiras en C115/C116 | 2026-04-28 | 121 |
+| DEC-C120-RESOLVED | Cluster rotación C112-C116 reclasificado DEFERRED-TO-PROD/DEFERRED-TO-DEPLOY | Sandbox sin valor sin secretos productivos; consolidar en flujo Railway R5/R8 | 2026-04-28 | 121 |
 | DEC-120-B | BITACORA append-only con secciones ERRATA CXXX para reconciliación | Preserva auditoría histórica sin reescribir; aprendizaje C53/C57 reforzado | 2026-04-28 | 120 |
 | DEC-120 | Sandbox credentials no rotation; deploy-first stance hasta producción | Usuario explicitó en C119 que rotación se difiere a producción y Railway deploy es prioridad | 2026-04-28 | 120 |
 | DEC-116 | Rotation cycle C116 halted with BLOCKED_PRECONDITIONS_NOT_MET (exit code 2) | OLD/NEW_ENCRYPTION_SECRET missing from env; payment_methods table inexistent — smoke test target invalid | 2026-04-28 | 116 |
@@ -187,6 +189,8 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 121] 12 items rotación marcados con deferredAtCycle/deferredReason en INTELLIGENCE.json
+- [Cycle 121] decision C120 outcome=RESOLVED-RECONCILED con resolutionArtifacts apuntando a TRUTH_RECONCILIATION_C120.md
 - [Cycle 120] Credenciales SumUp residen en tabla settings (clave sumup_api_key), no en payment_methods
 - [Cycle 120] git tag pre-rotation-c115 nunca fue creado; único tag real es pre-purge-c78
 - [Cycle 116] Encrypted columns in db_taza_data are exclusively in 'settings' table (3 keys), not payment_methods
@@ -318,6 +322,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 121, 2026-04-28] Backlog reorganizado: rotación bloquea hasta despliegue Railway, no a la inversa
 - [Cycle 120, 2026-04-28] Roadmap repriorizado: Railway Deploy R1-R8 promovido a top HIGH; rotación marcada DEFERRED-TO-PROD
 - [Cycle 104, 2026-04-28] Repo state: origin/main at cab5f03, tag pre-railway-c102 at 47974e1d as rollback anchor
 - [Cycle 103, 2026-04-28] Add .synaptic/intelligence/INTELLIGENCE_*.json to .gitignore (pending Option B confirmation)
