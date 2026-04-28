@@ -2626,7 +2626,7 @@
     "[2026-04-28T03:44:13.386Z] User offered 3 unblock paths: (a) provide both secrets, (b) authorize Claude to generate NEW with openssl, (c) rewrite smoke test target to settings:sumup_api_key",
     "[2026-04-28T03:44:13.388Z] Workspace verified canonical: import-1777213083759-63z86j / amaCafe"
   ],
-  "lastUpdated": "2026-04-28T03:55:46.397Z",
+  "lastUpdated": "2026-04-28T03:59:20.035Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
