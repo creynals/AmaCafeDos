@@ -1204,25 +1204,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-87-1777335244520-4",
-      "cycle": 87,
-      "timestamp": "2026-04-28T00:14:04.520Z",
-      "type": "USER_PREFERENCE",
-      "title": "Multi-item requests executed in IMMEDIATE EXECUTION (DG-079)",
-      "description": "User chained three independent C86 follow-ups in one request expecting all executed without re-confirmation per item.",
-      "context": "When user explicitly references prior cycle recommendations",
-      "applicability": [
-        "execution-mode",
-        "synaptic-protocol"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:14:04.520Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
       "learningId": "learning-93-1777337968454-0",
       "cycle": 93,
       "timestamp": "2026-04-28T00:59:28.454Z",
@@ -2318,7 +2299,7 @@
     "[2026-04-28T02:37:34.520Z] Tags rollback disponibles en origin: pre-rebase-c107, pre-railway-c102",
     "[2026-04-28T02:37:34.522Z] Divergencia 4↑/1↓ resuelta sin operaciones destructivas"
   ],
-  "lastUpdated": "2026-04-28T03:04:39.205Z",
+  "lastUpdated": "2026-04-28T03:11:59.885Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5290,6 +5271,25 @@
         "score": 0,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T23:45:10.513Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-87-1777335244520-4",
+      "cycle": 87,
+      "timestamp": "2026-04-28T00:14:04.520Z",
+      "type": "USER_PREFERENCE",
+      "title": "Multi-item requests executed in IMMEDIATE EXECUTION (DG-079)",
+      "description": "User chained three independent C86 follow-ups in one request expecting all executed without re-confirmation per item.",
+      "context": "When user explicitly references prior cycle recommendations",
+      "applicability": [
+        "execution-mode",
+        "synaptic-protocol"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:14:04.520Z",
         "source": "EXPLICIT"
       }
     }
