@@ -1386,29 +1386,36 @@
       "status": "PLANNED",
       "createdAtCycle": 114,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-C117-UNBLOCK",
+      "title": "Resolve C116 blockers and complete rotation",
+      "description": "User must provide OLD+NEW_ENCRYPTION_SECRET (or authorize generation) and confirm smoke test target as settings:sumup_api_key",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 116,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-C117-SMOKE-REWRITE",
+      "title": "Rewrite smoke test against settings table",
+      "description": "Update smoke test to decrypt one row from settings (sumup_api_key) instead of nonexistent payment_methods",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 116,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-C117-PATH-FIX",
+      "title": "Adjust execution path to backend/scripts/rotate-encryption-secret.js",
+      "description": "Use correct path when running rotation in next cycle",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 116,
+      "dependencies": []
     }
   ],
   "learnings": [
-    {
-      "learningId": "learning-93-1777337968454-0",
-      "cycle": 93,
-      "timestamp": "2026-04-28T00:59:28.454Z",
-      "type": "USER_PREFERENCE",
-      "title": "Usuario prefiere opciones balanceadas (Option B)",
-      "description": "5/5 últimas decisiones del usuario favorecieron la opción B (balanceada) sobre conservadora o innovadora",
-      "context": "Decision Gates con tres opciones A/B/C",
-      "applicability": [
-        "decision-gate",
-        "user-pattern",
-        "option-b"
-      ],
-      "confidence": {
-        "score": 0.30000000000000004,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:59:28.454Z",
-        "source": "EXPLICIT"
-      }
-    },
     {
       "learningId": "learning-94-1777338274410-2",
       "cycle": 94,
@@ -1423,7 +1430,7 @@
         "balanced-approach"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:04:34.410Z",
         "source": "EXPLICIT"
@@ -2410,6 +2417,126 @@
         "lastReinforced": "2026-04-28T03:38:19.195Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-116-1777347853358-0",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.358Z",
+      "type": "USER_PREFERENCE",
+      "title": "Immediate execution mode overrides Decision Gates",
+      "description": "User can declare prior decision binding and demand execution without new DG/halts",
+      "context": "When user explicitly says 'EJECUTAR AHORA — sin nuevo Decision Gate'",
+      "applicability": [
+        "execution-mode",
+        "decision-gates",
+        "user-directives"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.358Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853365-1",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.365Z",
+      "type": "PATTERN",
+      "title": "Halt-on-blocker with error codes is acceptable in immediate execution",
+      "description": "Even in 'no halts' mode, hard blockers (missing secrets, missing tables) warrant stop with clear error code",
+      "context": "Destructive operations with missing prerequisites",
+      "applicability": [
+        "pre-flight",
+        "blockers",
+        "error-codes"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.365Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853369-2",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.369Z",
+      "type": "ANTI_PATTERN",
+      "title": "Never invent secrets or credentials autonomously",
+      "description": "OLD/NEW_ENCRYPTION_SECRET must come from user or explicit authorization, never fabricated",
+      "context": "Credential rotation operations",
+      "applicability": [
+        "secrets",
+        "security",
+        "rotation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.369Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853373-3",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.373Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "payment_methods table does not exist in db_taza_data",
+      "description": "Encrypted data lives in 'settings' table (recaptcha_secret_key, sumup_api_key, sumup_merchant_code)",
+      "context": "Smoke tests for encryption rotation",
+      "applicability": [
+        "database-schema",
+        "encryption",
+        "amaCafe"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.373Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853376-4",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.376Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "rotate-encryption-secret.js lives in backend/scripts/ not scripts/",
+      "description": "Path drift between user requirement and actual file location",
+      "context": "Executing rotation script",
+      "applicability": [
+        "script-paths",
+        "amaCafe",
+        "backend"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.376Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-116-1777347853379-5",
+      "cycle": 116,
+      "timestamp": "2026-04-28T03:44:13.379Z",
+      "type": "PATTERN",
+      "title": "Pre-flight verification before destructive operations",
+      "description": "Verify pg_dump availability, DB access, .env presence, tag availability, working tree state before mutation",
+      "context": "Any rotation/migration/destructive cycle",
+      "applicability": [
+        "pre-flight",
+        "safety",
+        "verification"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:44:13.379Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -2572,9 +2699,13 @@
     "[2026-04-28T03:36:05.005Z] Backlog HIGH posterior: deploy Railway pendiente tras completar cluster de rotación",
     "[2026-04-28T03:38:19.198Z] C114 ejecuta el cluster decidido en C113; C112 y C113 originales no se ejecutaron como ciclos individuales",
     "[2026-04-28T03:38:19.199Z] keyManager.js (C81 OPTION B) habilita decrypt verification automatizada en smoke tests",
-    "[2026-04-28T03:38:19.201Z] SumUp prod permanece como tarea HIGH bloqueante para deploy Railway"
+    "[2026-04-28T03:38:19.201Z] SumUp prod permanece como tarea HIGH bloqueante para deploy Railway",
+    "[2026-04-28T03:44:13.382Z] C116 commit PRE = 5112c43; no POST commit because execution halted before mutation",
+    "[2026-04-28T03:44:13.384Z] Tag pre-rotation-c115 not created (only pre-purge-c78 exists in repo)",
+    "[2026-04-28T03:44:13.386Z] User offered 3 unblock paths: (a) provide both secrets, (b) authorize Claude to generate NEW with openssl, (c) rewrite smoke test target to settings:sumup_api_key",
+    "[2026-04-28T03:44:13.388Z] Workspace verified canonical: import-1777213083759-63z86j / amaCafe"
   ],
-  "lastUpdated": "2026-04-28T03:41:46.350Z",
+  "lastUpdated": "2026-04-28T03:45:19.522Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5788,6 +5919,26 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:07:33.132Z",
         "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968454-0",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.454Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario prefiere opciones balanceadas (Option B)",
+      "description": "5/5 últimas decisiones del usuario favorecieron la opción B (balanceada) sobre conservadora o innovadora",
+      "context": "Decision Gates con tres opciones A/B/C",
+      "applicability": [
+        "decision-gate",
+        "user-pattern",
+        "option-b"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.454Z",
+        "source": "EXPLICIT"
       }
     }
   ]

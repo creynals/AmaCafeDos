@@ -102,6 +102,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-116 | Rotation cycle C116 halted with BLOCKED_PRECONDITIONS_NOT_MET (exit code 2) | OLD/NEW_ENCRYPTION_SECRET missing from env; payment_methods table inexistent — smoke test target invalid | 2026-04-28 | 116 |
 | DEC-114 | Ejecutar cluster C112+C113 con Option B: pre-flight focalizado + validación entre pasos + SumUp prod diferido | Balance óptimo entre reversibilidad y velocidad; alinea con preferencia explícita C113 y patrón histórico | 2026-04-28 | 114 |
 | DEC-113 | Ejecutar cluster C112+C113 secuencial con checkpoint entre pasos y tag pre-rotation-c113 | Honra cluster aprobado en C112; checkpoint reduce blast radius; rollback global vía git tag + pg_dump | 2026-04-28 | 113 |
 | DEC-112 | Ejecutar bloque pre-deploy en dos ciclos: rotación secretos (C112+C113) y infra Railway (C114+C115) | Atomicidad por dominio: separar crypto local de infra cloud reduce blast radius y permite verificación intermedia | 2026-04-28 | 112 |
@@ -183,6 +184,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 116] Encrypted columns in db_taza_data are exclusively in 'settings' table (3 keys), not payment_methods
+- [Cycle 116] rotate-encryption-secret.js requires both OLD and NEW env vars or aborts at lines 27-30
+- [Cycle 116] keyManager.js (C81) is available for decrypt verification in smoke tests
 - [Cycle 114] pg_dump parcial de tablas críticas (payment_methods, users, orders) como backup pre-rotación
 - [Cycle 114] Smoke test focalizado: 5 muestras decrypt + 1 JWT round-trip entre C112 y C113
 - [Cycle 114] CREDENTIAL_ROTATION_C112-C113.md gitignored con valores enmascarados
