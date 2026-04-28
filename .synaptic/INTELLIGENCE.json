@@ -2756,7 +2756,7 @@
     "[2026-04-28T18:43:10.390Z] Commit 4ba6087 has generic PRE message but contains the productive C135 delta",
     "[2026-04-28T18:43:10.392Z] Branch fix/c135-serve-bind-explicit pushed; PR #6 open and awaiting merge"
   ],
-  "lastUpdated": "2026-04-28T19:07:52.420Z",
+  "lastUpdated": "2026-04-28T19:10:57.246Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
