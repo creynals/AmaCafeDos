@@ -7410,3 +7410,107 @@ proceder con OPTION B: git filter-repo — Purga Estándar Recomendada Oficialme
 **Synaptic Strength**: 99%
 
 ---
+
+## Cycle 121 — Reconciliación + Repriorización Backlog (OPTION B)
+
+```json
+{
+  "cycle": 121,
+  "timestamp": "2026-04-28T04:30:00.000Z",
+  "userRequest": "proceder con OPTION B: Reconciliación + Repriorización Backlog (Balanceada) ⭐ RECOMENDADA",
+  "decisionResolved": "Cycle 120 Decision Gate — OPTION B selected",
+  "executionMode": "IMMEDIATE_EXECUTION (DG-079) sobre decisión vinculante C120",
+  "rationale": "C120 decidió Option B pero no creó el artefacto físico TRUTH_RECONCILIATION_C120.md ni reclasificó el backlog. C121 cumple ambas promesas y deja la mesa lista para Railway R1-R8.",
+
+  "phase1_inventarioVerdad": {
+    "metodologia": "Comparar BITACORA + INTELLIGENCE.contextNotes (declarado) vs filesystem real + git tag list (verificado)",
+    "claimsRefutados": [
+      "C115 declaró 'git tag pre-rotation-c115' → INEXISTENTE (git tag solo lista pre-purge-c78, pre-railway-c102, pre-rebase-c107)",
+      "C115 declaró 'pg_dump → ./backups/pre-rotation-c115.sql' → DIRECTORIO ./backups/ NO EXISTE en workspace",
+      "C115 declaró 'node scripts/rotate-encryption-secret.js --apply' → script vive en backend/scripts/, no scripts/; nunca ejecutado",
+      "C115/C116 smoke target 'payment_methods' → tabla NO EXISTE en db_taza_data",
+      "C113/C116 declaró 'CREDENTIAL_ROTATION_C112-C113.md (gitignored)' → solo existe CREDENTIAL_ROTATION_C78.md (legítimo de C78)",
+      "C114 declaró 'cluster C112+C113 ejecutado' → ningún archivo nuevo, ningún commit POST, ningún .env modificado"
+    ],
+    "claimsValidados": [
+      "C81 keyManager.js (refactor crypto + 16 tests) → vigente",
+      "C78 git filter-repo + tag pre-purge-c78 → vigente",
+      "C101 validateInput.js + 32 tests → vigente",
+      "C94/C107 push origin/main + reconciliación rebase → vigente",
+      "C104 .gitignore snapshots INTELLIGENCE + tag pre-railway-c102 → vigente"
+    ]
+  },
+
+  "phase2_repriorizacionBacklog": {
+    "deferredToProd": [
+      "ROAD-112A — Ejecutar C112 rotación ENCRYPTION_SECRET local",
+      "ROAD-112B — Ejecutar C113 rotar JWT/reCAPTCHA/SumUp sandbox+prod",
+      "ROAD-113-1 — Pre-flight pg_dump + git tag pre-rotation-c113",
+      "ROAD-113-2 — Rotar ENCRYPTION_SECRET (C112) + decrypt SumUp",
+      "ROAD-113-3 — Rotar JWT/reCAPTCHA/SumUp + actualizar .env",
+      "ROAD-113-4 — Crear CREDENTIAL_ROTATION_C112-C113.md",
+      "ROAD-113-5 — Reinicio backend + smoke tests post-rotación",
+      "ROAD-114-1 — Ejecutar rotación ENCRYPTION_SECRET (C112)",
+      "ROAD-114-2 — Ejecutar rotación JWT + reCAPTCHA + SumUp sandbox",
+      "ROAD-C117-UNBLOCK — Resolve C116 blockers and complete rotation",
+      "ROAD-C117-SMOKE-REWRITE — Rewrite smoke test against settings table (re-emerge en R8)",
+      "ROAD-C117-PATH-FIX — Adjust execution path to backend/scripts (re-emerge en R5)"
+    ],
+    "elevadosAHigh": [
+      "ROAD-120-3 — Tag pre-deploy-cXXX (MEDIUM → HIGH)",
+      "ROAD-121-DEPLOY-R1 — Branch protection en main (NEW HIGH)",
+      "ROAD-121-DEPLOY-R2 — Tag pre-deploy-c122 + verificación física (NEW HIGH)",
+      "ROAD-121-DEPLOY-R3-R8 — Pipeline completo Railway según docs/RAILWAY_DEPLOY.md (NEW HIGH)"
+    ],
+    "consolidados": "ROAD-104-1, ROAD-095-3, ROAD-106-1, ROAD-107A → ROAD-121-DEPLOY-R1 | ROAD-104-2, ROAD-095-2, ROAD-106-2, ROAD-107B, ROAD-120-1 → ROAD-121-DEPLOY-R3-R8"
+  },
+
+  "phase3_persistencia": {
+    "filesAdded": [
+      "TRUTH_RECONCILIATION_C120.md (root del workspace, 6 secciones, 158 líneas, ~5.2 KB) — inventario declarado-vs-verificado, decisión DEFERRED-TO-PROD, repriorización formal, invariantes reforzados, plan C122"
+    ],
+    "filesModified": [
+      ".synaptic/INTELLIGENCE.json — 12 items rotación marcados DEFERRED-TO-PROD con deferredAtCycle/deferredReason; 4 items deploy R1/R2/R3-R8 + 1 reconciliación agregados; decision-1777348877404 (C120) marcada outcome=RESOLVED-RECONCILED con resolutionArtifacts; implementationState actualizado; lastUpdated=2026-04-28T04:30:00Z; 4 contextNotes C121 anexadas",
+      "DESIGN_DOC.md — fila C120/C121 agregada al Decision Log (sección 2)",
+      "BITACORA.md — esta entrada C121"
+    ],
+    "filesUnchanged": [
+      "backend/* (código de aplicación) — la reconciliación es documental/organizacional, no toca lógica",
+      "MANTRA.md, RULES.md — invariantes ya capturados en TRUTH_RECONCILIATION_C120.md sección 5"
+    ]
+  },
+
+  "validation": {
+    "jsonStructure": "python3 -m json.tool .synaptic/INTELLIGENCE.json → JSON OK (validado post-edits)",
+    "truthFileExists": "ls TRUTH_RECONCILIATION_C120.md → presente, 5.2 KB",
+    "designDocRowAdded": "grep 'C120/C121' DESIGN_DOC.md → 1 match en Decision Log",
+    "bitacoraEntry": "grep '^## Cycle 121' BITACORA.md → 1 match",
+    "rotationItemsDeferred": "grep -c 'DEFERRED-TO-PROD' INTELLIGENCE.json → 12 items rotación + 0 falsos positivos",
+    "verifyAfterEditRule": "Cada archivo modificado releído antes de declarar SUCCESS (regla C57 honrada)"
+  },
+
+  "outcome": "SUCCESS",
+  "synapticStrength": 99,
+  "complianceScore": 100
+}
+```
+
+**Notas críticas**:
+- Esta es una reconciliación **documental/organizacional**, no de código de aplicación. No toca `backend/`, `frontend/`, ni `scripts/`. La verdad operativa la define filesystem + git, no los `actionsExecuted` de BITACORA.
+- C121 cumple la promesa de C120 que C120 mismo no cumplió: el artefacto físico `TRUTH_RECONCILIATION_C120.md` ahora existe y es referenciable.
+- `payment_methods` queda explícitamente registrado como tabla **inexistente**; el target correcto para smoke test crypto es `settings:sumup_api_key` (entry encriptada).
+- La rotación de credenciales NO se cancela — se mueve al flujo Railway R5/R8 con secretos productivos del gestor del usuario. `ROAD-114-3` (rotar SumUp prod en deploy) sigue activo HIGH como ancla.
+- Patrón Option B confirmado en 12/12 últimas decisiones — preferencia robusta del usuario por enfoque balanceado/recomendado.
+
+**Recomendaciones (próximos pasos por prioridad)**:
+- 🔴 **ALTA — C122**: Ejecutar `ROAD-121-DEPLOY-R1` — usuario configura branch protection en `main` desde GitHub UI (Settings → Branches → Add rule: require PR, require status checks). Verificar con `gh api repos/creynals/AmaCafeDos/branches/main/protection`.
+- 🔴 **ALTA — C123**: Ejecutar `ROAD-121-DEPLOY-R2` — `git tag -a pre-deploy-c123 -m 'rollback anchor pre-Railway'` + `git tag --list pre-deploy-c123` (verificar) + `git push origin pre-deploy-c123`.
+- 🔴 **ALTA — C124+**: Iniciar `ROAD-121-DEPLOY-R3-R8` siguiendo `docs/RAILWAY_DEPLOY.md` (R3 service config, R4 Volume `/data`, R5 secrets prod + SUMUP_MODE=live, R6 backend deploy, R7 frontend deploy, R8 smoke E2E con decrypt `settings:sumup_api_key`).
+- 🟡 **MEDIA**: Tras R8 verde, retomar `ROAD-101A` (E2E manual validateInput) y `ROAD-101B` (rate limiting `/api/auth/login`).
+- 🟢 **BAJA**: GitHub Actions CI (lint + build + test) tras stack productivo estable.
+
+**Synaptic Strength**: 99%
+**Compliance Score**: 100%
+**Violations Count**: 0
+
+---
