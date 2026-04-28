@@ -1124,26 +1124,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-82-1777329010391-3",
-      "cycle": 82,
-      "timestamp": "2026-04-27T22:30:10.391Z",
-      "type": "USER_PREFERENCE",
-      "title": "Balanced option preferred over minimal/maximal",
-      "description": "User selected OPTION B (Fix + Refactor) over A (minimal fix) or C (full versioning)",
-      "context": "Decision Gate selection between scope tiers",
-      "applicability": [
-        "decision-gate",
-        "scope",
-        "user-preference"
-      ],
-      "confidence": {
-        "score": 0.3500000000000001,
-        "evidenceCount": 2,
-        "lastReinforced": "2026-04-28T01:48:33.030Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
       "learningId": "learning-84-1777333031645-0",
       "cycle": 84,
       "timestamp": "2026-04-27T23:37:11.645Z",
@@ -1157,111 +1137,10 @@
         "execution-mode"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T23:37:11.645Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-85-1777333510497-0",
-      "cycle": 85,
-      "timestamp": "2026-04-27T23:45:10.497Z",
-      "type": "PATTERN",
-      "title": "Single source of truth for storage paths",
-      "description": "Centralize IMAGES_DIR resolution in one util so routes and static mount stay aligned",
-      "context": "When multiple modules need the same configurable filesystem path",
-      "applicability": [
-        "storage",
-        "config",
-        "refactor"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:45:10.497Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-85-1777333510502-1",
-      "cycle": 85,
-      "timestamp": "2026-04-27T23:45:10.502Z",
-      "type": "PATTERN",
-      "title": "Mount specific static path before broader one",
-      "description": "Express mounts /static/products from volume BEFORE /static so volume overrides bundled assets",
-      "context": "Express static middleware ordering with overlapping paths",
-      "applicability": [
-        "express",
-        "static-files",
-        "routing"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:45:10.502Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-85-1777333510506-2",
-      "cycle": 85,
-      "timestamp": "2026-04-27T23:45:10.506Z",
-      "type": "PATTERN",
-      "title": "Idempotent seed script via preDeployCommand",
-      "description": "Chain migrate.js && seed-volume-images.js in preDeploy; copy only when target empty",
-      "context": "Bootstrapping persistent volumes on first deploy without re-copying on every restart",
-      "applicability": [
-        "railway",
-        "deploy",
-        "volume",
-        "seed"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:45:10.506Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-85-1777333510509-3",
-      "cycle": 85,
-      "timestamp": "2026-04-27T23:45:10.509Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Volume resolver rejects relative paths",
-      "description": "IMAGES_STORAGE_PATH must be absolute; empty/missing falls back to fuentes/products for local dev",
-      "context": "Configuring storage path across local dev and Railway deploy",
-      "applicability": [
-        "config",
-        "validation",
-        "env"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:45:10.509Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-85-1777333510511-4",
-      "cycle": 85,
-      "timestamp": "2026-04-27T23:45:10.511Z",
-      "type": "PATTERN",
-      "title": "Smoke-test seed scripts with temp dirs",
-      "description": "Verify first-run copy + second-run skip with IMAGES_STORAGE_PATH=/tmp/... before deploying",
-      "context": "Validating idempotent filesystem operations locally",
-      "applicability": [
-        "testing",
-        "scripts",
-        "smoke-test"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T23:45:10.511Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -1277,7 +1156,7 @@
         "tradeoffs"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T23:45:10.513Z",
         "source": "EXPLICIT"
@@ -2331,7 +2210,7 @@
     "[2026-04-28T02:19:19.379Z] Tag pre-railway-c102 is the rollback anchor for upcoming Railway deploy",
     "[2026-04-28T02:19:19.380Z] main branch lacks protection rules — flagged as next HIGH priority"
   ],
-  "lastUpdated": "2026-04-28T02:20:25.544Z",
+  "lastUpdated": "2026-04-28T02:30:19.509Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5024,6 +4903,127 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T23:37:11.660Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-82-1777329010391-3",
+      "cycle": 82,
+      "timestamp": "2026-04-27T22:30:10.391Z",
+      "type": "USER_PREFERENCE",
+      "title": "Balanced option preferred over minimal/maximal",
+      "description": "User selected OPTION B (Fix + Refactor) over A (minimal fix) or C (full versioning)",
+      "context": "Decision Gate selection between scope tiers",
+      "applicability": [
+        "decision-gate",
+        "scope",
+        "user-preference"
+      ],
+      "confidence": {
+        "score": 0,
+        "evidenceCount": 2,
+        "lastReinforced": "2026-04-28T01:48:33.030Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510497-0",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.497Z",
+      "type": "PATTERN",
+      "title": "Single source of truth for storage paths",
+      "description": "Centralize IMAGES_DIR resolution in one util so routes and static mount stay aligned",
+      "context": "When multiple modules need the same configurable filesystem path",
+      "applicability": [
+        "storage",
+        "config",
+        "refactor"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.497Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510502-1",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.502Z",
+      "type": "PATTERN",
+      "title": "Mount specific static path before broader one",
+      "description": "Express mounts /static/products from volume BEFORE /static so volume overrides bundled assets",
+      "context": "Express static middleware ordering with overlapping paths",
+      "applicability": [
+        "express",
+        "static-files",
+        "routing"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.502Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510506-2",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.506Z",
+      "type": "PATTERN",
+      "title": "Idempotent seed script via preDeployCommand",
+      "description": "Chain migrate.js && seed-volume-images.js in preDeploy; copy only when target empty",
+      "context": "Bootstrapping persistent volumes on first deploy without re-copying on every restart",
+      "applicability": [
+        "railway",
+        "deploy",
+        "volume",
+        "seed"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.506Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510509-3",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.509Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Volume resolver rejects relative paths",
+      "description": "IMAGES_STORAGE_PATH must be absolute; empty/missing falls back to fuentes/products for local dev",
+      "context": "Configuring storage path across local dev and Railway deploy",
+      "applicability": [
+        "config",
+        "validation",
+        "env"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.509Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-85-1777333510511-4",
+      "cycle": 85,
+      "timestamp": "2026-04-27T23:45:10.511Z",
+      "type": "PATTERN",
+      "title": "Smoke-test seed scripts with temp dirs",
+      "description": "Verify first-run copy + second-run skip with IMAGES_STORAGE_PATH=/tmp/... before deploying",
+      "context": "Validating idempotent filesystem operations locally",
+      "applicability": [
+        "testing",
+        "scripts",
+        "smoke-test"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T23:45:10.511Z",
         "source": "INFERRED"
       }
     }
