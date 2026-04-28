@@ -1633,7 +1633,7 @@
     "[2026-04-27T23:45:10.515Z] Persistence guarantee is theoretical until E2E test: upload image → restart service → verify URL resolves",
     "[2026-04-27T23:45:10.516Z] Post-edit verification rule (C57) was honored: every promised file re-read on disk after edit"
   ],
-  "lastUpdated": "2026-04-27T23:51:24.262Z",
+  "lastUpdated": "2026-04-28T00:02:38.983Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
