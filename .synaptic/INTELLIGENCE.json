@@ -1682,7 +1682,7 @@
     "[2026-04-28T00:14:04.530Z] docs/RAILWAY_DEPLOY.md R5 sets SUMUP_MODE=live; R8 step 2 verifies promotion log line",
     "[2026-04-28T00:14:04.531Z] 1247 files / -223856 lines staged for deletion at end of C87 — user must review and commit"
   ],
-  "lastUpdated": "2026-04-28T00:47:32.863Z",
+  "lastUpdated": "2026-04-28T00:52:11.837Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
