@@ -215,6 +215,32 @@
       "selectedOption": "B",
       "userRationale": ": Pre-flight + Gitignore (b) + Tag + Push (Balanceado) ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777343591561",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:33:11.561Z",
+      "decisionPoint": "proceder con OPTION B: Rebase con drop del duplicado (Balanceado) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Rebase con drop del duplicado (Balanceado) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -1120,6 +1146,24 @@
       "status": "PLANNED",
       "createdAtCycle": 104,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-106-1",
+      "title": "Configurar branch protection en main",
+      "description": "Activar protección de rama main en GitHub tras reconciliación exitosa",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 106,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-106-2",
+      "title": "Ejecutar gates R1-R8 Railway deploy",
+      "description": "Correr secuencia completa de gates de despliegue Railway planificada en INTELLIGENCE",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 106,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -1137,7 +1181,7 @@
         "execution-mode"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T23:37:11.645Z",
         "source": "EXPLICIT"
@@ -1156,7 +1200,7 @@
         "tradeoffs"
       ],
       "confidence": {
-        "score": 0.8,
+        "score": 0.6000000000000001,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T23:45:10.513Z",
         "source": "EXPLICIT"
@@ -2063,6 +2107,125 @@
         "lastReinforced": "2026-04-28T02:19:19.374Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-106-1777343533298-0",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.298Z",
+      "type": "PATTERN",
+      "title": "Pre-flight diagnóstico antes de reconciliar git",
+      "description": "Ejecutar git status/rev-list/merge-base/diff --stat antes de proponer estrategia evita merges ciegos",
+      "context": "Cuando hay divergencia local vs remoto y se requiere reconciliación",
+      "applicability": [
+        "git",
+        "reconciliation",
+        "pre-flight"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.298Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533303-1",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.303Z",
+      "type": "INSIGHT",
+      "title": "Detectar commits duplicados por diff idéntico",
+      "description": "Dos SHAs distintos con mismo diff (5 ins / 45794 del, 11 archivos) indican mismo cambio con mensajes distintos",
+      "context": "Al reconciliar tras un commit convencional vs commit SYNAPTIC con marcadores",
+      "applicability": [
+        "git",
+        "deduplication",
+        "synaptic-bookkeeping"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.303Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533307-2",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.307Z",
+      "type": "PATTERN",
+      "title": "Rebase --onto para drop selectivo de duplicado",
+      "description": "git rebase --onto origin/main <duplicado> main descarta duplicado y replaya commits posteriores fast-forward",
+      "context": "Cuando hay 1 commit duplicado + N commits válidos no pusheados",
+      "applicability": [
+        "git",
+        "rebase",
+        "history-cleanup"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.307Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533310-3",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.310Z",
+      "type": "PATTERN",
+      "title": "Tag pre-reconcile como rollback anchor",
+      "description": "Crear tag local antes de rebase permite recuperación sin reflog hunting",
+      "context": "Operaciones git que reescriben SHAs locales",
+      "applicability": [
+        "git",
+        "safety",
+        "rollback"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.310Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533313-4",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.313Z",
+      "type": "ANTI_PATTERN",
+      "title": "Hard reset destruye bookkeeping SYNAPTIC",
+      "description": "git reset --hard a origin/main borra BITACORA/INTELLIGENCE/audit de ciclos no pusheados, viola Traceable covenant",
+      "context": "Cuando hay commits SYNAPTIC PRE/POST locales con bookkeeping",
+      "applicability": [
+        "git",
+        "synaptic",
+        "auditability"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.313Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533316-5",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.316Z",
+      "type": "USER_PREFERENCE",
+      "title": "Option B balanceado consolidado 5/5",
+      "description": "Usuario elige Option B (balanceado/recomendada) en 5 de últimas 5 decisiones — confianza ~90%",
+      "context": "Decision Gate Phase 1 con tres opciones A/B/C",
+      "applicability": [
+        "decision-gate",
+        "user-pattern"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.316Z",
+        "source": "EXPLICIT"
+      }
     }
   ],
   "implementationState": {
@@ -2208,9 +2371,12 @@
     "[2026-04-28T01:58:31.255Z] Recommended option is B (Balanced); Option C (keep INTELLIGENCE versioned) flagged HIGH risk due to repo bloat",
     "[2026-04-28T02:19:19.377Z] INTELLIGENCE snapshot backups live in .synaptic/backups/ not .synaptic/intelligence/",
     "[2026-04-28T02:19:19.379Z] Tag pre-railway-c102 is the rollback anchor for upcoming Railway deploy",
-    "[2026-04-28T02:19:19.380Z] main branch lacks protection rules — flagged as next HIGH priority"
+    "[2026-04-28T02:19:19.380Z] main branch lacks protection rules — flagged as next HIGH priority",
+    "[2026-04-28T02:32:13.319Z] Repo recién inicializado en GitHub (origin: creynals/AmaCafeDos.git) — preferir historia lineal",
+    "[2026-04-28T02:32:13.321Z] Próximo paso post-reconcile: branch protection en main + gates R1-R8 Railway deploy",
+    "[2026-04-28T02:32:13.322Z] Harness SYNAPTIC puede regenerar artefactos (INTELLIGENCE/BITACORA) en próximo ciclo — comportamiento esperado"
   ],
-  "lastUpdated": "2026-04-28T02:30:19.509Z",
+  "lastUpdated": "2026-04-28T02:33:11.566Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

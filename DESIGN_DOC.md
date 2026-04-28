@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-106 | Reconciliar main vía rebase --onto descartando commit duplicado eea6d78 | Preserva bookkeeping C105/C106, elimina ruido del duplicado, push fast-forward sin --force | 2026-04-28 | 106 |
 | DEC-104 | Untrack .synaptic/backups/INTELLIGENCE_*.json + create pre-railway-c102 tag | Establish clean rollback anchor before Railway deploy R1-R8 | 2026-04-28 | 104 |
 | DEC-103 | Publish C101 deliverable to origin/main via Option B (gitignore INTELLIGENCE + tag + fast-forward push) | Balanced approach: clean remote history, rollback anchor, no history rewrite, halt-on-anomaly safety | 2026-04-28 | 103 |
 | DEC-101B | Exempt chat and webhooks via mount order, not skip logic | Mount before guard preserves silent sanitizer for chat; keeps guard config simple | 2026-04-28 | 101 |
@@ -176,6 +177,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 106] Commit eea6d78 (C104 POST SYNAPTIC) y cab5f03 (chore convencional) tienen diff idéntico: 5 ins / 45794 del / 11 archivos
+- [Cycle 106] Merge base actual: cf40db2 (C104 PRE); divergencia +3/-1 vs origin/main
+- [Cycle 106] Rebase de SHAs nunca pusheados no requiere --force-push
 - [Cycle 104] Gitignore patterns added for INTELLIGENCE_*.json in both backups/ and intelligence/ paths
 - [Cycle 104] Push was fast-forward (no --force), 14 commits to origin/main
 - [Cycle 103] Pre-flight halt criteria: unexpected commits, sensitive files (.env), or non-fast-forward conflict abort the chain
