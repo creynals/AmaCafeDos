@@ -319,6 +319,32 @@
       "selectedOption": "B",
       "userRationale": ") está aprobada y es vinculante.\nOutput esperado en este ciclo:\n  1) git tag pre-rotation-c115\n  2) pg_dump backup → ./backups/pre-rotation-c115.sql\n  3) node scripts/rotate-encryption-secret.js --app",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777348877404",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:01:17.404Z",
+      "decisionPoint": "proceder con OPTION B: Reconciliación + Repriorización Backlog (Balanceada) ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Reconciliación + Repriorización Backlog (Balanceada) ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -1413,6 +1439,33 @@
       "status": "PLANNED",
       "createdAtCycle": 116,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-120-1",
+      "title": "Railway Deploy R1-R8",
+      "description": "Ejecutar pipeline de deploy a Railway en producción amaCafe",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 120,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-120-2",
+      "title": "Rotación credenciales SumUp en producción",
+      "description": "Diferida hasta post-deploy; usar settings:sumup_api_key como fuente de verdad",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 120,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-120-3",
+      "title": "Crear git tag pre-deploy-cXXX antes de Railway push",
+      "description": "Aprender de C115: verificar creación efectiva del tag con git tag --list antes de declarar éxito",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 120,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -1430,90 +1483,10 @@
         "enforcement"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:40:20.165Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-100-1777340420171-1",
-      "cycle": 100,
-      "timestamp": "2026-04-28T01:40:20.171Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "No central validateInput middleware exists",
-      "description": "Backend has only auth.js (36 LOC) and security.js (125 LOC); no validateInput.js, no zod/joi/express-validator",
-      "context": "Audit baseline for input-hardening work in amaCafe backend",
-      "applicability": [
-        "backend",
-        "middleware",
-        "security-audit"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:40:20.171Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-100-1777340420175-2",
-      "cycle": 100,
-      "timestamp": "2026-04-28T01:40:20.175Z",
-      "type": "ANTI_PATTERN",
-      "title": "Test glob excludes middleware/ and routes/",
-      "description": "Pattern 'src/utils/*.test.js' won't pick up middleware/*.test.js or routes/*.test.js",
-      "context": "Adding tests outside utils/ requires updating package.json test script",
-      "applicability": [
-        "testing",
-        "node-test-runner",
-        "package-json"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:40:20.175Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-100-1777340420178-3",
-      "cycle": 100,
-      "timestamp": "2026-04-28T01:40:20.178Z",
-      "type": "PATTERN",
-      "title": "Prefer hand-rolled utilities over new dependencies",
-      "description": "Monorepo convention follows keyManager.js style — hand-rolled validators preferred over zod/dompurify",
-      "context": "When choosing between adding deps vs implementing lightweight utilities",
-      "applicability": [
-        "dependencies",
-        "convention",
-        "amaCafe"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:40:20.178Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-100-1777340420182-4",
-      "cycle": 100,
-      "timestamp": "2026-04-28T01:40:20.182Z",
-      "type": "INSIGHT",
-      "title": "Pre-Railway-deploy risk shapes scope decisions",
-      "description": "High blast-radius changes (13-route sweeps) deferred until Railway deploy is stable",
-      "context": "Scoping cycles during deployment-sensitive periods",
-      "applicability": [
-        "risk-management",
-        "deployment",
-        "scoping"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T01:40:20.182Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -2458,6 +2431,110 @@
         "lastReinforced": "2026-04-28T03:44:13.379Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-120-1777348856861-0",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:00:56.862Z",
+      "type": "USER_PREFERENCE",
+      "title": "Deploy-first sobre rotación de credenciales sandbox",
+      "description": "Usuario priorizó Railway deploy R1-R8 y diferir rotación de credenciales sandbox a producción",
+      "context": "Cuando el backlog INTELLIGENCE muestre rotación como HIGH pero el usuario indique deploy primero",
+      "applicability": [
+        "roadmap",
+        "prioritization",
+        "sandbox",
+        "deploy"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:00:56.861Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-120-1777348856869-1",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:00:56.869Z",
+      "type": "ANTI_PATTERN",
+      "title": "Declarar ejecución sin verificar artefactos físicos",
+      "description": "C115/C116 declararon git tag y rotación que nunca ocurrieron; tabla payment_methods no existía",
+      "context": "Antes de marcar SUCCESS en BITACORA, verificar tags, tablas y commits POST reales",
+      "applicability": [
+        "bitacora",
+        "verification",
+        "smoke-test",
+        "git-tags"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:00:56.869Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-120-1777348856873-2",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:00:56.873Z",
+      "type": "PATTERN",
+      "title": "Reconciliación append-only en BITACORA",
+      "description": "Erratas históricas se anexan como sección ERRATA CXXX, nunca se reescriben entradas previas",
+      "context": "Cuando se descubren divergencias entre BITACORA y estado físico verificable",
+      "applicability": [
+        "bitacora",
+        "audit",
+        "errata",
+        "memory-hygiene"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:00:56.873Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-120-1777348856877-3",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:00:56.877Z",
+      "type": "INSIGHT",
+      "title": "ENFORCE-SYNAPTIC-PROTOCOL anula DG-079 Immediate Execution",
+      "description": "Aun con DG-079 activo, instrucciones SYNAPTIC strict obligan a Decision Gate previo",
+      "context": "Inicio de cualquier ciclo bajo enforcement STRICT",
+      "applicability": [
+        "protocol",
+        "decision-gate",
+        "enforcement"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:00:56.877Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-120-1777348856880-4",
+      "cycle": 120,
+      "timestamp": "2026-04-28T04:00:56.880Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Smoke test SumUp usa settings:sumup_api_key",
+      "description": "No existe tabla payment_methods; credenciales SumUp viven en settings con clave sumup_api_key",
+      "context": "Al diseñar smoke tests o queries de credenciales SumUp en amaCafe",
+      "applicability": [
+        "sumup",
+        "smoke-test",
+        "settings",
+        "amaCafe"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T04:00:56.880Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -2624,9 +2701,12 @@
     "[2026-04-28T03:44:13.382Z] C116 commit PRE = 5112c43; no POST commit because execution halted before mutation",
     "[2026-04-28T03:44:13.384Z] Tag pre-rotation-c115 not created (only pre-purge-c78 exists in repo)",
     "[2026-04-28T03:44:13.386Z] User offered 3 unblock paths: (a) provide both secrets, (b) authorize Claude to generate NEW with openssl, (c) rewrite smoke test target to settings:sumup_api_key",
-    "[2026-04-28T03:44:13.388Z] Workspace verified canonical: import-1777213083759-63z86j / amaCafe"
+    "[2026-04-28T03:44:13.388Z] Workspace verified canonical: import-1777213083759-63z86j / amaCafe",
+    "[2026-04-28T04:00:56.883Z] C115 y C116 contienen declaraciones no verificadas; consultar TRUTH_RECONCILIATION_C120.md antes de actuar sobre ellas",
+    "[2026-04-28T04:00:56.885Z] Cluster Rotación queda DEFERRED-TO-PROD; no re-promover a HIGH sin instrucción explícita del usuario",
+    "[2026-04-28T04:00:56.887Z] Próximo ciclo debe atacar Railway R1-R8 directamente"
   ],
-  "lastUpdated": "2026-04-28T03:59:20.035Z",
+  "lastUpdated": "2026-04-28T04:01:17.417Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5938,6 +6018,86 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T01:34:41.590Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420171-1",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.171Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "No central validateInput middleware exists",
+      "description": "Backend has only auth.js (36 LOC) and security.js (125 LOC); no validateInput.js, no zod/joi/express-validator",
+      "context": "Audit baseline for input-hardening work in amaCafe backend",
+      "applicability": [
+        "backend",
+        "middleware",
+        "security-audit"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.171Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420175-2",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.175Z",
+      "type": "ANTI_PATTERN",
+      "title": "Test glob excludes middleware/ and routes/",
+      "description": "Pattern 'src/utils/*.test.js' won't pick up middleware/*.test.js or routes/*.test.js",
+      "context": "Adding tests outside utils/ requires updating package.json test script",
+      "applicability": [
+        "testing",
+        "node-test-runner",
+        "package-json"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.175Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420178-3",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.178Z",
+      "type": "PATTERN",
+      "title": "Prefer hand-rolled utilities over new dependencies",
+      "description": "Monorepo convention follows keyManager.js style — hand-rolled validators preferred over zod/dompurify",
+      "context": "When choosing between adding deps vs implementing lightweight utilities",
+      "applicability": [
+        "dependencies",
+        "convention",
+        "amaCafe"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.178Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-100-1777340420182-4",
+      "cycle": 100,
+      "timestamp": "2026-04-28T01:40:20.182Z",
+      "type": "INSIGHT",
+      "title": "Pre-Railway-deploy risk shapes scope decisions",
+      "description": "High blast-radius changes (13-route sweeps) deferred until Railway deploy is stable",
+      "context": "Scoping cycles during deployment-sensitive periods",
+      "applicability": [
+        "risk-management",
+        "deployment",
+        "scoping"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:40:20.182Z",
         "source": "INFERRED"
       }
     }
