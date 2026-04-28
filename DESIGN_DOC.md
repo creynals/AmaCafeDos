@@ -102,6 +102,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-113 | Ejecutar cluster C112+C113 secuencial con checkpoint entre pasos y tag pre-rotation-c113 | Honra cluster aprobado en C112; checkpoint reduce blast radius; rollback global vía git tag + pg_dump | 2026-04-28 | 113 |
 | DEC-112 | Ejecutar bloque pre-deploy en dos ciclos: rotación secretos (C112+C113) y infra Railway (C114+C115) | Atomicidad por dominio: separar crypto local de infra cloud reduce blast radius y permite verificación intermedia | 2026-04-28 | 112 |
 | DEC-107 | Reconciliar divergencia main vía rebase --onto con drop de eea6d78 + push FF | Evita --force, preserva historia lineal, recuperable por tag pre-rebase-c107 | 2026-04-28 | 107 |
 | DEC-106 | Reconciliar main vía rebase --onto descartando commit duplicado eea6d78 | Preserva bookkeeping C105/C106, elimina ruido del duplicado, push fast-forward sin --force | 2026-04-28 | 106 |
@@ -181,6 +182,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 113] Orden de rotación: ENCRYPTION_SECRET → validación SumUp decrypt → JWT_SECRET + RECAPTCHA_SECRET + SUMUP_API_KEY
+- [Cycle 113] SUMUP_API_KEY prod requiere coordinación con dashboard del proveedor (potencial bloqueador)
+- [Cycle 113] Backend reinicio + smoke test (login JWT + checkout SumUp) obligatorio post-rotación
 - [Cycle 112] Pre-flight obligatorio: pg_dump + snapshot .env + verificar rows cifradas + tests round-trip keyManager
 - [Cycle 112] Documentación rotación va en docs/CREDENTIAL_ROTATION_C112-C113.md (gitignored, sin valores)
 - [Cycle 112] Tag pre-railway-c102 disponible como rollback anchor

@@ -267,6 +267,32 @@
       "selectedOption": "B",
       "userRationale": ": C112 + C113 — Cluster de Rotación de Credenciales (Balanceado) ⭐ RECOMENDADA",
       "outcome": "PENDING"
+    },
+    {
+      "decisionId": "decision-1777347399732",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:39.732Z",
+      "decisionPoint": "proceder con OPTION B: Cluster completo C112 + C113 secuencial con validación entre pasos ⭐ RECOMENDADA",
+      "options": {
+        "optionA": {
+          "title": "Conservative approach",
+          "description": "Safe, standard implementation",
+          "risk": "LOW"
+        },
+        "optionB": {
+          "title": "Balanced approach",
+          "description": "Moderate innovation with manageable risk",
+          "risk": "MEDIUM"
+        },
+        "optionC": {
+          "title": "Innovative approach",
+          "description": "Advanced implementation with higher complexity",
+          "risk": "HIGH"
+        }
+      },
+      "selectedOption": "B",
+      "userRationale": ": Cluster completo C112 + C113 secuencial con validación entre pasos ⭐ RECOMENDADA",
+      "outcome": "PENDING"
     }
   ],
   "roadmap": [
@@ -1247,11 +1273,11 @@
     },
     {
       "itemId": "ROAD-114",
-      "title": "Ciclo separado C114+C115: infra Railway",
-      "description": "Renombrar servicio a amacafe-backend, crear amacafe-frontend, provisionar Postgres plugin con preDeployCommand",
+      "title": "Deploy Railway (backlog HIGH posterior)",
+      "description": "Continuar con deploy a Railway una vez completado cluster de rotación",
       "priority": "HIGH",
       "status": "PLANNED",
-      "createdAtCycle": 112,
+      "createdAtCycle": 113,
       "dependencies": []
     },
     {
@@ -1261,6 +1287,51 @@
       "priority": "HIGH",
       "status": "PLANNED",
       "createdAtCycle": 112,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-113-1",
+      "title": "Ejecutar pre-flight (pg_dump + git tag pre-rotation-c113)",
+      "description": "Snapshot DB + commit limpio + tag de rollback antes de rotación",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 113,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-113-2",
+      "title": "Rotar ENCRYPTION_SECRET (C112) y validar decrypt SumUp",
+      "description": "rotate-encryption-secret.js --apply + smoke test descifrado payment_methods",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 113,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-113-3",
+      "title": "Rotar JWT/reCAPTCHA/SumUp (C113) y actualizar .env",
+      "description": "Generar nuevos valores, persistir en .env local, marcar SumUp prod pendiente input usuario",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 113,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-113-4",
+      "title": "Crear CREDENTIAL_ROTATION_C112-C113.md (gitignored)",
+      "description": "Doc con valores enmascarados, timestamp, checklist de gestor de secretos",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 113,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-113-5",
+      "title": "Reinicio backend + smoke tests post-rotación",
+      "description": "Verificar login JWT, reCAPTCHA y checkout SumUp tras rotación completa",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 113,
       "dependencies": []
     }
   ],
@@ -1279,91 +1350,10 @@
         "option-b"
       ],
       "confidence": {
-        "score": 0.9,
+        "score": 0.8,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T00:59:28.454Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-93-1777337968459-1",
-      "cycle": 93,
-      "timestamp": "2026-04-28T00:59:28.459Z",
-      "type": "PATTERN",
-      "title": "Decision Gate sobre mecánica de push inicial",
-      "description": "Push inicial a remote vacío requiere decidir: rename branch, manejo de tags, branch protection",
-      "context": "Primer push a repo GitHub recién creado tras filter-repo",
-      "applicability": [
-        "git",
-        "github",
-        "initial-push",
-        "filter-repo"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:59:28.459Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-93-1777337968462-2",
-      "cycle": 93,
-      "timestamp": "2026-04-28T00:59:28.462Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Pre-flight checks obligatorios antes de push post-purga",
-      "description": "Verificar remote, .gitignore, tag respaldo, credenciales rotadas, log post-purga antes de pushear",
-      "context": "Push inicial tras git filter-repo que eliminó secretos",
-      "applicability": [
-        "security",
-        "git-filter-repo",
-        "secrets-purge"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:59:28.462Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-93-1777337968465-3",
-      "cycle": 93,
-      "timestamp": "2026-04-28T00:59:28.465Z",
-      "type": "INSIGHT",
-      "title": "Tag pre-purge-c77 sólo local es single-point-of-failure",
-      "description": "Mantener tag de respaldo de purga sólo en local arriesga pérdida por fallo de disco",
-      "context": "Estrategia de respaldo post-filter-repo",
-      "applicability": [
-        "backup",
-        "resilience",
-        "tags"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:59:28.465Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-93-1777337968468-4",
-      "cycle": 93,
-      "timestamp": "2026-04-28T00:59:28.468Z",
-      "type": "ANTI_PATTERN",
-      "title": "Dual branch master+main genera ruido sin beneficio",
-      "description": "Publicar ambas ramas con mismo HEAD confunde y branch protection estricta sin team bloquea workflow",
-      "context": "MVP de un solo desarrollador",
-      "applicability": [
-        "git",
-        "branch-strategy",
-        "over-engineering"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T00:59:28.468Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -2308,6 +2298,106 @@
         "lastReinforced": "2026-04-28T03:33:46.710Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-113-1777347364980-0",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:04.980Z",
+      "type": "USER_PREFERENCE",
+      "title": "Usuario confirma Option B en cluster de rotación",
+      "description": "Usuario aprobó OPTION B (cluster C112+C113 secuencial con checkpoint) consistente con patrón 10/10",
+      "context": "Decisiones de implementación bajo ENFORCE-SYNAPTIC-PROTOCOL con clusters aprobados previamente",
+      "applicability": [
+        "decision-gate",
+        "option-b",
+        "credential-rotation"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:36:04.980Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-113-1777347364985-1",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:04.985Z",
+      "type": "PATTERN",
+      "title": "Checkpoint defensivo entre sub-tareas críticas",
+      "description": "Cluster ejecuta C112 con validación + STOP-on-fail antes de proceder a C113",
+      "context": "Rotaciones múltiples de secretos en una misma sesión",
+      "applicability": [
+        "rotation",
+        "checkpoint",
+        "blast-radius"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:36:04.985Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-113-1777347364989-2",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:04.989Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Pre-flight obligatorio antes de rotación",
+      "description": "pg_dump + commit limpio + git tag pre-rotation-c113 como red de seguridad",
+      "context": "Rotación de ENCRYPTION_SECRET que afecta DB cifrada",
+      "applicability": [
+        "pg_dump",
+        "rollback",
+        "encryption-secret"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:36:04.989Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-113-1777347364993-3",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:04.993Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Documento de rotación gitignored",
+      "description": "CREDENTIAL_ROTATION_C112-C113.md mantiene secretos enmascarados fuera de git (post-purga C78)",
+      "context": "Documentación de rotaciones sin reintroducir secretos al historial",
+      "applicability": [
+        "gitignore",
+        "secrets",
+        "documentation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:36:04.993Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-113-1777347364996-4",
+      "cycle": 113,
+      "timestamp": "2026-04-28T03:36:04.996Z",
+      "type": "ANTI_PATTERN",
+      "title": "Evitar orquestador transaccional para MVP local",
+      "description": "Option C (rotate-all-secrets.js +400 LOC) descartada por over-engineering y desviar foco de Railway deploy",
+      "context": "Decisiones de scope en MVP cuando hay backlog HIGH pendiente",
+      "applicability": [
+        "over-engineering",
+        "yagni",
+        "mvp"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T03:36:04.996Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -2463,9 +2553,13 @@
     "[2026-04-28T03:33:46.713Z] Branch protection en main sigue PENDIENTE (HIGH priority backlog)",
     "[2026-04-28T03:33:46.714Z] backend/.env ya purgado del historial git en C78 (filter-repo OK)",
     "[2026-04-28T03:33:46.716Z] keyManager.js refactor C81 (OPTION B) habilita validación E2E de rotación",
-    "[2026-04-28T03:33:46.718Z] Patrón Option B confirmado en 10/10 decisiones recientes — señal estadísticamente robusta"
+    "[2026-04-28T03:33:46.718Z] Patrón Option B confirmado en 10/10 decisiones recientes — señal estadísticamente robusta",
+    "[2026-04-28T03:36:04.999Z] Patrón Option B confirmado en 10/10 decisiones recientes — alta consistencia del usuario",
+    "[2026-04-28T03:36:05.001Z] keyManager.js (C81 Option B) disponible para soporte de rotación de claves cifradas",
+    "[2026-04-28T03:36:05.003Z] backend/.env ya purgado del historial git en C78 — mantener secretos fuera de git es invariante",
+    "[2026-04-28T03:36:05.005Z] Backlog HIGH posterior: deploy Railway pendiente tras completar cluster de rotación"
   ],
-  "lastUpdated": "2026-04-28T03:34:26.502Z",
+  "lastUpdated": "2026-04-28T03:36:39.737Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -5457,6 +5551,87 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T00:14:04.520Z",
         "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968459-1",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.459Z",
+      "type": "PATTERN",
+      "title": "Decision Gate sobre mecánica de push inicial",
+      "description": "Push inicial a remote vacío requiere decidir: rename branch, manejo de tags, branch protection",
+      "context": "Primer push a repo GitHub recién creado tras filter-repo",
+      "applicability": [
+        "git",
+        "github",
+        "initial-push",
+        "filter-repo"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.459Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968462-2",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.462Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Pre-flight checks obligatorios antes de push post-purga",
+      "description": "Verificar remote, .gitignore, tag respaldo, credenciales rotadas, log post-purga antes de pushear",
+      "context": "Push inicial tras git filter-repo que eliminó secretos",
+      "applicability": [
+        "security",
+        "git-filter-repo",
+        "secrets-purge"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.462Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968465-3",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.465Z",
+      "type": "INSIGHT",
+      "title": "Tag pre-purge-c77 sólo local es single-point-of-failure",
+      "description": "Mantener tag de respaldo de purga sólo en local arriesga pérdida por fallo de disco",
+      "context": "Estrategia de respaldo post-filter-repo",
+      "applicability": [
+        "backup",
+        "resilience",
+        "tags"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.465Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-93-1777337968468-4",
+      "cycle": 93,
+      "timestamp": "2026-04-28T00:59:28.468Z",
+      "type": "ANTI_PATTERN",
+      "title": "Dual branch master+main genera ruido sin beneficio",
+      "description": "Publicar ambas ramas con mismo HEAD confunde y branch protection estricta sin team bloquea workflow",
+      "context": "MVP de un solo desarrollador",
+      "applicability": [
+        "git",
+        "branch-strategy",
+        "over-engineering"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T00:59:28.468Z",
+        "source": "INFERRED"
       }
     }
   ]
