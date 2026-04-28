@@ -867,6 +867,51 @@
       "status": "PLANNED",
       "createdAtCycle": 94,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-1",
+      "title": "Rotación obligatoria de credenciales",
+      "description": "Rotate ENCRYPTION_SECRET, SumUp sandbox+prod, reCAPTCHA, JWT, DB password",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-2",
+      "title": "Decision Gate Railway deploy R1-R8",
+      "description": "Execute Railway deploy gates per docs/RAILWAY_DEPLOY.md after credential rotation",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-3",
+      "title": "Branch protection on main",
+      "description": "Require PR + status checks on main branch before collaborators/CI added",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-4",
+      "title": "Document SHA mapping pre/post-purge",
+      "description": "Record pre/post filter-repo SHA mapping in WORKSPACE_IDENTITY.md",
+      "priority": "MEDIUM",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-095-5",
+      "title": "GitHub Actions CI básico",
+      "description": "Set up basic lint + build CI workflow after branch protection",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 95,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -1841,6 +1886,85 @@
         "lastReinforced": "2026-04-28T01:04:34.413Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-95-1777338453119-0",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.119Z",
+      "type": "PATTERN",
+      "title": "Verify state before requesting manual user action",
+      "description": "Use gh api to check actual GitHub state before asking user to perform UI tasks",
+      "context": "When roadmap suggests manual GitHub UI actions",
+      "applicability": [
+        "github",
+        "verification",
+        "automation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.119Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453125-1",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.125Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "GitHub auto-promotes first pushed branch as default",
+      "description": "Empty repos auto-set default branch on first push -u; no manual UI step needed",
+      "context": "After git push -u origin main on a freshly created empty repo",
+      "applicability": [
+        "github",
+        "git",
+        "default-branch"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.125Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453128-2",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.128Z",
+      "type": "PATTERN",
+      "title": "Verify .env absence in remote history after purge",
+      "description": "git log --all --full-history -- '**/.env' must return empty to confirm filter-repo persisted",
+      "context": "Post-push validation after git filter-repo credential purge",
+      "applicability": [
+        "security",
+        "git-filter-repo",
+        "validation"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.128Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-95-1777338453132-3",
+      "cycle": 95,
+      "timestamp": "2026-04-28T01:07:33.132Z",
+      "type": "INSIGHT",
+      "title": "Repo visibility was private, not public as legacy roadmap claimed",
+      "description": "AmaCafeDos repo is private; older roadmap notes had stale visibility info",
+      "context": "When trusting legacy roadmap entries about repo metadata",
+      "applicability": [
+        "roadmap-hygiene",
+        "github"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T01:07:33.132Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -1960,9 +2084,13 @@
     "[2026-04-28T01:04:34.415Z] Default branch en GitHub UI aún debe configurarse manualmente como main",
     "[2026-04-28T01:04:34.417Z] Inspección visual pendiente: confirmar que ningún .env aparece en commits del repo público",
     "[2026-04-28T01:04:34.419Z] Rotación de credenciales pendiente antes de deploy Railway: ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB",
-    "[2026-04-28T01:04:34.421Z] Discrepancia resuelta: nomenclatura tag c77 vs c78 — siempre verificar con git tag -l antes de referenciar"
+    "[2026-04-28T01:04:34.421Z] Discrepancia resuelta: nomenclatura tag c77 vs c78 — siempre verificar con git tag -l antes de referenciar",
+    "[2026-04-28T01:07:33.134Z] Repo creynals/AmaCafeDos is PRIVATE (not public)",
+    "[2026-04-28T01:07:33.136Z] Default branch already main; branch protection still pending",
+    "[2026-04-28T01:07:33.138Z] Next HIGH priority is credential rotation (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB)",
+    "[2026-04-28T01:07:33.140Z] Railway deploy Decision Gate R1-R8 blocked on credential rotation"
   ],
-  "lastUpdated": "2026-04-28T01:05:25.823Z",
+  "lastUpdated": "2026-04-28T01:21:57.171Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",

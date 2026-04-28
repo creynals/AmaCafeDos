@@ -100,6 +100,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-095 | Validate GitHub state via gh api before delegating manual UI tasks to user | Tasks may already be auto-completed; avoids unnecessary user friction | 2026-04-28 | 95 |
 | DEC-094 | Ejecutar Option B: rename master→main, push inicial, push tag pre-purge-c78 | Balance entre seguridad (tag respaldo) y simplicidad (sin force-push ni re-purga) | 2026-04-28 | 94 |
 | DEC-093 | Decision Gate abierto: estrategia de push inicial a AmaCafeDos (Option A/B/C) | Usuario autorizó push pero mecánica (rename, tags, protección) requiere confirmación explícita | 2026-04-28 | 93 |
 | DEC-087-3 | Stage cleanup deletions but defer commit to user | 1247-file deletion is dramatic; user must visually confirm before history changes | 2026-04-28 | 87 |
@@ -169,6 +170,10 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 95] Default branch on AmaCafeDos = main (verified via gh api)
+- [Cycle 95] Only branch on remote = main; no stale branches to clean
+- [Cycle 95] Last push timestamp 2026-04-28T01:02:39Z matches C94 push
+- [Cycle 95] C78 filter-repo purge of .env remains intact after C94 push
 - [Cycle 94] Remote origin: https://github.com/creynals/AmaCafeDos.git
 - [Cycle 94] main HEAD remoto: d888a2f
 - [Cycle 94] Tag pre-purge-c78 remota: 347807f
