@@ -1216,7 +1216,7 @@
         "synaptic-protocol"
       ],
       "confidence": {
-        "score": 0.6000000000000001,
+        "score": 0.30000000000000004,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T00:14:04.520Z",
         "source": "EXPLICIT"
@@ -2318,7 +2318,7 @@
     "[2026-04-28T02:37:34.520Z] Tags rollback disponibles en origin: pre-rebase-c107, pre-railway-c102",
     "[2026-04-28T02:37:34.522Z] Divergencia 4↑/1↓ resuelta sin operaciones destructivas"
   ],
-  "lastUpdated": "2026-04-28T02:57:40.373Z",
+  "lastUpdated": "2026-04-28T03:04:39.205Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
