@@ -102,6 +102,7 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-112 | Ejecutar bloque pre-deploy en dos ciclos: rotación secretos (C112+C113) y infra Railway (C114+C115) | Atomicidad por dominio: separar crypto local de infra cloud reduce blast radius y permite verificación intermedia | 2026-04-28 | 112 |
 | DEC-107 | Reconciliar divergencia main vía rebase --onto con drop de eea6d78 + push FF | Evita --force, preserva historia lineal, recuperable por tag pre-rebase-c107 | 2026-04-28 | 107 |
 | DEC-106 | Reconciliar main vía rebase --onto descartando commit duplicado eea6d78 | Preserva bookkeeping C105/C106, elimina ruido del duplicado, push fast-forward sin --force | 2026-04-28 | 106 |
 | DEC-104 | Untrack .synaptic/backups/INTELLIGENCE_*.json + create pre-railway-c102 tag | Establish clean rollback anchor before Railway deploy R1-R8 | 2026-04-28 | 104 |
@@ -180,6 +181,9 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 112] Pre-flight obligatorio: pg_dump + snapshot .env + verificar rows cifradas + tests round-trip keyManager
+- [Cycle 112] Documentación rotación va en docs/CREDENTIAL_ROTATION_C112-C113.md (gitignored, sin valores)
+- [Cycle 112] Tag pre-railway-c102 disponible como rollback anchor
 - [Cycle 107] SHA mapping post-rebase: dae064c→bf7ad7a, 8226645→5622fb3, b5e33db→f8c3ddb
 - [Cycle 107] Tag pre-rebase-c107 publicado en origin como punto de rollback
 - [Cycle 107] Los 3 commits ahead eran puramente estado SYNAPTIC (harness/BITACORA/INTELLIGENCE)
