@@ -929,91 +929,9 @@
         "phase-2"
       ],
       "confidence": {
-        "score": 0.44999999999999996,
+        "score": 0.35,
         "evidenceCount": 2,
         "lastReinforced": "2026-04-27T22:24:09.789Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415068-1",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.068Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "git filter-repo recomendado oficialmente sobre filter-branch",
-      "description": "Es el sustituto oficial de Git para reescritura de historial; cubre archivos y contenido",
-      "context": "Purga de secretos del historial git",
-      "applicability": [
-        "git",
-        "security",
-        "history-rewrite",
-        "secrets"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.068Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415071-2",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.071Z",
-      "type": "INSIGHT",
-      "title": "Rotación de credenciales es prerequisito Y obligatorio post-purga",
-      "description": "Aunque se rote antes, tras purgar historial deben rotarse TODAS las credenciales expuestas",
-      "context": "Operaciones de purga de .env del historial",
-      "applicability": [
-        "security",
-        "credentials-rotation",
-        "post-purge"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.071Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415074-3",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.074Z",
-      "type": "ANTI_PATTERN",
-      "title": "Recreación total destruye trazabilidad SYNAPTIC",
-      "description": "Squash inicial rompe vínculo BITACORA↔commits y contradice principio Traceable",
-      "context": "Decisiones sobre limpieza de historial en proyectos SYNAPTIC",
-      "applicability": [
-        "synaptic-principles",
-        "traceability",
-        "anti-pattern"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.074Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-77-1777327415077-4",
-      "cycle": 77,
-      "timestamp": "2026-04-27T22:03:35.077Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Backup obligatorio + tag pre-purge antes de force-push",
-      "description": "Zip de .git+working tree y tag pre-purge-c77 permiten rollback granular",
-      "context": "Antes de cualquier operación destructiva sobre historial git",
-      "applicability": [
-        "git",
-        "backup",
-        "rollback",
-        "safety"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-27T22:03:35.077Z",
         "source": "INFERRED"
       }
     },
@@ -2090,7 +2008,7 @@
     "[2026-04-28T01:07:33.138Z] Next HIGH priority is credential rotation (ENCRYPTION_SECRET, SumUp, reCAPTCHA, JWT, DB)",
     "[2026-04-28T01:07:33.140Z] Railway deploy Decision Gate R1-R8 blocked on credential rotation"
   ],
-  "lastUpdated": "2026-04-28T01:26:59.744Z",
+  "lastUpdated": "2026-04-28T01:32:29.005Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -4292,6 +4210,88 @@
         "score": 0.19999999999999998,
         "evidenceCount": 1,
         "lastReinforced": "2026-04-27T04:22:26.577Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415068-1",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.068Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "git filter-repo recomendado oficialmente sobre filter-branch",
+      "description": "Es el sustituto oficial de Git para reescritura de historial; cubre archivos y contenido",
+      "context": "Purga de secretos del historial git",
+      "applicability": [
+        "git",
+        "security",
+        "history-rewrite",
+        "secrets"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.068Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415071-2",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.071Z",
+      "type": "INSIGHT",
+      "title": "Rotación de credenciales es prerequisito Y obligatorio post-purga",
+      "description": "Aunque se rote antes, tras purgar historial deben rotarse TODAS las credenciales expuestas",
+      "context": "Operaciones de purga de .env del historial",
+      "applicability": [
+        "security",
+        "credentials-rotation",
+        "post-purge"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.071Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415074-3",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.074Z",
+      "type": "ANTI_PATTERN",
+      "title": "Recreación total destruye trazabilidad SYNAPTIC",
+      "description": "Squash inicial rompe vínculo BITACORA↔commits y contradice principio Traceable",
+      "context": "Decisiones sobre limpieza de historial en proyectos SYNAPTIC",
+      "applicability": [
+        "synaptic-principles",
+        "traceability",
+        "anti-pattern"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.074Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-77-1777327415077-4",
+      "cycle": 77,
+      "timestamp": "2026-04-27T22:03:35.077Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "Backup obligatorio + tag pre-purge antes de force-push",
+      "description": "Zip de .git+working tree y tag pre-purge-c77 permiten rollback granular",
+      "context": "Antes de cualquier operación destructiva sobre historial git",
+      "applicability": [
+        "git",
+        "backup",
+        "rollback",
+        "safety"
+      ],
+      "confidence": {
+        "score": 0.19999999999999998,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-27T22:03:35.077Z",
         "source": "INFERRED"
       }
     }
