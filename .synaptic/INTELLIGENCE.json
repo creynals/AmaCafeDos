@@ -1654,25 +1654,6 @@
   ],
   "learnings": [
     {
-      "learningId": "learning-106-1777343533316-5",
-      "cycle": 106,
-      "timestamp": "2026-04-28T02:32:13.316Z",
-      "type": "USER_PREFERENCE",
-      "title": "Option B balanceado consolidado 5/5",
-      "description": "Usuario elige Option B (balanceado/recomendada) en 5 de últimas 5 decisiones — confianza ~90%",
-      "context": "Decision Gate Phase 1 con tres opciones A/B/C",
-      "applicability": [
-        "decision-gate",
-        "user-pattern"
-      ],
-      "confidence": {
-        "score": 0.5,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:32:13.316Z",
-        "source": "EXPLICIT"
-      }
-    },
-    {
       "learningId": "learning-112-1777347226694-0",
       "cycle": 112,
       "timestamp": "2026-04-28T03:33:46.694Z",
@@ -2775,7 +2756,7 @@
     "[2026-04-28T18:43:10.390Z] Commit 4ba6087 has generic PRE message but contains the productive C135 delta",
     "[2026-04-28T18:43:10.392Z] Branch fix/c135-serve-bind-explicit pushed; PR #6 open and awaiting merge"
   ],
-  "lastUpdated": "2026-04-28T18:59:00.841Z",
+  "lastUpdated": "2026-04-28T19:07:52.420Z",
   "archivedLearnings": [
     {
       "learningId": "learning-3-1777215334650-6",
@@ -6631,6 +6612,25 @@
         "evidenceCount": 2,
         "lastReinforced": "2026-04-28T02:37:34.504Z",
         "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-106-1777343533316-5",
+      "cycle": 106,
+      "timestamp": "2026-04-28T02:32:13.316Z",
+      "type": "USER_PREFERENCE",
+      "title": "Option B balanceado consolidado 5/5",
+      "description": "Usuario elige Option B (balanceado/recomendada) en 5 de últimas 5 decisiones — confianza ~90%",
+      "context": "Decision Gate Phase 1 con tres opciones A/B/C",
+      "applicability": [
+        "decision-gate",
+        "user-pattern"
+      ],
+      "confidence": {
+        "score": 0.19999999999999996,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T02:32:13.316Z",
+        "source": "EXPLICIT"
       }
     }
   ]
