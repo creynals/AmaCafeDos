@@ -103,6 +103,12 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-129-D | Branch off fix/c127-railway-frontend-ebusy as fix/c128-railway-node-version | Preserve C127 EBUSY fix; merge order C127 first, C128 second | 2026-04-28 | 129 |
+| DEC-129-C | Skip Fix C (NIXPACKS_NODE_VERSION env) unless Fix A fails | Over-configuration; engines.node is the canonical mechanism | 2026-04-28 | 129 |
+| DEC-129-B | Move root railway.toml to backend/railway.toml (Fix B.1) | Eliminates two-TOML ambiguity; matches per-service Root Directory pattern | 2026-04-28 | 129 |
+| DEC-129-A | Pin engines.node >=22.12.0 in both backend and frontend package.json | Vite 8 floor + forces Nixpacks past Railway default Node 22.0/22.1 | 2026-04-28 | 129 |
+| DEC-127-02 | Adopt C123 PR-only pattern as default for main-targeted commits | Branch protection on main is now enforced; direct push always fails | 2026-04-28 | 127 |
+| DEC-127-01 | frontend/railway.toml buildCommand reduced to 'npm run build' only | Nixpacks already runs npm ci with BuildKit cache mount; duplicating it caused EBUSY | 2026-04-28 | 127 |
 | DEC-123B | Sprint A debe ejecutarse vía PR (Option A recomendada) | Respeta branch protection, deja audit trail, no abre ventana de desprotección | 2026-04-28 | 123 |
 | DEC-123A | No crear tag pre-deploy si push falló | Evita tags huérfanos apuntando a SHAs no remotos (lección C115/C116) | 2026-04-28 | 123 |
 | DEC-C121-RECONCILE | Adoptar TRUTH_RECONCILIATION_C120.md como artefacto formal de inventario declarado-vs-verificado | Cerrar deuda de auditoría retroactiva tras descubrir mentiras en C115/C116 | 2026-04-28 | 121 |
@@ -191,6 +197,11 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 129] git mv preserves rename detection (100% similarity) for railway.toml relocation
+- [Cycle 129] Railway UI Root Directory must match TOML location for service to discover config
+- [Cycle 127] frontend/railway.toml:28 buildCommand = 'npm run build' (no npm ci prefix)
+- [Cycle 127] backend has no railway.toml — relies on Nixpacks auto-detection
+- [Cycle 127] PR #2 opened: https://github.com/creynals/AmaCafeDos/pull/2
 - [Cycle 123] Remote origin: https://github.com/creynals/AmaCafeDos.git
 - [Cycle 123] Branch protection en main bloquea push directo (GH006)
 - [Cycle 123] 17 commits locales pendientes (cycles 108→123 PRE) sin secretos en diff
@@ -327,6 +338,7 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 129, 2026-04-28] Railway config now per-service: backend/railway.toml + frontend/railway.toml (no root toml)
 - [Cycle 121, 2026-04-28] Backlog reorganizado: rotación bloquea hasta despliegue Railway, no a la inversa
 - [Cycle 120, 2026-04-28] Roadmap repriorizado: Railway Deploy R1-R8 promovido a top HIGH; rotación marcada DEFERRED-TO-PROD
 - [Cycle 104, 2026-04-28] Repo state: origin/main at cab5f03, tag pre-railway-c102 at 47974e1d as rollback anchor

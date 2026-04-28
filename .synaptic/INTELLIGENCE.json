@@ -1587,6 +1587,42 @@
       "status": "PLANNED",
       "createdAtCycle": 123,
       "dependencies": []
+    },
+    {
+      "itemId": "ROAD-127-01",
+      "title": "Merge PR #2 (railway frontend EBUSY fix)",
+      "description": "Squash or merge https://github.com/creynals/AmaCafeDos/pull/2 to deliver the fix",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 127,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-127-02",
+      "title": "Verify VITE_API_BASE_URL in Railway frontend service",
+      "description": "UI check in Railway → frontend service → Variables before triggering redeploy",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 127,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-127-03",
+      "title": "Trigger frontend redeploy and confirm success",
+      "description": "After PR merge + env var verification, trigger redeploy and validate 1st-attempt success",
+      "priority": "HIGH",
+      "status": "PLANNED",
+      "createdAtCycle": 127,
+      "dependencies": []
+    },
+    {
+      "itemId": "ROAD-127-04",
+      "title": "Update backlog: mark 'Branch protection on main' as DONE",
+      "description": "Backlog still lists this as PLANNED HIGH but it is already enforced",
+      "priority": "LOW",
+      "status": "PLANNED",
+      "createdAtCycle": 127,
+      "dependencies": []
     }
   ],
   "learnings": [
@@ -1647,67 +1683,6 @@
         "evidenceCount": 1,
         "lastReinforced": "2026-04-28T02:32:13.316Z",
         "source": "EXPLICIT"
-      }
-    },
-    {
-      "learningId": "learning-107-1777343854508-1",
-      "cycle": 107,
-      "timestamp": "2026-04-28T02:37:34.508Z",
-      "type": "PATTERN",
-      "title": "Tag de respaldo pre-rebase",
-      "description": "Crear tag pre-rebase-cXXX antes de history rewrite permite rollback sin reflog",
-      "context": "Antes de cualquier rebase/reset que reescriba historia local",
-      "applicability": [
-        "git",
-        "safety",
-        "rollback",
-        "synaptic"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:37:34.508Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-107-1777343854512-2",
-      "cycle": 107,
-      "timestamp": "2026-04-28T02:37:34.512Z",
-      "type": "TECHNICAL_NOTE",
-      "title": "Validación de duplicado por árbol+timestamp",
-      "description": "Comparar árbol git (líneas modificadas) y timestamp confirma equivalencia funcional pese a mensajes distintos",
-      "context": "Diagnóstico previo a drop en rebase para evitar pérdida de cambios reales",
-      "applicability": [
-        "git",
-        "diff",
-        "diagnosis"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:37:34.512Z",
-        "source": "INFERRED"
-      }
-    },
-    {
-      "learningId": "learning-107-1777343854515-3",
-      "cycle": 107,
-      "timestamp": "2026-04-28T02:37:34.515Z",
-      "type": "INSIGHT",
-      "title": "Push fast-forward post-rebase evita --force",
-      "description": "Si origin solo tenía el duplicado dropable, post-rebase el push es FF natural sin --force",
-      "context": "Reconciliación local↔remote cuando divergencia es solo por duplicado",
-      "applicability": [
-        "git",
-        "push",
-        "safety"
-      ],
-      "confidence": {
-        "score": 0.3,
-        "evidenceCount": 1,
-        "lastReinforced": "2026-04-28T02:37:34.515Z",
-        "source": "INFERRED"
       }
     },
     {
@@ -2413,6 +2388,129 @@
         "lastReinforced": "2026-04-28T04:18:22.165Z",
         "source": "INFERRED"
       }
+    },
+    {
+      "learningId": "learning-127-1777392743194-0",
+      "cycle": 127,
+      "timestamp": "2026-04-28T16:12:23.194Z",
+      "type": "ANTI_PATTERN",
+      "title": "Nixpacks buildCommand duplicating npm install causes EBUSY",
+      "description": "With builder=NIXPACKS, buildCommand must never include npm ci/install — collides with BuildKit cache mount",
+      "context": "Railway services using Nixpacks builder with custom railway.toml buildCommand",
+      "applicability": [
+        "railway",
+        "nixpacks",
+        "deployment",
+        "frontend"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T16:12:23.194Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-127-1777392743200-1",
+      "cycle": 127,
+      "timestamp": "2026-04-28T16:12:23.200Z",
+      "type": "INSIGHT",
+      "title": "Railway frontend/backend config asymmetry",
+      "description": "Backend has no railway.toml (Nixpacks auto-detects); frontend has explicit one — manual authoring is the risk surface",
+      "context": "When debugging Railway deploy failures, check whether the failing service has explicit railway.toml overrides",
+      "applicability": [
+        "railway",
+        "monorepo",
+        "deployment"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T16:12:23.200Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-127-1777392743204-2",
+      "cycle": 127,
+      "timestamp": "2026-04-28T16:12:23.204Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "main branch protection is now active on AmaCafeDos",
+      "description": "Direct push to main fails GH006; must use PR pattern (C123 fallback) — backlog item silently completed",
+      "context": "Any commit targeting main on AmaCafeDos repo",
+      "applicability": [
+        "git",
+        "github",
+        "branch-protection",
+        "workflow"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T16:12:23.204Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-127-1777392743208-3",
+      "cycle": 127,
+      "timestamp": "2026-04-28T16:12:23.208Z",
+      "type": "PATTERN",
+      "title": "Verify-after-edit before commit",
+      "description": "Re-read/grep the edited file physically before committing — C53/C57 lesson applied successfully",
+      "context": "Every implementation cycle that modifies files",
+      "applicability": [
+        "workflow",
+        "verification",
+        "synaptic"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T16:12:23.208Z",
+        "source": "INFERRED"
+      }
+    },
+    {
+      "learningId": "learning-127-1777392743212-4",
+      "cycle": 127,
+      "timestamp": "2026-04-28T16:12:23.212Z",
+      "type": "USER_PREFERENCE",
+      "title": "User authorizes PR pattern as fallback when direct-to-main fails",
+      "description": "User explicitly allows C123 PR pattern as fallback if direct push is blocked",
+      "context": "Commits where user offers 'direct or PR' choice",
+      "applicability": [
+        "workflow",
+        "git",
+        "user-preference"
+      ],
+      "confidence": {
+        "score": 0.9,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T16:12:23.212Z",
+        "source": "EXPLICIT"
+      }
+    },
+    {
+      "learningId": "learning-127-1777392743215-5",
+      "cycle": 127,
+      "timestamp": "2026-04-28T16:12:23.215Z",
+      "type": "TECHNICAL_NOTE",
+      "title": "VITE_API_BASE_URL is inlined at build time",
+      "description": "Must be set in Railway env vars BEFORE redeploy — bundle bakes the value, runtime changes have no effect",
+      "context": "Vite frontend deployments needing backend API URL",
+      "applicability": [
+        "vite",
+        "railway",
+        "env-vars",
+        "build-time"
+      ],
+      "confidence": {
+        "score": 0.3,
+        "evidenceCount": 1,
+        "lastReinforced": "2026-04-28T16:12:23.215Z",
+        "source": "INFERRED"
+      }
     }
   ],
   "implementationState": {
@@ -2598,7 +2696,11 @@
     "[2026-04-28T04:18:22.168Z] Sprint A en estado HALT-AWAITING-INPUT, no SUCCESS",
     "[2026-04-28T04:18:22.171Z] Tag pre-deploy-c123 NO creado intencionalmente",
     "[2026-04-28T04:18:22.173Z] Recomendación SYNAPTIC: Option A (PR único con 17 commits)",
-    "[2026-04-28T04:18:22.175Z] Verificación final requerida: git ls-remote --tags origin pre-deploy-c123"
+    "[2026-04-28T04:18:22.175Z] Verificación final requerida: git ls-remote --tags origin pre-deploy-c123",
+    "[2026-04-28T16:12:23.218Z] Branch protection on main is ACTIVE on AmaCafeDos — backlog item silently completed",
+    "[2026-04-28T16:12:23.221Z] Commit 51845e4 lives on branch fix/c127-railway-frontend-ebusy, awaiting PR #2 merge",
+    "[2026-04-28T16:12:23.223Z] Frontend Railway deploy expected to succeed on 1st attempt post-merge if VITE_API_BASE_URL is set",
+    "[2026-04-28T16:12:23.225Z] BITACORA C127 entry at lines 6601-6675"
   ],
   "lastUpdated": "2026-04-28T16:07:57.024Z",
   "archivedLearnings": [

@@ -1,12 +1,12 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-28T04:10:54.192Z",
+  "lastUpdated": "2026-04-28T16:56:33.467Z",
   "summary": {
-    "totalCyclesAudited": 50,
-    "averageScore": 53,
-    "currentStreak": 3,
-    "lastAuditCycle": 121,
-    "lastAuditTimestamp": "2026-04-28T04:10:54.192Z",
+    "totalCyclesAudited": 52,
+    "averageScore": 54,
+    "currentStreak": 5,
+    "lastAuditCycle": 129,
+    "lastAuditTimestamp": "2026-04-28T16:56:33.467Z",
     "lastAuditGrade": "A"
   },
   "scoreHistory": [
@@ -309,6 +309,18 @@
       "score": 100,
       "grade": "A",
       "timestamp": "2026-04-28T04:10:54.192Z"
+    },
+    {
+      "cycle": 127,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-28T16:11:56.955Z"
+    },
+    {
+      "cycle": 129,
+      "score": 100,
+      "grade": "A",
+      "timestamp": "2026-04-28T16:56:33.467Z"
     }
   ],
   "findingsAggregate": {
