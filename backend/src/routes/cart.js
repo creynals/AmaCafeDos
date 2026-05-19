@@ -140,7 +140,7 @@ router.delete('/cart/:id/items/:itemId', async (req, res) => {
 
   await query('UPDATE carts SET updated_at = NOW() WHERE id = $1', [req.params.id]);
 
-  res.json({ message: 'Item eliminado del carrito' });
+  res.json(await getCartResponse(req.params.id));
 });
 
 // DELETE /api/cart/:id - Clear entire cart
