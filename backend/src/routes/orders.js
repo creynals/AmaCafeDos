@@ -97,13 +97,29 @@ router.post('/orders', async (req, res) => {
   try {
     await client.query('BEGIN');
 
+    // C156: upsert customer por email normalizado y vincular order.customer_id.
+    // Antes solo se persistían contact_* inline en orders, dejando la tabla
+    // customers desconectada de los pedidos reales (la lista admin solo veía
+    // datos semilla).
+    const normalizedEmail = contact.email.trim().toLowerCase();
+    const { rows: customerRows } = await client.query(
+      `INSERT INTO customers (name, email, phone)
+       VALUES ($1, $2, $3)
+       ON CONFLICT (email) DO UPDATE
+         SET name = EXCLUDED.name,
+             phone = EXCLUDED.phone
+       RETURNING id`,
+      [contact.name, normalizedEmail, contact.phone]
+    );
+    const customerId = customerRows[0].id;
+
     const { rows: orderRows } = await client.query(`
-      INSERT INTO orders (cart_id, contact_name, contact_email, contact_phone,
+      INSERT INTO orders (customer_id, cart_id, contact_name, contact_email, contact_phone,
         address_street, address_number, address_commune, address_city, address_notes,
         payment_method, subtotal, total, customer_instructions)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING id
     `, [
-      cart_id, contact.name, contact.email, contact.phone,
+      customerId, cart_id, contact.name, contact.email, contact.phone,
       address.street, address.number, address.commune, address.city, address.notes || null,
       normalizedMethod, subtotal, total, normalizedInstructions
     ]);
