@@ -322,7 +322,9 @@ router.get('/admin/customers-summary', async (req, res) => {
 //                      address_city, sumup_transaction_code.
 //   status           — uno o más fulfillment statuses (csv).
 //   payment_status   — uno o más payment statuses (csv).
-//   payment_method   — single value (efectivo|transferencia|tarjeta|...).
+//   payment_method   — single value (transferencia|tarjeta|...). Acepta
+//                      'efectivo' sólo como filtro de órdenes históricas
+//                      (legacy; deshabilitado para nuevas órdenes en C155).
 //   from, to         — rango de fechas (YYYY-MM-DD) sobre created_at.
 //   sort             — created_at_desc (default) | created_at_asc |
 //                      total_desc | total_asc.

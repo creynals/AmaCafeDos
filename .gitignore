@@ -40,3 +40,6 @@ coverage/
 # Canonical .synaptic/INTELLIGENCE.json IS tracked; only timestamped backups are ignored
 .synaptic/backups/INTELLIGENCE_*.json
 .synaptic/intelligence/INTELLIGENCE_*.json
+
+# --- SYNAPTIC deploy verification checklists (local, per-cycle) ---
+DEPLOY_VERIFICATION_C*.md

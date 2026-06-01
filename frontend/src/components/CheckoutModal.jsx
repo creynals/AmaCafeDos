@@ -16,14 +16,17 @@ const STEPS = [
 /**
  * Métodos de pago.
  *
- * Ciclo 31 (Option C, DG #3): mantenemos los 4 botones (efectivo,
- * transferencia, tarjeta débito, tarjeta crédito) como UX. Los dos botones
- * de tarjeta envían `payment_method: 'tarjeta'` al backend (unificado). La
- * marca real (VISA/MASTERCARD/...) se muestra post-autorización vía
+ * Ciclo 31 (Option C, DG #3): los dos botones de tarjeta envían
+ * `payment_method: 'tarjeta'` al backend (unificado). La marca real
+ * (VISA/MASTERCARD/...) se muestra post-autorización vía
  * orders.card_scheme poblado por el webhook desde la respuesta de SumUp.
+ *
+ * Ciclo 155 (OPTION B): se eliminó la opción "efectivo" del checkout por
+ * requerimiento del cliente (C152 item 4). Las órdenes históricas con
+ * payment_method='efectivo' siguen siendo legibles en admin/cocina; sólo
+ * se removió la opción de selección en el flujo de compra del storefront.
  */
 const PAYMENT_METHODS = [
-  { id: 'efectivo',       label: 'Efectivo',        desc: 'Pago al momento de la entrega', backendValue: 'efectivo' },
   { id: 'transferencia',  label: 'Transferencia',   desc: 'Transferencia bancaria',        backendValue: 'transferencia' },
   { id: 'tarjeta_debito', label: 'Tarjeta Débito',  desc: 'Pago seguro con tarjeta',       backendValue: 'tarjeta' },
   { id: 'tarjeta_credito',label: 'Tarjeta Crédito', desc: 'Pago seguro con tarjeta',       backendValue: 'tarjeta' },

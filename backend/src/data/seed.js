@@ -18,7 +18,7 @@ async function seed() {
   // Insert categories
   const categories = [
     ['caffe', 'Caffè', 'Cafés calientes preparados con granos de especialidad', 1],
-    ['iced', 'Iced Drinks', 'Bebidas frías y refrescantes', 2],
+    ['iced', 'Bebidas heladas', 'Bebidas frías y refrescantes', 2],
     ['te_infusiones', 'Té e Infusiones', 'Tés, matcha e infusiones', 3],
     ['helados', 'Helados', 'Copas de helado artesanal', 4],
     ['panaderia', 'Panadería', 'Croissants, pan de chocolate y más', 5],
@@ -57,7 +57,7 @@ async function seed() {
     [categoryIds.caffe, 'Café Massa Cardo', 'Café especial con cacao amarillo y frambuesa deshidratada', 3500, '/images/products/specialty.jpg', 25, 16],
     [categoryIds.caffe, 'Café Massa Mahir', 'Café especial con amaretti, canela y cardamomo', 3500, '/images/products/specialty.jpg', 25, 17],
 
-    // Iced Drinks
+    // Bebidas heladas (Iced Drinks)
     [categoryIds.iced, 'Iced Coffee', 'Shot de café + hielo + agua', 3000, '/images/products/iced-coffee.jpg', 70, 1],
     [categoryIds.iced, 'Iced Cold Brew', 'Shot cold brew + hielo + agua', 3500, '/images/products/iced-coffee.jpg', 50, 2],
     [categoryIds.iced, 'Iced Cold Brew Tonic/Ginger', 'Shot cold brew + agua tónica o ginger', 4500, '/images/products/iced-tonic.jpg', 35, 3],
@@ -132,161 +132,14 @@ async function seed() {
     }
   }
 
-  // =============================================
-  // SEED: Customers
-  // =============================================
-  const customers = [
-    ['María González', 'maria.gonzalez@gmail.com', '+56912345678', '2025-11-15 10:30:00'],
-    ['Pedro Soto', 'pedro.soto@outlook.com', '+56923456789', '2025-11-20 14:15:00'],
-    ['Camila Fernández', 'camila.fern@gmail.com', '+56934567890', '2025-12-01 09:00:00'],
-    ['Andrés Muñoz', 'andres.munoz@yahoo.com', '+56945678901', '2025-12-05 16:45:00'],
-    ['Valentina Rojas', 'vale.rojas@hotmail.com', '+56956789012', '2025-12-10 11:20:00'],
-    ['Sebastián Torres', 'seba.torres@gmail.com', '+56967890123', '2025-12-15 08:30:00'],
-    ['Francisca López', 'fran.lopez@gmail.com', '+56978901234', '2025-12-20 13:00:00'],
-    ['Matías Herrera', 'matias.h@outlook.com', '+56989012345', '2026-01-05 10:00:00'],
-    ['Catalina Díaz', 'cata.diaz@gmail.com', '+56990123456', '2026-01-10 15:30:00'],
-    ['Nicolás Vargas', 'nico.vargas@gmail.com', '+56901234567', '2026-01-15 09:45:00'],
-    ['Isidora Contreras', 'isi.contreras@yahoo.com', '+56911112222', '2026-01-20 12:00:00'],
-    ['Tomás Ramírez', 'tomas.ramirez@gmail.com', '+56922223333', '2026-01-25 14:30:00'],
-    ['Antonia Silva', 'antonia.silva@hotmail.com', '+56933334444', '2026-02-01 08:15:00'],
-    ['Felipe Morales', 'felipe.m@gmail.com', '+56944445555', '2026-02-10 16:00:00'],
-    ['Josefa Castillo', 'josefa.c@outlook.com', '+56955556666', '2026-02-15 11:45:00'],
-    ['Benjamín Pizarro', 'benja.pizarro@gmail.com', '+56966667777', '2026-02-20 09:30:00'],
-    ['Amanda Reyes', 'amanda.reyes@gmail.com', '+56977778888', '2026-02-25 13:15:00'],
-    ['Diego Fuentes', 'diego.fuentes@yahoo.com', '+56988889999', '2026-03-01 10:45:00'],
-    ['Renata Guzmán', 'renata.g@hotmail.com', '+56999990000', '2026-03-05 15:00:00'],
-    ['Joaquín Espinoza', 'joaquin.e@gmail.com', '+56900001111', '2026-03-10 08:00:00'],
-  ];
-
-  const customerIds = [];
-  for (const [name, email, phone, created_at] of customers) {
-    const { rows } = await query(
-      'INSERT INTO customers (name, email, phone, created_at) VALUES ($1, $2, $3, $4) RETURNING id',
-      [name, email, phone, created_at]
-    );
-    customerIds.push(rows[0].id);
-  }
-
-  // =============================================
-  // SEED: Orders with realistic sales data
-  // =============================================
-
-  // Get all product info for building orders
-  const { rows: allProducts } = await query('SELECT id, name, price FROM products');
-  const productMap = {};
-  for (const p of allProducts) {
-    productMap[p.id] = p;
-  }
-
-  const communes = ['Providencia', 'Las Condes', 'Ñuñoa', 'Santiago Centro', 'Vitacura', 'La Reina'];
-  const streets = ['Av. Providencia', 'Los Leones', 'Av. Apoquindo', 'Av. Italia', 'Av. Vitacura', 'Tobalaba'];
-  const paymentMethods = ['efectivo', 'debito', 'credito', 'transferencia'];
-
-  // Helper: pseudo-random using a seed for reproducibility
-  let rngSeed = 42;
-  function rng() {
-    rngSeed = (rngSeed * 1103515245 + 12345) & 0x7fffffff;
-    return rngSeed / 0x7fffffff;
-  }
-
-  function pickRandom(arr) {
-    return arr[Math.floor(rng() * arr.length)];
-  }
-
-  const customerOrderCounts = [
-    18, 14, 12, 9, 15, 7, 11, 5, 13, 6, 8, 4, 10, 3, 7, 5, 9, 2, 6, 3,
-  ];
-
-  const popularProducts = [0,1,4,5,8,9,11,12,17,18,20,25,26,28,31,32,36,37,40];
-  const premiumProducts = [13,19,22,29,30,40,41,42];
-
-  const startDate = new Date('2025-12-01');
-  const endDate = new Date('2026-03-25');
-
-  for (let ci = 0; ci < customerIds.length; ci++) {
-    const customerId = customerIds[ci];
-    const orderCount = customerOrderCounts[ci];
-    const customer = customers[ci];
-
-    for (let oi = 0; oi < orderCount; oi++) {
-      const dayRange = (endDate - startDate) / (1000 * 60 * 60 * 24);
-      const orderDay = Math.floor(rng() * dayRange);
-      const orderDate = new Date(startDate);
-      orderDate.setDate(orderDate.getDate() + orderDay);
-      const hour = 8 + Math.floor(rng() * 12);
-      const minute = Math.floor(rng() * 60);
-      orderDate.setHours(hour, minute, 0, 0);
-      const dateStr = orderDate.toISOString().replace('T', ' ').substring(0, 19);
-
-      const r = rng();
-      const itemCount = r < 0.15 ? 1 : r < 0.55 ? 2 : r < 0.85 ? 3 : 4;
-
-      const orderProductIndices = new Set();
-      for (let ii = 0; ii < itemCount; ii++) {
-        const usePopular = rng() < 0.7;
-        if (usePopular) {
-          orderProductIndices.add(pickRandom(popularProducts));
-        } else {
-          orderProductIndices.add(Math.floor(rng() * products.length));
-        }
-      }
-
-      if (ci < 5 && rng() < 0.3) {
-        orderProductIndices.add(pickRandom(premiumProducts));
-      }
-
-      let subtotal = 0;
-      const items = [];
-      for (const pi of orderProductIndices) {
-        const pid = productIds[pi];
-        const product = productMap[pid];
-        if (!product) continue;
-        const qty = rng() < 0.3 ? 2 : 1;
-        const itemSubtotal = product.price * qty;
-        subtotal += itemSubtotal;
-        items.push({ product_id: pid, name: product.name, price: product.price, quantity: qty, subtotal: itemSubtotal });
-      }
-
-      if (items.length === 0) continue;
-
-      const commune = pickRandom(communes);
-      const street = pickRandom(streets);
-      const streetNum = String(100 + Math.floor(rng() * 9900));
-      const payment = pickRandom(paymentMethods);
-      const status = rng() < 0.9 ? 'completed' : 'pending';
-
-      const { rows: orderRows } = await query(`
-        INSERT INTO orders (customer_id, cart_id, status, contact_name, contact_email, contact_phone,
-          address_street, address_number, address_commune, address_city, address_notes,
-          payment_method, subtotal, total, created_at)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id
-      `, [
-        customerId, null, status, customer[0], customer[1], customer[2],
-        street, streetNum, commune, 'Santiago', null,
-        payment, subtotal, subtotal, dateStr
-      ]);
-
-      const orderId = orderRows[0].id;
-      for (const item of items) {
-        await query(`
-          INSERT INTO order_items (order_id, product_id, name, price, quantity, subtotal, notes)
-          VALUES ($1, $2, $3, $4, $5, $6, $7)
-        `, [orderId, item.product_id, item.name, item.price, item.quantity, item.subtotal, null]);
-      }
-    }
-  }
-
-  // Count totals for logging
-  const totalOrders = (await query('SELECT COUNT(*) as c FROM orders')).rows[0].c;
-  const totalItems = (await query('SELECT COUNT(*) as c FROM order_items')).rows[0].c;
+  // C159: Dummy customers + synthetic orders removed.
+  // Real customers are now created exclusively via POST /api/orders (C156),
+  // so the admin Clientes list only shows people who actually checked out.
 
   console.log('Database seeded successfully!');
   console.log(`  - ${categories.length} categories`);
   console.log(`  - ${products.length} products (with stock levels)`);
   console.log(`  - ${coffeeProducts.length * adicionales.length} product options`);
-  console.log(`  - ${customers.length} customers`);
-  console.log(`  - ${totalOrders} orders`);
-  console.log(`  - ${totalItems} order items`);
 
   await closeDatabase();
 }

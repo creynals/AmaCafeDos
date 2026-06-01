@@ -338,3 +338,62 @@ test('corpus: XSS in admin search query is blocked', () => {
   assert.equal(res.statusCode, 400);
   assert.equal(res.body.code, 'xss_pattern_detected');
 });
+
+// ─── C166: skipBodyKeys (admin chat history bypass) ─────────────────────────
+
+test('C166: skipBodyKeys whitelists conversational history with markdown', () => {
+  const mw = validateInput({ skipBodyKeys: ['history'] });
+  const { req, res } = makeReqRes({
+    body: {
+      message: '¿Cuáles son los productos más vendidos?',
+      history: [
+        { role: 'user', content: 'Hola, dame un análisis' },
+        {
+          role: 'assistant',
+          content: '**Top 3:**\n- Café Latte -- 120 unidades\n- Cappuccino -- 80 unidades',
+        },
+      ],
+    },
+  });
+  let nextCalled = false;
+  mw(req, res, () => { nextCalled = true; });
+  assert.equal(nextCalled, true, 'history with markdown "--" must not be rejected');
+});
+
+test('C166: skipBodyKeys does NOT whitelist sibling fields', () => {
+  const mw = validateInput({ skipBodyKeys: ['history'] });
+  const { req, res } = makeReqRes({
+    body: {
+      message: "admin'-- DROP TABLE products",
+      history: [],
+    },
+  });
+  mw(req, res, () => {});
+  assert.equal(res.statusCode, 400);
+  assert.equal(res.body.field, 'message');
+});
+
+test('C166: skipBodyKeys does NOT whitelist nested keys with same name', () => {
+  const mw = validateInput({ skipBodyKeys: ['history'] });
+  const { req, res } = makeReqRes({
+    body: {
+      payload: {
+        history: [{ content: '<script>alert(1)</script>' }],
+      },
+    },
+  });
+  mw(req, res, () => {});
+  assert.equal(res.statusCode, 400, 'nested history.* must still be inspected');
+  assert.equal(res.body.code, 'xss_pattern_detected');
+});
+
+test('C166: default validateInput() still inspects history', () => {
+  const mw = validateInput();
+  const { req, res } = makeReqRes({
+    body: {
+      history: [{ role: 'assistant', content: '<script>alert(1)</script>' }],
+    },
+  });
+  mw(req, res, () => {});
+  assert.equal(res.statusCode, 400, 'no opt-in means no skip');
+});

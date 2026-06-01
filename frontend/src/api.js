@@ -242,6 +242,18 @@ export const api = {
   saveSumup: (payload) => post('/admin/settings/sumup', payload, { auth: true }),
   deleteSumup: () => del('/admin/settings/sumup', { auth: true }),
 
+  // SMTP configuration (authenticated) — Ciclo 176 (env → DB con cifrado)
+  getSmtpStatus: () => request('/admin/settings/smtp', { auth: true }),
+  saveSmtp: (payload) => post('/admin/settings/smtp', payload, { auth: true }),
+  deleteSmtp: () => del('/admin/settings/smtp', { auth: true }),
+  testSmtp: (to) => post('/admin/settings/smtp/test', { to }, { auth: true }),
+
+  // Bank account configuration (authenticated) — Ciclo 180 (datos para transferencia)
+  getBankStatus: () => request('/admin/settings/bank', { auth: true }),
+  saveBank: (payload) => post('/admin/settings/bank', payload, { auth: true }),
+  deleteBank: () => del('/admin/settings/bank', { auth: true }),
+  testBankEmail: (to) => post('/admin/settings/bank/test-email', { to }, { auth: true }),
+
   // CRUD individual de productos — Ciclo 9 SYNAPTIC (admin maintainer)
   adminProductsList: (params = {}) => {
     const clean = {};

@@ -4,12 +4,18 @@ const { chatCompletion, getApiKey } = require('../utils/openrouter');
 
 const router = express.Router();
 
+const INVENTORY_LIMIT = 15;
+const CUSTOMERS_LIMIT = 8;
+
 function buildAdminSystemPrompt(salesData) {
   const { inventory, bestSellers, byCategory, byPayment, recentTrend, orders, customers, topByRevenue, topByFrequency, leastActive } = salesData;
 
-  const inventoryText = inventory
+  const inventoryShown = inventory.slice(0, INVENTORY_LIMIT);
+  const inventoryHidden = Math.max(0, inventory.length - INVENTORY_LIMIT);
+  const inventoryText = inventoryShown
     .map(p => `  - ${p.name} (${p.category}): $${Number(p.price).toLocaleString('es-CL')} | Vendidos: ${p.total_sold} | Ingreso: $${Number(p.total_revenue).toLocaleString('es-CL')} | ${p.available ? 'Activo' : 'Inactivo'}`)
-    .join('\n');
+    .join('\n')
+    + (inventoryHidden > 0 ? `\n  ...y ${inventoryHidden} producto(s) más con menor ingreso (no mostrados para optimizar contexto)` : '');
 
   const bestSellersText = bestSellers.length > 0
     ? bestSellers.map((p, i) => `  ${i + 1}. ${p.name}: ${p.total_sold} unidades, $${Number(p.total_revenue).toLocaleString('es-CL')}`).join('\n')
@@ -27,6 +33,13 @@ function buildAdminSystemPrompt(salesData) {
     ? recentTrend.slice(0, 7).map(t => `  - ${t.date}: ${t.orders} pedidos, $${Number(t.revenue).toLocaleString('es-CL')}`).join('\n')
     : '  Sin datos de tendencia';
 
+  const customersShown = customers.slice(0, CUSTOMERS_LIMIT);
+  const customersHidden = Math.max(0, customers.length - CUSTOMERS_LIMIT);
+  const customersText = customersShown.length > 0
+    ? customersShown.map(c => `  - ${c.name} (${c.email}): ${c.total_orders} pedidos, $${Number(c.total_spent).toLocaleString('es-CL')} gastado, último pedido: ${c.last_order_date || 'Nunca'}`).join('\n')
+      + (customersHidden > 0 ? `\n  ...y ${customersHidden} cliente(s) más con menor gasto (no mostrados para optimizar contexto)` : '')
+    : '  Sin clientes registrados aun';
+
   return `Eres un asistente de inteligencia de negocios para AMA Café, una cafetería de especialidad chilena.
 Tu rol es ayudar al administrador con análisis de datos, insights de ventas, sugerencias de campañas
 y estrategia de negocio.
@@ -41,7 +54,7 @@ REGLAS:
 
 DATOS ACTUALES DEL NEGOCIO:
 
-INVENTARIO COMPLETO:
+INVENTARIO (top ${INVENTORY_LIMIT} por ingreso, total ${inventory.length} productos):
 ${inventoryText}
 
 TOP PRODUCTOS MÁS VENDIDOS:
@@ -58,8 +71,8 @@ ${trendText}
 
 TOTAL PEDIDOS: ${orders}
 
-CLIENTES REGISTRADOS:
-${customers.map(c => `  - ${c.name} (${c.email}): ${c.total_orders} pedidos, $${Number(c.total_spent).toLocaleString('es-CL')} gastado, último pedido: ${c.last_order_date || 'Nunca'}`).join('\n')}
+CLIENTES REGISTRADOS (top ${CUSTOMERS_LIMIT} por gasto, total ${customers.length}):
+${customersText}
 
 TOP 5 CLIENTES POR INGRESO:
 ${topByRevenue.map((c, i) => `  ${i + 1}. ${c.name}: $${Number(c.total_spent).toLocaleString('es-CL')} en ${c.order_count} pedidos`).join('\n')}
@@ -170,7 +183,8 @@ router.post('/admin/chat', async (req, res) => {
 
   const messages = [{ role: 'system', content: systemPrompt }];
   if (history && Array.isArray(history)) {
-    for (const msg of history.slice(-10)) {
+    for (const msg of history.slice(-4)) {
+      if (!msg || typeof msg.content !== 'string' || !msg.content.trim()) continue;
       messages.push({ role: msg.role === 'user' ? 'user' : 'assistant', content: msg.content });
     }
   }
@@ -180,10 +194,40 @@ router.post('/admin/chat', async (req, res) => {
     const reply = await chatCompletion({ messages, maxTokens: 900, agent: 'admin' });
     res.json({ reply });
   } catch (err) {
-    console.error('Admin chat error:', err.message);
-    res.status(500).json({
+    console.error('Admin chat error', {
+      message: err.message,
+      upstreamStatus: err.upstreamStatus,
+      upstreamModel: err.upstreamModel,
+      upstreamBody: err.upstreamBody ? String(err.upstreamBody).slice(0, 1000) : undefined,
+      finishReason: err.finishReason,
+      historyLen: Array.isArray(history) ? history.length : 0,
+      stack: err.stack,
+    });
+
+    let detail = err.message;
+    if (err.upstreamBody) {
+      try {
+        const parsed = JSON.parse(err.upstreamBody);
+        detail = parsed?.error?.message || parsed?.message || err.upstreamBody.slice(0, 300);
+      } catch {
+        detail = err.upstreamBody.slice(0, 300);
+      }
+    }
+
+    // Actionable UX message when token budget exhausted after escalation
+    const userReply = err.finishReason === 'length'
+      ? 'El modelo necesitó más tokens de los permitidos incluso tras reintentos. Sugerencia: haz una pregunta más corta o inicia una conversación nueva para liberar el contexto.'
+      : `Hubo un error contactando al modelo${err.upstreamStatus ? ` (HTTP ${err.upstreamStatus})` : ''}: ${detail}`;
+
+    res.status(502).json({
       error: 'Error al comunicarse con el asistente AI',
-      reply: 'Hubo un error. Intenta de nuevo.',
+      reply: userReply,
+      upstream: {
+        status: err.upstreamStatus,
+        model: err.upstreamModel,
+        finishReason: err.finishReason,
+        detail,
+      },
     });
   }
 });
