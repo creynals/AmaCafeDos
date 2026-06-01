@@ -543,6 +543,135 @@ router.post('/admin/settings/smtp/test', async (req, res) => {
   });
 });
 
+// --- Email Provider / Resend (Ciclo 200 — OPTION B) ---
+//
+// Permite elegir entre SMTP (nodemailer) y Resend (HTTPS API). Configurar
+// Resend evita el bloqueo de TCP egress en puertos SMTP (issue C199 Railway).
+// La key se cifra con AES-256-GCM (igual que smtp_pass / sumup_api_key).
+
+const VALID_MAIL_PROVIDERS = ['smtp', 'resend', 'auto'];
+
+router.get('/admin/settings/email', async (req, res) => {
+  const [providerRow, resendKeyRow, mailFromRow, mailReplyRow, runtime] = await Promise.all([
+    query('SELECT value, updated_at FROM settings WHERE key = $1', ['mail_provider']),
+    query('SELECT value, updated_at FROM settings WHERE key = $1', ['resend_api_key']),
+    query('SELECT value, updated_at FROM settings WHERE key = $1', ['mail_from']),
+    query('SELECT value, updated_at FROM settings WHERE key = $1', ['mail_reply_to']),
+    mailer.describe(),
+  ]);
+
+  const provider = providerRow.rows[0]?.value || 'auto';
+  const resendKeyRaw = resendKeyRow.rows[0]?.value || null;
+  const resendKey = resendKeyRaw ? decrypt(resendKeyRaw) : null;
+  const resendMasked = resendKey
+    ? resendKey.slice(0, 6) + '…' + resendKey.slice(-4)
+    : null;
+
+  res.json({
+    provider: { value: provider, updatedAt: providerRow.rows[0]?.updated_at || null },
+    resend: {
+      configured: !!resendKey,
+      masked: resendMasked,
+      updatedAt: resendKeyRow.rows[0]?.updated_at || null,
+    },
+    mailFrom: { value: mailFromRow.rows[0]?.value || null, updatedAt: mailFromRow.rows[0]?.updated_at || null },
+    mailReplyTo: { value: mailReplyRow.rows[0]?.value || null, updatedAt: mailReplyRow.rows[0]?.updated_at || null },
+    runtime,
+    validProviders: VALID_MAIL_PROVIDERS,
+  });
+});
+
+router.post('/admin/settings/email', async (req, res) => {
+  const { provider, resend_api_key, mail_from, mail_reply_to } = req.body || {};
+
+  const updates = [];
+  const flags = { provider: false, resendApiKey: false, mailFrom: false, mailReplyTo: false };
+
+  if (provider !== undefined) {
+    const p = String(provider || '').trim().toLowerCase();
+    if (!VALID_MAIL_PROVIDERS.includes(p)) {
+      return res.status(400).json({ error: `provider inválido (valores: ${VALID_MAIL_PROVIDERS.join(', ')})` });
+    }
+    updates.push(query(
+      `INSERT INTO settings (key, value, updated_at) VALUES ('mail_provider', $1, NOW())
+       ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = NOW()`,
+      [p],
+    ));
+    flags.provider = true;
+  }
+  if (resend_api_key !== undefined) {
+    if (typeof resend_api_key !== 'string' || resend_api_key.trim().length < 8) {
+      return res.status(400).json({ error: 'resend_api_key inválida (mínimo 8 caracteres)' });
+    }
+    updates.push(query(
+      `INSERT INTO settings (key, value, updated_at) VALUES ('resend_api_key', $1, NOW())
+       ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = NOW()`,
+      [encrypt(resend_api_key.trim())],
+    ));
+    flags.resendApiKey = true;
+  }
+  if (mail_from !== undefined) {
+    if (typeof mail_from !== 'string' || mail_from.trim().length < 3) {
+      return res.status(400).json({ error: 'mail_from inválido' });
+    }
+    updates.push(query(
+      `INSERT INTO settings (key, value, updated_at) VALUES ('mail_from', $1, NOW())
+       ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = NOW()`,
+      [mail_from.trim()],
+    ));
+    flags.mailFrom = true;
+  }
+  if (mail_reply_to !== undefined) {
+    if (typeof mail_reply_to !== 'string') {
+      return res.status(400).json({ error: 'mail_reply_to inválido' });
+    }
+    updates.push(query(
+      `INSERT INTO settings (key, value, updated_at) VALUES ('mail_reply_to', $1, NOW())
+       ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = NOW()`,
+      [mail_reply_to.trim()],
+    ));
+    flags.mailReplyTo = true;
+  }
+
+  if (updates.length === 0) {
+    return res.status(400).json({ error: 'Nada que actualizar' });
+  }
+
+  await Promise.all(updates);
+  mailer.invalidateCache();
+
+  res.json({
+    success: true,
+    message: 'Configuración de email guardada correctamente',
+    updated: flags,
+  });
+});
+
+router.delete('/admin/settings/email/resend-key', async (req, res) => {
+  await query("DELETE FROM settings WHERE key = 'resend_api_key'");
+  mailer.invalidateCache();
+  res.json({ success: true, message: 'Resend API key eliminada' });
+});
+
+router.post('/admin/settings/email/verify', async (req, res) => {
+  const result = await mailer.verifyConnection();
+  if (result.verified) return res.json({ success: true, ...result });
+  return res.status(502).json({ success: false, ...result });
+});
+
+router.post('/admin/settings/email/test', async (req, res) => {
+  const { to } = req.body || {};
+  if (!to || typeof to !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to.trim())) {
+    return res.status(400).json({ error: 'Email destino inválido' });
+  }
+  const result = await mailer.sendTestMail(to.trim());
+  if (result.ok) return res.json({ success: true, message: `Email enviado a ${to}`, provider: result.provider, messageId: result.messageId });
+  if (result.skipped) {
+    return res.status(400).json({ success: false, error: 'Mailer deshabilitado o sin configuración mínima', reason: result.reason, provider: result.provider });
+  }
+  return res.status(502).json({ success: false, error: result.error || 'Fallo al enviar', reason: result.reason || 'unknown', provider: result.provider });
+});
+
 // --- Bank Account Settings (Ciclo 180 — datos para transferencia) ---
 //
 // Persiste 6 claves planas en `settings` (sin cifrado: aparecen en el email
