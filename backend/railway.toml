@@ -30,6 +30,25 @@
 #                           `fuentes/products` directory (local dev only — DO
 #                           NOT leave unset in Railway, uploads would be lost
 #                           on every redeploy).
+#   HOST                  → "0.0.0.0" (binding C135 para healthcheck Railway).
+#
+# SMTP (Cycle 188 — clarification): NO definir SMTP_HOST / SMTP_PORT /
+# SMTP_USER / SMTP_PASS / SMTP_SECURE / MAIL_FROM / MAIL_REPLY_TO / MAIL_ENABLED
+# como env vars en Railway. El diseño C173+C176 mantiene la config en la tabla
+# `settings` (8 keys: smtp_host, smtp_port, smtp_secure, smtp_user, smtp_pass,
+# smtp_from, smtp_reply_to, smtp_enabled). Sólo `smtp_pass` se cifra con
+# AES-256-GCM usando ENCRYPTION_SECRET. Para que el envío funcione en prod
+# basta con:
+#   1. ENCRYPTION_SECRET en Railway igual al secreto con el que se cifró
+#      `settings.smtp_pass` (si no coincide, mailer.js loguea
+#      "decrypt_failed" / "Decryption failed: Unsupported state...").
+#   2. Re-grabar el password desde /admin → Configuración → SMTP tras
+#      cualquier rotación de ENCRYPTION_SECRET (re-cifra con el activo).
+# Las env vars SMTP_* sólo actúan como fallback de bootstrap en dev sin BD.
+# NEW_ENCRYPTION_SECRET y OLD_ENCRYPTION_SECRET NO se leen en runtime; sólo
+# las consume `scripts/rotate-encryption-secret.js` durante una rotación
+# one-off — elimínalas del servicio Railway una vez completada la rotación
+# para no inducir confusión.
 #
 # Persistent storage (C85 — B2 Railway Volume):
 #   In Railway → Service → Volumes, attach a volume mounted at `/data`.
