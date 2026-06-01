@@ -100,27 +100,44 @@ async function resolveConfig() {
   const host = source(db.smtp_host, env.host);
   const portRaw = source(db.smtp_port, env.port);
   const port = Number.parseInt(portRaw.value || '587', 10) || 587;
-  const explicitSecure = db.smtp_secure != null ? db.smtp_secure : env.secure;
-  const secure = parseBool(explicitSecure, port === 465);
+  // C195 ROOT CAUSE: Railway env had SMTP_PORT=465 + SMTP_SECURE=false. Port 465
+  // is SMTPS (implicit TLS), so nodemailer with secure=false attempts a plain
+  // SMTP greeting that the server never answers → tcp_timeout after ~15s. The
+  // RFC mapping is fixed and cannot be overridden by user config:
+  //   port 465 → secure=true (implicit TLS / SMTPS)
+  //   port 587 → secure=false (STARTTLS)
+  //   port 25  → secure=false (plain)
+  // For any other port we honor the explicit setting (legacy / custom relays).
+  let secure;
+  if (port === 465) {
+    secure = true;
+  } else if (port === 587 || port === 25) {
+    secure = false;
+  } else {
+    const explicitSecure = db.smtp_secure != null ? db.smtp_secure : env.secure;
+    secure = parseBool(explicitSecure, false);
+  }
   const user = source(db.smtp_user, env.user);
-  // smtp_pass viene cifrada desde la BD; si está, hay que decrypt.
-  // C189: track decryptOk explicitly so describe() puede reportar la causa
-  // de un envío fallido (típicamente ENCRYPTION_SECRET rotado entre entornos).
+  // C195: env-first override for SMTP_PASS. When SMTP_PASS is set in the
+  // process env we trust it over any DB-encrypted value. Rationale: the only
+  // failure mode of the previous db-first policy was the ENCRYPTION_SECRET
+  // mismatch (C188-C190) — the operator setting SMTP_PASS in env is making an
+  // explicit override that should beat a stale ciphertext. We still report
+  // dbPassPresent / decryptOk via describe() so the admin UI can surface the
+  // mismatch and prompt a re-save when convenient.
   let pass = '';
   let passSource = 'none';
-  let dbPassPresent = Boolean(db.smtp_pass);
+  const dbPassPresent = Boolean(db.smtp_pass);
   let decryptOk = null;
   if (dbPassPresent) {
     const decrypted = decrypt(db.smtp_pass);
+    decryptOk = Boolean(decrypted);
     if (decrypted) {
       pass = decrypted;
       passSource = 'db';
-      decryptOk = true;
-    } else {
-      decryptOk = false;
     }
   }
-  if (!pass && env.pass) {
+  if (env.pass) {
     pass = env.pass;
     passSource = 'env';
   }
