@@ -21,6 +21,7 @@ const adminProductsCrudRoutes = require('./routes/products-admin-crud');
 const adminProductsImagesRoutes = require('./routes/products-admin-images');
 const adminChatRoutes = require('./routes/admin-chat');
 const settingsRoutes = require('./routes/settings');
+const encryptionHealthRoutes = require('./routes/encryption-health');
 const usersRoutes = require('./routes/users');
 const webhookRoutes = require('./routes/webhooks');
 const { getRecaptchaConfig } = require('./utils/recaptcha');
@@ -151,6 +152,7 @@ app.use('/api', requireAuth, requireAdmin, adminProductsCrudRoutes);
 app.use('/api', requireAuth, requireAdmin, adminProductsImagesRoutes);
 app.use('/api', requireAuth, requireAdmin, adminChatRoutes);
 app.use('/api', requireAuth, requireAdmin, settingsRoutes);
+app.use('/api', requireAuth, requireAdmin, encryptionHealthRoutes);
 app.use('/api', requireAuth, requireAdmin, usersRoutes);
 
 // Error handler
