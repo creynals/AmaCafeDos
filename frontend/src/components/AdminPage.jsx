@@ -2730,9 +2730,11 @@ export default function AdminPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => navigate('/')}
-              className="p-2 text-ama-text-muted hover:text-ama-amber transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-2 py-1.5 text-sm font-medium text-ama-text-muted hover:text-ama-amber transition-colors cursor-pointer"
+              title="Volver al inicio"
             >
-              <ArrowLeft size={20} />
+              <ArrowLeft size={18} />
+              <span>Volver</span>
             </button>
             <h1 className="text-lg font-semibold text-ama-text">
               Panel <span className="text-ama-amber">ADM</span>
