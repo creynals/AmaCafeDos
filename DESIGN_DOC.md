@@ -103,6 +103,57 @@ To be defined
 
 | ID | Decision | Rationale | Date | Cycle |
 |----|----------|-----------|------|-------|
+| DEC-183 | Plan deploy C183 vía release branch limpia desde origin/main con squash-merge PR | Evita pollution de 73 commits SYNAPTIC PRE/POST y cumple branch protection (GH006) | 2026-06-01 | 183 |
+| DEC-182 | Consolidate readBankSettings and 6 sibling symbols into single header require at lines 12-21 | Eliminates SyntaxError from duplicate declaration; aligns with single-source-of-truth import pattern | 2026-06-01 | 182 |
+| DEC-181 | Consolidate all bankSettings imports into single header require in settings.js | Fixes SyntaxError without refactor risk during outage; preserves convention and avoids TDZ | 2026-06-01 | 181 |
+| DEC-180C | Bank block in confirmation email is conditional on payment_method | Only transferencia/deposito orders need bank details; avoids leaking info | 2026-06-01 | 180 |
+| DEC-180B | RUT validation via modulo-11 algorithm at backend util layer | Reusable, testable, prevents invalid Chilean tax IDs | 2026-06-01 | 180 |
+| DEC-180A | Bank account data persisted as flat keys in settings table (not JSON blob) | Consistency with SMTP C178 pattern and simpler GET/POST semantics | 2026-06-01 | 180 |
+| DEC-179 | Datos bancarios para transferencia se configuran en panel Admin Settings y se inyectan en email orderConfirmation cuando payment_method=transfer | Cliente self-service necesita datos para depositar sin contactar staff; ubicación junto a SMTP mantiene cohesión | 2026-06-01 | 179 |
+| DEC-178 | SMTP UI uses provider terminology + paste wizard; backend secure:'true'|'false' contract preserved | Balance UX clarity (provider-aligned labels) with zero backend risk (C159 no-commits directive) | 2026-06-01 | 178 |
+| DEC-IMAP-OOS-177 | IMAP queda fuera de alcance; amaCafe es SMTP send-only para confirmaciones de pedido | C173/C176 aprobaron solo envío saliente; IMAP introduce 400-600 LOC sin requirement validado | 2026-06-01 | 177 |
+| DEC-SMTP-UI-177 | Realinear labels SMTP UI a nomenclatura de proveedores (smtp_server, smtp_port, encryption) | Cerrar gap entre ficha del proveedor y formulario admin para evitar traducción mental | 2026-06-01 | 177 |
+| DEC-176-3 | Cache TTL 30s for mailer config with explicit invalidateCache() | Balance perf vs admin UI responsiveness; invalidate on writes | 2026-06-01 | 176 |
+| DEC-176-2 | Fallback chain: DB settings → .env vars → disabled | Backward compatibility during migration; smtp_enabled=auto resolves source | 2026-06-01 | 176 |
+| DEC-176-1 | SMTP config stored in settings table, smtp_pass encrypted AES-256-GCM | Consistency with openrouter/sumup/recaptcha; enables admin UI config without redeploy | 2026-06-01 | 176 |
+| DEC-173-C | Builder de email es función pura separada del transporte para tests deterministas | Permite cobertura unitaria de XSS/formato CLP/omisión condicional sin mock de SMTP | 2026-06-01 | 173 |
+| DEC-173-B | Email de confirmación es fire-and-forget; fallos SMTP no afectan 201 al cliente | Checkout debe ser resiliente a problemas de proveedor de correo | 2026-06-01 | 173 |
+| DEC-173-A | Adoptar nodemailer@^6.9.16 como transporte SMTP único del backend | Estándar maduro, soporta Gmail App Password sin dependencias adicionales | 2026-06-01 | 173 |
+| DEC-171b | Blacklist reasoning-emitting free-tier models with pre-flight swap | Reasoning models consume token budget on hidden thinking, leaving empty visible output | 2026-06-01 | 171 |
+| DEC-171 | Implement 3-strategy retry: escalate max_tokens → swap model → structured error | Single-shot null-guard (C168) insufficient; finish_reason=length needs adaptive recovery | 2026-06-01 | 171 |
+| DEC-170 | Pending: user must select Option A (quick), B (robust, recommended), or C (architectural) | C168 fix exposed reasoning-token exhaustion as true root cause; needs targeted fix | 2026-06-01 | 170 |
+| DEC-168 | Implement Null-Guard + Auto-Retry Fallback + Prompt Slimming in OpenRouter integration | Root cause was null content from free-tier model on context overflow causing TypeError in .replace() | 2026-06-01 | 168 |
+| DEC-167 | Plan null-guard + auto-retry + prompt slimming for OpenRouter response parsing | Covers symptom (crash) and root cause (context pressure on free models) | 2026-06-01 | 167 |
+| DEC-166 | Implement OPTION B: skipBodyKeys=['history'] in global validateInput mount | Surgical fix preserves validation on message/other fields while unblocking conversational history | 2026-05-30 | 166 |
+| DEC-165 | Pending Decision Gate: bypass validateInput for /api/admin/chat (Option A recommended) | Replicates C100 pattern; admin JWT + handler string check provide defense; 5-min low-risk fix | 2026-05-30 | 165 |
+| DEC-164 | Cap admin-chat system prompt at top 25 products + top 15 customers | Free-tier llama-3.3-70b context overflow on 2nd/3rd turn with unbounded data | 2026-05-30 | 164 |
+| DEC-163 | Reduce admin-chat history from slice(-10) to slice(-6) and surface upstream errors verbatim | Mitigate free-tier context overflow and restore observability for 2nd/3rd-turn failures | 2026-05-30 | 163 |
+| DEC-162-A | Tab 'insights' label cambiado de 'Chat Análisis con IA' a 'Asesor de Negocios' | Cumplimiento tardío de DEC-160-A omitida en C161 | 2026-05-30 | 162 |
+| DEC-161-B | Logout admin navega a '/' con replace:true | Evita que el usuario quede en ruta protegida tras cerrar sesión | 2026-05-30 | 161 |
+| DEC-161 | Adoptar meta-llama/llama-3.3-70b-instruct:free como DEFAULT y deepseek-chat-v3.1:free como FALLBACK | Modelos vigentes y gratuitos en OpenRouter; los anteriores devolvían 404 | 2026-05-30 | 161 |
+| DEC-160-B | Logout debe redirigir a landing '/' no a LoginPage | UX esperada: usuario regresa al storefront público tras cerrar sesión admin | 2026-05-30 | 160 |
+| DEC-160-A | Renombrar pestaña 'Chat Análisis con IA' a 'Asesor de Negocios' | Mejorar claridad UX para el rol del chat IA en panel admin | 2026-05-30 | 160 |
+| DEC-159-B | Deploys a Railway pausados hasta nueva autorización del usuario | Usuario solicitó explícitamente trabajar solo en local por ahora | 2026-05-30 | 159 |
+| DEC-159-A | Eliminar bloques de customers dummy y generación sintética de órdenes en seed.js | Customers reales solo deben crearse vía POST /api/orders; seed no debe contaminar tabla customers | 2026-05-30 | 159 |
+| DEC-158 | SYNAPTIC ejecuta squash-merge vía gh CLI cuando PR está MERGEABLE+CLEAN | Branch protection no bloquea al usuario autenticado vía gh; evita handoff innecesario | 2026-05-30 | 158 |
+| DEC-157 | Exclude BITACORA.md from cherry-picks to protected main | Avoid polluting production branch with SYNAPTIC meta files; keep PRs focused on productive changes | 2026-05-30 | 157 |
+| DEC-156B | Posponer FK orders.customer_id REFERENCES customers(id) hasta validar backfill en prod | Evitar fallos de deploy si quedan filas huérfanas tras migración 016 | 2026-05-30 | 156 |
+| DEC-156 | Customers se crean/upsertan en cada POST /api/orders por email | Garantiza que admin Clientes refleje compradores reales, no solo seed dummies | 2026-05-30 | 156 |
+| DEC-155-C | Defer Item 3 (cart steps) pending user clarification | Original C152 prompt was truncated; cannot reconstruct intent from code alone | 2026-05-30 | 155 |
+| DEC-155-B | Defer Item 2 (SMTP) to dedicated Decision Gate for provider selection | Scope ≥3 sub-cycles; requires provider choice (nodemailer+Gmail vs Resend/SendGrid) | 2026-05-30 | 155 |
+| DEC-155-A | Remove 'efectivo' from new order payment whitelist, preserve in admin filter for legacy orders | Backwards compatibility with historical DB records while preventing new cash orders | 2026-05-30 | 155 |
+| DEC-154 | ARCHITECT MODE debe escribir spec a disco antes de cerrar ciclo | Sin spec persistida, el ciclo siguiente no puede implementar y debe levantar NEEDS-INPUT | 2026-05-30 | 154 |
+| DEC-150 | Execute hard reset of local main to origin/main with safety tag backup | Local divergence (5↑/6↓) was benign — 1 duplicate fix already squashed in PR #2 + 4 meta commits | 2026-05-19 | 150 |
+| DEC-149 | Destructive git operations require explicit user authorization even under IMMEDIATE EXECUTION | DG-079 IMMEDIATE EXECUTION is overridden by system prompt rules on irreversible/destructive actions | 2026-05-19 | 149 |
+| DEC-144B | PR #7 merge must go through GitHub UI squash-merge (or gh CLI with authorization) | main is branch-protected (GH006); direct push blocked | 2026-05-19 | 144 |
+| DEC-144A | All SYNAPTIC responses for amaCafe must be bilingual ES+EN | Explicit user demand in C144, overrides DG-078 auto-detect default | 2026-05-19 | 144 |
+| DEC-143 | Adopt clean cherry-pick pattern for all SYNAPTIC-to-main deploys | Keeps main free of meta PRE/POST commits while preserving SYNAPTIC traceability on working branch | 2026-05-19 | 143 |
+| DEC-142 | Recommend Option B: cherry-pick C141 fix to fresh branch from origin/main for clean PR | Honors main-branch-protected rule, isolates productive fix from noise, consistent with C123/C127 precedent | 2026-05-19 | 142 |
+| DEC-141 | All cart mutation endpoints must return full cart via getCartResponse() | Frontend CartContext replaces state with response; partial responses corrupt UI state | 2026-05-19 | 141 |
+| DEC-138 | sumup_merchant_code local plaintext es MCPHQ2AY | Decrypt limpio con ENCRYPTION_SECRET local; merchant code público de SumUp | 2026-04-29 | 138 |
+| DEC-131 | Execute OPTION B: push branch + verify/push rollback tag + generate gitignored deploy checklist | Balances safety (rollback anchor) with operational readiness (checklist) without overengineering | 2026-04-28 | 131 |
+| DEC-130 | Halt at Phase 2 Decision Gate awaiting A/B/C selection | STRICT mode requires human input before push/tag/doc actions on protected branch context | 2026-04-28 | 130 |
+| DEC-135 | Use `serve -l tcp://0.0.0.0:$PORT` instead of `-l $PORT` in frontend/railway.toml | serve >=14 binds to localhost when port is bare number; Railway healthcheck needs 0.0.0.0 | 2026-04-28 | 127 |
 | DEC-129-D | Branch off fix/c127-railway-frontend-ebusy as fix/c128-railway-node-version | Preserve C127 EBUSY fix; merge order C127 first, C128 second | 2026-04-28 | 129 |
 | DEC-129-C | Skip Fix C (NIXPACKS_NODE_VERSION env) unless Fix A fails | Over-configuration; engines.node is the canonical mechanism | 2026-04-28 | 129 |
 | DEC-129-B | Move root railway.toml to backend/railway.toml (Fix B.1) | Eliminates two-TOML ambiguity; matches per-service Root Directory pattern | 2026-04-28 | 129 |
@@ -197,6 +248,107 @@ To be defined
 
 ## Technical Notes
 
+- [Cycle 183] Delta vs origin/main: 53 archivos, +25.190/-4.435 líneas
+- [Cycle 183] Migraciones idempotentes esperadas: IF NOT EXISTS / ON CONFLICT
+- [Cycle 183] Railway preDeploy ejecuta migrate.js antes del boot backend
+- [Cycle 183] Backend bind 0.0.0.0 (C135) requerido para healthcheck Railway
+- [Cycle 182] backend/src/routes/settings.js header now exposes 7 symbols: BANK_KEYS, ACCOUNT_TYPES, BANK_NAMES, readBankKey, writeBankKey, readBankSettings, isBankConfigured
+- [Cycle 182] Inline require block at former lines 525-533 fully removed
+- [Cycle 182] Net diff: -2 lines
+- [Cycle 181] C180 left two declarations of readBankSettings (line 12 + lines 525-533) causing parse-time crash
+- [Cycle 181] bankSettings.js exports: BANK_KEYS, ACCOUNT_TYPES, BANK_NAMES, readBankKey, writeBankKey, readBankSettings, isBankConfigured
+- [Cycle 181] orders.js:6 already uses clean import — no duplicate there
+- [Cycle 180] bankSettings.js centralizes 6 flat keys + whitelists for reuse in orders.js
+- [Cycle 180] orders.js injects bankAccount into responseBody before buildOrderConfirmationEmail
+- [Cycle 180] 20 new tests added (6 RUT + 14 email block) — 49/49 backend suite green
+- [Cycle 179] Settings rows: bank_rut, bank_account_type, bank_account_number, bank_name, bank_holder_name
+- [Cycle 179] Endpoints: GET/PUT /api/admin/settings/bank siguiendo patrón SMTP C173-C178
+- [Cycle 179] Email template orderConfirmation requiere bloque condicional {{#if isTransfer}}
+- [Cycle 179] RUT regex formato: ^[0-9]{1,2}(\.[0-9]{3})?(\.[0-9]{3})?-[0-9kK]$
+- [Cycle 179] Bancos y tipo cuenta validados con whitelist server-side
+- [Cycle 178] SmtpSettings lives in frontend/src/components/AdminPage.jsx (not a separate file)
+- [Cycle 178] Encryption selector has 4 options (none/starttls/ssl/auto) mapped to backend secure boolean via helpers
+- [Cycle 178] parseProviderTicket() is the canonical parser for provider config blocks
+- [Cycle 177] Selector encryption debe exponer 4 opciones: ssl/tls/starttls/none mapeadas a puertos 465/587/587/25
+- [Cycle 177] Agregar bloque informativo explicando por qué no se piden credenciales IMAP
+- [Cycle 177] Mantener compatibilidad con env vars SMTP_*/MAIL_* y 8 keys actuales en settings
+- [Cycle 176] Migration 017_smtp_settings.sql documents 8 SMTP keys catalog (idempotent)
+- [Cycle 176] POST /admin/settings/smtp/test endpoint validates config by sending real email
+- [Cycle 176] Mailer singleton refactored: ~240 lines, env-only → DB+env hybrid
+- [Cycle 173] backend/src/utils/mailer.js es singleton nodemailer con sendMail() fail-safe
+- [Cycle 173] backend/.env.example documenta MAIL_ENABLED, SMTP_HOST/PORT/SECURE/USER/PASS, MAIL_FROM/REPLY_TO
+- [Cycle 173] Subject estándar: 'Confirmación de tu pedido amaCafe #<id>'
+- [Cycle 173] Suite backend completa: 80/80 pass (71 previos + 9 nuevos del builder)
+- [Cycle 171] max_tokens escalation capped at 4000 to prevent runaway cost
+- [Cycle 171] Max 3 retry attempts to bound latency
+- [Cycle 171] err.finishReason exposed to UI for actionable Spanish hint
+- [Cycle 171] History slice changed from -6 to -4 in admin-chat.js
+- [Cycle 170] openrouter.js:129 fallback reuses maxTokens — needs escalation logic
+- [Cycle 170] admin-chat.js:185-190 uses history.slice(-6); consider slice(-4) + char-cap truncation
+- [Cycle 170] settings.model_admin may point to reasoning-heavy model causing silent token burn
+- [Cycle 170] finish_reason=length with empty content is the canonical signature of reasoning-token exhaustion
+- [Cycle 168] openrouter.js lines 109-138: defensive extraction with optional chaining and string validation
+- [Cycle 168] Auto-retry logic: if selectedModel !== fallbackModel and content is null, retry with fallback
+- [Cycle 168] Error 502 structured with finish_reason, tokens, model metadata when both attempts fail
+- [Cycle 168] admin-chat.js lines 7-8: INVENTORY_LIMIT=15, CUSTOMERS_LIMIT=8
+- [Cycle 167] openrouter.js:109-111 lacks null-guard on data.choices[0].message.content
+- [Cycle 167] Customer chat uses maxTokens=300 and does not exhibit this bug (smaller context)
+- [Cycle 167] message.reasoning/reasoning_content can serve as content fallback when content is null
+- [Cycle 166] validateInput.js walk() now accepts skipKeys Set parameter
+- [Cycle 166] skipBodyKeys is root-only and body-only (does not affect query/params)
+- [Cycle 166] Test coverage: 36/36 passing including 4 new C166 tests
+- [Cycle 165] validateInput middleware (server.js:111) registered globally on /api swallows /api/admin/chat history payloads
+- [Cycle 165] XSS_PATTERNS in validateInput.js:49-61 false-positive on markdown tables (pipes, quotes, attribute-like syntax)
+- [Cycle 165] admin-chat.js:185-190 already validates typeof msg.content === 'string' as second barrier
+- [Cycle 164] backend/src/routes/admin-chat.js uses INVENTORY_LIMIT=25 and CUSTOMERS_LIMIT=15 constants
+- [Cycle 164] Data budget reduced from ~18k tok to ~1.5k tok in system prompt
+- [Cycle 163] openrouter.js Error now carries upstreamStatus/upstreamModel/upstreamBody fields
+- [Cycle 163] AdminPage.jsx marks error messages with isError:true and filters them from outbound history
+- [Cycle 163] admin-chat.js returns 502 with parsed upstream reason for admin observability
+- [Cycle 162] Rename aplicado en frontend/src/components/AdminPage.jsx:16
+- [Cycle 162] Grep productivo confirma 0 referencias residuales al label antiguo
+- [Cycle 161] ModelSelector usa 3 fallbacks hardcoded en AdminPage.jsx (líneas 1569, 1581, 1593)
+- [Cycle 161] Sub-tab 'crud' fue renombrada a 'Catálogo' dentro de 'Mantenedor Productos'
+- [Cycle 160] Frontend debe usar catch (err) y propagar err.data.reply al UI
+- [Cycle 160] Model IDs de OpenRouter deben validarse contra catálogo vigente o leerse de settings DB
+- [Cycle 160] useNavigate ya está importado en AdminPage.jsx:3 — disponible para logout flow
+- [Cycle 159] seed.js ahora solo siembra categorías/productos/opciones, no customers ni orders
+- [Cycle 159] Limpieza local: 400 order_items + 167 orders + 20 customers eliminados en transacción
+- [Cycle 158] Tag pre-deploy-cNNN convención para anclar rollback antes de cada deploy con migración
+- [Cycle 157] Migration 016 path: backend/src/migrations/016_link_orders_to_customers.sql (canonical location)
+- [Cycle 157] Railway preDeploy hook auto-applies migrations on merge to main via migrate.js
+- [Cycle 156] Email normalizado (lower+trim) es la clave de unicidad para customers
+- [Cycle 156] Migración 016 corre vía preDeploy: migrate.js en Railway
+- [Cycle 156] ON CONFLICT (email) DO UPDATE actualiza name/phone con datos más recientes del checkout
+- [Cycle 155] Migration 015_es_rename_iced_drinks_category.sql created for prod category rename
+- [Cycle 155] Backend whitelist in orders.js now rejects payment_method='efectivo'
+- [Cycle 155] Admin filter in admin.js preserves 'efectivo' option for historical order display
+- [Cycle 154] Prompts en .synaptic/INTELLIGENCE.json se truncan a ~100 chars
+- [Cycle 154] BITACORA solo recibe POST de ciclos no-ARCHITECT
+- [Cycle 154] Commits PRE muestran el prompt original truncado, no el plan generado
+- [Cycle 150] Safety tag pre-c150-main-reset preserves SHA 51845e4 as rollback anchor
+- [Cycle 150] main aligned to d37b05c matching origin/main exactly (0/0 divergence)
+- [Cycle 150] Working branch fix/c135-serve-bind-explicit preserved through reset operation
+- [Cycle 149] C141 cart-delete fix confirmed live at backend/src/routes/cart.js:143 on origin/main SHA d37b05c
+- [Cycle 149] PR #7 merged with --delete-branch; origin/fix/c141-cart-delete-contract pruned successfully
+- [Cycle 144] PR #7 verified state: OPEN, MERGEABLE, CLEAN, no blocking checks
+- [Cycle 144] Cart fix commit b70f40e is clean cherry-pick on origin/main
+- [Cycle 144] Railway backend service watches origin/main for auto-deploy trigger
+- [Cycle 143] Cherry-pick conflict on BITACORA.md is expected; resolve with checkout --ours to keep main version
+- [Cycle 143] PR #7 created from fix/c141-cart-delete-contract → main with single +1/-1 line productive delta
+- [Cycle 142] C141 fix is commit b70f40e on backend/src/routes/cart.routes.js (DELETE returns {items})
+- [Cycle 142] Branch fix/c135-serve-bind-explicit had PR #6 merged but accumulated 13 commits post-merge
+- [Cycle 141] backend/src/routes/cart.js:143 DELETE handler now returns full cart, matching GET/POST/PUT contract
+- [Cycle 141] getCartResponse() is the single source of truth for cart response shape (4 callers)
+- [Cycle 138] crypto.js usa AES-256-GCM con scrypt(secret, 'amacafe-salt', 32) para derivar key
+- [Cycle 138] Ciphertext schema: iv(hex):authTag(hex):cipher(hex) separados por ':'
+- [Cycle 131] Tag pre-c134-fix anchored at SHA 202fb41 as rollback target for C135 fix
+- [Cycle 131] .gitignore now covers DEPLOY_VERIFICATION_C*.md as reusable per-cycle pattern
+- [Cycle 131] origin/fix/c135-serve-bind-explicit synchronized at 0babd6a after C131 push
+- [Cycle 130] frontend/railway.toml references pre-c134-fix tag at SHA 202fb41 as rollback anchor
+- [Cycle 130] Expected log regex post-deploy: Accepting connections at http://0\.0\.0\.0:
+- [Cycle 127] frontend/railway.toml uses `serve` for static hosting after C130 vite-preview migration
+- [Cycle 127] PR #6 opened for C135 fix; awaits manual squash merge + Railway redeploy
 - [Cycle 129] git mv preserves rename detection (100% similarity) for railway.toml relocation
 - [Cycle 129] Railway UI Root Directory must match TOML location for service to discover config
 - [Cycle 127] frontend/railway.toml:28 buildCommand = 'npm run build' (no npm ci prefix)
@@ -338,6 +490,23 @@ To be defined
 
 ## Architecture Changes
 
+- [Cycle 180, 2026-06-01] New backend utils: rut.js, bankSettings.js
+- [Cycle 180, 2026-06-01] New admin endpoints: GET/POST/DELETE /admin/settings/bank + POST /admin/settings/bank/test-email
+- [Cycle 180, 2026-06-01] Frontend api.js wrappers: getBankStatus/saveBank/deleteBank/testBankEmail
+- [Cycle 180, 2026-06-01] New <BankSettings /> component mounted after <SmtpSettings /> in SettingsTab
+- [Cycle 176, 2026-06-01] Mailer now async at isEnabled/describe level; sendMail signature unchanged
+- [Cycle 176, 2026-06-01] New SmtpSettings component in AdminPage following SumupSettings pattern
+- [Cycle 173, 2026-06-01] Nuevo módulo utilitario backend/src/utils/mailer.js + orderConfirmationEmail.js
+- [Cycle 173, 2026-06-01] routes/orders.js ahora dispara side-effect SMTP tras INSERT exitoso
+- [Cycle 171, 2026-06-01] openrouter.js now owns retry strategy state machine and model blacklist
+- [Cycle 171, 2026-06-01] admin-chat.js surfaces structured token-budget errors to frontend
+- [Cycle 168, 2026-06-01] OpenRouter client now has two-tier resilience: primary model → fallback model → structured 502
+- [Cycle 167, 2026-06-01] Proposed: lower INVENTORY_LIMIT 25→15 and CUSTOMERS_LIMIT 15→8 in admin-chat.js
+- [Cycle 166, 2026-05-30] Global /api validation middleware now whitelists 'history' field at root
+- [Cycle 159, 2026-05-30] Separación estricta seed↔runtime: customers/orders son exclusivamente runtime data
+- [Cycle 157, 2026-05-30] orders.js now upserts customer record within order transaction (atomic link)
+- [Cycle 156, 2026-05-30] orders.customer_id ahora se popula sistemáticamente desde checkout (antes NULL)
+- [Cycle 156, 2026-05-30] customers se convierte en source-of-truth de compradores, no solo seed estático
 - [Cycle 129, 2026-04-28] Railway config now per-service: backend/railway.toml + frontend/railway.toml (no root toml)
 - [Cycle 121, 2026-04-28] Backlog reorganizado: rotación bloquea hasta despliegue Railway, no a la inversa
 - [Cycle 120, 2026-04-28] Roadmap repriorizado: Railway Deploy R1-R8 promovido a top HIGH; rotación marcada DEFERRED-TO-PROD

@@ -1,6 +1,9 @@
 const express = require('express');
 const { query, getClient } = require('../models/database');
 const sumup = require('../utils/sumup');
+const mailer = require('../utils/mailer');
+const { buildOrderConfirmationEmail } = require('../utils/orderConfirmationEmail');
+const { readBankSettings, isBankConfigured } = require('../utils/bankSettings');
 
 const router = express.Router();
 
@@ -14,9 +17,13 @@ const router = express.Router();
  * transición — todos se persisten como 'tarjeta'. La marca real (VISA/
  * MASTERCARD/...) se puebla en orders.card_scheme post-autorización vía
  * webhook (migración 007).
+ *
+ * Ciclo 155 (OPTION B): se eliminó 'efectivo' de la whitelist por
+ * requerimiento del cliente (C152 item 4). Órdenes históricas con ese
+ * valor siguen legibles para admin/cocina; no se aceptan nuevas órdenes
+ * con payment_method='efectivo'.
  */
 const VALID_PAYMENT_METHODS = new Set([
-  'efectivo',
   'transferencia',
   'tarjeta',
   'tarjeta_debito',  // legacy, se normaliza a 'tarjeta'
@@ -186,7 +193,7 @@ router.post('/orders', async (req, res) => {
   const { rows: [order] } = await query('SELECT * FROM orders WHERE id = $1', [orderId]);
   const { rows: items } = await query('SELECT * FROM order_items WHERE order_id = $1', [orderId]);
 
-  res.status(201).json({
+  const responseBody = {
     order_id: order.id,
     status: order.status,
     payment_status: order.payment_status,
@@ -214,7 +221,37 @@ router.post('/orders', async (req, res) => {
     subtotal: order.subtotal,
     total: order.total,
     created_at: order.created_at,
+  };
+
+  // C173: fire-and-forget envío de confirmación SMTP.
+  // No bloquea la respuesta 201 al cliente; cualquier error de SMTP se
+  // loguea en mailer.js y NO propaga. Si MAIL_ENABLED='auto' (default) y no
+  // hay SMTP_HOST, sendMail() es no-op silencioso.
+  // C180: si payment_method es transferencia, inyecta bankAccount desde
+  // settings para que el template renderice el bloque de depósito.
+  Promise.resolve().then(async () => {
+    try {
+      let emailInput = responseBody;
+      if (order.payment_method === 'transferencia') {
+        const bank = await readBankSettings();
+        if (isBankConfigured(bank)) {
+          emailInput = { ...responseBody, bankAccount: bank };
+        } else {
+          console.warn(`[orders] order ${order.id} pagada por transferencia pero no hay datos bancarios configurados; el email omitirá el bloque de depósito.`);
+        }
+      }
+      const payload = buildOrderConfirmationEmail(emailInput);
+      if (payload.to) {
+        return mailer.sendMail(payload);
+      }
+      return null;
+    } catch (err) {
+      console.error(`[orders] order-confirmation email build failed for order ${order.id}:`, err.message);
+      return null;
+    }
   });
+
+  res.status(201).json(responseBody);
 });
 
 function serializeOrder(order, items) {

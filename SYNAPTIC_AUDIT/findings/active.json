@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-28T16:56:33.469Z",
+  "lastUpdated": "2026-06-01T15:01:01.890Z",
   "findings": [
     {
       "id": "DC-001",
@@ -1763,7 +1763,12 @@
       "findingId": "SAI-687ef548",
       "detectedInCycle": 3,
       "detectedAt": "2026-04-26T14:55:00.501Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 178,
+        "resolvedAt": "2026-06-01T14:19:49.393Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-023",
@@ -1820,7 +1825,12 @@
       "findingId": "SAI-49f0bce9",
       "detectedInCycle": 3,
       "detectedAt": "2026-04-26T14:55:00.501Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 163,
+        "resolvedAt": "2026-05-30T20:13:49.002Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-027",
@@ -1833,7 +1843,12 @@
       "findingId": "SAI-6cdc1b0f",
       "detectedInCycle": 3,
       "detectedAt": "2026-04-26T14:55:00.501Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 163,
+        "resolvedAt": "2026-05-30T20:13:49.002Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-028",
@@ -1976,7 +1991,12 @@
       "findingId": "SAI-0559328b",
       "detectedInCycle": 3,
       "detectedAt": "2026-04-26T14:55:00.501Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 176,
+        "resolvedAt": "2026-06-01T14:03:56.931Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-039",
@@ -2102,7 +2122,12 @@
       "findingId": "SAI-83aa4655",
       "detectedInCycle": 3,
       "detectedAt": "2026-04-26T14:55:00.501Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 163,
+        "resolvedAt": "2026-05-30T20:13:49.002Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "MT-048",
@@ -2154,7 +2179,12 @@
       "findingId": "SAI-965c0297",
       "detectedInCycle": 3,
       "detectedAt": "2026-04-26T14:55:00.501Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 176,
+        "resolvedAt": "2026-06-01T14:03:56.931Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-118",
@@ -2624,7 +2654,12 @@
       "findingId": "SAI-922b1619",
       "detectedInCycle": 25,
       "detectedAt": "2026-04-26T18:08:12.788Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 161,
+        "resolvedAt": "2026-05-30T12:04:38.909Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-794",
@@ -3063,7 +3098,12 @@
       "findingId": "SAI-3777337c",
       "detectedInCycle": 67,
       "detectedAt": "2026-04-27T04:22:01.693Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 155,
+        "resolvedAt": "2026-05-30T02:46:00.566Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-006",
@@ -3257,7 +3297,12 @@
       "findingId": "SAI-0fecdd81",
       "detectedInCycle": 67,
       "detectedAt": "2026-04-27T04:22:01.693Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 155,
+        "resolvedAt": "2026-05-30T02:46:00.566Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "MT-021",
@@ -3515,7 +3560,12 @@
       "findingId": "SAI-5a0d6f8d",
       "detectedInCycle": 101,
       "detectedAt": "2026-04-28T01:48:09.110Z",
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 166,
+        "resolvedAt": "2026-05-30T21:45:15.727Z",
+        "resolvedBy": "auto"
+      }
     },
     {
       "id": "DC-155",
@@ -3555,19 +3605,858 @@
       "detectedInCycle": 101,
       "detectedAt": "2026-04-28T01:48:09.110Z",
       "status": "OPEN"
+    },
+    {
+      "id": "MT-031",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/data/seed.js",
+      "line": 4,
+      "description": "Function 'seed' has 289 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-c6f3c5da",
+      "detectedInCycle": 155,
+      "detectedAt": "2026-05-30T02:46:00.565Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 159,
+        "resolvedAt": "2026-05-30T03:10:37.614Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-032",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/data/seed.js",
+      "line": 206,
+      "description": "Function 'for' has 72 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-10d8fccd",
+      "detectedInCycle": 155,
+      "detectedAt": "2026-05-30T02:46:00.565Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 159,
+        "resolvedAt": "2026-05-30T03:10:37.614Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-033",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/data/seed.js",
+      "line": 211,
+      "description": "Function 'for' has 66 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-72d9f3fd",
+      "detectedInCycle": 155,
+      "detectedAt": "2026-05-30T02:46:00.565Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 159,
+        "resolvedAt": "2026-05-30T03:10:37.614Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-084",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/CheckoutModal.jsx",
+      "description": "File has 672 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-c4e80210",
+      "detectedInCycle": 155,
+      "detectedAt": "2026-05-30T02:46:00.565Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-089",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/admin.js",
+      "description": "File has 638 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-eff4d598",
+      "detectedInCycle": 155,
+      "detectedAt": "2026-05-30T02:46:00.565Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-091",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/data/seed.js",
+      "line": 4,
+      "description": "Function 'seed' has 142 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-e4baa081",
+      "detectedInCycle": 159,
+      "detectedAt": "2026-05-30T03:10:37.613Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-092",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/openrouter.js",
+      "line": 27,
+      "description": "Unused function: 'saveModelConfig' (7 lines)",
+      "suggestion": "Remove unused function 'saveModelConfig' or export if needed elsewhere",
+      "findingId": "SAI-6684786d",
+      "detectedInCycle": 161,
+      "detectedAt": "2026-05-30T12:04:38.907Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-093",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/openrouter.js",
+      "line": 35,
+      "description": "Unused function: 'fetchAvailableModels' (28 lines)",
+      "suggestion": "Remove unused function 'fetchAvailableModels' or export if needed elsewhere",
+      "findingId": "SAI-8c9ad8bb",
+      "detectedInCycle": 161,
+      "detectedAt": "2026-05-30T12:04:38.907Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-117",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "description": "File has 1786 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-c453500c",
+      "detectedInCycle": 161,
+      "detectedAt": "2026-05-30T12:04:38.907Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 163,
+        "resolvedAt": "2026-05-30T20:13:49.002Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "DC-299",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 701,
+      "description": "Unused function: 'InsightsTab' (121 lines)",
+      "suggestion": "Remove unused function 'InsightsTab' or export if needed elsewhere",
+      "findingId": "SAI-7a7e099e",
+      "detectedInCycle": 163,
+      "detectedAt": "2026-05-30T20:13:49.001Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-300",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 716,
+      "description": "Unused function: 'handleSend' (31 lines)",
+      "suggestion": "Remove unused function 'handleSend' or export if needed elsewhere",
+      "findingId": "SAI-9a31f92c",
+      "detectedInCycle": 163,
+      "detectedAt": "2026-05-30T20:13:49.001Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-315",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "description": "File has 1795 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-e2762f5e",
+      "detectedInCycle": 163,
+      "detectedAt": "2026-05-30T20:13:49.001Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 176,
+        "resolvedAt": "2026-06-01T14:03:56.931Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-320",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 701,
+      "description": "Function 'InsightsTab' has 121 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-393479d7",
+      "detectedInCycle": 163,
+      "detectedAt": "2026-05-30T20:13:49.001Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-327",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/admin-chat.js",
+      "line": 7,
+      "description": "Function 'buildAdminSystemPrompt' has 70 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-cf2ed143",
+      "detectedInCycle": 163,
+      "detectedAt": "2026-05-30T20:13:49.001Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 164,
+        "resolvedAt": "2026-05-30T20:24:42.628Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-328",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/admin-chat.js",
+      "line": 10,
+      "description": "Function 'buildAdminSystemPrompt' has 80 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-db52495b",
+      "detectedInCycle": 164,
+      "detectedAt": "2026-05-30T20:24:42.628Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-331",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/middleware/validateInput.js",
+      "line": 157,
+      "description": "Unused function: 'validateInput' (42 lines)",
+      "suggestion": "Remove unused function 'validateInput' or export if needed elsewhere",
+      "findingId": "SAI-f69fa755",
+      "detectedInCycle": 166,
+      "detectedAt": "2026-05-30T21:45:15.726Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-340",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/openrouter.js",
+      "line": 64,
+      "description": "Function 'chatCompletion' has 77 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-9a0afd2e",
+      "detectedInCycle": 168,
+      "detectedAt": "2026-06-01T04:31:20.148Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 171,
+        "resolvedAt": "2026-06-01T13:26:08.893Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-344",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/openrouter.js",
+      "line": 82,
+      "description": "Function 'chatCompletion' has 152 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-111f1cd6",
+      "detectedInCycle": 171,
+      "detectedAt": "2026-06-01T13:26:08.891Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-345",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/openrouter.js",
+      "line": 164,
+      "description": "Function 'if' has 67 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-138c276c",
+      "detectedInCycle": 171,
+      "detectedAt": "2026-06-01T13:26:08.891Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-352",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/mailer.js",
+      "line": 100,
+      "description": "Unused function: 'isEnabled' (3 lines)",
+      "suggestion": "Remove unused function 'isEnabled' or export if needed elsewhere",
+      "findingId": "SAI-91086e37",
+      "detectedInCycle": 173,
+      "detectedAt": "2026-06-01T13:39:00.421Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 176,
+        "resolvedAt": "2026-06-01T14:03:56.931Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "DC-353",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/mailer.js",
+      "line": 104,
+      "description": "Unused function: 'describe' (11 lines)",
+      "suggestion": "Remove unused function 'describe' or export if needed elsewhere",
+      "findingId": "SAI-7c717cc9",
+      "detectedInCycle": 173,
+      "detectedAt": "2026-06-01T13:39:00.421Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 176,
+        "resolvedAt": "2026-06-01T14:03:56.931Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "DC-354",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/orderConfirmationEmail.js",
+      "line": 30,
+      "description": "Unused function: 'buildOrderConfirmationEmail' (128 lines)",
+      "suggestion": "Remove unused function 'buildOrderConfirmationEmail' or export if needed elsewhere",
+      "findingId": "SAI-8279eae9",
+      "detectedInCycle": 173,
+      "detectedAt": "2026-06-01T13:39:00.421Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 180,
+        "resolvedAt": "2026-06-01T14:54:31.824Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-355",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/orderConfirmationEmail.js",
+      "line": 30,
+      "description": "Function 'buildOrderConfirmationEmail' has 128 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-e9a71e66",
+      "detectedInCycle": 173,
+      "detectedAt": "2026-06-01T13:39:00.421Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 180,
+        "resolvedAt": "2026-06-01T14:54:31.824Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "DC-358",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/mailer.js",
+      "line": 67,
+      "description": "Unused function: 'for' (3 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere",
+      "findingId": "SAI-1623e9aa",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-359",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/mailer.js",
+      "line": 212,
+      "description": "Unused function: 'isEnabled' (4 lines)",
+      "suggestion": "Remove unused function 'isEnabled' or export if needed elsewhere",
+      "findingId": "SAI-a4cf947b",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-360",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/mailer.js",
+      "line": 217,
+      "description": "Unused function: 'describe' (13 lines)",
+      "suggestion": "Remove unused function 'describe' or export if needed elsewhere",
+      "findingId": "SAI-a6aec039",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-361",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/mailer.js",
+      "line": 231,
+      "description": "Unused function: 'sendTestMail' (13 lines)",
+      "suggestion": "Remove unused function 'sendTestMail' or export if needed elsewhere",
+      "findingId": "SAI-97d1417f",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-362",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/mailer.js",
+      "line": 96,
+      "description": "Function 'resolveConfig' has 58 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-273897db",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-363",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/settings.js",
+      "description": "File has 516 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-98267d18",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 180,
+        "resolvedAt": "2026-06-01T14:54:31.824Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "DC-383",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1377,
+      "description": "Unused function: 'SmtpSettings' (323 lines)",
+      "suggestion": "Remove unused function 'SmtpSettings' or export if needed elsewhere",
+      "findingId": "SAI-7515dd52",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 178,
+        "resolvedAt": "2026-06-01T14:19:49.393Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "DC-384",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1417,
+      "description": "Unused function: 'handleSave' (25 lines)",
+      "suggestion": "Remove unused function 'handleSave' or export if needed elsewhere",
+      "findingId": "SAI-54af2158",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-385",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1443,
+      "description": "Unused function: 'handleDeleteAll' (11 lines)",
+      "suggestion": "Remove unused function 'handleDeleteAll' or export if needed elsewhere",
+      "findingId": "SAI-52137cf1",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-386",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1455,
+      "description": "Unused function: 'handleTest' (16 lines)",
+      "suggestion": "Remove unused function 'handleTest' or export if needed elsewhere",
+      "findingId": "SAI-e8390941",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-387",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1701,
+      "description": "Unused function: 'SettingsTab' (283 lines)",
+      "suggestion": "Remove unused function 'SettingsTab' or export if needed elsewhere",
+      "findingId": "SAI-a0c588c7",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 180,
+        "resolvedAt": "2026-06-01T14:54:31.824Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-391",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "description": "File has 2122 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-fc9ecd04",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 178,
+        "resolvedAt": "2026-06-01T14:19:49.393Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-400",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1377,
+      "description": "Function 'SmtpSettings' has 323 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-c3ee3a94",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 178,
+        "resolvedAt": "2026-06-01T14:19:49.393Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-401",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1701,
+      "description": "Function 'SettingsTab' has 283 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-2acd65eb",
+      "detectedInCycle": 176,
+      "detectedAt": "2026-06-01T14:03:56.930Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 180,
+        "resolvedAt": "2026-06-01T14:54:31.824Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "DC-458",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1449,
+      "description": "Unused function: 'SmtpSettings' (455 lines)",
+      "suggestion": "Remove unused function 'SmtpSettings' or export if needed elsewhere",
+      "findingId": "SAI-97c3a432",
+      "detectedInCycle": 178,
+      "detectedAt": "2026-06-01T14:19:49.392Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-462",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1549,
+      "description": "Unused function: 'handleApplyPaste' (22 lines)",
+      "suggestion": "Remove unused function 'handleApplyPaste' or export if needed elsewhere",
+      "findingId": "SAI-20fcb002",
+      "detectedInCycle": 178,
+      "detectedAt": "2026-06-01T14:19:49.392Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-467",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "description": "File has 2326 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-f5772c39",
+      "detectedInCycle": 178,
+      "detectedAt": "2026-06-01T14:19:49.392Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 180,
+        "resolvedAt": "2026-06-01T14:54:31.824Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "MT-476",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1379,
+      "description": "Function 'parseProviderTicket' has 56 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-704eab21",
+      "detectedInCycle": 178,
+      "detectedAt": "2026-06-01T14:19:49.392Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-477",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1449,
+      "description": "Function 'SmtpSettings' has 455 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-1bf525e8",
+      "detectedInCycle": 178,
+      "detectedAt": "2026-06-01T14:19:49.392Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-713",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/rut.js",
+      "line": 21,
+      "description": "Unused function: 'for' (4 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere",
+      "findingId": "SAI-7da15b38",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-714",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/settings.js",
+      "description": "File has 685 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-06368ed0",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "RESOLVED",
+      "resolution": {
+        "resolvedInCycle": 182,
+        "resolvedAt": "2026-06-01T15:01:01.890Z",
+        "resolvedBy": "auto"
+      }
+    },
+    {
+      "id": "DC-715",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/bankSettings.js",
+      "line": 60,
+      "description": "Unused function: 'writeBankKey' (6 lines)",
+      "suggestion": "Remove unused function 'writeBankKey' or export if needed elsewhere",
+      "findingId": "SAI-0b4bca0d",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-716",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/bankSettings.js",
+      "line": 67,
+      "description": "Unused function: 'readBankSettings' (28 lines)",
+      "suggestion": "Remove unused function 'readBankSettings' or export if needed elsewhere",
+      "findingId": "SAI-f9736506",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-717",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/bankSettings.js",
+      "line": 96,
+      "description": "Unused function: 'isBankConfigured' (8 lines)",
+      "suggestion": "Remove unused function 'isBankConfigured' or export if needed elsewhere",
+      "findingId": "SAI-8593bdec",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-719",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/orderConfirmationEmail.js",
+      "line": 39,
+      "description": "Unused function: 'buildOrderConfirmationEmail' (164 lines)",
+      "suggestion": "Remove unused function 'buildOrderConfirmationEmail' or export if needed elsewhere",
+      "findingId": "SAI-d36824c4",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-720",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/orderConfirmationEmail.js",
+      "line": 39,
+      "description": "Function 'buildOrderConfirmationEmail' has 164 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-72c04173",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-727",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/orderConfirmationEmail.test.js",
+      "line": 199,
+      "description": "Unused function: 'for' (4 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere",
+      "findingId": "SAI-7fb3dfe1",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-751",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 2029,
+      "description": "Unused function: 'BankSettings' (401 lines)",
+      "suggestion": "Remove unused function 'BankSettings' or export if needed elsewhere",
+      "findingId": "SAI-8f52de3f",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-755",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 2126,
+      "description": "Unused function: 'handleApplyPaste' (16 lines)",
+      "suggestion": "Remove unused function 'handleApplyPaste' or export if needed elsewhere",
+      "findingId": "SAI-61cfc22d",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "DC-756",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 2431,
+      "description": "Unused function: 'SettingsTab' (286 lines)",
+      "suggestion": "Remove unused function 'SettingsTab' or export if needed elsewhere",
+      "findingId": "SAI-4685eb3c",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-760",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "description": "File has 2855 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-626309fe",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-771",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 1945,
+      "description": "Function 'parseBankTicket' has 83 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-01dc89a9",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-772",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 2029,
+      "description": "Function 'BankSettings' has 401 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-9d16fa6b",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-773",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/frontend/src/components/AdminPage.jsx",
+      "line": 2431,
+      "description": "Function 'SettingsTab' has 286 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions",
+      "findingId": "SAI-4e44c097",
+      "detectedInCycle": 180,
+      "detectedAt": "2026-06-01T14:54:31.822Z",
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-820",
+      "type": "maintainability",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/settings.js",
+      "description": "File has 683 lines (max recommended: 500)",
+      "suggestion": "Consider splitting this file into smaller modules",
+      "findingId": "SAI-1a257ab1",
+      "detectedInCycle": 182,
+      "detectedAt": "2026-06-01T15:01:01.889Z",
+      "status": "OPEN"
     }
   ],
   "stats": {
-    "totalOpen": 217,
-    "totalResolved": 42,
+    "totalOpen": 246,
+    "totalResolved": 71,
     "bySeverity": {
-      "MEDIUM": 176,
-      "LOW": 39,
+      "MEDIUM": 195,
+      "LOW": 49,
       "CRITICAL": 2
     },
     "byType": {
-      "dead_code": 165,
-      "maintainability": 50,
+      "dead_code": 183,
+      "maintainability": 61,
       "security": 2
     }
   }

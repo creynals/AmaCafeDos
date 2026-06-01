@@ -10,16 +10,16 @@ import ProductsCrudPanel from './ProductsCrudPanel';
 import KitchenView from './KitchenView';
 
 const TABS = [
-  { id: 'products-parent', label: 'Productos', icon: Package },
+  { id: 'products-parent', label: 'Mantenedor Productos', icon: Package },
   { id: 'orders', label: 'Órdenes', icon: ClipboardList },
   { id: 'customers', label: 'Clientes', icon: Users },
-  { id: 'insights', label: 'Chat AI Insights', icon: MessageCircle },
+  { id: 'insights', label: 'Asesor de Negocios', icon: MessageCircle },
   { id: 'settings', label: 'Configuración', icon: Settings },
   { id: 'users', label: 'Usuarios', icon: UserCog },
 ];
 
 const PRODUCTS_SUBTABS = [
-  { id: 'crud', label: 'Mantenedor Productos', icon: Package, description: 'Gestión CRUD de productos individuales (crear, editar, stock, galería)' },
+  { id: 'crud', label: 'Catálogo', icon: Package, description: 'Gestión CRUD de productos individuales (crear, editar, stock, galería)' },
   { id: 'analytics', label: 'Análisis Productos', icon: BarChart3, description: 'Métricas de ventas, top productos y tendencias' },
   { id: 'bulk-import', label: 'Importación Masiva', icon: FileSpreadsheet, description: 'Carga masiva de productos vía Excel (alta, edición, eliminación)' },
 ];
@@ -723,13 +723,22 @@ function InsightsTab() {
     setLoading(true);
 
     try {
-      const history = messages.filter(m => m !== WELCOME_MESSAGE);
+      const history = messages.filter(m => m !== WELCOME_MESSAGE && !m.isError);
       const data = await api.adminChat(text, history);
       setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
-    } catch {
+    } catch (err) {
+      console.error('[AdminChat] send failed', {
+        status: err?.status,
+        message: err?.message,
+        backendError: err?.data?.error,
+        backendReply: err?.data?.reply,
+        upstream: err?.data?.upstream,
+      });
+      const reply = err?.data?.reply || err?.data?.error || err?.message || 'Error al conectar con el asistente. Intenta de nuevo.';
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'Error al conectar con el asistente. Intenta de nuevo.',
+        content: reply,
+        isError: true,
       }]);
     } finally {
       setLoading(false);
@@ -1365,6 +1374,1060 @@ function SumupSettings() {
   );
 }
 
+// Cycle 178 — Parser tolerante de "ficha de proveedor" (formato cPanel/Plesk).
+// Acepta `clave: valor` o `clave = valor`, ignora comentarios y campos IMAP de forma silenciosa.
+function parseProviderTicket(text) {
+  const SMTP_HOST_KEYS = ['smtp_server', 'smtp_host', 'host', 'server', 'mail_server', 'outgoing_server'];
+  const SMTP_PORT_KEYS = ['smtp_port', 'port', 'outgoing_port'];
+  const ENCRYPTION_KEYS = ['encryption', 'security', 'connection_security', 'protocol'];
+  const USER_KEYS = ['username', 'user', 'login', 'email', 'account', 'mail_user'];
+  const PASS_KEYS = ['password', 'pass', 'mail_password', 'app_password'];
+  const FROM_KEYS = ['from', 'from_email', 'sender', 'remitente'];
+  const REPLY_KEYS = ['reply_to', 'replyto', 'responder_a'];
+  const IMAP_KEYS = ['imap_server', 'imap_host', 'imap_port', 'incoming_server', 'incoming_port', 'pop3_server', 'pop3_port'];
+
+  const result = { applied: {}, ignored: [], unknown: [] };
+  const lines = String(text || '').split(/\r?\n/);
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith('#') || line.startsWith('//')) continue;
+
+    const sepMatch = line.match(/^([\w .-]+?)\s*[:=]\s*(.+?)\s*$/);
+    if (!sepMatch) continue;
+
+    const key = sepMatch[1].trim().toLowerCase().replace(/[\s.-]+/g, '_');
+    const value = sepMatch[2].trim().replace(/^["']|["']$/g, '');
+    if (!value) continue;
+
+    if (IMAP_KEYS.includes(key)) {
+      result.ignored.push(`${key}=${value}`);
+      continue;
+    }
+    if (SMTP_HOST_KEYS.includes(key)) { result.applied.host = value; continue; }
+    if (SMTP_PORT_KEYS.includes(key)) {
+      const n = Number.parseInt(value, 10);
+      if (Number.isInteger(n) && n > 0 && n < 65536) result.applied.port = String(n);
+      continue;
+    }
+    if (ENCRYPTION_KEYS.includes(key)) {
+      const v = value.toLowerCase();
+      if (v === 'ssl' || v === 'tls' || v === 'ssl/tls') result.applied.encryption = 'ssl';
+      else if (v === 'starttls' || v === 'start_tls') result.applied.encryption = 'starttls';
+      else if (v === 'none' || v === 'plain' || v === 'no') result.applied.encryption = 'none';
+      else if (v === 'auto') result.applied.encryption = 'auto';
+      continue;
+    }
+    if (USER_KEYS.includes(key)) { result.applied.user = value; continue; }
+    if (PASS_KEYS.includes(key)) { result.applied.pass = value; continue; }
+    if (FROM_KEYS.includes(key)) { result.applied.from = value; continue; }
+    if (REPLY_KEYS.includes(key)) { result.applied.replyTo = value; continue; }
+
+    result.unknown.push(key);
+  }
+
+  // Si llegó "ssl/tls" sin puerto, autocompletamos puerto típico
+  if (result.applied.encryption === 'ssl' && !result.applied.port) result.applied.port = '465';
+  if (result.applied.encryption === 'starttls' && !result.applied.port) result.applied.port = '587';
+
+  return result;
+}
+
+// Mapea valor visible del selector ↔ valor `secure` aceptado por el backend (string 'true'|'false').
+function encryptionToSecure(encryption, port) {
+  if (encryption === 'ssl') return 'true';
+  if (encryption === 'starttls') return 'false';
+  if (encryption === 'none') return 'false';
+  // auto: TLS directo si puerto es 465, STARTTLS en cualquier otro caso.
+  return String(Number.parseInt(port, 10) === 465);
+}
+
+function secureToEncryption(secureStr) {
+  return secureStr === 'true' ? 'ssl' : 'starttls';
+}
+
+function SmtpSettings() {
+  const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const [testing, setTesting] = useState(false);
+  const [showPass, setShowPass] = useState(false);
+
+  const [host, setHost] = useState('');
+  const [port, setPort] = useState('587');
+  const [encryption, setEncryption] = useState('starttls'); // none | starttls | ssl | auto
+  const [user, setUser] = useState('');
+  const [pass, setPass] = useState('');
+  const [from, setFrom] = useState('');
+  const [replyTo, setReplyTo] = useState('');
+  const [enabled, setEnabled] = useState('auto');
+  const [testTo, setTestTo] = useState('');
+
+  // Wizard "Pegar ficha de proveedor"
+  const [showPasteWizard, setShowPasteWizard] = useState(false);
+  const [pasteText, setPasteText] = useState('');
+  const [pasteFeedback, setPasteFeedback] = useState(null);
+
+  const loadStatus = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await api.getSmtpStatus();
+      setStatus(data);
+      setHost(data.host?.value || '');
+      setPort(data.port?.value || '587');
+      setEncryption(secureToEncryption(data.secure?.value || 'false'));
+      setUser(data.user?.value || '');
+      setFrom(data.from?.value || '');
+      setReplyTo(data.replyTo?.value || '');
+      setEnabled(data.enabled?.value || 'auto');
+    } catch (err) {
+      console.error('Error loading SMTP status:', err);
+      setMessage({ type: 'error', text: 'Error al cargar configuración SMTP' });
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { loadStatus(); }, [loadStatus]);
+
+  const handleSave = async () => {
+    setSaving(true);
+    setMessage(null);
+    try {
+      const payload = {
+        host: host.trim(),
+        port: Number.parseInt(port, 10),
+        secure: encryptionToSecure(encryption, port),
+        user: user.trim(),
+        from: from.trim(),
+        reply_to: replyTo.trim(),
+        enabled,
+      };
+      if (pass) payload.pass = pass;
+
+      const result = await api.saveSmtp(payload);
+      setMessage({ type: 'success', text: result.message });
+      setPass('');
+      await loadStatus();
+    } catch (err) {
+      setMessage({ type: 'error', text: err.message || 'Error al guardar configuración SMTP' });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    if (!confirm('¿Eliminar TODA la configuración SMTP de la base de datos? El sistema volverá a leer desde .env (o quedará deshabilitado).')) return;
+    try {
+      await api.deleteSmtp();
+      setMessage({ type: 'success', text: 'Configuración SMTP eliminada' });
+      setPass('');
+      await loadStatus();
+    } catch (err) {
+      setMessage({ type: 'error', text: err.message || 'Error al eliminar configuración' });
+    }
+  };
+
+  const handleTest = async () => {
+    if (!testTo.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(testTo.trim())) {
+      setMessage({ type: 'error', text: 'Ingresa un email destino válido para la prueba' });
+      return;
+    }
+    setTesting(true);
+    setMessage(null);
+    try {
+      const result = await api.testSmtp(testTo.trim());
+      setMessage({ type: 'success', text: result.message || 'Email de prueba enviado' });
+    } catch (err) {
+      setMessage({ type: 'error', text: err.message || 'Error al enviar email de prueba' });
+    } finally {
+      setTesting(false);
+    }
+  };
+
+  const handleApplyPaste = () => {
+    const parsed = parseProviderTicket(pasteText);
+    const appliedFields = [];
+    if (parsed.applied.host) { setHost(parsed.applied.host); appliedFields.push('Servidor SMTP'); }
+    if (parsed.applied.port) { setPort(parsed.applied.port); appliedFields.push('Puerto SMTP'); }
+    if (parsed.applied.encryption) { setEncryption(parsed.applied.encryption); appliedFields.push('Cifrado'); }
+    if (parsed.applied.user) { setUser(parsed.applied.user); appliedFields.push('Usuario'); }
+    if (parsed.applied.pass) { setPass(parsed.applied.pass); appliedFields.push('Contraseña'); }
+    if (parsed.applied.from) { setFrom(parsed.applied.from); appliedFields.push('Remitente'); }
+    if (parsed.applied.replyTo) { setReplyTo(parsed.applied.replyTo); appliedFields.push('Reply-To'); }
+
+    if (appliedFields.length === 0) {
+      setPasteFeedback({ type: 'error', text: 'No se detectó ningún campo SMTP en el texto. Verifica el formato.' });
+      return;
+    }
+    setPasteFeedback({
+      type: 'success',
+      applied: appliedFields,
+      ignored: parsed.ignored,
+      unknown: parsed.unknown,
+    });
+  };
+
+  if (loading) return null;
+
+  const runtime = status?.runtime || {};
+
+  return (
+    <div className="bg-ama-card border border-ama-border rounded-xl p-6">
+      <div className="flex items-center gap-3 mb-4">
+        <Mail size={24} className="text-ama-amber" />
+        <div>
+          <h2 className="text-lg font-semibold text-ama-text">Servidor de Email (SMTP)</h2>
+          <p className="text-xs text-ama-text-muted">
+            Configura el servidor SMTP para enviar confirmaciones de pedido. La contraseña se cifra con AES-256-GCM.
+          </p>
+        </div>
+      </div>
+
+      {/* Status Panel */}
+      <div className="bg-ama-darker rounded-xl p-4 border border-ama-border mb-4 space-y-1">
+        <div className="flex items-center gap-2 mb-2">
+          <Shield size={16} className="text-ama-amber" />
+          <span className="text-sm font-medium text-ama-text">Estado Actual</span>
+        </div>
+        <div className="flex items-center justify-between text-xs py-1">
+          <span className="text-ama-text-muted">Habilitado</span>
+          <span className={`flex items-center gap-1.5 ${runtime.enabled ? 'text-green-400' : 'text-yellow-400'}`}>
+            {runtime.enabled ? <CheckCircle size={12} /> : <AlertCircle size={12} />}
+            {runtime.enabled ? 'Sí — envíos activos' : 'No — envíos desactivados (config incompleta o enabled=false)'}
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-xs py-1">
+          <span className="text-ama-text-muted">Host</span>
+          <span className="font-mono text-ama-text">
+            {runtime.host || <span className="text-yellow-400">No configurado</span>}
+            {runtime.host && (
+              <span className="ml-2 text-[10px] text-ama-text-muted">({status?.runtime?.sources?.host || '—'})</span>
+            )}
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-xs py-1">
+          <span className="text-ama-text-muted">Puerto / Seguro</span>
+          <span className="font-mono text-ama-text">
+            {runtime.port} / {runtime.secure ? 'TLS' : 'STARTTLS'}
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-xs py-1">
+          <span className="text-ama-text-muted">Remitente (from)</span>
+          <span className="font-mono text-ama-text truncate max-w-xs">
+            {runtime.from || <span className="text-yellow-400">No configurado</span>}
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-xs py-1">
+          <span className="text-ama-text-muted">Contraseña</span>
+          {status?.pass?.configured ? (
+            <span className="flex items-center gap-1.5 text-green-400 font-mono">
+              <CheckCircle size={12} />
+              {status.pass.masked || '✓'}
+              <span className="ml-1 text-[10px] text-ama-text-muted">(cifrada en BD)</span>
+            </span>
+          ) : (
+            <span className="flex items-center gap-1.5 text-yellow-400">
+              <AlertCircle size={12} />
+              No configurada en BD
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Wizard "Pegar ficha de proveedor" — C178 OPTION B */}
+      <div className="bg-ama-darker rounded-xl p-4 border border-ama-border mb-4">
+        <button
+          type="button"
+          onClick={() => setShowPasteWizard(s => !s)}
+          className="w-full flex items-center justify-between text-left cursor-pointer"
+        >
+          <div className="flex items-center gap-2">
+            <ClipboardList size={16} className="text-ama-amber" />
+            <div>
+              <h3 className="text-sm font-medium text-ama-text">Pegar Ficha de Proveedor</h3>
+              <p className="text-[11px] text-ama-text-muted">
+                Pega el bloque de configuración que te envió tu hosting (cPanel, Plesk, Gmail…) y autocompletamos los campos.
+              </p>
+            </div>
+          </div>
+          <ChevronDown
+            size={16}
+            className={`text-ama-text-muted transition-transform ${showPasteWizard ? 'rotate-180' : ''}`}
+          />
+        </button>
+
+        {showPasteWizard && (
+          <div className="mt-3 space-y-3">
+            <textarea
+              value={pasteText}
+              onChange={e => setPasteText(e.target.value)}
+              rows={8}
+              placeholder={`Ejemplo (formato cPanel/Plesk):
+imap_port: 993
+smtp_port: 465
+encryption: ssl
+imap_server: mail.golab.cl
+smtp_server: mail.golab.cl
+username: pedidos@golab.cl
+password: tu-clave-aqui`}
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-xs text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+            />
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={handleApplyPaste}
+                disabled={!pasteText.trim()}
+                className="flex items-center gap-2 px-4 py-2 bg-ama-amber/20 text-ama-amber font-medium text-sm rounded-lg hover:bg-ama-amber/30 border border-ama-amber/40 transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                <Zap size={14} />
+                Aplicar ficha
+              </button>
+              <button
+                onClick={() => { setPasteText(''); setPasteFeedback(null); }}
+                className="flex items-center gap-2 px-3 py-2 text-xs text-ama-text-muted hover:text-ama-text cursor-pointer"
+              >
+                <Trash2 size={12} />
+                Limpiar
+              </button>
+            </div>
+
+            {pasteFeedback && pasteFeedback.type === 'success' && (
+              <div className="bg-green-400/10 border border-green-400/30 rounded-lg p-3 text-xs space-y-1">
+                <div className="flex items-center gap-2 text-green-400 font-medium">
+                  <CheckCircle size={12} />
+                  Campos aplicados: {pasteFeedback.applied.join(', ')}
+                </div>
+                {pasteFeedback.ignored && pasteFeedback.ignored.length > 0 && (
+                  <div className="text-ama-text-muted">
+                    Ignorados (IMAP/POP3 — no usados para envío): {pasteFeedback.ignored.join(', ')}
+                  </div>
+                )}
+                {pasteFeedback.unknown && pasteFeedback.unknown.length > 0 && (
+                  <div className="text-yellow-400/80">
+                    No reconocidos: {pasteFeedback.unknown.join(', ')}
+                  </div>
+                )}
+                <div className="text-ama-text-muted pt-1">
+                  Revisa los campos abajo y presiona "Guardar configuración".
+                </div>
+              </div>
+            )}
+            {pasteFeedback && pasteFeedback.type === 'error' && (
+              <div className="flex items-center gap-2 text-red-400 text-xs">
+                <AlertCircle size={12} />
+                {pasteFeedback.text}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Form */}
+      <div className="bg-ama-darker rounded-xl p-4 border border-ama-border space-y-3 mb-4">
+        <h3 className="text-sm font-medium text-ama-text">Configuración SMTP (envío de correo)</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <label className="text-xs text-ama-text-muted mb-1 block">Servidor SMTP</label>
+            <input
+              type="text"
+              value={host}
+              onChange={e => setHost(e.target.value)}
+              placeholder="mail.tuproveedor.cl o smtp.gmail.com"
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+            />
+          </div>
+          <div>
+            <label className="text-xs text-ama-text-muted mb-1 block">Puerto SMTP</label>
+            <input
+              type="number"
+              value={port}
+              onChange={e => setPort(e.target.value)}
+              placeholder="587"
+              min="1"
+              max="65535"
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+            />
+          </div>
+          <div>
+            <label className="text-xs text-ama-text-muted mb-1 block">Cifrado / Conexión segura</label>
+            <select
+              value={encryption}
+              onChange={e => setEncryption(e.target.value)}
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text focus:border-ama-amber/50 focus:outline-none"
+            >
+              <option value="none">Sin cifrado (puerto 25 — no recomendado)</option>
+              <option value="starttls">STARTTLS (puerto 587)</option>
+              <option value="ssl">SSL/TLS directo (puerto 465)</option>
+              <option value="auto">Auto (decide por puerto)</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-ama-text-muted mb-1 block">Estado</label>
+            <select
+              value={enabled}
+              onChange={e => setEnabled(e.target.value)}
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text focus:border-ama-amber/50 focus:outline-none"
+            >
+              <option value="auto">auto (activa si host+from existen)</option>
+              <option value="true">Habilitado</option>
+              <option value="false">Deshabilitado</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-ama-text-muted mb-1 block">Usuario (auth)</label>
+            <input
+              type="text"
+              value={user}
+              onChange={e => setUser(e.target.value)}
+              placeholder="ventas@amacafe.cl"
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+            />
+          </div>
+          <div>
+            <label className="text-xs text-ama-text-muted mb-1 block">
+              Contraseña / App Password
+              {status?.pass?.configured && (
+                <span className="ml-2 text-[10px] text-ama-text-muted">(deja vacío para mantener la actual)</span>
+              )}
+            </label>
+            <div className="relative">
+              <input
+                type={showPass ? 'text' : 'password'}
+                value={pass}
+                onChange={e => setPass(e.target.value)}
+                placeholder={status?.pass?.configured ? '••••••••••••' : 'Pega aquí el App Password de Gmail'}
+                className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 pr-10 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPass(s => !s)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-ama-text-muted hover:text-ama-amber"
+                tabIndex={-1}
+              >
+                {showPass ? <EyeOff size={14} /> : <Eye size={14} />}
+              </button>
+            </div>
+          </div>
+          <div className="md:col-span-2">
+            <label className="text-xs text-ama-text-muted mb-1 block">Remitente (From)</label>
+            <input
+              type="text"
+              value={from}
+              onChange={e => setFrom(e.target.value)}
+              placeholder='amaCafe <ventas@amacafe.cl>'
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+            />
+          </div>
+          <div className="md:col-span-2">
+            <label className="text-xs text-ama-text-muted mb-1 block">Reply-To (opcional)</label>
+            <input
+              type="text"
+              value={replyTo}
+              onChange={e => setReplyTo(e.target.value)}
+              placeholder="soporte@amacafe.cl"
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+            />
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="flex items-center gap-2 px-5 py-2.5 bg-ama-amber text-ama-darker font-medium text-sm rounded-lg hover:bg-ama-amber-light transition-colors disabled:opacity-50 cursor-pointer"
+          >
+            {saving ? <Loader2 size={16} className="animate-spin" /> : <Mail size={16} />}
+            {saving ? 'Guardando...' : 'Guardar configuración'}
+          </button>
+          <button
+            onClick={handleDeleteAll}
+            className="flex items-center gap-2 px-4 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-red-400/10 border border-red-400/30 rounded-lg transition-colors cursor-pointer"
+          >
+            <Trash2 size={14} />
+            Eliminar todo
+          </button>
+        </div>
+
+        {/* Info IMAP — C178: explicar por qué no pedimos IMAP */}
+        <div className="mt-2 bg-ama-card/50 border border-ama-border/60 rounded-lg p-3 text-[11px] text-ama-text-muted leading-relaxed">
+          <div className="flex items-start gap-2">
+            <Mail size={12} className="text-ama-amber/70 mt-0.5 shrink-0" />
+            <div>
+              <span className="text-ama-text font-medium">¿Por qué no se pide IMAP / POP3?</span>{' '}
+              amaCafe solo envía correos (confirmaciones de pedido), no los lee. Por eso solamente
+              configuramos el lado <span className="font-mono text-ama-text">SMTP</span> de tu cuenta.
+              Si tu hosting te entrega también <span className="font-mono">imap_server</span> /{' '}
+              <span className="font-mono">imap_port</span>, puedes pegar la ficha completa arriba —
+              esos campos se ignoran automáticamente.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Test panel */}
+      <div className="bg-ama-darker rounded-xl p-4 border border-ama-border space-y-3">
+        <h3 className="text-sm font-medium text-ama-text flex items-center gap-2">
+          <Send size={14} className="text-ama-amber" />
+          Enviar Email de Prueba
+        </h3>
+        <div className="flex flex-col md:flex-row gap-3">
+          <input
+            type="email"
+            value={testTo}
+            onChange={e => setTestTo(e.target.value)}
+            placeholder="destinatario@ejemplo.cl"
+            className="flex-1 bg-ama-card border border-ama-border rounded-lg px-3 py-2.5 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+          />
+          <button
+            onClick={handleTest}
+            disabled={testing || !testTo.trim()}
+            className="flex items-center gap-2 px-5 py-2.5 bg-ama-amber/20 text-ama-amber font-medium text-sm rounded-lg hover:bg-ama-amber/30 border border-ama-amber/40 transition-colors disabled:opacity-50 cursor-pointer"
+          >
+            {testing ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+            {testing ? 'Enviando...' : 'Enviar prueba'}
+          </button>
+        </div>
+        <p className="text-[11px] text-ama-text-muted">
+          Útil para verificar credenciales antes de poner el sistema en producción.
+        </p>
+      </div>
+
+      {message && (
+        <div className={`mt-4 flex items-center gap-2 text-sm ${message.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+          {message.type === 'success' ? <CheckCircle size={14} /> : <AlertCircle size={14} />}
+          {message.text}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================================
+// Cycle 180 — BankSettings: panel de datos bancarios para transferencia
+// ============================================================================
+
+// Validador RUT chileno (módulo 11). Espejo del backend (backend/src/utils/rut.js)
+// para dar feedback instantáneo sin round-trip.
+function cleanRutFE(raw) {
+  if (raw == null) return '';
+  return String(raw).toUpperCase().replace(/[.\s-]/g, '');
+}
+function computeDvFE(body) {
+  let sum = 0, m = 2;
+  for (let i = body.length - 1; i >= 0; i--) {
+    sum += Number(body[i]) * m;
+    m = m === 7 ? 2 : m + 1;
+  }
+  const mod = 11 - (sum % 11);
+  if (mod === 11) return '0';
+  if (mod === 10) return 'K';
+  return String(mod);
+}
+function validateRutFE(raw) {
+  const c = cleanRutFE(raw);
+  if (c.length < 2) return false;
+  const body = c.slice(0, -1);
+  const dv = c.slice(-1);
+  if (!/^\d+$/.test(body) || !/^[0-9K]$/.test(dv)) return false;
+  if (body.length < 7 || body.length > 8) return false;
+  return computeDvFE(body) === dv;
+}
+function formatRutFE(raw) {
+  const c = cleanRutFE(raw);
+  if (!validateRutFE(c)) return null;
+  const body = c.slice(0, -1);
+  const dv = c.slice(-1);
+  return body.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '-' + dv;
+}
+
+// Parser tolerante de "ficha bancaria". Acepta `clave: valor` o `clave = valor`.
+// Resuelve banco y tipo de cuenta por matching textual contra el catálogo.
+function parseBankTicket(text, catalog) {
+  const RUT_KEYS    = ['rut', 'rut_titular', 'titular_rut', 'rol_unico', 'rolunico', 'rol_unico_tributario'];
+  const NAME_KEYS   = ['nombre', 'titular', 'nombre_titular', 'razon_social', 'razonsocial', 'beneficiario', 'holder', 'name', 'beneficiary'];
+  const TYPE_KEYS   = ['tipo', 'tipo_cuenta', 'tipo_de_cuenta', 'cuenta_tipo', 'account_type', 'producto'];
+  const NUMBER_KEYS = ['numero', 'cuenta', 'no_cuenta', 'no_de_cuenta', 'numero_cuenta', 'numero_de_cuenta', 'account_number', 'account', 'n_cuenta', 'nro_cuenta', 'cuenta_numero'];
+  const BANK_KEYS_  = ['banco', 'bank', 'institucion', 'banco_emisor', 'institucion_financiera', 'entidad'];
+  const EMAIL_KEYS  = ['email', 'correo', 'correo_electronico', 'mail', 'e_mail', 'holder_email', 'titular_email', 'correo_titular'];
+
+  const result = { applied: {}, ignored: [], unknown: [] };
+  const lines = String(text || '').split(/\r?\n/);
+
+  function resolveBank(value) {
+    const v = value.toLowerCase().replace(/\s+/g, ' ').trim();
+    for (const [key, label] of Object.entries(catalog?.banks || {})) {
+      const labelLow = label.toLowerCase();
+      if (v === labelLow || v.includes(labelLow) || labelLow.includes(v)) return key;
+      if (v === key) return key;
+    }
+    if (v.includes('chile')) return 'chile';
+    if (v.includes('estado')) return 'estado';
+    if (v.includes('santander')) return 'santander';
+    if (v.includes('bci')) return 'bci';
+    if (v.includes('itau') || v.includes('itaú')) return 'itau';
+    if (v.includes('scotia')) return 'scotiabank';
+    if (v.includes('internacional')) return 'internacional';
+    if (v.includes('bice')) return 'bice';
+    if (v.includes('falabella')) return 'falabella';
+    if (v.includes('security')) return 'security';
+    if (v.includes('consorcio')) return 'consorcio';
+    if (v.includes('ripley')) return 'ripley';
+    if (v.includes('hsbc')) return 'hsbc';
+    if (v.includes('mercado pago') || v.includes('mercadopago')) return 'mercado_pago';
+    if (v.includes('tenpo')) return 'tenpo';
+    if (v.includes('mach')) return 'mach';
+    return null;
+  }
+
+  function resolveAccountType(value) {
+    const v = value.toLowerCase();
+    if (v.includes('corriente')) return 'corriente';
+    if (v.includes('vista'))     return 'vista';
+    if (v.includes('ahorro'))    return 'ahorro';
+    if (v.includes('cuentarut') || v.includes('cuenta rut') || (v.includes('rut') && !v.includes('rut titular'))) return 'rut';
+    if (v.includes('chequera'))  return 'chequera';
+    return null;
+  }
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith('#') || line.startsWith('//')) continue;
+    const sep = line.match(/^([\wáéíóúñ .°-]+?)\s*[:=]\s*(.+?)\s*$/i);
+    if (!sep) continue;
+    const key = sep[1].trim().toLowerCase()
+      .replace(/[áä]/g, 'a').replace(/[éë]/g, 'e').replace(/[íï]/g, 'i').replace(/[óö]/g, 'o').replace(/[úü]/g, 'u').replace(/ñ/g, 'n')
+      .replace(/[°]/g, '')
+      .replace(/[\s.-]+/g, '_');
+    const value = sep[2].trim().replace(/^["']|["']$/g, '');
+    if (!value) continue;
+
+    if (RUT_KEYS.includes(key))    { result.applied.holderRut = value; continue; }
+    if (NAME_KEYS.includes(key))   { result.applied.holderName = value; continue; }
+    if (EMAIL_KEYS.includes(key))  { result.applied.holderEmail = value; continue; }
+    if (TYPE_KEYS.includes(key)) {
+      const resolved = resolveAccountType(value);
+      if (resolved) result.applied.accountType = resolved;
+      else result.ignored.push(`${key}=${value} (tipo no reconocido)`);
+      continue;
+    }
+    if (NUMBER_KEYS.includes(key)) {
+      const cleaned = value.replace(/[^0-9-]/g, '');
+      if (cleaned.length >= 3) result.applied.accountNumber = cleaned;
+      continue;
+    }
+    if (BANK_KEYS_.includes(key)) {
+      const resolved = resolveBank(value);
+      if (resolved) result.applied.bank = resolved;
+      else result.ignored.push(`${key}=${value} (banco no reconocido — usa "other")`);
+      continue;
+    }
+    result.unknown.push(key);
+  }
+  return result;
+}
+
+function BankSettings() {
+  const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const [testing, setTesting] = useState(false);
+
+  const [holderRut, setHolderRut] = useState('');
+  const [holderName, setHolderName] = useState('');
+  const [accountType, setAccountType] = useState('');
+  const [accountNumber, setAccountNumber] = useState('');
+  const [bank, setBank] = useState('');
+  const [holderEmail, setHolderEmail] = useState('');
+  const [testTo, setTestTo] = useState('');
+
+  const [showPasteWizard, setShowPasteWizard] = useState(false);
+  const [pasteText, setPasteText] = useState('');
+  const [pasteFeedback, setPasteFeedback] = useState(null);
+
+  const rutValid = !holderRut || validateRutFE(holderRut);
+  const rutDisplay = rutValid && holderRut ? (formatRutFE(holderRut) || holderRut) : holderRut;
+
+  const loadStatus = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await api.getBankStatus();
+      setStatus(data);
+      setHolderRut(data.holderRut?.formatted || data.holderRut?.value || '');
+      setHolderName(data.holderName?.value || '');
+      setAccountType(data.accountType?.value || '');
+      setAccountNumber(data.accountNumber?.value || '');
+      setBank(data.bank?.value || '');
+      setHolderEmail(data.holderEmail?.value || '');
+    } catch (err) {
+      console.error('Error loading bank status:', err);
+      setMessage({ type: 'error', text: 'Error al cargar datos bancarios' });
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { loadStatus(); }, [loadStatus]);
+
+  const handleSave = async () => {
+    if (holderRut && !validateRutFE(holderRut)) {
+      setMessage({ type: 'error', text: 'RUT inválido. Verifica el dígito verificador.' });
+      return;
+    }
+    setSaving(true);
+    setMessage(null);
+    try {
+      const payload = {
+        holder_rut: holderRut.trim(),
+        holder_name: holderName.trim(),
+        account_type: accountType,
+        account_number: accountNumber.trim(),
+        bank,
+        holder_email: holderEmail.trim(),
+      };
+      const result = await api.saveBank(payload);
+      setMessage({ type: 'success', text: result.message });
+      await loadStatus();
+    } catch (err) {
+      setMessage({ type: 'error', text: err.message || 'Error al guardar datos bancarios' });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    if (!confirm('¿Eliminar TODOS los datos bancarios? El email de confirmación dejará de mostrar el bloque de transferencia.')) return;
+    try {
+      await api.deleteBank();
+      setMessage({ type: 'success', text: 'Datos bancarios eliminados' });
+      await loadStatus();
+    } catch (err) {
+      setMessage({ type: 'error', text: err.message || 'Error al eliminar datos bancarios' });
+    }
+  };
+
+  const handleTest = async () => {
+    if (!testTo.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(testTo.trim())) {
+      setMessage({ type: 'error', text: 'Ingresa un email destino válido para la prueba' });
+      return;
+    }
+    setTesting(true);
+    setMessage(null);
+    try {
+      const result = await api.testBankEmail(testTo.trim());
+      setMessage({ type: 'success', text: result.message || 'Email de prueba enviado' });
+    } catch (err) {
+      setMessage({ type: 'error', text: err.message || 'Error al enviar email de prueba' });
+    } finally {
+      setTesting(false);
+    }
+  };
+
+  const handleApplyPaste = () => {
+    const parsed = parseBankTicket(pasteText, status?.catalog);
+    const appliedFields = [];
+    if (parsed.applied.holderRut)     { setHolderRut(parsed.applied.holderRut); appliedFields.push('RUT'); }
+    if (parsed.applied.holderName)    { setHolderName(parsed.applied.holderName); appliedFields.push('Titular'); }
+    if (parsed.applied.accountType)   { setAccountType(parsed.applied.accountType); appliedFields.push('Tipo de cuenta'); }
+    if (parsed.applied.accountNumber) { setAccountNumber(parsed.applied.accountNumber); appliedFields.push('N° cuenta'); }
+    if (parsed.applied.bank)          { setBank(parsed.applied.bank); appliedFields.push('Banco'); }
+    if (parsed.applied.holderEmail)   { setHolderEmail(parsed.applied.holderEmail); appliedFields.push('Email titular'); }
+
+    if (appliedFields.length === 0) {
+      setPasteFeedback({ type: 'error', text: 'No se detectó ningún campo bancario. Verifica el formato (clave: valor).' });
+      return;
+    }
+    setPasteFeedback({ type: 'success', applied: appliedFields, ignored: parsed.ignored, unknown: parsed.unknown });
+  };
+
+  if (loading) return null;
+
+  const catalog = status?.catalog || { accountTypes: {}, banks: {} };
+
+  return (
+    <div className="bg-ama-card border border-ama-border rounded-xl p-6">
+      <div className="flex items-center gap-3 mb-4">
+        <CreditCard size={24} className="text-ama-amber" />
+        <div>
+          <h2 className="text-lg font-semibold text-ama-text">Datos Bancarios (Transferencia)</h2>
+          <p className="text-xs text-ama-text-muted">
+            Cuenta de depósito que aparecerá en el email de confirmación cuando el cliente elija "transferencia" como método de pago.
+          </p>
+        </div>
+      </div>
+
+      {/* Status panel */}
+      <div className="bg-ama-darker rounded-xl p-4 border border-ama-border mb-4 space-y-1">
+        <div className="flex items-center gap-2 mb-2">
+          <Shield size={16} className="text-ama-amber" />
+          <span className="text-sm font-medium text-ama-text">Estado Actual</span>
+        </div>
+        <div className="flex items-center justify-between text-xs py-1">
+          <span className="text-ama-text-muted">Cuenta configurada</span>
+          <span className={`flex items-center gap-1.5 ${status?.configured ? 'text-green-400' : 'text-yellow-400'}`}>
+            {status?.configured ? <CheckCircle size={12} /> : <AlertCircle size={12} />}
+            {status?.configured ? 'Sí — el bloque bancario se incluirá en el email' : 'No — falta completar campos requeridos'}
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-xs py-1">
+          <span className="text-ama-text-muted">Banco</span>
+          <span className="font-mono text-ama-text">
+            {status?.bank?.label || <span className="text-yellow-400">No configurado</span>}
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-xs py-1">
+          <span className="text-ama-text-muted">Tipo / N° cuenta</span>
+          <span className="font-mono text-ama-text">
+            {status?.accountType?.label || '—'} / {status?.accountNumber?.value || '—'}
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-xs py-1">
+          <span className="text-ama-text-muted">RUT titular</span>
+          <span className="font-mono text-ama-text">
+            {status?.holderRut?.formatted || <span className="text-yellow-400">No configurado</span>}
+          </span>
+        </div>
+      </div>
+
+      {/* Wizard "Pegar Ficha Bancaria" — C180 OPTION B */}
+      <div className="bg-ama-darker rounded-xl p-4 border border-ama-border mb-4">
+        <button
+          type="button"
+          onClick={() => setShowPasteWizard(s => !s)}
+          className="w-full flex items-center justify-between text-left cursor-pointer"
+        >
+          <div className="flex items-center gap-2">
+            <ClipboardList size={16} className="text-ama-amber" />
+            <div>
+              <h3 className="text-sm font-medium text-ama-text">Pegar Ficha Bancaria</h3>
+              <p className="text-[11px] text-ama-text-muted">
+                Pega los datos de tu cuenta (cartola, comprobante o copia desde tu banco) y autocompletamos los campos.
+              </p>
+            </div>
+          </div>
+          <ChevronDown
+            size={16}
+            className={`text-ama-text-muted transition-transform ${showPasteWizard ? 'rotate-180' : ''}`}
+          />
+        </button>
+
+        {showPasteWizard && (
+          <div className="mt-3 space-y-3">
+            <textarea
+              value={pasteText}
+              onChange={e => setPasteText(e.target.value)}
+              rows={7}
+              placeholder={`Ejemplo:
+Banco: Banco de Chile
+Tipo de cuenta: Cuenta Corriente
+N° cuenta: 0001234567
+RUT: 12.345.678-5
+Titular: amaCafe SpA
+Email: pagos@amacafe.cl`}
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-xs text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+            />
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={handleApplyPaste}
+                disabled={!pasteText.trim()}
+                className="flex items-center gap-2 px-4 py-2 bg-ama-amber/20 text-ama-amber font-medium text-sm rounded-lg hover:bg-ama-amber/30 border border-ama-amber/40 transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                <Zap size={14} />
+                Aplicar ficha
+              </button>
+              <button
+                onClick={() => { setPasteText(''); setPasteFeedback(null); }}
+                className="flex items-center gap-2 px-3 py-2 text-xs text-ama-text-muted hover:text-ama-text cursor-pointer"
+              >
+                <Trash2 size={12} />
+                Limpiar
+              </button>
+            </div>
+
+            {pasteFeedback && pasteFeedback.type === 'success' && (
+              <div className="bg-green-400/10 border border-green-400/30 rounded-lg p-3 text-xs space-y-1">
+                <div className="flex items-center gap-2 text-green-400 font-medium">
+                  <CheckCircle size={12} />
+                  Campos aplicados: {pasteFeedback.applied.join(', ')}
+                </div>
+                {pasteFeedback.ignored && pasteFeedback.ignored.length > 0 && (
+                  <div className="text-yellow-400/80">
+                    No reconocidos: {pasteFeedback.ignored.join(' · ')}
+                  </div>
+                )}
+                {pasteFeedback.unknown && pasteFeedback.unknown.length > 0 && (
+                  <div className="text-ama-text-muted">
+                    Claves desconocidas: {pasteFeedback.unknown.join(', ')}
+                  </div>
+                )}
+                <div className="text-ama-text-muted pt-1">
+                  Revisa los campos abajo y presiona "Guardar datos bancarios".
+                </div>
+              </div>
+            )}
+            {pasteFeedback && pasteFeedback.type === 'error' && (
+              <div className="flex items-center gap-2 text-red-400 text-xs">
+                <AlertCircle size={12} />
+                {pasteFeedback.text}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Form */}
+      <div className="bg-ama-darker rounded-xl p-4 border border-ama-border space-y-3 mb-4">
+        <h3 className="text-sm font-medium text-ama-text">Cuenta de Depósito</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <label className="text-xs text-ama-text-muted mb-1 block">Banco *</label>
+            <select
+              value={bank}
+              onChange={e => setBank(e.target.value)}
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text focus:border-ama-amber/50 focus:outline-none"
+            >
+              <option value="">— Selecciona un banco —</option>
+              {Object.entries(catalog.banks).map(([key, label]) => (
+                <option key={key} value={key}>{label}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-ama-text-muted mb-1 block">Tipo de cuenta *</label>
+            <select
+              value={accountType}
+              onChange={e => setAccountType(e.target.value)}
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text focus:border-ama-amber/50 focus:outline-none"
+            >
+              <option value="">— Selecciona un tipo —</option>
+              {Object.entries(catalog.accountTypes).map(([key, label]) => (
+                <option key={key} value={key}>{label}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-ama-text-muted mb-1 block">N° de cuenta *</label>
+            <input
+              type="text"
+              value={accountNumber}
+              onChange={e => setAccountNumber(e.target.value.replace(/[^0-9-]/g, ''))}
+              placeholder="0001234567"
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+            />
+          </div>
+          <div>
+            <label className="text-xs text-ama-text-muted mb-1 block">
+              RUT titular *
+              {holderRut && !rutValid && (
+                <span className="ml-2 text-[10px] text-red-400">DV incorrecto</span>
+              )}
+              {holderRut && rutValid && (
+                <span className="ml-2 text-[10px] text-green-400">✓ válido</span>
+              )}
+            </label>
+            <input
+              type="text"
+              value={rutDisplay}
+              onChange={e => setHolderRut(e.target.value)}
+              placeholder="12.345.678-5"
+              className={`w-full bg-ama-card border rounded-lg px-3 py-2 text-sm text-ama-text placeholder-ama-text-muted/50 focus:outline-none font-mono ${
+                holderRut && !rutValid ? 'border-red-400/50 focus:border-red-400' : 'border-ama-border focus:border-ama-amber/50'
+              }`}
+            />
+          </div>
+          <div className="md:col-span-2">
+            <label className="text-xs text-ama-text-muted mb-1 block">Nombre del titular</label>
+            <input
+              type="text"
+              value={holderName}
+              onChange={e => setHolderName(e.target.value)}
+              placeholder="amaCafe SpA / Juan Pérez Soto"
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none"
+            />
+          </div>
+          <div className="md:col-span-2">
+            <label className="text-xs text-ama-text-muted mb-1 block">
+              Email del titular (opcional)
+              <span className="ml-2 text-[10px] text-ama-text-muted">— para CC del comprobante</span>
+            </label>
+            <input
+              type="email"
+              value={holderEmail}
+              onChange={e => setHolderEmail(e.target.value)}
+              placeholder="pagos@amacafe.cl"
+              className="w-full bg-ama-card border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+            />
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={handleSave}
+            disabled={saving || (holderRut && !rutValid)}
+            className="flex items-center gap-2 px-5 py-2.5 bg-ama-amber text-ama-darker font-medium text-sm rounded-lg hover:bg-ama-amber-light transition-colors disabled:opacity-50 cursor-pointer"
+          >
+            {saving ? <Loader2 size={16} className="animate-spin" /> : <CreditCard size={16} />}
+            {saving ? 'Guardando...' : 'Guardar datos bancarios'}
+          </button>
+          <button
+            onClick={handleDeleteAll}
+            className="flex items-center gap-2 px-4 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-red-400/10 border border-red-400/30 rounded-lg transition-colors cursor-pointer"
+          >
+            <Trash2 size={14} />
+            Eliminar todo
+          </button>
+        </div>
+
+        <div className="mt-2 bg-ama-card/50 border border-ama-border/60 rounded-lg p-3 text-[11px] text-ama-text-muted leading-relaxed">
+          <div className="flex items-start gap-2">
+            <CreditCard size={12} className="text-ama-amber/70 mt-0.5 shrink-0" />
+            <div>
+              <span className="text-ama-text font-medium">¿Dónde aparecen estos datos?</span>{' '}
+              Cuando un cliente termina su pedido con <span className="font-mono text-ama-text">transferencia</span>,
+              el email de confirmación incluye una tabla con banco, tipo y número de cuenta, RUT del titular y monto a depositar.
+              Si la cuenta no está configurada, ese bloque se omite silenciosamente y el cliente solo verá el método de pago.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Test panel */}
+      <div className="bg-ama-darker rounded-xl p-4 border border-ama-border space-y-3">
+        <h3 className="text-sm font-medium text-ama-text flex items-center gap-2">
+          <Send size={14} className="text-ama-amber" />
+          Enviar Email de Prueba (con bloque bancario)
+        </h3>
+        <div className="flex flex-col md:flex-row gap-3">
+          <input
+            type="email"
+            value={testTo}
+            onChange={e => setTestTo(e.target.value)}
+            placeholder="destinatario@ejemplo.cl"
+            className="flex-1 bg-ama-card border border-ama-border rounded-lg px-3 py-2.5 text-sm text-ama-text placeholder-ama-text-muted/50 focus:border-ama-amber/50 focus:outline-none font-mono"
+          />
+          <button
+            onClick={handleTest}
+            disabled={testing || !testTo.trim() || !status?.configured}
+            className="flex items-center gap-2 px-5 py-2.5 bg-ama-amber/20 text-ama-amber font-medium text-sm rounded-lg hover:bg-ama-amber/30 border border-ama-amber/40 transition-colors disabled:opacity-50 cursor-pointer"
+          >
+            {testing ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+            {testing ? 'Enviando...' : 'Enviar prueba'}
+          </button>
+        </div>
+        <p className="text-[11px] text-ama-text-muted">
+          Genera un email con un pedido ficticio (método: transferencia) para validar cómo verá el cliente la información de depósito. Requiere SMTP configurado.
+        </p>
+      </div>
+
+      {message && (
+        <div className={`mt-4 flex items-center gap-2 text-sm ${message.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+          {message.type === 'success' ? <CheckCircle size={14} /> : <AlertCircle size={14} />}
+          {message.text}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SettingsTab() {
   const [aiStatus, setAiStatus] = useState(null);
   const [apiKey, setApiKey] = useState('');
@@ -1566,7 +2629,7 @@ function SettingsTab() {
               label="Asistente de Clientes"
               icon={MessageCircle}
               iconColor="text-blue-400"
-              currentModel={aiStatus?.models?.customer || 'qwen/qwen3.6-plus:free'}
+              currentModel={aiStatus?.models?.customer || 'meta-llama/llama-3.3-70b-instruct:free'}
               availableModels={availableModels}
               loadingModels={loadingModels}
               onSave={handleSaveModel}
@@ -1578,7 +2641,7 @@ function SettingsTab() {
               label="Asistente de Negocio"
               icon={BarChart3}
               iconColor="text-purple-400"
-              currentModel={aiStatus?.models?.admin || 'qwen/qwen3.6-plus:free'}
+              currentModel={aiStatus?.models?.admin || 'meta-llama/llama-3.3-70b-instruct:free'}
               availableModels={availableModels}
               loadingModels={loadingModels}
               onSave={handleSaveModel}
@@ -1590,7 +2653,7 @@ function SettingsTab() {
               label="Modelo de Respaldo"
               icon={Zap}
               iconColor="text-ama-amber"
-              currentModel={aiStatus?.models?.fallback || 'nvidia/nemotron-3-super-120b-a12b:free'}
+              currentModel={aiStatus?.models?.fallback || 'deepseek/deepseek-chat-v3.1:free'}
               availableModels={availableModels}
               loadingModels={loadingModels}
               onSave={handleSaveModel}
@@ -1605,6 +2668,12 @@ function SettingsTab() {
 
       {/* SumUp Payment Integration Section (Ciclo 15 — L2 coherence completa) */}
       <SumupSettings />
+
+      {/* SMTP Email Configuration (Ciclo 176 — env → settings con cifrado) */}
+      <SmtpSettings />
+
+      {/* Bank Account for Transfer Payment (Ciclo 180) */}
+      <BankSettings />
 
       {/* Active Agents Section */}
       <div className="bg-ama-card border border-ama-border rounded-xl p-6">
@@ -1674,9 +2743,12 @@ export default function AdminPage() {
               {user?.display_name}
             </span>
             <button
-              onClick={logout}
+              onClick={async () => {
+                await logout();
+                navigate('/', { replace: true });
+              }}
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-ama-text-muted hover:text-red-400 border border-ama-border hover:border-red-400/30 rounded-lg transition-colors cursor-pointer"
-              title="Cerrar sesión"
+              title="Cerrar sesión y volver al inicio"
             >
               <LogOut size={14} />
               Salir

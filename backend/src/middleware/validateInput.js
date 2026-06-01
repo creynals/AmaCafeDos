@@ -23,6 +23,13 @@
 // legitimately accept rich text (none today). The chat route is bypassed
 // implicitly — it mounts BEFORE the global guard, and chatInputSanitizer
 // handles its own normalization there.
+//
+// C166 (OPTION B): `skipBodyKeys` lets the global mount whitelist top-level
+// body keys whose subtree is not walked. Used for `history` (admin chat
+// conversational context) — LLM replies legitimately contain markdown like
+// "**", "--" bullet separators, and code fences that trip SQL-comment /
+// XSS patterns. The risk profile is acceptable: history is replayed back
+// to the LLM, never executed or rendered as HTML in the admin UI.
 
 const MAX_STRING_LENGTH = 5000;
 
@@ -96,7 +103,7 @@ function detectMaliciousPattern(value) {
  * `path` is a dotted/bracketed string ("contact.email", "items[0].notes")
  * useful for the rejection error so the caller can fix the offending field.
  */
-function walk(value, path = '') {
+function walk(value, path = '', skipKeys = null) {
   if (value == null) return null;
   if (typeof value === 'string') {
     if (value.length > MAX_STRING_LENGTH) {
@@ -115,6 +122,10 @@ function walk(value, path = '') {
   }
   if (typeof value === 'object') {
     for (const [k, v] of Object.entries(value)) {
+      // C166: skip configured top-level keys (e.g. `history` for admin chat).
+      // Only honored at the root of the walked tree to avoid accidentally
+      // whitelisting deep nested fields with the same name.
+      if (skipKeys && path === '' && skipKeys.has(k)) continue;
       // Inspect the KEY itself — Mongo-style operators ($where, $ne, ...)
       // are smuggled in as keys, not values. Prototype-pollution markers
       // ("__proto__", "constructor") also surface here.
@@ -145,12 +156,16 @@ function walk(value, path = '') {
  */
 function validateInput(options = {}) {
   const fields = options.fields || ['body', 'query', 'params'];
+  const skipBodyKeys = Array.isArray(options.skipBodyKeys) && options.skipBodyKeys.length > 0
+    ? new Set(options.skipBodyKeys)
+    : null;
 
   return function validateInputMiddleware(req, res, next) {
     for (const field of fields) {
       const data = req[field];
       if (!data) continue;
-      const hit = walk(data);
+      const skip = field === 'body' ? skipBodyKeys : null;
+      const hit = walk(data, '', skip);
       if (hit) {
         const codeMap = {
           sqli: 'sqli_pattern_detected',

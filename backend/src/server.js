@@ -107,8 +107,13 @@ app.use('/api/health', (req, res) => {
 // (silent HTML strip) keeps working — rejecting loudly there would break
 // legitimate user messages that happen to contain "<3" or similar tokens.
 // Webhooks bypass implicitly (registered earlier with raw body).
+//
+// C166 (OPTION B): `skipBodyKeys: ['history']` whitelists the conversational
+// history payload sent by /api/admin/chat. LLM replies contain markdown ("**",
+// "--" bullets, code fences) that legitimately match SQL-comment / XSS shapes;
+// replaying them through the guard rejected the 2nd+ message in every session.
 app.use('/api', chatRoutes);
-app.use('/api', validateInput());
+app.use('/api', validateInput({ skipBodyKeys: ['history'] }));
 
 // Public API Routes (post-guard)
 app.use('/api', productRoutes);

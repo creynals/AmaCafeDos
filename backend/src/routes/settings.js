@@ -7,6 +7,17 @@ const {
   getModeWithSource: getSumupModeWithSource,
   getReturnUrlBaseWithSource: getSumupReturnUrlBaseWithSource,
 } = require('../utils/sumup.config');
+const { validateRut, formatRut } = require('../utils/rut');
+const { buildOrderConfirmationEmail } = require('../utils/orderConfirmationEmail');
+const {
+  BANK_KEYS,
+  ACCOUNT_TYPES,
+  BANK_NAMES,
+  readBankKey,
+  writeBankKey,
+  readBankSettings,
+  isBankConfigured,
+} = require('../utils/bankSettings');
 
 const router = express.Router();
 
@@ -325,6 +336,347 @@ router.delete('/admin/settings/sumup', async (req, res) => {
   adapter.invalidateModeCache?.();
   adapter.invalidateReturnUrlCache?.();
   res.json({ success: true, message: 'Configuración SumUp eliminada' });
+});
+
+// --- SMTP Configuration (Ciclo 176 — migración env → settings) ---
+//
+// Mueve la configuración SMTP desde .env (C173) a la tabla settings con
+// cifrado AES-256-GCM para smtp_pass. Las env vars siguen funcionando como
+// fallback de bootstrap; un POST aquí sobreescribe la fuente preferida.
+
+const mailer = require('../utils/mailer');
+
+const SMTP_KEYS = {
+  host:     { key: 'smtp_host',     encrypted: false },
+  port:     { key: 'smtp_port',     encrypted: false },
+  secure:   { key: 'smtp_secure',   encrypted: false },
+  user:     { key: 'smtp_user',     encrypted: false },
+  pass:     { key: 'smtp_pass',     encrypted: true  },
+  from:     { key: 'smtp_from',     encrypted: false },
+  replyTo:  { key: 'smtp_reply_to', encrypted: false },
+  enabled:  { key: 'smtp_enabled',  encrypted: false },
+};
+
+const SMTP_ENABLED_MODES = ['true', 'false', 'auto'];
+
+async function readSmtpSetting({ key, encrypted }) {
+  const { rows } = await query('SELECT value, updated_at FROM settings WHERE key = $1', [key]);
+  if (rows.length === 0) return { value: null, updatedAt: null };
+  const raw = rows[0].value;
+  const value = raw ? (encrypted ? decrypt(raw) : raw) : null;
+  return { value, updatedAt: rows[0].updated_at };
+}
+
+async function writeSmtpSetting({ key, encrypted }, value) {
+  const stored = encrypted ? encrypt(value) : value;
+  await query(`
+    INSERT INTO settings (key, value, updated_at) VALUES ($1, $2, NOW())
+    ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = NOW()
+  `, [key, stored]);
+}
+
+function maskSmtpPass(value) {
+  if (!value) return null;
+  if (value.length <= 4) return '***';
+  return value.slice(0, 2) + '...' + value.slice(-2);
+}
+
+router.get('/admin/settings/smtp', async (req, res) => {
+  const [host, port, secure, user, pass, from, replyTo, enabled, runtime] = await Promise.all([
+    readSmtpSetting(SMTP_KEYS.host),
+    readSmtpSetting(SMTP_KEYS.port),
+    readSmtpSetting(SMTP_KEYS.secure),
+    readSmtpSetting(SMTP_KEYS.user),
+    readSmtpSetting(SMTP_KEYS.pass),
+    readSmtpSetting(SMTP_KEYS.from),
+    readSmtpSetting(SMTP_KEYS.replyTo),
+    readSmtpSetting(SMTP_KEYS.enabled),
+    mailer.describe(),
+  ]);
+
+  res.json({
+    provider: 'SMTP',
+    runtime,
+    host:    { value: host.value || null, updatedAt: host.updatedAt },
+    port:    { value: port.value || null, updatedAt: port.updatedAt },
+    secure:  { value: secure.value || null, updatedAt: secure.updatedAt },
+    user:    { value: user.value || null, updatedAt: user.updatedAt },
+    pass:    { configured: !!pass.value, masked: maskSmtpPass(pass.value), updatedAt: pass.updatedAt },
+    from:    { value: from.value || null, updatedAt: from.updatedAt },
+    replyTo: { value: replyTo.value || null, updatedAt: replyTo.updatedAt },
+    enabled: { value: enabled.value || 'auto', updatedAt: enabled.updatedAt },
+  });
+});
+
+router.post('/admin/settings/smtp', async (req, res) => {
+  const { host, port, secure, user, pass, from, reply_to, enabled } = req.body || {};
+
+  const updates = [];
+  const flags = { host: false, port: false, secure: false, user: false, pass: false, from: false, replyTo: false, enabled: false };
+
+  if (host !== undefined) {
+    if (typeof host !== 'string' || host.trim().length < 3) {
+      return res.status(400).json({ error: 'host inválido (mínimo 3 caracteres)' });
+    }
+    updates.push(writeSmtpSetting(SMTP_KEYS.host, host.trim()));
+    flags.host = true;
+  }
+  if (port !== undefined) {
+    const portNum = Number.parseInt(port, 10);
+    if (!Number.isInteger(portNum) || portNum < 1 || portNum > 65535) {
+      return res.status(400).json({ error: 'port inválido (entero entre 1 y 65535)' });
+    }
+    updates.push(writeSmtpSetting(SMTP_KEYS.port, String(portNum)));
+    flags.port = true;
+  }
+  if (secure !== undefined) {
+    const secureStr = String(secure).trim().toLowerCase();
+    if (!['true', 'false'].includes(secureStr)) {
+      return res.status(400).json({ error: 'secure inválido (true|false)' });
+    }
+    updates.push(writeSmtpSetting(SMTP_KEYS.secure, secureStr));
+    flags.secure = true;
+  }
+  if (user !== undefined) {
+    if (typeof user !== 'string') {
+      return res.status(400).json({ error: 'user inválido' });
+    }
+    updates.push(writeSmtpSetting(SMTP_KEYS.user, user.trim()));
+    flags.user = true;
+  }
+  if (pass !== undefined) {
+    if (typeof pass !== 'string' || pass.length < 1) {
+      return res.status(400).json({ error: 'pass inválido' });
+    }
+    updates.push(writeSmtpSetting(SMTP_KEYS.pass, pass));
+    flags.pass = true;
+  }
+  if (from !== undefined) {
+    if (typeof from !== 'string' || from.trim().length < 3) {
+      return res.status(400).json({ error: 'from inválido' });
+    }
+    updates.push(writeSmtpSetting(SMTP_KEYS.from, from.trim()));
+    flags.from = true;
+  }
+  if (reply_to !== undefined) {
+    if (typeof reply_to !== 'string') {
+      return res.status(400).json({ error: 'reply_to inválido' });
+    }
+    updates.push(writeSmtpSetting(SMTP_KEYS.replyTo, reply_to.trim()));
+    flags.replyTo = true;
+  }
+  if (enabled !== undefined) {
+    const enabledStr = String(enabled).trim().toLowerCase();
+    if (!SMTP_ENABLED_MODES.includes(enabledStr)) {
+      return res.status(400).json({ error: `enabled inválido (valores permitidos: ${SMTP_ENABLED_MODES.join(', ')})` });
+    }
+    updates.push(writeSmtpSetting(SMTP_KEYS.enabled, enabledStr));
+    flags.enabled = true;
+  }
+
+  if (updates.length === 0) {
+    return res.status(400).json({ error: 'Nada que actualizar' });
+  }
+
+  await Promise.all(updates);
+  mailer.invalidateCache();
+
+  res.json({
+    success: true,
+    message: 'Configuración SMTP guardada correctamente',
+    updated: flags,
+  });
+});
+
+router.delete('/admin/settings/smtp', async (req, res) => {
+  await query(
+    'DELETE FROM settings WHERE key IN ($1,$2,$3,$4,$5,$6,$7,$8)',
+    [
+      SMTP_KEYS.host.key,
+      SMTP_KEYS.port.key,
+      SMTP_KEYS.secure.key,
+      SMTP_KEYS.user.key,
+      SMTP_KEYS.pass.key,
+      SMTP_KEYS.from.key,
+      SMTP_KEYS.replyTo.key,
+      SMTP_KEYS.enabled.key,
+    ],
+  );
+  mailer.invalidateCache();
+  res.json({ success: true, message: 'Configuración SMTP eliminada' });
+});
+
+router.post('/admin/settings/smtp/test', async (req, res) => {
+  const { to } = req.body || {};
+  if (!to || typeof to !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to.trim())) {
+    return res.status(400).json({ error: 'Email destino inválido' });
+  }
+
+  const result = await mailer.sendTestMail(to.trim());
+
+  if (result.ok) {
+    return res.json({ success: true, message: `Email de prueba enviado a ${to}`, messageId: result.messageId });
+  }
+  if (result.skipped) {
+    return res.status(400).json({ success: false, error: 'SMTP deshabilitado o sin configuración mínima', reason: result.reason });
+  }
+  return res.status(502).json({ success: false, error: result.error || 'Fallo al enviar el email de prueba' });
+});
+
+// --- Bank Account Settings (Ciclo 180 — datos para transferencia) ---
+//
+// Persiste 6 claves planas en `settings` (sin cifrado: aparecen en el email
+// al cliente). El RUT se valida con dígito verificador módulo 11. El tipo
+// de cuenta y banco están restringidos a whitelists para evitar typos que
+// confundan al cliente.
+
+router.get('/admin/settings/bank', async (req, res) => {
+  const bank = await readBankSettings();
+  res.json({
+    provider: 'BankTransfer',
+    configured: isBankConfigured(bank),
+    holderRut:     { value: bank.holderRut,     formatted: bank.holderRut ? formatRut(bank.holderRut) : null },
+    holderName:    { value: bank.holderName },
+    accountType:   { value: bank.accountTypeKey, label: bank.accountTypeLabel },
+    accountNumber: { value: bank.accountNumber },
+    bank:          { value: bank.bankKey, label: bank.bankLabel },
+    holderEmail:   { value: bank.holderEmail },
+    catalog: {
+      accountTypes: ACCOUNT_TYPES,
+      banks:        BANK_NAMES,
+    },
+    updatedAt: bank.updatedAt,
+  });
+});
+
+router.post('/admin/settings/bank', async (req, res) => {
+  const { holder_rut, holder_name, account_type, account_number, bank, holder_email } = req.body || {};
+
+  const updates = [];
+  const flags = { holderRut: false, holderName: false, accountType: false, accountNumber: false, bank: false, holderEmail: false };
+
+  if (holder_rut !== undefined) {
+    const raw = String(holder_rut || '').trim();
+    if (raw && !validateRut(raw)) {
+      return res.status(400).json({ error: 'RUT inválido (dígito verificador no coincide)' });
+    }
+    const normalized = raw ? formatRut(raw) : '';
+    updates.push(writeBankKey(BANK_KEYS.holderRut, normalized));
+    flags.holderRut = true;
+  }
+  if (holder_name !== undefined) {
+    if (typeof holder_name !== 'string') {
+      return res.status(400).json({ error: 'holder_name inválido' });
+    }
+    updates.push(writeBankKey(BANK_KEYS.holderName, holder_name.trim()));
+    flags.holderName = true;
+  }
+  if (account_type !== undefined) {
+    const key = String(account_type || '').trim().toLowerCase();
+    if (key && !Object.prototype.hasOwnProperty.call(ACCOUNT_TYPES, key)) {
+      return res.status(400).json({ error: `account_type inválido (valores: ${Object.keys(ACCOUNT_TYPES).join(', ')})` });
+    }
+    updates.push(writeBankKey(BANK_KEYS.accountType, key));
+    flags.accountType = true;
+  }
+  if (account_number !== undefined) {
+    const num = String(account_number || '').trim();
+    if (num && !/^[0-9-]{3,30}$/.test(num)) {
+      return res.status(400).json({ error: 'account_number inválido (solo dígitos y guiones, 3-30 caracteres)' });
+    }
+    updates.push(writeBankKey(BANK_KEYS.accountNumber, num));
+    flags.accountNumber = true;
+  }
+  if (bank !== undefined) {
+    const key = String(bank || '').trim().toLowerCase();
+    if (key && !Object.prototype.hasOwnProperty.call(BANK_NAMES, key)) {
+      return res.status(400).json({ error: `bank inválido (valores: ${Object.keys(BANK_NAMES).join(', ')})` });
+    }
+    updates.push(writeBankKey(BANK_KEYS.bankName, key));
+    flags.bank = true;
+  }
+  if (holder_email !== undefined) {
+    const email = String(holder_email || '').trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ error: 'holder_email inválido' });
+    }
+    updates.push(writeBankKey(BANK_KEYS.holderEmail, email));
+    flags.holderEmail = true;
+  }
+
+  if (updates.length === 0) {
+    return res.status(400).json({ error: 'Nada que actualizar' });
+  }
+
+  await Promise.all(updates);
+  res.json({
+    success: true,
+    message: 'Datos bancarios guardados correctamente',
+    updated: flags,
+  });
+});
+
+router.delete('/admin/settings/bank', async (req, res) => {
+  await query(
+    'DELETE FROM settings WHERE key IN ($1,$2,$3,$4,$5,$6)',
+    [
+      BANK_KEYS.holderRut,
+      BANK_KEYS.holderName,
+      BANK_KEYS.accountType,
+      BANK_KEYS.accountNumber,
+      BANK_KEYS.bankName,
+      BANK_KEYS.holderEmail,
+    ],
+  );
+  res.json({ success: true, message: 'Datos bancarios eliminados' });
+});
+
+// POST /admin/settings/bank/test-email
+// Envía un email mock de orden con payment_method='transferencia' al
+// destinatario indicado para validar que el bloque bancario renderiza
+// correctamente sin tener que generar un pedido real.
+router.post('/admin/settings/bank/test-email', async (req, res) => {
+  const { to } = req.body || {};
+  if (!to || typeof to !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to.trim())) {
+    return res.status(400).json({ error: 'Email destino inválido' });
+  }
+
+  const bank = await readBankSettings();
+  if (!isBankConfigured(bank)) {
+    return res.status(400).json({
+      error: 'Datos bancarios incompletos — completa todos los campos requeridos antes de enviar la prueba.',
+    });
+  }
+
+  const mockOrder = {
+    order_id: `TEST-${Date.now()}`,
+    contact: { name: 'Cliente de Prueba', email: to.trim(), phone: '+56 9 0000 0000' },
+    address: { street: 'Av. Test', number: '123', commune: 'Providencia', city: 'Santiago', notes: 'Pedido de prueba — no preparar' },
+    payment_method: 'transferencia',
+    customer_instructions: 'Email de prueba — bloque bancario',
+    items: [
+      { name: 'Latte 12oz', price: 3500, quantity: 1, subtotal: 3500 },
+      { name: 'Croissant', price: 2500, quantity: 1, subtotal: 2500 },
+    ],
+    subtotal: 6000,
+    total: 6000,
+    bankAccount: bank,
+  };
+
+  try {
+    const payload = buildOrderConfirmationEmail(mockOrder);
+    const result = await mailer.sendMail(payload);
+    if (result?.ok) {
+      return res.json({ success: true, message: `Email de prueba con datos bancarios enviado a ${to}`, messageId: result.messageId });
+    }
+    if (result?.skipped) {
+      return res.status(400).json({ success: false, error: 'SMTP deshabilitado o sin configuración mínima', reason: result.reason });
+    }
+    return res.status(502).json({ success: false, error: result?.error || 'Fallo al enviar el email de prueba' });
+  } catch (err) {
+    console.error('[bank] test-email failed:', err.message);
+    return res.status(500).json({ success: false, error: 'Error interno al construir el email de prueba' });
+  }
 });
 
 module.exports = router;

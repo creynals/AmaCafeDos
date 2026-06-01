@@ -1,0 +1,85 @@
+{
+  "cycleId": 173,
+  "timestamp": "2026-06-01T13:39:00.420Z",
+  "taskId": "task-1780320694415-plpcwcu8y",
+  "audit": {
+    "passed": false,
+    "score": 45,
+    "grade": "F",
+    "filesAnalyzed": [
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/mailer.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/orderConfirmationEmail.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/orderConfirmationEmail.test.js"
+    ],
+    "linesAnalyzed": 1220
+  },
+  "findings": [
+    {
+      "id": "DC-352",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/mailer.js",
+      "line": 100,
+      "description": "Unused function: 'isEnabled' (3 lines)",
+      "suggestion": "Remove unused function 'isEnabled' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-353",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/mailer.js",
+      "line": 104,
+      "description": "Unused function: 'describe' (11 lines)",
+      "suggestion": "Remove unused function 'describe' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-354",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/orderConfirmationEmail.js",
+      "line": 30,
+      "description": "Unused function: 'buildOrderConfirmationEmail' (128 lines)",
+      "suggestion": "Remove unused function 'buildOrderConfirmationEmail' or export if needed elsewhere"
+    },
+    {
+      "id": "MT-355",
+      "type": "maintainability",
+      "severity": "LOW",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/utils/orderConfirmationEmail.js",
+      "line": 30,
+      "description": "Function 'buildOrderConfirmationEmail' has 128 lines (max recommended: 50)",
+      "suggestion": "Consider breaking this function into smaller functions"
+    },
+    {
+      "id": "DC-356",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "line": 135,
+      "description": "Unused function: 'for' (6 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    },
+    {
+      "id": "DC-357",
+      "type": "dead_code",
+      "severity": "MEDIUM",
+      "file": "/Users/christianreynals/Documents/Personales/goLAB/SYNAPTIC/SYNAPTIC_EXPERT/packages/agent/workspaces/import-1777213083759-63z86j/backend/src/routes/orders.js",
+      "line": 135,
+      "description": "Unused function: 'for' (6 lines)",
+      "suggestion": "Remove unused function 'for' or export if needed elsewhere"
+    }
+  ],
+  "resolvedFindingIds": [],
+  "metrics": {
+    "importsUsedPercent": 75,
+    "functionsUsedPercent": 75,
+    "duplicatePatterns": 0,
+    "securityIssues": 0,
+    "consistencyScore": 100,
+    "avgComplexity": 244,
+    "filesAnalyzed": 5,
+    "linesAnalyzed": 1220
+  }
+}

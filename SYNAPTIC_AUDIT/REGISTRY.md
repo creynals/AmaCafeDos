@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Version:** 1.0.0
-- **Last Updated:** 2026-04-28T16:56:33.470Z
+- **Last Updated:** 2026-06-01T15:01:01.892Z
 - **Status:** ACTIVE
 
 ---
@@ -11,13 +11,13 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Ciclos Auditados | 52 |
+| Ciclos Auditados | 73 |
 | Score Promedio | 54% |
-| Racha Actual (A/B) | 5 ciclos |
-| Último Ciclo | 129 |
-| Última Calificación | A |
-| Findings Abiertos | 217 |
-| Findings Resueltos | 42 |
+| Racha Actual (A/B) | 1 ciclos |
+| Último Ciclo | 182 |
+| Última Calificación | B |
+| Findings Abiertos | 246 |
+| Findings Resueltos | 71 |
 
 ---
 
@@ -27,8 +27,8 @@
 |-----------|----------|
 | CRITICAL | 2 |
 | HIGH | 0 |
-| MEDIUM | 176 |
-| LOW | 39 |
+| MEDIUM | 195 |
+| LOW | 49 |
 
 ---
 
@@ -36,9 +36,9 @@
 
 | Tipo | Cantidad |
 |------|----------|
-| Dead Code | 165 |
+| Dead Code | 183 |
 | Security | 2 |
-| Maintainability | 50 |
+| Maintainability | 61 |
 | Duplication | 0 |
 | Consistency | 0 |
 
@@ -48,16 +48,16 @@
 
 | ID | Tipo | Severidad | Archivo | Descripción |
 |-----|------|-----------|---------|-------------|
-| SAI-b2c74955 | dead_code | MEDIUM | utils/imageStorage.js | Unused function: 'ensureImagesDir' (5 lines)... |
-| SAI-9e1fcd4a | dead_code | MEDIUM | scripts/seed-volume-images.js | Unused function: 'for' (13 lines)... |
-| SAI-4e7fca60 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'getMode' (3 lines)... |
-| SAI-fdc63616 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'invalidateReturnUrlCache' (3 lin... |
-| SAI-6be101f2 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'bootstrapModeFromEnv' (26 lines)... |
-| SAI-ece3ea11 | dead_code | MEDIUM | utils/sumup.config.js | Unused function: 'buildReturnUrls' (8 lines)... |
-| SAI-5a0d6f8d | dead_code | MEDIUM | middleware/validateInput.js | Unused function: 'validateInput' (38 lines)... |
-| SAI-b1728a6b | dead_code | MEDIUM | middleware/validateInput.test.js | Unused function: 'status' (1 lines)... |
-| SAI-f594e8d8 | dead_code | MEDIUM | middleware/validateInput.test.js | Unused function: 'json' (1 lines)... |
-| SAI-f5d1cbb5 | security | CRITICAL | middleware/validateInput.test.js | Potential hardcoded secret detected... |
+| SAI-72c04173 | maintainability | LOW | utils/orderConfirmationEmail.js | Function 'buildOrderConfirmationEmail' has 164 lin... |
+| SAI-7fb3dfe1 | dead_code | MEDIUM | utils/orderConfirmationEmail.test.js | Unused function: 'for' (4 lines)... |
+| SAI-8f52de3f | dead_code | MEDIUM | components/AdminPage.jsx | Unused function: 'BankSettings' (401 lines)... |
+| SAI-61cfc22d | dead_code | MEDIUM | components/AdminPage.jsx | Unused function: 'handleApplyPaste' (16 lines)... |
+| SAI-4685eb3c | dead_code | MEDIUM | components/AdminPage.jsx | Unused function: 'SettingsTab' (286 lines)... |
+| SAI-626309fe | maintainability | MEDIUM | components/AdminPage.jsx | File has 2855 lines (max recommended: 500)... |
+| SAI-01dc89a9 | maintainability | LOW | components/AdminPage.jsx | Function 'parseBankTicket' has 83 lines (max recom... |
+| SAI-9d16fa6b | maintainability | LOW | components/AdminPage.jsx | Function 'BankSettings' has 401 lines (max recomme... |
+| SAI-4e44c097 | maintainability | LOW | components/AdminPage.jsx | Function 'SettingsTab' has 286 lines (max recommen... |
+| SAI-1a257ab1 | maintainability | MEDIUM | routes/settings.js | File has 683 lines (max recommended: 500)... |
 
 ---
 
@@ -65,26 +65,26 @@
 
 | Ciclo | Score | Grade |
 |-------|-------|-------|
-| 39 | 100 | A |
-| 42 | 80 | B |
-| 44 | 45 | F |
-| 50 | 100 | A |
-| 53 | 100 | A |
-| 57 | 100 | A |
-| 67 | 0 | F |
-| 78 | 100 | A |
-| 82 | 35 | F |
-| 84 | 100 | A |
-| 85 | 80 | B |
-| 87 | 20 | F |
-| 94 | 100 | A |
-| 95 | 100 | A |
-| 101 | 0 | F |
-| 104 | 100 | A |
-| 107 | 100 | A |
-| 121 | 100 | A |
-| 127 | 100 | A |
-| 129 | 100 | A |
+| 141 | 100 | A |
+| 143 | 100 | A |
+| 144 | 100 | A |
+| 155 | 0 | F |
+| 156 | 90 | A |
+| 157 | 100 | A |
+| 158 | 100 | A |
+| 159 | 95 | A |
+| 161 | 0 | F |
+| 162 | 0 | F |
+| 163 | 0 | F |
+| 164 | 85 | B |
+| 166 | 0 | F |
+| 168 | 70 | C |
+| 171 | 30 | F |
+| 173 | 45 | F |
+| 176 | 0 | F |
+| 178 | 0 | F |
+| 180 | 0 | F |
+| 182 | 80 | B |
 
 ---
 
