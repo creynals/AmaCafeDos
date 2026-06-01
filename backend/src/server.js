@@ -8,6 +8,7 @@ const { requireAuth, requireAdmin } = require('./middleware/auth');
 const { validateInput } = require('./middleware/validateInput');
 const { ensureDefaultAdmin } = require('./utils/auth');
 const { getModeWithSource, getReturnUrlBaseWithSource, bootstrapModeFromEnv } = require('./utils/sumup.config');
+const mailer = require('./utils/mailer');
 const productRoutes = require('./routes/products');
 const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/orders');
@@ -20,6 +21,7 @@ const adminProductsCrudRoutes = require('./routes/products-admin-crud');
 const adminProductsImagesRoutes = require('./routes/products-admin-images');
 const adminChatRoutes = require('./routes/admin-chat');
 const settingsRoutes = require('./routes/settings');
+const encryptionHealthRoutes = require('./routes/encryption-health');
 const usersRoutes = require('./routes/users');
 const webhookRoutes = require('./routes/webhooks');
 const { getRecaptchaConfig } = require('./utils/recaptcha');
@@ -150,6 +152,7 @@ app.use('/api', requireAuth, requireAdmin, adminProductsCrudRoutes);
 app.use('/api', requireAuth, requireAdmin, adminProductsImagesRoutes);
 app.use('/api', requireAuth, requireAdmin, adminChatRoutes);
 app.use('/api', requireAuth, requireAdmin, settingsRoutes);
+app.use('/api', requireAuth, requireAdmin, encryptionHealthRoutes);
 app.use('/api', requireAuth, requireAdmin, usersRoutes);
 
 // Error handler
@@ -193,11 +196,33 @@ async function logAndValidateSumupConfig() {
   }
 }
 
+// C195: resolved-SMTP boot log so Railway logs reveal the active mailer
+// config every restart. Surfaces port/secure/source coupling so the next
+// "email no sale" incident is one log line away from the root cause instead
+// of another guess-and-deploy iteration.
+async function logSmtpConfig() {
+  try {
+    const cfg = await mailer.describe();
+    const decryptTag = cfg.dbPassPresent
+      ? (cfg.decryptOk ? 'decryptOk' : 'decryptFailed')
+      : 'noDbPass';
+    console.log(
+      `[mailer] enabled=${cfg.enabled} host=${cfg.host || '<unset>'} port=${cfg.port} secure=${cfg.secure} from=${cfg.from || '<unset>'} auth=${cfg.hasAuth ? 'yes' : 'no'} passSource=${cfg.sources?.pass || 'none'} db=${decryptTag}`,
+    );
+    if (cfg.enabled && cfg.port === 465 && cfg.secure !== true) {
+      console.error('[mailer] BUG: port=465 but secure!=true — SMTPS handshake will hang');
+    }
+  } catch (err) {
+    console.warn(`[mailer] boot describe failed: ${err.message}`);
+  }
+}
+
 // Initialize database and start server
 async function start() {
   await initSchema();
   await ensureDefaultAdmin();
   await logAndValidateSumupConfig();
+  await logSmtpConfig();
 
   const server = app.listen(PORT, () => {
     console.log(`AMA Café API running on http://localhost:${PORT}`);
