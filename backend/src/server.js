@@ -28,6 +28,13 @@ const { IMAGES_DIR, ensureImagesDir } = require('./utils/imageStorage');
 const app = express();
 const PORT = process.env.PORT || 7000;
 
+// C189 (OPTION B): trust the first proxy hop in front of the app (Railway
+// edge / cloudflared / Nginx-style reverse proxy) so X-Forwarded-For and
+// X-Forwarded-Proto are honored by req.ip / req.protocol. Required by
+// express-rate-limit: without it, the keyGenerator throws
+// ERR_ERL_UNEXPECTED_X_FORWARDED_FOR when Railway sets the header.
+app.set('trust proxy', 1);
+
 // Middleware
 
 // helmet — headers de seguridad. CSP whitelist: SumUp (gateway) + reCAPTCHA
