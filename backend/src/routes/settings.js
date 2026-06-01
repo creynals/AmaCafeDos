@@ -506,6 +506,17 @@ router.delete('/admin/settings/smtp', async (req, res) => {
   res.json({ success: true, message: 'Configuración SMTP eliminada' });
 });
 
+// C189: layered SMTP diagnostic — checks decrypt, transport init y verify()
+// sin enviar correo. Permite al admin distinguir entre "ENCRYPTION_SECRET
+// rotado" (re-grabar contraseña) vs "host/puerto bloqueado" (configurar red).
+router.post('/admin/settings/smtp/verify', async (req, res) => {
+  const result = await mailer.verifyConnection();
+  if (result.verified) {
+    return res.json({ success: true, ...result });
+  }
+  return res.status(502).json({ success: false, ...result });
+});
+
 router.post('/admin/settings/smtp/test', async (req, res) => {
   const { to } = req.body || {};
   if (!to || typeof to !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to.trim())) {
@@ -518,9 +529,18 @@ router.post('/admin/settings/smtp/test', async (req, res) => {
     return res.json({ success: true, message: `Email de prueba enviado a ${to}`, messageId: result.messageId });
   }
   if (result.skipped) {
-    return res.status(400).json({ success: false, error: 'SMTP deshabilitado o sin configuración mínima', reason: result.reason });
+    // C189: surface decrypt_failed explícito para que la UI pida al admin
+    // re-grabar la contraseña en lugar de mostrar "SMTP deshabilitado".
+    const errorMsg = result.reason === 'decrypt_failed'
+      ? 'No se puede descifrar la contraseña SMTP con el ENCRYPTION_SECRET actual. Vuelve a grabar la contraseña.'
+      : 'SMTP deshabilitado o sin configuración mínima';
+    return res.status(400).json({ success: false, error: errorMsg, reason: result.reason });
   }
-  return res.status(502).json({ success: false, error: result.error || 'Fallo al enviar el email de prueba' });
+  return res.status(502).json({
+    success: false,
+    error: result.error || 'Fallo al enviar el email de prueba',
+    reason: result.reason || 'unknown',
+  });
 });
 
 // --- Bank Account Settings (Ciclo 180 — datos para transferencia) ---

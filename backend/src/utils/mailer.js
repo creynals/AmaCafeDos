@@ -104,13 +104,20 @@ async function resolveConfig() {
   const secure = parseBool(explicitSecure, port === 465);
   const user = source(db.smtp_user, env.user);
   // smtp_pass viene cifrada desde la BD; si está, hay que decrypt.
+  // C189: track decryptOk explicitly so describe() puede reportar la causa
+  // de un envío fallido (típicamente ENCRYPTION_SECRET rotado entre entornos).
   let pass = '';
   let passSource = 'none';
-  if (db.smtp_pass) {
+  let dbPassPresent = Boolean(db.smtp_pass);
+  let decryptOk = null;
+  if (dbPassPresent) {
     const decrypted = decrypt(db.smtp_pass);
     if (decrypted) {
       pass = decrypted;
       passSource = 'db';
+      decryptOk = true;
+    } else {
+      decryptOk = false;
     }
   }
   if (!pass && env.pass) {
@@ -141,6 +148,8 @@ async function resolveConfig() {
     from: from.value || user.value,
     replyTo: replyTo.value || null,
     enabled,
+    dbPassPresent,
+    decryptOk,
     sources: {
       host: host.from,
       port: portRaw.from,
@@ -168,6 +177,16 @@ function invalidateCache() {
   transport = null;
 }
 
+// C189 (OPTION B): bound every blocking phase so a misconfigured host
+// (firewall, wrong port, dropped packets) returns within ~15s instead of
+// hanging the request thread for the default 10 min. Values mirror what
+// Railway and Gmail SMTP traditionally need under load.
+const TRANSPORT_TIMEOUTS = {
+  connectionTimeout: 10_000,
+  greetingTimeout: 8_000,
+  socketTimeout: 15_000,
+};
+
 async function getTransport() {
   const config = await getConfig();
   if (!config.enabled) return { transport: null, config };
@@ -177,13 +196,40 @@ async function getTransport() {
     port: config.port,
     secure: config.secure,
     auth: config.user ? { user: config.user, pass: config.pass } : undefined,
+    ...TRANSPORT_TIMEOUTS,
   });
   return { transport, config };
+}
+
+// C189: clasificar la causa del error de SMTP para que el caller (UI admin /
+// log) sepa si fue cifrado, red, TLS o credenciales. Sin esto, todo error de
+// nodemailer aparece como "Connection timeout" sin pista accionable.
+function classifySmtpError(err, config) {
+  if (!err) return 'unknown';
+  const code = err.code || '';
+  const command = err.command || '';
+  const responseCode = err.responseCode;
+
+  if (config && config.dbPassPresent && config.decryptOk === false) {
+    return 'decrypt_failed';
+  }
+  if (code === 'ETIMEDOUT' || /timeout/i.test(err.message || '')) return 'tcp_timeout';
+  if (code === 'ECONNREFUSED') return 'tcp_refused';
+  if (code === 'ENOTFOUND' || code === 'EAI_AGAIN') return 'dns_failed';
+  if (code === 'ESOCKET' || /tls|ssl|certificate/i.test(err.message || '')) return 'tls_failed';
+  if (responseCode === 535 || command === 'AUTH' || /auth/i.test(err.message || '')) return 'auth_failed';
+  return 'unknown';
 }
 
 async function sendMail({ to, subject, html, text, replyTo }) {
   const { transport: tx, config } = await getTransport();
   if (!config.enabled || !tx) {
+    // C189: distinguir SMTP simplemente apagado vs cifrado roto (ambos terminan
+    // en !enabled si auto-mode no encuentra credenciales decryptables).
+    if (config.dbPassPresent && config.decryptOk === false) {
+      console.error(`[mailer] decrypt_failed — smtp_pass exists in DB but ENCRYPTION_SECRET cannot decrypt it. Re-save SMTP password in /admin to re-encrypt with the active secret.`);
+      return { skipped: true, reason: 'decrypt_failed' };
+    }
     console.log(`[mailer] SMTP disabled — skipping mail to ${to} ("${subject}")`);
     return { skipped: true, reason: 'smtp_disabled' };
   }
@@ -204,8 +250,53 @@ async function sendMail({ to, subject, html, text, replyTo }) {
     console.log(`[mailer] sent to=${to} subject="${subject}" messageId=${info.messageId}`);
     return { ok: true, messageId: info.messageId };
   } catch (err) {
-    console.error(`[mailer] sendMail failed to=${to} subject="${subject}":`, err.message);
-    return { ok: false, error: err.message };
+    const reason = classifySmtpError(err, config);
+    console.error(`[mailer] sendMail failed to=${to} subject="${subject}" reason=${reason}: ${err.message}`);
+    return { ok: false, error: err.message, reason };
+  }
+}
+
+// C189: probe SMTP por capas sin enviar correo — útil para botón "Verificar
+// conexión" en /admin y para describe?verify=true. Reporta dónde rompe.
+async function verifyConnection() {
+  const config = await getConfig();
+  const result = {
+    decryptOk: config.decryptOk,
+    hasAuth: Boolean(config.user),
+    transportReady: false,
+    verified: false,
+    reason: null,
+    error: null,
+  };
+  if (config.dbPassPresent && config.decryptOk === false) {
+    result.reason = 'decrypt_failed';
+    return result;
+  }
+  if (!config.enabled) {
+    result.reason = 'smtp_disabled';
+    return result;
+  }
+  let tx;
+  try {
+    ({ transport: tx } = await getTransport());
+    result.transportReady = Boolean(tx);
+  } catch (err) {
+    result.reason = 'transport_init_failed';
+    result.error = err.message;
+    return result;
+  }
+  if (!tx) {
+    result.reason = 'transport_unavailable';
+    return result;
+  }
+  try {
+    await tx.verify();
+    result.verified = true;
+    return result;
+  } catch (err) {
+    result.reason = classifySmtpError(err, config);
+    result.error = err.message;
+    return result;
   }
 }
 
@@ -224,6 +315,10 @@ async function describe() {
     from: config.from || null,
     replyTo: config.replyTo,
     hasAuth: Boolean(config.user),
+    // C189: surface decrypt status so admin UI shows actionable error
+    // ("re-grabar contraseña") instead of generic "SMTP disabled".
+    dbPassPresent: config.dbPassPresent,
+    decryptOk: config.decryptOk,
     sources: config.sources,
   };
 }
@@ -247,5 +342,6 @@ module.exports = {
   sendTestMail,
   isEnabled,
   describe,
+  verifyConnection,
   invalidateCache,
 };
