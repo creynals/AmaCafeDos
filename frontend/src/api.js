@@ -139,6 +139,10 @@ export const api = {
   // (no depende del webhook). Usado por CheckoutModal tras widget success.
   syncOrderPayment: (id) => post(`/orders/${id}/sync-payment`, {}),
 
+  // C205: autocompletar datos del cliente vía código por email.
+  requestCheckoutCode: (email) => post('/checkout/request-code', { email }),
+  verifyCheckoutCode: (email, code) => post('/checkout/verify-code', { email, code }),
+
   // Ciclo 86: resultado público para la página /checkout/success a la que
   // SumUp redirige post-pago. Identificado por checkout_id (sin PII).
   getSumupResult: (checkoutId) =>

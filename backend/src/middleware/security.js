@@ -114,6 +114,26 @@ const uploadImageRateLimiter = rateLimit({
   message: { error: 'Demasiadas subidas de imágenes. Intente en un minuto.' },
 });
 
+// Checkout autofill — envío de código OTP (C205): 10 req / 15 min por IP.
+// Protege contra abuso del envío de emails. El throttle por email vive en
+// routes/checkout-autofill.js (límite adicional por destinatario).
+const checkoutCodeRequestRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Demasiadas solicitudes de código. Intenta en 15 minutos.' },
+});
+
+// Checkout autofill — verificación de código (C205): 20 req / 15 min por IP.
+const checkoutCodeVerifyRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Demasiados intentos. Intenta en 15 minutos.' },
+});
+
 module.exports = {
   sanitizeText,
   sanitizeResponse,
@@ -122,4 +142,6 @@ module.exports = {
   loginRateLimiter,
   bulkImportRateLimiter,
   uploadImageRateLimiter,
+  checkoutCodeRequestRateLimiter,
+  checkoutCodeVerifyRateLimiter,
 };

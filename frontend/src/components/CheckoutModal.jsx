@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { X, ArrowLeft, ArrowRight, ShoppingBag, User, MapPin, CreditCard, Check, Loader2, AlertCircle } from 'lucide-react';
+import { X, ArrowLeft, ArrowRight, ShoppingBag, User, MapPin, CreditCard, Check, Loader2, AlertCircle, KeyRound } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { formatPrice } from '../utils/format';
@@ -434,7 +434,13 @@ export default function CheckoutModal({ isOpen, onClose }) {
               maxInstructionsLen={CUSTOMER_INSTRUCTIONS_MAX}
             />
           )}
-          {step === 1 && <StepContact contact={contact} onChange={setContact} />}
+          {step === 1 && (
+            <StepContact
+              contact={contact}
+              onChange={setContact}
+              onAutofill={(c, a) => { setContact(c); if (a) setAddress(a); }}
+            />
+          )}
           {step === 2 && <StepAddress address={address} onChange={setAddress} />}
           {step === 3 && <StepPayment selected={paymentMethod} onSelect={setPaymentMethod} total={total} />}
         </div>
@@ -523,8 +529,52 @@ function StepSummary({
   );
 }
 
-function StepContact({ contact, onChange }) {
+function StepContact({ contact, onChange, onAutofill }) {
   const update = (field, value) => onChange({ ...contact, [field]: value });
+
+  // C205: autocompletar datos vía código por email (anti-fuga de PII).
+  const [phase, setPhase] = useState('idle'); // idle | sent | done
+  const [code, setCode] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [info, setInfo] = useState(null);
+  const [err, setErr] = useState(null);
+
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email.trim());
+
+  async function sendCode() {
+    setBusy(true); setErr(null); setInfo(null);
+    try {
+      const res = await api.requestCheckoutCode(contact.email.trim());
+      setPhase('sent');
+      setInfo(res?.message || 'Si tienes datos guardados, te enviamos un código a tu correo.');
+    } catch (e) {
+      setErr(e?.data?.error || 'No se pudo enviar el código. Intenta más tarde.');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function verify() {
+    if (!/^\d{6}$/.test(code.trim())) { setErr('Ingresa el código de 6 dígitos.'); return; }
+    setBusy(true); setErr(null); setInfo(null);
+    try {
+      const res = await api.verifyCheckoutCode(contact.email.trim(), code.trim());
+      const filledContact = { ...res.contact, email: contact.email.trim() };
+      onAutofill(filledContact, res.address || null);
+      setPhase('done');
+      setInfo('¡Listo! Cargamos tus datos guardados. Revísalos y continúa.');
+    } catch (e) {
+      const d = e?.data || {};
+      let msg = 'Código inválido.';
+      if (d.reason === 'expired') msg = 'El código venció. Pide uno nuevo.';
+      else if (d.reason === 'too_many_attempts') msg = 'Demasiados intentos. Pide un código nuevo.';
+      else if (d.reason === 'no_code') msg = 'No hay un código activo. Pide uno nuevo.';
+      else if (typeof d.attemptsLeft === 'number') msg = `Código incorrecto. Te quedan ${d.attemptsLeft} intentos.`;
+      setErr(msg);
+    } finally {
+      setBusy(false);
+    }
+  }
 
   return (
     <div>
@@ -545,11 +595,60 @@ function StepContact({ contact, onChange }) {
           <input
             type="email"
             value={contact.email}
-            onChange={(e) => update('email', e.target.value)}
+            onChange={(e) => { update('email', e.target.value); if (phase !== 'idle') { setPhase('idle'); setCode(''); setInfo(null); setErr(null); } }}
             placeholder="juan@ejemplo.com"
             className="w-full bg-ama-dark border border-ama-border rounded-xl px-4 py-2.5 text-sm text-ama-text placeholder:text-ama-text-muted/50 focus:outline-none focus:border-ama-amber transition-colors"
           />
         </div>
+
+        {/* C205: cargar datos guardados con código por email */}
+        {phase !== 'done' && (
+          <div className="bg-ama-dark/60 border border-ama-border rounded-xl p-3">
+            <p className="text-xs text-ama-text-muted leading-relaxed mb-2">
+              <KeyRound size={13} className="inline mr-1 -mt-0.5 text-ama-amber" />
+              ¿Ya compraste antes? Te enviamos un <strong>código a tu correo</strong> para cargar tus datos y no reescribirlos. El código protege tu información: nadie puede verla sin él.
+            </p>
+            {phase === 'idle' && (
+              <button
+                type="button"
+                onClick={sendCode}
+                disabled={!emailValid || busy}
+                className="w-full bg-ama-amber/15 text-ama-amber border border-ama-amber/30 rounded-lg px-3 py-2 text-sm font-medium hover:bg-ama-amber/25 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+              >
+                {busy ? <Loader2 size={14} className="animate-spin" /> : <KeyRound size={14} />}
+                Enviarme un código para cargar mis datos
+              </button>
+            )}
+            {phase === 'sent' && (
+              <div className="flex items-stretch gap-2">
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={code}
+                  onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
+                  placeholder="Código de 6 dígitos"
+                  className="flex-1 bg-ama-dark border border-ama-border rounded-lg px-3 py-2 text-sm text-ama-text tracking-widest placeholder:tracking-normal placeholder:text-ama-text-muted/50 focus:outline-none focus:border-ama-amber"
+                />
+                <button
+                  type="button"
+                  onClick={verify}
+                  disabled={busy || code.length !== 6}
+                  className="bg-ama-amber text-ama-darker rounded-lg px-3 py-2 text-sm font-medium hover:bg-ama-amber/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-1.5 whitespace-nowrap"
+                >
+                  {busy ? <Loader2 size={14} className="animate-spin" /> : <Check size={14} />}
+                  Cargar
+                </button>
+              </div>
+            )}
+            {info && <p className="text-xs text-green-400 mt-2">{info}</p>}
+            {err && <p className="text-xs text-red-400 mt-2 flex items-center gap-1"><AlertCircle size={12} /> {err}</p>}
+          </div>
+        )}
+        {phase === 'done' && info && (
+          <p className="text-xs text-green-400 flex items-center gap-1"><Check size={12} /> {info}</p>
+        )}
+
         <div>
           <label className="block text-xs text-ama-text-muted mb-1">Telefono *</label>
           <input
