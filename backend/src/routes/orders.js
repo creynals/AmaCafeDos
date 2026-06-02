@@ -3,6 +3,7 @@ const { query, getClient } = require('../models/database');
 const sumup = require('../utils/sumup');
 const mailer = require('../utils/mailer');
 const { buildOrderConfirmationEmail } = require('../utils/orderConfirmationEmail');
+const { resolveLogoUrl } = require('../utils/mailAssets');
 const { readBankSettings, isBankConfigured } = require('../utils/bankSettings');
 
 const router = express.Router();
@@ -231,11 +232,13 @@ router.post('/orders', async (req, res) => {
   // settings para que el template renderice el bloque de depósito.
   Promise.resolve().then(async () => {
     try {
-      let emailInput = responseBody;
+      // C204: logo de AMA Café en el header del email (URL pública absoluta).
+      const logoUrl = await resolveLogoUrl();
+      let emailInput = { ...responseBody, logoUrl };
       if (order.payment_method === 'transferencia') {
         const bank = await readBankSettings();
         if (isBankConfigured(bank)) {
-          emailInput = { ...responseBody, bankAccount: bank };
+          emailInput = { ...emailInput, bankAccount: bank };
         } else {
           console.warn(`[orders] order ${order.id} pagada por transferencia pero no hay datos bancarios configurados; el email omitirá el bloque de depósito.`);
         }
