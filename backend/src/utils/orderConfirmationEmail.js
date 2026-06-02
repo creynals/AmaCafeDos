@@ -65,6 +65,13 @@ function buildOrderConfirmationEmail(order) {
     && bankAccount.holderRut
     && bankAccount.accountNumber;
 
+  // C204: logo de AMA Café en la franja café del header. Solo se renderiza si
+  // el caller inyectó una URL absoluta http(s) (resuelta en utils/mailAssets);
+  // si no, el header cae a solo texto (sin imagen rota).
+  const logoUrl = typeof order.logoUrl === 'string' && /^https?:\/\//i.test(order.logoUrl)
+    ? order.logoUrl
+    : null;
+
   const subject = `Confirmación de tu pedido amaCafe #${orderId}`;
 
   const itemsRowsHtml = items.map((item) => `
@@ -94,8 +101,17 @@ function buildOrderConfirmationEmail(order) {
       <tr><td align="center">
         <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;background:#ffffff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
           <tr><td style="padding:24px 32px;background:#a06b3a;color:#fff;border-radius:8px 8px 0 0;">
-            <h1 style="margin:0;font-size:22px;">¡Gracias por tu compra, ${escapeHtml(contact?.name || '')}!</h1>
-            <p style="margin:6px 0 0 0;font-size:14px;opacity:0.9;">Pedido #${escapeHtml(orderId)} confirmado.</p>
+            <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                ${logoUrl ? `<td width="64" style="vertical-align:middle;padding-right:16px;">
+                  <img src="${escapeHtml(logoUrl)}" alt="AMA Café" width="56" height="56" style="display:block;width:56px;height:56px;border-radius:50%;border:2px solid #ffffff;background:#ffffff;" />
+                </td>` : ''}
+                <td style="vertical-align:middle;">
+                  <h1 style="margin:0;font-size:22px;line-height:1.2;">¡Gracias por tu compra, ${escapeHtml(contact?.name || '')}!</h1>
+                  <p style="margin:6px 0 0 0;font-size:14px;opacity:0.9;">Pedido #${escapeHtml(orderId)} confirmado.</p>
+                </td>
+              </tr>
+            </table>
           </td></tr>
           <tr><td style="padding:24px 32px;">
             <p style="margin:0 0 16px 0;font-size:14px;line-height:1.5;">

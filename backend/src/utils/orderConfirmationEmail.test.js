@@ -201,3 +201,33 @@ test('bank block detects "depósito" / "transfer" variants', () => {
     assert.match(out.html, /Datos para tu transferencia/, `falló para método "${method}"`);
   }
 });
+
+// C204 — logo en la franja café del header
+test('renders logo img in header when valid http(s) logoUrl provided', () => {
+  const out = buildOrderConfirmationEmail(mockOrder({
+    logoUrl: 'https://amacafe.example.com/images/logo-ama.jpg',
+  }));
+  assert.match(out.html, /<img src="https:\/\/amacafe\.example\.com\/images\/logo-ama\.jpg" alt="AMA Café"/);
+  // sigue dentro de la franja café y junto al título
+  assert.match(out.html, /background:#a06b3a[\s\S]*logo-ama\.jpg[\s\S]*¡Gracias por tu compra/);
+});
+
+test('omits logo img when logoUrl absent (text-only header still renders)', () => {
+  const out = buildOrderConfirmationEmail(mockOrder());
+  assert.ok(!out.html.includes('<img'));
+  assert.match(out.html, /¡Gracias por tu compra/);
+});
+
+test('ignores non-http logoUrl (no broken image, no injection)', () => {
+  for (const bad of ['javascript:alert(1)', 'data:image/png;base64,AAAA', 'ftp://x/y.png', '/relative/logo.jpg', 42]) {
+    const out = buildOrderConfirmationEmail(mockOrder({ logoUrl: bad }));
+    assert.ok(!out.html.includes('<img'), `no debió renderizar img para ${bad}`);
+  }
+});
+
+test('escapes quotes in logoUrl to prevent attribute breakout', () => {
+  const out = buildOrderConfirmationEmail(mockOrder({
+    logoUrl: 'https://x.com/a.jpg"><script>alert(1)</script>',
+  }));
+  assert.ok(!out.html.includes('"><script>'));
+});

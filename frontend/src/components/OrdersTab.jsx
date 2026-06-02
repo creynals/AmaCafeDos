@@ -5,67 +5,11 @@ import {
   CreditCard, Calendar, ArrowRight, ChevronDown, ChevronUp, MessageSquare,
 } from 'lucide-react';
 import { api } from '../api';
-
-// Vocabulario fulfillment — coherente con FULFILLMENT_STATUSES en backend/admin.js
-const FULFILLMENT_STATUSES = [
-  'pending', 'in_progress', 'out_for_delivery', 'delivered', 'cancelled', 'returned',
-];
-
-const FULFILLMENT_LABELS = {
-  pending: 'Pendiente',
-  in_progress: 'En preparación',
-  out_for_delivery: 'En reparto',
-  delivered: 'Entregada',
-  cancelled: 'Cancelada',
-  returned: 'Devuelta',
-};
-
-const FULFILLMENT_COLORS = {
-  pending: 'bg-yellow-400/10 text-yellow-400 border-yellow-400/30',
-  in_progress: 'bg-blue-400/10 text-blue-400 border-blue-400/30',
-  out_for_delivery: 'bg-purple-400/10 text-purple-400 border-purple-400/30',
-  delivered: 'bg-green-400/10 text-green-400 border-green-400/30',
-  cancelled: 'bg-red-400/10 text-red-400 border-red-400/30',
-  returned: 'bg-orange-400/10 text-orange-400 border-orange-400/30',
-};
-
-const PAYMENT_STATUSES = ['pending', 'processing', 'paid', 'failed', 'cancelled', 'refunded'];
-
-const PAYMENT_STATUS_LABELS = {
-  pending: 'Pendiente',
-  processing: 'Procesando',
-  paid: 'Pagado',
-  failed: 'Falló',
-  cancelled: 'Cancelado',
-  refunded: 'Reembolsado',
-};
-
-const PAYMENT_STATUS_COLORS = {
-  pending: 'text-yellow-400',
-  processing: 'text-blue-400',
-  paid: 'text-green-400',
-  failed: 'text-red-400',
-  cancelled: 'text-ama-text-muted',
-  refunded: 'text-orange-400',
-};
-
-const PAYMENT_METHOD_LABELS = {
-  efectivo: 'Efectivo',
-  transferencia: 'Transferencia',
-  tarjeta: 'Tarjeta',
-};
-
-// Transiciones permitidas — espejo de ALLOWED_TRANSITIONS en backend/admin.js
-const ALLOWED_TRANSITIONS = {
-  pending: ['in_progress', 'cancelled'],
-  in_progress: ['out_for_delivery', 'cancelled'],
-  out_for_delivery: ['delivered', 'cancelled'],
-  delivered: ['returned'],
-  cancelled: [],
-  returned: [],
-};
-
-const PAID_REQUIRED_TARGETS = new Set(['in_progress', 'out_for_delivery', 'delivered']);
+import {
+  FULFILLMENT_STATUSES, FULFILLMENT_LABELS, PAYMENT_STATUSES, PAYMENT_STATUS_LABELS,
+  PAYMENT_METHOD_LABELS, ALLOWED_TRANSITIONS, PAID_REQUIRED_TARGETS,
+} from '../utils/orderStatus.js';
+import { StatusBadge, PaymentStatusPill } from './OrderBadges.jsx';
 
 function formatPrice(price) {
   const n = Number(price || 0);
@@ -79,24 +23,6 @@ function formatDateTime(iso) {
     day: '2-digit', month: '2-digit', year: 'numeric',
     hour: '2-digit', minute: '2-digit',
   });
-}
-
-function StatusBadge({ status }) {
-  const cls = FULFILLMENT_COLORS[status] || 'bg-ama-darker text-ama-text-muted border-ama-border';
-  return (
-    <span className={`px-2 py-0.5 text-xs rounded-full border ${cls} whitespace-nowrap`}>
-      {FULFILLMENT_LABELS[status] || status}
-    </span>
-  );
-}
-
-function PaymentStatusPill({ status }) {
-  const cls = PAYMENT_STATUS_COLORS[status] || 'text-ama-text-muted';
-  return (
-    <span className={`text-xs ${cls}`}>
-      {PAYMENT_STATUS_LABELS[status] || status}
-    </span>
-  );
 }
 
 function ChipMulti({ values, options, labels, onChange }) {
@@ -127,14 +53,36 @@ function ChipMulti({ values, options, labels, onChange }) {
   );
 }
 
-function StatusChangeModal({ order, onClose, onSuccess }) {
+function StatusChangeModal({ order, onClose, onSuccess, onPaymentConfirmed }) {
   const [target, setTarget] = useState('');
   const [reason, setReason] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [confirmingPayment, setConfirmingPayment] = useState(false);
 
   const allowed = ALLOWED_TRANSITIONS[order.status] || [];
   const isTerminal = allowed.length === 0;
+
+  // Confirmación manual de pago: solo para transferencias aún no pagadas.
+  // Las de tarjeta las confirma SumUp por webhook/poll.
+  const canConfirmPayment = order.payment_method === 'transferencia' && order.payment_status !== 'paid';
+
+  async function confirmPayment() {
+    setConfirmingPayment(true);
+    setError(null);
+    try {
+      const updated = await api.adminOrderConfirmPayment(order.id);
+      onPaymentConfirmed(updated);
+    } catch (err) {
+      const data = err?.data || {};
+      let msg = data.message || data.error || err.message;
+      if (data.error === 'already_paid') msg = 'El pago de esta orden ya estaba confirmado.';
+      else if (data.error === 'manual_confirm_not_allowed') msg = 'Solo las transferencias se confirman manualmente.';
+      setError(msg);
+    } finally {
+      setConfirmingPayment(false);
+    }
+  }
 
   async function submit() {
     if (!target) { setError('Selecciona un nuevo estado'); return; }
@@ -187,6 +135,27 @@ function StatusChangeModal({ order, onClose, onSuccess }) {
             <span className="text-ama-text-muted">Pago:</span>
             <PaymentStatusPill status={order.payment_status} />
           </div>
+
+          {/* Confirmación manual de transferencia (Cycle 202) — desbloquea el
+              avance de cumplimiento, que exige payment_status='paid'. */}
+          {canConfirmPayment && (
+            <div className="bg-green-400/5 border border-green-400/30 rounded-lg p-3">
+              <div className="flex items-start gap-2 mb-2">
+                <CreditCard size={16} className="text-green-400 shrink-0 mt-0.5" />
+                <div className="text-xs text-ama-text-muted">
+                  Pago por <strong className="text-ama-text">transferencia</strong> sin confirmar. Marca el depósito como recibido para habilitar el avance del pedido.
+                </div>
+              </div>
+              <button
+                onClick={confirmPayment}
+                disabled={confirmingPayment}
+                className="w-full px-3 py-2 text-sm bg-green-500 text-white rounded-lg font-medium hover:bg-green-500/90 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2"
+              >
+                {confirmingPayment ? <Loader2 size={14} className="animate-spin" /> : <CheckCircle size={14} />}
+                Confirmar pago recibido
+              </button>
+            </div>
+          )}
 
           {isTerminal && (
             <div className="bg-ama-darker border border-ama-border rounded-lg p-3 flex items-start gap-2">
@@ -455,6 +424,13 @@ export default function OrdersTab() {
     setOrders(prev => prev.map(o => o.id === updated.id ? { ...o, ...updated } : o));
   }
 
+  // Pago confirmado: actualiza la lista y el order del modal (sin cerrarlo), para
+  // que el admin pueda avanzar el estado de inmediato con el blocker ya levantado.
+  function handlePaymentConfirmed(updated) {
+    setOrders(prev => prev.map(o => o.id === updated.id ? { ...o, ...updated } : o));
+    setStatusModalOrder(prev => (prev && prev.id === updated.id ? { ...prev, ...updated } : prev));
+  }
+
   const fromShown = pagination.total === 0 ? 0 : pagination.offset + 1;
   const toShown = Math.min(pagination.offset + pagination.limit, pagination.total);
 
@@ -704,6 +680,7 @@ export default function OrdersTab() {
           order={statusModalOrder}
           onClose={() => setStatusModalOrder(null)}
           onSuccess={handleStatusUpdated}
+          onPaymentConfirmed={handlePaymentConfirmed}
         />
       )}
     </div>
