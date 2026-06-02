@@ -581,16 +581,6 @@ function StepContact({ contact, onChange, onAutofill }) {
       <h3 className="text-sm font-semibold text-ama-text-muted mb-3">Datos de contacto</h3>
       <div className="space-y-3">
         <div>
-          <label className="block text-xs text-ama-text-muted mb-1">Nombre completo *</label>
-          <input
-            type="text"
-            value={contact.name}
-            onChange={(e) => update('name', e.target.value)}
-            placeholder="Juan Perez"
-            className="w-full bg-ama-dark border border-ama-border rounded-xl px-4 py-2.5 text-sm text-ama-text placeholder:text-ama-text-muted/50 focus:outline-none focus:border-ama-amber transition-colors"
-          />
-        </div>
-        <div>
           <label className="block text-xs text-ama-text-muted mb-1">Email *</label>
           <input
             type="email"
@@ -649,6 +639,16 @@ function StepContact({ contact, onChange, onAutofill }) {
           <p className="text-xs text-green-400 flex items-center gap-1"><Check size={12} /> {info}</p>
         )}
 
+        <div>
+          <label className="block text-xs text-ama-text-muted mb-1">Nombre completo *</label>
+          <input
+            type="text"
+            value={contact.name}
+            onChange={(e) => update('name', e.target.value)}
+            placeholder="Juan Perez"
+            className="w-full bg-ama-dark border border-ama-border rounded-xl px-4 py-2.5 text-sm text-ama-text placeholder:text-ama-text-muted/50 focus:outline-none focus:border-ama-amber transition-colors"
+          />
+        </div>
         <div>
           <label className="block text-xs text-ama-text-muted mb-1">Telefono *</label>
           <input

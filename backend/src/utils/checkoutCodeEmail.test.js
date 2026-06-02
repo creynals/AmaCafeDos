@@ -22,3 +22,18 @@ test('menciona expiración y un solo uso', () => {
   assert.match(out.text, /vence/i);
   assert.match(out.text, /un solo uso/i);
 });
+
+// C206 — logo en la franja café
+test('renderiza logo cuando logoUrl http(s) válido', () => {
+  const out = buildCheckoutCodeEmail({ to: 'x@y.cl', code: '111111', logoUrl: 'https://amacafe.cl/images/logo-ama.jpg' });
+  assert.match(out.html, /<img src="https:\/\/amacafe\.cl\/images\/logo-ama\.jpg" alt="AMA Café"/);
+  assert.match(out.html, /background:#a06b3a[\s\S]*logo-ama\.jpg[\s\S]*Tu código/);
+});
+
+test('omite logo sin logoUrl o con valor no-http', () => {
+  for (const bad of [undefined, 'javascript:x', 'data:image/png;base64,AA', '/rel.jpg']) {
+    const out = buildCheckoutCodeEmail({ to: 'x@y.cl', code: '111111', logoUrl: bad });
+    assert.ok(!out.html.includes('<img'), `no debió render img para ${bad}`);
+    assert.match(out.html, /Tu código/);
+  }
+});
