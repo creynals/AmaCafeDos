@@ -1,7 +1,12 @@
 const express = require('express');
 const { query, getClient } = require('../models/database');
+const { confirmedSql, pendingSql, countedSql } = require('../utils/orderStatus');
 
 const router = express.Router();
+
+// payment_status que admiten confirmación manual de transferencia → 'paid'.
+// (no resucitar failed/refunded/cancelled, ni re-confirmar paid).
+const MANUAL_PAYABLE_STATUSES = new Set(['pending', 'processing']);
 
 // Ciclo 99 — Vocabulario fulfillment + reglas de transición.
 // Coherente con CHECK constraint en migración 010.
@@ -56,16 +61,28 @@ router.get('/admin/dashboard', async (req, res) => {
 
   const totalProducts = (await query('SELECT COUNT(*) as count FROM products')).rows[0].count;
   const activeProducts = (await query('SELECT COUNT(*) as count FROM products WHERE available = 1')).rows[0].count;
-  const totalOrders = (await query(`SELECT COUNT(*) as count FROM orders o WHERE 1=1 ${filter}`, params)).rows[0].count;
-  const totalRevenue = (await query(`SELECT COALESCE(SUM(total), 0) as total FROM orders o WHERE 1=1 ${filter}`, params)).rows[0].total;
-  const avgOrderValue = (await query(`SELECT COALESCE(AVG(total), 0) as avg FROM orders o WHERE 1=1 ${filter}`, params)).rows[0].avg;
+
+  // Conteos por bucket en una sola pasada. total_orders/total_revenue cuentan
+  // pedidos no cancelados (counted); confirmed_* el dinero efectivamente cobrado.
+  const o = (await query(`
+    SELECT COUNT(*) FILTER (WHERE ${countedSql('o')})   AS total_orders,
+           COUNT(*) FILTER (WHERE ${pendingSql('o')})   AS pending_orders,
+           COUNT(*) FILTER (WHERE ${confirmedSql('o')}) AS confirmed_orders,
+           COALESCE(SUM(total) FILTER (WHERE ${countedSql('o')}), 0)   AS total_revenue,
+           COALESCE(SUM(total) FILTER (WHERE ${confirmedSql('o')}), 0) AS confirmed_revenue,
+           COALESCE(AVG(total) FILTER (WHERE ${countedSql('o')}), 0)   AS avg_order_value
+    FROM orders o WHERE 1=1 ${filter}
+  `, params)).rows[0];
 
   res.json({
     total_products: Number(totalProducts),
     active_products: Number(activeProducts),
-    total_orders: Number(totalOrders),
-    total_revenue: Number(totalRevenue),
-    avg_order_value: Math.round(Number(avgOrderValue)),
+    total_orders: Number(o.total_orders),
+    pending_orders: Number(o.pending_orders),
+    confirmed_orders: Number(o.confirmed_orders),
+    total_revenue: Number(o.total_revenue),
+    confirmed_revenue: Number(o.confirmed_revenue),
+    avg_order_value: Math.round(Number(o.avg_order_value)),
   });
 });
 
@@ -191,18 +208,26 @@ router.get('/admin/customers', async (req, res) => {
 
   const { rows } = await query(`
     SELECT c.id, c.name, c.email, c.phone, c.created_at,
-           COUNT(DISTINCT o.id) as total_orders,
-           COALESCE(SUM(o.total), 0) as total_spent,
-           COALESCE(AVG(o.total), 0) as avg_order_value,
-           MAX(o.created_at) as last_order_date
+           COUNT(DISTINCT o.id) FILTER (WHERE ${countedSql('o')})   as total_orders,
+           COUNT(DISTINCT o.id) FILTER (WHERE ${pendingSql('o')})   as pending_orders,
+           COUNT(DISTINCT o.id) FILTER (WHERE ${confirmedSql('o')}) as confirmed_orders,
+           COALESCE(SUM(o.total) FILTER (WHERE ${countedSql('o')}), 0)   as total_spent,
+           COALESCE(SUM(o.total) FILTER (WHERE ${confirmedSql('o')}), 0) as confirmed_spent,
+           COALESCE(AVG(o.total) FILTER (WHERE ${countedSql('o')}), 0)   as avg_order_value,
+           MAX(o.created_at) FILTER (WHERE ${countedSql('o')}) as last_order_date
     FROM customers c
-    LEFT JOIN orders o ON o.customer_id = c.id AND o.status = 'completed' ${filter}
+    LEFT JOIN orders o ON o.customer_id = c.id ${filter}
     GROUP BY c.id, c.name, c.email, c.phone, c.created_at
     ORDER BY total_spent DESC
   `, params);
 
   res.json(rows.map(c => ({
     ...c,
+    total_orders: Number(c.total_orders),
+    pending_orders: Number(c.pending_orders),
+    confirmed_orders: Number(c.confirmed_orders),
+    total_spent: Number(c.total_spent),
+    confirmed_spent: Number(c.confirmed_spent),
     avg_order_value: Math.round(Number(c.avg_order_value)),
   })));
 });
@@ -213,11 +238,14 @@ router.get('/admin/customers/:id', async (req, res) => {
 
   const { rows: customerRows } = await query(`
     SELECT c.id, c.name, c.email, c.phone, c.created_at,
-           COUNT(DISTINCT o.id) as total_orders,
-           COALESCE(SUM(o.total), 0) as total_spent,
-           COALESCE(AVG(o.total), 0) as avg_order_value
+           COUNT(DISTINCT o.id) FILTER (WHERE ${countedSql('o')})   as total_orders,
+           COUNT(DISTINCT o.id) FILTER (WHERE ${pendingSql('o')})   as pending_orders,
+           COUNT(DISTINCT o.id) FILTER (WHERE ${confirmedSql('o')}) as confirmed_orders,
+           COALESCE(SUM(o.total) FILTER (WHERE ${countedSql('o')}), 0)   as total_spent,
+           COALESCE(SUM(o.total) FILTER (WHERE ${confirmedSql('o')}), 0) as confirmed_spent,
+           COALESCE(AVG(o.total) FILTER (WHERE ${countedSql('o')}), 0)   as avg_order_value
     FROM customers c
-    LEFT JOIN orders o ON o.customer_id = c.id AND o.status = 'completed'
+    LEFT JOIN orders o ON o.customer_id = c.id
     WHERE c.id = $1
     GROUP BY c.id, c.name, c.email, c.phone, c.created_at
   `, [id]);
@@ -235,25 +263,30 @@ router.get('/admin/customers/:id', async (req, res) => {
     JOIN order_items oi ON oi.order_id = o.id
     JOIN products p ON oi.product_id = p.id
     JOIN categories c2 ON p.category_id = c2.id
-    WHERE o.customer_id = $1 AND o.status = 'completed'
+    WHERE o.customer_id = $1 AND ${countedSql('o')}
     GROUP BY p.id, p.name, p.price, c2.display_name
     ORDER BY times_ordered DESC
     LIMIT 5
   `, [id]);
 
   const { rows: recentOrders } = await query(`
-    SELECT o.id, o.total, o.payment_method, o.created_at,
+    SELECT o.id, o.total, o.payment_method, o.status, o.payment_status, o.created_at,
            COUNT(oi.id) as item_count
     FROM orders o
     LEFT JOIN order_items oi ON oi.order_id = o.id
-    WHERE o.customer_id = $1 AND o.status = 'completed'
-    GROUP BY o.id, o.total, o.payment_method, o.created_at
+    WHERE o.customer_id = $1 AND ${countedSql('o')}
+    GROUP BY o.id, o.total, o.payment_method, o.status, o.payment_status, o.created_at
     ORDER BY o.created_at DESC
     LIMIT 10
   `, [id]);
 
   res.json({
     ...customer,
+    total_orders: Number(customer.total_orders),
+    pending_orders: Number(customer.pending_orders),
+    confirmed_orders: Number(customer.confirmed_orders),
+    total_spent: Number(customer.total_spent),
+    confirmed_spent: Number(customer.confirmed_spent),
     avg_order_value: Math.round(Number(customer.avg_order_value)),
     favorite_products: favoriteProducts,
     recent_orders: recentOrders,
@@ -267,22 +300,32 @@ router.get('/admin/customers-summary', async (req, res) => {
   const totalCustomers = (await query('SELECT COUNT(*) as count FROM customers')).rows[0].count;
   const activeCustomers = (await query(`
     SELECT COUNT(DISTINCT customer_id) as count FROM orders o
-    WHERE status = 'completed' AND created_at >= NOW() - INTERVAL '30 days' ${filter}
+    WHERE ${countedSql('o')} AND o.created_at >= NOW() - INTERVAL '30 days' ${filter}
   `, params)).rows[0].count;
-  const totalRevenue = (await query(`SELECT COALESCE(SUM(total), 0) as total FROM orders o WHERE status = 'completed' ${filter}`, params)).rows[0].total;
+
+  // Conteos + dinero por bucket en una sola pasada (revenue=counted, confirmado=paid).
+  const orderTotals = (await query(`
+    SELECT COUNT(*) FILTER (WHERE ${countedSql('o')})   AS total_orders,
+           COUNT(*) FILTER (WHERE ${pendingSql('o')})   AS pending_orders,
+           COUNT(*) FILTER (WHERE ${confirmedSql('o')}) AS confirmed_orders,
+           COALESCE(SUM(total) FILTER (WHERE ${countedSql('o')}), 0)   AS total_revenue,
+           COALESCE(SUM(total) FILTER (WHERE ${confirmedSql('o')}), 0) AS confirmed_revenue
+    FROM orders o WHERE 1=1 ${filter}
+  `, params)).rows[0];
+
   const avgLifetimeValue = (await query(`
     SELECT COALESCE(AVG(ltv), 0) as avg_ltv FROM (
-      SELECT SUM(total) as ltv FROM orders o WHERE status = 'completed' ${filter} GROUP BY customer_id
+      SELECT SUM(total) as ltv FROM orders o WHERE ${countedSql('o')} ${filter} GROUP BY customer_id
     ) sub
   `, params)).rows[0].avg_ltv;
 
-  // Top 5 by revenue contribution
+  // Top 5 by revenue contribution (sobre pedidos no cancelados)
   const { rows: topByRevenue } = await query(`
     SELECT c.id, c.name,
            SUM(o.total) as total_spent,
            COUNT(o.id) as order_count
     FROM customers c
-    JOIN orders o ON o.customer_id = c.id AND o.status = 'completed' ${filter}
+    JOIN orders o ON o.customer_id = c.id AND ${countedSql('o')} ${filter}
     GROUP BY c.id, c.name
     ORDER BY total_spent DESC
     LIMIT 5
@@ -294,7 +337,7 @@ router.get('/admin/customers-summary', async (req, res) => {
            COUNT(o.id) as order_count,
            SUM(o.total) as total_spent
     FROM customers c
-    JOIN orders o ON o.customer_id = c.id AND o.status = 'completed' ${filter}
+    JOIN orders o ON o.customer_id = c.id AND ${countedSql('o')} ${filter}
     GROUP BY c.id, c.name
     ORDER BY order_count DESC
     LIMIT 5
@@ -303,7 +346,11 @@ router.get('/admin/customers-summary', async (req, res) => {
   res.json({
     total_customers: Number(totalCustomers),
     active_customers_30d: Number(activeCustomers),
-    total_revenue: Number(totalRevenue),
+    total_orders: Number(orderTotals.total_orders),
+    pending_orders: Number(orderTotals.pending_orders),
+    confirmed_orders: Number(orderTotals.confirmed_orders),
+    total_revenue: Number(orderTotals.total_revenue),
+    confirmed_revenue: Number(orderTotals.confirmed_revenue),
     avg_lifetime_value: Math.round(Number(avgLifetimeValue)),
     top_by_revenue: topByRevenue,
     top_by_frequency: topByFrequency,
@@ -613,6 +660,137 @@ router.patch('/admin/orders/:id/status', async (req, res) => {
   }
 
   // Devolver la orden actualizada con item_count, fuera de la transacción.
+  const { rows: [updated] } = await query(
+    `SELECT o.id, o.status, o.payment_status, o.payment_method, o.payment_currency,
+            o.contact_name, o.contact_email, o.contact_phone,
+            o.address_street, o.address_number, o.address_commune, o.address_city, o.address_notes,
+            o.subtotal, o.total,
+            o.card_scheme,
+            o.sumup_checkout_id, o.sumup_transaction_id,
+            o.sumup_transaction_code, o.sumup_transaction_status, o.sumup_transaction_at,
+            o.payment_updated_at, o.created_at, o.updated_at,
+            (SELECT COUNT(*) FROM order_items oi WHERE oi.order_id = o.id) AS item_count
+       FROM orders o
+      WHERE o.id = $1`,
+    [orderId],
+  );
+
+  res.json({
+    ...updated,
+    item_count: Number(updated.item_count),
+  });
+});
+
+// PATCH /api/admin/orders/:id/payment
+//
+// Confirmación MANUAL de pago. Las tarjetas se confirman vía SumUp
+// (webhook/poll) que setea payment_status='paid'; las TRANSFERENCIAS no tienen
+// ese canal, así que el admin confirma aquí la recepción del depósito. Sin
+// este paso las transferencias quedan atascadas en 'pending' para siempre y el
+// lifecycle de cumplimiento no puede avanzar (PAID_REQUIRED_TARGETS).
+//
+// Body: { reason?: string }
+// Reglas:
+//   1. orderId válido y orden existente.
+//   2. payment_method debe ser 'transferencia' (las de tarjeta NO se confirman
+//      a mano — su verdad la dicta SumUp).
+//   3. payment_status actual ∈ {pending, processing} (no re-confirmar 'paid' ni
+//      resucitar failed/refunded/cancelled).
+//   4. SET payment_status='paid', payment_updated_at=NOW().
+//   5. Audit: action=payment_update, field=payment_status, prev/new.
+router.patch('/admin/orders/:id/payment', async (req, res) => {
+  const orderId = parseInt(req.params.id, 10);
+  if (!Number.isInteger(orderId) || orderId <= 0) {
+    return res.status(400).json({ error: 'invalid_order_id' });
+  }
+
+  const { reason } = req.body || {};
+  if (reason !== undefined && reason !== null && typeof reason !== 'string') {
+    return res.status(400).json({ error: 'reason_must_be_string' });
+  }
+  const reasonTrimmed = typeof reason === 'string' ? reason.trim() : null;
+  if (reasonTrimmed && reasonTrimmed.length > 1000) {
+    return res.status(400).json({ error: 'reason_too_long', max: 1000 });
+  }
+
+  const client = await getClient();
+  try {
+    await client.query('BEGIN');
+
+    const { rows: orderRows } = await client.query(
+      'SELECT id, status, payment_method, payment_status FROM orders WHERE id = $1 FOR UPDATE',
+      [orderId],
+    );
+    const order = orderRows[0];
+
+    if (!order) {
+      await client.query('ROLLBACK');
+      return res.status(404).json({ error: 'order_not_found' });
+    }
+
+    if (order.payment_method !== 'transferencia') {
+      await client.query('ROLLBACK');
+      return res.status(409).json({
+        error: 'manual_confirm_not_allowed',
+        message: 'Solo las órdenes por transferencia se confirman manualmente; las de tarjeta las confirma SumUp.',
+        payment_method: order.payment_method,
+      });
+    }
+
+    if (order.payment_status === 'paid') {
+      await client.query('ROLLBACK');
+      return res.status(409).json({
+        error: 'already_paid',
+        message: 'El pago de esta orden ya está confirmado.',
+      });
+    }
+
+    if (!MANUAL_PAYABLE_STATUSES.has(order.payment_status)) {
+      await client.query('ROLLBACK');
+      return res.status(409).json({
+        error: 'invalid_payment_state',
+        message: 'El pago no está en un estado confirmable (debe ser pending o processing).',
+        current_payment_status: order.payment_status,
+      });
+    }
+
+    await client.query(
+      "UPDATE orders SET payment_status = 'paid', payment_updated_at = NOW(), updated_at = NOW() WHERE id = $1",
+      [orderId],
+    );
+
+    const changedBy = req.authUser?.user_id ?? null;
+    const changedByEmail = req.authUser?.username ?? null;
+    const metadata = {
+      ip: req.ip || req.headers['x-forwarded-for'] || null,
+      user_agent: req.headers['user-agent'] || null,
+      admin_display_name: req.authUser?.display_name || null,
+      manual_transfer_confirmation: true,
+    };
+
+    await client.query(
+      `INSERT INTO orders_audit
+         (order_id, action, field, previous_value, new_value,
+          changed_by, changed_by_email, reason, metadata)
+       VALUES ($1, 'payment_update', 'payment_status', $2, 'paid', $3, $4, $5, $6::jsonb)`,
+      [
+        orderId,
+        order.payment_status,
+        changedBy,
+        changedByEmail,
+        reasonTrimmed || null,
+        JSON.stringify(metadata),
+      ],
+    );
+
+    await client.query('COMMIT');
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
+
   const { rows: [updated] } = await query(
     `SELECT o.id, o.status, o.payment_status, o.payment_method, o.payment_currency,
             o.contact_name, o.contact_email, o.contact_phone,
