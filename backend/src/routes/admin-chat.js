@@ -1,6 +1,6 @@
 const express = require('express');
 const { query } = require('../models/database');
-const { countedSql } = require('../utils/orderStatus');
+const { countedSql, pendingSql, confirmedSql } = require('../utils/orderStatus');
 const { buildRetrievedContext } = require('../utils/adminChatContext');
 const { chatCompletion, getApiKey } = require('../utils/openrouter');
 
@@ -10,7 +10,7 @@ const INVENTORY_LIMIT = 15;
 const CUSTOMERS_LIMIT = 8;
 
 function buildAdminSystemPrompt(salesData) {
-  const { inventory, bestSellers, byCategory, byPayment, recentTrend, orders, customers, topByRevenue, topByFrequency, leastActive } = salesData;
+  const { inventory, bestSellers, byCategory, byPayment, recentTrend, orders, ordersPending, ordersConfirmed, customers, topByRevenue, topByFrequency, leastActive } = salesData;
 
   const inventoryShown = inventory.slice(0, INVENTORY_LIMIT);
   const inventoryHidden = Math.max(0, inventory.length - INVENTORY_LIMIT);
@@ -83,7 +83,7 @@ ${paymentText}
 TENDENCIA RECIENTE (últimos 7 días):
 ${trendText}
 
-TOTAL PEDIDOS: ${orders}
+PEDIDOS (no cancelados): ${orders} en total — ${ordersPending} pendientes de pago, ${ordersConfirmed} confirmados (pagados)
 
 CLIENTES REGISTRADOS (top ${CUSTOMERS_LIMIT} por gasto, total ${customers.length}):
 ${customersText}
@@ -161,7 +161,15 @@ router.post('/admin/chat', async (req, res) => {
     GROUP BY DATE(o.created_at) ORDER BY date DESC LIMIT 7
   `);
 
-  const totalOrders = (await query(`SELECT COUNT(*) as count FROM orders o WHERE ${countedSql('o')}`)).rows[0].count;
+  const orderCounts = (await query(`
+    SELECT COUNT(*) FILTER (WHERE ${countedSql('o')})   AS total,
+           COUNT(*) FILTER (WHERE ${pendingSql('o')})   AS pending,
+           COUNT(*) FILTER (WHERE ${confirmedSql('o')}) AS confirmed
+    FROM orders o
+  `)).rows[0];
+  const totalOrders = Number(orderCounts.total);
+  const ordersPending = Number(orderCounts.pending);
+  const ordersConfirmed = Number(orderCounts.confirmed);
 
   const { rows: customers } = await query(`
     SELECT c.id, c.name, c.email, c.phone, c.created_at,
@@ -198,7 +206,8 @@ router.post('/admin/chat', async (req, res) => {
   `);
 
   let systemPrompt = buildAdminSystemPrompt({
-    inventory, bestSellers, byCategory, byPayment, recentTrend, orders: totalOrders,
+    inventory, bestSellers, byCategory, byPayment, recentTrend,
+    orders: totalOrders, ordersPending, ordersConfirmed,
     customers, topByRevenue, topByFrequency, leastActive,
   });
 
