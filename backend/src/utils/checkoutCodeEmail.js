@@ -13,9 +13,13 @@ function escapeHtml(value) {
   }[ch]));
 }
 
-function buildCheckoutCodeEmail({ to, code }) {
+function buildCheckoutCodeEmail({ to, code, logoUrl }) {
   const safeCode = escapeHtml(code);
   const subject = `Tu código amaCafe: ${safeCode}`;
+
+  // C206: logo de AMA Café en la franja café (solo si se inyectó una URL
+  // absoluta http(s); si no, header de solo texto, sin imagen rota).
+  const logo = typeof logoUrl === 'string' && /^https?:\/\//i.test(logoUrl) ? logoUrl : null;
 
   const html = `<!doctype html>
 <html lang="es">
@@ -24,7 +28,16 @@ function buildCheckoutCodeEmail({ to, code }) {
       <tr><td align="center">
         <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;background:#ffffff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
           <tr><td style="padding:24px 32px;background:#a06b3a;color:#fff;border-radius:8px 8px 0 0;">
-            <h1 style="margin:0;font-size:20px;">Tu código para cargar tus datos</h1>
+            <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                ${logo ? `<td width="64" style="vertical-align:middle;padding-right:16px;">
+                  <img src="${escapeHtml(logo)}" alt="AMA Café" width="56" height="56" style="display:block;width:56px;height:56px;border-radius:50%;border:2px solid #ffffff;background:#ffffff;" />
+                </td>` : ''}
+                <td style="vertical-align:middle;">
+                  <h1 style="margin:0;font-size:20px;line-height:1.2;">Tu código para cargar tus datos</h1>
+                </td>
+              </tr>
+            </table>
           </td></tr>
           <tr><td style="padding:24px 32px;">
             <p style="margin:0 0 16px 0;font-size:14px;line-height:1.5;">

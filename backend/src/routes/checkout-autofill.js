@@ -14,6 +14,7 @@ const express = require('express');
 const mailer = require('../utils/mailer');
 const { issueCode, verifyCode } = require('../utils/checkoutVerification');
 const { buildCheckoutCodeEmail } = require('../utils/checkoutCodeEmail');
+const { resolveLogoUrl } = require('../utils/mailAssets');
 const {
   checkoutCodeRequestRateLimiter,
   checkoutCodeVerifyRateLimiter,
@@ -57,7 +58,8 @@ router.post('/checkout/request-code', checkoutCodeRequestRateLimiter, async (req
   try {
     const code = await issueCode(email);
     if (code) {
-      const payload = buildCheckoutCodeEmail({ to: email, code });
+      const logoUrl = await resolveLogoUrl();
+      const payload = buildCheckoutCodeEmail({ to: email, code, logoUrl });
       // fire-and-forget: el resultado del envío no se refleja en la respuesta.
       Promise.resolve()
         .then(() => mailer.sendMail(payload))
