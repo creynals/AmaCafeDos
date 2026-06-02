@@ -9,6 +9,7 @@ const {
 } = require('../utils/sumup.config');
 const { validateRut, formatRut } = require('../utils/rut');
 const { buildOrderConfirmationEmail } = require('../utils/orderConfirmationEmail');
+const { resolveLogoUrl } = require('../utils/mailAssets');
 const {
   BANK_KEYS,
   ACCOUNT_TYPES,
@@ -810,6 +811,7 @@ router.post('/admin/settings/bank/test-email', async (req, res) => {
     subtotal: 6000,
     total: 6000,
     bankAccount: bank,
+    logoUrl: await resolveLogoUrl(),
   };
 
   try {
