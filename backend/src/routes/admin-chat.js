@@ -1,5 +1,6 @@
 const express = require('express');
 const { query } = require('../models/database');
+const { countedSql } = require('../utils/orderStatus');
 const { chatCompletion, getApiKey } = require('../utils/openrouter');
 
 const router = express.Router();
@@ -148,7 +149,7 @@ router.post('/admin/chat', async (req, res) => {
            COALESCE(SUM(o.total), 0) as total_spent,
            MAX(o.created_at) as last_order_date
     FROM customers c
-    LEFT JOIN orders o ON o.customer_id = c.id AND o.status = 'completed'
+    LEFT JOIN orders o ON o.customer_id = c.id AND ${countedSql('o')}
     GROUP BY c.id, c.name, c.email, c.phone, c.created_at
     ORDER BY total_spent DESC
   `);
@@ -156,14 +157,14 @@ router.post('/admin/chat', async (req, res) => {
   const { rows: topByRevenue } = await query(`
     SELECT c.name, SUM(o.total) as total_spent, COUNT(o.id) as order_count
     FROM customers c
-    JOIN orders o ON o.customer_id = c.id AND o.status = 'completed'
+    JOIN orders o ON o.customer_id = c.id AND ${countedSql('o')}
     GROUP BY c.id, c.name ORDER BY total_spent DESC LIMIT 5
   `);
 
   const { rows: topByFrequency } = await query(`
     SELECT c.name, COUNT(o.id) as order_count, SUM(o.total) as total_spent
     FROM customers c
-    JOIN orders o ON o.customer_id = c.id AND o.status = 'completed'
+    JOIN orders o ON o.customer_id = c.id AND ${countedSql('o')}
     GROUP BY c.id, c.name ORDER BY order_count DESC LIMIT 5
   `);
 
@@ -172,7 +173,7 @@ router.post('/admin/chat', async (req, res) => {
            COALESCE(SUM(o.total), 0) as total_spent,
            MAX(o.created_at) as last_order_date
     FROM customers c
-    LEFT JOIN orders o ON o.customer_id = c.id AND o.status = 'completed'
+    LEFT JOIN orders o ON o.customer_id = c.id AND ${countedSql('o')}
     GROUP BY c.id, c.name, c.email ORDER BY total_orders ASC, total_spent ASC LIMIT 5
   `);
 
