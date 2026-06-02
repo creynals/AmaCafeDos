@@ -1,6 +1,7 @@
 const express = require('express');
 const { query } = require('../models/database');
 const { countedSql } = require('../utils/orderStatus');
+const { buildRetrievedContext } = require('../utils/adminChatContext');
 const { chatCompletion, getApiKey } = require('../utils/openrouter');
 
 const router = express.Router();
@@ -47,11 +48,23 @@ y estrategia de negocio.
 
 REGLAS:
 - Responde siempre en español profesional pero cercano
-- Basa tus respuestas en los datos reales proporcionados
 - Sé específico con números y porcentajes
 - Cuando sugieras campañas o estrategias, sé concreto y accionable
 - Los precios están en pesos chilenos (CLP)
-- Si no hay datos suficientes, indícalo y sugiere cómo empezar a recopilar información
+
+REGLAS ANTI-INVENCIÓN (CRÍTICAS — no las violes):
+- Usa EXCLUSIVAMENTE los datos provistos abajo. NUNCA inventes ni estimes
+  números, IDs de pedido, fechas, nombres de clientes ni productos.
+- Si la pregunta requiere un dato que NO aparece en el contexto (un pedido,
+  cliente, producto, mes o métrica que no está listado), dilo claramente:
+  "No tengo ese dato disponible" y, si aplica, sugiere cómo obtenerlo
+  (ej. buscarlo por #pedido, nombre de cliente o rango de fechas).
+- El resumen muestra solo el TOP de productos y clientes; si preguntan por uno
+  que no está, NO asumas sus cifras — indícalo.
+- NO hay datos de costos ni márgenes en el sistema. Si preguntan por margen,
+  rentabilidad o ganancia, aclara que esa información no está disponible (solo
+  hay precios de venta e ingresos), en vez de estimarla.
+- Todas las cifras de pedidos/ingresos excluyen pedidos cancelados.
 
 DATOS ACTUALES DEL NEGOCIO:
 
@@ -106,11 +119,12 @@ router.post('/admin/chat', async (req, res) => {
   const { rows: inventory } = await query(`
     SELECT p.id, p.name, p.price, p.available,
            c.display_name as category,
-           COALESCE(SUM(oi.quantity), 0) as total_sold,
-           COALESCE(SUM(oi.subtotal), 0) as total_revenue
+           COALESCE(SUM(oi.quantity) FILTER (WHERE ${countedSql('o')}), 0) as total_sold,
+           COALESCE(SUM(oi.subtotal) FILTER (WHERE ${countedSql('o')}), 0) as total_revenue
     FROM products p
     JOIN categories c ON p.category_id = c.id
     LEFT JOIN order_items oi ON oi.product_id = p.id
+    LEFT JOIN orders o ON oi.order_id = o.id
     GROUP BY p.id, p.name, p.price, p.available, c.display_name
     ORDER BY total_revenue DESC
   `);
@@ -119,6 +133,8 @@ router.post('/admin/chat', async (req, res) => {
     SELECT p.name, SUM(oi.quantity) as total_sold, SUM(oi.subtotal) as total_revenue
     FROM order_items oi
     JOIN products p ON oi.product_id = p.id
+    JOIN orders o ON oi.order_id = o.id
+    WHERE ${countedSql('o')}
     GROUP BY p.id, p.name ORDER BY total_sold DESC LIMIT 10
   `);
 
@@ -128,20 +144,24 @@ router.post('/admin/chat', async (req, res) => {
     FROM order_items oi
     JOIN products p ON oi.product_id = p.id
     JOIN categories c ON p.category_id = c.id
+    JOIN orders o ON oi.order_id = o.id
+    WHERE ${countedSql('o')}
     GROUP BY c.id, c.display_name ORDER BY revenue DESC
   `);
 
   const { rows: byPayment } = await query(`
-    SELECT payment_method, COUNT(*) as count, SUM(total) as revenue
-    FROM orders GROUP BY payment_method ORDER BY count DESC
+    SELECT o.payment_method, COUNT(*) as count, SUM(o.total) as revenue
+    FROM orders o WHERE ${countedSql('o')}
+    GROUP BY o.payment_method ORDER BY count DESC
   `);
 
   const { rows: recentTrend } = await query(`
-    SELECT DATE(created_at) as date, COUNT(*) as orders, SUM(total) as revenue
-    FROM orders GROUP BY DATE(created_at) ORDER BY date DESC LIMIT 7
+    SELECT DATE(o.created_at) as date, COUNT(*) as orders, SUM(o.total) as revenue
+    FROM orders o WHERE ${countedSql('o')}
+    GROUP BY DATE(o.created_at) ORDER BY date DESC LIMIT 7
   `);
 
-  const totalOrders = (await query('SELECT COUNT(*) as count FROM orders')).rows[0].count;
+  const totalOrders = (await query(`SELECT COUNT(*) as count FROM orders o WHERE ${countedSql('o')}`)).rows[0].count;
 
   const { rows: customers } = await query(`
     SELECT c.id, c.name, c.email, c.phone, c.created_at,
@@ -177,10 +197,20 @@ router.post('/admin/chat', async (req, res) => {
     GROUP BY c.id, c.name, c.email ORDER BY total_orders ASC, total_spent ASC LIMIT 5
   `);
 
-  const systemPrompt = buildAdminSystemPrompt({
+  let systemPrompt = buildAdminSystemPrompt({
     inventory, bestSellers, byCategory, byPayment, recentTrend, orders: totalOrders,
     customers, topByRevenue, topByFrequency, leastActive,
   });
+
+  // Retrieval dirigido (C203): si el mensaje menciona un #pedido, cliente o
+  // rango de fechas, inyecta datos reales puntuales para no obligar al modelo
+  // a inventar fuera del snapshot. Nunca rompe el chat si falla.
+  try {
+    const retrieved = await buildRetrievedContext(message, customers);
+    if (retrieved) systemPrompt += `\n${retrieved}`;
+  } catch (err) {
+    console.warn('[admin-chat] retrieval context failed:', err.message);
+  }
 
   const messages = [{ role: 'system', content: systemPrompt }];
   if (history && Array.isArray(history)) {

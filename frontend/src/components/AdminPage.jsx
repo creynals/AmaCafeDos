@@ -33,7 +33,7 @@ const ORDERS_SUBTABS = [
 
 const WELCOME_MESSAGE = {
   role: 'assistant',
-  content: '¡Hola! Soy tu asistente de inteligencia de negocios para AMA Café. Puedo ayudarte con:\n\n• Análisis de productos más vendidos\n• Tendencias de ventas por período\n• Ideas para campañas y promociones\n• Insights sobre márgenes y rentabilidad\n\n¿Qué te gustaría saber?',
+  content: '¡Hola! Soy tu asistente de inteligencia de negocios para AMA Café. Puedo ayudarte con:\n\n• Análisis de productos más vendidos\n• Tendencias de ventas por período\n• Pedidos y clientes específicos (por #, nombre o rango de fechas)\n• Ideas para campañas y promociones\n\nRespondo solo con datos reales del negocio; si no tengo el dato, te lo digo. ¿Qué te gustaría saber?',
 };
 
 function formatPrice(price) {
