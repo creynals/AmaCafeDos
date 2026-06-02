@@ -10,7 +10,7 @@ const INVENTORY_LIMIT = 15;
 const CUSTOMERS_LIMIT = 8;
 
 function buildAdminSystemPrompt(salesData) {
-  const { inventory, bestSellers, byCategory, byPayment, recentTrend, orders, ordersPending, ordersConfirmed, customers, topByRevenue, topByFrequency, leastActive } = salesData;
+  const { inventory, bestSellers, byCategory, byPayment, recentTrend, orders, ordersPending, ordersConfirmed, ordersCancelled, ordersGrandTotal, customers, topByRevenue, topByFrequency, leastActive } = salesData;
 
   const inventoryShown = inventory.slice(0, INVENTORY_LIMIT);
   const inventoryHidden = Math.max(0, inventory.length - INVENTORY_LIMIT);
@@ -83,7 +83,12 @@ ${paymentText}
 TENDENCIA RECIENTE (últimos 7 días):
 ${trendText}
 
-PEDIDOS (no cancelados): ${orders} en total — ${ordersPending} pendientes de pago, ${ordersConfirmed} confirmados (pagados)
+PEDIDOS (conteos exactos — úsalos directamente, no los inventes):
+  - Total de pedidos (incluye todos los estados): ${ordersGrandTotal}
+  - Pendientes de pago (transferencia sin confirmar): ${ordersPending}
+  - Confirmados (pago recibido): ${ordersConfirmed}
+  - Cancelados o devueltos: ${ordersCancelled}
+  - Activos no cancelados (= pendientes + confirmados): ${orders}
 
 CLIENTES REGISTRADOS (top ${CUSTOMERS_LIMIT} por gasto, total ${customers.length}):
 ${customersText}
@@ -164,12 +169,16 @@ router.post('/admin/chat', async (req, res) => {
   const orderCounts = (await query(`
     SELECT COUNT(*) FILTER (WHERE ${countedSql('o')})   AS total,
            COUNT(*) FILTER (WHERE ${pendingSql('o')})   AS pending,
-           COUNT(*) FILTER (WHERE ${confirmedSql('o')}) AS confirmed
+           COUNT(*) FILTER (WHERE ${confirmedSql('o')}) AS confirmed,
+           COUNT(*) FILTER (WHERE o.status IN ('cancelled', 'returned')) AS cancelled,
+           COUNT(*) AS grand_total
     FROM orders o
   `)).rows[0];
   const totalOrders = Number(orderCounts.total);
   const ordersPending = Number(orderCounts.pending);
   const ordersConfirmed = Number(orderCounts.confirmed);
+  const ordersCancelled = Number(orderCounts.cancelled);
+  const ordersGrandTotal = Number(orderCounts.grand_total);
 
   const { rows: customers } = await query(`
     SELECT c.id, c.name, c.email, c.phone, c.created_at,
@@ -207,7 +216,7 @@ router.post('/admin/chat', async (req, res) => {
 
   let systemPrompt = buildAdminSystemPrompt({
     inventory, bestSellers, byCategory, byPayment, recentTrend,
-    orders: totalOrders, ordersPending, ordersConfirmed,
+    orders: totalOrders, ordersPending, ordersConfirmed, ordersCancelled, ordersGrandTotal,
     customers, topByRevenue, topByFrequency, leastActive,
   });
 
