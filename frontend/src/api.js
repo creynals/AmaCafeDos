@@ -206,6 +206,10 @@ export const api = {
   adminOrderUpdateStatus: (id, status, reason) =>
     patch(`/admin/orders/${id}/status`, { status, reason }, { auth: true }),
 
+  // Confirmación manual de pago por transferencia → payment_status='paid' (C202).
+  adminOrderConfirmPayment: (id, reason) =>
+    patch(`/admin/orders/${id}/payment`, { reason }, { auth: true }),
+
   adminChat: (message, history) => post('/admin/chat', { message, history }, { auth: true }),
   adminCustomers: (dateRange) => {
     const qs = dateRange?.from ? `?from=${dateRange.from}${dateRange.to ? '&to=' + dateRange.to : ''}` : '';
