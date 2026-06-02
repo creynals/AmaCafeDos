@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { ArrowLeft, Package, TrendingUp, DollarSign, ShoppingBag, MessageCircle, Send, Loader2, BarChart3, RefreshCw, Users, UserCheck, Crown, ChevronLeft, Star, Calendar, Mail, Phone, CalendarRange, Settings, Key, Shield, Trash2, CheckCircle, AlertCircle, ChevronDown, Cpu, Zap, Lock, Eye, EyeOff, LogOut, UserCog, CreditCard, Globe, ClipboardList, FileSpreadsheet, ChefHat } from 'lucide-react';
+import { ArrowLeft, Package, TrendingUp, DollarSign, ShoppingBag, MessageCircle, Send, Loader2, BarChart3, RefreshCw, Users, UserCheck, Crown, ChevronLeft, Star, Calendar, Mail, Phone, CalendarRange, Settings, Key, Shield, Trash2, CheckCircle, AlertCircle, ChevronDown, Cpu, Zap, Lock, Eye, EyeOff, LogOut, UserCog, CreditCard, Globe, ClipboardList, FileSpreadsheet, ChefHat, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../api';
+import { PAYMENT_METHOD_LABELS } from '../utils/orderStatus.js';
+import { StatusBadge, PaymentStatusPill } from './OrderBadges.jsx';
 import { useAuth } from '../context/AuthContext';
 import UsersTab from './UsersTab';
 import OrdersTab from './OrdersTab';
@@ -31,7 +33,7 @@ const ORDERS_SUBTABS = [
 
 const WELCOME_MESSAGE = {
   role: 'assistant',
-  content: '¡Hola! Soy tu asistente de inteligencia de negocios para AMA Café. Puedo ayudarte con:\n\n• Análisis de productos más vendidos\n• Tendencias de ventas por período\n• Ideas para campañas y promociones\n• Insights sobre márgenes y rentabilidad\n\n¿Qué te gustaría saber?',
+  content: '¡Hola! Soy tu asistente de inteligencia de negocios para AMA Café. Puedo ayudarte con:\n\n• Análisis de productos más vendidos\n• Tendencias de ventas por período\n• Pedidos y clientes específicos (por #, nombre o rango de fechas)\n• Ideas para campañas y promociones\n\nRespondo solo con datos reales del negocio; si no tengo el dato, te lo digo. ¿Qué te gustaría saber?',
 };
 
 function formatPrice(price) {
@@ -431,18 +433,28 @@ function CustomersTab() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 mt-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
             <div className="bg-ama-darker rounded-lg p-3 text-center">
-              <p className="text-xs text-ama-text-muted">Total Gastado</p>
+              <p className="text-xs text-ama-text-muted">Total en Pedidos</p>
               <p className="text-lg font-bold text-ama-amber">{formatPrice(customerDetail.total_spent)}</p>
+              <p className="text-xs text-green-400 mt-0.5">{formatPrice(customerDetail.confirmed_spent ?? 0)} confirmado</p>
             </div>
             <div className="bg-ama-darker rounded-lg p-3 text-center">
               <p className="text-xs text-ama-text-muted">Pedidos</p>
               <p className="text-lg font-bold text-ama-text">{customerDetail.total_orders}</p>
+              <p className="text-xs text-ama-text-muted mt-0.5">
+                <span className="text-yellow-400">{customerDetail.pending_orders ?? 0} pend</span>
+                {' · '}
+                <span className="text-green-400">{customerDetail.confirmed_orders ?? 0} conf</span>
+              </p>
             </div>
             <div className="bg-ama-darker rounded-lg p-3 text-center">
               <p className="text-xs text-ama-text-muted">Ticket Promedio</p>
               <p className="text-lg font-bold text-ama-text">{formatPrice(customerDetail.avg_order_value)}</p>
+            </div>
+            <div className="bg-ama-darker rounded-lg p-3 text-center">
+              <p className="text-xs text-ama-text-muted">Cliente desde</p>
+              <p className="text-lg font-bold text-ama-text">{new Date(customerDetail.created_at).toLocaleDateString('es-CL')}</p>
             </div>
           </div>
         </div>
@@ -493,6 +505,8 @@ function CustomersTab() {
                     <th className="pb-2 pr-4">Fecha</th>
                     <th className="pb-2 pr-4 text-right">Items</th>
                     <th className="pb-2 pr-4 text-right">Total</th>
+                    <th className="pb-2 pr-4">Método</th>
+                    <th className="pb-2 pr-4">Estado</th>
                     <th className="pb-2">Pago</th>
                   </tr>
                 </thead>
@@ -503,7 +517,9 @@ function CustomersTab() {
                       <td className="py-2 pr-4 text-ama-text">{new Date(o.created_at).toLocaleDateString('es-CL')}</td>
                       <td className="py-2 pr-4 text-right text-ama-text">{o.item_count}</td>
                       <td className="py-2 pr-4 text-right text-ama-amber font-medium">{formatPrice(o.total)}</td>
-                      <td className="py-2 capitalize text-ama-text-muted">{o.payment_method}</td>
+                      <td className="py-2 pr-4 text-ama-text-muted">{PAYMENT_METHOD_LABELS[o.payment_method] || o.payment_method}</td>
+                      <td className="py-2 pr-4"><StatusBadge status={o.status} /></td>
+                      <td className="py-2"><PaymentStatusPill status={o.payment_status} /></td>
                     </tr>
                   ))}
                 </tbody>
@@ -520,9 +536,12 @@ function CustomersTab() {
       {/* Summary Stats */}
       {summary && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <StatCard icon={Users} label="Total Clientes" value={summary.total_customers} />
-          <StatCard icon={UserCheck} label="Activos (30d)" value={summary.active_customers_30d} />
-          <StatCard icon={DollarSign} label="Ingreso Total" value={formatPrice(summary.total_revenue)} />
+          <StatCard icon={Users} label="Total Clientes" value={summary.total_customers} sub={`${summary.active_customers_30d} activos (30d)`} />
+          <StatCard icon={ShoppingBag} label="Total Pedidos" value={summary.total_orders ?? 0} sub="no cancelados" />
+          <StatCard icon={Clock} label="Pedidos Pendientes" value={summary.pending_orders ?? 0} sub="pago por confirmar" />
+          <StatCard icon={CheckCircle} label="Pedidos Confirmados" value={summary.confirmed_orders ?? 0} sub="pago recibido" />
+          <StatCard icon={DollarSign} label="Ingreso en Pedidos" value={formatPrice(summary.total_revenue)} sub="valor de pedidos no cancelados" />
+          <StatCard icon={CheckCircle} label="Ingreso Confirmado" value={formatPrice(summary.confirmed_revenue ?? 0)} sub="pagos efectivamente recibidos" />
           <StatCard icon={TrendingUp} label="LTV Promedio" value={formatPrice(summary.avg_lifetime_value)} />
         </div>
       )}
@@ -607,7 +626,14 @@ function CustomersTab() {
                       <p className="text-ama-text font-medium">{c.name}</p>
                       <p className="text-xs text-ama-text-muted">{c.email}</p>
                     </td>
-                    <td className="py-2.5 pr-4 text-right text-ama-text">{c.total_orders}</td>
+                    <td className="py-2.5 pr-4 text-right text-ama-text">
+                      {c.total_orders}
+                      <span className="block text-xs text-ama-text-muted">
+                        <span className="text-yellow-400">{c.pending_orders} pend</span>
+                        {' · '}
+                        <span className="text-green-400">{c.confirmed_orders} conf</span>
+                      </span>
+                    </td>
                     <td className="py-2.5 pr-4 text-right text-ama-amber font-medium">{formatPrice(c.total_spent)}</td>
                     <td className="py-2.5 pr-4 text-right text-ama-text">{formatPrice(c.avg_order_value)}</td>
                     <td className="py-2.5 text-ama-text-muted text-xs">
