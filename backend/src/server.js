@@ -12,6 +12,7 @@ const mailer = require('./utils/mailer');
 const productRoutes = require('./routes/products');
 const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/orders');
+const checkoutAutofillRoutes = require('./routes/checkout-autofill');
 const paymentsRoutes = require('./routes/payments');
 const chatRoutes = require('./routes/chat');
 const authRoutes = require('./routes/auth');
@@ -128,6 +129,9 @@ app.use('/api', validateInput({ skipBodyKeys: ['history'] }));
 app.use('/api', productRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', orderRoutes);
+// C205: autocompletar datos de cliente vía código por email — PÚBLICO,
+// montado antes del requireAuth global (igual que orders/cart).
+app.use('/api', checkoutAutofillRoutes);
 app.use('/api', paymentsRoutes);
 app.use('/api', authRoutes);
 
